@@ -12,19 +12,10 @@ const plugins = [
     }),
 ]
 
-pugPages.map((page) => {
-    plugins.push(
-        new HtmlWebpackPlugin({
-            template: `./src/pages/${page}/${page}.pug`,
-            filename: `${page}.html`,
-        })
-    )
-})
-
 plugins.push(
     new HtmlWebpackPlugin({
         template: `./src/index.html`,
-        filename: `${page}.html`,
+        filename: `index.html`,
     }),
     new webpack.ProvidePlugin({
         $: 'jquery',
@@ -37,16 +28,7 @@ plugins.push(
 module.exports = {
     mode: 'development',
     entry: {
-        styles: './src/styles.js',
-        checkboxExpList:
-            './src/components/checkbox-expandable-list/checkbox-expandable-list.js',
-        datepicker: './src/components/datepicker/datepicker.js',
-        dropdown: './src/components/dropdown/dropdown.js',
-        likeButton: './src/components/like-button/like-button.js',
-        maskedTextField:
-            './src/components/masked-text-field/masked-text-field.js',
-        slider: './src/components/slider/slider.js',
-        chart: './src/components/impressions/chart.js',
+        index: './src/index.ts',
     },
     output: {
         filename: '[name].bundle.js',
@@ -116,15 +98,6 @@ module.exports = {
                             name: '[name].[contenthash].[ext]',
                             outputPath: 'fonts/',
                         },
-                    },
-                ],
-            },
-            {
-                test: /\.pug$/,
-                use: [
-                    {
-                        loader: 'pug-loader',
-                        options: { pretty: true },
                     },
                 ],
             },

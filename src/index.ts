@@ -31,10 +31,7 @@ jquery(document).ready(function ($) {
         }
     )
     $('.range-slider').on('mouseup touchend', function (event) {
-        event.preventDefault()
-        const $el = $(this)
-        const $elParent = $(this).parents('.range-slider')
-        $el.removeClass('tap')
-        $el.off('mousemove touchmove')
+        $(this).removeClass('tap')
+        $(this).off('mousemove touchmove')
     })
 })

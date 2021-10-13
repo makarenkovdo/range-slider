@@ -12,19 +12,15 @@ jquery(document).ready(function ($) {
             event.preventDefault()
             const $el = $(this)
             const $elParent = $(this).parents('.range-slider')
-            const elWid = $el.innerWidth()
-            console.log(elWid)
-
-            const elOffset = 0
             const thisEnd = $elParent.data('end')
-            const parentWid = $elParent.innerWidth()
             console.log(event, $el, $elParent)
             $elParent.addClass('tap')
             $elParent.on('mousemove touchmove', function (event) {
                 event.preventDefault()
-                const leftOff = event.offsetX
-                const elPosition = (leftOff * 100) / $elParent[0].offsetWidth
-                const text = Math.floor(elPosition * (thisEnd / 100)) + 2
+                const cursorX = event.offsetX
+                const elPosition =
+                    ((cursorX + 1) * 100) / $elParent[0].offsetWidth
+                const text = Math.floor(elPosition * (thisEnd / 100))
                 $el.css('left', elPosition + '%')
                 $el.find('span').text(text)
             })

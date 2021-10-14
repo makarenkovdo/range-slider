@@ -15,10 +15,10 @@ export default class SliderController {
         return this
     }
     onDrag() {
-        this.rangeSlider.onDrag(this.updateView, this.updateText)
+        this.rangeSlider.onDrag(this.updatePosition, this.updateText)
         return this
     }
-    updateView(positionsArray) {
+    updatePosition(positionsArray) {
         sliderView.updatePosition(positionsArray)
     }
     updateText(positionsArray) {
@@ -30,6 +30,10 @@ export default class SliderController {
     }
     setMaxValue(number) {
         this.rangeSlider.setMaxValue(number)
+        return this
+    }
+    setMinValue(number) {
+        this.rangeSlider.setMinValue(number)
         return this
     }
 }

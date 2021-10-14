@@ -1,23 +1,29 @@
 import jquery from 'jquery'
 
 export default class SliderModel {
-    constructor(id, maxValue = 100, isVertical = false, rangeQuantity = 1) {
+    constructor(id, isVertical = false, rangeQuantity = 1) {
+        this.id = id
+        this.positionInPercentage = 0
+        this.value = ''
         this.id = id
         this.$element = ''
         this.$parent = ''
-        this.value = ''
         this.array = []
-        this.maxValue = maxValue
+        this.minValue = 0
+        this.maxValue = 100
         this.isVertical = isVertical
         this.rangeQuantity = rangeQuantity
     }
     setMaxValue(number) {
-        console.log(this.id)
         $(`#${this.id}`).attr('data-end', number)
         return this
     }
+    setMinValue(number) {
+        $(`#${this.id}`).attr('data-start', number)
+        return this
+    }
 
-    onDrag(updateView, updateText) {
+    onDrag(updatePosition, updateText) {
         const that = this
 
         $('.range-slider').on(
@@ -27,23 +33,26 @@ export default class SliderModel {
                 event.preventDefault()
                 this.$element = $(event.currentTarget)
                 this.$parent = $(event.currentTarget).parents('.range-slider')
-                const thisEnd = this.$parent.data('end')
+                this.minValue = this.$parent.data('start')
+                this.maxValue = this.$parent.data('end')
                 this.$parent.addClass('tap')
                 this.$parent.on('mousemove touchmove', (event) => {
                     event.preventDefault()
                     const cursorX = event.offsetX
-                    const chosenPercentOfWidth =
+                    this.positionInPercentage =
                         ((cursorX + 1) * 100) / this.$parent[0].offsetWidth
-                    const chosenNumber = Math.floor(
-                        chosenPercentOfWidth * (thisEnd / 100)
+                    this.value = Math.floor(
+                        this.positionInPercentage *
+                            ((this.maxValue - this.minValue) / 100) +
+                            this.minValue
                     )
-                    updateView([
+                    updatePosition([
                         this.$element,
-                        chosenPercentOfWidth,
-                        chosenNumber,
+                        this.positionInPercentage,
+                        this.value,
                     ])
                     if (this.$element.attr('class') === 'range-number') {
-                        updateText([this.$element, chosenNumber])
+                        updateText([this.$element, this.value])
                     }
                 })
             }

@@ -2,7 +2,7 @@ import jquery from 'jquery'
 
 export default class SliderModel {
     constructor(id, isVertical = false, rangeQuantity = 1) {
-        this.id = id
+        this.class = ''
         this.positionInPercentage = 0
         this.value = ''
         this.id = id
@@ -22,25 +22,51 @@ export default class SliderModel {
         $(`#${this.id}`).attr('data-start', number)
         return this
     }
+    // setSelectorValues() {
+    //     $('.range-slider, .vertical-range-slider').
+    //     this.$element = $(event.currentTarget)
+    //     this.$parent = $(event.currentTarget).parents(
+    //         '.range-slider, .vertical-range-slider'
+    //     )
+    //     this.minValue = this.$parent.data('start')
+    //     this.maxValue = this.$parent.data('end')
+    // }
 
     onDrag(updatePosition, updateText) {
         const that = this
 
-        $('.range-slider').on(
+        $('.range-slider, .vertical-range-slider').on(
             'mousedown touchstart',
             '.range-number, .slider-toggler',
             (event) => {
                 event.preventDefault()
                 this.$element = $(event.currentTarget)
-                this.$parent = $(event.currentTarget).parents('.range-slider')
+                this.$parent = $(event.currentTarget).parents(
+                    '.range-slider, .vertical-range-slider'
+                )
+                console.log(this.$parent.attr('class'))
+
                 this.minValue = this.$parent.data('start')
                 this.maxValue = this.$parent.data('end')
                 this.$parent.addClass('tap')
                 this.$parent.on('mousemove touchmove', (event) => {
                     event.preventDefault()
                     const cursorX = event.offsetX
-                    this.positionInPercentage =
-                        ((cursorX + 1) * 100) / this.$parent[0].offsetWidth
+                    const cursorY = event.offsetY
+                    console.log(cursorY)
+                    if (
+                        this.$parent.attr('class') ===
+                        'vertical-range-slider tap'
+                    ) {
+                        console.log('VERTICAL!!')
+                        this.positionInPercentage =
+                            ((this.$parent[0].offsetHeight - cursorY + 1) *
+                                100) /
+                            this.$parent[0].offsetHeight
+                    } else {
+                        this.positionInPercentage =
+                            ((cursorX + 1) * 100) / this.$parent[0].offsetWidth
+                    }
                     this.value = Math.floor(
                         this.positionInPercentage *
                             ((this.maxValue - this.minValue) / 100) +
@@ -60,9 +86,12 @@ export default class SliderModel {
     }
 
     onDrop() {
-        $('.range-slider').on('mouseup touchend', function (event) {
-            $(this).removeClass('tap')
-            $(this).off('mousemove touchmove')
-        })
+        $('.range-slider, .vertical-range-slider').on(
+            'mouseup touchend',
+            function (event) {
+                $(this).removeClass('tap')
+                $(this).off('mousemove touchmove')
+            }
+        )
     }
 }

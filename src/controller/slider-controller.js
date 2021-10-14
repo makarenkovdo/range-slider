@@ -18,11 +18,11 @@ export default class SliderController {
         this.rangeSlider.onDrag(this.updatePosition, this.updateText)
         return this
     }
-    updatePosition(positionsArray) {
-        sliderView.updatePosition(positionsArray)
+    updatePosition(updateArray) {
+        sliderView.updatePosition(updateArray)
     }
-    updateText(positionsArray) {
-        sliderView.updateTextNumber(positionsArray)
+    updateText(updateArray) {
+        sliderView.updateTextNumber(updateArray)
     }
     onDrop() {
         this.rangeSlider.onDrop()

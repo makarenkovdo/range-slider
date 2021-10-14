@@ -24,62 +24,63 @@ h1 {
     width: 100%;
     position: relative;
     margin: 0 auto;
-}
-.range-slider + .range-slider {
-    margin-top: 60px;
-}
-.range-slider:before,
-.range-slider:after {
-    box-sizing: border-box;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto 0;
-    font-size: 14px;
-    line-height: 20px;
-    height: 20px;
-    font-weight: 600;
-    color: #fff;
-}
-.range-slider:before {
-    content: attr(data-start);
-    left: 10px;
-}
-.range-slider:after {
-    content: attr(data-end);
-    right: 10px;
-}
-.range-number {
-    position: absolute;
-    left: 5px;
-    top: 0px;
-    background: linear-gradient(#6fcf97, blue);
-    padding: 5px;
-    border-radius: 100%;
-    width: 41px;
-    height: 41px;
-    cursor: pointer;
-    transform: translateY(0%);
-    user-select: none;
-    transition: transform 0.25s cubic-bezier(0.01, 0.02, 0.07, 1);
-    z-index: 2;
-}
-.range-number span {
-    box-sizing: border-box;
-    font-size: 14px;
-    line-height: 40px;
-    display: block;
-    height: 40px;
-    width: 40px;
-    color: black;
-    font-weight: bold;
-    text-align: center;
-    white-space: nowrap;
-    border-radius: 100%;
-    background-color: #fff;
-    position: relative;
-}
 
-.range-slider.tap .range-number {
-    transform: translateY(-100%);
+    + .range-slider {
+        margin-top: 60px;
+    }
+    &:before,
+    &:after {
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto 0;
+        font-size: 14px;
+        line-height: 20px;
+        height: 20px;
+        font-weight: 600;
+        color: #fff;
+    }
+    &:before {
+        content: attr(data-start);
+        left: 10px;
+    }
+    &:after {
+        content: attr(data-end);
+        right: 10px;
+    }
+    .range-number {
+        position: absolute;
+        left: 5px;
+        top: 0px;
+        background: linear-gradient(#6fcf97, blue);
+        padding: 5px;
+        border-radius: 100%;
+        width: 41px;
+        height: 41px;
+        cursor: pointer;
+        transform: translateY(0%);
+        user-select: none;
+        transition: transform 0.25s cubic-bezier(0.01, 0.02, 0.07, 1);
+        z-index: 2;
+    }
+    .range-number span {
+        box-sizing: border-box;
+        font-size: 14px;
+        line-height: 40px;
+        display: block;
+        height: 40px;
+        width: 40px;
+        color: black;
+        font-weight: bold;
+        text-align: center;
+        white-space: nowrap;
+        border-radius: 100%;
+        background-color: #fff;
+        position: relative;
+    }
+
+    &.tap .range-number {
+        transform: translateY(-100%);
+    }
 }

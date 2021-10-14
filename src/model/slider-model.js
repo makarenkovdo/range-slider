@@ -17,12 +17,12 @@ export default class SliderModel {
         return this
     }
 
-    onDrag(updateView, updateValues) {
+    onDrag(updateView, updateText) {
         const that = this
 
         $('.range-slider').on(
             'mousedown touchstart',
-            '.range-number',
+            '.range-number, .slider-toggler',
             (event) => {
                 event.preventDefault()
                 this.$element = $(event.currentTarget)
@@ -42,6 +42,9 @@ export default class SliderModel {
                         chosenPercentOfWidth,
                         chosenNumber,
                     ])
+                    if (this.$element.attr('class') === 'range-number') {
+                        updateText([this.$element, chosenNumber])
+                    }
                 })
             }
         )

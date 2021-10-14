@@ -6,16 +6,23 @@ export default class SliderController {
         this.id = id
         this.rangeSlider = new SliderModel(this.id)
     }
+    addSliderButton() {
+        sliderView.addSliderButton(this.id)
+        return this
+    }
     switchOnTip() {
         sliderView.addRangeNumber(this.id)
         return this
     }
     onDrag() {
-        this.rangeSlider.onDrag(this.updateView, this.rangeSlider.updateValues)
+        this.rangeSlider.onDrag(this.updateView, this.updateText)
         return this
     }
     updateView(positionsArray) {
         sliderView.updatePosition(positionsArray)
+    }
+    updateText(positionsArray) {
+        sliderView.updateTextNumber(positionsArray)
     }
     onDrop() {
         this.rangeSlider.onDrop()

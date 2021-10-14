@@ -8,7 +8,6 @@ class SliderView {
         })
     }
     updatePosition(numbersArray) {
-        console.log(numbersArray)
         const elViewPosition =
             numbersArray[1] - numbersArray[0].innerWidth() / 6
         numbersArray[0].css('left', elViewPosition + '%')

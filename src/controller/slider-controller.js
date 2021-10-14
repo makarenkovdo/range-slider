@@ -1,23 +1,29 @@
-import RangeSlider from '../model/slider-model'
+import SliderModel from '../model/slider-model'
 import { sliderView } from '../view/slider-view'
-const rangeSlider = new RangeSlider()
 
 class SliderController {
+    constructor(id) {
+        this.id = id
+        this.rangeSlider = new SliderModel(this.id)
+    }
     newInstance() {
-        rangeSlider.init(sliderView.addRangeNumber)
+        this.rangeSlider.init(sliderView.addRangeNumber)
         return this
     }
     onDrag() {
-        console.log('???')
-        rangeSlider.onDrag(this.updateView, rangeSlider.updateValues)
+        this.rangeSlider.onDrag(this.updateView, this.rangeSlider.updateValues)
         return this
     }
     updateView(positionsArray) {
-        console.log(positionsArray)
         sliderView.updatePosition(positionsArray)
     }
     onDrop() {
-        rangeSlider.onDrop()
+        this.rangeSlider.onDrop()
+        return this
+    }
+    setMaxValue(number) {
+        this.rangeSlider.setMaxValue(number)
+        return this
     }
 }
-export const newSlider = new SliderController()
+export const newSlider = new SliderController('second')

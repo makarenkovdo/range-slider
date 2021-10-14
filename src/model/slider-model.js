@@ -1,7 +1,8 @@
 import jquery from 'jquery'
 
-export default class RangeSlider {
-    constructor(maxValue = 100, isVertical = false, rangeQuantity = 1) {
+export default class SliderModel {
+    constructor(id, maxValue = 100, isVertical = false, rangeQuantity = 1) {
+        this.id = id
         this.$element = ''
         this.$parent = ''
         this.value = ''
@@ -12,6 +13,11 @@ export default class RangeSlider {
     }
     init(addRangeNumber) {
         addRangeNumber()
+    }
+    setMaxValue(number) {
+        console.log(this.id)
+        $(`#${this.id}`).attr('data-end', number)
+        return this
     }
 
     onDrag(updateView, updateValues) {
@@ -43,10 +49,7 @@ export default class RangeSlider {
             }
         )
     }
-    updateValues(array) {
-        ;[this.a, this.b, this.c] = [...array]
-        console.log(this.a, this.b, this.c)
-    }
+
     onDrop() {
         $('.range-slider').on('mouseup touchend', function (event) {
             $(this).removeClass('tap')

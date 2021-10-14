@@ -6,8 +6,8 @@ export default class SliderController {
         this.id = id
         this.rangeSlider = new SliderModel(this.id)
     }
-    newInstance() {
-        this.rangeSlider.init(sliderView.addRangeNumber, this.id)
+    switchOnTip() {
+        sliderView.addRangeNumber(this.id)
         return this
     }
     onDrag() {

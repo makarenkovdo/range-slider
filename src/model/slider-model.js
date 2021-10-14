@@ -11,9 +11,6 @@ export default class SliderModel {
         this.isVertical = isVertical
         this.rangeQuantity = rangeQuantity
     }
-    init(addRangeNumber, id) {
-        addRangeNumber(id)
-    }
     setMaxValue(number) {
         console.log(this.id)
         $(`#${this.id}`).attr('data-end', number)

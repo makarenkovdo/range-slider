@@ -1,5 +1,5 @@
 import jquery from 'jquery'
 
-import { newSlider } from './controller/controller'
+import { newSlider } from './controller/slider-controller'
 
-newSlider.newInstance().onDrag()
+newSlider.newInstance().onDrag().onDrop()

@@ -20,9 +20,6 @@ jquery(document).ready(function ($) {
                 const elPosition =
                     ((cursorX + 1) * 100) / $elParent[0].offsetWidth
                 const text = Math.floor(elPosition * (thisEnd / 100))
-                const elViewPosition = elPosition - $el.innerWidth() / 6
-                $el.css('left', elViewPosition + '%')
-                $el.find('span').text(text)
             })
         }
     )

@@ -9,7 +9,7 @@ class SliderController {
     }
     onDrag() {
         console.log('???')
-        rangeSlider.onDrag(this.updateView)
+        rangeSlider.onDrag(this.updateView, rangeSlider.updateValues)
         return this
     }
     updateView(positionsArray) {

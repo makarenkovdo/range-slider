@@ -11,8 +11,8 @@ export default class SliderModel {
         this.isVertical = isVertical
         this.rangeQuantity = rangeQuantity
     }
-    init(addRangeNumber) {
-        addRangeNumber()
+    init(addRangeNumber, id) {
+        addRangeNumber(id)
     }
     setMaxValue(number) {
         console.log(this.id)

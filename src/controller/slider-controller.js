@@ -1,13 +1,13 @@
 import SliderModel from '../model/slider-model'
 import { sliderView } from '../view/slider-view'
 
-class SliderController {
+export default class SliderController {
     constructor(id) {
         this.id = id
         this.rangeSlider = new SliderModel(this.id)
     }
     newInstance() {
-        this.rangeSlider.init(sliderView.addRangeNumber)
+        this.rangeSlider.init(sliderView.addRangeNumber, this.id)
         return this
     }
     onDrag() {
@@ -26,4 +26,3 @@ class SliderController {
         return this
     }
 }
-export const newSlider = new SliderController('second')

@@ -2,8 +2,8 @@ import './../index.scss'
 import jquery from 'jquery'
 
 class SliderView {
-    addRangeNumber() {
-        $('.range-slider').each(function (index, el) {
+    addRangeNumber(id) {
+        $(`#${id}`).each(function (index, el) {
             $(this).append('<span class="range-number"><span>0</span></span>')
         })
     }

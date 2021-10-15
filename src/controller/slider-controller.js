@@ -15,7 +15,7 @@ export default class SliderController {
             .onDrag()
             .onDrop()
     }
-    optionalBuild({ switchOnTip = false, minValue = 0, maxValue = 100 }) {
+    setOptions({ switchOnTip = false, minValue = 0, maxValue = 100 }) {
         this.switchOnTip(switchOnTip)
             .setMinValue(minValue)
             .setMaxValue(maxValue)

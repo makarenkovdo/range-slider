@@ -48,14 +48,14 @@ export default class SliderModel {
     onDrag(updatePosition, updateText) {
         $(`#${this.id}`).on(
             'mousedown touchstart',
-            '.range-number, .slider-toggler',
+            '.slider-toggler',
             (event) => {
                 event.preventDefault()
-                this.$element = $(event.currentTarget)
-                this.$parent = $(event.currentTarget).parents('.range-slider')
+                // this.$element = $(event.currentTarget)
+                // this.$parent = $(event.currentTarget).parents('.range-slider')
 
-                this.minValue = this.$parent.data('start')
-                this.maxValue = this.$parent.data('end')
+                // this.minValue = this.$parent.data('start')
+                // this.maxValue = this.$parent.data('end')
                 this.$parent.addClass('tap')
                 this.$parent.on('mousemove touchmove', (event) => {
                     event.preventDefault()

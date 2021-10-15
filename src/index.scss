@@ -54,7 +54,7 @@ h1 {
         }
         .range-number {
             left: 0px;
-            top: -10px;
+            top: -2.2 * $size;
         }
     }
     &.vertical {
@@ -85,7 +85,7 @@ h1 {
             top: 0%;
         }
         .range-number {
-            left: -10px;
+            left: $size;
             top: 0px;
         }
     }
@@ -120,7 +120,6 @@ h1 {
     }
 
     &.tap .range-number {
-        transform: scale(1.2);
         z-index: -2;
     }
     .slider-toggler {

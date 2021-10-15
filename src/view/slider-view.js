@@ -10,11 +10,13 @@ class SliderView extends SliderModel {
         })
     }
     addRangeNumber(id) {
-        $(`#${id}`).find('.slider-toggler').remove()
+        // $(`#${id}`).find('.slider-toggler').remove()
         $(`#${id}`).append('<span class="range-number"><span>0</span></span>')
     }
     updatePosition(that) {
         const thisRangeSlider = that.rangeSlider
+        console.log(thisRangeSlider)
+
         if (thisRangeSlider.isVertical) {
             const elViewPosition = 100 - thisRangeSlider.positionInPercentage
 

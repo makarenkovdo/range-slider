@@ -13,5 +13,5 @@ const thirdSlider = new SliderController('third').setOptions({
     switchOnTip: true,
 })
 const fourthSlider = new SliderController('fourth').setOptions({
-    switchOnTip: true,
+    switchOnTip: false,
 })

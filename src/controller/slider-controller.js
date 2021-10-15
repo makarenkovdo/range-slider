@@ -6,6 +6,10 @@ export default class SliderController {
         this.id = id
         this.rangeSlider = new SliderModel(this.id)
     }
+    init() {
+        console.log(this.rangeSlider.init())
+        return this
+    }
     addSliderButton() {
         sliderView.addSliderButton(this.id)
         return this

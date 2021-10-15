@@ -14,6 +14,24 @@ export default class SliderModel {
         this.isVertical = isVertical
         this.rangeQuantity = rangeQuantity
     }
+    init() {
+        console.log(this)
+        this.$element = $(`#${this.id}`)
+        this.minValue = $(`#${this.id}`).attr('data-start')
+        this.maxValue = $(`#${this.id}`).attr('data-end')
+        this.class = $(`#${this.id}`).attr('class')
+        this.isVertical = this.class === 'vertical-range-slider'
+        // this.$parent = $(event.currentTarget).parents(
+        //     '.range-slider, .vertical-range-slider'
+        // )
+        return [
+            this.$element,
+            this.minValue,
+            this.maxValue,
+            this.class,
+            this.isVertical,
+        ]
+    }
     setMaxValue(number) {
         $(`#${this.id}`).attr('data-end', number)
         return this
@@ -22,15 +40,6 @@ export default class SliderModel {
         $(`#${this.id}`).attr('data-start', number)
         return this
     }
-    // setSelectorValues() {
-    //     $('.range-slider, .vertical-range-slider').
-    //     this.$element = $(event.currentTarget)
-    //     this.$parent = $(event.currentTarget).parents(
-    //         '.range-slider, .vertical-range-slider'
-    //     )
-    //     this.minValue = this.$parent.data('start')
-    //     this.maxValue = this.$parent.data('end')
-    // }
 
     onDrag(updatePosition, updateText) {
         const that = this
@@ -41,10 +50,11 @@ export default class SliderModel {
             (event) => {
                 event.preventDefault()
                 this.$element = $(event.currentTarget)
+                console.log(this.$element)
                 this.$parent = $(event.currentTarget).parents(
                     '.range-slider, .vertical-range-slider'
                 )
-                console.log(this.$parent.attr('class'))
+                console.log(this.$parent)
 
                 this.minValue = this.$parent.data('start')
                 this.maxValue = this.$parent.data('end')

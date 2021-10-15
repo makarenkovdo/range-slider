@@ -13,11 +13,16 @@ class SliderView extends SliderModel {
             $(this).append('<span class="range-number"><span>0</span></span>')
         })
     }
-    updatePosition(numbersArray) {
+    updatePosition(that) {
+        console.log('that', that.rangeSlider)
+        console.log('thatEl', that.rangeSlider.$element)
+        console.log('thatPose', that.rangeSlider.positionInPercentage)
+
         const elViewPosition =
-            numbersArray[1] - numbersArray[0].innerWidth() / 6
-        numbersArray[0].css('left', elViewPosition + '%')
-        // numbersArray[0].find('span').text(numbersArray[2])
+            that.rangeSlider.positionInPercentage -
+            that.rangeSlider.$element.innerWidth() / 6
+        that.rangeSlider.$element.css('left', elViewPosition + '%')
+        // that.rangeSlider.$element.find('span').text(numbersArray[2])
     }
     updateTextNumber(numbersArray) {
         numbersArray[0].find('span').text(numbersArray[1])

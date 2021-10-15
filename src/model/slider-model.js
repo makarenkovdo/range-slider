@@ -1,7 +1,7 @@
 import jquery from 'jquery'
 
 export default class SliderModel {
-    constructor(id, isVertical = false, rangeQuantity = 1) {
+    constructor(id, subscriber) {
         this.class = ''
         this.positionInPercentage = 0
         this.value = ''
@@ -11,31 +11,31 @@ export default class SliderModel {
         this.array = []
         this.minValue = 0
         this.maxValue = 100
-        this.isVertical = isVertical
-        this.rangeQuantity = rangeQuantity
+        this.isVertical = false
+        this.rangeQuantity = 1
+        this.subscriber = subscriber
     }
     init() {
-        console.log(this)
+        console.log('this', this)
         this.$parent = $(`#${this.id}`)
         this.$element = $(`#${this.id}`).children(
             '.range-number, .slider-toggler '
         )
-
         this.minValue = $(`#${this.id}`).attr('data-start')
         this.maxValue = $(`#${this.id}`).attr('data-end')
         this.class = $(`#${this.id}`).attr('class')
         this.isVertical = this.class === 'vertical-range-slider'
-        // this.$parent = $(event.currentTarget).parents(
-        //     '.range-slider, .vertical-range-slider'
-        // )
-        return [
-            this.$element,
-            this.$parent,
-            this.minValue,
-            this.maxValue,
-            this.class,
-            this.isVertical,
-        ]
+        // return this
+        // $element: this.$element,
+        // $parent: this.$parent,
+        // minValue: this.minValue,
+        // maxValue: this.maxValue,
+        // class: this.class,
+        // isVertical: this.isVertical,
+    }
+    notify() {
+        this.subscriber.recieve(this)
+        // return this.subscriber.
     }
     setMaxValue(number) {
         $(`#${this.id}`).attr('data-end', number)
@@ -55,11 +55,9 @@ export default class SliderModel {
             (event) => {
                 event.preventDefault()
                 this.$element = $(event.currentTarget)
-                console.log(this.$element)
                 this.$parent = $(event.currentTarget).parents(
                     '.range-slider, .vertical-range-slider'
                 )
-                console.log(this.$parent)
 
                 this.minValue = this.$parent.data('start')
                 this.maxValue = this.$parent.data('end')
@@ -68,12 +66,10 @@ export default class SliderModel {
                     event.preventDefault()
                     const cursorX = event.offsetX
                     const cursorY = event.offsetY
-                    console.log(cursorY)
                     if (
                         this.$parent.attr('class') ===
                         'vertical-range-slider tap'
                     ) {
-                        console.log('VERTICAL!!')
                         this.positionInPercentage =
                             ((this.$parent[0].offsetHeight - cursorY + 1) *
                                 100) /
@@ -87,11 +83,12 @@ export default class SliderModel {
                             ((this.maxValue - this.minValue) / 100) +
                             this.minValue
                     )
-                    updatePosition([
-                        this.$element,
-                        this.positionInPercentage,
-                        this.value,
-                    ])
+                    this.notify(this)
+                    // updatePosition([
+                    //     this.$element,
+                    //     this.positionInPercentage,
+                    //     this.value,
+                    // ])
                     if (this.$element.attr('class') === 'range-number') {
                         updateText([this.$element, this.value])
                     }
@@ -109,4 +106,5 @@ export default class SliderModel {
             }
         )
     }
+    inform() {}
 }

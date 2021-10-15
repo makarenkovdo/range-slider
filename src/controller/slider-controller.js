@@ -4,18 +4,18 @@ import { sliderView } from '../view/slider-view'
 export default class SliderController {
     constructor(id) {
         this.id = id
-        this.rangeSlider = new SliderModel(this.id)
+        this.rangeSlider = new SliderModel(this.id, this)
     }
     init() {
-        ;[
-            this.$element,
-            this.$parent,
-            this.minValue,
-            this.maxValue,
-            this.class,
-            this.isVertical,
-        ] = this.rangeSlider.init()
-        console.log(this.rangeSlider)
+        // ;[
+        //     this.$element,
+        //     this.$parent,
+        //     this.minValue,
+        //     this.maxValue,
+        //     this.class,
+        //     this.isVertical,
+        // ] =
+        this.rangeSlider.init()
         return this
     }
     addSliderButton() {
@@ -28,12 +28,15 @@ export default class SliderController {
     }
     onDrag() {
         this.rangeSlider.onDrag(this.updatePosition.bind(this), this.updateText)
+        this.recieve(this)
         return this
     }
-    updatePosition(updateArray) {
+    recieve(that) {
+        this.updatePosition(that)
+    }
+    updatePosition() {
         console.log(this)
-        console.log(this.rangeSlider)
-        sliderView.updatePosition(updateArray)
+        sliderView.updatePosition(this)
     }
     updateText(updateArray) {
         sliderView.updateTextNumber(updateArray)

@@ -33,6 +33,7 @@ export default class SliderController {
         //     this.isVertical,
         // ] =
         this.rangeSlider.init()
+        console.log(this)
         return this
     }
     addSliderButton() {
@@ -44,7 +45,6 @@ export default class SliderController {
         return this
     }
     onDrag() {
-        console.log(this)
         this.rangeSlider.onDrag(this.updatePosition.bind(this), this.updateText)
         this.recieve(this)
         return this
@@ -53,7 +53,6 @@ export default class SliderController {
         this.updatePosition()
     }
     updatePosition() {
-        // console.log(this)
         sliderView.updatePosition(this)
     }
     updateText(updateArray) {

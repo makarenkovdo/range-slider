@@ -16,7 +16,6 @@ class SliderView extends SliderModel {
     updatePosition(that) {
         const thisRangeSlider = that.rangeSlider
         if (thisRangeSlider.isVertical) {
-            // console.log('vertical!')
             const elViewPosition =
                 thisRangeSlider.positionInPercentage -
                 thisRangeSlider.$element.innerHeight() / 6

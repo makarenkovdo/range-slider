@@ -16,7 +16,6 @@ export default class SliderModel {
         this.subscriber = subscriber
     }
     init() {
-        console.log('this', this)
         this.$parent = $(`#${this.id}`)
         this.$element = $(`#${this.id}`).children(
             '.range-number, .slider-toggler '
@@ -24,7 +23,7 @@ export default class SliderModel {
         this.minValue = $(`#${this.id}`).attr('data-start')
         this.maxValue = $(`#${this.id}`).attr('data-end')
         this.class = $(`#${this.id}`).attr('class')
-        this.isVertical = this.class === 'vertical-range-slider'
+        this.isVertical = this.class === 'range-slider vertical'
         // return this
         // $element: this.$element,
         // $parent: this.$parent,
@@ -47,17 +46,13 @@ export default class SliderModel {
     }
 
     onDrag(updatePosition, updateText) {
-        console.log(this)
-
         $(`#${this.id}`).on(
             'mousedown touchstart',
             '.range-number, .slider-toggler',
             (event) => {
                 event.preventDefault()
                 this.$element = $(event.currentTarget)
-                this.$parent = $(event.currentTarget).parents(
-                    '.range-slider, .vertical-range-slider'
-                )
+                this.$parent = $(event.currentTarget).parents('.range-slider')
 
                 this.minValue = this.$parent.data('start')
                 this.maxValue = this.$parent.data('end')
@@ -66,11 +61,7 @@ export default class SliderModel {
                     event.preventDefault()
                     const cursorX = event.offsetX
                     const cursorY = event.offsetY
-                    console.log(this.$parent[0].offsetHeight)
-                    if (
-                        this.$parent.attr('class') ===
-                        'vertical-range-slider tap'
-                    ) {
+                    if (this.isVertical) {
                         this.positionInPercentage =
                             ((this.$parent[0].offsetHeight - (cursorY + 1)) *
                                 100) /

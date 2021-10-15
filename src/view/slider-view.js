@@ -27,22 +27,30 @@ class SliderView extends SliderModel {
         }
     }
     updatePosition(that) {
-        const thisRangeSlider = that.rangeSlider
         let elViewPosition = 0
-        if (thisRangeSlider.isVertical) {
-            elViewPosition = 100 - thisRangeSlider.positionInPercentage
+        if (this.isVertical) {
+            elViewPosition = 100 - this.positionInPercentage
 
-            thisRangeSlider.$element.css('top', elViewPosition + '%')
+            this.$element.css('top', elViewPosition + '%')
         } else {
-            elViewPosition = thisRangeSlider.positionInPercentage
-            thisRangeSlider.$element.css('left', elViewPosition + '%')
+            elViewPosition = this.positionInPercentage
+            console.log(this.value)
+            console.log(this.positionInPercentage)
+            console.log((elViewPosition / this.step) * this.step)
+
+            this.$element.css(
+                'left',
+                `${Math.floor(elViewPosition / this.step) * this.step}` + '%'
+            )
             //TODO -rangeNumber.width/2
         }
 
         // that.rangeSlider.$element.find('span').text(numbersArray[2])
     }
     updateTextNumber(numbersArray) {
-        this.$element.find('span').text(Math.trunc(this.value))
+        this.$element
+            .find('span')
+            .text(`${Math.floor(this.value / this.step) * this.step}`)
     }
 }
 

@@ -2,17 +2,17 @@ import jquery from 'jquery'
 
 export default class SliderModel {
     constructor(id, subscriber) {
-        this.class = ''
-        this.positionInPercentage = 0
-        this.value = 0
-        this.id = id
         this.$element = ''
         this.$parent = ''
-        this.array = []
+        this.class = ''
+        this.id = id
+        this.positionInPercentage = 0
+        this.value = 0
         this.minValue = 0
         this.maxValue = 100
+        this.step = 1
         this.isVertical = false
-        this.rangeQuantity = 1
+        this.isRange = false
         this.subscriber = subscriber
         this.isBarAdded = false
     }
@@ -28,7 +28,6 @@ export default class SliderModel {
     }
     notify() {
         this.subscriber.recieve(this)
-        // return this.subscriber.
     }
     setMaxValue(number) {
         $(`#${this.id}`).attr('data-end', number)
@@ -37,6 +36,9 @@ export default class SliderModel {
     setMinValue(number) {
         $(`#${this.id}`).attr('data-start', number)
         return this
+    }
+    setStep(step) {
+        this.step = step
     }
 
     onDrag(updatePosition, updateText) {
@@ -64,8 +66,6 @@ export default class SliderModel {
                             ((this.maxValue - this.minValue) / 100) +
                         (+this.minValue + 1)
 
-                    console.log(this.value)
-                    console.log(this.positionInPercentage)
                     this.notify(this)
                     // updatePosition([
                     //     this.$element,

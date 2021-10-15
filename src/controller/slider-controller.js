@@ -20,12 +20,14 @@ export default class SliderController {
         minValue = 0,
         maxValue = 100,
         shouldAddBar = false,
+        step = 1,
     }) {
         this.switchOnTip(switchOnTip)
             .setMinValue(minValue)
             .setMaxValue(maxValue)
             .init()
             .addBar(shouldAddBar)
+            .setStep(step)
     }
     init() {
         this.rangeSlider.init()
@@ -60,7 +62,7 @@ export default class SliderController {
         this.updateText()
     }
     updatePosition() {
-        sliderView.updatePosition(this)
+        sliderView.updatePosition.call(this.rangeSlider)
     }
     updateText() {
         sliderView.updateTextNumber.call(this.rangeSlider)
@@ -69,12 +71,15 @@ export default class SliderController {
         this.rangeSlider.onDrop()
         return this
     }
-    setMaxValue(number) {
-        this.rangeSlider.setMaxValue(number)
+    setMaxValue(maxValue) {
+        this.rangeSlider.setMaxValue(maxValue)
         return this
     }
-    setMinValue(number) {
-        this.rangeSlider.setMinValue(number)
+    setMinValue(minValue) {
+        this.rangeSlider.setMinValue(minValue)
         return this
+    }
+    setStep(interval) {
+        this.rangeSlider.setStep(interval)
     }
 }

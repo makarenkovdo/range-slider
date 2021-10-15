@@ -66,13 +66,13 @@ export default class SliderModel {
                     event.preventDefault()
                     const cursorX = event.offsetX
                     const cursorY = event.offsetY
+                    console.log(this.$parent[0].offsetHeight)
                     if (
                         this.$parent.attr('class') ===
                         'vertical-range-slider tap'
                     ) {
-                        console.log('WRONG')
                         this.positionInPercentage =
-                            ((this.$parent[0].offsetHeight - cursorY + 1) *
+                            ((this.$parent[0].offsetHeight - (cursorY + 1)) *
                                 100) /
                             this.$parent[0].offsetHeight
                     } else {

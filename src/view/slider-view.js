@@ -14,14 +14,33 @@ class SliderView extends SliderModel {
         $(`#${id}`).append('<span class="range-number"><span>0</span></span>')
     }
     addBar(id) {
-        console.log('here')
+        let direction = 'width'
+        let thickness = 'height'
         $(`#${id}`).append(
-            '<div class="slider-bar" style="width:100%; height:20px; background: red"></div>'
+            `<div class="slider-bar" style='background: red'></div>`
         )
+        console.log('AFSFASF', this)
+    }
+    updateBar() {
+        console.log('updateBar', this)
+        let direction = 'width'
+        let thickness = 'height'
+        if (this.isVertical) {
+            console.log('INSIDE VERTICAL')
+            direction = 'height'
+            thickness = 'width'
+            $(`#${this.id}`)
+                .children('.slider-bar')
+                .css(`${direction}`, `${100 - this.positionInPercentage}%`)
+        } else {
+            $(`#${this.id}`)
+                .children('.slider-bar')
+                .css(`${direction}`, `${this.positionInPercentage}%`)
+                .css(`${thickness}`, `${20}px`)
+        }
     }
     updatePosition(that) {
         const thisRangeSlider = that.rangeSlider
-        console.log(thisRangeSlider)
         let elViewPosition = 0
         if (thisRangeSlider.isVertical) {
             elViewPosition = 100 - thisRangeSlider.positionInPercentage
@@ -32,9 +51,6 @@ class SliderView extends SliderModel {
             thisRangeSlider.$element.css('left', elViewPosition + '%')
             //TODO -rangeNumber.width/2
         }
-        $(`#${thisRangeSlider.id}`)
-            .children('.slider-bar')
-            .css('width', `${elViewPosition}%`)
 
         // that.rangeSlider.$element.find('span').text(numbersArray[2])
     }

@@ -8,6 +8,7 @@ const firstSlider = new SliderController('first').setOptions({
 
 const secondSlider = new SliderController('second').setOptions({
     switchOnTip: true,
+    shouldAddBar: true,
 })
 
 const thirdSlider = new SliderController('third').setOptions({

@@ -41,8 +41,12 @@ export default class SliderController {
         return this
     }
     addBar(shouldAddBar) {
-        console.log('!!!!!!!!')
-        shouldAddBar ? sliderView.addBar(this.id) : null
+        this.rangeSlider.isBarAdded = true
+        shouldAddBar ? sliderView.addBar.call(this, this.id) : null
+        return this
+    }
+    updateBar() {
+        sliderView.updateBar.call(this.rangeSlider)
         return this
     }
     onDrag() {
@@ -52,6 +56,7 @@ export default class SliderController {
     }
     recieve() {
         this.updatePosition()
+        this.updateBar(true)
     }
     updatePosition() {
         sliderView.updatePosition(this)

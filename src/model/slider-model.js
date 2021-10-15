@@ -14,6 +14,7 @@ export default class SliderModel {
         this.isVertical = false
         this.rangeQuantity = 1
         this.subscriber = subscriber
+        this.isBarAdded = false
     }
     init() {
         this.$parent = $(`#${this.id}`)

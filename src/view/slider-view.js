@@ -1,7 +1,8 @@
 import './../index.scss'
 import jquery from 'jquery'
+import SliderModel from '../model/slider-model'
 
-class SliderView {
+class SliderView extends SliderModel {
     addSliderButton(id) {
         $(`#${id}`).each(function (index, el) {
             $(this).append('<span class="slider-toggler"></span>')

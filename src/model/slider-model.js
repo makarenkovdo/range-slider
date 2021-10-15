@@ -16,7 +16,11 @@ export default class SliderModel {
     }
     init() {
         console.log(this)
-        this.$element = $(`#${this.id}`)
+        this.$parent = $(`#${this.id}`)
+        this.$element = $(`#${this.id}`).children(
+            '.range-number, .slider-toggler '
+        )
+
         this.minValue = $(`#${this.id}`).attr('data-start')
         this.maxValue = $(`#${this.id}`).attr('data-end')
         this.class = $(`#${this.id}`).attr('class')
@@ -26,6 +30,7 @@ export default class SliderModel {
         // )
         return [
             this.$element,
+            this.$parent,
             this.minValue,
             this.maxValue,
             this.class,

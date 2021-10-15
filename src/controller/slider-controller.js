@@ -7,7 +7,15 @@ export default class SliderController {
         this.rangeSlider = new SliderModel(this.id)
     }
     init() {
-        console.log(this.rangeSlider.init())
+        ;[
+            this.$element,
+            this.$parent,
+            this.minValue,
+            this.maxValue,
+            this.class,
+            this.isVertical,
+        ] = this.rangeSlider.init()
+        console.log(this.rangeSlider)
         return this
     }
     addSliderButton() {
@@ -19,10 +27,12 @@ export default class SliderController {
         return this
     }
     onDrag() {
-        this.rangeSlider.onDrag(this.updatePosition, this.updateText)
+        this.rangeSlider.onDrag(this.updatePosition.bind(this), this.updateText)
         return this
     }
     updatePosition(updateArray) {
+        console.log(this)
+        console.log(this.rangeSlider)
         sliderView.updatePosition(updateArray)
     }
     updateText(updateArray) {

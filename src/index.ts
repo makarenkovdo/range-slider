@@ -13,4 +13,4 @@ firstSlider
     .onDrag()
     .onDrop()
 secondSlider.switchOnTip().setMaxValue(333).init().onDrag().onDrop()
-thirdSlider.addSliderButton().setMaxValue(123).onDrag().onDrop()
+thirdSlider.addSliderButton().setMaxValue(123).init().onDrag().onDrop()

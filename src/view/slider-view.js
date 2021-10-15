@@ -14,14 +14,27 @@ class SliderView extends SliderModel {
         })
     }
     updatePosition(that) {
+        const thisRangeSlider = that.rangeSlider
         console.log('that', that.rangeSlider)
         console.log('thatEl', that.rangeSlider.$element)
         console.log('thatPose', that.rangeSlider.positionInPercentage)
 
-        const elViewPosition =
-            that.rangeSlider.positionInPercentage -
-            that.rangeSlider.$element.innerWidth() / 6
-        that.rangeSlider.$element.css('left', elViewPosition + '%')
+        if (thisRangeSlider.isVertical) {
+            console.log('vertical!')
+            const elViewPosition =
+                thisRangeSlider.positionInPercentage -
+                thisRangeSlider.$element.innerHeight() / 6
+            thisRangeSlider.$element.css(
+                'top',
+                thisRangeSlider.$element.innerHeight() - elViewPosition + '%'
+            )
+        } else {
+            const elViewPosition =
+                thisRangeSlider.positionInPercentage -
+                thisRangeSlider.$element.innerWidth() / 6
+            thisRangeSlider.$element.css('left', elViewPosition + '%')
+        }
+
         // that.rangeSlider.$element.find('span').text(numbersArray[2])
     }
     updateTextNumber(numbersArray) {

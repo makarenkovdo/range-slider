@@ -31,8 +31,8 @@ export default class SliderController {
         this.recieve(this)
         return this
     }
-    recieve(that) {
-        this.updatePosition(that)
+    recieve() {
+        this.updatePosition()
     }
     updatePosition() {
         console.log(this)

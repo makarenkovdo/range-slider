@@ -1,6 +1,6 @@
 body {
     font-family: 'Verdana', sans-serif;
-    background-color: #dddddd;
+    background-color: #fff;
     padding: 100px 15px;
 }
 .title {
@@ -14,16 +14,20 @@ h1 {
     color: #1d1d1d;
 }
 .range-slider {
+    $size: 20px;
+    border-radius: 5px;
+    border: 1px solid rgba(109, 208, 165);
+    box-sizing: border-box;
+    border-radius: 3px;
+    color: #fff;
+    position: relative;
+    margin: auto;
+    margin-bottom: 100px;
+
     &.horizontal {
-        height: 20px;
-        border-radius: 5px;
-        border: 1px solid rgba(31, 32, 65, 0.25);
-        box-sizing: border-box;
-        border-radius: 3px;
-        color: #fff;
-        width: 100%;
         position: relative;
-        margin: 0 auto;
+        height: $size;
+        width: 100%;
 
         + .range-slider {
             margin-top: 60px;
@@ -32,14 +36,13 @@ h1 {
         &:after {
             box-sizing: border-box;
             position: absolute;
-            top: 0;
-            bottom: 0;
+            top: $size;
             margin: auto 0;
             font-size: 14px;
             line-height: 20px;
             height: 20px;
             font-weight: 600;
-            color: #fff;
+            color: #000;
         }
         &:before {
             content: attr(data-start);
@@ -52,52 +55,45 @@ h1 {
     }
     &.vertical {
         height: 100%;
-        border-radius: 5px;
-        border: 1px solid rgba(31, 32, 65, 0.25);
-        box-sizing: border-box;
-        border-radius: 3px;
-        color: #fff;
-        width: 20px;
-        position: relative;
-        margin: 0 auto;
+        width: $size;
 
         + .range-slider {
-            margin-top: 60px;
+            margin-bottom: 100px;
         }
         &:before,
         &:after {
             box-sizing: border-box;
             position: absolute;
-            top: 0;
-            bottom: 0;
+            right: $size;
             margin: auto 0;
             font-size: 14px;
             line-height: 20px;
             height: 20px;
             font-weight: 600;
-            color: #fff;
+            color: #000;
         }
         &:before {
             content: attr(data-start);
-            left: 10px;
+            top: 100%;
         }
         &:after {
             content: attr(data-end);
-            right: 10px;
+            top: 0%;
         }
         .range-number {
-            top: 200px;
+            top: 0px;
         }
     }
     .range-number {
         position: absolute;
         left: 5px;
         top: 0px;
-        background: linear-gradient(#6fcf97, blue);
+        background-color: #fff;
+
         padding: 5px;
         border-radius: 100%;
-        width: 41px;
-        height: 41px;
+        width: $size * 2.333;
+        height: $size * 2.333;
         cursor: pointer;
         transform: translateY(0%);
         user-select: none;
@@ -109,19 +105,19 @@ h1 {
         font-size: 14px;
         line-height: 40px;
         display: block;
-        height: 40px;
-        width: 40px;
+        height: $size * 2;
+        width: $size * 2;
         color: black;
         font-weight: bold;
         text-align: center;
         white-space: nowrap;
         border-radius: 100%;
-        background-color: #fff;
         position: relative;
+        background: linear-gradient(#6fcf97 50%, #66d2ea);
     }
 
     &.tap .range-number {
-        transform: scale(2);
+        transform: scale(1.2);
         z-index: -2;
     }
     .slider-toggler {

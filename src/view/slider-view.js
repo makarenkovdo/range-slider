@@ -16,18 +16,13 @@ class SliderView extends SliderModel {
     updatePosition(that) {
         const thisRangeSlider = that.rangeSlider
         if (thisRangeSlider.isVertical) {
-            const elViewPosition =
-                thisRangeSlider.positionInPercentage -
-                thisRangeSlider.$element.innerHeight() / 6
-            thisRangeSlider.$element.css(
-                'top',
-                thisRangeSlider.$element.innerHeight() - elViewPosition + '%'
-            )
+            const elViewPosition = 100 - thisRangeSlider.positionInPercentage
+
+            thisRangeSlider.$element.css('top', elViewPosition + '%')
         } else {
-            const elViewPosition =
-                thisRangeSlider.positionInPercentage -
-                thisRangeSlider.$element.innerWidth() / 6
+            const elViewPosition = thisRangeSlider.positionInPercentage
             thisRangeSlider.$element.css('left', elViewPosition + '%')
+            //TODO -rangeNumber.width/2
         }
 
         // that.rangeSlider.$element.find('span').text(numbersArray[2])

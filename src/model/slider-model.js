@@ -73,7 +73,8 @@ export default class SliderModel {
                     this.value = Math.floor(
                         this.positionInPercentage *
                             ((this.maxValue - this.minValue) / 100) +
-                            this.minValue
+                            this.minValue +
+                            1
                     )
                     this.notify(this)
                     // updatePosition([

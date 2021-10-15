@@ -5,6 +5,7 @@ import SliderModel from '../model/slider-model'
 class SliderView extends SliderModel {
     addSliderButton(id) {
         $(`#${id}`).each(function (index, el) {
+            //TODO id?
             $(this).append('<span class="slider-toggler"></span>')
         })
     }
@@ -15,12 +16,8 @@ class SliderView extends SliderModel {
     }
     updatePosition(that) {
         const thisRangeSlider = that.rangeSlider
-        console.log('that', that.rangeSlider)
-        console.log('thatEl', that.rangeSlider.$element)
-        console.log('thatPose', that.rangeSlider.positionInPercentage)
-
         if (thisRangeSlider.isVertical) {
-            console.log('vertical!')
+            // console.log('vertical!')
             const elViewPosition =
                 thisRangeSlider.positionInPercentage -
                 thisRangeSlider.$element.innerHeight() / 6

@@ -47,9 +47,9 @@ export default class SliderModel {
     }
 
     onDrag(updatePosition, updateText) {
-        const that = this
+        console.log(this)
 
-        $('.range-slider, .vertical-range-slider').on(
+        $(`#${this.id}`).on(
             'mousedown touchstart',
             '.range-number, .slider-toggler',
             (event) => {
@@ -70,6 +70,7 @@ export default class SliderModel {
                         this.$parent.attr('class') ===
                         'vertical-range-slider tap'
                     ) {
+                        console.log('WRONG')
                         this.positionInPercentage =
                             ((this.$parent[0].offsetHeight - cursorY + 1) *
                                 100) /

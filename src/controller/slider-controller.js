@@ -6,6 +6,7 @@ export default class SliderController {
         this.id = id
         this.rangeSlider = new SliderModel(this.id, this)
     }
+    build() {}
     init() {
         // ;[
         //     this.$element,
@@ -27,6 +28,7 @@ export default class SliderController {
         return this
     }
     onDrag() {
+        console.log(this)
         this.rangeSlider.onDrag(this.updatePosition.bind(this), this.updateText)
         this.recieve(this)
         return this
@@ -35,7 +37,7 @@ export default class SliderController {
         this.updatePosition()
     }
     updatePosition() {
-        console.log(this)
+        // console.log(this)
         sliderView.updatePosition(this)
     }
     updateText(updateArray) {

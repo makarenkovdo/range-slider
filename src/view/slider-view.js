@@ -10,9 +10,8 @@ class SliderView extends SliderModel {
         })
     }
     addRangeNumber(id) {
-        $(`#${id}`).each(function (index, el) {
-            $(this).append('<span class="range-number"><span>0</span></span>')
-        })
+        $(`#${id}`).find('.slider-toggler').remove()
+        $(`#${id}`).append('<span class="range-number"><span>0</span></span>')
     }
     updatePosition(that) {
         const thisRangeSlider = that.rangeSlider

@@ -57,12 +57,13 @@ export default class SliderController {
     recieve() {
         this.updatePosition()
         this.updateBar(true)
+        this.updateText()
     }
     updatePosition() {
         sliderView.updatePosition(this)
     }
-    updateText(updateArray) {
-        sliderView.updateTextNumber(updateArray)
+    updateText() {
+        sliderView.updateTextNumber.call(this.rangeSlider)
     }
     onDrop() {
         this.rangeSlider.onDrop()

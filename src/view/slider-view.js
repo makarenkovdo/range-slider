@@ -4,39 +4,26 @@ import SliderModel from '../model/slider-model'
 
 class SliderView extends SliderModel {
     addSliderButton(id) {
-        $(`#${id}`).each(function (index, el) {
-            //TODO id?
-            $(this).append('<span class="slider-toggler"></span>')
-        })
+        $(`#${id}`).append('<span class="slider-toggler"></span>')
     }
     addRangeNumber(id) {
         // $(`#${id}`).find('.slider-toggler').remove()
         $(`#${id}`).append('<span class="range-number"><span>0</span></span>')
     }
     addBar(id) {
-        let direction = 'width'
-        let thickness = 'height'
-        $(`#${id}`).append(
-            `<div class="slider-bar" style='background: red'></div>`
-        )
-        console.log('AFSFASF', this)
+        $(`#${id}`).append(`<div class="slider-bar"></div>`)
     }
     updateBar() {
-        console.log('updateBar', this)
-        let direction = 'width'
-        let thickness = 'height'
         if (this.isVertical) {
             console.log('INSIDE VERTICAL')
-            direction = 'height'
-            thickness = 'width'
             $(`#${this.id}`)
                 .children('.slider-bar')
-                .css(`${direction}`, `${this.positionInPercentage}%`)
+                .css('height', `${this.positionInPercentage}%`)
                 .css(`top`, `${100 - this.positionInPercentage}%`)
         } else {
             $(`#${this.id}`)
                 .children('.slider-bar')
-                .css(`${direction}`, `${this.positionInPercentage}%`)
+                .css('width', `${this.positionInPercentage}%`)
         }
     }
     updatePosition(that) {
@@ -55,7 +42,8 @@ class SliderView extends SliderModel {
         // that.rangeSlider.$element.find('span').text(numbersArray[2])
     }
     updateTextNumber(numbersArray) {
-        numbersArray[0].find('span').text(numbersArray[1])
+        console.log(this.$element)
+        this.$element.find('span').text(this.value)
     }
 }
 

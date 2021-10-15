@@ -5,8 +5,16 @@ export default class SliderController {
     constructor(id) {
         this.id = id
         this.rangeSlider = new SliderModel(this.id, this)
+        this.build()
     }
-    build() {}
+    build() {
+        this.switchOnTip()
+            .setMinValue(5)
+            .setMaxValue(77)
+            .init()
+            .onDrag()
+            .onDrop()
+    }
     init() {
         // ;[
         //     this.$element,

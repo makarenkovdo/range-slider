@@ -31,12 +31,12 @@ class SliderView extends SliderModel {
             thickness = 'width'
             $(`#${this.id}`)
                 .children('.slider-bar')
-                .css(`${direction}`, `${100 - this.positionInPercentage}%`)
+                .css(`${direction}`, `${this.positionInPercentage}%`)
+                .css(`top`, `${100 - this.positionInPercentage}%`)
         } else {
             $(`#${this.id}`)
                 .children('.slider-bar')
                 .css(`${direction}`, `${this.positionInPercentage}%`)
-                .css(`${thickness}`, `${20}px`)
         }
     }
     updatePosition(that) {

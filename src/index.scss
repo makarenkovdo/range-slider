@@ -60,6 +60,7 @@ h1 {
     &.vertical {
         height: 100%;
         width: $size;
+        position: relative;
 
         + .range-slider {
             margin-bottom: 100px;
@@ -87,6 +88,12 @@ h1 {
         .range-number {
             left: $size;
             top: 0px;
+        }
+        .slider-bar {
+            position: absolute;
+            // top: 100%;
+            width: $size;
+            z-index: -3;
         }
     }
     .range-number {

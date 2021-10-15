@@ -15,23 +15,19 @@ export default class SliderController {
             .onDrag()
             .onDrop()
     }
-    setOptions({ switchOnTip = false, minValue = 0, maxValue = 100 }) {
+    setOptions({
+        switchOnTip = false,
+        minValue = 0,
+        maxValue = 100,
+        shouldAddBar = false,
+    }) {
         this.switchOnTip(switchOnTip)
             .setMinValue(minValue)
             .setMaxValue(maxValue)
             .init()
-            .onDrag()
-            .onDrop()
+            .addBar(shouldAddBar)
     }
     init() {
-        // ;[
-        //     this.$element,
-        //     this.$parent,
-        //     this.minValue,
-        //     this.maxValue,
-        //     this.class,
-        //     this.isVertical,
-        // ] =
         this.rangeSlider.init()
         console.log(this)
         return this
@@ -42,6 +38,11 @@ export default class SliderController {
     }
     switchOnTip(isOn) {
         isOn ? sliderView.addRangeNumber(this.id) : this.addSliderButton()
+        return this
+    }
+    addBar(shouldAddBar) {
+        console.log('!!!!!!!!')
+        shouldAddBar ? sliderView.addBar(this.id) : null
         return this
     }
     onDrag() {

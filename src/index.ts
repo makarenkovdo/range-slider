@@ -3,6 +3,7 @@ import SliderController from './controller/slider-controller'
 
 const firstSlider = new SliderController('first').setOptions({
     switchOnTip: true,
+    shouldAddBar: true,
 })
 
 const secondSlider = new SliderController('second').setOptions({

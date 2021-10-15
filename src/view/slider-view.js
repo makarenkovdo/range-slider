@@ -13,19 +13,28 @@ class SliderView extends SliderModel {
         // $(`#${id}`).find('.slider-toggler').remove()
         $(`#${id}`).append('<span class="range-number"><span>0</span></span>')
     }
+    addBar(id) {
+        console.log('here')
+        $(`#${id}`).append(
+            '<div class="slider-bar" style="width:100%; height:20px; background: red"></div>'
+        )
+    }
     updatePosition(that) {
         const thisRangeSlider = that.rangeSlider
         console.log(thisRangeSlider)
-
+        let elViewPosition = 0
         if (thisRangeSlider.isVertical) {
-            const elViewPosition = 100 - thisRangeSlider.positionInPercentage
+            elViewPosition = 100 - thisRangeSlider.positionInPercentage
 
             thisRangeSlider.$element.css('top', elViewPosition + '%')
         } else {
-            const elViewPosition = thisRangeSlider.positionInPercentage
+            elViewPosition = thisRangeSlider.positionInPercentage
             thisRangeSlider.$element.css('left', elViewPosition + '%')
             //TODO -rangeNumber.width/2
         }
+        $(`#${thisRangeSlider.id}`)
+            .children('.slider-bar')
+            .css('width', `${elViewPosition}%`)
 
         // that.rangeSlider.$element.find('span').text(numbersArray[2])
     }

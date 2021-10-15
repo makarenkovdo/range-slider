@@ -4,12 +4,13 @@ import SliderController from './controller/slider-controller'
 const firstSlider = new SliderController('first').setOptions({
     switchOnTip: true,
     shouldAddBar: true,
-    step: 1,
+    step: 10,
 })
 
 const secondSlider = new SliderController('second').setOptions({
     switchOnTip: true,
     shouldAddBar: true,
+    step: 10,
 })
 
 const thirdSlider = new SliderController('third').setOptions({

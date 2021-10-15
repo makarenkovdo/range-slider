@@ -15,6 +15,8 @@ export default class SliderModel {
         this.isRange = false
         this.subscriber = subscriber
         this.isBarAdded = false
+        this.stepPosition = 0
+        this.stepValue = 0
     }
     init() {
         this.$parent = $(`#${this.id}`)
@@ -65,6 +67,11 @@ export default class SliderModel {
                         this.positionInPercentage *
                             ((this.maxValue - this.minValue) / 100) +
                         (+this.minValue + 1)
+                    this.stepPosition =
+                        Math.trunc(this.positionInPercentage / this.step) *
+                        this.step
+                    this.stepValue =
+                        Math.trunc(this.value / this.step) * this.step
 
                     this.notify(this)
                     // updatePosition([

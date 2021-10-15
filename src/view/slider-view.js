@@ -18,39 +18,26 @@ class SliderView extends SliderModel {
             console.log('INSIDE VERTICAL')
             $(`#${this.id}`)
                 .children('.slider-bar')
-                .css('height', `${this.positionInPercentage}%`)
-                .css(`top`, `${100 - this.positionInPercentage}%`)
+                .css('height', `${this.stepPosition}%`)
+                .css(`top`, `${100 - this.stepPosition}%`)
         } else {
             $(`#${this.id}`)
                 .children('.slider-bar')
-                .css('width', `${this.positionInPercentage}%`)
+                .css('width', `${this.stepPosition}%`)
         }
     }
     updatePosition(that) {
-        let elViewPosition = 0
         if (this.isVertical) {
-            elViewPosition = 100 - this.positionInPercentage
-
-            this.$element.css('top', elViewPosition + '%')
+            this.$element.css('top', 100 - this.stepPosition + '%')
         } else {
-            elViewPosition = this.positionInPercentage
-            console.log(this.value)
-            console.log(this.positionInPercentage)
-            console.log((elViewPosition / this.step) * this.step)
-
-            this.$element.css(
-                'left',
-                `${Math.floor(elViewPosition / this.step) * this.step}` + '%'
-            )
+            this.$element.css('left', `${this.stepPosition}` + '%')
             //TODO -rangeNumber.width/2
         }
 
         // that.rangeSlider.$element.find('span').text(numbersArray[2])
     }
     updateTextNumber(numbersArray) {
-        this.$element
-            .find('span')
-            .text(`${Math.floor(this.value / this.step) * this.step}`)
+        this.$element.find('span').text(`${this.stepValue}`)
     }
 }
 

@@ -52,6 +52,10 @@ h1 {
             content: attr(data-end);
             right: 10px;
         }
+        .range-number {
+            left: 0px;
+            top: -10px;
+        }
     }
     &.vertical {
         height: 100%;
@@ -81,16 +85,15 @@ h1 {
             top: 0%;
         }
         .range-number {
+            left: -10px;
             top: 0px;
         }
     }
     .range-number {
         position: absolute;
-        left: 5px;
-        top: 0px;
         background-color: #fff;
 
-        padding: 5px;
+        padding: 0px;
         border-radius: 100%;
         width: $size * 2.333;
         height: $size * 2.333;

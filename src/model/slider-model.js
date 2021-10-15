@@ -4,7 +4,7 @@ export default class SliderModel {
     constructor(id, subscriber) {
         this.class = ''
         this.positionInPercentage = 0
-        this.value = ''
+        this.value = 0
         this.id = id
         this.$element = ''
         this.$parent = ''
@@ -25,13 +25,6 @@ export default class SliderModel {
         this.maxValue = $(`#${this.id}`).attr('data-end')
         this.class = $(`#${this.id}`).attr('class')
         this.isVertical = this.class === 'range-slider vertical'
-        // return this
-        // $element: this.$element,
-        // $parent: this.$parent,
-        // minValue: this.minValue,
-        // maxValue: this.maxValue,
-        // class: this.class,
-        // isVertical: this.isVertical,
     }
     notify() {
         this.subscriber.recieve(this)
@@ -52,11 +45,6 @@ export default class SliderModel {
             '.slider-toggler',
             (event) => {
                 event.preventDefault()
-                // this.$element = $(event.currentTarget)
-                // this.$parent = $(event.currentTarget).parents('.range-slider')
-
-                // this.minValue = this.$parent.data('start')
-                // this.maxValue = this.$parent.data('end')
                 this.$parent.addClass('tap')
                 this.$parent.on('mousemove touchmove', (event) => {
                     event.preventDefault()
@@ -71,12 +59,13 @@ export default class SliderModel {
                         this.positionInPercentage =
                             ((cursorX + 1) * 100) / this.$parent[0].offsetWidth
                     }
-                    this.value = Math.floor(
+                    this.value =
                         this.positionInPercentage *
                             ((this.maxValue - this.minValue) / 100) +
-                            this.minValue +
-                            1
-                    )
+                        (+this.minValue + 1)
+
+                    console.log(this.value)
+                    console.log(this.positionInPercentage)
                     this.notify(this)
                     // updatePosition([
                     //     this.$element,

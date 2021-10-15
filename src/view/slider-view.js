@@ -42,8 +42,7 @@ class SliderView extends SliderModel {
         // that.rangeSlider.$element.find('span').text(numbersArray[2])
     }
     updateTextNumber(numbersArray) {
-        console.log(this.$element)
-        this.$element.find('span').text(this.value)
+        this.$element.find('span').text(Math.trunc(this.value))
     }
 }
 

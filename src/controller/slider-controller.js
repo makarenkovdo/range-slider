@@ -14,6 +14,7 @@ export default class SliderController {
             .init()
             .onDrag()
             .onDrop()
+            .onClick()
     }
     setOptions({
         switchOnTip = false,
@@ -53,6 +54,14 @@ export default class SliderController {
     }
     onDrag() {
         this.rangeSlider.onDrag(this.updatePosition.bind(this), this.updateText)
+        this.recieve(this)
+        return this
+    }
+    onClick() {
+        this.rangeSlider.onClick(
+            this.updatePosition.bind(this),
+            this.updateText
+        )
         this.recieve(this)
         return this
     }

@@ -1,5 +1,6 @@
 import jquery from 'jquery'
 import SliderController from './controller/slider-controller'
+import SliderInputModel from './model/slider-input-model'
 
 const firstSlider = new SliderController('first').setOptions({
     switchOnTip: true,
@@ -11,7 +12,7 @@ const firstSlider = new SliderController('first').setOptions({
 const secondSlider = new SliderController('second').setOptions({
     switchOnTip: true,
     shouldAddBar: true,
-    step: 1,
+    step: 10,
 })
 
 const thirdSlider = new SliderController('third').setOptions({
@@ -20,3 +21,6 @@ const thirdSlider = new SliderController('third').setOptions({
 const fourthSlider = new SliderController('fourth').setOptions({
     switchOnTip: false,
 })
+
+const temporarySlider = new SliderInputModel('df')
+console.log(temporarySlider)

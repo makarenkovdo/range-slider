@@ -1,10 +1,10 @@
-import SliderModel from '../model/slider-model'
+import FieldModel from '../model/field-model'
 import { sliderView } from '../view/slider-view'
 
 export default class SliderController {
     constructor(id, params) {
         this.id = id
-        this.rangeSlider = new SliderModel(this.id, this)
+        this.rangeSlider = new FieldModel(this.id, this)
         this.build(params)
     }
     build() {

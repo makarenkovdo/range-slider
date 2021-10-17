@@ -1,10 +1,10 @@
 import './../index.scss'
 import jquery from 'jquery'
-import SliderModel from '../model/slider-model'
 
-class SliderView extends SliderModel {
+class SliderView {
     addSliderButton(id) {
-        $(`#${id}`).append('<span class="slider-toggler"></span>')
+        $(`#${id}`).append('<span class="slider-toggler first"></span>')
+        $(`#${id}`).append('<span class="slider-toggler second"></span>')
     }
     addRangeNumber(id) {
         // $(`#${id}`).find('.slider-toggler').remove()

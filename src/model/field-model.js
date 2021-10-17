@@ -1,6 +1,6 @@
 import jquery from 'jquery'
 
-export default class SliderModel {
+export default class FieldModel {
     constructor(id, subscriber) {
         this.$element = ''
         this.$parent = ''
@@ -12,9 +12,13 @@ export default class SliderModel {
         this.maxValue = 100
         this.step = 1
         this.stepSignAfterComma = 0
+        this.isVertical = false
+        this.isRange = false
+        this.subscriber = subscriber
         this.isBarAdded = false
         this.stepPosition = 0
         this.stepValue = 0
+        this.range = []
     }
     init() {
         console.log(this.step)

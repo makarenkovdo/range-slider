@@ -48,35 +48,36 @@ export default class FieldModel {
     }
 
     onClick() {
-        $(`#${this.id}`).on('click', (event) => {
-            event.preventDefault()
-            const cursorX = event.offsetX
-            const cursorY = event.offsetY
-            if (this.isVertical) {
-                this.positionInPercentage =
-                    ((this.$parent[0].offsetHeight - (cursorY + 1)) * 100) /
-                    this.$parent[0].offsetHeight
-            } else {
-                this.positionInPercentage =
-                    ((cursorX + 1) * 100) / this.$parent[0].offsetWidth + 1
-            }
-            this.value =
-                this.positionInPercentage *
-                    ((this.maxValue - this.minValue) / 100) +
-                +this.minValue
-            this.stepPosition = (
-                (this.positionInPercentage / this.step) *
-                this.step
-            ).toFixed(this.step)
-            this.stepValue =
-                Math.trunc(this.value / this.step) *
-                this.step(
-                    this.positionInPercentage,
-                    this.stepPosition,
-                    this.value,
-                    this.stepValue
-                )
-            this.notify(this)
-        })
+        // console.log(this)
+        // $(`#${this.id}`).on('click', (event) => {
+        //     event.preventDefault()
+        //     const cursorX = event.offsetX
+        //     const cursorY = event.offsetY
+        //     if (this.isVertical) {
+        //         this.positionInPercentage =
+        //             ((this.$element[0].offsetHeight - (cursorY + 1)) * 100) /
+        //             this.$element[0].offsetHeight
+        //     } else {
+        //         this.positionInPercentage =
+        //             ((cursorX + 1) * 100) / this.$element[0].offsetWidth + 1
+        //     }
+        //     this.value =
+        //         this.positionInPercentage *
+        //             ((this.maxValue - this.minValue) / 100) +
+        //         +this.minValue
+        //     this.stepPosition = (
+        //         (this.positionInPercentage / this.step) *
+        //         this.step
+        //     ).toFixed(this.step)
+        //     this.stepValue =
+        //         Math.trunc(this.value / this.step) *
+        //         this.step(
+        //             this.positionInPercentage,
+        //             this.stepPosition,
+        //             this.value,
+        //             this.stepValue
+        //         )
+        //     this.notify(this)
+        // })
     }
 }

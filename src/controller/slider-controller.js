@@ -53,8 +53,8 @@ export default class SliderController {
     createSlider(isRange) {
         if (isRange) {
             this.sliderCounter++
-            this.slider.push(new SliderModel(this.id))
-            this.view.push(new SliderView(this.id))
+            this.slider.push(new SliderModel(this.id, this))
+            this.view.push(new SliderView(this.id, this))
             this.addSliderView(this.sliderCounter)
         }
         return this
@@ -91,6 +91,7 @@ export default class SliderController {
         this.updateText(that)
     }
     updatePosition(that) {
+        console.log('that', that)
         this.view.forEach((v) => v.updatePosition(that))
     }
     updateText(that) {

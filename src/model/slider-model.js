@@ -11,6 +11,7 @@ export default class SliderModel {
         this.minValue = 0
         this.maxValue = 100
         this.step = 1
+        this.stepSignAfterComma = 0
         this.isVertical = false
         this.isRange = false
         this.subscriber = subscriber
@@ -19,6 +20,7 @@ export default class SliderModel {
         this.stepValue = 0
     }
     init() {
+        console.log(this.step)
         this.$parent = $(`#${this.id}`)
         this.$element = $(`#${this.id}`).children(
             '.range-number, .slider-toggler '
@@ -27,6 +29,17 @@ export default class SliderModel {
         this.maxValue = $(`#${this.id}`).attr('data-end')
         this.class = $(`#${this.id}`).attr('class')
         this.isVertical = this.class === 'range-slider vertical'
+    }
+    defineSignAfterComma() {
+        const f = (step) =>
+            step.toString().includes('.')
+                ? (this.stepSignAfterComma = step
+                      .toString()
+                      .split('.')
+                      .pop().length)
+                : (this.stepSignAfterComma = 0)
+        f(this.step)
+        console.log('SINGNEN!!!', this.stepSignAfterComma)
     }
     notify() {
         this.subscriber.recieve(this)
@@ -41,6 +54,10 @@ export default class SliderModel {
     }
     setStep(step) {
         this.step = step
+        if (this.step < 1) {
+            console.log('INIT IF~!!!')
+            this.defineSignAfterComma()
+        }
     }
 
     onDrag(updatePosition, updateText) {
@@ -66,22 +83,16 @@ export default class SliderModel {
                     this.value =
                         this.positionInPercentage *
                             ((this.maxValue - this.minValue) / 100) +
-                        (+this.minValue + 1)
-                    this.stepPosition =
+                        +this.minValue
+                    this.stepPosition = (
                         Math.trunc(this.positionInPercentage / this.step) *
                         this.step
-                    this.stepValue =
+                    ).toFixed(this.stepSignAfterComma)
+                    this.stepValue = (
                         Math.trunc(this.value / this.step) * this.step
+                    ).toFixed(this.stepSignAfterComma)
 
                     this.notify(this)
-                    // updatePosition([
-                    //     this.$element,
-                    //     this.positionInPercentage,
-                    //     this.value,
-                    // ])
-                    // if (this.$element.attr('class') === 'range-number') {
-                    //     updateText([this.$element, this.value])
-                    // }
                 })
             }
         )
@@ -89,8 +100,10 @@ export default class SliderModel {
 
     onDrop() {
         $('.range-slider, .vertical-range-slider').on(
-            'mouseup touchend',
+            'mouseup touchend mouseleave',
             function (event) {
+                event.preventDefault()
+                event.stopPropagation()
                 $(this).removeClass('tap')
                 $(this).off('mousemove touchmove')
             }
@@ -113,8 +126,10 @@ export default class SliderModel {
                 this.positionInPercentage *
                     ((this.maxValue - this.minValue) / 100) +
                 +this.minValue
-            this.stepPosition =
-                Math.trunc(this.positionInPercentage / this.step) * this.step
+            this.stepPosition = (
+                (this.positionInPercentage / this.step) *
+                this.step
+            ).toFixed(this.step)
             this.stepValue = Math.trunc(this.value / this.step) * this.step
             console.log(
                 this.positionInPercentage,
@@ -122,7 +137,6 @@ export default class SliderModel {
                 this.value,
                 this.stepValue
             )
-
             this.notify(this)
         })
     }

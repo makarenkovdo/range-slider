@@ -53,15 +53,12 @@ export default class SliderController {
         return this
     }
     onDrag() {
-        this.rangeSlider.onDrag(this.updatePosition.bind(this), this.updateText)
+        this.rangeSlider.onDrag()
         this.recieve(this)
         return this
     }
     onClick() {
-        this.rangeSlider.onClick(
-            this.updatePosition.bind(this),
-            this.updateText
-        )
+        this.rangeSlider.onClick()
         this.recieve(this)
         return this
     }

@@ -2,8 +2,8 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/
 body {
-  font-family: "Verdana", sans-serif;
-  background-color: #dddddd;
+  font-family: "Impact", sans-serif;
+  background-color: #fff;
   padding: 100px 15px;
 }
 
@@ -20,70 +20,139 @@ h1 {
 }
 
 .range-slider {
-  height: 20px;
-  border-radius: 5px;
-  border: 1px solid rgba(31, 32, 65, 0.25);
+  border: 1px solid #6dd0a5;
   box-sizing: border-box;
-  border-radius: 3px;
   color: #fff;
-  max-width: 300px;
-  width: 100%;
   position: relative;
-  margin: 0 auto;
+  margin: auto;
+  margin-bottom: 100px;
+  border-radius: 3px;
 }
-.range-slider + .range-slider {
+.range-slider.horizontal {
+  position: relative;
+  height: 20px;
+  width: 100%;
+}
+.range-slider.horizontal + .range-slider {
   margin-top: 60px;
 }
-.range-slider:before, .range-slider:after {
+.range-slider.horizontal:before, .range-slider.horizontal:after {
   box-sizing: border-box;
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 20px;
   margin: auto 0;
   font-size: 14px;
   line-height: 20px;
   height: 20px;
   font-weight: 600;
-  color: #fff;
+  color: #000;
 }
-.range-slider:before {
+.range-slider.horizontal:before {
   content: attr(data-start);
   left: 10px;
 }
-.range-slider:after {
+.range-slider.horizontal:after {
   content: attr(data-end);
   right: 10px;
 }
+.range-slider.horizontal .range-number {
+  left: 0px;
+  top: -44px;
+}
+.range-slider.horizontal .slider-bar {
+  background: linear-gradient(#6fcf97 50%, #66d2ea);
+  height: 20px;
+  width: 0;
+}
+.range-slider.vertical {
+  height: 100%;
+  width: 20px;
+  position: relative;
+}
+.range-slider.vertical + .range-slider {
+  margin-bottom: 100px;
+}
+.range-slider.vertical:before, .range-slider.vertical:after {
+  box-sizing: border-box;
+  position: absolute;
+  right: 20px;
+  margin: auto 0;
+  font-size: 14px;
+  line-height: 20px;
+  height: 20px;
+  font-weight: 600;
+  color: #000;
+}
+.range-slider.vertical:before {
+  content: attr(data-start);
+  top: 100%;
+}
+.range-slider.vertical:after {
+  content: attr(data-end);
+  top: 0%;
+}
+.range-slider.vertical .range-number {
+  left: 20px;
+  top: 0px;
+}
+.range-slider.vertical .slider-bar {
+  position: absolute;
+  width: 20px;
+  z-index: -3;
+  background: linear-gradient(#6fcf97 50%, #66d2ea);
+}
 .range-slider .range-number {
   position: absolute;
-  left: 5px;
-  top: 0px;
-  background: linear-gradient(#6fcf97, blue);
-  padding: 5px;
-  border-radius: 100%;
-  width: 41px;
-  height: 41px;
-  cursor: pointer;
-  transform: translateY(0%);
+  transform: translateY(10%);
   user-select: none;
   transition: transform 0.25s cubic-bezier(0.01, 0.02, 0.07, 1);
   z-index: 2;
 }
 .range-slider .range-number span {
+  border-radius: 5px;
+  border: 1px solid #333;
   box-sizing: border-box;
   font-size: 14px;
-  line-height: 40px;
+  line-height: 20px;
   display: block;
-  height: 40px;
+  height: 20px;
   width: 40px;
   color: black;
   font-weight: bold;
   text-align: center;
   white-space: nowrap;
-  border-radius: 100%;
-  background-color: #fff;
   position: relative;
+  background: linear-gradient(#6fcf97 50%, #66d2ea);
+  opacity: 0.2;
 }
 .range-slider.tap .range-number {
-  transform: translateY(-100%);
+  z-index: -2;
+}
+.range-slider.tap .range-number span {
+  opacity: 1;
+  transition: 1s;
+  transform: scale(1.1);
+}
+.range-slider .slider-toggler {
+  position: absolute;
+  top: -3px;
+  right: 100px;
+  background: white;
+  border-radius: 100%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+.range-slider .slider-toggler::before {
+  left: 2px;
+  top: 2px;
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background: linear-gradient(#6fcf97 50%, #66d2ea);
+}
+.range-slider.tap .slider-toggler {
+  z-index: -1;
 }

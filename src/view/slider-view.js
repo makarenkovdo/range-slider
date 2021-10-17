@@ -27,11 +27,32 @@ class SliderView extends SliderModel {
         }
     }
     updatePosition(that) {
+        console.log(
+            `${this.stepPosition}` +
+                (parseInt(this.$element.css('height')) /
+                    parseInt(this.$parent.css('height'))) *
+                    50
+        )
         if (this.isVertical) {
-            this.$element.css('top', 100 - this.stepPosition + '%')
+            this.$element.css(
+                'top',
+                100 -
+                    `${this.stepPosition}` -
+                    (parseInt(this.$element.css('height')) /
+                        parseInt(this.$parent.css('height'))) *
+                        50 +
+                    '%'
+            )
         } else {
-            this.$element.css('left', `${this.stepPosition}` + '%')
-            //TODO -rangeNumber.width/2
+            this.$element.css(
+                'left',
+                `${this.stepPosition}` -
+                    (parseInt(this.$element.css('width')) /
+                        parseInt(this.$parent.css('width'))) *
+                        50 +
+                    '%'
+                // middle of the elemnt
+            )
         }
 
         // that.rangeSlider.$element.find('span').text(numbersArray[2])

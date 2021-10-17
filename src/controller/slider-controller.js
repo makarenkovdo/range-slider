@@ -7,7 +7,7 @@ export default class SliderController {
         this.id = id
         this.hasBar = false
         this.hasRange = false
-        this.sliderCounter = 0
+        this.sliderCounter = -1
         this.field = new FieldModel(this.id, this)
         this.slider = []
         this.view = []
@@ -43,17 +43,17 @@ export default class SliderController {
         this.field.init()
         this.slider.forEach((v) => v.init())
         console.log('оно', this.view[0])
+        console.log(this.view[this.sliderCounter], this.sliderCounter)
         this.view[this.sliderCounter].initValues(this, this.sliderCounter)
         // this.view.forEach((v, i) => v.initValues())
-        this.sliderCounter++
 
         return this
     }
 
     createSlider(isRange) {
         if (isRange) {
+            this.sliderCounter++
             this.slider.push(new SliderModel(this.id))
-
             this.view.push(new SliderView(this.id))
             this.addSliderView(this.sliderCounter)
         }
@@ -91,13 +91,13 @@ export default class SliderController {
         this.updateText(that)
     }
     updatePosition(that) {
-        this.view.forEach((v) => v.updatePosition.call(this))
+        this.view.forEach((v) => v.updatePosition(that))
     }
-    updateText() {
-        this.view.forEach((v) => v.updateTextNumber.call(this))
+    updateText(that) {
+        this.view.forEach((v) => v.updateTextNumber(that))
     }
-    updateBar() {
-        this.view.forEach((v) => v.updateBar.call(this))
+    updateBar(that) {
+        this.view.forEach((v) => v.updateBar(true, that))
         return this
     }
     onDrop() {

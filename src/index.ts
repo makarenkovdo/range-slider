@@ -23,4 +23,3 @@ const fourthSlider = new SliderController('fourth').setOptions({
 })
 
 const temporarySlider = new SliderInputModel('df')
-console.log(temporarySlider)

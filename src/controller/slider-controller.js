@@ -1,14 +1,21 @@
 import FieldModel from '../model/field-model'
-import { sliderView } from '../view/slider-view'
+import SliderModel from '../model/slider-model'
+import SliderView from '../view/slider-view'
 
 export default class SliderController {
     constructor(id, params) {
         this.id = id
-        this.rangeSlider = new FieldModel(this.id, this)
-        this.build(params)
+        this.hasBar = false
+        this.hasRange = false
+        this.sliderCounter = 0
+        this.field = new FieldModel(this.id, this)
+        this.slider = []
+        this.view = []
+        this.build()
     }
     build() {
-        this.switchOnTip(false)
+        this.createSlider(true)
+            .switchOnTip(false)
             .setMinValue(0)
             .setMaxValue(100)
             .init()
@@ -22,8 +29,10 @@ export default class SliderController {
         maxValue = 100,
         shouldAddBar = false,
         step = 1,
+        isRange = false,
     }) {
-        this.switchOnTip(switchOnTip)
+        this.createSlider(isRange)
+            .switchOnTip(switchOnTip)
             .setMinValue(minValue)
             .setMaxValue(maxValue)
             .init()
@@ -31,61 +40,79 @@ export default class SliderController {
             .setStep(step)
     }
     init() {
-        this.rangeSlider.init()
-        console.log(this)
+        this.field.init()
+        this.slider.forEach((v) => v.init())
+        console.log('оно', this.view[0])
+        this.view[this.sliderCounter].initValues(this, this.sliderCounter)
+        // this.view.forEach((v, i) => v.initValues())
+        this.sliderCounter++
+
         return this
     }
-    addSliderButton() {
-        sliderView.addSliderButton(this.id)
+
+    createSlider(isRange) {
+        if (isRange) {
+            this.slider.push(new SliderModel(this.id))
+
+            this.view.push(new SliderView(this.id))
+            this.addSliderView(this.sliderCounter)
+        }
         return this
+    }
+
+    addSliderView(i) {
+        this.view[i].addSlider(this.id)
     }
     switchOnTip(isOn) {
-        isOn ? sliderView.addRangeNumber(this.id) : this.addSliderButton()
+        isOn ? this.view.forEach((v) => v.addRangeNumber.call(this)) : false
         return this
     }
     addBar(shouldAddBar) {
-        this.rangeSlider.isBarAdded = true
-        shouldAddBar ? sliderView.addBar.call(this, this.id) : null
+        this.hasBar = true
+        shouldAddBar ? this.view.forEach((v) => v.addBar.call(this)) : null
         return this
     }
-    updateBar() {
-        sliderView.updateBar.call(this.rangeSlider)
-        return this
+    addRange(isRange) {
+        // isRange ? true : false
     }
+
     onDrag() {
-        this.rangeSlider.onDrag()
-        this.recieve(this)
+        this.recieve(this.slider.forEach((v) => v.onDrag(this.field)))
         return this
     }
     onClick() {
-        this.rangeSlider.onClick()
-        this.recieve(this)
+        this.field.onClick()
+        this.recieve(this) //todo copy onDrag
         return this
     }
-    recieve() {
-        this.updatePosition()
+    recieve(that) {
+        this.updatePosition(that)
         this.updateBar(true)
-        this.updateText()
+        this.updateText(that)
     }
-    updatePosition() {
-        sliderView.updatePosition.call(this.rangeSlider)
+    updatePosition(that) {
+        this.view.forEach((v) => v.updatePosition.call(this))
     }
     updateText() {
-        sliderView.updateTextNumber.call(this.rangeSlider)
+        this.view.forEach((v) => v.updateTextNumber.call(this))
+    }
+    updateBar() {
+        this.view.forEach((v) => v.updateBar.call(this))
+        return this
     }
     onDrop() {
-        this.rangeSlider.onDrop()
+        this.slider.forEach((v) => v.onDrop())
         return this
     }
     setMaxValue(maxValue) {
-        this.rangeSlider.setMaxValue(maxValue)
+        this.field.setMaxValue(maxValue)
         return this
     }
     setMinValue(minValue) {
-        this.rangeSlider.setMinValue(minValue)
+        this.field.setMinValue(minValue)
         return this
     }
     setStep(interval) {
-        this.rangeSlider.setStep(interval)
+        this.slider.forEach((v) => v.setStep(interval))
     }
 }

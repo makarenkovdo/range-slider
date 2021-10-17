@@ -12,7 +12,6 @@ jquery(document).ready(function ($) {
             const $el = $(this)
             const $elParent = $(this).parents('.range-slider')
             const thisEnd = $elParent.data('end')
-            console.log(event, $el, $elParent)
             $elParent.addClass('tap')
             $elParent.on('mousemove touchmove', function (event) {
                 event.preventDefault()

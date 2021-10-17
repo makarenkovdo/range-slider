@@ -1,13 +1,32 @@
 import './../index.scss'
 import jquery from 'jquery'
 
-class SliderView {
-    addSliderButton(id) {
-        $(`#${id}`).append('<span class="slider-toggler first"></span>')
-        $(`#${id}`).append('<span class="slider-toggler second"></span>')
+export default class SliderView {
+    constructor(id) {
+        this.id = id
+        this.$element = ''
+        this.$parent = ''
+        this.stepSignAfterComma = 0
+        this.verticalCorrector = 0
+        this.horizontalCorrector = 0
+    }
+    initValues(controller, i) {
+        this.$element = controller.slider[i].$element
+        this.$parent = controller.field.$element
+        // this.verticalCorrector =
+        //     (parseInt(this.$element.css('height')) / //count 1 time and write to this
+        //         parseInt(this.$parent.css('height'))) *
+        //     50
+        // this.horizontalCorrector =
+        //     (parseInt(this.$element.css('width')) /
+        //         parseInt(this.$parent.css('width'))) *
+        //     50
+        console.log(this, controller)
+    }
+    addSlider(id) {
+        $(`#${id}`).append('<span class="slider-toggler first"></span>') //?????
     }
     addRangeNumber(id) {
-        // $(`#${id}`).find('.slider-toggler').remove()
         $(`#${id}`).append('<span class="range-number"><span>0</span></span>')
     }
     addBar(id) {
@@ -15,7 +34,6 @@ class SliderView {
     }
     updateBar() {
         if (this.isVertical) {
-            console.log('INSIDE VERTICAL')
             $(`#${this.id}`)
                 .children('.slider-bar')
                 .css('height', `${this.stepPosition}%`)
@@ -27,18 +45,17 @@ class SliderView {
         }
     }
     updatePosition(that) {
-        console.log(
-            `${this.stepPosition}` +
-                (parseInt(this.$element.css('height')) /
-                    parseInt(this.$parent.css('height'))) *
-                    50
-        )
+        ;`${this.stepPosition}` +
+            (parseInt(this.$element.css('height')) /
+                parseInt(this.$parent.css('height'))) *
+                50
+
         if (this.isVertical) {
             this.$element.css(
                 'top',
                 100 -
                     `${this.stepPosition}` -
-                    (parseInt(this.$element.css('height')) /
+                    (parseInt(this.$element.css('height')) / //count 1 time and write to this
                         parseInt(this.$parent.css('height'))) *
                         50 +
                     '%'
@@ -62,7 +79,7 @@ class SliderView {
     }
 }
 
-export const sliderView = new SliderView()
+// export const sliderView = new SliderView()
 
 // const elViewPosition = elPosition - $el.innerWidth() / 6
 // $el.css('left', elViewPosition + '%')

@@ -43,37 +43,40 @@ export default class SliderModel {
             'mousedown touchstart',
             '.slider, .range-number',
             (event) => {
+                console.log(field)
                 event.preventDefault()
                 field.$element.addClass('tap')
-                field.$element.on('mousemove touchmove', (event) => {
-                    event.preventDefault()
-                    const cursorX = event.offsetX
-                    const cursorY = event.offsetY
-                    if (field.isVertical) {
-                        this.positionInPercentage =
-                            ((field.$element[0].offsetHeight - (cursorY + 1)) *
-                                100) /
-                            field.$element[0].offsetHeight
-                    } else {
-                        this.positionInPercentage =
-                            ((cursorX + 1) * 100) / this.$parent[0].offsetWidth
-                    }
-                    this.value =
-                        this.positionInPercentage *
-                            ((field.maxValue - field.minValue) / 100) +
-                        +field.minValue
-                    this.stepPosition = (
-                        Math.trunc(this.positionInPercentage / this.step) *
-                        this.step
-                    ).toFixed(this.stepSignAfterComma)
-                    this.stepValue = (
-                        Math.trunc(this.value / this.step) * this.step
-                    ).toFixed(this.stepSignAfterComma)
-
-                    this.notify.call(this)
-                })
+                this.measurePosition(field)
             }
         )
+    }
+    measurePosition(field) {
+        console.log(field, this)
+
+        field.$element.on('mousemove touchmove', (event) => {
+            event.preventDefault()
+            const cursorX = event.offsetX
+            const cursorY = event.offsetY
+            if (field.isVertical) {
+                this.positionInPercentage =
+                    ((field.$element[0].offsetHeight - (cursorY + 1)) * 100) /
+                    field.$element[0].offsetHeight
+            } else {
+                this.positionInPercentage =
+                    ((cursorX + 1) * 100) / this.$parent[0].offsetWidth
+            }
+            this.value =
+                this.positionInPercentage *
+                    ((field.maxValue - field.minValue) / 100) +
+                +field.minValue
+            this.stepPosition = (
+                Math.trunc(this.positionInPercentage / this.step) * this.step
+            ).toFixed(this.stepSignAfterComma)
+            this.stepValue = (
+                Math.trunc(this.value / this.step) * this.step
+            ).toFixed(this.stepSignAfterComma)
+            this.notify.call(this)
+        })
     }
 
     onDrop() {

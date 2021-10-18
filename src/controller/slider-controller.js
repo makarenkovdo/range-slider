@@ -53,7 +53,6 @@ export default class SliderController {
             this.sliderCounter++
             this.slider.push(new SliderModel(this.id, this))
             this.view.push(new SliderView(this.id, this))
-            console.log(this)
 
             this.addSliderView(this.sliderCounter)
         }

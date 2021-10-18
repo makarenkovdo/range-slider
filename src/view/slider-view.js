@@ -28,7 +28,12 @@ export default class SliderView {
         })
     }
     addSlider(id) {
-        $(`#${id}`).append('<span class="slider"></span>')
+        $(`#${id}`).append(
+            `<span class="slider" ></span>`
+
+            // style="top:${$(`#${id}`).css(
+            //     'height'")}
+        )
     }
     addRangeNumber(id) {
         $(`#${this.id}`).append(

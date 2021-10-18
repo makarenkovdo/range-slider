@@ -61,6 +61,11 @@ export default class SliderView {
                         50 +
                     '%'
             )
+            this.$parent.find('.range-number').css(
+                'top',
+                this.$element.css('top')
+                // parseInt(this.$element.css('width')) / 2
+            )
         } else {
             this.$element.css(
                 'left',
@@ -69,7 +74,11 @@ export default class SliderView {
                         parseInt(this.$parent.css('width'))) *
                         50 +
                     '%'
-                // middle of the elemnt
+            )
+            this.$parent.find('.range-number').css(
+                'left',
+                this.$element.css('left')
+                // parseInt(this.$element.css('width')) / 2
             )
         }
 

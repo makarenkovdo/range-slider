@@ -30,7 +30,6 @@ export default class SliderModel {
         f(this.step)
     }
     notify() {
-        console.log('notify', this)
         this.subscriber.recieve(this)
     }
     setStep(step) {
@@ -55,8 +54,6 @@ export default class SliderModel {
         )
     }
     measurePosition(event, field) {
-        console.log(field, this)
-
         const cursorX = event.offsetX
         const cursorY = event.offsetY
         if (field.isVertical) {

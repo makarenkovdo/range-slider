@@ -76,36 +76,62 @@ export default class SliderView {
         }
     }
     updateRangeBar(controller) {
-        console.log('UPD', controller, this)
-        if (this.isVertical) {
+        $(document).ready(() => {
+            if (this.isVertical) {
+                this.updateRangeBarHelper(1)
+            } else {
+                this.updateRangeBarHelper(0)
+            }
+
+            // positionSwitcher.forEach((v) =>
+            //     $(`#${this.id}`)
+            //         .children('.slider-bar')
+            //         .css(`${v[0][i]}`, barWidthHeight[0])
+            // )
+
+            // positionSwitcher.forEach((v) =>
+            //     $(`#${this.id}`)
+            //         .children('.slider-bar')
+            //         .css(`${v[0]}`, barPosesArray[i][0])
+            // )
+
             // $(`#${this.id}`)
             //     .children('.slider-bar')
-            //     .css('height', `${that.stepPosition}%`)
-            //     .css(`top`, `${100 - that.stepPosition}%`)
-        } else {
-            $(document).ready(() => {
-                console.log(
-                    'NEWEWEW',
-                    $(`#${this.id}`).children('.instance-1').css('left')
+            //     .css('width', barWidthHeight[0])
+            // $(`#${this.id}`)
+            //     .children('.slider-bar')
+            //     .css('left', barPosesArray[0][0])
+        })
+    }
+    updateRangeBarHelper(index) {
+        const positionSwitcher = [
+            ['left', 'width'],
+            ['top', 'height'],
+        ]
+        //barPosesArray - [[instance0-left,instance1-left],[instance0-top,instance1-top]]
+        //for horizontal and vertical accordingly
+        const barPosesArray = positionSwitcher.map((v1, i1, arr) =>
+            arr.map((v2, i2) =>
+                parseInt(
+                    $(`#${this.id}`).children(`.instance-${i2}`).css(`${v1[0]}`)
                 )
-                let barWidth =
-                    parseInt(
-                        $(`#${this.id}`).children('.instance-1').css('left')
-                    ) -
-                    parseInt(
-                        $(`#${this.id}`).children('.instance-0').css('left')
-                    ) +
-                    'px'
-                console.log(barWidth)
-                $(`#${this.id}`).children('.slider-bar').css('width', barWidth)
+            )
+        )
+        //barWidthHeight - [horizontalSliderWidth,verticalSliderHeight]
+        let barWidthHeight = barPosesArray.map((v) => v[1] - v[0])
+        console.log(barWidthHeight)
+
+        let helpVariable = [barPosesArray[index][0], barWidthHeight[index]]
+        positionSwitcher[index].forEach(
+            (v, i) => {
+                console.log(v[i])
                 $(`#${this.id}`)
                     .children('.slider-bar')
-                    .css(
-                        'left',
-                        $(`#${this.id}`).children('.instance-0').css('left')
-                    )
-            })
-        }
+                    .css(`${v}`, helpVariable[i]) //ЗДЕСЬ ОШИБКА - v[index][i] было бы nice,НО!
+            }
+            //сначала left, потом width
+            //или top, затем height
+        )
     }
     updatePosition(that) {
         if (this.isVertical) {
@@ -126,7 +152,6 @@ export default class SliderView {
                 // parseInt(this.$element.css('width')) / 2
             )
         } else {
-            console.log(that.instance)
             this.$parent
                 .find(`.instance-${that.instance}`)
                 .css(

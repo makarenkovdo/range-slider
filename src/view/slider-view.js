@@ -28,7 +28,7 @@ export default class SliderView {
         })
     }
     addSlider(id, i) {
-        $(`#${id}`).append(`<span class="slider instance-${i + 1}"></span>`)
+        $(`#${id}`).append(`<span class="slider instance-${i}"></span>`)
     }
     correctSliderPosition(id) {
         $(document).ready(() => {
@@ -77,30 +77,36 @@ export default class SliderView {
         }
     }
     updatePosition(that) {
+        console.log('update', this.$element, that)
         if (this.isVertical) {
-            this.$element.css(
-                'top',
-                100 -
-                    `${that.stepPosition}` -
-                    (parseInt(this.$element.css('height')) /
-                        parseInt(this.$parent.css('height'))) *
-                        50 +
-                    '%'
-            )
+            this.$parent
+                .find(`.slider .instance-1`)
+                .css(
+                    'top',
+                    100 -
+                        `${that.stepPosition}` -
+                        (parseInt(this.$element.css('height')) /
+                            parseInt(this.$parent.css('height'))) *
+                            50 +
+                        '%'
+                )
             this.$parent.find('.range-number').css(
                 'top',
                 this.$element.css('top')
                 // parseInt(this.$element.css('width')) / 2
             )
         } else {
-            this.$element.css(
-                'left',
-                `${that.stepPosition}` -
-                    (parseInt(this.$element.css('width')) /
-                        parseInt(this.$parent.css('width'))) *
-                        50 +
-                    '%'
-            )
+            console.log(this.$parent)
+            this.$parent
+                .find('.instance-0')
+                .css(
+                    'left',
+                    `${that.stepPosition}` -
+                        (parseInt(this.$element.css('width')) /
+                            parseInt(this.$parent.css('width'))) *
+                            50 +
+                        '%'
+                )
             this.$parent.find('.range-number').css(
                 'left',
                 this.$element.css('left')

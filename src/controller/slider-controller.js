@@ -52,7 +52,7 @@ export default class SliderController {
         if (isRange) {
             this.isRange = true
             this.sliderCounter++
-            this.slider.push(new SliderModel(this.id, this))
+            this.slider.push(new SliderModel(this.id, this.sliderCounter, this))
             this.view.push(new SliderView(this.id, this))
 
             this.addSliderView(this.sliderCounter)
@@ -85,7 +85,9 @@ export default class SliderController {
         return this
     }
     onDrag() {
-        this.recieve(this.slider.forEach((v) => v.onDrag(this.field)))
+        $(document).ready(() =>
+            this.recieve(this.slider.forEach((v) => v.onDrag(this.field)))
+        )
         return this
     }
     onDrop() {

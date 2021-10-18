@@ -48,9 +48,7 @@ export default class FieldModel {
     }
 
     onClick() {
-        console.log(this)
         $(`#${this.id}`).on('click', (event) => {
-            console.log('SDFSDSDFSDF')
             this.slider[0].measurePosition(event, this.field)
         })
     }

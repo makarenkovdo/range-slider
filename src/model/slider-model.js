@@ -1,8 +1,9 @@
 import jquery from 'jquery'
 
 export default class SliderModel {
-    constructor(id, subscriber) {
+    constructor(id, instance, subscriber) {
         this.id = id
+        this.instance = instance
         this.$element = ''
         this.class = ''
         this.positionInPercentage = 0
@@ -29,6 +30,7 @@ export default class SliderModel {
         f(this.step)
     }
     notify() {
+        console.log('notify', this)
         this.subscriber.recieve(this)
     }
     setStep(step) {
@@ -39,6 +41,7 @@ export default class SliderModel {
     }
 
     onDrag(field) {
+        console.log(this)
         $(`#${this.id}`).on(
             'mousedown touchstart',
             '.slider, .range-number',

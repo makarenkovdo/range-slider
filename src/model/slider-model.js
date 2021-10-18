@@ -15,9 +15,7 @@ export default class SliderModel {
     }
     init() {
         this.$parent = $(`#${this.id}`)
-        this.$element = $(`#${this.id}`).children(
-            '.range-number, .slider-toggler '
-        )
+        this.$element = $(`#${this.id}`).children('.slider ')
         this.class = $(`#${this.id}`).attr('class')
     }
     defineSignAfterComma() {
@@ -41,52 +39,45 @@ export default class SliderModel {
     }
 
     onDrag(field) {
-        $(`#${this.id}`).on(
-            'mousedown touchstart',
-            '.slider-toggler',
-            (event) => {
+        $(`#${this.id}`).on('mousedown touchstart', '.slider', (event) => {
+            event.preventDefault()
+            field.$element.addClass('tap')
+            field.$element.on('mousemove touchmove', (event) => {
                 event.preventDefault()
-                field.$element.addClass('tap')
-                field.$element.on('mousemove touchmove', (event) => {
-                    event.preventDefault()
-                    const cursorX = event.offsetX
-                    const cursorY = event.offsetY
-                    if (field.isVertical) {
-                        this.positionInPercentage =
-                            ((field.$element[0].offsetHeight - (cursorY + 1)) *
-                                100) /
-                            field.$element[0].offsetHeight
-                    } else {
-                        this.positionInPercentage =
-                            ((cursorX + 1) * 100) / this.$parent[0].offsetWidth
-                    }
-                    this.value =
-                        this.positionInPercentage *
-                            ((field.maxValue - field.minValue) / 100) +
-                        +field.minValue
-                    this.stepPosition = (
-                        Math.trunc(this.positionInPercentage / this.step) *
-                        this.step
-                    ).toFixed(this.stepSignAfterComma)
-                    this.stepValue = (
-                        Math.trunc(this.value / this.step) * this.step
-                    ).toFixed(this.stepSignAfterComma)
+                const cursorX = event.offsetX
+                const cursorY = event.offsetY
+                if (field.isVertical) {
+                    this.positionInPercentage =
+                        ((field.$element[0].offsetHeight - (cursorY + 1)) *
+                            100) /
+                        field.$element[0].offsetHeight
+                } else {
+                    this.positionInPercentage =
+                        ((cursorX + 1) * 100) / this.$parent[0].offsetWidth
+                }
+                this.value =
+                    this.positionInPercentage *
+                        ((field.maxValue - field.minValue) / 100) +
+                    +field.minValue
+                this.stepPosition = (
+                    Math.trunc(this.positionInPercentage / this.step) *
+                    this.step
+                ).toFixed(this.stepSignAfterComma)
+                this.stepValue = (
+                    Math.trunc(this.value / this.step) * this.step
+                ).toFixed(this.stepSignAfterComma)
 
-                    this.notify.call(this)
-                })
-            }
-        )
+                this.notify.call(this)
+            })
+        })
     }
 
     onDrop() {
-        $('.range-slider, .vertical-range-slider').on(
-            'mouseup touchend mouseleave',
-            function (event) {
-                event.preventDefault()
-                event.stopPropagation()
-                $(this).removeClass('tap')
-                $(this).off('mousemove touchmove')
-            }
-        )
+        $('.range-slider').on('mouseup touchend mouseleave', function (event) {
+            event.preventDefault()
+            event.stopPropagation()
+            $(this).removeClass('tap')
+            $(this).off('mousemove touchmove')
+        })
     }
 }

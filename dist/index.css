@@ -28,7 +28,7 @@ h1 {
   margin-bottom: 100px;
   border-radius: 3px;
 }
-.range-slider .slider-toggler {
+.range-slider .slider {
   position: absolute;
   top: -12px;
   right: 100px;
@@ -77,7 +77,7 @@ h1 {
   width: 0;
   z-index: -3;
 }
-.range-slider.horizontal .slider-toggler {
+.range-slider.horizontal .slider {
   top: -12px;
 }
 .range-slider.vertical {
@@ -117,7 +117,7 @@ h1 {
   z-index: -3;
   background: linear-gradient(#6fcf97 50%, #66d2ea);
 }
-.range-slider.vertical .slider-toggler {
+.range-slider.vertical .slider {
   top: 0px;
   left: -12px;
 }
@@ -153,6 +153,6 @@ h1 {
   transition: 1s;
   transform: scale(1.1);
 }
-.range-slider.tap .slider-toggler {
+.range-slider.tap .slider {
   z-index: -1;
 }

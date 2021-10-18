@@ -22,7 +22,7 @@ h1 {
     margin: auto;
     margin-bottom: 100px;
     border-radius: 3px;
-    .slider-toggler {
+    .slider {
         position: absolute;
         top: -($size * 1.2) * 0.5;
         right: 100px;
@@ -73,7 +73,7 @@ h1 {
             width: 0;
             z-index: -3;
         }
-        .slider-toggler {
+        .slider {
             top: -($size * 1.2) * 0.5;
         }
     }
@@ -116,7 +116,7 @@ h1 {
             z-index: -3;
             background: linear-gradient(#6fcf97 50%, #66d2ea);
         }
-        .slider-toggler {
+        .slider {
             // top: -($size * 1.2) * 0.5;
             // right: 100px;
             top: 0px;
@@ -157,7 +157,7 @@ h1 {
         }
     }
 
-    &.tap .slider-toggler {
+    &.tap .slider {
         z-index: -1;
     }
 }

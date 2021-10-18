@@ -42,8 +42,6 @@ export default class SliderController {
     init() {
         this.field.init()
         this.slider.forEach((v) => v.init())
-        console.log('оно', this.view[0])
-        console.log(this.view[this.sliderCounter], this.sliderCounter)
         this.view[this.sliderCounter].initValues(this, this.sliderCounter)
         // this.view.forEach((v, i) => v.initValues())
 
@@ -86,19 +84,20 @@ export default class SliderController {
         return this
     }
     recieve(that) {
-        this.updatePosition(that)
-        this.updateBar(true)
-        this.updateText(that)
+        if (that) {
+            this.updatePosition(that)
+            this.updateBar(that)
+            this.updateText(that)
+        }
     }
     updatePosition(that) {
-        console.log('that', that)
         this.view.forEach((v) => v.updatePosition(that))
     }
     updateText(that) {
         this.view.forEach((v) => v.updateTextNumber(that))
     }
     updateBar(that) {
-        this.view.forEach((v) => v.updateBar(true, that))
+        this.view.forEach((v) => v.updateBar(that))
         return this
     }
     onDrop() {

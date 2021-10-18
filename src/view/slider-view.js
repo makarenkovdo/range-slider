@@ -52,28 +52,41 @@ export default class SliderView {
     addBar() {
         $(`#${this.id}`).append(`<div class="slider-bar"></div>`)
     }
-    updateBar(that) {
-        // if (this.isVertical) {
-        //     $(`#${this.id}`)
-        //         .children('.slider-bar')
-        //         .css('height', `${that.stepPosition}%`)
-        //         .css(`top`, `${100 - that.stepPosition}%`)
-        // } else {
-        //     $(`#${this.id}`)
-        //         .children('.slider-bar')
-        //         .css('width', `${that.stepPosition}%`)
-        // }
-    }
-    updateRangeBar(that) {
+    // addRangeBar() {
+    //     $(`#${this.id}`).append(`<div class="slider-bar"></div>`)
+    // }
+    updateBar(slider) {
         if (this.isVertical) {
             $(`#${this.id}`)
                 .children('.slider-bar')
-                .css('height', `${that.stepPosition}%`)
-                .css(`top`, `${100 - that.stepPosition}%`)
+                .css('height', `${slider.stepPosition}%`)
+                .css(`top`, `${100 - slider.stepPosition}%`)
         } else {
             $(`#${this.id}`)
                 .children('.slider-bar')
-                .css('width', `${that.stepPosition}%`)
+                .css('width', `${slider.stepPosition}%`)
+        }
+    }
+    updateRangeBar(controller) {
+        console.log('UPD', controller, this)
+        if (this.isVertical) {
+            // $(`#${this.id}`)
+            //     .children('.slider-bar')
+            //     .css('height', `${that.stepPosition}%`)
+            //     .css(`top`, `${100 - that.stepPosition}%`)
+        } else {
+            $(document).ready(() => {
+                let barWidth = parseInt(
+                    controller.slider[1].stepPosition -
+                        controller.slider[0].stepPosition
+                )
+                $(`#${this.id}`)
+                    .children('.slider-bar')
+                    .css('width', barWidth + '%')
+                $(`#${this.id}`)
+                    .children('.slider-bar')
+                    .css('left', controller.slider[0].stepPosition + '%')
+            })
         }
     }
     updatePosition(that) {

@@ -73,7 +73,13 @@ export default class SliderController {
     }
     addBar(shouldAddBar) {
         this.hasBar = true
-        shouldAddBar ? this.view.addBar.call(this) : null
+        // if (this.isRange && shouldAddBar) {
+        //     this.view.addRangeBar.call(this)
+        // } else
+        if (shouldAddBar) {
+            this.view.addBar.call(this)
+        }
+
         return this
     }
     addRange(isRange) {
@@ -97,8 +103,8 @@ export default class SliderController {
     recieve(that) {
         if (that) {
             this.updatePosition(that)
-            this.updateBar(that)
             this.updateText(that)
+            this.updateBar(that)
         }
     }
     updatePosition(that) {
@@ -108,7 +114,9 @@ export default class SliderController {
         this.view.updateTextNumber(that)
     }
     updateBar(that) {
-        this.view.updateBar(that)
+        this.isRange
+            ? this.view.updateRangeBar(this)
+            : this.view.updateBar(that)
         return this
     }
     setMaxValue(maxValue) {

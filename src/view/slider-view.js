@@ -28,12 +28,23 @@ export default class SliderView {
         })
     }
     addSlider(id) {
-        $(`#${id}`).append(
-            `<span class="slider" ></span>`
-
-            // style="top:${$(`#${id}`).css(
-            //     'height'")}
-        )
+        $(`#${id}`).append('<span class="slider"></span>')
+    }
+    correctSliderPosition(id) {
+        console.log(this.isVertical)
+        $(document).ready(() => {
+            if (this.isVertical) {
+                console.log('VERTITTTTI')
+                $(`#${id}`)
+                    .find('.slider')
+                    .css(
+                        'top',
+                        parseInt($(`#${id}`).css('height')) -
+                            parseInt($('.slider').css('height')) +
+                            'px'
+                    )
+            }
+        })
     }
     addRangeNumber(id) {
         $(`#${this.id}`).append(

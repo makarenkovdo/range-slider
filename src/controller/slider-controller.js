@@ -36,6 +36,7 @@ export default class SliderController {
             .setMinValue(minValue)
             .setMaxValue(maxValue)
             .init()
+            .correctSliderPosition()
             .addBar(shouldAddBar)
             .setStep(step)
     }
@@ -56,6 +57,10 @@ export default class SliderController {
 
             this.addSliderView(this.sliderCounter)
         }
+        return this
+    }
+    correctSliderPosition() {
+        this.view.forEach((v) => v.correctSliderPosition(this.id))
         return this
     }
 

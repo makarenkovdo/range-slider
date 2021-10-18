@@ -24,10 +24,6 @@ export default class SliderView {
                 (parseInt(this.$element.css('width')) /
                     parseInt(this.$parent.css('width'))) *
                 50
-        console.log(this.$parent, this.$element)
-        console.log(this.corrector)
-        console.log('this.$element.css', this.$element)
-        console.log('this.$element.css(width))', this.$element.css('width'))
     }
     addSlider(id) {
         $(`#${id}`).append('<span class="slider"></span>')
@@ -37,12 +33,13 @@ export default class SliderView {
             '<span class="range-number"><span>0</span></span>'
         )
     }
-    addBar(id) {
-        $(`#${id}`).append(`<div class="slider-bar"></div>`)
+    addBar() {
+        $(`#${this.id}`).append(`<div class="slider-bar"></div>`)
     }
     updateBar(that) {
         console.log('sdfsdf', that.stepPosition)
         if (this.isVertical) {
+            console.log(this)
             $(`#${this.id}`)
                 .children('.slider-bar')
                 .css('height', `${that.stepPosition}%`)
@@ -54,8 +51,6 @@ export default class SliderView {
         }
     }
     updatePosition(that) {
-        console.log(this.corrector)
-
         if (this.isVertical) {
             this.$element.css(
                 'top',
@@ -72,8 +67,6 @@ export default class SliderView {
         // that.rangeSlider.$element.find('span').text(numbersArray[2])
     }
     updateTextNumber(that) {
-        console.log('text', this.$parent)
-
         this.$parent.find('.range-number span').text(`${that.stepValue}`)
     }
 }

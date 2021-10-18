@@ -14,16 +14,18 @@ export default class SliderView {
         this.$element = controller.slider[i].$element
         this.$parent = controller.field.$element
         this.isVertical = controller.field.isVertical
-        if (this.isVertical) {
-            this.corrector =
-                (parseInt(this.$element.css('height')) /
-                    parseInt(this.$parent.css('height'))) *
-                50
-        } else
-            this.corrector =
-                (parseInt(this.$element.css('width')) /
-                    parseInt(this.$parent.css('width'))) *
-                50
+        $(document).ready(() => {
+            if (this.isVertical) {
+                this.corrector =
+                    (parseInt(this.$element.css('height')) /
+                        parseInt(this.$parent.css('height'))) *
+                    50
+            } else
+                this.corrector =
+                    (parseInt(this.$element.css('width')) /
+                        parseInt(this.$parent.css('width'))) *
+                    50
+        })
     }
     addSlider(id) {
         $(`#${id}`).append('<span class="slider"></span>')
@@ -37,9 +39,7 @@ export default class SliderView {
         $(`#${this.id}`).append(`<div class="slider-bar"></div>`)
     }
     updateBar(that) {
-        console.log('sdfsdf', that.stepPosition)
         if (this.isVertical) {
-            console.log(this)
             $(`#${this.id}`)
                 .children('.slider-bar')
                 .css('height', `${that.stepPosition}%`)
@@ -54,12 +54,21 @@ export default class SliderView {
         if (this.isVertical) {
             this.$element.css(
                 'top',
-                100 - `${that.stepPosition}` - this.corrector + '%'
+                100 -
+                    `${that.stepPosition}` -
+                    (parseInt(this.$element.css('height')) /
+                        parseInt(this.$parent.css('height'))) *
+                        50 +
+                    '%'
             )
         } else {
             this.$element.css(
                 'left',
-                `${that.stepPosition}` - this.corrector + '%'
+                `${that.stepPosition}` -
+                    (parseInt(this.$element.css('width')) /
+                        parseInt(this.$parent.css('width'))) *
+                        50 +
+                    '%'
                 // middle of the elemnt
             )
         }

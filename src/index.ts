@@ -18,8 +18,6 @@ const secondSlider = new SliderController('second').setOptions({
 const thirdSlider = new SliderController('third').setOptions({
     switchOnTip: true,
 })
-const fourthSlider = new SliderController('fourth').setOptions({
-    switchOnTip: false,
-})
+const fourthSlider = new SliderController('fourth').setOptions({})
 
 const temporarySlider = new SliderInputModel('df')

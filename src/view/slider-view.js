@@ -169,7 +169,9 @@ export default class SliderView {
         // that.rangeSlider.$element.find('span').text(numbersArray[2])
     }
     updateTextNumber(that) {
-        this.$parent.find('.range-number span').text(`${that.stepValue}`)
+        this.$parent
+            .find(`.instance-${that.instance} span`)
+            .text(`${that.stepValue}`)
     }
 }
 

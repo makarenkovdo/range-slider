@@ -43,7 +43,6 @@ export default class SliderModel {
             'mousedown touchstart',
             '.slider, .range-number',
             (event) => {
-                console.log(field)
                 event.preventDefault()
                 field.$element.addClass('tap')
                 this.measurePosition(field)
@@ -80,11 +79,17 @@ export default class SliderModel {
     }
 
     onDrop() {
-        $('.range-slider').on('mouseup touchend mouseleave', function (event) {
+        $('.range-slider').on('mouseup touchend', function (event) {
             event.preventDefault()
             event.stopPropagation()
-            $(this).removeClass('tap')
-            $(this).off('mousemove touchmove')
+            $('.range-slider').removeClass('tap')
+            $('.range-slider').off('mousemove touchmove')
+        })
+        $('body').on('mouseup touchend', function (event) {
+            event.preventDefault()
+            event.stopPropagation()
+            $('.range-slider').removeClass('tap')
+            $('.range-slider').off('mousemove touchmove')
         })
     }
 }

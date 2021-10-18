@@ -79,7 +79,7 @@ export default class SliderView {
     updatePosition(that) {
         if (this.isVertical) {
             this.$parent
-                .find(`.slider .instance-1`)
+                .find(`.instance-${that.instance}`)
                 .css(
                     'top',
                     100 -

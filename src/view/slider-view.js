@@ -53,9 +53,9 @@ export default class SliderView {
             }
         })
     }
-    addRangeNumber(id) {
+    addRangeNumber(i) {
         $(`#${this.id}`).append(
-            '<span class="range-number"><span>0</span></span>'
+            `<span class='range-number instance-${i}'><span>0</span></span>`
         )
     }
     addBar() {
@@ -159,7 +159,7 @@ export default class SliderView {
                             50 +
                         '%'
                 )
-            this.$parent.find('.range-number').css(
+            this.$parent.find(`.range-number .instance-${that.instance}`).css(
                 'left',
                 this.$element.css('left')
                 // parseInt(this.$element.css('width')) / 2

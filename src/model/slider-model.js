@@ -42,7 +42,7 @@ export default class SliderModel {
     onDrag(field) {
         $(`#${this.id}`).on(
             'mousedown touchstart',
-            `.instance-${this.instance}, .range-number`,
+            `.instance-${this.instance}`,
             (event) => {
                 event.preventDefault()
                 field.$element.addClass('tap')

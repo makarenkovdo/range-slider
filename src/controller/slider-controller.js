@@ -31,9 +31,8 @@ export default class SliderController {
         step = 1,
         isRange = false,
     }) {
-        this.createRangeSlider(isRange)
-            // .createSlider(isRange)
-            .switchOnTip(switchOnTip)
+        this.switchOnTip(switchOnTip)
+            .createRangeSlider(isRange)
             .setMinValue(minValue)
             .setMaxValue(maxValue)
             .init()
@@ -54,6 +53,7 @@ export default class SliderController {
         if (isRange) {
             this.createSlider()
             this.addSliderView(this.sliderCounter)
+            this.switchOnTip(true)
         }
         return this
     }
@@ -75,7 +75,8 @@ export default class SliderController {
         return this
     }
     switchOnTip(isOn) {
-        isOn ? this.view.addRangeNumber.call(this) : false
+        console.log()
+        isOn ? this.view.addRangeNumber.call(this, this.sliderCounter) : false
         return this
     }
     addBar(shouldAddBar) {

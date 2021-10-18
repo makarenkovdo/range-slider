@@ -74,14 +74,17 @@ export default class SliderController {
     addRange(isRange) {
         // isRange ? true : false
     }
-
+    onClick() {
+        this.field.onClick.call(this)
+        this.recieve(this) //todo copy onDrag
+        return this
+    }
     onDrag() {
         this.recieve(this.slider.forEach((v) => v.onDrag(this.field)))
         return this
     }
-    onClick() {
-        this.field.onClick()
-        this.recieve(this) //todo copy onDrag
+    onDrop() {
+        this.slider.forEach((v) => v.onDrop())
         return this
     }
     recieve(that) {
@@ -99,10 +102,6 @@ export default class SliderController {
     }
     updateBar(that) {
         this.view.forEach((v) => v.updateBar(that))
-        return this
-    }
-    onDrop() {
-        this.slider.forEach((v) => v.onDrop())
         return this
     }
     setMaxValue(maxValue) {

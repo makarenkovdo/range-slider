@@ -28,9 +28,17 @@ export default class SliderView {
         })
     }
     addSlider(id, i) {
-        $(`#${id}`).append(`<span class="slider instance-${i}"></span>`)
+        //adding first and second slider (for range)
+        const firstLeftStyle = 20
+        const secondLeftStyle = 50
+        $(`#${id}`).append(
+            `<span class="slider instance-${i}" style="left:${
+                firstLeftStyle + secondLeftStyle * i
+            }%"></span>`
+        )
     }
     correctSliderPosition(id) {
+        //shift on half heght/width of slider
         $(document).ready(() => {
             if (this.isVertical) {
                 $(`#${id}`)
@@ -76,16 +84,26 @@ export default class SliderView {
             //     .css(`top`, `${100 - that.stepPosition}%`)
         } else {
             $(document).ready(() => {
-                let barWidth = parseInt(
-                    controller.slider[1].stepPosition -
-                        controller.slider[0].stepPosition
+                console.log(
+                    'NEWEWEW',
+                    $(`#${this.id}`).children('.instance-1').css('left')
                 )
+                let barWidth =
+                    parseInt(
+                        $(`#${this.id}`).children('.instance-1').css('left')
+                    ) -
+                    parseInt(
+                        $(`#${this.id}`).children('.instance-0').css('left')
+                    ) +
+                    'px'
+                console.log(barWidth)
+                $(`#${this.id}`).children('.slider-bar').css('width', barWidth)
                 $(`#${this.id}`)
                     .children('.slider-bar')
-                    .css('width', barWidth + '%')
-                $(`#${this.id}`)
-                    .children('.slider-bar')
-                    .css('left', controller.slider[0].stepPosition + '%')
+                    .css(
+                        'left',
+                        $(`#${this.id}`).children('.instance-0').css('left')
+                    )
             })
         }
     }

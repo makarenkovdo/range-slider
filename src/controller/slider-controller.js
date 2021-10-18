@@ -11,7 +11,7 @@ export default class SliderController {
         this.sliderCounter = -1
         this.field = new FieldModel(this.id, this)
         this.slider = []
-        this.view = []
+        this.view = new SliderView(this.id, this)
         this.build()
     }
     build() {
@@ -42,7 +42,7 @@ export default class SliderController {
     init() {
         this.field.init()
         this.slider.forEach((v) => v.init())
-        this.view[this.sliderCounter].initValues(this, this.sliderCounter)
+        this.view.initValues(this, this.sliderCounter)
         // this.view.forEach((v, i) => v.initValues())
 
         return this
@@ -53,27 +53,27 @@ export default class SliderController {
             this.isRange = true
             this.sliderCounter++
             this.slider.push(new SliderModel(this.id, this.sliderCounter, this))
-            this.view.push(new SliderView(this.id, this))
+            // this.view.push(new SliderView(this.id, this))
 
             this.addSliderView(this.sliderCounter)
         }
         return this
     }
     correctSliderPosition() {
-        this.view.forEach((v) => v.correctSliderPosition(this.id))
+        this.view.correctSliderPosition(this.id)
         return this
     }
 
     addSliderView(i) {
-        this.view[i].addSlider(this.id, i)
+        this.view.addSlider(this.id, i)
     }
     switchOnTip(isOn) {
-        isOn ? this.view.forEach((v) => v.addRangeNumber.call(this)) : false
+        isOn ? this.view.addRangeNumber.call(this) : false
         return this
     }
     addBar(shouldAddBar) {
         this.hasBar = true
-        shouldAddBar ? this.view.forEach((v) => v.addBar.call(this)) : null
+        shouldAddBar ? this.view.addBar.call(this) : null
         return this
     }
     addRange(isRange) {
@@ -102,13 +102,13 @@ export default class SliderController {
         }
     }
     updatePosition(that) {
-        this.view.forEach((v) => v.updatePosition(that))
+        this.view.updatePosition(that)
     }
     updateText(that) {
-        this.view.forEach((v) => v.updateTextNumber(that))
+        this.view.updateTextNumber(that)
     }
     updateBar(that) {
-        this.view.forEach((v) => v.updateBar(that))
+        this.view.updateBar(that)
         return this
     }
     setMaxValue(maxValue) {

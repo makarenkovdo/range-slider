@@ -15,7 +15,8 @@ export default class SliderController {
         this.build()
     }
     build() {
-        this.createSlider(true)
+        this.createSlider()
+            .addSliderView(this.sliderCounter)
             .correctSliderPosition()
             .init()
             .onDrag()
@@ -28,9 +29,10 @@ export default class SliderController {
         maxValue = 100,
         shouldAddBar = false,
         step = 1,
-        isRange = true,
+        isRange = false,
     }) {
-        this.createSlider(isRange)
+        this.createRangeSlider(isRange)
+            // .createSlider(isRange)
             .switchOnTip(switchOnTip)
             .setMinValue(minValue)
             .setMaxValue(maxValue)
@@ -42,21 +44,24 @@ export default class SliderController {
     init() {
         this.field.init()
         this.slider.forEach((v) => v.init())
+        console.log(this.sliderCounter)
         this.view.initValues(this, this.sliderCounter)
         // this.view.forEach((v, i) => v.initValues())
 
         return this
     }
-
-    createSlider(isRange) {
+    createRangeSlider(isRange) {
         if (isRange) {
-            this.isRange = true
-            this.sliderCounter++
-            this.slider.push(new SliderModel(this.id, this.sliderCounter, this))
-            // this.view.push(new SliderView(this.id, this))
-
+            this.createSlider()
             this.addSliderView(this.sliderCounter)
         }
+        return this
+    }
+
+    createSlider(isRange) {
+        this.sliderCounter++
+        this.isRange = true
+        this.slider.push(new SliderModel(this.id, this.sliderCounter, this))
         return this
     }
     correctSliderPosition() {
@@ -66,6 +71,8 @@ export default class SliderController {
 
     addSliderView(i) {
         this.view.addSlider(this.id, i)
+        console.log(this)
+        return this
     }
     switchOnTip(isOn) {
         isOn ? this.view.addRangeNumber.call(this) : false

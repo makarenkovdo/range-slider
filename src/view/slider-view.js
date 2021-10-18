@@ -11,7 +11,8 @@ export default class SliderView {
         this.corrector = 0
     }
     initValues(controller, i) {
-        this.$element = controller.slider[i].$element
+        console.log(controller.slider[i], i)
+        this.$element = controller.slider[0].$element
         this.$parent = controller.field.$element
         this.isVertical = controller.field.isVertical
         $(document).ready(() => {
@@ -60,9 +61,6 @@ export default class SliderView {
     addBar() {
         $(`#${this.id}`).append(`<div class="slider-bar"></div>`)
     }
-    // addRangeBar() {
-    //     $(`#${this.id}`).append(`<div class="slider-bar"></div>`)
-    // }
     updateBar(slider) {
         if (this.isVertical) {
             $(`#${this.id}`)
@@ -124,10 +122,9 @@ export default class SliderView {
         let helpVariable = [barPosesArray[index][0], barWidthHeight[index]]
         positionSwitcher[index].forEach(
             (v, i) => {
-                console.log(v[i])
                 $(`#${this.id}`)
                     .children('.slider-bar')
-                    .css(`${v}`, helpVariable[i]) //ЗДЕСЬ ОШИБКА - v[index][i] было бы nice,НО!
+                    .css(`${v}`, helpVariable[i])
             }
             //сначала left, потом width
             //или top, затем height

@@ -53,16 +53,16 @@ export default class SliderView {
         $(`#${this.id}`).append(`<div class="slider-bar"></div>`)
     }
     updateBar(that) {
-        if (this.isVertical) {
-            $(`#${this.id}`)
-                .children('.slider-bar')
-                .css('height', `${that.stepPosition}%`)
-                .css(`top`, `${100 - that.stepPosition}%`)
-        } else {
-            $(`#${this.id}`)
-                .children('.slider-bar')
-                .css('width', `${that.stepPosition}%`)
-        }
+        // if (this.isVertical) {
+        //     $(`#${this.id}`)
+        //         .children('.slider-bar')
+        //         .css('height', `${that.stepPosition}%`)
+        //         .css(`top`, `${100 - that.stepPosition}%`)
+        // } else {
+        //     $(`#${this.id}`)
+        //         .children('.slider-bar')
+        //         .css('width', `${that.stepPosition}%`)
+        // }
     }
     updateRangeBar(that) {
         if (this.isVertical) {
@@ -77,7 +77,6 @@ export default class SliderView {
         }
     }
     updatePosition(that) {
-        console.log('update', this.$element, that)
         if (this.isVertical) {
             this.$parent
                 .find(`.slider .instance-1`)
@@ -96,9 +95,9 @@ export default class SliderView {
                 // parseInt(this.$element.css('width')) / 2
             )
         } else {
-            console.log(this.$parent)
+            console.log(that.instance)
             this.$parent
-                .find('.instance-0')
+                .find(`.instance-${that.instance}`)
                 .css(
                     'left',
                     `${that.stepPosition}` -

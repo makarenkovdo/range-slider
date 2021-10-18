@@ -48,8 +48,8 @@ export default class FieldModel {
     }
 
     onClick() {
-        $(`#${this.id}`).on('click', (event) => {
-            this.slider[0].measurePosition(event, this.field)
-        })
+        // $(`#${this.id}`).on('click', (event) => {
+        //     this.slider[0].measurePosition(event, this.field)
+        // })
     }
 }

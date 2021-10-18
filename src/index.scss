@@ -74,6 +74,9 @@ h1 {
         }
         .slider {
             top: -($size * 1.2) * 0.5;
+            &.instance-2 {
+                left: 50%;
+            }
         }
     }
     &.vertical {

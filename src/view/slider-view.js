@@ -27,14 +27,12 @@ export default class SliderView {
                     50
         })
     }
-    addSlider(id) {
-        $(`#${id}`).append('<span class="slider"></span>')
+    addSlider(id, i) {
+        $(`#${id}`).append(`<span class="slider instance-${i + 1}"></span>`)
     }
     correctSliderPosition(id) {
-        console.log(this.isVertical)
         $(document).ready(() => {
             if (this.isVertical) {
-                console.log('VERTITTTTI')
                 $(`#${id}`)
                     .find('.slider')
                     .css(
@@ -55,6 +53,18 @@ export default class SliderView {
         $(`#${this.id}`).append(`<div class="slider-bar"></div>`)
     }
     updateBar(that) {
+        if (this.isVertical) {
+            $(`#${this.id}`)
+                .children('.slider-bar')
+                .css('height', `${that.stepPosition}%`)
+                .css(`top`, `${100 - that.stepPosition}%`)
+        } else {
+            $(`#${this.id}`)
+                .children('.slider-bar')
+                .css('width', `${that.stepPosition}%`)
+        }
+    }
+    updateRangeBar(that) {
         if (this.isVertical) {
             $(`#${this.id}`)
                 .children('.slider-bar')

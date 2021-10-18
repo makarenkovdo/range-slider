@@ -53,9 +53,9 @@ export default class SliderView {
             }
         })
     }
-    addRangeNumber(i) {
+    addTipNumber(i) {
         $(`#${this.id}`).append(
-            `<span class='range-number instance-${i}'><span>0</span></span>`
+            `<span class='tip-number instance-${i}'><span>0</span></span>`
         )
     }
     addBar() {
@@ -143,7 +143,7 @@ export default class SliderView {
                             50 +
                         '%'
                 )
-            this.$parent.find('.range-number').css(
+            this.$parent.find('.tip-number').css(
                 'top',
                 this.$element.css('top')
                 // parseInt(this.$element.css('width')) / 2
@@ -159,7 +159,7 @@ export default class SliderView {
                             50 +
                         '%'
                 )
-            this.$parent.find(`.range-number .instance-${that.instance}`).css(
+            this.$parent.find(`.tip-number .instance-${that.instance}`).css(
                 'left',
                 this.$element.css('left')
                 // parseInt(this.$element.css('width')) / 2
@@ -168,6 +168,7 @@ export default class SliderView {
 
         // that.rangeSlider.$element.find('span').text(numbersArray[2])
     }
+    updateTipPosition() {}
     updateTextNumber(that) {
         this.$parent
             .find(`.instance-${that.instance} span`)

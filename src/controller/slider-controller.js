@@ -76,7 +76,7 @@ export default class SliderController {
     }
     switchOnTip(isOn) {
         console.log()
-        isOn ? this.view.addRangeNumber.call(this, this.sliderCounter) : false
+        isOn ? this.view.addTipNumber.call(this, this.sliderCounter) : false
         return this
     }
     addBar(shouldAddBar) {

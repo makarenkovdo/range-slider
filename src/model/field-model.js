@@ -59,7 +59,6 @@ export default class FieldModel {
         $(`#${this.id}`).on('click', (event) => {
             let nearest = 0
             if (this.isRange) nearest = this.field.defineNearestSlider(event)
-            console.log(this.slider[nearest])
             this.slider[nearest].measurePosition(
                 event,
                 this.field,

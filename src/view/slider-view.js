@@ -71,7 +71,6 @@ export default class SliderView {
         this.$id.append(`<div class="slider-bar"></div>`)
     }
     updateBar(slider) {
-        console.log(slider)
         if (this.isVertical) {
             this.$id
                 .children('.slider-bar')
@@ -138,7 +137,11 @@ export default class SliderView {
         const position = this.isVertical
             ? this.getVerticalPosition(updatingSlider, preperatoryPosition)
             : this.getHorizontalPosition(updatingSlider, preperatoryPosition)
-
+        console.log(
+            'updatingSlider.stepPosition,position',
+            updatingSlider.positionInPercentage,
+            position
+        )
         this.$parent
             .find(`.instance-${updatingSlider.instance}`)
             .css(positioning[0], position)

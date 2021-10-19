@@ -49,7 +49,6 @@ export default class SliderModel {
     }
 
     onDrag(field, slider, hasRange) {
-        console.log(hasRange)
         $(`#${this.id}`).on(
             'mousedown touchstart',
             `.instance-${this.instance}`,
@@ -65,7 +64,6 @@ export default class SliderModel {
         )
     }
     measurePosition(event, field, slider, hasRange) {
-        console.log(event, field, slider, hasRange)
         const cursorX = event.offsetX
         const cursorY = event.offsetY
         if (field.isVertical) {
@@ -74,7 +72,7 @@ export default class SliderModel {
                 field.$element[0].offsetHeight
         } else {
             this.positionInPercentage =
-                ((cursorX + 1) * 100) / this.$parent[0].offsetWidth
+                ((cursorX + 2) * 100) / this.$parent[0].offsetWidth
         }
         this.value =
             this.positionInPercentage *
@@ -86,7 +84,6 @@ export default class SliderModel {
         const stepValue = (
             Math.trunc(this.value / this.step) * this.step
         ).toFixed(this.stepSignAfterComma)
-        console.log(stepPosition, stepValue)
         if (hasRange) {
             this.checkCollision(stepPosition, stepValue, slider)
         } else [this.stepPosition, this.stepValue] = [stepPosition, stepValue]
@@ -125,7 +122,7 @@ export default class SliderModel {
             this.stepValue = stepValue
         }
     }
-    checkBorders(stepPosition, stepValue, slider) {
+    checkBordersCollision(stepPosition, stepValue, slider) {
         if (
             (!this.isVertical &&
                 this.instance === 0 &&

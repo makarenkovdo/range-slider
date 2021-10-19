@@ -104,7 +104,9 @@ export default class SliderController {
     }
     onDrag() {
         $(document).ready(() =>
-            this.recieve(this.slider.forEach((v) => v.onDrag(this.field)))
+            this.recieve(
+                this.slider.forEach((v) => v.onDrag(this.field, this.slider))
+            )
         )
         return this
     }

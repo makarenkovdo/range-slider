@@ -41,21 +41,22 @@ export default class SliderModel {
         }
     }
 
-    onDrag(field) {
+    onDrag(field, slider) {
         $(`#${this.id}`).on(
             'mousedown touchstart',
             `.instance-${this.instance}`,
             (event) => {
                 event.preventDefault()
+                event.stopPropagation()
                 field.$element.addClass('tap')
                 field.$element.on('mousemove touchmove', (event) => {
                     event.preventDefault()
-                    this.measurePosition(event, field)
+                    this.measurePosition(event, field, slider)
                 })
             }
         )
     }
-    measurePosition(event, field) {
+    measurePosition(event, field, slider) {
         const cursorX = event.offsetX
         const cursorY = event.offsetY
         if (field.isVertical) {
@@ -70,13 +71,40 @@ export default class SliderModel {
             this.positionInPercentage *
                 ((field.maxValue - field.minValue) / 100) +
             +field.minValue
-        this.stepPosition = (
+        const stepPosition = (
             Math.trunc(this.positionInPercentage / this.step) * this.step
         ).toFixed(this.stepSignAfterComma)
-        this.stepValue = (
+        const stepValue = (
             Math.trunc(this.value / this.step) * this.step
         ).toFixed(this.stepSignAfterComma)
+
+        if (
+            this.instance === 0 &&
+            stepPosition - slider[1].stepPosition >= this.step
+        ) {
+            console.log('here!')
+            slider[0].stepPosition = slider[1].stepPosition - this.step
+            slider[0].stepValue = slider[1].stepValue
+        } else if (
+            this.instance === 1 &&
+            stepPosition - slider[0].stepPosition <= this.step
+        ) {
+            slider[1].stepPosition = slider[0].stepPosition + this.step
+            slider[1].stepValue = parseFloat(slider[0].stepValue)
+        } else {
+            this.stepPosition = stepPosition
+            this.stepValue = stepValue
+        }
+
+        // if (slider[1].stepPosition < slider[0].stepPosition) {
+        //     console.log('???')
+        //     slider[1].stepPosition = slider[0].stepPosition
+        //     slider[1].stepValue = slider[0].stepValue
+        // }
         this.notify.call(this)
+    }
+    checkCollision() {
+        // if this
     }
 
     onDrop() {

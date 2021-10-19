@@ -56,10 +56,10 @@ export default class FieldModel {
     }
 
     onClick() {
-        $(`#${this.id}`).on('click', (event) => {
-            const nearest = this.field.defineNearestSlider(event)
-            this.slider[nearest].measurePosition(event, this.field)
-        })
+        // $(`#${this.id}`).on('click', (event) => {
+        //     const nearest = this.field.defineNearestSlider(event)
+        //     this.slider[nearest].measurePosition(event, this.field)
+        // })
     }
     defineNearestSlider(event) {
         const cursorXY = [event.offsetX, event.offsetY]

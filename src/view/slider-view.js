@@ -110,36 +110,36 @@ export default class SliderView {
             //left&width OR top&height depending on index
         )
     }
-    updatePosition(that) {
+    updatePosition(updatingSlider) {
         let positioning = [
             ['left', 'width'],
             ['top', 'height'],
         ]
         this.isVertical
-            ? this.updatePositionHelper(that, positioning[1])
-            : this.updatePositionHelper(that, positioning[0])
+            ? this.updatePositionHelper(updatingSlider, positioning[1])
+            : this.updatePositionHelper(updatingSlider, positioning[0])
     }
-    updatePositionHelper(that, positioning) {
+    updatePositionHelper(updatingSlider, positioning) {
         const preperatoryPosition =
             (parseInt(this.$element.css(positioning[1])) /
                 parseInt(this.$parent.css(positioning[1]))) *
             50
         const position = this.isVertical
-            ? this.getVerticalPosition(that, preperatoryPosition)
-            : this.getHorizontalPosition(that, preperatoryPosition)
+            ? this.getVerticalPosition(updatingSlider, preperatoryPosition)
+            : this.getHorizontalPosition(updatingSlider, preperatoryPosition)
 
         this.$parent
-            .find(`.instance-${that.instance}`)
+            .find(`.instance-${updatingSlider.instance}`)
             .css(positioning[0], position)
     }
-    getVerticalPosition(that, preperatoryPosition) {
-        return 100 - that.stepPosition - preperatoryPosition + '%'
+    getVerticalPosition(updatingSlider, preperatoryPosition) {
+        return 100 - updatingSlider.stepPosition - preperatoryPosition + '%'
     }
-    getHorizontalPosition(that, preperatoryPosition) {
+    getHorizontalPosition(updatingSlider, preperatoryPosition) {
         return (
-            that.stepPosition -
+            updatingSlider.stepPosition -
             preperatoryPosition -
-            preperatoryPosition * that.instance +
+            preperatoryPosition * updatingSlider.instance +
             '%'
         )
     }

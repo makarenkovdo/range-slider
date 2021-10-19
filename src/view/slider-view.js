@@ -57,6 +57,7 @@ export default class SliderView {
         this.$id.append(
             `<span class='tip-number instance-${i}' style="${positioning}:${minMax[i]}%"><span>0</span></span>`
         )
+        this.updateTextNumber()
     }
     addBar() {
         console.log(this)
@@ -150,9 +151,7 @@ export default class SliderView {
     //         // parseInt(this.$element.css('width')) / 2
     //     )
     // }
-    updateTextNumber(that) {
-        this.$parent
-            .find(`.instance-${that.instance} span`)
-            .text(`${that.stepValue}`)
+    updateTextNumber(stepValue, instance) {
+        this.$parent.find(`.instance-${instance} span`).text(`${stepValue}`)
     }
 }

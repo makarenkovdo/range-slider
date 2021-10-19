@@ -82,7 +82,8 @@ export default class SliderController {
                   this.id,
                   this.sliderCounter,
                   this.field.isVertical,
-                  [this.field.minValue, this.field.maxValue]
+                  [this.field.minValue, this.field.maxValue],
+                  this.slider[0].step
               )
             : false
         return this
@@ -117,15 +118,15 @@ export default class SliderController {
     recieve(that) {
         if (that) {
             this.updatePosition(that)
-            this.updateText(that)
+            this.updateText(that.stepValue, that.instance)
             this.updateBar(that)
         }
     }
     updatePosition(that) {
         this.view.updatePosition(that)
     }
-    updateText(that) {
-        this.view.updateTextNumber(that)
+    updateText(stepValue, instance) {
+        this.view.updateTextNumber(stepValue, instance)
     }
     updateBar(that) {
         this.isRange

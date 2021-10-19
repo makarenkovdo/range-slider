@@ -63,25 +63,27 @@ export default class FieldModel {
     }
     defineNearestSlider(event) {
         const cursorXY = [event.offsetX, event.offsetY]
-        const slidersPosition = [
+        const instanceIndex = [0, 1]
+        let positioning = 'left'
+        let xySwitcher = 0
+        if (this.isVertical) {
+            positioning = 'top'
+            xySwitcher = 1
+        }
+        const slidersPosition = instanceIndex.map((v) =>
             parseInt(
-                $(`#${this.id}`).children('.slider.instance-0').css('left')
-            ),
-            parseInt(
-                $(`#${this.id}`).children('.slider.instance-1').css('left')
-            ),
-        ]
-        const lengthArray = [
-            Math.abs(cursorXY[0] - slidersPosition[0]),
-            Math.abs(cursorXY[0] - slidersPosition[1]),
-        ]
-        const nearest = lengthArray[0] - lengthArray[1] < 0 ? 0 : 1
+                $(`#${this.id}`)
+                    .children(`.slider.instance-${v}`)
+                    .css(positioning)
+            )
+        )
+        const nearest =
+            Math.abs(cursorXY[xySwitcher] - slidersPosition[0]) -
+                Math.abs(cursorXY[xySwitcher] - slidersPosition[1]) <
+            0
+                ? 0
+                : 1
 
         return nearest
-
-        // slider0Position = this.slider[0].stepPosition
-        // if (this.isVertical) {
-
-        // }
     }
 }

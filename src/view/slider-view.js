@@ -146,6 +146,7 @@ export default class SliderView {
             .css(positioning[0], position)
     }
     getVerticalPosition(updatingSlider, preperatoryPosition) {
+        console.log(updatingSlider.stepPosition)
         return 100 - updatingSlider.stepPosition - preperatoryPosition + '%'
     }
     getHorizontalPosition(updatingSlider, preperatoryPosition) {

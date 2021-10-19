@@ -3,7 +3,6 @@ import jquery from 'jquery'
 
 export default class SliderView {
     constructor(id) {
-        this.id = id
         this.$id = $(`#${id}`)
         this.$element = ''
         this.$parent = ''
@@ -12,7 +11,6 @@ export default class SliderView {
         this.corrector = 0
     }
     initValues(controller, i) {
-        console.log(controller.slider[i], i)
         this.$element = controller.slider[0].$element
         this.$parent = controller.field.$element
         this.isVertical = controller.field.isVertical
@@ -74,30 +72,9 @@ export default class SliderView {
     }
     updateRangeBar(controller) {
         $(document).ready(() => {
-            if (this.isVertical) {
-                this.updateRangeBarHelper(1)
-            } else {
-                this.updateRangeBarHelper(0)
-            }
-
-            // positionSwitcher.forEach((v) =>
-            //     $(`#${this.id}`)
-            //         .children('.slider-bar')
-            //         .css(`${v[0][i]}`, barWidthHeight[0])
-            // )
-
-            // positionSwitcher.forEach((v) =>
-            //     $(`#${this.id}`)
-            //         .children('.slider-bar')
-            //         .css(`${v[0]}`, barPosesArray[i][0])
-            // )
-
-            // $(`#${this.id}`)
-            //     .children('.slider-bar')
-            //     .css('width', barWidthHeight[0])
-            // $(`#${this.id}`)
-            //     .children('.slider-bar')
-            //     .css('left', barPosesArray[0][0])
+            this.isVertical
+                ? this.updateRangeBarHelper(1)
+                : this.updateRangeBarHelper(0)
         })
     }
     updateRangeBarHelper(index) {
@@ -105,8 +82,8 @@ export default class SliderView {
             ['left', 'width'],
             ['top', 'height'],
         ]
-        //barPosesArray - [[instance0-left,instance1-left],[instance0-top,instance1-top]]
-        //for horizontal and vertical accordingly
+        /*barPosesArray - [[instance0-left,instance1-left],[instance0-top,instance1-top]]
+        for horizontal and vertical sliders accordingly*/
         const barPosesArray = positionSwitcher.map((v1, i1, arr) =>
             arr.map((v2, i2) =>
                 parseInt(this.$id.children(`.instance-${i2}`).css(`${v1[0]}`))
@@ -115,13 +92,18 @@ export default class SliderView {
         //barWidthHeight - [horizontalSliderWidth,verticalSliderHeight]
         let barWidthHeight = barPosesArray.map((v) => v[1] - v[0])
 
+        //helpVariable for rotation left/top value
         let helpVariable = [barPosesArray[index][0], barWidthHeight[index]]
+
         positionSwitcher[index].forEach(
             (v, i) => {
-                this.$id.children('.slider-bar').css(`${v}`, helpVariable[i])
+                this.$id.children('.slider-bar').css(
+                    `${v}`,
+                    helpVariable[i] + (this.$element.width() / 2) * !i
+                    //shift on half a width WHEN it's a LEFT(TOP) position of instance-0
+                )
             }
-            //сначала left, потом width
-            //или top, затем height
+            //left&width OR top&height depending on index
         )
     }
     updatePosition(that) {
@@ -146,7 +128,11 @@ export default class SliderView {
                     `${that.stepPosition}` -
                         (parseInt(this.$element.css('width')) /
                             parseInt(this.$parent.css('width'))) *
-                            50 +
+                            50 -
+                        (parseInt(this.$element.css('width')) /
+                            parseInt(this.$parent.css('width'))) *
+                            50 *
+                            that.instance +
                         '%'
                 )
             // this.updateTipPosition('left')

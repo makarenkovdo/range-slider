@@ -119,9 +119,7 @@ h1 {
             background: linear-gradient(#6fcf97 50%, #66d2ea);
         }
         .slider {
-            // top: -($size * 1.2) * 0.5;
-            // right: 100px;
-            // left: -(($size * 1.2) * 0.5);
+            left: -$size * 1.2 * 0.5; //hald a width with borders
         }
     }
     .tip-number {

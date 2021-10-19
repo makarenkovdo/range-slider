@@ -70,7 +70,10 @@ export default class SliderController {
     }
 
     addSliderView(i) {
-        this.view.addSlider(this.id, i, this.field.isVertical)
+        this.view.addSlider(this.id, i, this.field.isVertical, [
+            this.field.minValue,
+            this.field.maxValue,
+        ])
         return this
     }
     switchOnTip(isOn) {

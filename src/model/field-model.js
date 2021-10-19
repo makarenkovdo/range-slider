@@ -49,11 +49,10 @@ export default class FieldModel {
     }
     setMinMax(args) {
         const [minOrMax, dataSuffix, value] = args
-        console.log(minOrMax, dataSuffix, value)
         if (value !== NaN && value !== null && value !== undefined) {
             this[minOrMax] = value
         }
-        $(`#${this.id}`).attr(`data-${dataSuffix}`, value)
+        $(`#${this.id}`).attr(`data-${dataSuffix}`, this[minOrMax])
     }
 
     onClick() {

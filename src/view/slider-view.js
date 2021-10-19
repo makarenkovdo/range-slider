@@ -4,6 +4,7 @@ import jquery from 'jquery'
 export default class SliderView {
     constructor(id) {
         this.id = id
+        this.$id = $(`#${id}`)
         this.$element = ''
         this.$parent = ''
         this.isVertical = false
@@ -28,22 +29,12 @@ export default class SliderView {
                     50
         })
     }
-    addSlider(id, i, isVert) {
-        console.log('isVert', isVert)
-        //adding first and second slider (for range)
-        // $(document).ready(() => {
-        console.log(this)
-        console.log(this.isVertical)
+    addSlider(id, i, isVert, minMax) {
         let position = ''
         this.isVertical ? (position = 'top') : (position = 'left')
-        const firstStyle = 20
-        const secondStyle = 50
-        $(`#${id}`).append(
-            `<span class="slider instance-${i}" style="${position}:${
-                firstStyle + secondStyle * i
-            }%"></span>`
+        this.$id.append(
+            `<span class="slider instance-${i}" style="${position}:${minMax[i]}%"></span>`
         )
-        // })
     }
     correctSliderPosition(id) {
         //shift on half heght/width of slider

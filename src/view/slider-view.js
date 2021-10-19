@@ -57,7 +57,7 @@ export default class SliderView {
         this.$id.append(
             `<span class='tip-number instance-${i}' style="${positioning}:${minMax[i]}%"><span>0</span></span>`
         )
-        this.updateTextNumber()
+        this.updateTextNumber(minMax[i], i) //todo update with REAL minmax
     }
     addBar() {
         console.log(this)

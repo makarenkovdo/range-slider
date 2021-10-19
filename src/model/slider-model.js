@@ -84,7 +84,15 @@ export default class SliderModel {
         const stepValue = (
             Math.trunc(this.value / this.step) * this.step
         ).toFixed(this.stepSignAfterComma)
+        this.checkCollision(stepPosition, stepValue, slider)
 
+        // if (slider[1].stepPosition < slider[0].stepPosition) {
+        //     console.log('???')
+        //     slider[1].stepPosition = slider[0].stepPosition
+        //     slider[1].stepValue = slider[0].stepValue
+        // }
+    }
+    checkCollision(stepPosition, stepValue, slider) {
         if (
             this.instance === 0 &&
             stepPosition - slider[1].stepPosition >= this.step
@@ -102,16 +110,7 @@ export default class SliderModel {
             this.stepPosition = stepPosition
             this.stepValue = stepValue
         }
-
-        // if (slider[1].stepPosition < slider[0].stepPosition) {
-        //     console.log('???')
-        //     slider[1].stepPosition = slider[0].stepPosition
-        //     slider[1].stepValue = slider[0].stepValue
-        // }
         this.notify.call(this)
-    }
-    checkCollision() {
-        // if this
     }
 
     onDrop() {

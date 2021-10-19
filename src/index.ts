@@ -19,9 +19,13 @@ const secondSlider = new SliderController('second').setOptions({
 
 const thirdSlider = new SliderController('third').setOptions({
     switchOnTip: true,
-    isRange: true,
     shouldAddBar: true,
+    maxValue: 10,
 })
-const fourthSlider = new SliderController('fourth').setOptions({})
+const fourthSlider = new SliderController('fourth').setOptions({
+    switchOnTip: true,
+    shouldAddBar: true,
+    maxValue: 10,
+})
 
 const temporarySlider = new SliderInputModel('df')

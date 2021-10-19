@@ -50,10 +50,12 @@ export default class SliderController {
     }
     createRangeSlider(isRange) {
         if (isRange) {
+            console.log(this.isRange)
+            this.isRange = true
             this.createSlider()
             this.addSliderView(this.sliderCounter)
             this.switchOnTip(true)
-        }
+        } else this.isRange = false
         return this
     }
 
@@ -63,7 +65,6 @@ export default class SliderController {
         this.slider.push(new SliderModel(this.id, this.sliderCounter, this))
         this.slider.forEach((v) => v.init(this.minValue, this.maxValue))
         this.view.initValues(this, this.sliderCounter)
-
         return this
     }
     correctSliderPosition() {
@@ -108,7 +109,9 @@ export default class SliderController {
     onDrag() {
         $(document).ready(() =>
             this.recieve(
-                this.slider.forEach((v) => v.onDrag(this.field, this.slider))
+                this.slider.forEach((v) =>
+                    v.onDrag(this.field, this.slider, this.isRange)
+                )
             )
         )
         return this
@@ -117,11 +120,11 @@ export default class SliderController {
         this.slider.forEach((v) => v.onDrop())
         return this
     }
-    recieve(that) {
-        if (that) {
-            this.updatePosition(that)
-            this.updateText(that.stepValue, that.instance)
-            this.updateBar(that)
+    recieve(updatingSlider) {
+        if (updatingSlider) {
+            this.updatePosition(updatingSlider)
+            this.updateText(updatingSlider.stepValue, updatingSlider.instance)
+            this.updateBar(updatingSlider)
         }
     }
     updatePosition(that) {

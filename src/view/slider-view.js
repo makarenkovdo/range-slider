@@ -55,7 +55,6 @@ export default class SliderView {
         // })
     }
     addTipNumber(id, i, isVert, minMax) {
-        console.log('????', this)
         let positioning = 'left'
         let index = i
         if (this.isVertical) {
@@ -63,17 +62,16 @@ export default class SliderView {
             if (index === 0) index = 1
             else index = 0
         }
-        console.log(positioning)
         this.$id.append(
             `<span class='tip-number instance-${i}' style="${positioning}:${minMax[index]}%"><span>0</span></span>`
         )
         this.updateTextNumber(minMax[index], index) //todo update with REAL minmax
     }
     addBar() {
-        console.log(this)
         this.$id.append(`<div class="slider-bar"></div>`)
     }
     updateBar(slider) {
+        console.log(slider)
         if (this.isVertical) {
             this.$id
                 .children('.slider-bar')
@@ -105,7 +103,6 @@ export default class SliderView {
                 parseInt(this.$id.children(`.instance-${i2}`).css(`${v1[0]}`))
             )
         )
-        console.log(barPosesArray[1])
         //barSize = [horizontalSliderWidth,verticalSliderHeight]
         let barSize = barPosesArray.map((v) => Math.abs(v[1] - v[0]))
 
@@ -124,6 +121,7 @@ export default class SliderView {
         )
     }
     updatePosition(updatingSlider) {
+        //HERE THE PROBLEM WITH NO-RANGE SLIDER(ONE INSTANCE)
         let positioning = [
             ['left', 'width'],
             ['top', 'height'],
@@ -134,8 +132,8 @@ export default class SliderView {
     }
     updatePositionHelper(updatingSlider, positioning) {
         const preperatoryPosition =
-            (parseInt(this.$element.css(positioning[1])) /
-                parseInt(this.$parent.css(positioning[1]))) *
+            (parseInt(this.$id.children('.slider').css(positioning[1])) /
+                parseInt(this.$id.css(positioning[1]))) *
             50
         const position = this.isVertical
             ? this.getVerticalPosition(updatingSlider, preperatoryPosition)
@@ -146,7 +144,6 @@ export default class SliderView {
             .css(positioning[0], position)
     }
     getVerticalPosition(updatingSlider, preperatoryPosition) {
-        console.log(updatingSlider.stepPosition)
         return 100 - updatingSlider.stepPosition - preperatoryPosition + '%'
     }
     getHorizontalPosition(updatingSlider, preperatoryPosition) {

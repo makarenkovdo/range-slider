@@ -48,7 +48,8 @@ export default class SliderModel {
         }
     }
 
-    onDrag(field, slider) {
+    onDrag(field, slider, hasRange) {
+        console.log(hasRange)
         $(`#${this.id}`).on(
             'mousedown touchstart',
             `.instance-${this.instance}`,
@@ -58,12 +59,12 @@ export default class SliderModel {
                 field.$element.addClass('tap')
                 field.$element.on('mousemove touchmove', (event) => {
                     event.preventDefault()
-                    this.measurePosition(event, field, slider)
+                    this.measurePosition(event, field, slider, hasRange)
                 })
             }
         )
     }
-    measurePosition(event, field, slider) {
+    measurePosition(event, field, slider, hasRange) {
         const cursorX = event.offsetX
         const cursorY = event.offsetY
         if (field.isVertical) {
@@ -84,7 +85,12 @@ export default class SliderModel {
         const stepValue = (
             Math.trunc(this.value / this.step) * this.step
         ).toFixed(this.stepSignAfterComma)
-        this.checkCollision(stepPosition, stepValue, slider)
+        console.log(hasRange)
+        if (hasRange) {
+            this.checkCollision(stepPosition, stepValue, slider)
+        } else [this.stepPosition, this.stepValue] = [stepPosition, stepValue]
+
+        this.notify.call(this)
 
         // if (slider[1].stepPosition < slider[0].stepPosition) {
         //     console.log('???')
@@ -93,6 +99,32 @@ export default class SliderModel {
         // }
     }
     checkCollision(stepPosition, stepValue, slider) {
+        if (
+            (!this.isVertical &&
+                this.instance === 0 &&
+                stepPosition - slider[1].stepPosition >= this.step) ||
+            (this.isVertical &&
+                this.instance === 0 &&
+                stepPosition - slider[1].stepPosition <= this.step)
+        ) {
+            slider[0].stepPosition = +slider[1].stepPosition - this.step
+            slider[0].stepValue = +slider[1].stepValue - this.step
+        } else if (
+            (!this.isVertical &&
+                this.instance === 1 &&
+                stepPosition - slider[0].stepPosition <= this.step) ||
+            (this.isVertical &&
+                this.instance === 0 &&
+                stepPosition - slider[0].stepPosition >= this.step)
+        ) {
+            slider[1].stepPosition = +slider[0].stepPosition + this.step
+            slider[1].stepValue = +slider[0].stepValue + this.step
+        } else {
+            this.stepPosition = stepPosition
+            this.stepValue = stepValue
+        }
+    }
+    checkBorders(stepPosition, stepValue, slider) {
         if (
             (!this.isVertical &&
                 this.instance === 0 &&

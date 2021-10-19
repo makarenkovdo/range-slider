@@ -5,7 +5,7 @@ export default class SliderView {
     constructor(id) {
         this.$id = $(`#${id}`)
         this.$element = ''
-        this.$parent = ''
+        this.$parent = '' //todo: equal to this.$id
         this.isVertical = false
         this.stepSignAfterComma = 0
         this.corrector = 0
@@ -49,13 +49,17 @@ export default class SliderView {
         //     }
         // })
     }
-    addTipNumber(i) {
-        console.log(this)
+    addTipNumber(id, i, isVert, minMax) {
+        console.log('????', this)
+        let positioning = ''
+        this.isVertical ? (positioning = 'top') : (positioning = 'left')
+        console.log(positioning)
         this.$id.append(
-            `<span class='tip-number instance-${i}'><span>0</span></span>`
+            `<span class='tip-number instance-${i}' style="${positioning}:${minMax[i]}%"><span>0</span></span>`
         )
     }
     addBar() {
+        console.log(this)
         this.$id.append(`<div class="slider-bar"></div>`)
     }
     updateBar(slider) {
@@ -82,18 +86,18 @@ export default class SliderView {
             ['left', 'width'],
             ['top', 'height'],
         ]
-        /*barPosesArray - [[instance0-left,instance1-left],[instance0-top,instance1-top]]
+        /*barPosesArray = [[instance0-left,instance1-left],[instance0-top,instance1-top]]
         for horizontal and vertical sliders accordingly*/
         const barPosesArray = positionSwitcher.map((v1, i1, arr) =>
             arr.map((v2, i2) =>
                 parseInt(this.$id.children(`.instance-${i2}`).css(`${v1[0]}`))
             )
         )
-        //barWidthHeight - [horizontalSliderWidth,verticalSliderHeight]
-        let barWidthHeight = barPosesArray.map((v) => v[1] - v[0])
+        //barSize = [horizontalSliderWidth,verticalSliderHeight]
+        let barSize = barPosesArray.map((v) => v[1] - v[0])
 
         //helpVariable for rotation left/top value
-        let helpVariable = [barPosesArray[index][0], barWidthHeight[index]]
+        let helpVariable = [barPosesArray[index][0], barSize[index]]
 
         positionSwitcher[index].forEach(
             (v, i) => {

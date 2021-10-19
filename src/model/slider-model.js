@@ -19,15 +19,17 @@ export default class SliderModel {
         this.$element = $(`#${this.id}`).children('.slider ')
         this.class = $(`#${this.id}`).attr('class')
     }
+
+    //for small 'steps' we need to define sign quantity after comma
     defineSignAfterComma() {
-        const f = (step) =>
+        ;((step) => {
             step.toString().includes('.')
                 ? (this.stepSignAfterComma = step
                       .toString()
                       .split('.')
                       .pop().length)
                 : (this.stepSignAfterComma = 0)
-        f(this.step)
+        })(this.step)
     }
     notify() {
         this.subscriber.recieve(this)

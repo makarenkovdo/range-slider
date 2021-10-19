@@ -15,10 +15,10 @@ export default class SliderController {
         this.build()
     }
     build() {
-        this.createSlider()
+        this.init()
+            .createSlider()
             .addSliderView(this.sliderCounter)
             .correctSliderPosition()
-            .init()
             .onDrag()
             .onDrop()
             .onClick()
@@ -42,10 +42,6 @@ export default class SliderController {
     }
     init() {
         this.field.init()
-        this.slider.forEach((v) => v.init())
-        console.log(this.sliderCounter)
-        this.view.initValues(this, this.sliderCounter)
-        // this.view.forEach((v, i) => v.initValues())
 
         return this
     }
@@ -62,6 +58,9 @@ export default class SliderController {
         this.sliderCounter++
         this.isRange = true
         this.slider.push(new SliderModel(this.id, this.sliderCounter, this))
+        this.slider.forEach((v) => v.init())
+        this.view.initValues(this, this.sliderCounter)
+
         return this
     }
     correctSliderPosition() {
@@ -70,32 +69,26 @@ export default class SliderController {
     }
 
     addSliderView(i) {
-        this.view.addSlider(this.id, i)
-        console.log(this)
+        this.view.addSlider(this.id, i, this.field.isVertical)
         return this
     }
     switchOnTip(isOn) {
-        console.log()
         isOn ? this.view.addTipNumber.call(this, this.sliderCounter) : false
         return this
     }
     addBar(shouldAddBar) {
         this.hasBar = true
-        // if (this.isRange && shouldAddBar) {
-        //     this.view.addRangeBar.call(this)
-        // } else
         if (shouldAddBar) {
             this.view.addBar.call(this)
         }
 
         return this
     }
-    addRange(isRange) {
-        // isRange ? true : false
-    }
+
     onClick() {
+        //todo NEARES OF TWO RANGES
         this.field.onClick.call(this)
-        this.recieve(this) //todo copy onDrag
+        this.recieve(this)
         return this
     }
     onDrag() {

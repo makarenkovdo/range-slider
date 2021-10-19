@@ -108,7 +108,7 @@ h1 {
             top: 0%;
         }
         .tip-number {
-            left: $size;
+            left: 2.2 * $size;
             top: 0px;
         }
         .slider-bar {
@@ -121,7 +121,7 @@ h1 {
         .slider {
             // top: -($size * 1.2) * 0.5;
             // right: 100px;
-            left: -($size * 1.2) * 0.5;
+            // left: -(($size * 1.2) * 0.5);
         }
     }
     .tip-number {

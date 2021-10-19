@@ -28,30 +28,37 @@ export default class SliderView {
                     50
         })
     }
-    addSlider(id, i) {
+    addSlider(id, i, isVert) {
+        console.log('isVert', isVert)
         //adding first and second slider (for range)
-        const firstLeftStyle = 20
-        const secondLeftStyle = 50
+        // $(document).ready(() => {
+        console.log(this)
+        console.log(this.isVertical)
+        let position = ''
+        this.isVertical ? (position = 'top') : (position = 'left')
+        const firstStyle = 20
+        const secondStyle = 50
         $(`#${id}`).append(
-            `<span class="slider instance-${i}" style="left:${
-                firstLeftStyle + secondLeftStyle * i
+            `<span class="slider instance-${i}" style="${position}:${
+                firstStyle + secondStyle * i
             }%"></span>`
         )
+        // })
     }
     correctSliderPosition(id) {
         //shift on half heght/width of slider
-        $(document).ready(() => {
-            if (this.isVertical) {
-                $(`#${id}`)
-                    .find('.slider')
-                    .css(
-                        'top',
-                        parseInt($(`#${id}`).css('height')) -
-                            parseInt($('.slider').css('height')) +
-                            'px'
-                    )
-            }
-        })
+        // $(document).ready(() => {
+        //     if (this.isVertical) {
+        //         $(`#${id}`)
+        //             .find('.slider')
+        //             .css(
+        //                 'top',
+        //                 parseInt($(`#${id}`).css('height')) -
+        //                     parseInt($('.slider').css('height')) +
+        //                     'px'
+        //             )
+        //     }
+        // })
     }
     addTipNumber(i) {
         $(`#${this.id}`).append(
@@ -117,7 +124,6 @@ export default class SliderView {
         )
         //barWidthHeight - [horizontalSliderWidth,verticalSliderHeight]
         let barWidthHeight = barPosesArray.map((v) => v[1] - v[0])
-        console.log(barWidthHeight)
 
         let helpVariable = [barPosesArray[index][0], barWidthHeight[index]]
         positionSwitcher[index].forEach(
@@ -143,11 +149,7 @@ export default class SliderView {
                             50 +
                         '%'
                 )
-            this.$parent.find('.tip-number').css(
-                'top',
-                this.$element.css('top')
-                // parseInt(this.$element.css('width')) / 2
-            )
+            // this.updateTipPosition('top')
         } else {
             this.$parent
                 .find(`.instance-${that.instance}`)
@@ -159,16 +161,16 @@ export default class SliderView {
                             50 +
                         '%'
                 )
-            this.$parent.find(`.tip-number .instance-${that.instance}`).css(
-                'left',
-                this.$element.css('left')
-                // parseInt(this.$element.css('width')) / 2
-            )
+            // this.updateTipPosition('left')
         }
-
-        // that.rangeSlider.$element.find('span').text(numbersArray[2])
     }
-    updateTipPosition() {}
+    // updateTipPosition(direction) {
+    //     this.$parent.find('.tip-number .instance-1').css(
+    //         direction,
+    //         this.$element.css(direction)
+    //         // parseInt(this.$element.css('width')) / 2
+    //     )
+    // }
     updateTextNumber(that) {
         this.$parent
             .find(`.instance-${that.instance} span`)

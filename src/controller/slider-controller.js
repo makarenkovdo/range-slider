@@ -39,6 +39,8 @@ export default class SliderController {
             .correctSliderPosition()
             .addBar(shouldAddBar)
             .setStep(step)
+            .updateText(minValue, 0)
+            .updateText(maxValue, 1)
     }
     init() {
         this.field.init()
@@ -127,6 +129,7 @@ export default class SliderController {
     }
     updateText(stepValue, instance) {
         this.view.updateTextNumber(stepValue, instance)
+        return this
     }
     updateBar(that) {
         this.isRange
@@ -144,5 +147,6 @@ export default class SliderController {
     }
     setStep(interval) {
         this.slider.forEach((v) => v.setStep(interval))
+        return this
     }
 }

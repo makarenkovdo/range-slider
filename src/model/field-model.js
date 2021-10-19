@@ -63,14 +63,13 @@ export default class FieldModel {
     }
     defineNearestSlider(event) {
         const cursorXY = [event.offsetX, event.offsetY]
-        const instanceIndex = [0, 1]
         let positioning = 'left'
         let xySwitcher = 0
         if (this.isVertical) {
             positioning = 'top'
             xySwitcher = 1
         }
-        const slidersPosition = instanceIndex.map((v) =>
+        const slidersPosition = [0, 1].map((v) =>
             parseInt(
                 $(`#${this.id}`)
                     .children(`.slider.instance-${v}`)

@@ -107,36 +107,37 @@ export default class SliderView {
         )
     }
     updatePosition(that) {
-        if (this.isVertical) {
-            this.$parent
-                .find(`.instance-${that.instance}`)
-                .css(
-                    'top',
-                    100 -
-                        `${that.stepPosition}` -
-                        (parseInt(this.$element.css('height')) /
-                            parseInt(this.$parent.css('height'))) *
-                            50 +
-                        '%'
-                )
-            // this.updateTipPosition('top')
-        } else {
-            this.$parent
-                .find(`.instance-${that.instance}`)
-                .css(
-                    'left',
-                    `${that.stepPosition}` -
-                        (parseInt(this.$element.css('width')) /
-                            parseInt(this.$parent.css('width'))) *
-                            50 -
-                        (parseInt(this.$element.css('width')) /
-                            parseInt(this.$parent.css('width'))) *
-                            50 *
-                            that.instance +
-                        '%'
-                )
-            // this.updateTipPosition('left')
-        }
+        let positioning = [
+            ['left', 'width'],
+            ['top', 'height'],
+        ]
+        this.isVertical
+            ? this.updatePositionHelper(that, positioning[1])
+            : this.updatePositionHelper(that, positioning[0])
+    }
+    updatePositionHelper(that, positioning) {
+        const preperatoryPosition =
+            (parseInt(this.$element.css(positioning[1])) /
+                parseInt(this.$parent.css(positioning[1]))) *
+            50
+        const position = this.isVertical
+            ? this.getVerticalPosition(that, preperatoryPosition)
+            : this.getHorizontalPosition(that, preperatoryPosition)
+
+        this.$parent
+            .find(`.instance-${that.instance}`)
+            .css(positioning[0], position)
+    }
+    getVerticalPosition(that, preperatoryPosition) {
+        return 100 - that.stepPosition - preperatoryPosition + '%'
+    }
+    getHorizontalPosition(that, preperatoryPosition) {
+        return (
+            that.stepPosition -
+            preperatoryPosition -
+            preperatoryPosition * that.instance +
+            '%'
+        )
     }
     // updateTipPosition(direction) {
     //     this.$parent.find('.tip-number .instance-1').css(
@@ -151,9 +152,3 @@ export default class SliderView {
             .text(`${that.stepValue}`)
     }
 }
-
-// export const sliderView = new SliderView()
-
-// const elViewPosition = elPosition - $el.innerWidth() / 6
-// $el.css('left', elViewPosition + '%')
-//

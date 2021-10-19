@@ -14,10 +14,17 @@ export default class SliderModel {
         this.stepValue = 0
         this.subscriber = subscriber
     }
-    init() {
+    init(min, max) {
         this.$parent = $(`#${this.id}`)
         this.$element = $(`#${this.id}`).children('.slider ')
         this.class = $(`#${this.id}`).attr('class')
+        if (this.instance === 0) {
+            this.stepPosition = min
+            this.stepValue = min
+        } else {
+            this.stepPosition = max
+            this.stepValue = max
+        }
     }
 
     //for small 'steps' we need to define sign quantity after comma

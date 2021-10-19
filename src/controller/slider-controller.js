@@ -59,7 +59,7 @@ export default class SliderController {
         this.sliderCounter++
         this.isRange = true
         this.slider.push(new SliderModel(this.id, this.sliderCounter, this))
-        this.slider.forEach((v) => v.init())
+        this.slider.forEach((v) => v.init(this.minValue, this.maxValue))
         this.view.initValues(this, this.sliderCounter)
 
         return this

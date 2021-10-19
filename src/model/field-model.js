@@ -20,10 +20,11 @@ export default class FieldModel {
     }
     init() {
         this.$element = $(`#${this.id}`)
-        this.minValue = $(`#${this.id}`).attr('data-start')
-        this.maxValue = $(`#${this.id}`).attr('data-end')
         this.class = $(`#${this.id}`).attr('class')
         this.isVertical = this.class === 'range-slider vertical'
+        $(`#${this.id}`).attr('data-end', this.minValue)
+        $(`#${this.id}`).attr('data-start', this.maxValue)
+        return this
     }
     defineSignAfterComma() {
         const f = (step) =>
@@ -38,13 +39,21 @@ export default class FieldModel {
     notify() {
         this.subscriber.recieve(this)
     }
-    setMaxValue(number) {
-        $(`#${this.id}`).attr('data-end', number)
+    setMaxValue(value) {
+        this.setMinMax(['maxValue', 'end', value])
         return this
     }
-    setMinValue(number) {
-        $(`#${this.id}`).attr('data-start', number)
+    setMinValue(value) {
+        this.setMinMax(['minValue', 'start', value])
         return this
+    }
+    setMinMax(args) {
+        const [minOrMax, dataSuffix, value] = args
+        console.log(minOrMax, dataSuffix, value)
+        if (value !== NaN && value !== null && value !== undefined) {
+            this[minOrMax] = value
+        }
+        $(`#${this.id}`).attr(`data-${dataSuffix}`, value)
     }
 
     onClick() {

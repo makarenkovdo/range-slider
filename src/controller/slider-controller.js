@@ -35,14 +35,15 @@ export default class SliderController {
             .createRangeSlider(isRange)
             .setMinValue(minValue)
             .setMaxValue(maxValue)
-            .init()
+            // .init()
             .correctSliderPosition()
             .addBar(shouldAddBar)
             .setStep(step)
     }
     init() {
         this.field.init()
-
+        this.setMinValue()
+        this.setMaxValue()
         return this
     }
     createRangeSlider(isRange) {

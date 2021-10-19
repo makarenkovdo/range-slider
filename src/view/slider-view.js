@@ -28,10 +28,15 @@ export default class SliderView {
         })
     }
     addSlider(id, i, isVert, minMax) {
-        let position = ''
-        this.isVertical ? (position = 'top') : (position = 'left')
+        let positioning = 'left'
+        let index = i
+        if (this.isVertical) {
+            positioning = 'top'
+            if (index === 0) index = 1
+            else index = 0
+        }
         this.$id.append(
-            `<span class="slider instance-${i}" style="${position}:${minMax[i]}%"></span>`
+            `<span class="slider instance-${i}" style="${positioning}:${minMax[index]}%"></span>`
         )
     }
     correctSliderPosition(id) {
@@ -51,13 +56,18 @@ export default class SliderView {
     }
     addTipNumber(id, i, isVert, minMax) {
         console.log('????', this)
-        let positioning = ''
-        this.isVertical ? (positioning = 'top') : (positioning = 'left')
+        let positioning = 'left'
+        let index = i
+        if (this.isVertical) {
+            positioning = 'top'
+            if (index === 0) index = 1
+            else index = 0
+        }
         console.log(positioning)
         this.$id.append(
-            `<span class='tip-number instance-${i}' style="${positioning}:${minMax[i]}%"><span>0</span></span>`
+            `<span class='tip-number instance-${i}' style="${positioning}:${minMax[index]}%"><span>0</span></span>`
         )
-        this.updateTextNumber(minMax[i], i) //todo update with REAL minmax
+        this.updateTextNumber(minMax[index], index) //todo update with REAL minmax
     }
     addBar() {
         console.log(this)

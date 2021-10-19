@@ -94,15 +94,21 @@ export default class SliderModel {
     }
     checkCollision(stepPosition, stepValue, slider) {
         if (
-            this.instance === 0 &&
-            stepPosition - slider[1].stepPosition >= this.step
+            (!this.isVertical &&
+                this.instance === 0 &&
+                stepPosition - slider[1].stepPosition >= this.step) ||
+            (this.isVertical &&
+                stepPosition - slider[1].stepPosition <= this.step)
         ) {
             console.log('here!')
             slider[0].stepPosition = slider[1].stepPosition - this.step
             slider[0].stepValue = slider[1].stepValue
         } else if (
-            this.instance === 1 &&
-            stepPosition - slider[0].stepPosition <= this.step
+            (!this.isVertical &&
+                this.instance === 1 &&
+                stepPosition - slider[0].stepPosition <= this.step) ||
+            (this.isVertical &&
+                stepPosition - slider[0].stepPosition >= this.step)
         ) {
             slider[1].stepPosition = slider[0].stepPosition + this.step
             slider[1].stepValue = parseFloat(slider[0].stepValue)

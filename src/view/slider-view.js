@@ -93,6 +93,7 @@ export default class SliderView {
         })
     }
     updateRangeBarHelper(index) {
+        const vertIndex = 0
         const positionSwitcher = [
             ['left', 'width'],
             ['top', 'height'],
@@ -104,11 +105,12 @@ export default class SliderView {
                 parseInt(this.$id.children(`.instance-${i2}`).css(`${v1[0]}`))
             )
         )
+        console.log(barPosesArray[1])
         //barSize = [horizontalSliderWidth,verticalSliderHeight]
-        let barSize = barPosesArray.map((v) => v[1] - v[0])
+        let barSize = barPosesArray.map((v) => Math.abs(v[1] - v[0]))
 
         //helpVariable for rotation left/top value
-        let helpVariable = [barPosesArray[index][0], barSize[index]]
+        let helpVariable = [barPosesArray[index][index], barSize[index]]
 
         positionSwitcher[index].forEach(
             (v, i) => {

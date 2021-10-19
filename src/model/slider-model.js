@@ -65,6 +65,7 @@ export default class SliderModel {
         )
     }
     measurePosition(event, field, slider, hasRange) {
+        console.log(event, field, slider, hasRange)
         const cursorX = event.offsetX
         const cursorY = event.offsetY
         if (field.isVertical) {
@@ -85,7 +86,7 @@ export default class SliderModel {
         const stepValue = (
             Math.trunc(this.value / this.step) * this.step
         ).toFixed(this.stepSignAfterComma)
-        console.log(hasRange)
+        console.log(stepPosition, stepValue)
         if (hasRange) {
             this.checkCollision(stepPosition, stepValue, slider)
         } else [this.stepPosition, this.stepValue] = [stepPosition, stepValue]

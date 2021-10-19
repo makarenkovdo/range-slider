@@ -52,6 +52,7 @@ export default class SliderController {
         if (isRange) {
             console.log(this.isRange)
             this.isRange = true
+            this.field.isRange = true
             this.createSlider()
             this.addSliderView(this.sliderCounter)
             this.switchOnTip(true)

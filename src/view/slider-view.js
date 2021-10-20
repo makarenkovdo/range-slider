@@ -137,11 +137,6 @@ export default class SliderView {
         const position = this.isVertical
             ? this.getVerticalPosition(updatingSlider, preperatoryPosition)
             : this.getHorizontalPosition(updatingSlider, preperatoryPosition)
-        console.log(
-            'updatingSlider.stepPosition,position',
-            updatingSlider.positionInPercentage,
-            position
-        )
         this.$parent
             .find(`.instance-${updatingSlider.instance}`)
             .css(positioning[0], position)

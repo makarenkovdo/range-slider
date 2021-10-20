@@ -50,7 +50,6 @@ export default class SliderController {
     }
     createRangeSlider(isRange) {
         if (isRange) {
-            console.log(this.isRange)
             this.isRange = true
             this.field.isRange = true
             this.createSlider()

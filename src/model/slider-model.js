@@ -126,7 +126,6 @@ export default class SliderModel {
         }
     }
     checkBordersCollision(stepPosition, slider) {
-        console.log(this.positionInPercentage)
         if (this.positionInPercentage < 1) {
         }
         //     this.notify.call(this)

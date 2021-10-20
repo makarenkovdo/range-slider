@@ -108,8 +108,8 @@ export default class SliderView {
   }
 
   updatePosition(updatingSlider) {
-    //HERE THE PROBLEM WITH NO-RANGE SLIDER(ONE INSTANCE)
-    let positioning = [
+    //  HERE THE PROBLEM WITH NO-RANGE SLIDER(ONE INSTANCE)
+    const positioning = [
       ['left', 'width'],
       ['top', 'height'],
     ];
@@ -117,27 +117,18 @@ export default class SliderView {
     else this.updatePositionHelper(updatingSlider, positioning[0]);
   }
 
+  // prettier-ignore
   updatePositionHelper(updatingSlider, positioning) {
-    const preperatoryPosition =
-      (parseInt(this.$id.children('.slider').css(positioning[1])) /
-        parseInt(this.$id.css(positioning[1]))) *
-      50;
+    const preperatoryPosition = (parseInt(this.$id.children('.slider').css(positioning[1]), 10)
+      / parseInt(this.$id.css(positioning[1]), 10)) * 50;
+    const getVerticalPosition = () => `${100 - updatingSlider.stepPosition - preperatoryPosition}%`;
+    const getHorizontalPosition = () => `${updatingSlider.stepPosition - preperatoryPosition - preperatoryPosition * updatingSlider.instance}%`;
     const position = this.isVertical
-      ? this.getVerticalPosition(updatingSlider, preperatoryPosition)
-      : this.getHorizontalPosition(updatingSlider, preperatoryPosition);
+      ? getVerticalPosition()
+      : getHorizontalPosition();
     this.$parent.find(`.instance-${updatingSlider.instance}`).css(positioning[0], position);
   }
-  getVerticalPosition(updatingSlider, preperatoryPosition) {
-    return 100 - updatingSlider.stepPosition - preperatoryPosition + '%';
-  }
-  getHorizontalPosition(updatingSlider, preperatoryPosition) {
-    return (
-      updatingSlider.stepPosition -
-      preperatoryPosition -
-      preperatoryPosition * updatingSlider.instance +
-      '%'
-    );
-  }
+
   // updateTipPosition(direction) {
   //     this.$parent.find('.tip-number .instance-1').css(
   //         direction,

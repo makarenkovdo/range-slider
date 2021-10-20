@@ -174,7 +174,6 @@ export default class SliderController {
 
   // todo NEARES OF TWO RANGES
   onClick() {
-    console.log(this.isRange);
     this.field.onClick(this.isRange, this.slider);
     this.recieve(this);
     return this;
@@ -211,7 +210,8 @@ export default class SliderController {
   }
 
   updateBar(that) {
-    this.isRange ? this.view.updateRangeBar(this) : this.view.updateBar(that);
+    if (this.isRange) this.view.updateRangeBar(this);
+    else this.view.updateBar(that);
     return this;
   }
 

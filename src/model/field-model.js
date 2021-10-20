@@ -76,21 +76,13 @@ export default class FieldModel {
       positioning = 'top';
       xySwitcher = 1;
     }
-    const slidersPosition = [0, 1].map((v) =>
-      parseInt(
-        $(`#${this.id}`)
-          .children(`.slider.instance-${v}`)
-          .css(positioning),
-        10,
-      ),
-    );
 
-    const nearest =
-      Math.abs(cursorXY[xySwitcher] - slidersPosition[0]) -
-        Math.abs(cursorXY[xySwitcher] - slidersPosition[1]) <
-      0
-        ? 0
-        : 1;
+    // prettier-ignore
+    const slidersPosition = [0, 1].map((v) => parseInt($(`#${this.id}`).children(`.slider.instance-${v}`).css(positioning), 10));
+
+    const lengthToFirstSlider = Math.abs(cursorXY[xySwitcher] - slidersPosition[0]);
+    const lengthToSecondSlider = Math.abs(cursorXY[xySwitcher] - slidersPosition[1]);
+    const nearest = lengthToFirstSlider - lengthToSecondSlider < 0 ? 0 : 1;
 
     return nearest;
   }

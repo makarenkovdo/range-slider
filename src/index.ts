@@ -28,4 +28,9 @@ const fourthSlider = new SliderController('fourth').setOptions({
     maxValue: 10,
 })
 
-const temporarySlider = new SliderInputModel('df')
+const fifthSlider = new SliderController('fifth').setOptions({
+    switchOnTip: true,
+    shouldAddBar: true,
+    minValue: 20,
+    maxValue: 35,
+})

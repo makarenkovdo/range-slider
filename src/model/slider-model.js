@@ -72,7 +72,7 @@ export default class SliderModel {
                 field.$element[0].offsetHeight
         } else {
             this.positionInPercentage =
-                ((cursorX + 2) * 100) / this.$parent[0].offsetWidth
+                ((cursorX + 5) * 100) / this.$parent[0].offsetWidth
         }
         this.value =
             this.positionInPercentage *
@@ -82,8 +82,11 @@ export default class SliderModel {
             Math.trunc(this.positionInPercentage / this.step) * this.step
         ).toFixed(this.stepSignAfterComma)
         const stepValue = (
-            Math.trunc(this.value / this.step) * this.step
+            Math.round(this.value / this.step) * this.step
         ).toFixed(this.stepSignAfterComma)
+
+        const returned = this.checkBordersCollision(stepPosition, slider)
+
         if (hasRange) {
             this.checkCollision(stepPosition, stepValue, slider)
         } else [this.stepPosition, this.stepValue] = [stepPosition, stepValue]
@@ -122,32 +125,11 @@ export default class SliderModel {
             this.stepValue = stepValue
         }
     }
-    checkBordersCollision(stepPosition, stepValue, slider) {
-        if (
-            (!this.isVertical &&
-                this.instance === 0 &&
-                stepPosition - slider[1].stepPosition >= this.step) ||
-            (this.isVertical &&
-                this.instance === 0 &&
-                stepPosition - slider[1].stepPosition <= this.step)
-        ) {
-            slider[0].stepPosition = +slider[1].stepPosition - this.step
-            slider[0].stepValue = +slider[1].stepValue - this.step
-        } else if (
-            (!this.isVertical &&
-                this.instance === 1 &&
-                stepPosition - slider[0].stepPosition <= this.step) ||
-            (this.isVertical &&
-                this.instance === 0 &&
-                stepPosition - slider[0].stepPosition >= this.step)
-        ) {
-            slider[1].stepPosition = +slider[0].stepPosition + this.step
-            slider[1].stepValue = +slider[0].stepValue + this.step
-        } else {
-            this.stepPosition = stepPosition
-            this.stepValue = stepValue
+    checkBordersCollision(stepPosition, slider) {
+        console.log(this.positionInPercentage)
+        if (this.positionInPercentage < 1) {
         }
-        this.notify.call(this)
+        //     this.notify.call(this)
     }
 
     onDrop() {

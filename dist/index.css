@@ -20,6 +20,8 @@ h1 {
 }
 
 .range-slider {
+  margin-top: 20px;
+  margin-bottom: 50px;
   border: 1px solid #6dd0a5;
   box-sizing: border-box;
   color: #fff;
@@ -118,6 +120,9 @@ h1 {
   width: 20px;
   z-index: -3;
   background: linear-gradient(#6fcf97 50%, #66d2ea);
+}
+.range-slider.vertical .slider {
+  left: -12px;
 }
 .range-slider .tip-number {
   position: absolute;

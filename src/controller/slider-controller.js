@@ -61,7 +61,7 @@ export default class SliderController {
     }
 
     createSlider(isRange) {
-        this.sliderCounter++
+        this.sliderCounter += 1
         this.isRange = true
         this.slider.push(new SliderModel(this.id, this.sliderCounter, this))
         this.slider.forEach((v) => v.init(this.minValue, this.maxValue))
@@ -108,6 +108,7 @@ export default class SliderController {
         return this
     }
     onDrag() {
+        // [this.slider[0].stepPosition]
         $(document).ready(() =>
             this.recieve(
                 this.slider.forEach((v) =>

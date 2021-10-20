@@ -153,14 +153,14 @@ class SliderModel {
   //   });
   // }
   onDrop() {
-    const cancelDragging = (event) => {
-      event.preventDefault();
-      event.stopPropagation();
+    function cancelDragging(e) {
+      e.preventDefault();
+      e.stopPropagation();
       this.$parent.removeClass('tap');
       this.$parent.off('mousemove touchmove');
-    };
-    this.$parent.on('mouseup touchend', cancelDragging());
-    $('body').on('mouseup touchend', cancelDragging());
+    }
+    this.$parent.on('mouseup touchend', cancelDragging.bind(this));
+    $('body').on('mouseup touchend', cancelDragging.bind(this));
   }
 }
 export default SliderModel;

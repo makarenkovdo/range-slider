@@ -1,5 +1,5 @@
+/* eslint-env jquery */
 import '../index.scss';
-import { $ } from 'jquery';
 
 export default class SliderView {
   constructor(id) {
@@ -21,8 +21,9 @@ export default class SliderView {
         const parentHeight = parseInt(this.$parent.css('height'), 10);
         this.corrector = (elementHeight / parentHeight) * 50;
       } else {
-        this.corrector =
-          (parseInt(this.$element.css('width'), 10) / parseInt(this.$parent.css('width'), 10)) * 50;
+        const elementWidth = parseInt(this.$element.css('width'), 10);
+        const parentWidth = parseInt(this.$parent.css('width'), 10);
+        this.corrector = (elementWidth / parentWidth) * 50;
       }
     });
   }
@@ -71,12 +72,12 @@ export default class SliderView {
 
   updateRangeBar() {
     $(document).ready(() => {
-      this.isVertical ? this.updateRangeBarHelper(1) : this.updateRangeBarHelper(0);
+      if (this.isVertical) this.updateRangeBarHelper(1);
+      else this.updateRangeBarHelper(0);
     });
   }
 
   updateRangeBarHelper(index) {
-    const vertIndex = 0;
     const positionSwitcher = [
       ['left', 'width'],
       ['top', 'height'],
@@ -84,11 +85,8 @@ export default class SliderView {
 
     /*  barPosesArray = [[instance0-left,instance1-left],[instance0-top,instance1-top]]
         for horizontal and vertical sliders accordingly */
-    const barPosesArray = positionSwitcher.map((v1, i1, arr) => {
-      return arr.map((v2, i2) => {
-        return parseInt(this.$id.children(`.instance-${i2}`).css(`${v1[0]}`), 10);
-      });
-    });
+    // prettier-ignore
+    const barPosesArray = positionSwitcher.map((v1, i1, arr) => (arr.map((v2, i2) => parseInt(this.$id.children(`.instance-${i2}`).css(`${v1[0]}`), 10))));
 
     //  barSize = [horizontalSliderWidth,verticalSliderHeight]
     const barSize = barPosesArray.map((v) => Math.abs(v[1] - v[0]));
@@ -108,16 +106,17 @@ export default class SliderView {
       //    left&width OR top&height depending on index
     );
   }
+
   updatePosition(updatingSlider) {
     //HERE THE PROBLEM WITH NO-RANGE SLIDER(ONE INSTANCE)
     let positioning = [
       ['left', 'width'],
       ['top', 'height'],
     ];
-    this.isVertical
-      ? this.updatePositionHelper(updatingSlider, positioning[1])
-      : this.updatePositionHelper(updatingSlider, positioning[0]);
+    if (this.isVertical) this.updatePositionHelper(updatingSlider, positioning[1]);
+    else this.updatePositionHelper(updatingSlider, positioning[0]);
   }
+
   updatePositionHelper(updatingSlider, positioning) {
     const preperatoryPosition =
       (parseInt(this.$id.children('.slider').css(positioning[1])) /

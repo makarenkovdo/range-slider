@@ -1,4 +1,4 @@
-import { $ } from 'jquery';
+/* eslint-env jquery */
 
 export default class FieldModel {
   constructor(id, subscriber) {
@@ -85,7 +85,12 @@ export default class FieldModel {
       ),
     );
 
-    const nearest = Math.abs(cursorXY[xySwitcher] - slidersPosition[0]) - Math.abs(cursorXY[xySwitcher] - slidersPosition[1]) < 0 ? 0 : 1;
+    const nearest =
+      Math.abs(cursorXY[xySwitcher] - slidersPosition[0]) -
+        Math.abs(cursorXY[xySwitcher] - slidersPosition[1]) <
+      0
+        ? 0
+        : 1;
 
     return nearest;
   }

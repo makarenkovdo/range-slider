@@ -1,4 +1,4 @@
-import { $ } from 'jquery';
+/* eslint-env jquery */
 import FieldModel from '../model/field-model';
 import SliderModel from '../model/slider-model';
 import SliderView from '../view/slider-view';
@@ -84,7 +84,7 @@ export default class SliderController {
     this.init()
       .createSlider()
       .addSliderView(this.sliderCounter)
-      .correctSliderPosition()
+      // .correctSliderPosition()
       .onDrag()
       .onDrop()
       .onClick();
@@ -103,7 +103,7 @@ export default class SliderController {
       .setMinValue(minValue)
       .setMaxValue(maxValue)
       // .init()
-      .correctSliderPosition()
+      // .correctSliderPosition()
       .addBar(shouldAddBar)
       .setStep(step)
       .updateText(minValue, 0)
@@ -136,10 +136,10 @@ export default class SliderController {
     return this;
   }
 
-  correctSliderPosition() {
-    this.view.correctSliderPosition(this.id);
-    return this;
-  }
+  // correctSliderPosition() {
+  //   this.view.correctSliderPosition(this.id);
+  //   return this;
+  // }
 
   addSliderView(i) {
     this.view.addSlider(this.id, i, this.field.isVertical, [

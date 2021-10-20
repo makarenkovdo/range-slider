@@ -1,5 +1,4 @@
-import { $ } from 'jquery';
-
+/* eslint-env jquery */
 class SliderModel {
   constructor(id, instance, subscriber) {
     this.id = id;
@@ -30,8 +29,8 @@ class SliderModel {
 
   //    for small 'steps' we need to define sign quantity after comma
   defineSignAfterComma(step) {
-    if (step.toString().includes('.')) {
-      this.stepSignAfterComma = step
+    if (this.step.toString().includes('.')) {
+      this.stepSignAfterComma = this.step
         .toString()
         .split('.')
         .pop().length;

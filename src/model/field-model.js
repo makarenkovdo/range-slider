@@ -59,10 +59,7 @@ export default class FieldModel {
   }
 
   onClick(isRange, sliders) {
-    console.log('sdf', isRange);
-
     const onClickHandler = (event) => {
-      console.log(isRange);
       let nearest = 0;
       if (isRange) nearest = this.defineNearestSlider(event);
       sliders[nearest].measurePosition(event, this, sliders, isRange);

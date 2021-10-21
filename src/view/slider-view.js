@@ -42,7 +42,6 @@ export default class SliderView {
   }
 
   addTipNumber(id, i, isVert, minMax) {
-    console.log(id, i, isVert, minMax);
     let positioning = 'left';
     let index = i;
     if (this.isVertical) {

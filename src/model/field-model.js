@@ -4,7 +4,7 @@ export default class FieldModel {
   constructor(id, subscriber) {
     this.$element = $(`#${id}`);
     this.class = this.$element.attr('class');
-    this.width = $(`#${id}`).css('width');
+    this.size = [$(`#${id}`).css('width'), $(`#${id}`).css('height')];
     this.id = id;
     this.minValue = 0;
     this.maxValue = 100;
@@ -22,7 +22,6 @@ export default class FieldModel {
   initDataStartEnd() {
     this.$element.attr('data-start', this.minValue);
     this.$element.attr('data-end', this.maxValue);
-    console.log('width', this.width);
     return this;
   }
 

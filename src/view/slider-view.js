@@ -5,30 +5,27 @@ export default class SliderView {
   constructor(id) {
     this.$id = $(`#${id}`);
     this.$element = '';
+    this.sliderSize = [];
     this.$parent = '';
     this.isVertical = false;
     this.stepSignAfterComma = 0;
     // this.corrector = 0;
   }
 
-  initValues(controller) {
+  initValues(controller, sliderSize, fieldSize) {
     this.$element = controller.slider[0].$element;
     this.$parent = controller.field.$element;
     this.isVertical = controller.field.isVertical;
     $(document).ready(() => {
       if (this.isVertical) {
-        const elementHeight = parseInt(this.$element.css('height'), 10);
-        const parentHeight = parseInt(this.$parent.css('height'), 10);
-        this.corrector = (elementHeight / parentHeight) * 50;
+        this.corrector = (sliderSize[1] / fieldSize[1]) * 50;
       } else {
-        const elementWidth = parseInt(this.$element.css('width'), 10);
-        const parentWidth = parseInt(this.$parent.css('width'), 10);
-        this.corrector = (elementWidth / parentWidth) * 50;
+        this.corrector = (sliderSize[0] / fieldSize[0]) * 50;
       }
     });
   }
 
-  addSlider(i) {
+  addSlider(i, sliderSize) {
     let positioning = 'left';
     let index = i;
     if (this.isVertical) {
@@ -39,7 +36,9 @@ export default class SliderView {
     //  set min = 0%, max = 100% for left/top positions
     const minMax = index * 100;
     console.log(i, positioning, minMax);
-    this.$id.append(`<span class="slider instance-${i}" style="${positioning}:${minMax}%"></span>`);
+    this.$id.append(
+      `<span class="slider instance-${i}" style="${positioning}:${minMax}%; width:${sliderSize}px; height:${sliderSize}px"></span>`,
+    );
   }
 
   addTipNumber(id, i, isVert) {

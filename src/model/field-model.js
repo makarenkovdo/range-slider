@@ -4,6 +4,7 @@ export default class FieldModel {
   constructor(id, subscriber) {
     this.$element = $(`#${id}`);
     this.class = this.$element.attr('class');
+    this.width = $(`#${id}`).css('width');
     this.id = id;
     this.minValue = 0;
     this.maxValue = 100;
@@ -18,9 +19,10 @@ export default class FieldModel {
     this.range = [];
   }
 
-  init() {
-    this.$element.attr('data-end', this.minValue);
-    this.$element.attr('data-start', this.maxValue);
+  initDataStartEnd() {
+    this.$element.attr('data-start', this.minValue);
+    this.$element.attr('data-end', this.maxValue);
+    console.log('width', this.width);
     return this;
   }
 
@@ -55,7 +57,8 @@ export default class FieldModel {
     if (!value.isNaN && value !== undefined) {
       this[minOrMax] = value;
     }
-    this.$element.attr(`data-${dataSuffix}`, value);
+    console.log(minOrMax, dataSuffix, value);
+    value;
   }
 
   onClick(isRange, sliders) {

@@ -12,7 +12,6 @@ export default class SliderView {
   }
 
   initValues(controller) {
-    this.$element = controller.slider[0].$element;
     this.$parent = controller.field.$element;
     this.isVertical = controller.field.isVertical;
     $(document).ready(() => {
@@ -38,6 +37,7 @@ export default class SliderView {
     }
     //  set min = 0%, max = 100% for left/top positions
     const minMax = index * 100;
+    console.log(i, positioning, minMax);
     this.$id.append(`<span class="slider instance-${i}" style="${positioning}:${minMax}%"></span>`);
   }
 

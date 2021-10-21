@@ -6,6 +6,8 @@ class SliderModel {
     this.instance = instance;
     this.$element = '';
     this.class = '';
+    this.width = 40;
+    this.height = 40;
     this.positionInPercentage = 0;
     this.value = 0;
     this.step = 1;
@@ -19,6 +21,7 @@ class SliderModel {
     this.$parent = $(`#${this.id}`);
     this.$element = $(`#${this.id}`).children('.slider ');
     this.class = $(`#${this.id}`).attr('class');
+    console.log(this.$parent, this.$element);
     if (this.instance === 0) {
       this.stepPosition = min;
       this.stepValue = min;

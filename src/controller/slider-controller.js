@@ -72,7 +72,7 @@ export default class SliderController {
     this.id = id;
     this.hasBar = false;
     this.isRange = false;
-    this.sliderCounter = -1;
+    this.sliderCounter = 0;
     this.field = new FieldModel(this.id, this);
     this.slider = [];
     this.view = new SliderView(this.id, this);
@@ -87,23 +87,30 @@ export default class SliderController {
       shouldAddTip = false, shouldAddBar = false, isRange = false,
       minValue = 0,
       maxValue = 100,
+      sliderSize = [40,40],
       step = 1,
     } = params;
+
     if (minValue > maxValue) {
       [minValue, maxValue] = [maxValue, minValue];
     } else if (minValue === maxValue) {
       minValue = 0;
       maxValue = 100;
     }
+
     if (step <= 0) {
       step = 1;
     }
 
-    this.init()
-      .setMinValue(minValue)
+    if (sliderSize[0] <= 0 || sliderSize[1] <= 0) {
+      sliderSize[0] = 40;
+      sliderSize[1] = 40;
+    }
+
+    this.setMinValue(minValue)
       .setMaxValue(maxValue)
-      .createRangeSlider(isRange, shouldAddTip)
-      .addSliderView(this.sliderCounter)
+      .initDataStartEnd()
+      .createRangeSlider(isRange, shouldAddTip, sliderSize)
       // .correctSliderPosition()
       .setStep(step)
       .addBar(shouldAddBar)
@@ -112,32 +119,33 @@ export default class SliderController {
       .onDrag()
       .onDrop()
       .onClick();
+   
   }
 
-  init() {
-    this.field.init();
+  initDataStartEnd() {
+    this.field.initDataStartEnd();
     // this.setMinValue();
     // this.setMaxValue();
     return this;
   }
 
-  createRangeSlider(isRange, shouldAddTip) {
-    this.createSlider();
+  createRangeSlider(isRange, shouldAddTip, sliderSize) {
+    this.createSlider(sliderSize);
     this.addSliderView(this.sliderCounter);
     this.addTipNumber(shouldAddTip);
     if (isRange) {
+      this.sliderCounter += 1;
       this.isRange = true;
       this.field.isRange = true;
-      this.createSlider();
       this.addSliderView(this.sliderCounter);
+      this.createSlider();
       this.addTipNumber(shouldAddTip);
     } else this.isRange = false;
     return this;
   }
 
-  createSlider() {
-    this.sliderCounter += 1;
-    this.slider.push(new SliderModel(this.id, this.sliderCounter, this));
+  createSlider(sliderSize) {
+    this.slider.push(new SliderModel(this.id, this.sliderCounter, this, sliderSize));
     this.slider.forEach((v) => v.init(this.minValue, this.maxValue));
     this.view.initValues(this, this.sliderCounter);
     return this;

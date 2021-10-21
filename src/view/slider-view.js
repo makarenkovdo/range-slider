@@ -36,14 +36,12 @@ export default class SliderView {
       if (index === 0) index = 1;
       else index = 0;
     }
-    let realMinMax = index * 100;
-    this.$id.append(
-      `<span class="slider instance-${i}" style="${positioning}:${realMinMax}%"></span>`,
-    );
+    //  set min = 0%, max = 100% for left/top positions
+    const minMax = index * 100;
+    this.$id.append(`<span class="slider instance-${i}" style="${positioning}:${minMax}%"></span>`);
   }
 
-  addTipNumber(id, i, isVert, minMax) {
-    console.log(i, minMax);
+  addTipNumber(id, i, isVert) {
     let positioning = 'left';
     let index = i;
     if (this.isVertical) {
@@ -51,8 +49,11 @@ export default class SliderView {
       if (index === 0) index = 1;
       else index = 0;
     }
+
+    //  set min = 0%, max = 100% for left/top positions
+    const minMax = index * 100;
     this.$id.append(
-      `<span class='tip-number instance-${i}' style="${positioning}:${minMax[index]}%"><span>0</span></span>`,
+      `<span class='tip-number instance-${i}' style="${positioning}:${minMax}%"><span>0</span></span>`,
     );
     this.updateTextNumber(minMax[index], index); // todo update with REAL minmax
   }

@@ -28,7 +28,7 @@ export default class SliderView {
     });
   }
 
-  addSlider(id, i, isVert, minMax) {
+  addSlider(i) {
     let positioning = 'left';
     let index = i;
     if (this.isVertical) {
@@ -36,8 +36,9 @@ export default class SliderView {
       if (index === 0) index = 1;
       else index = 0;
     }
+    let realMinMax = index * 100;
     this.$id.append(
-      `<span class="slider instance-${i}" style="${positioning}:${minMax[index]}%"></span>`,
+      `<span class="slider instance-${i}" style="${positioning}:${realMinMax}%"></span>`,
     );
   }
 

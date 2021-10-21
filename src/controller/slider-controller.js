@@ -139,10 +139,7 @@ export default class SliderController {
   // }
 
   addSliderView(i) {
-    this.view.addSlider(this.id, i, this.field.isVertical, [
-      this.field.minValue,
-      this.field.maxValue,
-    ]);
+    this.view.addSlider(i);
     return this;
   }
 

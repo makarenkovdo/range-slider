@@ -90,17 +90,15 @@ export default class SliderController {
       isRange = false,
     } = params;
 
-    console.log(shouldAddTip, minValue, maxValue, shouldAddBar, step, isRange);
-
     this.init()
       .setMinValue(minValue)
       .setMaxValue(maxValue)
-      .setStep(step)
       .createSlider()
       .addSliderView(this.sliderCounter)
       // .correctSliderPosition()
       .switchOnTip(shouldAddTip)
       .createRangeSlider(isRange)
+      .setStep(step)
       .addBar(shouldAddBar)
       .updateText(minValue, 0)
       .updateText(maxValue, 1)
@@ -220,8 +218,6 @@ export default class SliderController {
   }
 
   setMinValue(minValue) {
-    console.log(minValue);
-
     this.field.setMinValue(minValue);
     return this;
   }

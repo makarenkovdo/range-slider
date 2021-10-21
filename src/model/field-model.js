@@ -52,11 +52,10 @@ export default class FieldModel {
 
   setMinMax(args) {
     const [minOrMax, dataSuffix, value] = args;
-    if (!Number.isNaN && value !== undefined) {
+    if (!value.isNaN && value !== undefined) {
       this[minOrMax] = value;
     }
-    console.log(minOrMax, dataSuffix, value);
-    this.$element.attr(`data-${dataSuffix}`, this[minOrMax]);
+    this.$element.attr(`data-${dataSuffix}`, value);
   }
 
   onClick(isRange, sliders) {

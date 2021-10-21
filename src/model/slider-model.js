@@ -100,6 +100,7 @@ class SliderModel {
     if (hasRange) {
       this.checkCollision(stepPosition, stepValue, slider);
     } else [this.stepPosition, this.stepValue] = [stepPosition, stepValue];
+    console.log(this.stepPosition, this.stepValue);
     this.notify.call(this);
 
     // if (slider[1].stepPosition < slider[0].stepPosition) {
@@ -136,11 +137,9 @@ class SliderModel {
     // }
 
     if (isCollisionFirst()) {
-      console.log('???');
       this.stepPosition = +slider[1].stepPosition - this.step;
       this.stepValue = +slider[1].stepValue - this.step;
     } else if (isCollisionSecond()) {
-      console.log('!!!!!!!!!!');
       this.stepPosition = +slider[0].stepPosition + this.step;
       this.stepValue = +slider[0].stepValue + this.step;
     } else {

@@ -16,16 +16,16 @@ export default class SliderView {
     this.$element = controller.slider[0].$element;
     this.$parent = controller.field.$element;
     this.isVertical = controller.field.isVertical;
-    $(document).ready(() => {
-      if (this.isVertical) {
-        this.corrector = (sliderSize[1] / fieldSize[1]) * 50;
-      } else {
-        this.corrector = (sliderSize[0] / fieldSize[0]) * 50;
-      }
-    });
+    this.sliderSize = sliderSize;
+    this.fieldSize = fieldSize;
+    if (this.isVertical) {
+      this.corrector = (sliderSize[1] / fieldSize[1]) * 50;
+    } else {
+      this.corrector = (sliderSize[0] / fieldSize[0]) * 50;
+    }
   }
 
-  addSlider(i, sliderSize) {
+  addSlider(i) {
     let positioning = 'left';
     let index = i;
     if (this.isVertical) {
@@ -35,9 +35,10 @@ export default class SliderView {
     }
     //  set min = 0%, max = 100% for left/top positions
     const minMax = index * 100;
+    console.log('sliderSize', this.sliderSize);
     console.log(i, positioning, minMax);
     this.$id.append(
-      `<span class="slider instance-${i}" style="${positioning}:${minMax}%; width:${sliderSize}px; height:${sliderSize}px"></span>`,
+      `<span class="slider instance-${i}" style="${positioning}:${minMax}%; width:${this.sliderSize[0]}px; height:${this.sliderSize[1]}px"></span>`,
     );
   }
 

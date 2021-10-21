@@ -54,11 +54,12 @@ class SliderModel {
       event.preventDefault();
       this.measurePosition(event, field, slider, hasRange);
     };
-    this.$element.on('mousedown touchstart', `.instance-${this.instance}`, (event) => {
+    this.$parent.on('mousedown touchstart', `.instance-${this.instance}`, (event) => {
+      console.log(event);
       event.preventDefault();
       event.stopPropagation();
       field.$element.addClass('tap');
-      field.$element.on('mousemove touchmove', onMove());
+      field.$element.on('mousemove touchmove', onMove(event));
     });
   }
 
@@ -79,13 +80,14 @@ class SliderModel {
     const stepValue = (Math.round(this.value / this.step) * this.step).toFixed(
       this.stepSignAfterComma,
     );
+    // console.log(stepPosition);
 
     // const returned = this.checkBordersCollision(stepPosition, slider);
 
     if (hasRange) {
       this.checkCollision(stepPosition, stepValue, slider);
     } else [this.stepPosition, this.stepValue] = [stepPosition, stepValue];
-
+    console.log(this.positionInPercentage);
     this.notify.call(this);
 
     // if (slider[1].stepPosition < slider[0].stepPosition) {

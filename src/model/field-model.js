@@ -59,13 +59,12 @@ export default class FieldModel {
   }
 
   onClick(isRange, sliders) {
-    const onClickHandler = (event) => {
-      let nearest = 0;
-      if (isRange) nearest = this.defineNearestSlider(event);
-      sliders[nearest].measurePosition(event, this, sliders, isRange);
-    };
-
-    $(`#${this.id}`).on('click', onClickHandler(isRange));
+    // const onClickHandler = (event) => {
+    //   let nearest = 0;
+    //   if (isRange) nearest = this.defineNearestSlider(event);
+    //   sliders[nearest].measurePosition(event, this, sliders, isRange);
+    // };
+    // $(`#${this.id}`).on('click', onClickHandler(isRange));
   }
 
   defineNearestSlider(event) {

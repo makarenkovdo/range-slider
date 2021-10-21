@@ -80,24 +80,31 @@ export default class SliderController {
   }
 
   // build(params: ControllerBuildParams) {
+  // prettier-ignore
   build(params) {
-    const {
-      shouldAddTip = false,
+    let {
+      // eslint-disable-next-line prefer-const
+      shouldAddTip = false, shouldAddBar = false, isRange = false,
       minValue = 0,
       maxValue = 100,
-      shouldAddBar = false,
       step = 1,
-      isRange = false,
     } = params;
+    if (minValue > maxValue) {
+      [minValue, maxValue] = [maxValue, minValue];
+    } else if (minValue === maxValue) {
+      minValue = 0;
+      maxValue = 100;
+    }
+    if (step <= 0) {
+      step = 1;
+    }
 
     this.init()
       .setMinValue(minValue)
       .setMaxValue(maxValue)
-      .createSlider()
+      .createRangeSlider(isRange, shouldAddTip)
       .addSliderView(this.sliderCounter)
       // .correctSliderPosition()
-      .switchOnTip(shouldAddTip)
-      .createRangeSlider(isRange)
       .setStep(step)
       .addBar(shouldAddBar)
       .updateText(minValue, 0)
@@ -114,13 +121,16 @@ export default class SliderController {
     return this;
   }
 
-  createRangeSlider(isRange) {
+  createRangeSlider(isRange, shouldAddTip) {
+    this.createSlider();
+    this.addSliderView(this.sliderCounter);
+    this.addTipNumber(shouldAddTip);
     if (isRange) {
       this.isRange = true;
       this.field.isRange = true;
       this.createSlider();
       this.addSliderView(this.sliderCounter);
-      this.switchOnTip(true);
+      this.addTipNumber(shouldAddTip);
     } else this.isRange = false;
     return this;
   }
@@ -143,8 +153,8 @@ export default class SliderController {
     return this;
   }
 
-  // switchOnTip(isOn: boolean) {
-  switchOnTip(isOn) {
+  // addTipNumber(isOn: boolean) {
+  addTipNumber(isOn) {
     if (isOn) {
       this.view.addTipNumber(
         this.id,

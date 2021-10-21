@@ -63,14 +63,16 @@ class SliderModel {
   //   });
   // }
   onDrag(field, slider, hasRange) {
+    const onMove = (event) => {
+      event.preventDefault();
+      this.measurePosition(event, field, slider, hasRange);
+    };
+
     $(`#${this.id}`).on('mousedown touchstart', `.instance-${this.instance}`, (event) => {
       event.preventDefault();
       event.stopPropagation();
       field.$element.addClass('tap');
-      field.$element.on('mousemove touchmove', (event) => {
-        event.preventDefault();
-        this.measurePosition(event, field, slider, hasRange);
-      });
+      field.$element.on('mousemove touchmove', onMove);
     });
   }
 

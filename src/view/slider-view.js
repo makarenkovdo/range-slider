@@ -12,6 +12,7 @@ export default class SliderView {
   }
 
   initValues(controller) {
+    this.$element = controller.slider[0].$element;
     this.$parent = controller.field.$element;
     this.isVertical = controller.field.isVertical;
     $(document).ready(() => {

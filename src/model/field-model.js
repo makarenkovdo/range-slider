@@ -55,6 +55,7 @@ export default class FieldModel {
     if (!Number.isNaN && value !== undefined) {
       this[minOrMax] = value;
     }
+    console.log(minOrMax, dataSuffix, value);
     this.$element.attr(`data-${dataSuffix}`, this[minOrMax]);
   }
 

@@ -68,7 +68,7 @@ export default class SliderController {
   // view: View;
 
   // constructor(id: string, params?: ControllerBuildParams) {
-  constructor(id, params) {
+  constructor(id, params = {}) {
     this.id = id;
     this.hasBar = false;
     this.isRange = false;
@@ -81,29 +81,27 @@ export default class SliderController {
 
   // build(params: ControllerBuildParams) {
   build(params) {
-    let shouldAddTip = false;
-    let minValue = 0;
-    let maxValue = 100;
-    let shouldAddBar = false;
-    let step = 1;
-    let isRange = false;
-    // prettier-ignore
-    if (params) {
-      ({
-        shouldAddTip, minValue, maxValue, shouldAddBar, step, isRange,
-      } = params);
-    }
+    const {
+      shouldAddTip = false,
+      minValue = 0,
+      maxValue = 100,
+      shouldAddBar = false,
+      step = 1,
+      isRange = false,
+    } = params;
+
+    console.log(shouldAddTip, minValue, maxValue, shouldAddBar, step, isRange);
 
     this.init()
+      .setMinValue(minValue)
+      .setMaxValue(maxValue)
+      .setStep(step)
       .createSlider()
       .addSliderView(this.sliderCounter)
       // .correctSliderPosition()
       .switchOnTip(shouldAddTip)
       .createRangeSlider(isRange)
-      .setMinValue(minValue)
-      .setMaxValue(maxValue)
       .addBar(shouldAddBar)
-      .setStep(step)
       .updateText(minValue, 0)
       .updateText(maxValue, 1)
       .onDrag()
@@ -222,6 +220,8 @@ export default class SliderController {
   }
 
   setMinValue(minValue) {
+    console.log(minValue);
+
     this.field.setMinValue(minValue);
     return this;
   }

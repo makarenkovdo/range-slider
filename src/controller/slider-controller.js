@@ -83,13 +83,15 @@ export default class SliderController {
   // prettier-ignore
   build(params) {
     let {
-      // eslint-disable-next-line prefer-const
-      shouldAddTip = false, shouldAddBar = false, isRange = false,
+     
       minValue = 0,
       maxValue = 100,
-      sliderSize = [40,40],
       step = 1,
     } = params;
+    const { 
+      shouldAddTip = false, shouldAddBar = false, isRange = false, sliderSize = [40, 40],
+    } = params;
+
 
     if (minValue > maxValue) {
       [minValue, maxValue] = [maxValue, minValue];

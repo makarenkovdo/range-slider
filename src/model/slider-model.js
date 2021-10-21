@@ -49,17 +49,28 @@ class SliderModel {
     }
   }
 
+  // onDrag(field, slider, hasRange) {
+  //   const onMove = (event) => {
+  //     event.preventDefault();
+  //     this.measurePosition(event, field, slider, hasRange);
+  //   };
+  //   this.$parent.on('mousedown touchstart', `.instance-${this.instance}`, (event) => {
+  //     console.log(event);
+  //     event.preventDefault();
+  //     event.stopPropagation();
+  //     field.$element.addClass('tap');
+  //     field.$element.on('mousemove touchmove', onMove(event));
+  //   });
+  // }
   onDrag(field, slider, hasRange) {
-    const onMove = (event) => {
-      event.preventDefault();
-      this.measurePosition(event, field, slider, hasRange);
-    };
-    this.$parent.on('mousedown touchstart', `.instance-${this.instance}`, (event) => {
-      console.log(event);
+    $(`#${this.id}`).on('mousedown touchstart', `.instance-${this.instance}`, (event) => {
       event.preventDefault();
       event.stopPropagation();
       field.$element.addClass('tap');
-      field.$element.on('mousemove touchmove', onMove(event));
+      field.$element.on('mousemove touchmove', (event) => {
+        event.preventDefault();
+        this.measurePosition(event, field, slider, hasRange);
+      });
     });
   }
 
@@ -87,7 +98,6 @@ class SliderModel {
     if (hasRange) {
       this.checkCollision(stepPosition, stepValue, slider);
     } else [this.stepPosition, this.stepValue] = [stepPosition, stepValue];
-    console.log(this.positionInPercentage);
     this.notify.call(this);
 
     // if (slider[1].stepPosition < slider[0].stepPosition) {
@@ -122,10 +132,13 @@ class SliderModel {
     //   this.stepPosition = stepPosition;
     //   this.stepValue = stepValue;
     // }
-    if (isCollisionFirst) {
+
+    if (isCollisionFirst()) {
+      console.log('???');
       this.stepPosition = +slider[1].stepPosition - this.step;
       this.stepValue = +slider[1].stepValue - this.step;
-    } else if (isCollisionSecond) {
+    } else if (isCollisionSecond()) {
+      console.log('!!!!!!!!!!');
       this.stepPosition = +slider[0].stepPosition + this.step;
       this.stepValue = +slider[0].stepValue + this.step;
     } else {

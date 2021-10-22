@@ -1,12 +1,12 @@
 /* eslint-env jquery */
 class SliderModel {
-  constructor(id, instance, subscriber) {
+  constructor(id, instance, subscriber, sliderSize) {
     this.id = id;
-    this.$parent = '';
+    this.$parent = $(`#${this.id}`);
     this.instance = instance;
-    this.$element = '';
-    this.class = '';
-    this.size = [40, 40];
+    this.$element = $(`#${this.id}`).children('.slider ');
+    this.class = $(`#${this.id}`).attr('class');
+    this.size = sliderSize;
     this.positionInPercentage = 0;
     this.value = 0;
     this.step = 1;
@@ -16,12 +16,9 @@ class SliderModel {
     this.subscriber = subscriber;
   }
 
-  init(min, max, sliderSize) {
-    this.$parent = $(`#${this.id}`);
-    this.$element = $(`#${this.id}`).children('.slider ');
+  initializeValues(min, max) {
+    this.$element = this.$parent.children('.slider ');
     this.class = $(`#${this.id}`).attr('class');
-    this.size = sliderSize;
-    console.log(this.$parent, this.$element);
     if (this.instance === 0) {
       this.stepPosition = min;
       this.stepValue = min;

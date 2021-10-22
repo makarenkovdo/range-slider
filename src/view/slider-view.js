@@ -24,13 +24,12 @@ export default class SliderView {
     }
   }
 
-  initializeDomElements(controller) {
-    this.$slider = controller.slider[0].$element;
-    this.$field = controller.field.$element;
+  initializeDomElements($slider, $field) {
+    this.$slider = $slider;
+    this.$field = $field;
   }
 
-  addSliderView(i, isVertical, sliderSize, fieldSize) {
-    console.log(isVertical);
+  addSliderView(i, isVertical) {
     let positioning = 'left';
     let index = i;
     if (isVertical) {

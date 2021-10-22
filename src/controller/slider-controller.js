@@ -134,13 +134,16 @@ export default class SliderController {
   createRangeSlider(isRange, shouldAddTip, sliderSize) {
     this.addSliderView(this.sliderCounter);
     this.createSlider(sliderSize);
+    this.view.initializeDomElements(this.slider[this.sliderCounter].$element, this.field.$element);
     this.addTipNumber(shouldAddTip);
+
     if (isRange) {
       this.sliderCounter += 1;
       this.isRange = true;
       this.field.isRange = true;
       this.addSliderView(this.sliderCounter);
       this.createSlider(sliderSize);
+
       this.addTipNumber(shouldAddTip);
     } else this.isRange = false;
     return this;
@@ -149,7 +152,6 @@ export default class SliderController {
   createSlider(sliderSize) {
     this.slider.push(new SliderModel(this.id, this.sliderCounter, this, sliderSize));
     this.slider.forEach((v) => v.initializeValues(this.minValue, this.maxValue));
-    this.view.initializeDomElements(this, sliderSize, this.field.size);
     return this;
   }
 

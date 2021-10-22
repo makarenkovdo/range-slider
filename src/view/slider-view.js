@@ -4,9 +4,9 @@ import '../index.scss';
 export default class SliderView {
   constructor(id) {
     this.$id = $(`#${id}`);
-    this.$element = '';
+    this.$slider = '';
     this.sliderSize = [];
-    this.$parent = '';
+    this.$field = '';
     this.isVertical = false;
     this.stepSignAfterComma = 0;
     // this.corrector = 0;
@@ -24,9 +24,9 @@ export default class SliderView {
     }
   }
 
-  initValues(controller) {
-    this.$element = controller.slider[0].$element;
-    this.$parent = controller.field.$element;
+  initializeDomElements(controller) {
+    this.$slider = controller.slider[0].$element;
+    this.$field = controller.field.$element;
   }
 
   addSliderView(i, isVertical, sliderSize, fieldSize) {
@@ -106,7 +106,7 @@ export default class SliderView {
       (v, i) => {
         this.$id.children('.slider-bar').css(
           `${v}`,
-          helpVariable[i] + (this.$element.width() / 2) * !i,
+          helpVariable[i] + (this.$slider.width() / 2) * !i,
           //    shift on half a width WHEN it's a LEFT(TOP) position of instance-0
         );
       },
@@ -134,17 +134,17 @@ export default class SliderView {
     const position = this.isVertical
       ? getVerticalPosition()
       : getHorizontalPosition();
-    this.$parent.find(`.instance-${updatingSlider.instance}`).css(positioning[0], position);
+    this.$field.find(`.instance-${updatingSlider.instance}`).css(positioning[0], position);
   }
 
   // updateTipPosition(direction) {
-  //     this.$parent.find('.tip-number .instance-1').css(
+  //     this.$field.find('.tip-number .instance-1').css(
   //         direction,
-  //         this.$element.css(direction)
-  //         // parseInt(this.$element.css('width')) / 2
+  //         this.$slider.css(direction)
+  //         // parseInt(this.$slider.css('width')) / 2
   //     )
   // }
   updateTextNumber(stepValue, instance) {
-    this.$parent.find(`.instance-${instance} span`).text(`${stepValue}`);
+    this.$field.find(`.instance-${instance} span`).text(`${stepValue}`);
   }
 }

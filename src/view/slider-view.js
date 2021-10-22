@@ -26,18 +26,18 @@ export default class SliderView {
     }
   }
 
-  initializeDomElements($slider) {
-    this.$slider = $slider;
+  createSliderView(i) {
+    addSliderToDom(prepareSliderArgs(i, this.isVertical), this.$field, this.sliderSize);
+    this.initializeSliderDom();
   }
 
-  createSliderView(i, isVertical, $slider) {
-    addSliderToDom(prepareSliderArgs(i, isVertical), this.$field, this.sliderSize);
-    // this.updateAfterCreateSliderView($slider);
+  initializeSliderDom() {
+    this.$slider = this.$field.children('.slider ');
   }
 
-  updateAfterCreateSliderView() {
-    this.$slider = $slider;
-  }
+  // updateAfterCreateSliderView() {
+  //   this.$slider = $slider;
+  // }
 
   createTipNumber(i, isVertical) {
     this.updateTextNumber(addTipNumberToDom(prepareTipNumberArgs(i, isVertical), this.$field));

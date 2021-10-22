@@ -134,7 +134,6 @@ export default class SliderController {
   createRangeSlider(isRange, shouldAddTip, sliderSize) {
     this.createSliderView(this.sliderCounter);
     this.createSlider(sliderSize);
-    this.view.initializeDomElements(this.slider[this.sliderCounter].$slider, this.field.$element);
     this.createTipNumber(shouldAddTip);
 
     if (isRange) {

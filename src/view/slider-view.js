@@ -1,6 +1,7 @@
 /* eslint-env jquery */
 import '../index.scss';
 import { addSliderToDom, prepareSliderArgs } from './view-modules/createSliderView';
+import { prepareTipNumberArgs, addTipNumberToDom } from './view-modules/createTipNumber';
 
 export default class SliderView {
   constructor(id) {
@@ -15,7 +16,6 @@ export default class SliderView {
   }
 
   initializeValues(sliderSize, fieldSize, isVertical) {
-    console.log(sliderSize, fieldSize, isVertical);
     this.sliderSize = sliderSize;
     this.fieldSize = fieldSize;
     this.isVertical = isVertical;
@@ -35,21 +35,8 @@ export default class SliderView {
     addSliderToDom(prepareSliderArgs(i, isVertical), this.$id, this.sliderSize);
   }
 
-  addTipNumber(id, i, isVert) {
-    let positioning = 'left';
-    let index = i;
-    if (this.isVertical) {
-      positioning = 'top';
-      if (index === 0) index = 1;
-      else index = 0;
-    }
-
-    //  set min = 0%, max = 100% for left/top positions
-    const minMax = index * 100;
-    this.$id.append(
-      `<span class='tip-number instance-${i}' style="${positioning}:${minMax}%"><span>0</span></span>`,
-    );
-    this.updateTextNumber(minMax[index], index); // todo update with REAL minmax
+  createTipNumber(i, isVertical) {
+    this.updateTextNumber(addTipNumberToDom(prepareTipNumberArgs(i, isVertical), this.$id));
   }
 
   addBar() {

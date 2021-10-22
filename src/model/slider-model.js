@@ -2,9 +2,9 @@
 class SliderModel {
   constructor(id, instance, subscriber, sliderSize) {
     this.id = id;
-    this.$parent = $(`#${this.id}`);
+    this.$field = $(`#${this.id}`);
     this.instance = instance;
-    this.$element = $(`#${this.id}`).children('.slider ');
+    this.$slider = $(`#${this.id}`).children('.slider ');
     this.class = $(`#${this.id}`).attr('class');
     this.size = sliderSize;
     this.positionInPercentage = 0;
@@ -16,9 +16,7 @@ class SliderModel {
     this.subscriber = subscriber;
   }
 
-  initializeValues(min, max) {
-    this.$element = this.$parent.children('.slider ');
-    this.class = $(`#${this.id}`).attr('class');
+  initializeMinMax(min, max) {
     if (this.instance === 0) {
       this.stepPosition = min;
       this.stepValue = min;
@@ -54,7 +52,7 @@ class SliderModel {
   //     event.preventDefault();
   //     this.measurePosition(event, field, slider, hasRange);
   //   };
-  //   this.$parent.on('mousedown touchstart', `.instance-${this.instance}`, (event) => {
+  //   this.$field.on('mousedown touchstart', `.instance-${this.instance}`, (event) => {
   //     console.log(event);
   //     event.preventDefault();
   //     event.stopPropagation();
@@ -83,7 +81,7 @@ class SliderModel {
       const fieldHeight = field.$element[0].offsetHeight;
       this.positionInPercentage = ((fieldHeight - (cursorY + 1)) * 100) / fieldHeight;
     } else {
-      this.positionInPercentage = ((cursorX + 5) * 100) / this.$parent[0].offsetWidth;
+      this.positionInPercentage = ((cursorX + 5) * 100) / this.$field[0].offsetWidth;
     }
     const fieldLength = field.maxValue - field.minValue;
     this.value = this.positionInPercentage * (fieldLength / 100) + +field.minValue;
@@ -100,7 +98,6 @@ class SliderModel {
     if (hasRange) {
       this.checkCollision(stepPosition, stepValue, slider);
     } else [this.stepPosition, this.stepValue] = [stepPosition, stepValue];
-    console.log(this.stepPosition, this.stepValue);
     this.notify.call(this);
 
     // if (slider[1].stepPosition < slider[0].stepPosition) {
@@ -172,10 +169,10 @@ class SliderModel {
     function cancelDragging(e) {
       e.preventDefault();
       e.stopPropagation();
-      this.$parent.removeClass('tap');
-      this.$parent.off('mousemove touchmove');
+      this.$field.removeClass('tap');
+      this.$field.off('mousemove touchmove');
     }
-    this.$parent.on('mouseup touchend', cancelDragging.bind(this));
+    this.$field.on('mouseup touchend', cancelDragging.bind(this));
     $('body').on('mouseup touchend', cancelDragging.bind(this));
   }
 }

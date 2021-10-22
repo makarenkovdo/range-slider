@@ -22,7 +22,6 @@ export default class FieldModel {
   initDataStartEnd() {
     this.$element.attr('data-start', this.minValue);
     this.$element.attr('data-end', this.maxValue);
-    console.log(this.isVertical);
 
     return this;
   }

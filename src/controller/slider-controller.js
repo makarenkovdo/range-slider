@@ -83,31 +83,32 @@ export default class SliderController {
   // prettier-ignore
   build(params) {
     let {
-     
       minValue = 0,
       maxValue = 100,
       step = 1,
     } = params;
-    const { 
+
+    const {
       shouldAddTip = false, shouldAddBar = false, isRange = false, sliderSize = [40, 40],
     } = params;
 
+    const checkedValues = () => {
+      if (minValue > maxValue) {
+        [minValue, maxValue] = [maxValue, minValue];
+      } else if (minValue === maxValue) {
+        minValue = 0;
+        maxValue = 100;
+      }
 
-    if (minValue > maxValue) {
-      [minValue, maxValue] = [maxValue, minValue];
-    } else if (minValue === maxValue) {
-      minValue = 0;
-      maxValue = 100;
-    }
-
-    if (step <= 0) {
-      step = 1;
-    }
-
-    if (sliderSize[0] <= 0 || sliderSize[1] <= 0) {
-      sliderSize[0] = 40;
-      sliderSize[1] = 40;
-    }
+      if (step <= 0) {
+        step = 1;
+      }
+      if (sliderSize[0] <= 0 || sliderSize[1] <= 0) {
+        sliderSize[0] = 40;
+        sliderSize[1] = 40;
+      }
+    };
+    checkedValues();
 
     this.setMinValue(minValue)
       .setMaxValue(maxValue)
@@ -121,7 +122,6 @@ export default class SliderController {
       .onDrag()
       .onDrop()
       .onClick();
-   
   }
 
   initLayers(sliderSize) {
@@ -134,8 +134,8 @@ export default class SliderController {
   createRangeSlider(isRange, shouldAddTip, sliderSize) {
     this.createSliderView(this.sliderCounter);
     this.createSlider(sliderSize);
-    this.view.initializeDomElements(this.slider[this.sliderCounter].$element, this.field.$element);
-    this.addTipNumber(shouldAddTip);
+    this.view.initializeDomElements(this.slider[this.sliderCounter].$slider, this.field.$element);
+    this.createTipNumber(shouldAddTip);
 
     if (isRange) {
       this.sliderCounter += 1;
@@ -144,14 +144,14 @@ export default class SliderController {
       this.createSliderView(this.sliderCounter);
       this.createSlider(sliderSize);
 
-      this.addTipNumber(shouldAddTip);
+      this.createTipNumber(shouldAddTip);
     } else this.isRange = false;
     return this;
   }
 
   createSlider(sliderSize) {
     this.slider.push(new SliderModel(this.id, this.sliderCounter, this, sliderSize));
-    this.slider.forEach((v) => v.initializeValues(this.minValue, this.maxValue));
+    this.slider.forEach((v) => v.initializeMinMax(this.minValue, this.maxValue));
     return this;
   }
 
@@ -165,15 +165,14 @@ export default class SliderController {
     return this;
   }
 
-  // addTipNumber(isOn: boolean) {
-  addTipNumber(isOn) {
+  // createTipNumber(isOn: boolean) {
+  createTipNumber(isOn) {
     if (isOn) {
-      this.view.addTipNumber(
-        this.id,
+      this.view.createTipNumber(
         this.sliderCounter,
         this.field.isVertical,
-        [this.field.minValue, this.field.maxValue],
-        this.slider[0].step,
+        // [this.field.minValue, this.field.maxValue],
+        // this.slider[0].step,
       );
     }
     return this;

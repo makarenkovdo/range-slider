@@ -5,10 +5,10 @@ import { prepareTipNumberArgs, addTipNumberToDom } from './view-modules/createTi
 
 export default class SliderView {
   constructor(id) {
-    this.$id = $(`#${id}`);
+    this.$field = $(`#${id}`);
     this.$slider = '';
+    this.$bar = '';
     this.sliderSize = [];
-    this.$field = '';
     this.isVertical = false;
     this.stepSignAfterComma = 0;
     // this.createSliderViewModules = { addSliderToDom, prepareSliderArgs };
@@ -26,31 +26,36 @@ export default class SliderView {
     }
   }
 
-  initializeDomElements($slider, $field) {
+  initializeDomElements($slider) {
     this.$slider = $slider;
-    this.$field = $field;
   }
 
-  createSliderView(i, isVertical) {
-    addSliderToDom(prepareSliderArgs(i, isVertical), this.$id, this.sliderSize);
+  createSliderView(i, isVertical, $slider) {
+    addSliderToDom(prepareSliderArgs(i, isVertical), this.$field, this.sliderSize);
+    // this.updateAfterCreateSliderView($slider);
+  }
+
+  updateAfterCreateSliderView() {
+    this.$slider = $slider;
   }
 
   createTipNumber(i, isVertical) {
-    this.updateTextNumber(addTipNumberToDom(prepareTipNumberArgs(i, isVertical), this.$id));
+    this.updateTextNumber(addTipNumberToDom(prepareTipNumberArgs(i, isVertical), this.$field));
   }
 
   addBar() {
-    this.$id.append("<div class='slider-bar'></div>");
+    this.$field.append("<div class='slider-bar'></div>");
+    this.$bar = this.$field.children('.slider-bar');
   }
 
   updateBar(slider) {
     if (this.isVertical) {
-      this.$id
+      this.$field
         .children('.slider-bar')
         .css('height', `${slider.stepPosition}%`)
         .css('top', `${100 - slider.stepPosition}%`);
     } else {
-      this.$id.children('.slider-bar').css('width', `${slider.stepPosition}%`);
+      this.$field.children('.slider-bar').css('width', `${slider.stepPosition}%`);
     }
   }
 
@@ -70,7 +75,7 @@ export default class SliderView {
     /*  barPosesArray = [[instance0-left,instance1-left],[instance0-top,instance1-top]]
         for horizontal and vertical sliders accordingly */
     // prettier-ignore
-    const barPosesArray = positionSwitcher.map((v1, i1, arr) => (arr.map((v2, i2) => parseInt(this.$id.children(`.instance-${i2}`).css(`${v1[0]}`), 10))));
+    const barPosesArray = positionSwitcher.map((v1, i1, arr) => (arr.map((v2, i2) => parseInt(this.$field.children(`.instance-${i2}`).css(`${v1[0]}`), 10))));
 
     //  barSize = [horizontalSliderWidth,verticalSliderHeight]
     const barSize = barPosesArray.map((v) => Math.abs(v[1] - v[0]));
@@ -80,7 +85,7 @@ export default class SliderView {
 
     positionSwitcher[index].forEach(
       (v, i) => {
-        this.$id.children('.slider-bar').css(
+        this.$field.children('.slider-bar').css(
           `${v}`,
           helpVariable[i] + (this.$slider.width() / 2) * !i,
           //    shift on half a width WHEN it's a LEFT(TOP) position of instance-0
@@ -103,8 +108,8 @@ export default class SliderView {
 
   // prettier-ignore
   updatePositionHelper(updatingSlider, positioning) {
-    const preperatoryPosition = (parseInt(this.$id.children('.slider').css(positioning[1]), 10)
-      / parseInt(this.$id.css(positioning[1]), 10)) * 50;
+    const preperatoryPosition = (parseInt(this.$field.children('.slider').css(positioning[1]), 10)
+      / parseInt(this.$field.css(positioning[1]), 10)) * 50;
     const getVerticalPosition = () => `${100 - updatingSlider.stepPosition - preperatoryPosition}%`;
     const getHorizontalPosition = () => `${updatingSlider.stepPosition - preperatoryPosition - preperatoryPosition * updatingSlider.instance}%`;
     const position = this.isVertical
@@ -122,5 +127,18 @@ export default class SliderView {
   // }
   updateTextNumber(stepValue, instance) {
     this.$field.find(`.instance-${instance} span`).text(`${stepValue}`);
+  }
+
+  updateThisConstructor(obj) {
+    const { $field = this.id, $slider } = obj;
+    this.$field = $field;
+    this.$slider = $slider;
+    this.$field = $(`#${id}`);
+    this.$slider = '';
+    this.$field = '';
+    this.$bar = '';
+    this.sliderSize = [];
+    this.isVertical = false;
+    this.stepSignAfterComma = 0;
   }
 }

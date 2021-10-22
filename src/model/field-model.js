@@ -22,6 +22,8 @@ export default class FieldModel {
   initDataStartEnd() {
     this.$element.attr('data-start', this.minValue);
     this.$element.attr('data-end', this.maxValue);
+    console.log(this.isVertical);
+
     return this;
   }
 
@@ -46,7 +48,6 @@ export default class FieldModel {
     if (!value.isNaN && value !== undefined) {
       this[minOrMax] = value;
     }
-    console.log(minOrMax, dataSuffix, value);
     return this;
   }
 

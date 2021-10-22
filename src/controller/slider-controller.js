@@ -111,7 +111,7 @@ export default class SliderController {
 
     this.setMinValue(minValue)
       .setMaxValue(maxValue)
-      .initDataStartEnd()
+      .initLayers(sliderSize)
       .createRangeSlider(isRange, shouldAddTip, sliderSize)
       // .correctSliderPosition()
       .setStep(step)
@@ -124,16 +124,16 @@ export default class SliderController {
    
   }
 
-  initDataStartEnd() {
+  initLayers(sliderSize) {
     this.field.initDataStartEnd();
-    // this.setMinValue();
+    this.view.initializeValues(sliderSize, this.field.size, this.field.isVertical);
     // this.setMaxValue();
     return this;
   }
 
   createRangeSlider(isRange, shouldAddTip, sliderSize) {
-    this.createSlider(sliderSize);
     this.addSliderView(this.sliderCounter);
+    this.createSlider(sliderSize);
     this.addTipNumber(shouldAddTip);
     if (isRange) {
       this.sliderCounter += 1;
@@ -159,7 +159,7 @@ export default class SliderController {
   // }
 
   addSliderView(i) {
-    this.view.addSlider(i);
+    this.view.addSliderView(i, this.field.isVertical);
     return this;
   }
 

@@ -12,12 +12,11 @@ export default class SliderView {
     // this.corrector = 0;
   }
 
-  initValues(controller, sliderSize, fieldSize) {
-    this.$element = controller.slider[0].$element;
-    this.$parent = controller.field.$element;
-    this.isVertical = controller.field.isVertical;
+  initializeValues(sliderSize, fieldSize, isVertical) {
+    console.log(sliderSize, fieldSize, isVertical);
     this.sliderSize = sliderSize;
     this.fieldSize = fieldSize;
+    this.isVertical = isVertical;
     if (this.isVertical) {
       this.corrector = (sliderSize[1] / fieldSize[1]) * 50;
     } else {
@@ -25,18 +24,23 @@ export default class SliderView {
     }
   }
 
-  addSlider(i) {
+  initValues(controller) {
+    this.$element = controller.slider[0].$element;
+    this.$parent = controller.field.$element;
+  }
+
+  addSliderView(i, isVertical, sliderSize, fieldSize) {
+    console.log(isVertical);
     let positioning = 'left';
     let index = i;
-    if (this.isVertical) {
+    if (isVertical) {
       positioning = 'top';
       if (index === 0) index = 1;
       else index = 0;
     }
     //  set min = 0%, max = 100% for left/top positions
     const minMax = index * 100;
-    console.log('sliderSize', this.sliderSize);
-    console.log(i, positioning, minMax);
+
     this.$id.append(
       `<span class="slider instance-${i}" style="${positioning}:${minMax}%; width:${this.sliderSize[0]}px; height:${this.sliderSize[1]}px"></span>`,
     );

@@ -41,23 +41,13 @@ export default class FieldModel {
     this.subscriber.recieve(this);
   }
 
-  setMaxValue(value) {
-    this.setMinMax(['maxValue', 'end', value]);
-    return this;
-  }
-
-  setMinValue(value) {
-    this.setMinMax(['minValue', 'start', value]);
-    return this;
-  }
-
   setMinMax(args) {
     const [minOrMax, dataSuffix, value] = args;
     if (!value.isNaN && value !== undefined) {
       this[minOrMax] = value;
     }
     console.log(minOrMax, dataSuffix, value);
-    value;
+    return this;
   }
 
   onClick(isRange, sliders) {

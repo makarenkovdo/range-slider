@@ -231,12 +231,12 @@ export default class SliderController {
 
   // how to test? read css data-start/end, read this.field.min/max and compare
   setMaxValue(maxValue) {
-    this.field.setMaxValue(maxValue);
+    this.field.setMinMax(['maxValue', 'end', maxValue]);
     return this;
   }
 
   setMinValue(minValue) {
-    this.field.setMinValue(minValue);
+    this.field.setMinMax(['minValue', 'start', minValue]);
     return this;
   }
 

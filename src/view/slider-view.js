@@ -1,5 +1,6 @@
 /* eslint-env jquery */
 import '../index.scss';
+import { addSliderToDom, prepareSliderArgs } from './view-modules/createSliderView';
 
 export default class SliderView {
   constructor(id) {
@@ -9,6 +10,7 @@ export default class SliderView {
     this.$field = '';
     this.isVertical = false;
     this.stepSignAfterComma = 0;
+    // this.createSliderViewModules = { addSliderToDom, prepareSliderArgs };
     // this.corrector = 0;
   }
 
@@ -29,20 +31,8 @@ export default class SliderView {
     this.$field = $field;
   }
 
-  addSliderView(i, isVertical) {
-    let positioning = 'left';
-    let index = i;
-    if (isVertical) {
-      positioning = 'top';
-      if (index === 0) index = 1;
-      else index = 0;
-    }
-    //  set min = 0%, max = 100% for left/top positions
-    const minMax = index * 100;
-
-    this.$id.append(
-      `<span class="slider instance-${i}" style="${positioning}:${minMax}%; width:${this.sliderSize[0]}px; height:${this.sliderSize[1]}px"></span>`,
-    );
+  createSliderView(i, isVertical) {
+    addSliderToDom(prepareSliderArgs(i, isVertical), this.$id, this.sliderSize);
   }
 
   addTipNumber(id, i, isVert) {

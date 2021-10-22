@@ -132,7 +132,7 @@ export default class SliderController {
   }
 
   createRangeSlider(isRange, shouldAddTip, sliderSize) {
-    this.addSliderView(this.sliderCounter);
+    this.createSliderView(this.sliderCounter);
     this.createSlider(sliderSize);
     this.view.initializeDomElements(this.slider[this.sliderCounter].$element, this.field.$element);
     this.addTipNumber(shouldAddTip);
@@ -141,7 +141,7 @@ export default class SliderController {
       this.sliderCounter += 1;
       this.isRange = true;
       this.field.isRange = true;
-      this.addSliderView(this.sliderCounter);
+      this.createSliderView(this.sliderCounter);
       this.createSlider(sliderSize);
 
       this.addTipNumber(shouldAddTip);
@@ -160,8 +160,8 @@ export default class SliderController {
   //   return this;
   // }
 
-  addSliderView(i) {
-    this.view.addSliderView(i, this.field.isVertical);
+  createSliderView(i) {
+    this.view.createSliderView(i, this.field.isVertical);
     return this;
   }
 

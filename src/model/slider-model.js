@@ -1,10 +1,10 @@
 /* eslint-env jquery */
 class SliderModel {
-  constructor(id, instance, subscriber, sliderSize) {
+  constructor(id, instance, subscriber, sliderSize, $field) {
     this.id = id;
-    this.$field = $(`#${this.id}`);
+    this.$field = $field;
     this.instance = instance;
-    this.$slider = $(`#${this.id}`).children('.slider ');
+    this.$slider = '';
     this.class = $(`#${this.id}`).attr('class');
     this.size = sliderSize;
     this.positionInPercentage = 0;

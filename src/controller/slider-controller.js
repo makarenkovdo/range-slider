@@ -245,8 +245,10 @@ export default class SliderController {
     return this;
   }
 
-  setStep(interval) {
-    this.slider.forEach((v) => v.setStep(interval));
+  setStep(step) {
+    this.slider.forEach((v) => v.setStep(step));
+    if (step < 1) this.slider.forEach((v) => v.defineSignAfterComma(step));
+
     return this;
   }
 }

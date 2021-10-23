@@ -1,4 +1,7 @@
 /* eslint-env jquery */
+
+import calcSignAfterComma from './slider-modules/defineSignAfterComma';
+
 class SliderModel {
   constructor(id, instance, subscriber, sliderSize, $field) {
     this.id = id;
@@ -39,12 +42,11 @@ class SliderModel {
 
   //    for small 'steps' we need to define sign quantity after comma
   defineSignAfterComma() {
-    if (this.step.toString().includes('.')) {
-      this.stepSignAfterComma = this.step
-        .toString()
-        .split('.')
-        .pop().length;
-    } else this.stepSignAfterComma = 0;
+    this.setThisSignAfterComma(calcSignAfterComma(this.step));
+  }
+
+  setThisSignAfterComma(stepSignAfterComma) {
+    this.stepSignAfterComma = stepSignAfterComma;
   }
 
   onDrag(slider, hasRange, field) {

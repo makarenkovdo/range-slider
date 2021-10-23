@@ -84,8 +84,6 @@ export default class SliderView {
   }
 
   setThisSliderPosition({ instance, stepPosition }) {
-    console.log(this.slidersPosition);
-
     this.slidersPosition[instance] = stepPosition;
   }
 

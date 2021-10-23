@@ -1,28 +1,8 @@
-import { Event } from 'jquery';
-
-const onMove = (event) => {
-  event.preventDefault();
-  event.stopPropagation();
-  measurePosition(
-    event,
-    event.data.field,
-    event.data.slider,
-    event.data.hasRange,
-    event.data.thisSlider,
-  );
-};
-
-const activateOnDragListener = (thisSlider, field, slider, hasRange, $field) => {
-  thisSlider.$field.on('mousedown touchstart', `.instance-${thisSlider.instance}`, (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    thisSlider.$field.addClass('tap');
-    thisSlider.$field.on('mousemove touchmove', { field, slider, hasRange, thisSlider }, onMove);
-  });
-};
+/* eslint no-param-reassign: ["error", { "props": true,
+"ignorePropertyModificationsFor": ["thisSlider"] }] */
 
 // prettier-ignore
-const checkCollision = (stepPosition, stepValue, slider,thisSlider) => {
+const checkCollision = (stepPosition, stepValue, slider, thisSlider) => {
   const isCollisionFirst = () => (!thisSlider.isVertical && thisSlider.instance === 0
         && stepPosition - slider[1].stepPosition >= thisSlider.step)
         || (thisSlider.isVertical && thisSlider.instance === 0
@@ -34,7 +14,7 @@ const checkCollision = (stepPosition, stepValue, slider,thisSlider) => {
         && stepPosition - slider[0].stepPosition <= thisSlider.step)
         || (thisSlider.isVertical && thisSlider.instance === 0
           && stepPosition - slider[0].stepPosition >= thisSlider.step)
-    );
+  );
     // todo: slider[0] = thisSlider.slider
     // if (isCollisionFirst) {
     //   slider[0].stepPosition = +slider[1].stepPosition - thisSlider.step;
@@ -66,7 +46,6 @@ const measurePosition = (
   hasRange,
   thisSlider,
 ) => {
-  console.log(event, { isVertical, minValue, maxValue }, slider, hasRange);
   const cursorX = event.offsetX;
   const cursorY = event.offsetY;
   if (isVertical) {
@@ -99,4 +78,40 @@ const measurePosition = (
   // }
 };
 
-export { onMove, activateOnDragListener, measurePosition, checkCollision };
+const onMove = (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+  measurePosition(
+    event,
+    event.data.field,
+    event.data.slider,
+    event.data.hasRange,
+    event.data.thisSlider,
+  );
+};
+
+const activateOnDragListener = (thisSlider, field, slider, hasRange) => {
+  thisSlider.$field.on('mousedown touchstart', `.instance-${thisSlider.instance}`, (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    thisSlider.$field.addClass('tap');
+    thisSlider.$field.on(
+      'mousemove touchmove',
+      {
+        thisSlider,
+        field,
+        slider,
+        hasRange,
+      },
+      onMove,
+    );
+  });
+};
+
+// prettier-ignore
+export {
+  onMove,
+  activateOnDragListener,
+  measurePosition,
+  checkCollision,
+};

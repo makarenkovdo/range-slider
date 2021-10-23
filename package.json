@@ -26,6 +26,7 @@
     "postcss-loader": "^6.1.1",
     "prettier": "^1.19.1",
     "prettier-airbnb-config": "^1.0.0",
+    "prettier-eslint": "^13.0.0",
     "sass": "^1.41.0",
     "sass-loader": "^12.1.0",
     "ts-loader": "^9.2.6",

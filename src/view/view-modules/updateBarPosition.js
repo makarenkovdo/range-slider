@@ -54,31 +54,13 @@ const updateRangeBarPosition = (index, activeSlider, $bar, slidersPosition, barL
     ['top', 'height'],
   ];
 
-  /*  barPosesArray = [[instance0-left,instance1-left],[instance0-top,instance1-top]]
-        for horizontal and vertical sliders accordingly */
-  // prettier-ignore
-  //   const barPosesArray = positioningSwitcher.map((v1, i1, arr) => (arr.map((v2, i2) => parseInt($(`#${id}`).children(`.instance-${i2}`).css(`${v1[0]}`), 10))));
-  //   const slidersPositions =
-  //   //  barSize = [horizontalSliderWidth,verticalSliderHeight]
-  //   const barSize = barPosesArray.map((v) => Math.abs(v[1] - v[0]));
-
   //  helpVariable for rotation left/top value
-  const positionAndLengthSwitcher = [slidersPosition[0], barLength];
-  console.log(positionAndLengthSwitcher);
+  const positionAndLengthSwitcher = [Math.abs(100 * index - slidersPosition[index]), barLength];
+  console.log(slidersPosition);
 
-  positioningSwitcher[index].forEach(
-    (v, i) => {
-      $bar.css(
-        `${v}`,
-        // positionAndLengthSwitcher[i] + (this.$slider.width() / 2) * !i,
-        positionAndLengthSwitcher[i] + (40 / 2) * !i + '%',
-
-        //    shift on half a width WHEN it's a LEFT(TOP) position of instance-0
-      );
-    },
-
-    //    left&width OR top&height depending on index
-  );
+  positioningSwitcher[index].forEach((v, i) => {
+    $bar.css(`${v}`, positionAndLengthSwitcher[i] + '%');
+  });
 };
 
 export {

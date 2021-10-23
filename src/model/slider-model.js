@@ -20,6 +20,11 @@ class SliderModel {
     this.subscriber = subscriber;
   }
 
+  //    for small 'steps' we need to define sign quantity after comma
+  defineSignAfterComma() {
+    this.setThisSignAfterComma(calcSignAfterComma(this.step));
+  }
+
   initializeDefaultPositionAndValue(minMax) {
     this.stepPosition = minMax[this.instance];
     this.stepValue = minMax[this.instance];
@@ -27,19 +32,6 @@ class SliderModel {
 
   notify() {
     this.subscriber.recieve(this);
-  }
-
-  setStep(step) {
-    this.step = step;
-  }
-
-  //    for small 'steps' we need to define sign quantity after comma
-  defineSignAfterComma() {
-    this.setThisSignAfterComma(calcSignAfterComma(this.step));
-  }
-
-  setThisSignAfterComma(stepSignAfterComma) {
-    this.stepSignAfterComma = stepSignAfterComma;
   }
 
   onDrag(slider, hasRange, field) {
@@ -66,6 +58,7 @@ class SliderModel {
   //     $('.range-slider').off('mousemove touchmove');
   //   });
   // }
+
   onDrop() {
     function cancelDragging(e) {
       e.preventDefault();
@@ -75,6 +68,14 @@ class SliderModel {
     }
     this.$field.on('mouseup touchend', cancelDragging.bind(this));
     $('body').on('mouseup touchend', cancelDragging.bind(this));
+  }
+
+  setStep(step) {
+    this.step = step;
+  }
+
+  setThisSignAfterComma(stepSignAfterComma) {
+    this.stepSignAfterComma = stepSignAfterComma;
   }
 }
 export default SliderModel;

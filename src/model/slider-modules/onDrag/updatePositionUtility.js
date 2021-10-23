@@ -4,14 +4,13 @@ const assignIfHasOwn = (obj, key, value) => {
   newObj[key] = value;
 };
 
-const checkCollision = ({ stepPosition, stepValue }, slider, thisSlider) => {
+// prettier-ignore
+const checkCollision = ([stepPosition, stepValue ], slider, thisSlider) => {
   const isCollisionFirst = () =>
-    (!thisSlider.isVertical &&
-      thisSlider.instance === 0 &&
-      stepPosition - slider[1].stepPosition >= thisSlider.step) ||
-    (thisSlider.isVertical &&
-      thisSlider.instance === 0 &&
-      stepPosition - slider[1].stepPosition <= thisSlider.step);
+    (!thisSlider.isVertical && thisSlider.instance === 0
+        && stepPosition - slider[1].stepPosition >= thisSlider.step)
+        || (thisSlider.isVertical && thisSlider.instance === 0
+            && stepPosition - slider[1].stepPosition <= thisSlider.step);
 
   // prettier-ignore
   const isCollisionSecond = () => (
@@ -22,15 +21,14 @@ const checkCollision = ({ stepPosition, stepValue }, slider, thisSlider) => {
   );
 
   if (isCollisionFirst()) {
-    thisSlider.stepPosition = +slider[1].stepPosition - thisSlider.step;
-    thisSlider.stepValue = +slider[1].stepValue - thisSlider.step;
+    return [+slider[1].stepPosition - thisSlider.step, +slider[1].stepValue - thisSlider.step]
+  // eslint-disable-next-line no-else-return
   } else if (isCollisionSecond()) {
-    thisSlider.stepPosition = +slider[0].stepPosition + thisSlider.step;
-    thisSlider.stepValue = +slider[0].stepValue + thisSlider.step;
+    return [+slider[0].stepPosition + thisSlider.step, +slider[0].stepValue + thisSlider.step]
   } else {
-    thisSlider.stepPosition = stepPosition;
-    thisSlider.stepValue = stepValue;
+     return [stepPosition, stepValue];
   }
+  
 };
 const calculatePositionInPercent = (isVertical, thisSlider, offsetX, offsetY) => {
   const cursorXY = [offsetX, offsetY];
@@ -40,21 +38,6 @@ const calculatePositionInPercent = (isVertical, thisSlider, offsetX, offsetY) =>
     return ((fieldHeight - (cursorXY[1] + 1)) * 100) / fieldHeight;
   }
   return ((cursorXY[0] + 5) * 100) / thisSlider.$field[0].offsetWidth;
-};
-
-const setPositionInPercent = (thisSlider, newPositionInPercent) => {
-  assignIfHasOwn(thisSlider, 'positionInPercent', newPositionInPercent);
-  //   const pureThisSlider = Object.prototype.hasOwnProperty.call(thisSlider, 'positionInPercent')
-  //     ? thisSlider
-  //     : false;
-  //   pureThisSlider.positionInPercent = newPositionInPercent;
-  //   positionInPercent = newPositionInPercent;
-
-  console.log(thisSlider.positionInPercent);
-};
-
-const setValue = (thisSlider, value) => {
-  thisSlider.value = value;
 };
 
 const calculateValue = (minValue, maxValue, thisSlider) => {
@@ -69,14 +52,30 @@ const calculateStepValueAndPosition = (thisSlider) => {
   const stepValue = (Math.round(thisSlider.value / thisSlider.step) * thisSlider.step).toFixed(
     thisSlider.stepSignAfterComma,
   );
-  return { stepPosition, stepValue };
+  return [stepPosition, stepValue];
+};
+
+const setPositionInPercent = (thisSlider, newPositionInPercent) => {
+  assignIfHasOwn(thisSlider, 'positionInPercent', newPositionInPercent);
+};
+
+const setValue = (thisSlider, value) => {
+  assignIfHasOwn(thisSlider, 'value', value);
+};
+
+const setStepValueAndPosition = (thisSlider, values) => {
+  console.log(thisSlider, values);
+  const [stepPosition, stepValue] = values;
+  assignIfHasOwn(thisSlider, 'stepPosition', stepPosition);
+  assignIfHasOwn(thisSlider, 'stepValue', stepValue);
 };
 
 export {
+  checkCollision,
   calculatePositionInPercent,
   calculateValue,
   calculateStepValueAndPosition,
   setPositionInPercent,
   setValue,
-  checkCollision,
+  setStepValueAndPosition,
 };

@@ -1,13 +1,12 @@
-/* eslint no-param-reassign: ["error", { "props": true,
-"ignorePropertyModificationsFor": ["thisSlider"] }] */
-
 import {
+  assignIfHasOwn,
+  checkCollision,
   calculatePositionInPercent,
   calculateValue,
   calculateStepValueAndPosition,
   setPositionInPercent,
   setValue,
-  checkCollision,
+  setStepValueAndPosition,
 } from './onDrag/updatePositionUtility';
 
 const updatePosition = (
@@ -25,10 +24,14 @@ const updatePosition = (
   setValue(thisSlider, calculateValue(minValue, maxValue, thisSlider));
 
   // const returned = thisSlider.checkBordersCollision(stepPosition, slider);
+
   if (hasRange) {
-    checkCollision(calculateStepValueAndPosition(thisSlider), slider, thisSlider);
+    setStepValueAndPosition(
+      thisSlider,
+      checkCollision(calculateStepValueAndPosition(thisSlider), slider, thisSlider),
+    );
   } else {
-    [thisSlider.stepPosition, thisSlider.stepValue] = [calculateStepValueAndPosition(thisSlider)];
+    setStepValueAndPosition(thisSlider, calculateStepValueAndPosition(thisSlider));
   }
   thisSlider.notify(this);
 };

@@ -62,6 +62,16 @@ const calculateValue = (minValue, maxValue, thisSlider) => {
   return thisSlider.positionInPercentage * (fieldLength / 100) + +minValue;
 };
 
+const calculateStepValueAndPosition = (thisSlider) => {
+  const stepPosition = (
+    Math.round(thisSlider.positionInPercentage / thisSlider.step) * thisSlider.step
+  ).toFixed(thisSlider.stepSignAfterComma);
+  const stepValue = (Math.round(thisSlider.value / thisSlider.step) * thisSlider.step).toFixed(
+    thisSlider.stepSignAfterComma,
+  );
+  return { stepPosition, stepValue };
+};
+
 const updatePosition = (
   event,
   { isVertical, minValue, maxValue },
@@ -75,26 +85,13 @@ const updatePosition = (
   );
 
   setValue(thisSlider, calculateValue(minValue, maxValue, thisSlider));
-  const stepPosition = (
-    Math.round(thisSlider.positionInPercentage / thisSlider.step) * thisSlider.step
-  ).toFixed(thisSlider.stepSignAfterComma);
-  const stepValue = (Math.round(thisSlider.value / thisSlider.step) * thisSlider.step).toFixed(
-    thisSlider.stepSignAfterComma,
-  );
-  // console.log(stepPosition);
 
   // const returned = thisSlider.checkBordersCollision(stepPosition, slider);
-
+  const { stepPosition, stepValue } = calculateStepValueAndPosition(thisSlider);
   if (hasRange) {
     checkCollision(stepPosition, stepValue, slider, thisSlider);
   } else [thisSlider.stepPosition, thisSlider.stepValue] = [stepPosition, stepValue];
   thisSlider.notify(this);
-
-  // if (slider[1].stepPosition < slider[0].stepPosition) {
-  //     console.log('???')
-  //     slider[1].stepPosition = slider[0].stepPosition
-  //     slider[1].stepValue = slider[0].stepValue
-  // }
 };
 
 const onMove = (event) => {

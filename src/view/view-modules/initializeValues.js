@@ -8,8 +8,6 @@ const getInitValues = (isVertical, $id) => {
 
   elementSize = parseInt($id.children('.slider.instance-0').css(measurement), 10);
   parentSize = parseInt($id.css(measurement), 10);
-  console.log();
-  console.log('whast', elementSize, parentSize);
   return [elementSize, parentSize];
 };
 const calcPoseCorrector = (elementSize, parentSize) => {

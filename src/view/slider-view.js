@@ -56,7 +56,6 @@ export default class SliderView {
 
   setThis$bar() {
     this.$bar = this.$field.children('.slider-bar');
-    console.log('bar creating', this.$bar);
   }
 
   updateBar(isRange, activeSlider) {

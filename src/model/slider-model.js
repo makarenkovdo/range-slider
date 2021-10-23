@@ -2,6 +2,7 @@
 
 import calcSignAfterComma from './slider-modules/defineSignAfterComma';
 import activateOnDragListener from './slider-modules/onDrag';
+import activateOnDropListener from './slider-modules/onDrop';
 
 class SliderModel {
   constructor(id, instance, subscriber, sliderSize, $field) {
@@ -26,7 +27,8 @@ class SliderModel {
   }
 
   initializeDefaultPositionAndValue(minMax) {
-    this.stepPosition = minMax[this.instance];
+    const minMaxStepPosition = [0, 100];
+    this.stepPosition = minMaxStepPosition[this.instance];
     this.stepValue = minMax[this.instance];
   }
 
@@ -44,30 +46,8 @@ class SliderModel {
   //   //     this.notify.call(this)
   // }
 
-  // onDrop() {
-  //   $('.range-slider').on('mouseup touchend', (event) => {
-  //     event.preventDefault();
-  //     event.stopPropagation();
-  //     $('.range-slider').removeClass('tap');
-  //     $('.range-slider').off('mousemove touchmove');
-  //   });
-  //   $('body').on('mouseup touchend', (event) => {
-  //     event.preventDefault();
-  //     event.stopPropagation();
-  //     $('.range-slider').removeClass('tap');
-  //     $('.range-slider').off('mousemove touchmove');
-  //   });
-  // }
-
   onDrop() {
-    function cancelDragging(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      this.$field.removeClass('tap');
-      this.$field.off('mousemove touchmove');
-    }
-    this.$field.on('mouseup touchend', cancelDragging.bind(this));
-    $('body').on('mouseup touchend', cancelDragging.bind(this));
+    activateOnDropListener(this.$field);
   }
 
   setStep(step) {

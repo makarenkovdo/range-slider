@@ -229,7 +229,6 @@ export default class SliderController {
   }
 
   updateBar(activeSlider) {
-    console.log('HOWWWWWWWW????');
     this.view.updateBar(this.isRange, activeSlider);
     return this;
   }

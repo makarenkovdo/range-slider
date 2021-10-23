@@ -32,7 +32,6 @@ const defineBarType = ({
   }
   if (!isRange && isVertical) updateSingleVerticalBarPosition(activeSlider, $bar);
   if (!isRange && !isVertical) updateSingleHorizontalBarPosition(activeSlider, $bar);
-  console.log('SDFSDF', activeSlider, $bar);
 
   return this;
 };
@@ -57,7 +56,6 @@ const updateRangeBarPosition = (index, activeSlider, $bar, slidersPosition, barL
 
   //  helpVariable for rotation left/top value
   const positionAndLengthSwitcher = [Math.abs(100 * index - slidersPosition[index]), barLength];
-  console.log(slidersPosition);
 
   positioningSwitcher[index].forEach((v, i) => {
     $bar.css(`${v}`, positionAndLengthSwitcher[i] + '%');

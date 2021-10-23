@@ -1,11 +1,17 @@
-/* eslint no-param-reassign: ["error", { "props": true,
-"ignorePropertyModificationsFor": ["thisSlider"] }] */
-// prettier-ignore
+//  implementation of airbnb rule #7.12
+const assignIfHasOwn = (obj, key, value) => {
+  const newObj = Object.prototype.hasOwnProperty.call(obj, key) ? obj : false;
+  newObj[key] = value;
+};
+
 const checkCollision = ({ stepPosition, stepValue }, slider, thisSlider) => {
-  const isCollisionFirst = () => (!thisSlider.isVertical && thisSlider.instance === 0
-        && stepPosition - slider[1].stepPosition >= thisSlider.step)
-        || (thisSlider.isVertical && thisSlider.instance === 0
-          && stepPosition - slider[1].stepPosition <= thisSlider.step);
+  const isCollisionFirst = () =>
+    (!thisSlider.isVertical &&
+      thisSlider.instance === 0 &&
+      stepPosition - slider[1].stepPosition >= thisSlider.step) ||
+    (thisSlider.isVertical &&
+      thisSlider.instance === 0 &&
+      stepPosition - slider[1].stepPosition <= thisSlider.step);
 
   // prettier-ignore
   const isCollisionSecond = () => (
@@ -36,9 +42,15 @@ const calculatePositionInPercent = (isVertical, thisSlider, offsetX, offsetY) =>
   return ((cursorXY[0] + 5) * 100) / thisSlider.$field[0].offsetWidth;
 };
 
-const setPositionInPercent = (thisSlider, positionInPercent) => {
-  thisSlider.positionInPercent = positionInPercent;
-  //   const positionInPercent = Object.prototype.hasOwnProperty.call(obj, 'positionInPercent') ? obj.key : 1;
+const setPositionInPercent = (thisSlider, newPositionInPercent) => {
+  assignIfHasOwn(thisSlider, 'positionInPercent', newPositionInPercent);
+  //   const pureThisSlider = Object.prototype.hasOwnProperty.call(thisSlider, 'positionInPercent')
+  //     ? thisSlider
+  //     : false;
+  //   pureThisSlider.positionInPercent = newPositionInPercent;
+  //   positionInPercent = newPositionInPercent;
+
+  console.log(thisSlider.positionInPercent);
 };
 
 const setValue = (thisSlider, value) => {

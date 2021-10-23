@@ -16,7 +16,7 @@ import SliderView from '../view/slider-view';
 //   instance: number;
 //   $element: string;
 //   class: string;
-//   positionInPercentage: number;
+//   positionInPercent: number;
 //   value: number;
 //   step: number;
 //   stepSignAfterComma: number;

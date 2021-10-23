@@ -182,8 +182,8 @@ export default class SliderController {
   }
 
   createBar(shouldAddBar) {
-    this.hasBar = true;
     if (shouldAddBar) {
+      this.hasBar = true;
       this.view.createBar(this);
     }
 
@@ -229,6 +229,7 @@ export default class SliderController {
   }
 
   updateBar(activeSlider) {
+    console.log('HOWWWWWWWW????');
     this.view.updateBar(this.isRange, activeSlider);
     return this;
   }

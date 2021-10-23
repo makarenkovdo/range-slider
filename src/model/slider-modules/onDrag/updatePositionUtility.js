@@ -45,13 +45,9 @@ const calculateValue = (minValue, maxValue, thisSlider) => {
   return thisSlider.positionInPercent * (fieldLength / 100) + +minValue;
 };
 
-const calculateStepValueAndPosition = (thisSlider) => {
-  const stepPosition = (
-    Math.round(thisSlider.positionInPercent / thisSlider.step) * thisSlider.step
-  ).toFixed(thisSlider.stepSignAfterComma);
-  const stepValue = (Math.round(thisSlider.value / thisSlider.step) * thisSlider.step).toFixed(
-    thisSlider.stepSignAfterComma,
-  );
+const calculateStepValueAndPosition = ({ positionInPercent, step, value, stepSignAfterComma }) => {
+  const stepPosition = (Math.round(positionInPercent / step) * step).toFixed(stepSignAfterComma);
+  const stepValue = (Math.round(value / step) * step).toFixed(stepSignAfterComma);
   return [stepPosition, stepValue];
 };
 

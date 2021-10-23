@@ -1,7 +1,7 @@
 /* eslint-env jquery */
 
 import calcSignAfterComma from './slider-modules/defineSignAfterComma';
-import { activateOnDragListener } from './slider-modules/onDrag';
+import activateOnDragListener from './slider-modules/onDrag';
 
 class SliderModel {
   constructor(id, instance, subscriber, sliderSize, $field) {

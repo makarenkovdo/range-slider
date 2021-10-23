@@ -7,45 +7,8 @@ import {
   calculateStepValueAndPosition,
   setPositionInPercentage,
   setValue,
+  checkCollision,
 } from './onDrag/updatePositionUtility';
-
-// prettier-ignore
-const checkCollision = ({ stepPosition, stepValue }, slider, thisSlider) => {
-  const isCollisionFirst = () => (!thisSlider.isVertical && thisSlider.instance === 0
-        && stepPosition - slider[1].stepPosition >= thisSlider.step)
-        || (thisSlider.isVertical && thisSlider.instance === 0
-          && stepPosition - slider[1].stepPosition <= thisSlider.step);
-
-  // prettier-ignore
-  const isCollisionSecond = () => (
-    (!thisSlider.isVertical && thisSlider.instance === 1
-        && stepPosition - slider[0].stepPosition <= thisSlider.step)
-        || (thisSlider.isVertical && thisSlider.instance === 0
-          && stepPosition - slider[0].stepPosition >= thisSlider.step)
-  );
-    // todo: slider[0] = thisSlider.slider
-    // if (isCollisionFirst) {
-    //   slider[0].stepPosition = +slider[1].stepPosition - thisSlider.step;
-    //   slider[0].stepValue = +slider[1].stepValue - thisSlider.step;
-    // } else if (isCollisionSecond) {
-    //   slider[1].stepPosition = +slider[0].stepPosition + thisSlider.step;
-    //   slider[1].stepValue = +slider[0].stepValue + thisSlider.step;
-    // } else {
-    //   thisSlider.stepPosition = stepPosition;
-    //   thisSlider.stepValue = stepValue;
-    // }
-
-  if (isCollisionFirst()) {
-    thisSlider.stepPosition = +slider[1].stepPosition - thisSlider.step;
-    thisSlider.stepValue = +slider[1].stepValue - thisSlider.step;
-  } else if (isCollisionSecond()) {
-    thisSlider.stepPosition = +slider[0].stepPosition + thisSlider.step;
-    thisSlider.stepValue = +slider[0].stepValue + thisSlider.step;
-  } else {
-    thisSlider.stepPosition = stepPosition;
-    thisSlider.stepValue = stepValue;
-  }
-};
 
 const updatePosition = (
   event,
@@ -101,9 +64,4 @@ const activateOnDragListener = (thisSlider, field, slider, hasRange) => {
 };
 
 // prettier-ignore
-export {
-  onMove,
-  activateOnDragListener,
-  updatePosition,
-  checkCollision,
-};
+export default activateOnDragListener ;

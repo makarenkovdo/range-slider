@@ -1,6 +1,31 @@
 /* eslint no-param-reassign: ["error", { "props": true,
 "ignorePropertyModificationsFor": ["thisSlider"] }] */
+// prettier-ignore
+const checkCollision = ({ stepPosition, stepValue }, slider, thisSlider) => {
+  const isCollisionFirst = () => (!thisSlider.isVertical && thisSlider.instance === 0
+        && stepPosition - slider[1].stepPosition >= thisSlider.step)
+        || (thisSlider.isVertical && thisSlider.instance === 0
+          && stepPosition - slider[1].stepPosition <= thisSlider.step);
 
+  // prettier-ignore
+  const isCollisionSecond = () => (
+    (!thisSlider.isVertical && thisSlider.instance === 1
+        && stepPosition - slider[0].stepPosition <= thisSlider.step)
+        || (thisSlider.isVertical && thisSlider.instance === 0
+          && stepPosition - slider[0].stepPosition >= thisSlider.step)
+  );
+
+  if (isCollisionFirst()) {
+    thisSlider.stepPosition = +slider[1].stepPosition - thisSlider.step;
+    thisSlider.stepValue = +slider[1].stepValue - thisSlider.step;
+  } else if (isCollisionSecond()) {
+    thisSlider.stepPosition = +slider[0].stepPosition + thisSlider.step;
+    thisSlider.stepValue = +slider[0].stepValue + thisSlider.step;
+  } else {
+    thisSlider.stepPosition = stepPosition;
+    thisSlider.stepValue = stepValue;
+  }
+};
 const calculatePositionInPercentage = (isVertical, thisSlider, offsetX, offsetY) => {
   const cursorXY = [offsetX, offsetY];
 
@@ -40,4 +65,5 @@ export {
   calculateStepValueAndPosition,
   setPositionInPercentage,
   setValue,
+  checkCollision,
 };

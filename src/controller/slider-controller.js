@@ -113,7 +113,9 @@ export default class SliderController {
     this.setMinValue(minValue)
       .setMaxValue(maxValue)
       .initLayers(sliderSize)
-      .createRangeSlider(isRange, shouldAddTip, sliderSize)
+      .createRangeSlider({
+        isRange, shouldAddTip, sliderSize, minValue, maxValue
+      })
       // .correctSliderPosition()
       .setStep(step)
       .createBar(shouldAddBar)
@@ -131,9 +133,9 @@ export default class SliderController {
     return this;
   }
 
-  createRangeSlider(isRange, shouldAddTip, sliderSize) {
+  createRangeSlider({ isRange, shouldAddTip, sliderSize, minValue, maxValue }) {
     this.createSliderView(this.sliderCounter);
-    this.createSlider(sliderSize);
+    this.createSlider(sliderSize, minValue, maxValue);
     this.createTipNumber(shouldAddTip);
 
     if (isRange) {
@@ -141,18 +143,19 @@ export default class SliderController {
       this.isRange = true;
       this.field.isRange = true;
       this.createSliderView(this.sliderCounter);
-      this.createSlider(sliderSize);
+      this.createSlider(sliderSize, minValue, maxValue);
 
       this.createTipNumber(shouldAddTip);
     } else this.isRange = false;
     return this;
   }
 
-  createSlider(sliderSize) {
+  createSlider(sliderSize, minValue, maxValue) {
     this.slider.push(
       new SliderModel(this.id, this.sliderCounter, this, sliderSize, this.field.$element),
     );
-    this.slider.forEach((v) => v.initializeDefaultPositionAndValue([this.minValue, this.maxValue]));
+    console.log('sdf', minValue, maxValue);
+    this.slider.forEach((v) => v.initializeDefaultPositionAndValue([minValue, maxValue]));
     return this;
   }
 
@@ -227,6 +230,8 @@ export default class SliderController {
   }
 
   updateBar(activeSlider) {
+    console.log(this.slider);
+    console.log(this.slider[0].stepPosition, this.slider[1].stepPosition);
     this.view.updateBar(this.isRange, activeSlider, [
       this.slider[0].stepPosition, // ??????????????
       this.slider[1].stepPosition,

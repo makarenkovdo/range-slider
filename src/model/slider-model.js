@@ -72,7 +72,7 @@ class SliderModel {
     }
     const fieldLength = maxValue - minValue;
     this.value = this.positionInPercentage * (fieldLength / 100) + +minValue;
-    const stepPosition = (Math.trunc(this.positionInPercentage / this.step) * this.step).toFixed(
+    const stepPosition = (Math.round(this.positionInPercentage / this.step) * this.step).toFixed(
       this.stepSignAfterComma,
     );
     const stepValue = (Math.round(this.value / this.step) * this.step).toFixed(

@@ -95,7 +95,7 @@ export default class SliderView {
     const preperatoryPosition = (parseInt(this.$field.children('.slider').css(positioning[1]), 10)
       / parseInt(this.$field.css(positioning[1]), 10)) * 50;
     const getVerticalPosition = () => `${100 - updatingSlider.stepPosition - preperatoryPosition}%`;
-    const getHorizontalPosition = () => `${updatingSlider.stepPosition - preperatoryPosition - preperatoryPosition * updatingSlider.instance}%`;
+    const getHorizontalPosition = () => `${updatingSlider.stepPosition - preperatoryPosition }%`;
     const position = this.isVertical
       ? getVerticalPosition()
       : getHorizontalPosition();

@@ -35,9 +35,12 @@ const checkCollision = ({stepPosition, stepValue}, slider, thisSlider) => {
   );
 
   if (isCollisionFirst()) {
+    console.log('FIRST');
     return calculateCollisionCorrection(slider[1].stepPosition, slider[1].stepValue, -thisSlider.step, 1);
   // eslint-disable-next-line no-else-return
   } else if (isCollisionSecond()) {
+    console.log('SECOND');
+
     return calculateCollisionCorrection(slider[0].stepPosition, slider[0].stepValue, thisSlider.step, 1);
   } else {
     return {stepPosition, stepValue};

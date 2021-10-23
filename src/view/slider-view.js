@@ -1,12 +1,21 @@
+/* eslint-disable padded-blocks */
 /* eslint-env jquery */
 import '../index.scss';
 import { addSliderToDom, prepareSliderArgs } from './view-modules/createSliderView';
 import { prepareTipNumberArgs, addTipNumberToDom } from './view-modules/createTipNumber';
+import {
+  defineBarType,
+  calcLengthOfRangeBar,
+  updateSingleVerticalBarPosition,
+  updateSingleHorizontalBarPosition,
+  updateRangeBarPosition,
+} from './view-modules/updateBarPosition';
 
 export default class SliderView {
   constructor(id) {
     this.$field = $(`#${id}`);
     this.$slider = '';
+    this.slidersPosition = [0, 100];
     this.$bar = '';
     this.sliderSize = [];
     this.isVertical = false;
@@ -28,16 +37,12 @@ export default class SliderView {
 
   createSliderView(i) {
     addSliderToDom(prepareSliderArgs(i, this.isVertical), this.$field, this.sliderSize);
-    this.initializeSliderDom();
+    this.setThis$slider();
   }
 
-  initializeSliderDom() {
+  setThis$slider() {
     this.$slider = this.$field.children('.slider ');
   }
-
-  // updateAfterCreateSliderView() {
-  //   this.$slider = $slider;
-  // }
 
   createTipNumber(i, isVertical) {
     this.updateTextNumber(addTipNumberToDom(prepareTipNumberArgs(i, isVertical), this.$field));
@@ -48,56 +53,24 @@ export default class SliderView {
     this.$bar = this.$field.children('.slider-bar');
   }
 
-  updateBar(slider) {
-    if (this.isVertical) {
-      this.$field
-        .children('.slider-bar')
-        .css('height', `${slider.stepPosition}%`)
-        .css('top', `${100 - slider.stepPosition}%`);
-    } else {
-      this.$field.children('.slider-bar').css('width', `${slider.stepPosition}%`);
-    }
-  }
-
-  updateRangeBar() {
-    $(document).ready(() => {
-      if (this.isVertical) this.updateRangeBarHelper(1);
-      else this.updateRangeBarHelper(0);
-    });
-  }
-
-  updateRangeBarHelper(index) {
-    const positionSwitcher = [
-      ['left', 'width'],
-      ['top', 'height'],
-    ];
-
-    /*  barPosesArray = [[instance0-left,instance1-left],[instance0-top,instance1-top]]
-        for horizontal and vertical sliders accordingly */
-    // prettier-ignore
-    const barPosesArray = positionSwitcher.map((v1, i1, arr) => (arr.map((v2, i2) => parseInt(this.$field.children(`.instance-${i2}`).css(`${v1[0]}`), 10))));
-
-    //  barSize = [horizontalSliderWidth,verticalSliderHeight]
-    const barSize = barPosesArray.map((v) => Math.abs(v[1] - v[0]));
-
-    //  helpVariable for rotation left/top value
-    const helpVariable = [barPosesArray[index][index], barSize[index]];
-
-    positionSwitcher[index].forEach(
-      (v, i) => {
-        this.$field.children('.slider-bar').css(
-          `${v}`,
-          helpVariable[i] + (this.$slider.width() / 2) * !i,
-          //    shift on half a width WHEN it's a LEFT(TOP) position of instance-0
-        );
-      },
-
-      //    left&width OR top&height depending on index
+  updateBar(isRange, activeSlider, slidersPosition) {
+    defineBarType(
+      isRange,
+      activeSlider,
+      this.isVertical,
+      this.$bar,
+      this.$field,
+      slidersPosition,
+      calcLengthOfRangeBar,
+      updateSingleVerticalBarPosition,
+      updateSingleHorizontalBarPosition,
+      updateRangeBarPosition,
     );
   }
 
   updatePosition(updatingSlider) {
-    //  HERE THE PROBLEM WITH NO-RANGE SLIDER(ONE INSTANCE)
+    if (updatingSlider.stepPosition) this.setThisSliderPosition(updatingSlider);
+
     const positioning = [
       ['left', 'width'],
       ['top', 'height'],
@@ -106,8 +79,16 @@ export default class SliderView {
     else this.updatePositionHelper(updatingSlider, positioning[0]);
   }
 
+  setThisSliderPosition({ instance, stepPosition }) {
+    console.log(this.slidersPosition);
+
+    this.slidersPosition[instance] = stepPosition;
+  }
+
   // prettier-ignore
   updatePositionHelper(updatingSlider, positioning) {
+
+    // getting the percent of sliderWidth to fieldWidth
     const preperatoryPosition = (parseInt(this.$field.children('.slider').css(positioning[1]), 10)
       / parseInt(this.$field.css(positioning[1]), 10)) * 50;
     const getVerticalPosition = () => `${100 - updatingSlider.stepPosition - preperatoryPosition}%`;
@@ -127,18 +108,5 @@ export default class SliderView {
   // }
   updateTextNumber(stepValue, instance) {
     this.$field.find(`.instance-${instance} span`).text(`${stepValue}`);
-  }
-
-  updateThisConstructor(obj) {
-    const { $field = this.id, $slider } = obj;
-    this.$field = $field;
-    this.$slider = $slider;
-    this.$field = $(`#${id}`);
-    this.$slider = '';
-    this.$field = '';
-    this.$bar = '';
-    this.sliderSize = [];
-    this.isVertical = false;
-    this.stepSignAfterComma = 0;
   }
 }

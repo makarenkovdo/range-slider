@@ -197,8 +197,9 @@ export default class SliderController {
 
   onDrag() {
     // [this.slider[0].stepPosition]
+
     $(document).ready(() => {
-      this.recieve(this.slider.forEach((v) => v.onDrag(this.field, this.slider, this.isRange)));
+      this.recieve(this.slider.forEach((v) => v.onDrag(this.slider, this.isRange, this.field)));
     });
     return this;
   }
@@ -208,16 +209,16 @@ export default class SliderController {
     return this;
   }
 
-  recieve(updatingSlider) {
-    if (updatingSlider) {
-      this.updatePosition(updatingSlider);
-      this.updateText(updatingSlider.stepValue, updatingSlider.instance);
-      this.updateBar(updatingSlider);
+  recieve(activeSlider) {
+    if (activeSlider) {
+      this.updatePosition(activeSlider);
+      this.updateText(activeSlider.stepValue, activeSlider.instance);
+      this.updateBar(activeSlider);
     }
   }
 
-  updatePosition(that) {
-    this.view.updatePosition(that);
+  updatePosition(activeSlider) {
+    this.view.updatePosition(activeSlider);
   }
 
   updateText(stepValue, instance) {
@@ -225,20 +226,22 @@ export default class SliderController {
     return this;
   }
 
-  updateBar(that) {
-    if (this.isRange) this.view.updateRangeBar(this);
-    else this.view.updateBar(that);
+  updateBar(activeSlider) {
+    this.view.updateBar(this.isRange, activeSlider, [
+      this.slider[0].stepPosition, // ??????????????
+      this.slider[1].stepPosition,
+    ]);
     return this;
   }
 
   // how to test? read css data-start/end, read this.field.min/max and compare
   setMaxValue(maxValue) {
-    this.field.setMinMax(['maxValue', 'end', maxValue]);
+    this.field.setMinMax(['maxValue', maxValue]);
     return this;
   }
 
   setMinValue(minValue) {
-    this.field.setMinMax(['minValue', 'start', minValue]);
+    this.field.setMinMax(['minValue', minValue]);
     return this;
   }
 

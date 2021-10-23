@@ -2,10 +2,10 @@
 class SliderModel {
   constructor(id, instance, subscriber, sliderSize, $field) {
     this.id = id;
+    this.class = $(`#${this.id}`).attr('class');
     this.$field = $field;
     this.instance = instance;
     this.$slider = '';
-    this.class = $(`#${this.id}`).attr('class');
     this.size = sliderSize;
     this.positionInPercentage = 0;
     this.value = 0;
@@ -26,16 +26,6 @@ class SliderModel {
     }
   }
 
-  //    for small 'steps' we need to define sign quantity after comma
-  defineSignAfterComma() {
-    if (this.step.toString().includes('.')) {
-      this.stepSignAfterComma = this.step
-        .toString()
-        .split('.')
-        .pop().length;
-    } else this.stepSignAfterComma = 0;
-  }
-
   notify() {
     this.subscriber.recieve(this);
   }
@@ -47,20 +37,17 @@ class SliderModel {
     }
   }
 
-  // onDrag(field, slider, hasRange) {
-  //   const onMove = (event) => {
-  //     event.preventDefault();
-  //     this.measurePosition(event, field, slider, hasRange);
-  //   };
-  //   this.$field.on('mousedown touchstart', `.instance-${this.instance}`, (event) => {
-  //     console.log(event);
-  //     event.preventDefault();
-  //     event.stopPropagation();
-  //     field.$element.addClass('tap');
-  //     field.$element.on('mousemove touchmove', onMove(event));
-  //   });
-  // }
-  onDrag(field, slider, hasRange) {
+  //    for small 'steps' we need to define sign quantity after comma
+  defineSignAfterComma() {
+    if (this.step.toString().includes('.')) {
+      this.stepSignAfterComma = this.step
+        .toString()
+        .split('.')
+        .pop().length;
+    } else this.stepSignAfterComma = 0;
+  }
+
+  onDrag(slider, hasRange, field) {
     const onMove = (event) => {
       event.preventDefault();
       this.measurePosition(event, field, slider, hasRange);
@@ -69,22 +56,22 @@ class SliderModel {
     $(`#${this.id}`).on('mousedown touchstart', `.instance-${this.instance}`, (event) => {
       event.preventDefault();
       event.stopPropagation();
-      field.$element.addClass('tap');
-      field.$element.on('mousemove touchmove', onMove);
+      this.$field.addClass('tap');
+      this.$field.on('mousemove touchmove', onMove);
     });
   }
 
-  measurePosition(event, field, slider, hasRange) {
+  measurePosition(event, { isVertical, minValue, maxValue }, slider, hasRange) {
     const cursorX = event.offsetX;
     const cursorY = event.offsetY;
-    if (field.isVertical) {
-      const fieldHeight = field.$element[0].offsetHeight;
+    if (isVertical) {
+      const fieldHeight = this.$field[0].offsetHeight;
       this.positionInPercentage = ((fieldHeight - (cursorY + 1)) * 100) / fieldHeight;
     } else {
       this.positionInPercentage = ((cursorX + 5) * 100) / this.$field[0].offsetWidth;
     }
-    const fieldLength = field.maxValue - field.minValue;
-    this.value = this.positionInPercentage * (fieldLength / 100) + +field.minValue;
+    const fieldLength = maxValue - minValue;
+    this.value = this.positionInPercentage * (fieldLength / 100) + +minValue;
     const stepPosition = (Math.trunc(this.positionInPercentage / this.step) * this.step).toFixed(
       this.stepSignAfterComma,
     );

@@ -43,7 +43,7 @@ export default class FieldModel {
   }
 
   setMinMax(args) {
-    const [minOrMax, dataSuffix, value] = args;
+    const [minOrMax, value] = args;
     if (!value.isNaN && value !== undefined) {
       this[minOrMax] = value;
     }

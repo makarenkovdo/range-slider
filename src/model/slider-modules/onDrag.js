@@ -48,8 +48,16 @@ const calculatePositionInPercentage = (isVertical, thisSlider, cursorXY) => {
 };
 
 const setPositionInPercentage = (thisSlider, positionInPercentage) => {
-  console.log(thisSlider, positionInPercentage);
   thisSlider.positionInPercentage = positionInPercentage;
+};
+
+const setValue = (thisSlider, value) => {
+  thisSlider.value = value;
+};
+
+const calculateValue = (minValue, maxValue, thisSlider) => {
+  const fieldLength = maxValue - minValue;
+  return thisSlider.positionInPercentage * (fieldLength / 100) + +minValue;
 };
 
 const updatePosition = (
@@ -60,13 +68,13 @@ const updatePosition = (
   thisSlider,
 ) => {
   const cursorXY = [event.offsetX, event.offsetY];
+
   setPositionInPercentage(
     thisSlider,
     calculatePositionInPercentage(isVertical, thisSlider, cursorXY),
   );
 
-  const fieldLength = maxValue - minValue;
-  thisSlider.value = thisSlider.positionInPercentage * (fieldLength / 100) + +minValue;
+  setValue(thisSlider, calculateValue(minValue, maxValue, thisSlider));
   const stepPosition = (
     Math.round(thisSlider.positionInPercentage / thisSlider.step) * thisSlider.step
   ).toFixed(thisSlider.stepSignAfterComma);

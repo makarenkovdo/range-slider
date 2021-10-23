@@ -17,7 +17,7 @@ const calculatePositionInPercent = (isVertical, thisSlider, offsetX, offsetY) =>
 };
 
 // prettier-ignore
-const checkCollision = ([stepPosition, stepValue], slider, thisSlider) => {
+const checkCollision = ({stepPosition, stepValue}, slider, thisSlider) => {
   const isCollisionFirst = () => (!thisSlider.isVertical && thisSlider.instance === 0
         && stepPosition - slider[1].stepPosition >= thisSlider.step)
         || (thisSlider.isVertical && thisSlider.instance === 0
@@ -37,7 +37,7 @@ const checkCollision = ([stepPosition, stepValue], slider, thisSlider) => {
   } else if (isCollisionSecond()) {
     calculateCollisionCorrection(slider[0].stepPosition, slider[0].stepValue, thisSlider.step, 1);
   } else {
-    return [stepPosition, stepValue];
+    return {stepPosition, stepValue};
   }
 };
 
@@ -55,7 +55,7 @@ const calculateStepValueAndPosition = ({
 }) => {
   const stepPosition = (Math.round(positionInPercent / step) * step).toFixed(stepSignAfterComma);
   const stepValue = (Math.round(value / step) * step).toFixed(stepSignAfterComma);
-  return [stepPosition, stepValue];
+  return {stepPosition, stepValue};
 };
 
 const setPositionInPercent = (thisSlider, newPositionInPercent) => {
@@ -67,7 +67,7 @@ const setValue = (thisSlider, value) => {
 };
 
 const setStepValueAndPosition = (thisSlider, values) => {
-  const [stepPosition, stepValue] = values;
+  const { stepPosition, stepValue } = values;
   assignIfHasOwn(thisSlider, 'stepPosition', stepPosition);
   assignIfHasOwn(thisSlider, 'stepValue', stepValue);
 };

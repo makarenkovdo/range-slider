@@ -215,7 +215,7 @@ export default class SliderController {
     if (activeSlider) {
       this.updatePosition(activeSlider);
       this.updateText(activeSlider.stepValue, activeSlider.instance);
-      this.updateBar(activeSlider);
+      if (this.hasBar) this.updateBar(activeSlider);
     }
   }
 

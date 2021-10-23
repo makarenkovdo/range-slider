@@ -1,3 +1,5 @@
+/* eslint-env jquery */
+
 const defineBarType = ({
   isRange,
   activeSlider,
@@ -44,7 +46,6 @@ const updateSingleVerticalBarPosition = (activeSlider, $bar) => {
 };
 
 const updateSingleHorizontalBarPosition = (activeSlider, $bar) => {
-  console.log($bar);
   $(document).ready(() => $bar.css('width', `${activeSlider.stepPosition}%`));
 };
 

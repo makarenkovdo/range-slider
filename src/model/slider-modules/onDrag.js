@@ -39,7 +39,9 @@ const checkCollision = (stepPosition, stepValue, slider, thisSlider) => {
   }
 };
 
-const calculatePositionInPercentage = (isVertical, thisSlider, cursorXY) => {
+const calculatePositionInPercentage = (isVertical, thisSlider, offsetX, offsetY) => {
+  const cursorXY = [offsetX, offsetY];
+
   if (isVertical) {
     const fieldHeight = thisSlider.$field[0].offsetHeight;
     return ((fieldHeight - (cursorXY[1] + 1)) * 100) / fieldHeight;
@@ -67,11 +69,9 @@ const updatePosition = (
   hasRange,
   thisSlider,
 ) => {
-  const cursorXY = [event.offsetX, event.offsetY];
-
   setPositionInPercentage(
     thisSlider,
-    calculatePositionInPercentage(isVertical, thisSlider, cursorXY),
+    calculatePositionInPercentage(isVertical, thisSlider, event.offsetX, event.offsetY),
   );
 
   setValue(thisSlider, calculateValue(minValue, maxValue, thisSlider));

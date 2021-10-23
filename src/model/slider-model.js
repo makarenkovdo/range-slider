@@ -11,7 +11,7 @@ class SliderModel {
     this.instance = instance;
     this.$slider = '';
     this.size = sliderSize;
-    this.positionInPercentage = 0;
+    this.positionInPercent = 0;
     this.value = 0;
     this.step = 1;
     this.stepSignAfterComma = 0;
@@ -47,7 +47,7 @@ class SliderModel {
   }
 
   // checkBordersCollision(stepPosition, slider) {
-  //   if (this.positionInPercentage < 1) {
+  //   if (this.positionInPercent < 1) {
   //   }
   //   //     this.notify.call(this)
   // }

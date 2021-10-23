@@ -2,10 +2,10 @@
 "ignorePropertyModificationsFor": ["thisSlider"] }] */
 
 import {
-  calculatePositionInPercentage,
+  calculatePositionInPercent,
   calculateValue,
   calculateStepValueAndPosition,
-  setPositionInPercentage,
+  setPositionInPercent,
   setValue,
   checkCollision,
 } from './onDrag/updatePositionUtility';
@@ -17,9 +17,9 @@ const updatePosition = (
   hasRange,
   thisSlider,
 ) => {
-  setPositionInPercentage(
+  setPositionInPercent(
     thisSlider,
-    calculatePositionInPercentage(isVertical, thisSlider, event.offsetX, event.offsetY),
+    calculatePositionInPercent(isVertical, thisSlider, event.offsetX, event.offsetY),
   );
 
   setValue(thisSlider, calculateValue(minValue, maxValue, thisSlider));
@@ -63,5 +63,4 @@ const activateOnDragListener = (thisSlider, field, slider, hasRange) => {
   });
 };
 
-// prettier-ignore
-export default activateOnDragListener ;
+export default activateOnDragListener;

@@ -26,7 +26,7 @@ const checkCollision = ({ stepPosition, stepValue }, slider, thisSlider) => {
     thisSlider.stepValue = stepValue;
   }
 };
-const calculatePositionInPercentage = (isVertical, thisSlider, offsetX, offsetY) => {
+const calculatePositionInPercent = (isVertical, thisSlider, offsetX, offsetY) => {
   const cursorXY = [offsetX, offsetY];
 
   if (isVertical) {
@@ -36,8 +36,9 @@ const calculatePositionInPercentage = (isVertical, thisSlider, offsetX, offsetY)
   return ((cursorXY[0] + 5) * 100) / thisSlider.$field[0].offsetWidth;
 };
 
-const setPositionInPercentage = (thisSlider, positionInPercentage) => {
-  thisSlider.positionInPercentage = positionInPercentage;
+const setPositionInPercent = (thisSlider, positionInPercent) => {
+  thisSlider.positionInPercent = positionInPercent;
+  //   const positionInPercent = Object.prototype.hasOwnProperty.call(obj, 'positionInPercent') ? obj.key : 1;
 };
 
 const setValue = (thisSlider, value) => {
@@ -46,12 +47,12 @@ const setValue = (thisSlider, value) => {
 
 const calculateValue = (minValue, maxValue, thisSlider) => {
   const fieldLength = maxValue - minValue;
-  return thisSlider.positionInPercentage * (fieldLength / 100) + +minValue;
+  return thisSlider.positionInPercent * (fieldLength / 100) + +minValue;
 };
 
 const calculateStepValueAndPosition = (thisSlider) => {
   const stepPosition = (
-    Math.round(thisSlider.positionInPercentage / thisSlider.step) * thisSlider.step
+    Math.round(thisSlider.positionInPercent / thisSlider.step) * thisSlider.step
   ).toFixed(thisSlider.stepSignAfterComma);
   const stepValue = (Math.round(thisSlider.value / thisSlider.step) * thisSlider.step).toFixed(
     thisSlider.stepSignAfterComma,
@@ -60,10 +61,10 @@ const calculateStepValueAndPosition = (thisSlider) => {
 };
 
 export {
-  calculatePositionInPercentage,
+  calculatePositionInPercent,
   calculateValue,
   calculateStepValueAndPosition,
-  setPositionInPercentage,
+  setPositionInPercent,
   setValue,
   checkCollision,
 };

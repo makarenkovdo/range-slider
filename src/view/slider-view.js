@@ -53,6 +53,7 @@ export default class SliderView {
     addBarToDom(this.$field);
     this.setThis$bar();
   }
+
   setThis$bar() {
     this.$bar = this.$field.children('.slider-bar');
   }

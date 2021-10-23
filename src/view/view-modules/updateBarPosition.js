@@ -1,4 +1,4 @@
-const defineBarType = (
+const defineBarType = ({
   isRange,
   activeSlider,
   isVertical,
@@ -9,7 +9,7 @@ const defineBarType = (
   updateSingleVerticalBarPosition,
   updateSingleHorizontalBarPosition,
   updateRangeBarPosition,
-) => {
+}) => {
   if (isRange && isVertical) {
     updateRangeBarPosition(
       1,
@@ -63,14 +63,15 @@ const updateRangeBarPosition = (index, activeSlider, $bar, slidersPosition, barL
   //   const barSize = barPosesArray.map((v) => Math.abs(v[1] - v[0]));
 
   //  helpVariable for rotation left/top value
-  const positionAndLengthSwitcher = [slidersPosition, barLength];
+  const positionAndLengthSwitcher = [slidersPosition[0], barLength];
+  console.log(positionAndLengthSwitcher);
 
   positioningSwitcher[index].forEach(
     (v, i) => {
       $bar.css(
         `${v}`,
         // positionAndLengthSwitcher[i] + (this.$slider.width() / 2) * !i,
-        positionAndLengthSwitcher[i] + (40 / 2) * !i,
+        positionAndLengthSwitcher[i] + (40 / 2) * !i + '%',
 
         //    shift on half a width WHEN it's a LEFT(TOP) position of instance-0
       );

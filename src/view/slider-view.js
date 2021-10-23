@@ -53,19 +53,19 @@ export default class SliderView {
     this.$bar = this.$field.children('.slider-bar');
   }
 
-  updateBar(isRange, activeSlider, slidersPosition) {
-    defineBarType(
+  updateBar(isRange, activeSlider) {
+    defineBarType({
       isRange,
       activeSlider,
-      this.isVertical,
-      this.$bar,
-      this.$field,
-      slidersPosition,
+      isVertical: this.isVertical,
+      $bar: this.$bar,
+      $field: this.$field,
+      slidersPosition: this.slidersPosition,
       calcLengthOfRangeBar,
       updateSingleVerticalBarPosition,
       updateSingleHorizontalBarPosition,
       updateRangeBarPosition,
-    );
+    });
   }
 
   updatePosition(updatingSlider) {

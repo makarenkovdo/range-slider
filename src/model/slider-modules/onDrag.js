@@ -39,21 +39,32 @@ const checkCollision = (stepPosition, stepValue, slider, thisSlider) => {
   }
 };
 
-const measurePosition = (
+const calculatePositionInPercentage = (isVertical, thisSlider, cursorXY) => {
+  if (isVertical) {
+    const fieldHeight = thisSlider.$field[0].offsetHeight;
+    return ((fieldHeight - (cursorXY[1] + 1)) * 100) / fieldHeight;
+  }
+  return ((cursorXY[0] + 5) * 100) / thisSlider.$field[0].offsetWidth;
+};
+
+const setPositionInPercentage = (thisSlider, positionInPercentage) => {
+  console.log(thisSlider, positionInPercentage);
+  thisSlider.positionInPercentage = positionInPercentage;
+};
+
+const updatePosition = (
   event,
   { isVertical, minValue, maxValue },
   slider,
   hasRange,
   thisSlider,
 ) => {
-  const cursorX = event.offsetX;
-  const cursorY = event.offsetY;
-  if (isVertical) {
-    const fieldHeight = thisSlider.$field[0].offsetHeight;
-    thisSlider.positionInPercentage = ((fieldHeight - (cursorY + 1)) * 100) / fieldHeight;
-  } else {
-    thisSlider.positionInPercentage = ((cursorX + 5) * 100) / thisSlider.$field[0].offsetWidth;
-  }
+  const cursorXY = [event.offsetX, event.offsetY];
+  setPositionInPercentage(
+    thisSlider,
+    calculatePositionInPercentage(isVertical, thisSlider, cursorXY),
+  );
+
   const fieldLength = maxValue - minValue;
   thisSlider.value = thisSlider.positionInPercentage * (fieldLength / 100) + +minValue;
   const stepPosition = (
@@ -81,7 +92,7 @@ const measurePosition = (
 const onMove = (event) => {
   event.preventDefault();
   event.stopPropagation();
-  measurePosition(
+  updatePosition(
     event,
     event.data.field,
     event.data.slider,
@@ -112,6 +123,6 @@ const activateOnDragListener = (thisSlider, field, slider, hasRange) => {
 export {
   onMove,
   activateOnDragListener,
-  measurePosition,
+  updatePosition,
   checkCollision,
 };

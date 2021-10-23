@@ -30,6 +30,7 @@ const defineBarType = ({
   }
   if (!isRange && isVertical) updateSingleVerticalBarPosition(activeSlider, $bar);
   if (!isRange && !isVertical) updateSingleHorizontalBarPosition(activeSlider, $bar);
+  console.log('SDFSDF', activeSlider, $bar);
 
   return this;
 };
@@ -43,7 +44,8 @@ const updateSingleVerticalBarPosition = (activeSlider, $bar) => {
 };
 
 const updateSingleHorizontalBarPosition = (activeSlider, $bar) => {
-  $bar.css('width', `${activeSlider.stepPosition}%`);
+  console.log($bar);
+  $(document).ready(() => $bar.css('width', `${activeSlider.stepPosition}%`));
 };
 
 const updateRangeBarPosition = (index, activeSlider, $bar, slidersPosition, barLength) => {

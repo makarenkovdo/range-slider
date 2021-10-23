@@ -154,7 +154,6 @@ export default class SliderController {
     this.slider.push(
       new SliderModel(this.id, this.sliderCounter, this, sliderSize, this.field.$element),
     );
-    console.log('sdf', minValue, maxValue);
     this.slider.forEach((v) => v.initializeDefaultPositionAndValue([minValue, maxValue]));
     return this;
   }
@@ -230,12 +229,7 @@ export default class SliderController {
   }
 
   updateBar(activeSlider) {
-    console.log(this.slider);
-    console.log(this.slider[0].stepPosition, this.slider[1].stepPosition);
-    this.view.updateBar(this.isRange, activeSlider, [
-      this.slider[0].stepPosition, // ??????????????
-      this.slider[1].stepPosition,
-    ]);
+    this.view.updateBar(this.isRange, activeSlider);
     return this;
   }
 

@@ -1,8 +1,16 @@
 /* eslint no-param-reassign: ["error", { "props": true,
 "ignorePropertyModificationsFor": ["thisSlider"] }] */
 
+import {
+  calculatePositionInPercentage,
+  calculateValue,
+  calculateStepValueAndPosition,
+  setPositionInPercentage,
+  setValue,
+} from './onDrag/updatePositionUtility';
+
 // prettier-ignore
-const checkCollision = (stepPosition, stepValue, slider, thisSlider) => {
+const checkCollision = ({ stepPosition, stepValue }, slider, thisSlider) => {
   const isCollisionFirst = () => (!thisSlider.isVertical && thisSlider.instance === 0
         && stepPosition - slider[1].stepPosition >= thisSlider.step)
         || (thisSlider.isVertical && thisSlider.instance === 0
@@ -39,39 +47,6 @@ const checkCollision = (stepPosition, stepValue, slider, thisSlider) => {
   }
 };
 
-const calculatePositionInPercentage = (isVertical, thisSlider, offsetX, offsetY) => {
-  const cursorXY = [offsetX, offsetY];
-
-  if (isVertical) {
-    const fieldHeight = thisSlider.$field[0].offsetHeight;
-    return ((fieldHeight - (cursorXY[1] + 1)) * 100) / fieldHeight;
-  }
-  return ((cursorXY[0] + 5) * 100) / thisSlider.$field[0].offsetWidth;
-};
-
-const setPositionInPercentage = (thisSlider, positionInPercentage) => {
-  thisSlider.positionInPercentage = positionInPercentage;
-};
-
-const setValue = (thisSlider, value) => {
-  thisSlider.value = value;
-};
-
-const calculateValue = (minValue, maxValue, thisSlider) => {
-  const fieldLength = maxValue - minValue;
-  return thisSlider.positionInPercentage * (fieldLength / 100) + +minValue;
-};
-
-const calculateStepValueAndPosition = (thisSlider) => {
-  const stepPosition = (
-    Math.round(thisSlider.positionInPercentage / thisSlider.step) * thisSlider.step
-  ).toFixed(thisSlider.stepSignAfterComma);
-  const stepValue = (Math.round(thisSlider.value / thisSlider.step) * thisSlider.step).toFixed(
-    thisSlider.stepSignAfterComma,
-  );
-  return { stepPosition, stepValue };
-};
-
 const updatePosition = (
   event,
   { isVertical, minValue, maxValue },
@@ -87,10 +62,11 @@ const updatePosition = (
   setValue(thisSlider, calculateValue(minValue, maxValue, thisSlider));
 
   // const returned = thisSlider.checkBordersCollision(stepPosition, slider);
-  const { stepPosition, stepValue } = calculateStepValueAndPosition(thisSlider);
   if (hasRange) {
-    checkCollision(stepPosition, stepValue, slider, thisSlider);
-  } else [thisSlider.stepPosition, thisSlider.stepValue] = [stepPosition, stepValue];
+    checkCollision(calculateStepValueAndPosition(thisSlider), slider, thisSlider);
+  } else {
+    [thisSlider.stepPosition, thisSlider.stepValue] = [calculateStepValueAndPosition(thisSlider)];
+  }
   thisSlider.notify(this);
 };
 

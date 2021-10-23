@@ -116,7 +116,7 @@ export default class SliderController {
       .createRangeSlider(isRange, shouldAddTip, sliderSize)
       // .correctSliderPosition()
       .setStep(step)
-      .addBar(shouldAddBar)
+      .createBar(shouldAddBar)
       .updateText(minValue, 0)
       .updateText(maxValue, 1)
       .onDrag()
@@ -179,10 +179,10 @@ export default class SliderController {
     return this;
   }
 
-  addBar(shouldAddBar) {
+  createBar(shouldAddBar) {
     this.hasBar = true;
     if (shouldAddBar) {
-      this.view.addBar(this);
+      this.view.createBar(this);
     }
 
     return this;

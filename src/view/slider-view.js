@@ -10,6 +10,7 @@ import {
   updateSingleHorizontalBarPosition,
   updateRangeBarPosition,
 } from './view-modules/updateBarPosition';
+import addBarToDom from './view-modules/createBar';
 
 export default class SliderView {
   constructor(id) {
@@ -48,8 +49,11 @@ export default class SliderView {
     this.updateTextNumber(addTipNumberToDom(prepareTipNumberArgs(i, isVertical), this.$field));
   }
 
-  addBar() {
-    this.$field.append("<div class='slider-bar'></div>");
+  createBar() {
+    addBarToDom(this.$field);
+    this.setThis$bar();
+  }
+  setThis$bar() {
     this.$bar = this.$field.children('.slider-bar');
   }
 

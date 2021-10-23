@@ -34,9 +34,7 @@ const defineBarType = ({
   return this;
 };
 
-const calcLengthOfRangeBar = (slidersPosition) => {
-  return Math.abs(slidersPosition[1] - slidersPosition[0]);
-};
+const calcLengthOfRangeBar = (slidersPosition) => Math.abs(slidersPosition[1] - slidersPosition[0]);
 
 const updateSingleVerticalBarPosition = (activeSlider, $bar) => {
   $bar

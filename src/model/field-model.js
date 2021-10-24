@@ -18,9 +18,8 @@ export default class FieldModel {
     this.isRange = false;
     this.subscriber = subscriber;
     this.isBarAdded = false;
-    // this.stepPosition = 0
-    // this.stepValue = 0
     this.range = [];
+
     this.notify = notify.bind(this);
     this.setMinMax = setMinMax.bind(this);
     this.onClick = onClick.bind(this);

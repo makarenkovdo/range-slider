@@ -1,11 +1,7 @@
-const calcSignAfterComma = (step) => {
-  if (step.toString().includes('.')) {
-    return step
-      .toString()
-      .split('.')
-      .pop().length;
-  }
-  return 0;
+import { calcSignAfterComma, setThisSign } from './setSignAfterComma/setSignAfterCommaUtility';
+
+const defineSignAfterComma = function defineSignQuantityAfterComma() {
+  setThisSign.call(this, calcSignAfterComma(this.step));
 };
 
-export default calcSignAfterComma;
+export default defineSignAfterComma;

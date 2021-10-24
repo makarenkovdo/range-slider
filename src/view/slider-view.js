@@ -7,6 +7,7 @@ import createSlider from './view-modules/createSlider';
 import createTipNumber from './view-modules/createTipNumber';
 import updateTipNumber from './view-modules/updateTipNumber';
 import updateBarPosition from './view-modules/updateBarPosition';
+import updateSliderPosition from './view-modules/updateSliderPosition';
 
 export default class SliderView {
   constructor(id) {
@@ -17,15 +18,14 @@ export default class SliderView {
     this.sliderSize = [];
     this.isVertical = false;
     this.stepSignAfterComma = 0;
+    this.corrector = 0;
 
     this.createBar = createBar.bind(this);
     this.createSlider = createSlider.bind(this);
     this.createTipNumber = createTipNumber.bind(this);
     this.updateBarPosition = updateBarPosition.bind(this);
     this.updateTipNumber = updateTipNumber.bind(this);
-
-    // this.createSliderViewModules = { addSliderToDom, prepareSliderArgs };
-    // this.corrector = 0;
+    this.updateSliderPosition = updateSliderPosition.bind(this);
   }
 
   initializeValues(sliderSize, fieldSize, isVertical) {
@@ -38,41 +38,4 @@ export default class SliderView {
       this.corrector = (sliderSize[0] / fieldSize[0]) * 50;
     }
   }
-
-  updatePosition(updatingSlider) {
-    if (updatingSlider.stepPosition) this.setThisSliderPosition(updatingSlider);
-
-    const positioning = [
-      ['left', 'width'],
-      ['top', 'height'],
-    ];
-    if (this.isVertical) this.updatePositionHelper(updatingSlider, positioning[1]);
-    else this.updatePositionHelper(updatingSlider, positioning[0]);
-  }
-
-  setThisSliderPosition({ instance, stepPosition }) {
-    this.slidersPosition[instance] = stepPosition;
-  }
-
-  // prettier-ignore
-  updatePositionHelper(updatingSlider, positioning) {
-
-    // getting the percent of sliderWidth to fieldWidth
-    const preperatoryPosition = (parseInt(this.$field.children('.slider').css(positioning[1]), 10)
-      / parseInt(this.$field.css(positioning[1]), 10)) * 50;
-    const getVerticalPosition = () => `${100 - updatingSlider.stepPosition - preperatoryPosition}%`;
-    const getHorizontalPosition = () => `${updatingSlider.stepPosition - preperatoryPosition }%`;
-    const position = this.isVertical
-      ? getVerticalPosition()
-      : getHorizontalPosition();
-    this.$field.find(`.instance-${updatingSlider.instance}`).css(positioning[0], position);
-  }
-
-  // updateTipPosition(direction) {
-  //     this.$field.find('.tip-number .instance-1').css(
-  //         direction,
-  //         this.$slider.css(direction)
-  //         // parseInt(this.$slider.css('width')) / 2
-  //     )
-  // }
 }

@@ -1,5 +1,7 @@
 /* eslint-env jquery */
 
+import SliderController from '../controller/slider-controller';
+import { Field, Slider } from './modelInterfaces';
 import defineSignAfterComma from './slider-modules/defineSignAfterComma';
 import initializeDefaultValues from './slider-modules/initializeDefaultValues';
 import notify from './slider-modules/notify';
@@ -9,6 +11,46 @@ import onDrop from './slider-modules/onDrop';
 import setStep from './slider-modules/setStep';
 
 class SliderModel {
+  id: string;
+
+  class: string;
+
+  $field: JQuery<HTMLElement>;
+
+  instance: number;
+
+  $slider: string | JQuery<HTMLElement>;
+
+  size: number[];
+
+  positionInPercent: number;
+
+  value: number;
+
+  step: number;
+
+  stepSignAfterComma: number;
+
+  stepPosition: number;
+
+  stepValue: number;
+
+  subscriber: SliderController;
+
+  defineSignAfterComma: (step: number) => void;
+
+  onDrag: (slider: Slider[], isRange: boolean, field: Field) => void;
+
+  onDrop: ($element: JQuery<HTMLElement>) => void;
+
+  notify: () => void;
+
+  setStep: (step: number) => void;
+
+  updatePosition: () => void;
+
+  initializeDefaultValues: (a: number[]) => void;
+
   constructor(id, instance, subscriber, sliderSize, $field) {
     this.id = id;
     this.class = $(`#${this.id}`).attr('class');

@@ -1,4 +1,5 @@
 import SliderController from '../controller/slider-controller';
+import { InitDataStartEndArgs } from './field-modules/fieldModulesInterfaces';
 import notify from './field-modules/notify';
 import onClick from './field-modules/onClick';
 import initDataStartEnd from './field-modules/setDataStartEnd';
@@ -39,7 +40,7 @@ export default class FieldModel {
 
   onClick: () => void;
 
-  initDataStartEnd: () => void;
+  initDataStartEnd: (a: InitDataStartEndArgs) => void;
 
   constructor(id: string, subscriber: SliderController) {
     this.$element = $(`#${id}`);

@@ -26,18 +26,6 @@ export default class FieldModel {
     return this;
   }
 
-  // defineSignAfterComma() {
-  //   (step) => {
-  //     step.toString().includes('.')
-  //       ? (this.stepSignAfterComma = step
-  //           .toString()
-  //           .split('.')
-  //           .pop().length)
-  //       : (this.stepSignAfterComma = 0);
-  //   };
-  //   f(this.step);
-  // }
-
   notify() {
     this.subscriber.recieve(this);
   }

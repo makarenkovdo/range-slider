@@ -3,7 +3,8 @@ const defineSliderType = (isVertical, updatingSlider) => {
     ['left', 'width'],
     ['top', 'height'],
   ];
-  let datasForUpdating = { updatingSlider, positioning: positioning[0] };
+  const { stepPosition, instance } = updatingSlider;
+  let datasForUpdating = { stepPosition, instance, positioning: positioning[0] };
   if (isVertical) datasForUpdating.positioning = positioning[1];
   return datasForUpdating;
 };
@@ -23,15 +24,14 @@ const calculatePreperatoryPosition = ($field, positioning) => {
 };
 
 // prettier-ignore
-const updatePositionToDOM = ({ updatingSlider, positioning }, isVertical, $field) => { 
+const updatePositionToDOM = ({ stepPosition, instance, positioning }, isVertical, $field) => { 
   const preperatoryPosition = calculatePreperatoryPosition($field, positioning);
-  const getVerticalPosition = () => `${100 - updatingSlider.stepPosition - preperatoryPosition}%`;
-  const getHorizontalPosition = () => `${updatingSlider.stepPosition - preperatoryPosition}%`;
+  const getVerticalPosition = () => `${100 - stepPosition - preperatoryPosition}%`;
+  const getHorizontalPosition = () => `${stepPosition - preperatoryPosition}%`;
   const position = isVertical
     ? getVerticalPosition()
     : getHorizontalPosition();
-    console.log(updatingSlider, positioning , isVertical, $field);
-  $field.find(`.instance-${updatingSlider.instance}`).css(positioning[0], position);
+  $field.find(`.instance-${instance}`).css(positioning[0], position);
 };
 
 export { setThisSliderPosition, defineSliderType, updatePositionToDOM };

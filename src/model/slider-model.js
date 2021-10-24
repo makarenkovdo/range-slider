@@ -1,7 +1,6 @@
 /* eslint-env jquery */
 
 import defineSignAfterComma from './slider-modules/defineSignAfterComma';
-import calcSignAfterComma from './slider-modules/defineSignAfterComma';
 import onDrag from './slider-modules/onDrag';
 import { updatePosition } from './slider-modules/onDrag/onDragUtility';
 import activateOnDropListener from './slider-modules/onDrop';
@@ -21,12 +20,11 @@ class SliderModel {
     this.stepPosition = 0;
     this.stepValue = 0;
     this.subscriber = subscriber;
+
     this.updatePosition = updatePosition.bind(this);
     this.onDrag = onDrag.bind(this);
     this.defineSignAfterComma = defineSignAfterComma.bind(this);
   }
-
-  //    for small 'steps' we need to define sign quantity after comma
 
   initializeDefaultPositionAndValue(minMax) {
     const minMaxStepPosition = [0, 100];

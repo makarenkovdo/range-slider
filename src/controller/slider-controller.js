@@ -114,7 +114,7 @@ export default class SliderController {
       .setMaxValue(maxValue)
       .initLayers(sliderSize)
       .createRangeSlider({
-        isRange, shouldAddTip, sliderSize, minValue, maxValue
+        isRange, shouldAddTip, sliderSize, minValue, maxValue,
       })
       // .correctSliderPosition()
       .setStep(step)
@@ -133,7 +133,10 @@ export default class SliderController {
     return this;
   }
 
-  createRangeSlider({ isRange, shouldAddTip, sliderSize, minValue, maxValue }) {
+  //  prettier-ignore
+  createRangeSlider({
+    isRange, shouldAddTip, sliderSize, minValue, maxValue,
+  }) {
     this.createSliderView(this.sliderCounter);
     this.createSlider(sliderSize, minValue, maxValue);
     this.createTipNumber(shouldAddTip);

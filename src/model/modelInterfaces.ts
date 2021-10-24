@@ -1,3 +1,5 @@
+import SliderController from '../controller/slider-controller';
+
 interface Field {
   $element: JQuery<HTMLElement>;
 
@@ -27,9 +29,9 @@ interface Field {
 
   notify: () => void;
 
-  setMinMax: () => void;
+  setMinMax: (args: Array<string | number>) => void;
 
-  onClick: () => void;
+  onClick: (slider: Slider[], isRange: boolean) => void;
 
   initDataStartEnd: (field: Field) => void;
 }
@@ -47,13 +49,13 @@ interface Slider {
   stepSignAfterComma: number;
   stepPosition: number;
   stepValue: number;
-  subscriber: Controller;
+  subscriber: SliderController;
 
-  defineSignAfterComma: () => void;
-  onDrag: () => void;
-  onDrop: () => void;
+  defineSignAfterComma: (step: number) => void;
+  onDrag: (slider: Slider[], isRange: boolean, field: Field) => void;
+  onDrop: ($element: JQuery<HTMLElement>) => void;
   notify: () => void;
-  setStep: () => void;
+  setStep: (step: number) => void;
   updatePosition: () => void;
   initializeDefaultValues: (a: number[]) => void;
 }

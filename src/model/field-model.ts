@@ -1,4 +1,3 @@
-import { Controller } from '../controller/controllerInterfaces';
 import SliderController from '../controller/slider-controller';
 import notify from './field-modules/notify';
 import onClick from './field-modules/onClick';

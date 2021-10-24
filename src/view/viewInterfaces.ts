@@ -1,3 +1,6 @@
+import SliderController from '../controller/slider-controller';
+import { Slider } from '../model/modelInterfaces';
+
 interface View {
   $field: JQuery<HTMLElement>;
 
@@ -15,17 +18,17 @@ interface View {
 
   corrector: number;
 
-  createBar: () => void;
+  createBar: (that: SliderController) => void;
 
-  createSlider: () => void;
+  createSlider: (i: number, isVertical: boolean) => void;
 
-  createTipNumber: () => void;
+  createTipNumber: (sliderCounter: number, isVertical: boolean) => void;
 
-  updateBarPosition: () => void;
+  updateBarPosition: (isRange: boolean, activeSlider: Slider) => void;
 
-  updateTipNumber: () => void;
+  updateTipNumber: (stepValue: number, instance: number) => void;
 
-  updateSliderPosition: () => void;
+  updateSliderPosition: (activeSlider: Slider) => void;
 
   initializeValues: (sliderSize: number[], size: string[], isVertical: boolean) => void;
 }

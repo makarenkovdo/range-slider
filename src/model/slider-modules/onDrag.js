@@ -24,7 +24,6 @@ const updatePosition = (
   setValue(thisSlider, calculateValue(minValue, maxValue, thisSlider));
 
   // const returned = thisSlider.checkBordersCollision(stepPosition, slider);
-  console.log(checkCollision(calculateStepValueAndPosition(thisSlider), slider, thisSlider));
   if (hasRange) {
     setStepValueAndPosition(
       thisSlider,

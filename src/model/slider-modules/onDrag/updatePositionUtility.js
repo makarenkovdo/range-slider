@@ -22,29 +22,37 @@ const calculatePositionInPercent = (isVertical, thisSlider, offsetX, offsetY) =>
 // prettier-ignore
 const checkCollision = ({stepPosition, stepValue}, slider, thisSlider) => {
   const isCollisionFirst = () => (!thisSlider.isVertical && thisSlider.instance === 0
-        && stepPosition - slider[1].stepPosition >= thisSlider.step)
+        && stepPosition - slider[1].stepPosition >= 0)
         || (thisSlider.isVertical && thisSlider.instance === 0
-            && stepPosition - slider[1].stepPosition <= thisSlider.step);
+            && stepPosition - slider[1].stepPosition <= 0);
 
   // prettier-ignore
   const isCollisionSecond = () => (
     (!thisSlider.isVertical && thisSlider.instance === 1
-        && stepPosition - slider[0].stepPosition <= thisSlider.step)
+        && stepPosition - slider[0].stepPosition <= 0)
         || (thisSlider.isVertical && thisSlider.instance === 0
-          && stepPosition - slider[0].stepPosition >= thisSlider.step)
+          && stepPosition - slider[0].stepPosition >= 0)
   );
 
   if (isCollisionFirst()) {
     console.log('FIRST');
-    return slider[1].stepPosition;
+    const a = {stepPosition:slider[1].stepPosition,stepValue:slider[1].stepValue} ;
+
+    return a
   // eslint-disable-next-line no-else-return
   } else if (isCollisionSecond()) {
     console.log('SECOND');
-
-    return slider[0].stepPosition ;
+    const a = {stepPosition:slider[0].stepPosition,stepValue:slider[0].stepValue} ;
+    return a
   } else {
     return {stepPosition, stepValue};
   }
+};
+
+const setStepValueAndPosition = (thisSlider, { stepPosition, stepValue }) => {
+  console.log(stepPosition, stepValue);
+  assignIfHasOwn(thisSlider, 'stepPosition', stepPosition);
+  assignIfHasOwn(thisSlider, 'stepValue', stepValue);
 };
 
 const calculateValue = (minValue, maxValue, thisSlider) => {
@@ -70,12 +78,6 @@ const setPositionInPercent = (thisSlider, newPositionInPercent) => {
 
 const setValue = (thisSlider, value) => {
   assignIfHasOwn(thisSlider, 'value', value);
-};
-
-const setStepValueAndPosition = (thisSlider, { stepPosition, stepValue }) => {
-  // console.log(stepPosition);
-  assignIfHasOwn(thisSlider, 'stepPosition', stepPosition);
-  assignIfHasOwn(thisSlider, 'stepValue', stepValue);
 };
 
 export {

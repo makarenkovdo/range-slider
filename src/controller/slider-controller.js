@@ -215,7 +215,7 @@ export default class SliderController {
     if (activeSlider) {
       this.updatePosition(activeSlider);
       this.updateTipNumber(activeSlider.stepValue, activeSlider.instance);
-      if (this.hasBar) this.updateBar(activeSlider);
+      if (this.hasBar) this.updateBarPosition(activeSlider);
     }
   }
 
@@ -228,8 +228,8 @@ export default class SliderController {
     return this;
   }
 
-  updateBar(activeSlider) {
-    this.view.updateBar(this.isRange, activeSlider);
+  updateBarPosition(activeSlider) {
+    this.view.updateBarPosition(this.isRange, activeSlider);
     return this;
   }
 

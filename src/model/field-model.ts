@@ -1,3 +1,5 @@
+import { Controller } from '../controller/controllerInterfaces';
+import SliderController from '../controller/slider-controller';
 import notify from './field-modules/notify';
 import onClick from './field-modules/onClick';
 import initDataStartEnd from './field-modules/setDataStartEnd';
@@ -40,7 +42,7 @@ export default class FieldModel {
 
   initDataStartEnd: () => void;
 
-  constructor(id, subscriber) {
+  constructor(id: string, subscriber: SliderController) {
     this.$element = $(`#${id}`);
     this.class = this.$element.attr('class');
     this.size = [$(`#${id}`).css('width'), $(`#${id}`).css('height')];

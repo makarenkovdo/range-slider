@@ -11,7 +11,37 @@ import updateSliderPosition from './view-modules/updateSliderPosition';
 import initializeValues from './view-modules/initializeValues';
 
 export default class SliderView {
-  constructor(id) {
+  $field: JQuery<HTMLElement>;
+
+  $slider: string;
+
+  $bar: string;
+
+  isVertical: boolean;
+
+  slidersPosition: number[];
+
+  sliderSize: number[];
+
+  stepSignAfterComma: number;
+
+  corrector: number;
+
+  createBar: () => void;
+
+  createSlider: () => void;
+
+  createTipNumber: () => void;
+
+  updateBarPosition: () => void;
+
+  updateTipNumber: () => void;
+
+  updateSliderPosition: () => void;
+
+  initializeValues: () => void;
+
+  constructor(id: string) {
     this.$field = $(`#${id}`);
     this.$slider = '';
     this.$bar = '';

@@ -1,5 +1,6 @@
 import notify from './field-modules/notify';
 import onClick from './field-modules/onClick';
+import initDataStartEnd from './field-modules/setDataStartEnd';
 import setMinMax from './field-modules/setMinMax';
 
 /* eslint-env jquery */
@@ -23,12 +24,6 @@ export default class FieldModel {
     this.notify = notify.bind(this);
     this.setMinMax = setMinMax.bind(this);
     this.onClick = onClick.bind(this);
-  }
-
-  initDataStartEnd() {
-    this.$element.attr('data-start', this.minValue);
-    this.$element.attr('data-end', this.maxValue);
-
-    return this;
+    this.initDataStartEnd = initDataStartEnd;
   }
 }

@@ -1,11 +1,12 @@
 /* eslint-env jquery */
 
 import defineSignAfterComma from './slider-modules/defineSignAfterComma';
+import initializeDefaultValues from './slider-modules/initializeDefaultValues';
 import notify from './slider-modules/notify';
 import onDrag from './slider-modules/onDrag';
 import { updatePosition } from './slider-modules/onDrag/onDragUtility';
 import onDrop from './slider-modules/onDrop';
-import activateOnDropListener from './slider-modules/onDrop';
+import setStep from './slider-modules/setStep';
 
 class SliderModel {
   constructor(id, instance, subscriber, sliderSize, $field) {
@@ -23,27 +24,13 @@ class SliderModel {
     this.stepValue = 0;
     this.subscriber = subscriber;
 
-    this.updatePosition = updatePosition.bind(this);
+    this.defineSignAfterComma = defineSignAfterComma.bind(this);
     this.onDrag = onDrag.bind(this);
     this.onDrop = onDrop;
-    this.defineSignAfterComma = defineSignAfterComma.bind(this);
     this.notify = notify.bind(this);
-  }
-
-  initializeDefaultPositionAndValue(minMax) {
-    const minMaxStepPosition = [0, 100];
-    this.stepPosition = minMaxStepPosition[this.instance];
-    this.stepValue = minMax[this.instance];
-  }
-
-  // checkBordersCollision(stepPosition, slider) {
-  //   if (this.positionInPercent < 1) {
-  //   }
-  //   //     this.notify.call(this)
-  // }
-
-  setStep(step) {
-    this.step = step;
+    this.setStep = setStep.bind(this);
+    this.updatePosition = updatePosition.bind(this);
+    this.initializeDefaultValues = initializeDefaultValues.bind(this);
   }
 }
 export default SliderModel;

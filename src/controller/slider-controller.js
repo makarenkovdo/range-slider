@@ -157,7 +157,7 @@ export default class SliderController {
     this.slider.push(
       new SliderModel(this.id, this.sliderCounter, this, sliderSize, this.field.$element),
     );
-    this.slider.forEach((v) => v.initializeDefaultPositionAndValue([minValue, maxValue]));
+    this.slider.forEach((v) => v.initializeDefaultValues([minValue, maxValue]));
     return this;
   }
 

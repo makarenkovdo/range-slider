@@ -1,3 +1,4 @@
+/* eslint-env jquery */
 function cancelDragging(event) {
   event.preventDefault();
   event.stopPropagation();

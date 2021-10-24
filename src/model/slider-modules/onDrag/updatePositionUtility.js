@@ -3,12 +3,7 @@ const assignIfHasOwn = (obj, key, value) => {
   const newObj = Object.prototype.hasOwnProperty.call(obj, key) ? obj : false;
   newObj[key] = value;
 };
-const calculateCollisionCorrection = (stepPosition, stepValue, step, i) => {
-  const newStepPosition = +stepPosition + step;
-  const newStepValue = +stepValue + step;
-  console.log(newStepPosition, newStepValue);
-  return { newStepPosition, newStepValue };
-};
+
 const calculatePositionInPercent = (isVertical, thisSlider, offsetX, offsetY) => {
   const cursorXY = [offsetX, offsetY];
 
@@ -20,7 +15,7 @@ const calculatePositionInPercent = (isVertical, thisSlider, offsetX, offsetY) =>
 };
 
 // prettier-ignore
-const checkCollision = ({stepPosition, stepValue}, slider, thisSlider) => {
+const checkCollision = ({ stepPosition, stepValue }, slider, thisSlider) => {
   const isCollisionFirst = () => (!thisSlider.isVertical && thisSlider.instance === 0
         && stepPosition - slider[1].stepPosition >= 0)
         || (thisSlider.isVertical && thisSlider.instance === 0
@@ -35,22 +30,18 @@ const checkCollision = ({stepPosition, stepValue}, slider, thisSlider) => {
   );
 
   if (isCollisionFirst()) {
-    console.log('FIRST');
-    const a = {stepPosition:slider[1].stepPosition,stepValue:slider[1].stepValue} ;
-
-    return a
+    const a = { stepPosition: slider[1].stepPosition, stepValue: slider[1].stepValue };
+    return a;
   // eslint-disable-next-line no-else-return
   } else if (isCollisionSecond()) {
-    console.log('SECOND');
-    const a = {stepPosition:slider[0].stepPosition,stepValue:slider[0].stepValue} ;
-    return a
+    const a = { stepPosition: slider[0].stepPosition, stepValue: slider[0].stepValue };
+    return a;
   } else {
-    return {stepPosition, stepValue};
+    return { stepPosition, stepValue };
   }
 };
 
 const setStepValueAndPosition = (thisSlider, { stepPosition, stepValue }) => {
-  console.log(stepPosition, stepValue);
   assignIfHasOwn(thisSlider, 'stepPosition', stepPosition);
   assignIfHasOwn(thisSlider, 'stepValue', stepValue);
 };
@@ -69,7 +60,7 @@ const calculateStepValueAndPosition = ({
 }) => {
   const stepPosition = (Math.round(positionInPercent / step) * step).toFixed(stepSignAfterComma);
   const stepValue = (Math.round(value / step) * step).toFixed(stepSignAfterComma);
-  return {stepPosition, stepValue};
+  return { stepPosition, stepValue };
 };
 
 const setPositionInPercent = (thisSlider, newPositionInPercent) => {

@@ -1,5 +1,4 @@
 import {
-  assignIfHasOwn,
   checkCollision,
   calculatePositionInPercent,
   calculateValue,

@@ -210,7 +210,7 @@ export default class SliderController {
   }
 
   onDrop() {
-    this.slider.forEach((v) => v.onDrop());
+    this.slider.forEach((v) => v.onDrop(this.field.$element));
     return this;
   }
 

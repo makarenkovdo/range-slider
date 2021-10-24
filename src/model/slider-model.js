@@ -1,8 +1,10 @@
 /* eslint-env jquery */
 
 import defineSignAfterComma from './slider-modules/defineSignAfterComma';
+import notify from './slider-modules/notify';
 import onDrag from './slider-modules/onDrag';
 import { updatePosition } from './slider-modules/onDrag/onDragUtility';
+import onDrop from './slider-modules/onDrop';
 import activateOnDropListener from './slider-modules/onDrop';
 
 class SliderModel {
@@ -23,7 +25,9 @@ class SliderModel {
 
     this.updatePosition = updatePosition.bind(this);
     this.onDrag = onDrag.bind(this);
+    this.onDrop = onDrop;
     this.defineSignAfterComma = defineSignAfterComma.bind(this);
+    this.notify = notify.bind(this);
   }
 
   initializeDefaultPositionAndValue(minMax) {
@@ -32,19 +36,11 @@ class SliderModel {
     this.stepValue = minMax[this.instance];
   }
 
-  notify() {
-    this.subscriber.recieve(this);
-  }
-
   // checkBordersCollision(stepPosition, slider) {
   //   if (this.positionInPercent < 1) {
   //   }
   //   //     this.notify.call(this)
   // }
-
-  onDrop() {
-    activateOnDropListener(this.$field);
-  }
 
   setStep(step) {
     this.step = step;

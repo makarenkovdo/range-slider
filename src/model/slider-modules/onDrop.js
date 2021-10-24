@@ -1,13 +1,6 @@
-/* eslint-env jquery */
-function cancelDragging(event) {
-  event.preventDefault();
-  event.stopPropagation();
-  event.data.$field.removeClass('tap');
-  event.data.$field.off('mousemove touchmove');
-}
-const activateOnDropListener = ($field) => {
-  $field.on('mouseup touchend', { $field }, cancelDragging);
-  $('body').on('mouseup touchend', { $field }, cancelDragging);
-};
+import activateOnDropListener from './onDrop/onDropUtility';
 
-export default activateOnDropListener;
+const onDrop = ($field) => {
+  activateOnDropListener($field);
+};
+export default onDrop;

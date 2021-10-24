@@ -72,13 +72,13 @@ class SliderModel {
     this.stepValue = 0;
     this.subscriber = subscriber;
 
-    this.defineSignAfterComma = defineSignAfterComma.bind(this);
-    this.onDrag = onDrag.bind(this);
+    this.defineSignAfterComma = defineSignAfterComma.bind(this) as () => void;
+    this.onDrag = onDrag.bind(this) as () => void;
     this.onDrop = onDrop;
-    this.notify = notify.bind(this);
-    this.setStep = setStep.bind(this);
-    this.updatePosition = updatePosition.bind(this);
-    this.initializeDefaultValues = initializeDefaultValues.bind(this);
+    this.notify = notify.bind(this) as () => void;
+    this.setStep = setStep.bind(this) as () => void;
+    this.updatePosition = updatePosition.bind(this) as () => void;
+    this.initializeDefaultValues = initializeDefaultValues.bind(this) as () => void;
   }
 }
 export default SliderModel;

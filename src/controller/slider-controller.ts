@@ -6,6 +6,14 @@ import SliderView from '../view/slider-view';
 import { View } from '../view/viewInterfaces';
 import { ControllerBuildParams } from './controllerInterfaces';
 
+type CreateRangeSliderArgsType = {
+  isRange: boolean;
+  shouldAddTip: boolean;
+  sliderSize: number[];
+  minValue: number;
+  maxValue: number;
+};
+
 export default class SliderController {
   id: string;
 
@@ -89,7 +97,7 @@ export default class SliderController {
   //  prettier-ignore
   createRangeSlider({
     isRange, shouldAddTip, sliderSize, minValue, maxValue,
-  }): this {
+  }:CreateRangeSliderArgsType): this {
     this.createSliderView(this.sliderCounter);
     this.createSlider(sliderSize, minValue, maxValue);
     this.createTipNumber(shouldAddTip);
@@ -106,7 +114,7 @@ export default class SliderController {
     return this;
   }
 
-  createSlider(sliderSize, minValue, maxValue): this {
+  createSlider(sliderSize: number[], minValue: number, maxValue: number): this {
     this.slider.push(
       new SliderModel(this.id, this.sliderCounter, this, sliderSize, this.field.$element),
     );
@@ -119,13 +127,13 @@ export default class SliderController {
   //   return this;
   // }
 
-  createSliderView(i): this {
+  createSliderView(i: number): this {
     this.view.createSlider(i, this.field.isVertical);
     return this;
   }
 
   // createTipNumber(isOn: boolean) {
-  createTipNumber(isOn): this {
+  createTipNumber(isOn: boolean): this {
     if (isOn) {
       this.view.createTipNumber(
         this.sliderCounter,
@@ -175,32 +183,32 @@ export default class SliderController {
     }
   }
 
-  updateSliderPosition(activeSlider): this {
+  updateSliderPosition(activeSlider: Slider): this {
     this.view.updateSliderPosition(activeSlider);
   }
 
-  updateTipNumber(stepValue, instance): this {
+  updateTipNumber(stepValue: number, instance: number): this {
     this.view.updateTipNumber(stepValue, instance);
     return this;
   }
 
-  updateBarPosition(activeSlider): this {
+  updateBarPosition(activeSlider: Slider): this {
     this.view.updateBarPosition(this.isRange, activeSlider);
     return this;
   }
 
   // how to test? read css data-start/end, read this.field.min/max and compare
-  setMaxValue(maxValue): this {
+  setMaxValue(maxValue: number): this {
     this.field.setMinMax(['maxValue', maxValue]);
     return this;
   }
 
-  setMinValue(minValue): this {
+  setMinValue(minValue: number): this {
     this.field.setMinMax(['minValue', minValue]);
     return this;
   }
 
-  setStep(step): this {
+  setStep(step: number): this {
     this.slider.forEach((v) => v.setStep(step));
     if (step < 1) this.slider.forEach((v) => v.defineSignAfterComma(step));
 

@@ -1,7 +1,7 @@
 /* eslint-disable padded-blocks */
 /* eslint-env jquery */
 import '../index.scss';
-import { addSliderToDom, prepareSliderArgs } from './view-modules/createSliderView';
+// import { addSliderToDom, prepareSliderArgs } from './view-modules/createSliderView';
 import { prepareTipNumberArgs, addTipNumberToDom } from './view-modules/createTipNumber';
 import {
   defineBarType,
@@ -10,7 +10,8 @@ import {
   updateSingleHorizontalBarPosition,
   updateRangeBarPosition,
 } from './view-modules/updateBarPosition';
-import addBarToDom from './view-modules/createBar';
+import createBar from './view-modules/createBar';
+import createSlider from './view-modules/createSlider';
 
 export default class SliderView {
   constructor(id) {
@@ -21,6 +22,8 @@ export default class SliderView {
     this.sliderSize = [];
     this.isVertical = false;
     this.stepSignAfterComma = 0;
+    this.createBar = createBar.bind(this);
+    this.createSlider = createSlider.bind(this);
     // this.createSliderViewModules = { addSliderToDom, prepareSliderArgs };
     // this.corrector = 0;
   }
@@ -36,26 +39,8 @@ export default class SliderView {
     }
   }
 
-  createSliderView(i) {
-    addSliderToDom(prepareSliderArgs(i, this.isVertical), this.$field, this.sliderSize);
-    this.setThis$slider();
-  }
-
-  setThis$slider() {
-    this.$slider = this.$field.children('.slider ');
-  }
-
   createTipNumber(i, isVertical) {
     this.updateTextNumber(addTipNumberToDom(prepareTipNumberArgs(i, isVertical), this.$field));
-  }
-
-  createBar() {
-    addBarToDom(this.$field);
-    this.setThis$bar();
-  }
-
-  setThis$bar() {
-    this.$bar = this.$field.children('.slider-bar');
   }
 
   updateBar(isRange, activeSlider) {

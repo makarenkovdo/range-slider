@@ -164,7 +164,7 @@ export default class SliderController {
   // }
 
   createSliderView(i) {
-    this.view.createSliderView(i, this.field.isVertical);
+    this.view.createSlider(i, this.field.isVertical);
     return this;
   }
 

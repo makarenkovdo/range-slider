@@ -2,7 +2,10 @@
 /* eslint-env jquery */
 import '../index.scss';
 // import { addSliderToDom, prepareSliderArgs } from './view-modules/createSliderView';
-import { prepareTipNumberArgs, addTipNumberToDom } from './view-modules/createTipNumber';
+import {
+  prepareTipNumberArgs,
+  addTipNumberToDom,
+} from './view-modules/createTipNumber/createTipNumberUtility';
 import {
   defineBarType,
   calcLengthOfRangeBar,
@@ -12,6 +15,7 @@ import {
 } from './view-modules/updateBarPosition';
 import createBar from './view-modules/createBar';
 import createSlider from './view-modules/createSlider';
+import createTipNumber from './view-modules/createTipNumber';
 
 export default class SliderView {
   constructor(id) {
@@ -24,6 +28,7 @@ export default class SliderView {
     this.stepSignAfterComma = 0;
     this.createBar = createBar.bind(this);
     this.createSlider = createSlider.bind(this);
+    this.createTipNumber = createTipNumber.bind(this);
     // this.createSliderViewModules = { addSliderToDom, prepareSliderArgs };
     // this.corrector = 0;
   }
@@ -37,10 +42,6 @@ export default class SliderView {
     } else {
       this.corrector = (sliderSize[0] / fieldSize[0]) * 50;
     }
-  }
-
-  createTipNumber(i, isVertical) {
-    this.updateTextNumber(addTipNumberToDom(prepareTipNumberArgs(i, isVertical), this.$field));
   }
 
   updateBar(isRange, activeSlider) {

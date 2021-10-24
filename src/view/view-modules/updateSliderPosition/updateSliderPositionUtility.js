@@ -4,7 +4,8 @@ const defineSliderType = (isVertical, updatingSlider) => {
     ['top', 'height'],
   ];
   const { stepPosition, instance } = updatingSlider;
-  let datasForUpdating = { stepPosition, instance, positioning: positioning[0] };
+  const datasForUpdating = { stepPosition, instance, positioning: positioning[0] };
+  // eslint-disable-next-line prefer-destructuring
   if (isVertical) datasForUpdating.positioning = positioning[1];
   return datasForUpdating;
 };

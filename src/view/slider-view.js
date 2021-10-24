@@ -16,6 +16,7 @@ import {
 import createBar from './view-modules/createBar';
 import createSlider from './view-modules/createSlider';
 import createTipNumber from './view-modules/createTipNumber';
+import updateTipNumber from './view-modules/updateTipNumber';
 
 export default class SliderView {
   constructor(id) {
@@ -29,6 +30,7 @@ export default class SliderView {
     this.createBar = createBar.bind(this);
     this.createSlider = createSlider.bind(this);
     this.createTipNumber = createTipNumber.bind(this);
+    this.updateTipNumber = updateTipNumber.bind(this);
     // this.createSliderViewModules = { addSliderToDom, prepareSliderArgs };
     // this.corrector = 0;
   }
@@ -95,7 +97,4 @@ export default class SliderView {
   //         // parseInt(this.$slider.css('width')) / 2
   //     )
   // }
-  updateTextNumber(stepValue, instance) {
-    this.$field.find(`.instance-${instance} span`).text(`${stepValue}`);
-  }
 }

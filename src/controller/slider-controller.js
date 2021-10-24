@@ -119,8 +119,8 @@ export default class SliderController {
       // .correctSliderPosition()
       .setStep(step)
       .createBar(shouldAddBar)
-      .updateText(minValue, 0)
-      .updateText(maxValue, 1)
+      .updateTipNumber(minValue, 0)
+      .updateTipNumber(maxValue, 1)
       .onDrag()
       .onDrop()
       .onClick();
@@ -214,7 +214,7 @@ export default class SliderController {
   recieve(activeSlider) {
     if (activeSlider) {
       this.updatePosition(activeSlider);
-      this.updateText(activeSlider.stepValue, activeSlider.instance);
+      this.updateTipNumber(activeSlider.stepValue, activeSlider.instance);
       if (this.hasBar) this.updateBar(activeSlider);
     }
   }
@@ -223,8 +223,8 @@ export default class SliderController {
     this.view.updatePosition(activeSlider);
   }
 
-  updateText(stepValue, instance) {
-    this.view.updateTextNumber(stepValue, instance);
+  updateTipNumber(stepValue, instance) {
+    this.view.updateTipNumber(stepValue, instance);
     return this;
   }
 

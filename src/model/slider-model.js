@@ -1,7 +1,7 @@
 /* eslint-env jquery */
 
 import calcSignAfterComma from './slider-modules/defineSignAfterComma';
-import activateOnDragListener from './slider-modules/onDrag';
+import { activateOnDragListener, updatePosition } from './slider-modules/onDrag';
 import activateOnDropListener from './slider-modules/onDrop';
 
 class SliderModel {
@@ -19,6 +19,7 @@ class SliderModel {
     this.stepPosition = 0;
     this.stepValue = 0;
     this.subscriber = subscriber;
+    this.updatePosition = updatePosition.bind(this);
   }
 
   //    for small 'steps' we need to define sign quantity after comma
@@ -36,8 +37,8 @@ class SliderModel {
     this.subscriber.recieve(this);
   }
 
-  onDrag(slider, hasRange, field) {
-    activateOnDragListener(this, field, slider, hasRange);
+  onDrag(slider, isRange, field) {
+    activateOnDragListener(this, field, slider, isRange);
   }
 
   // checkBordersCollision(stepPosition, slider) {

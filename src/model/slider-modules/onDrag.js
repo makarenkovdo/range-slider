@@ -8,13 +8,7 @@ import {
   setStepValueAndPosition,
 } from './onDrag/updatePositionUtility';
 
-const updatePosition = (
-  event,
-  { isVertical, minValue, maxValue },
-  slider,
-  hasRange,
-  thisSlider,
-) => {
+const updatePosition = (event, { isVertical, minValue, maxValue }, slider, isRange, thisSlider) => {
   setPositionInPercent(
     thisSlider,
     calculatePositionInPercent(isVertical, thisSlider, event.offsetX, event.offsetY),
@@ -23,7 +17,7 @@ const updatePosition = (
   setValue(thisSlider, calculateValue(minValue, maxValue, thisSlider));
 
   // const returned = thisSlider.checkBordersCollision(stepPosition, slider);
-  if (hasRange) {
+  if (isRange) {
     setStepValueAndPosition(
       thisSlider,
       checkCollision(calculateStepValueAndPosition(thisSlider), slider, thisSlider),
@@ -41,12 +35,12 @@ const onMove = (event) => {
     event,
     event.data.field,
     event.data.slider,
-    event.data.hasRange,
+    event.data.isRange,
     event.data.thisSlider,
   );
 };
 
-const activateOnDragListener = (thisSlider, field, slider, hasRange) => {
+const activateOnDragListener = (thisSlider, field, slider, isRange) => {
   thisSlider.$field.on('mousedown touchstart', `.instance-${thisSlider.instance}`, (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -57,11 +51,11 @@ const activateOnDragListener = (thisSlider, field, slider, hasRange) => {
         thisSlider,
         field,
         slider,
-        hasRange,
+        isRange,
       },
       onMove,
     );
   });
 };
 
-export default activateOnDragListener;
+export { activateOnDragListener, updatePosition };

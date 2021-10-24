@@ -1,3 +1,7 @@
+import notify from './field-modules/notify';
+import onClick from './field-modules/onClick';
+import setMinMax from './field-modules/setMinMax';
+
 /* eslint-env jquery */
 
 export default class FieldModel {
@@ -17,6 +21,9 @@ export default class FieldModel {
     // this.stepPosition = 0
     // this.stepValue = 0
     this.range = [];
+    this.notify = notify.bind(this);
+    this.setMinMax = setMinMax.bind(this);
+    this.onClick = onClick.bind(this);
   }
 
   initDataStartEnd() {
@@ -24,45 +31,5 @@ export default class FieldModel {
     this.$element.attr('data-end', this.maxValue);
 
     return this;
-  }
-
-  notify() {
-    this.subscriber.recieve(this);
-  }
-
-  setMinMax(args) {
-    const [minOrMax, value] = args;
-    if (!value.isNaN && value !== undefined) {
-      this[minOrMax] = value;
-    }
-    return this;
-  }
-
-  onClick(isRange, sliders) {
-    const onClickHandler = (event) => {
-      let nearest = 0;
-      if (isRange) nearest = this.defineNearestSlider(event);
-      sliders[nearest].measurePosition(event, this, sliders, isRange);
-    };
-    $(`#${this.id}`).on('click', onClickHandler);
-  }
-
-  defineNearestSlider(event) {
-    const cursorXY = [event.offsetX, event.offsetY];
-    let positioning = 'left';
-    let xySwitcher = 0;
-    if (this.isVertical) {
-      positioning = 'top';
-      xySwitcher = 1;
-    }
-
-    // prettier-ignore
-    const slidersPosition = [0, 1].map((v) => parseInt($(`#${this.id}`).children(`.slider.instance-${v}`).css(positioning), 10));
-
-    const lengthToFirstSlider = Math.abs(cursorXY[xySwitcher] - slidersPosition[0]);
-    const lengthToSecondSlider = Math.abs(cursorXY[xySwitcher] - slidersPosition[1]);
-    const nearest = lengthToFirstSlider - lengthToSecondSlider < 0 ? 0 : 1;
-
-    return nearest;
   }
 }

@@ -27,12 +27,12 @@ import SliderView from '../view/slider-view';
 //   defineSignAfterComma: () => void;
 //   notify: () => void;
 //   setStep: (a: number) => void;
-//   onDrag: (field: Field, slider: Slider, hasRange: boolean) => void;
+//   onDrag: (field: Field, slider: Slider, isRange: boolean) => void;
 //   measurePosition: (
 //     event: JQuery.TriggeredEvent<HTMLElement>,
 //     field: Field,
 //     slider: Slider,
-//     hasRange: boolean,
+//     isRange: boolean,
 //   ) => void;
 //   checkCollision: (stepPosition: number, stepValue: number, slider: Slider) => void;
 //   checkBordersCollision: (stepPosition: number, slider: Slider) => void;
@@ -192,7 +192,7 @@ export default class SliderController {
 
   // todo NEARES OF TWO RANGES
   onClick() {
-    this.field.onClick(this.isRange, this.slider);
+    this.field.onClick(this.slider, this.isRange);
     this.recieve(this);
     return this;
   }

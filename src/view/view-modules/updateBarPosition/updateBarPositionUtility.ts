@@ -1,5 +1,26 @@
-/* eslint-env jquery */
+import { Slider } from '../../../model/modelInterfaces';
 
+/* eslint-env jquery */
+type DefineBarKindArgsType = {
+  isRange: boolean;
+  activeSlider: Slider;
+  isVertical: boolean;
+  $bar: JQuery<HTMLElement>;
+  $field: JQuery<HTMLElement>;
+  slidersPosition: number;
+  calcLengthOfRangeBar: (slidersPosition: number) => number;
+  updateSingleVerticalBarPosition: (activeSlider: Slider, $bar: JQuery<HTMLElement>) => void;
+  updateSingleHorizontalBarPosition: (activeSlider: Slider, $bar: JQuery<HTMLElement>) => void;
+  updateRangeBarPosition: (
+    a: number,
+    activeSlider: Slider,
+    $bar: JQuery<HTMLElement>,
+    slidersPosition: number,
+    calcLengthOfRangeBar: (slidersPosition: number) => void,
+  ) => void;
+};
+
+//  type rename!
 const defineBarType = ({
   isRange,
   activeSlider,
@@ -11,7 +32,7 @@ const defineBarType = ({
   updateSingleVerticalBarPosition,
   updateSingleHorizontalBarPosition,
   updateRangeBarPosition,
-}) => {
+}: DefineBarKindArgsType): void => {
   if (isRange && isVertical) {
     updateRangeBarPosition(
       1,
@@ -36,7 +57,8 @@ const defineBarType = ({
   return this;
 };
 
-const calcLengthOfRangeBar = (slidersPosition) => Math.abs(slidersPosition[1] - slidersPosition[0]);
+const calcLengthOfRangeBar = (slidersPosition: number): number =>
+  Math.abs(slidersPosition[1] - slidersPosition[0]);
 
 const updateSingleVerticalBarPosition = (activeSlider, $bar) => {
   $bar

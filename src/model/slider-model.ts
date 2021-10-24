@@ -51,7 +51,13 @@ class SliderModel {
 
   initializeDefaultValues: (a: number[]) => void;
 
-  constructor(id, instance, subscriber, sliderSize, $field) {
+  constructor(
+    id: string,
+    instance: number,
+    subscriber: SliderController,
+    sliderSize: number[],
+    $field: JQuery<HTMLElement>,
+  ) {
     this.id = id;
     this.class = $(`#${this.id}`).attr('class');
     this.$field = $field;

@@ -2,13 +2,13 @@ import { Field, Slider } from '../model/modelInterfaces';
 import { View } from '../view/viewInterfaces';
 
 interface ControllerBuildParams {
-  minValue: number;
-  maxValue: number;
-  step: number;
-  shouldAddTip: boolean;
-  shouldAddBar: boolean;
-  isRange: boolean;
-  sliderSize: number[];
+  minValue?: number;
+  maxValue?: number;
+  step?: number;
+  shouldAddTip?: boolean;
+  shouldAddBar?: boolean;
+  isRange?: boolean;
+  sliderSize?: number[];
 }
 
 interface Controller {

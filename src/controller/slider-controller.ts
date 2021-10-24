@@ -34,7 +34,7 @@ export default class SliderController {
 
   // build(params: ControllerBuildParams) {
   // prettier-ignore
-  build(params: ControllerBuildParams) {
+  build(params: ControllerBuildParams):void {
     let {
       minValue = 0,
       maxValue = 100,
@@ -79,7 +79,7 @@ export default class SliderController {
       .onClick();
   }
 
-  initLayers(sliderSize) {
+  initLayers(sliderSize): this {
     this.field.initDataStartEnd(this.field);
     this.view.initializeValues(sliderSize, this.field.size, this.field.isVertical);
     // this.setMaxValue();
@@ -89,7 +89,7 @@ export default class SliderController {
   //  prettier-ignore
   createRangeSlider({
     isRange, shouldAddTip, sliderSize, minValue, maxValue,
-  }) {
+  }): this {
     this.createSliderView(this.sliderCounter);
     this.createSlider(sliderSize, minValue, maxValue);
     this.createTipNumber(shouldAddTip);
@@ -106,7 +106,7 @@ export default class SliderController {
     return this;
   }
 
-  createSlider(sliderSize, minValue, maxValue) {
+  createSlider(sliderSize, minValue, maxValue): this {
     this.slider.push(
       new SliderModel(this.id, this.sliderCounter, this, sliderSize, this.field.$element),
     );
@@ -119,13 +119,13 @@ export default class SliderController {
   //   return this;
   // }
 
-  createSliderView(i) {
+  createSliderView(i): this {
     this.view.createSlider(i, this.field.isVertical);
     return this;
   }
 
   // createTipNumber(isOn: boolean) {
-  createTipNumber(isOn) {
+  createTipNumber(isOn): this {
     if (isOn) {
       this.view.createTipNumber(
         this.sliderCounter,
@@ -137,7 +137,7 @@ export default class SliderController {
     return this;
   }
 
-  createBar(shouldAddBar) {
+  createBar(shouldAddBar: boolean): this {
     if (shouldAddBar) {
       this.hasBar = true;
       this.view.createBar(this);
@@ -147,13 +147,13 @@ export default class SliderController {
   }
 
   // todo NEARES OF TWO RANGES
-  onClick() {
+  onClick(): this {
     this.field.onClick(this.slider, this.isRange);
     this.recieve(this);
     return this;
   }
 
-  onDrag() {
+  onDrag(): this {
     // [this.slider[0].stepPosition]
 
     $(document).ready(() => {
@@ -162,12 +162,12 @@ export default class SliderController {
     return this;
   }
 
-  onDrop() {
+  onDrop(): this {
     this.slider.forEach((v) => v.onDrop(this.field.$element));
     return this;
   }
 
-  recieve(activeSlider) {
+  recieve(activeSlider: Slider): this {
     if (activeSlider) {
       this.updateSliderPosition(activeSlider);
       this.updateTipNumber(activeSlider.stepValue, activeSlider.instance);
@@ -175,32 +175,32 @@ export default class SliderController {
     }
   }
 
-  updateSliderPosition(activeSlider) {
+  updateSliderPosition(activeSlider): this {
     this.view.updateSliderPosition(activeSlider);
   }
 
-  updateTipNumber(stepValue, instance) {
+  updateTipNumber(stepValue, instance): this {
     this.view.updateTipNumber(stepValue, instance);
     return this;
   }
 
-  updateBarPosition(activeSlider) {
+  updateBarPosition(activeSlider): this {
     this.view.updateBarPosition(this.isRange, activeSlider);
     return this;
   }
 
   // how to test? read css data-start/end, read this.field.min/max and compare
-  setMaxValue(maxValue) {
+  setMaxValue(maxValue): this {
     this.field.setMinMax(['maxValue', maxValue]);
     return this;
   }
 
-  setMinValue(minValue) {
+  setMinValue(minValue): this {
     this.field.setMinMax(['minValue', minValue]);
     return this;
   }
 
-  setStep(step) {
+  setStep(step): this {
     this.slider.forEach((v) => v.setStep(step));
     if (step < 1) this.slider.forEach((v) => v.defineSignAfterComma(step));
 

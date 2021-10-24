@@ -3,72 +3,101 @@ import FieldModel from '../model/field-model';
 import SliderModel from '../model/slider-model';
 import SliderView from '../view/slider-view';
 
-// interface Field {
-//   isRange: boolean;
-//   init: () => void;
-// }
-// interface Controller {
-//   isRange: boolean;
-//   init: () => void;
-// }
-// interface Slider {
-//   id: string;
-//   instance: number;
-//   $element: string;
-//   class: string;
-//   positionInPercent: number;
-//   value: number;
-//   step: number;
-//   stepSignAfterComma: number;
-//   stepPosition: number;
-//   stepValue: number;
-//   subscriber: Function;
-//   init: (a: number, b: number) => void;
-//   defineSignAfterComma: () => void;
-//   notify: () => void;
-//   setStep: (a: number) => void;
-//   onDrag: (field: Field, slider: Slider, isRange: boolean) => void;
-//   measurePosition: (
-//     event: JQuery.TriggeredEvent<HTMLElement>,
-//     field: Field,
-//     slider: Slider,
-//     isRange: boolean,
-//   ) => void;
-//   checkCollision: (stepPosition: number, stepValue: number, slider: Slider) => void;
-//   checkBordersCollision: (stepPosition: number, slider: Slider) => void;
-//   onDrop: () => void;
-// }
-// interface View {
-//   id: string;
-//   $element: string;
-//   $parent: string;
-//   isVertical: boolean;
-//   stepSignAfterComma: number;
-//   addSlider(i, isVert, minMax);
-//   init: (a: number, b: number) => void;
-//   defineSignAfterComma: () => void;
-//   notify: () => void;
-//   initValues: () => void;
-// }
-// interface ControllerBuildParams {}
+interface Field {
+  $element: JQuery<HTMLElement>;
 
-export default class SliderController {
-  // id: string;
+  class: string;
 
-  // hasBar: boolean;
+  size: Array<string>;
 
-  // isRange: boolean;
+  id: string;
 
-  // sliderCounter: number;
+  minValue: number;
 
-  // field: Field;
+  maxValue: number;
 
-  // slider: Array<Slider>;
+  step: number;
 
-  // view: View;
+  stepSignAfterComma: number;
 
-  // constructor(id: string, params?: ControllerBuildParams) {
-  constructor(id, params = {}) {
+  isVertical: boolean;
+
+  isRange: boolean;
+
+  subscriber: object;
+
+  isBarAdded: boolean;
+
+  range: [];
+
+  notify: () => void;
+
+  setMinMax: () => void;
+
+  onClick: () => void;
+
+  initDataStartEnd: (field: Field) => void;
+}
+interface Controller {
+  isRange: boolean;
+}
+interface Slider {
+  id: string;
+  instance: number;
+  $element: string;
+  class: string;
+  positionInPercent: number;
+  value: number;
+  step: number;
+  stepSignAfterComma: number;
+  stepPosition: number;
+  stepValue: number;
+  subscriber: Function;
+  init: (a: number, b: number) => void;
+  defineSignAfterComma: () => void;
+  notify: () => void;
+  setStep: (a: number) => void;
+  onDrag: (field: Field, slider: Slider, isRange: boolean) => void;
+  measurePosition: (
+    event: JQuery.TriggeredEvent<HTMLElement>,
+    field: Field,
+    slider: Slider,
+    isRange: boolean,
+  ) => void;
+  checkCollision: (stepPosition: number, stepValue: number, slider: Slider) => void;
+  checkBordersCollision: (stepPosition: number, slider: Slider) => void;
+  onDrop: () => void;
+}
+interface View {
+  id: string;
+  $element: string;
+  $parent: string;
+  isVertical: boolean;
+  stepSignAfterComma: number;
+  addSlider(i, isVert, minMax);
+  init: (a: number, b: number) => void;
+  defineSignAfterComma: () => void;
+  notify: () => void;
+  initValues: () => void;
+}
+interface ControllerBuildParams {}
+
+export default class SliderController implements Controller {
+  id: string;
+
+  hasBar: boolean;
+
+  isRange: boolean;
+
+  sliderCounter: number;
+
+  field: Field;
+
+  slider: Array<Slider>;
+
+  view: View;
+
+  constructor(id: string, params: ControllerBuildParams = {}) {
     this.id = id;
     this.hasBar = false;
     this.isRange = false;

@@ -6,6 +6,40 @@ import setMinMax from './field-modules/setMinMax';
 /* eslint-env jquery */
 
 export default class FieldModel {
+  $element: JQuery<HTMLElement>;
+
+  class: string;
+
+  size: Array<string>;
+
+  id: string;
+
+  minValue: number;
+
+  maxValue: number;
+
+  step: number;
+
+  stepSignAfterComma: number;
+
+  isVertical: boolean;
+
+  isRange: boolean;
+
+  subscriber: object;
+
+  isBarAdded: boolean;
+
+  range: [];
+
+  notify: () => void;
+
+  setMinMax: () => void;
+
+  onClick: () => void;
+
+  initDataStartEnd: () => void;
+
   constructor(id, subscriber) {
     this.$element = $(`#${id}`);
     this.class = this.$element.attr('class');
@@ -19,7 +53,7 @@ export default class FieldModel {
     this.isRange = false;
     this.subscriber = subscriber;
     this.isBarAdded = false;
-    this.range = [];
+    this.range = []; // ?????????????????????????
 
     this.notify = notify.bind(this);
     this.setMinMax = setMinMax.bind(this);

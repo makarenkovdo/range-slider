@@ -1,5 +1,5 @@
 import SliderController from '../controller/slider-controller';
-import { InitDataStartEndArgs } from './field-modules/fieldModulesInterfaces';
+import InitDataStartEndArgs from './field-modules/fieldModulesInterfaces';
 import notify from './field-modules/notify';
 import onClick from './field-modules/onClick';
 import initDataStartEnd from './field-modules/setDataStartEnd';

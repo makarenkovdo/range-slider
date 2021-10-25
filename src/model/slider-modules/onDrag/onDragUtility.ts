@@ -1,3 +1,5 @@
+import FieldModel from '../../field-model';
+import SliderModel from '../../slider-model';
 import {
   checkCollision,
   calculatePositionInPercent,
@@ -8,7 +10,27 @@ import {
   setStepValueAndPosition,
 } from './updatePositionUtility';
 
-const updatePosition = (event, { isVertical, minValue, maxValue }, slider, isRange, thisSlider) => {
+type UpdatePositionSubargsType = {
+  isVertical: boolean;
+  minValue: number;
+  maxValue: number;
+};
+// type UpdatePositionArgsType = {
+//   event: JQuery.DragEvent | JQuery.ClickEvent;
+//   obj:UpdatePositionSubargsType;
+//   field: FieldModel;
+//   slider: SliderModel[];
+//   isRange: boolean;
+//   thisSlider: SliderModel;
+// };
+
+const updatePosition = (
+  event: JQuery.DragEvent | JQuery.ClickEvent,
+  { isVertical, minValue, maxValue }: UpdatePositionSubargsType,
+  slider: SliderModel[],
+  isRange: boolean,
+  thisSlider: SliderModel,
+): void => {
   setPositionInPercent(
     thisSlider,
     calculatePositionInPercent(isVertical, thisSlider, event.offsetX, event.offsetY),
@@ -28,7 +50,7 @@ const updatePosition = (event, { isVertical, minValue, maxValue }, slider, isRan
   thisSlider.notify(this);
 };
 
-const onMove = (event) => {
+const onMove = (event: JQuery.ClickEvent) => {
   event.preventDefault();
   event.stopPropagation();
   updatePosition(
@@ -40,22 +62,31 @@ const onMove = (event) => {
   );
 };
 
-const activateOnDragListener = (thisSlider, field, slider, isRange) => {
-  thisSlider.$field.on('mousedown touchstart', `.instance-${thisSlider.instance}`, (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    thisSlider.$field.addClass('tap');
-    thisSlider.$field.on(
-      'mousemove touchmove',
-      {
-        thisSlider,
-        field,
-        slider,
-        isRange,
-      },
-      onMove,
-    );
-  });
+const activateOnDragListener = (
+  thisSlider: SliderModel,
+  field: FieldModel,
+  slider: SliderModel[],
+  isRange: boolean,
+): void => {
+  thisSlider.$field.on(
+    'mousedown touchstart',
+    `.instance-${thisSlider.instance}`,
+    (event: JQuery.DragEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
+      thisSlider.$field.addClass('tap');
+      thisSlider.$field.on(
+        'mousemove touchmove',
+        {
+          thisSlider,
+          field,
+          slider,
+          isRange,
+        },
+        onMove,
+      );
+    },
+  );
 };
 
 export { activateOnDragListener, updatePosition };

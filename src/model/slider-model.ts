@@ -44,7 +44,7 @@ class SliderModel {
 
   onDrop: ($element: JQuery<HTMLElement>) => void;
 
-  notify: () => void;
+  notify: (that: SliderModel) => void;
 
   setStep: (step: number) => void;
 

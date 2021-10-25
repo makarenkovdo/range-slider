@@ -53,13 +53,14 @@ const updatePosition = (
 const onMove = (event: JQuery.ClickEvent) => {
   event.preventDefault();
   event.stopPropagation();
-  updatePosition(
-    event,
-    event.data.field,
-    event.data.slider,
-    event.data.isRange,
-    event.data.thisSlider,
-  );
+  type EventDataType = {
+    field: FieldModel;
+    slider: SliderModel[];
+    isRange: boolean;
+    thisSlider: SliderModel;
+  };
+  const eventData = event.data as EventDataType;
+  updatePosition(event, eventData.field, eventData.slider, eventData.isRange, eventData.thisSlider);
 };
 
 const activateOnDragListener = (

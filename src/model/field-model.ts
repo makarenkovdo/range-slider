@@ -4,6 +4,7 @@ import notify from './field-modules/notify';
 import onClick from './field-modules/onClick';
 import initDataStartEnd from './field-modules/setDataStartEnd';
 import setMinMax from './field-modules/setMinMax';
+import { Slider } from './modelInterfaces';
 
 /* eslint-env jquery */
 
@@ -28,7 +29,7 @@ export default class FieldModel {
 
   isRange: boolean;
 
-  subscriber: object;
+  subscriber: SliderController;
 
   isBarAdded: boolean;
 
@@ -36,9 +37,9 @@ export default class FieldModel {
 
   notify: () => void;
 
-  setMinMax: () => void;
+  setMinMax: (minMax: Array<string | number>) => void;
 
-  onClick: () => void;
+  onClick: (slider: Slider[], isRange: boolean) => void;
 
   initDataStartEnd: (a: InitDataStartEndArgs) => void;
 
@@ -57,9 +58,9 @@ export default class FieldModel {
     this.isBarAdded = false;
     this.range = []; // ?????????????????????????
 
-    this.notify = notify.bind(this);
-    this.setMinMax = setMinMax.bind(this);
-    this.onClick = onClick.bind(this);
-    this.initDataStartEnd = initDataStartEnd;
+    this.notify = notify.bind(this) as () => void;
+    this.setMinMax = setMinMax.bind(this) as () => void;
+    this.onClick = onClick.bind(this) as () => void;
+    this.initDataStartEnd = initDataStartEnd as () => void;
   }
 }

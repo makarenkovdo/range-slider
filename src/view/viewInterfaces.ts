@@ -33,4 +33,4 @@ interface View {
   initializeValues: (sliderSize: number[], size: string[], isVertical: boolean) => void;
 }
 
-export { View };
+export default View;

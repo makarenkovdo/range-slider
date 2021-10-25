@@ -1,9 +1,9 @@
 /* eslint-env jquery */
 import FieldModel from '../model/field-model';
-import { Field, Slider } from '../model/modelInterfaces';
+import { Slider } from '../model/modelInterfaces';
 import SliderModel from '../model/slider-model';
 import SliderView from '../view/slider-view';
-import { View } from '../view/viewInterfaces';
+import View from '../view/viewInterfaces';
 import { ControllerBuildParams } from './controllerInterfaces';
 
 type CreateRangeSliderArgsType = {
@@ -23,9 +23,9 @@ export default class SliderController {
 
   sliderCounter: number;
 
-  field: Field;
+  field: FieldModel;
 
-  slider: Array<Slider>;
+  slider: Array<SliderModel>;
 
   view: View;
 
@@ -87,7 +87,7 @@ export default class SliderController {
       .onClick();
   }
 
-  initLayers(sliderSize): this {
+  initLayers(sliderSize: number[]): this {
     this.field.initDataStartEnd(this.field);
     this.view.initializeValues(sliderSize, this.field.size, this.field.isVertical);
     // this.setMaxValue();
@@ -157,7 +157,7 @@ export default class SliderController {
   // todo NEARES OF TWO RANGES
   onClick(): this {
     this.field.onClick(this.slider, this.isRange);
-    this.recieve(this);
+    // this.recieve(this); // ? is it needed? or it call from onDrag notify?
     return this;
   }
 
@@ -165,7 +165,8 @@ export default class SliderController {
     // [this.slider[0].stepPosition]
 
     $(document).ready(() => {
-      this.recieve(this.slider.forEach((v) => v.onDrag(this.slider, this.isRange, this.field)));
+      // this.recieve(this.slider.forEach((v) => v.onDrag(this.slider, this.isRange, this.field)));
+      this.slider.forEach((v) => v.onDrag(this.slider, this.isRange, this.field));
     });
     return this;
   }
@@ -175,7 +176,7 @@ export default class SliderController {
     return this;
   }
 
-  recieve(activeSlider: Slider): this {
+  recieve(activeSlider: Slider): void {
     if (activeSlider) {
       this.updateSliderPosition(activeSlider);
       this.updateTipNumber(activeSlider.stepValue, activeSlider.instance);
@@ -183,7 +184,7 @@ export default class SliderController {
     }
   }
 
-  updateSliderPosition(activeSlider: Slider): this {
+  updateSliderPosition(activeSlider: Slider): void {
     this.view.updateSliderPosition(activeSlider);
   }
 

@@ -7,16 +7,16 @@ type DefineBarKindArgsType = {
   isVertical: boolean;
   $bar: JQuery<HTMLElement>;
   $field: JQuery<HTMLElement>;
-  slidersPosition: number;
-  calcLengthOfRangeBar: (slidersPosition: number) => number;
+  slidersPosition: number[];
+  calcLengthOfRangeBar: (slidersPosition: number[]) => number;
   updateSingleVerticalBarPosition: (activeSlider: Slider, $bar: JQuery<HTMLElement>) => void;
   updateSingleHorizontalBarPosition: (activeSlider: Slider, $bar: JQuery<HTMLElement>) => void;
   updateRangeBarPosition: (
     a: number,
     activeSlider: Slider,
     $bar: JQuery<HTMLElement>,
-    slidersPosition: number,
-    calcLengthOfRangeBar: (slidersPosition: number) => void,
+    slidersPosition: number[],
+    calcLengthOfRangeBar: (slidersPosition: number[]) => void,
   ) => void;
 };
 
@@ -57,20 +57,31 @@ const defineBarType = ({
   return this;
 };
 
-const calcLengthOfRangeBar = (slidersPosition: number): number =>
-  Math.abs(slidersPosition[1] - slidersPosition[0]);
+// prettier-ignore
+const calcLengthOfRangeBar = (slidersPosition: number[]): number => {
+  return Math.abs(slidersPosition[1] - slidersPosition[0]);
+};
 
-const updateSingleVerticalBarPosition = (activeSlider, $bar) => {
+const updateSingleVerticalBarPosition = (activeSlider: Slider, $bar: JQuery<HTMLElement>): void => {
   $bar
     .css('height', `${activeSlider.stepPosition}%`)
     .css('top', `${100 - activeSlider.stepPosition}%`);
 };
 
-const updateSingleHorizontalBarPosition = (activeSlider, $bar) => {
+const updateSingleHorizontalBarPosition = (
+  activeSlider: Slider,
+  $bar: JQuery<HTMLElement>,
+): void => {
   $(document).ready(() => $bar.css('width', `${activeSlider.stepPosition}%`));
 };
 
-const updateRangeBarPosition = (index, activeSlider, $bar, slidersPosition, barLength) => {
+const updateRangeBarPosition = (
+  index: number,
+  activeSlider: Slider,
+  $bar: JQuery<HTMLElement>,
+  slidersPosition: number[],
+  barLength: number,
+): void => {
   const positioningSwitcher = [
     ['left', 'width'],
     ['top', 'height'],
@@ -80,7 +91,7 @@ const updateRangeBarPosition = (index, activeSlider, $bar, slidersPosition, barL
   const positionAndLengthSwitcher = [Math.abs(100 * index - slidersPosition[index]), barLength];
 
   positioningSwitcher[index].forEach((v, i) => {
-    $bar.css(`${v}`, positionAndLengthSwitcher[i] + '%');
+    $bar.css(`${v}`, `${positionAndLengthSwitcher[i]}%`);
   });
 };
 

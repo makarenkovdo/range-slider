@@ -4,4 +4,4 @@ interface InitDataStartEndArgs {
   maxValue: number;
 }
 
-export { InitDataStartEndArgs };
+export default InitDataStartEndArgs;

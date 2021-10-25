@@ -1,6 +1,7 @@
 /* eslint-env jquery */
 
 import SliderController from '../controller/slider-controller';
+import FieldModel from './field-model';
 import { Field, Slider } from './modelInterfaces';
 import defineSignAfterComma from './slider-modules/defineSignAfterComma';
 import initializeDefaultValues from './slider-modules/initializeDefaultValues';
@@ -19,7 +20,7 @@ class SliderModel {
 
   instance: number;
 
-  $slider: string | JQuery<HTMLElement>;
+  $slider: JQuery<HTMLElement>;
 
   size: number[];
 
@@ -47,7 +48,13 @@ class SliderModel {
 
   setStep: (step: number) => void;
 
-  updatePosition: () => void;
+  updatePosition: (
+    event: JQuery.ClickEvent,
+    field: FieldModel,
+    sliders: SliderModel[],
+    isRange: boolean,
+    slider: SliderModel,
+  ) => void;
 
   initializeDefaultValues: (a: number[]) => void;
 
@@ -62,7 +69,7 @@ class SliderModel {
     this.class = $(`#${this.id}`).attr('class');
     this.$field = $field;
     this.instance = instance;
-    this.$slider = '';
+    // this.$slider = '';
     this.size = sliderSize;
     this.positionInPercent = 0;
     this.value = 0;

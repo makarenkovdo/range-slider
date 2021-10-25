@@ -1,6 +1,8 @@
-const setMinMax = function setMinimalMaximunSize(args) {
+import FieldModel from '../field-model';
+
+const setMinMax = function setMinimalMaximun(this: FieldModel, args: [string, number]): FieldModel {
   const [minOrMax, value] = args;
-  if (!value.isNaN && value !== undefined) {
+  if (value !== undefined) {
     this[minOrMax] = value;
   }
   return this;

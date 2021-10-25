@@ -21,7 +21,7 @@ interface Field {
 
   isRange: boolean;
 
-  subscriber: object;
+  subscriber: SliderController;
 
   isBarAdded: boolean;
 

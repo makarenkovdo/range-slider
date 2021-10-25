@@ -1,4 +1,6 @@
-const notify = function notifySubscribers() {
+import FieldModel from '../field-model';
+
+const notify = function notifySubscribers(this: FieldModel): void {
   this.subscriber.recieve(this);
 };
 

@@ -42,7 +42,7 @@ const updatePosition = (
   if (isRange) {
     setStepValueAndPosition(
       thisSlider,
-      checkCollision(calculateStepValueAndPosition(thisSlider), slider, thisSlider),
+      checkCollision(calculateStepValueAndPosition(thisSlider), slider, thisSlider, isVertical),
     );
   } else {
     setStepValueAndPosition(thisSlider, calculateStepValueAndPosition(thisSlider));

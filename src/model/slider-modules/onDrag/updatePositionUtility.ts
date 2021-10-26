@@ -39,29 +39,34 @@ const checkCollision = (
   { stepPosition, stepValue }:CheckCollisionSubargsType,
   slider:SliderModel[],
   thisSlider:SliderModel,
+  isVertical:boolean,
 ):CheckCollisionSubargsType => {
-  const isCollisionFirst = () => (thisSlider.instance === 0
-  // const isCollisionFirst = () => (!thisSlider.isVertical && thisSlider.instance === 0
+  // const isCollisionFirst = () => (thisSlider.instance === 0
+  const isCollisionFirst = () => (!isVertical && thisSlider.instance === 0
       && stepPosition - slider[1].stepPosition >= 0)
-        || (thisSlider && thisSlider.instance === 0 // thisSlider hasn't isVertical!!!
-        // || (thisSlider.isVertical && thisSlider.instance === 0 // thisSlider hasn't isVertical!
+        // || (thisSlider && thisSlider.instance === 0 // thisSlider hasn't isVertical!!!
+        || (isVertical && thisSlider.instance === 0 // thisSlider hasn't isVertical!
             && stepPosition - slider[1].stepPosition <= 0);
 
   // prettier-ignore
   const isCollisionSecond = () => (
-    // (!thisSlider.isVertical && thisSlider.instance === 1
-    (thisSlider.instance === 1
+    (!isVertical && thisSlider.instance === 1
+    // (thisSlider.instance === 1
         && stepPosition - slider[0].stepPosition <= 0)
-        || (thisSlider.instance === 0
-        // || (thisSlider.isVertical && thisSlider.instance === 0
+        // || (thisSlider.instance === 0
+        || (isVertical && thisSlider.instance === 0
             && stepPosition - slider[0].stepPosition >= 0)
   );
 
   if (isCollisionFirst()) {
+    console.log('sdfsdfsdf');
+
     const a = { stepPosition: slider[1].stepPosition, stepValue: slider[1].stepValue };
     return a;
   // eslint-disable-next-line no-else-return
   } else if (isCollisionSecond()) {
+    console.log('sdf');
+
     const a = { stepPosition: slider[0].stepPosition, stepValue: slider[0].stepValue };
     return a;
   } else {

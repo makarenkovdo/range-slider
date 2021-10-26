@@ -1,3 +1,5 @@
+import { UpdateTipNumberArgs } from '../../viewInterfaces';
+
 export type PreparedDataType = {
   i: number;
   positioning: string;
@@ -20,12 +22,12 @@ const prepareTipNumberArgs = (i: number, isVertical: boolean): PreparedDataType 
 const addTipNumberToDOM = (
   preparedData: PreparedDataType,
   $id: JQuery<HTMLElement>,
-): { minMax: number; i: number } => {
+): UpdateTipNumberArgs => {
   const { i, positioning, minMax } = preparedData;
   $id.append(
     `<span class='tip-number instance-${i}' style="${positioning}:${minMax}%"><span>0</span></span>`,
   );
-  return { minMax, i };
+  return { stepValue: minMax, instance: i };
 };
 
 export { prepareTipNumberArgs, addTipNumberToDOM };

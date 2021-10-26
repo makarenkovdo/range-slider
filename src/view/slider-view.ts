@@ -11,6 +11,7 @@ import updateSliderPosition from './view-modules/updateSliderPosition';
 import initializeValues from './view-modules/initializeValues';
 import SliderController from '../controller/slider-controller';
 import SliderModel from '../model/slider-model';
+import { UpdateTipNumberArgs } from './viewInterfaces';
 
 export default class SliderView {
   $field: JQuery<HTMLElement>;
@@ -39,7 +40,7 @@ export default class SliderView {
 
   updateBarPosition: (isRange: boolean, activeSlider: SliderModel) => void;
 
-  updateTipNumber: (stepValue: number, instance: number) => void;
+  updateTipNumber: (obj: UpdateTipNumberArgs) => void;
 
   updateSliderPosition: (activeSlider: SliderModel) => void;
 

@@ -2,7 +2,7 @@
 import FieldModel from '../model/field-model';
 import SliderModel from '../model/slider-model';
 import SliderView from '../view/slider-view';
-import { ControllerBuildParams } from './controllerInterfaces';
+import ControllerBuildParams from './controllerInterfaces';
 
 type CreateRangeSliderArgsType = {
   isRange: boolean;
@@ -187,7 +187,7 @@ export default class SliderController {
   }
 
   updateTipNumber(stepValue: number, instance: number): this {
-    this.view.updateTipNumber(stepValue, instance);
+    this.view.updateTipNumber({ stepValue, instance });
     return this;
   }
 

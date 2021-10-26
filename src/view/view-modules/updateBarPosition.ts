@@ -1,7 +1,7 @@
 import SliderModel from '../../model/slider-model';
 import SliderView from '../slider-view';
 import {
-  defineBarType,
+  defineBarKind,
   calcLengthOfRangeBar,
   updateSingleVerticalBarPosition,
   updateSingleHorizontalBarPosition,
@@ -13,7 +13,7 @@ const updateBarPosition = function updateBarPositionToDOM(
   isRange: boolean,
   activeSlider: SliderModel,
 ): void {
-  defineBarType({
+  defineBarKind({
     isRange,
     activeSlider,
     isVertical: this.isVertical,

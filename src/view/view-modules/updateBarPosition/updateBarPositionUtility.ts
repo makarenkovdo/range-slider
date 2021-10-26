@@ -2,12 +2,11 @@ import SliderModel from '../../../model/slider-model';
 import { DefineBarKindArgsType } from '../../viewInterfaces';
 
 enum NumbersEnum {
-  one = 1,
   zero = 0,
+  one = 1,
 }
 /* eslint-env jquery */
-//  defineBarType rename to defineBarKind!
-const defineBarType = ({
+const defineBarKind = ({
   isRange,
   activeSlider,
   isVertical,
@@ -74,7 +73,8 @@ const updateRangeBarPosition = (
     ['top', 'height'],
   ];
 
-  //  helpVariable for rotation left/top value
+  //  helpVariable for rotation left/top with width/height value
+
   const positionAndLengthSwitcher = [Math.abs(100 * index - slidersPosition[index]), barLength];
 
   positioningSwitcher[index].forEach((v, i) => {
@@ -83,7 +83,7 @@ const updateRangeBarPosition = (
 };
 
 export {
-  defineBarType,
+  defineBarKind,
   calcLengthOfRangeBar,
   updateSingleVerticalBarPosition,
   updateSingleHorizontalBarPosition,

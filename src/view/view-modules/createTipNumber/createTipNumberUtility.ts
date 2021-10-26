@@ -1,10 +1,10 @@
-type PreparedDataType = {
+export type PreparedDataType = {
   i: number;
   positioning: string;
   minMax: number;
 };
 
-const prepareTipNumberArgs = (i, isVertical) => {
+const prepareTipNumberArgs = (i: number, isVertical: boolean): PreparedDataType => {
   let positioning = 'left'; // for horizontal
   let minMax = 100 * i; // i=0 for instance=0 and i=100 for instance=1
 
@@ -14,7 +14,7 @@ const prepareTipNumberArgs = (i, isVertical) => {
   }
 
   //  set min = 0%, max = 100% for left/top positions
-  return { i, positioning, minMax };
+  return { i, positioning, minMax } as PreparedDataType;
 };
 
 const addTipNumberToDOM = (

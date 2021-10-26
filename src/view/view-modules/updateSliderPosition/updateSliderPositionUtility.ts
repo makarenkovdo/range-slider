@@ -1,4 +1,9 @@
-const defineSliderType = (isVertical, updatingSlider) => {
+import SliderModel from '../../../model/slider-model';
+import SliderView from '../../slider-view';
+
+type DatasForUpdating = { stepPosition: number; instance: number; positioning: string[] };
+
+const defineSliderType = (isVertical: boolean, updatingSlider: SliderModel): DatasForUpdating => {
   const positioning = [
     ['left', 'width'],
     ['top', 'height'],
@@ -9,23 +14,30 @@ const defineSliderType = (isVertical, updatingSlider) => {
   if (isVertical) datasForUpdating.positioning = positioning[1];
   return datasForUpdating;
 };
-
-const setThisSliderPosition = function setThisSliderPositionToThis({ instance, stepPosition }) {
+type SetThisSliderPositionArgs = {
+  instance: number;
+  stepPosition: number;
+};
+const setThisSliderPosition = function setThisSliderPositionToThis(
+  this: SliderView,
+  { instance, stepPosition }: SetThisSliderPositionArgs,
+): void {
   this.slidersPosition[instance] = stepPosition;
 };
 
+//  prettier-ignore
 // getting the percent of sliderWidth to fieldWidth
-const calculatePreperatoryPosition = ($field, positioning) => {
-  console.log(positioning);
-  return (
-    (parseInt($field.children('.slider').css(positioning[1]), 10) /
-      parseInt($field.css(positioning[1]), 10)) *
-    50
-  );
-};
+const calculatePreperatoryPosition = ($field: JQuery<HTMLElement>, positioning: string[]):number => (parseInt($field.children('.slider').css(positioning[1]), 10)
+    / parseInt($field.css(positioning[1]), 10))
+    * 50;
+
+type UpdatePositionToDOMArgs = { stepPosition: number; instance: number; positioning: string[] };
 
 // prettier-ignore
-const updatePositionToDOM = ({ stepPosition, instance, positioning }, isVertical, $field) => { 
+const updatePositionToDOM = (
+  { stepPosition, instance, positioning }:UpdatePositionToDOMArgs,
+  isVertical:boolean, $field:JQuery<HTMLElement>,
+):void => {
   const preperatoryPosition = calculatePreperatoryPosition($field, positioning);
   const getVerticalPosition = () => `${100 - stepPosition - preperatoryPosition}%`;
   const getHorizontalPosition = () => `${stepPosition - preperatoryPosition}%`;

@@ -18,7 +18,6 @@ const updateBarPosition = function updateBarPositionToDOM(
     activeSlider,
     isVertical: this.isVertical,
     $bar: this.$bar,
-    $field: this.$field,
     slidersPosition: this.slidersPosition,
     calcLengthOfRangeBar,
     updateSingleVerticalBarPosition,

@@ -12,11 +12,11 @@ type DefineBarKindArgsType = {
   updateSingleVerticalBarPosition: (activeSlider: SliderModel, $bar: JQuery<HTMLElement>) => void;
   updateSingleHorizontalBarPosition: (activeSlider: SliderModel, $bar: JQuery<HTMLElement>) => void;
   updateRangeBarPosition: (
-    a: number,
+    a: number, // todo enum
     activeSlider: SliderModel,
     $bar: JQuery<HTMLElement>,
     slidersPosition: number[],
-    calcLengthOfRangeBar: (slidersPosition: number[]) => void,
+    calcLengthOfRangeBar: (slidersPosition: number[]) => number,
   ) => void;
 };
 
@@ -26,7 +26,6 @@ const defineBarType = ({
   activeSlider,
   isVertical,
   $bar,
-  $field,
   slidersPosition,
   calcLengthOfRangeBar,
   updateSingleVerticalBarPosition,
@@ -35,7 +34,7 @@ const defineBarType = ({
 }: DefineBarKindArgsType): void => {
   if (isRange && isVertical) {
     updateRangeBarPosition(
-      1,
+      1, // todo enum
       activeSlider,
       $bar,
       slidersPosition,
@@ -58,9 +57,8 @@ const defineBarType = ({
 };
 
 // prettier-ignore
-const calcLengthOfRangeBar = (slidersPosition: number[]): number => {
-  return Math.abs(slidersPosition[1] - slidersPosition[0]);
-};
+const calcLengthOfRangeBar = (slidersPosition: number[]): number => Math.abs(slidersPosition[1]
+  - slidersPosition[0]);
 
 const updateSingleVerticalBarPosition = (
   activeSlider: SliderModel,

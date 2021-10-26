@@ -1,9 +1,9 @@
 import SliderView from '../slider-view';
+import { UpdateTipNumberArgs } from '../viewInterfaces';
 
 const updateTipNumber = function updateTipNumberAtDOM(
   this: SliderView,
-  stepValue: number,
-  instance: number,
+  { stepValue, instance }: UpdateTipNumberArgs,
 ): void {
   this.$field.find(`.instance-${instance} span`).text(`${stepValue}`);
 };

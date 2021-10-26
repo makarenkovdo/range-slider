@@ -59,14 +59,10 @@ const checkCollision = (
   );
 
   if (isCollisionFirst()) {
-    console.log('sdfsdfsdf');
-
     const a = { stepPosition: slider[1].stepPosition, stepValue: slider[1].stepValue };
     return a;
   // eslint-disable-next-line no-else-return
   } else if (isCollisionSecond()) {
-    console.log('sdf');
-
     const a = { stepPosition: slider[0].stepPosition, stepValue: slider[0].stepValue };
     return a;
   } else {

@@ -1,10 +1,11 @@
-import { Field, Slider } from '../modelInterfaces';
+import FieldModel from '../field-model';
+import SliderModel from '../slider-model';
 import { activateOnDragListener } from './onDrag/onDragUtility';
 
 const onDrag = function activateOnDragUpdatingPosition(
-  slider: Slider[],
+  slider: SliderModel[],
   isRange: boolean,
-  field: Field,
+  field: FieldModel,
 ): void {
   activateOnDragListener(this, field, slider, isRange);
 };

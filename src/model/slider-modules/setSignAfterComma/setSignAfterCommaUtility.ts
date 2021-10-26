@@ -1,7 +1,6 @@
-import { Slider } from '../../modelInterfaces';
 import SliderModel from '../../slider-model';
 
-const calcSignAfterComma = ({ step }: Slider): number => {
+const calcSignAfterComma = ({ step }: SliderModel): number => {
   if (step.toString().includes('.')) {
     return step
       .toString()

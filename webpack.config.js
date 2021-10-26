@@ -52,7 +52,13 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [['@babel/preset-env', { exclude: ['proposal-dynamic-import'] }]],
+            presets: [
+              [
+                '@babel/preset-env',
+                { exclude: ['proposal-dynamic-import'] },
+                '@babel/preset-typescript',
+              ],
+            ],
           },
         },
       },

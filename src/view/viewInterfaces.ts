@@ -8,7 +8,6 @@ type DefineBarKindArgsType = {
   activeSlider: SliderModel;
   isVertical: boolean;
   $bar: JQuery<HTMLElement>;
-  $field: JQuery<HTMLElement>;
   slidersPosition: number[];
   calcLengthOfRangeBar: (slidersPosition: number[]) => number;
   updateSingleVerticalBarPosition: (activeSlider: SliderModel, $bar: JQuery<HTMLElement>) => void;
@@ -18,7 +17,7 @@ type DefineBarKindArgsType = {
     activeSlider: SliderModel,
     $bar: JQuery<HTMLElement>,
     slidersPosition: number[],
-    calcLengthOfRangeBar: (slidersPosition: number[]) => number,
+    barLength: number,
   ) => void;
 };
 export { AddTipNumberToDOMReturned, UpdateTipNumberArgs, DefineBarKindArgsType };

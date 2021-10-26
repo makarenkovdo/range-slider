@@ -147,6 +147,7 @@ export default class SliderController {
     if (shouldAddBar) {
       this.hasBar = true;
       this.view.createBar(this);
+      this.view.updateBarPosition(this.isRange, this.slider[0]);
     }
 
     return this;

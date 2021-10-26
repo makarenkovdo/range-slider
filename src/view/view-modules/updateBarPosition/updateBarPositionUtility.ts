@@ -1,25 +1,11 @@
 import SliderModel from '../../../model/slider-model';
+import { DefineBarKindArgsType } from '../../viewInterfaces';
 
+enum NumbersEnum {
+  one = 1,
+  zero = 0,
+}
 /* eslint-env jquery */
-type DefineBarKindArgsType = {
-  isRange: boolean;
-  activeSlider: SliderModel;
-  isVertical: boolean;
-  $bar: JQuery<HTMLElement>;
-  $field: JQuery<HTMLElement>;
-  slidersPosition: number[];
-  calcLengthOfRangeBar: (slidersPosition: number[]) => number;
-  updateSingleVerticalBarPosition: (activeSlider: SliderModel, $bar: JQuery<HTMLElement>) => void;
-  updateSingleHorizontalBarPosition: (activeSlider: SliderModel, $bar: JQuery<HTMLElement>) => void;
-  updateRangeBarPosition: (
-    a: number, // todo enum
-    activeSlider: SliderModel,
-    $bar: JQuery<HTMLElement>,
-    slidersPosition: number[],
-    calcLengthOfRangeBar: (slidersPosition: number[]) => number,
-  ) => void;
-};
-
 //  defineBarType rename to defineBarKind!
 const defineBarType = ({
   isRange,
@@ -34,7 +20,7 @@ const defineBarType = ({
 }: DefineBarKindArgsType): void => {
   if (isRange && isVertical) {
     updateRangeBarPosition(
-      1, // todo enum
+      NumbersEnum.one, // todo enum
       activeSlider,
       $bar,
       slidersPosition,
@@ -43,7 +29,7 @@ const defineBarType = ({
   }
   if (isRange && !isVertical) {
     updateRangeBarPosition(
-      0,
+      NumbersEnum.zero,
       activeSlider,
       $bar,
       slidersPosition,
@@ -77,7 +63,7 @@ const updateSingleHorizontalBarPosition = (
 };
 
 const updateRangeBarPosition = (
-  index: number,
+  index: NumbersEnum,
   activeSlider: SliderModel,
   $bar: JQuery<HTMLElement>,
   slidersPosition: number[],

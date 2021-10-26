@@ -1,9 +1,7 @@
 /* eslint-env jquery */
 import FieldModel from '../model/field-model';
-import { Slider } from '../model/modelInterfaces';
 import SliderModel from '../model/slider-model';
 import SliderView from '../view/slider-view';
-import View from '../view/viewInterfaces';
 import { ControllerBuildParams } from './controllerInterfaces';
 
 type CreateRangeSliderArgsType = {
@@ -27,7 +25,7 @@ export default class SliderController {
 
   slider: Array<SliderModel>;
 
-  view: View;
+  view: SliderView;
 
   constructor(id: string, params?: ControllerBuildParams) {
     this.id = id;
@@ -176,7 +174,7 @@ export default class SliderController {
     return this;
   }
 
-  recieve(activeSlider: Slider): void {
+  recieve(activeSlider: SliderModel): void {
     if (activeSlider) {
       this.updateSliderPosition(activeSlider);
       this.updateTipNumber(activeSlider.stepValue, activeSlider.instance);
@@ -184,7 +182,7 @@ export default class SliderController {
     }
   }
 
-  updateSliderPosition(activeSlider: Slider): void {
+  updateSliderPosition(activeSlider: SliderModel): void {
     this.view.updateSliderPosition(activeSlider);
   }
 
@@ -193,7 +191,7 @@ export default class SliderController {
     return this;
   }
 
-  updateBarPosition(activeSlider: Slider): this {
+  updateBarPosition(activeSlider: SliderModel): this {
     this.view.updateBarPosition(this.isRange, activeSlider);
     return this;
   }

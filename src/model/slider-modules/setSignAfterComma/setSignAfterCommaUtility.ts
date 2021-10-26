@@ -1,4 +1,5 @@
 import { Slider } from '../../modelInterfaces';
+import SliderModel from '../../slider-model';
 
 const calcSignAfterComma = ({ step }: Slider): number => {
   if (step.toString().includes('.')) {
@@ -10,7 +11,10 @@ const calcSignAfterComma = ({ step }: Slider): number => {
   return 0;
 };
 
-const setThisSign = function setThisSignQuantityAfterComma(stepSignAfterComma: number): void {
+const setThisSign = function setThisSignQuantityAfterComma(
+  this: SliderModel,
+  stepSignAfterComma: number,
+): void {
   this.stepSignAfterComma = stepSignAfterComma;
 };
 

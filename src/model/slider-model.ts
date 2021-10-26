@@ -2,7 +2,6 @@
 
 import SliderController from '../controller/slider-controller';
 import FieldModel from './field-model';
-import { Field, Slider } from './modelInterfaces';
 import defineSignAfterComma from './slider-modules/defineSignAfterComma';
 import initializeDefaultValues from './slider-modules/initializeDefaultValues';
 import notify from './slider-modules/notify';
@@ -40,7 +39,7 @@ class SliderModel {
 
   defineSignAfterComma: (step: number) => void;
 
-  onDrag: (slider: Slider[], isRange: boolean, field: Field) => void;
+  onDrag: (slider: SliderModel[], isRange: boolean, field: FieldModel) => void;
 
   onDrop: ($element: JQuery<HTMLElement>) => void;
 

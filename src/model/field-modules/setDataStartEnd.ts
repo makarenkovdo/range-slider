@@ -1,14 +1,7 @@
 import FieldModel from '../field-model';
+import InitDataStartEndArgs from './fieldModulesInterfaces';
 
-const initDataStartEnd = ({
-  $element,
-  minValue,
-  maxValue,
-}: {
-  $element: JQuery<HTMLElement>;
-  minValue: number;
-  maxValue: number;
-}): FieldModel => {
+const initDataStartEnd = ({ $element, minValue, maxValue }: InitDataStartEndArgs): FieldModel => {
   $element.attr('data-start', minValue);
   $element.attr('data-end', maxValue);
 

@@ -1,13 +1,4 @@
-import SliderView from '../../../view/slider-view';
-import FieldModel from '../../field-model';
 import SliderModel from '../../slider-model';
-
-enum AssignIfHasOwn {
-  positionInPercent = 'positionInPercent',
-  value = 'value',
-  'stepPosition' = 'stepPosition',
-  'stepPosition' = 'stepPosition',
-}
 
 //  implementation of airbnb rule #7.12
 // const assignIfHasOwn = (obj, key, value) => {
@@ -15,13 +6,9 @@ enum AssignIfHasOwn {
 //   newObj[key] = value;
 // };
 
-type TKey = 'positionInPercent' | 'value' | 'stepPosition' | 'stepValue',
-const assignIfHasOwn = (
-  obj: FieldModel | SliderModel | SliderView,
-  key: TKey,
-  value: number | string | boolean,
-) => {
-  const newObj: FieldModel | SliderModel | SliderView = obj;
+type TKey = 'stepPosition' | 'stepValue' | 'value' | 'positionInPercent';
+const assignIfHasOwn = (obj: SliderModel, key: TKey, value: number) => {
+  const newObj: SliderModel = obj;
   if (Object.prototype.hasOwnProperty.call(obj, key)) {
     newObj[key] = value; // enum???
   }
@@ -109,8 +96,9 @@ const calculateStepValueAndPosition = ({
   value,
   stepSignAfterComma,
 }:CalculateStepValueAndPositionArgsType):CheckCollisionSubargsType => {
-  const stepPosition = (Math.round(positionInPercent / step) * step).toFixed(stepSignAfterComma);
-  const stepValue = (Math.round(value / step) * step).toFixed(stepSignAfterComma);
+  const stepPosition = Number((Math.round(positionInPercent / step) * step)
+    .toFixed(stepSignAfterComma));
+  const stepValue = Number((Math.round(value / step) * step).toFixed(stepSignAfterComma));
   return { stepPosition, stepValue };
 };
 
@@ -118,7 +106,7 @@ const setPositionInPercent = (thisSlider: SliderModel, newPositionInPercent: num
   assignIfHasOwn(thisSlider, 'positionInPercent', newPositionInPercent);
 };
 
-const setValue = (thisSlider: SliderModel, value: number) => {
+const setValue = (thisSlider: SliderModel, value: number): void => {
   assignIfHasOwn(thisSlider, 'value', value);
 };
 

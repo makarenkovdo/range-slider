@@ -1,4 +1,6 @@
-const setStep = function setSliderStep(step) {
+import SliderModel from '../slider-model';
+
+const setStep = function setSliderStep(this: SliderModel, step: number): void {
   this.step = step;
 };
 

@@ -1,26 +1,26 @@
-import { Slider } from '../../../model/modelInterfaces';
+import SliderModel from '../../../model/slider-model';
 
 /* eslint-env jquery */
 type DefineBarKindArgsType = {
   isRange: boolean;
-  activeSlider: Slider;
+  activeSlider: SliderModel;
   isVertical: boolean;
   $bar: JQuery<HTMLElement>;
   $field: JQuery<HTMLElement>;
   slidersPosition: number[];
   calcLengthOfRangeBar: (slidersPosition: number[]) => number;
-  updateSingleVerticalBarPosition: (activeSlider: Slider, $bar: JQuery<HTMLElement>) => void;
-  updateSingleHorizontalBarPosition: (activeSlider: Slider, $bar: JQuery<HTMLElement>) => void;
+  updateSingleVerticalBarPosition: (activeSlider: SliderModel, $bar: JQuery<HTMLElement>) => void;
+  updateSingleHorizontalBarPosition: (activeSlider: SliderModel, $bar: JQuery<HTMLElement>) => void;
   updateRangeBarPosition: (
     a: number,
-    activeSlider: Slider,
+    activeSlider: SliderModel,
     $bar: JQuery<HTMLElement>,
     slidersPosition: number[],
     calcLengthOfRangeBar: (slidersPosition: number[]) => void,
   ) => void;
 };
 
-//  type rename!
+//  defineBarType rename to defineBarKind!
 const defineBarType = ({
   isRange,
   activeSlider,
@@ -62,14 +62,17 @@ const calcLengthOfRangeBar = (slidersPosition: number[]): number => {
   return Math.abs(slidersPosition[1] - slidersPosition[0]);
 };
 
-const updateSingleVerticalBarPosition = (activeSlider: Slider, $bar: JQuery<HTMLElement>): void => {
+const updateSingleVerticalBarPosition = (
+  activeSlider: SliderModel,
+  $bar: JQuery<HTMLElement>,
+): void => {
   $bar
     .css('height', `${activeSlider.stepPosition}%`)
     .css('top', `${100 - activeSlider.stepPosition}%`);
 };
 
 const updateSingleHorizontalBarPosition = (
-  activeSlider: Slider,
+  activeSlider: SliderModel,
   $bar: JQuery<HTMLElement>,
 ): void => {
   $(document).ready(() => $bar.css('width', `${activeSlider.stepPosition}%`));
@@ -77,7 +80,7 @@ const updateSingleHorizontalBarPosition = (
 
 const updateRangeBarPosition = (
   index: number,
-  activeSlider: Slider,
+  activeSlider: SliderModel,
   $bar: JQuery<HTMLElement>,
   slidersPosition: number[],
   barLength: number,

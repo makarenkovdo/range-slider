@@ -9,13 +9,15 @@ import updateTipNumber from './view-modules/updateTipNumber';
 import updateBarPosition from './view-modules/updateBarPosition';
 import updateSliderPosition from './view-modules/updateSliderPosition';
 import initializeValues from './view-modules/initializeValues';
+import SliderController from '../controller/slider-controller';
+import SliderModel from '../model/slider-model';
 
 export default class SliderView {
   $field: JQuery<HTMLElement>;
 
-  $slider: string;
+  $slider: JQuery<HTMLElement>;
 
-  $bar: string;
+  $bar: JQuery<HTMLElement>;
 
   isVertical: boolean;
 
@@ -23,40 +25,42 @@ export default class SliderView {
 
   sliderSize: number[];
 
+  fieldSize: number[];
+
   stepSignAfterComma: number;
 
   corrector: number;
 
-  createBar: () => void;
+  createBar: (that: SliderController) => void;
 
-  createSlider: () => void;
+  createSlider: (i: number, isVertical: boolean) => void;
 
-  createTipNumber: () => void;
+  createTipNumber: (sliderCounter: number, isVertical: boolean) => void;
 
-  updateBarPosition: () => void;
+  updateBarPosition: (isRange: boolean, activeSlider: SliderModel) => void;
 
-  updateTipNumber: () => void;
+  updateTipNumber: (stepValue: number, instance: number) => void;
 
-  updateSliderPosition: () => void;
+  updateSliderPosition: (activeSlider: SliderModel) => void;
 
-  initializeValues: () => void;
+  initializeValues: (sliderSize: number[], size: string[], isVertical: boolean) => void;
 
   constructor(id: string) {
     this.$field = $(`#${id}`);
-    this.$slider = '';
-    this.$bar = '';
+    // this.$slider = '';
+    // this.$bar = '';
     this.isVertical = false;
     this.slidersPosition = [0, 100];
     this.sliderSize = [];
     this.stepSignAfterComma = 0;
     this.corrector = 0;
 
-    this.createBar = createBar.bind(this);
-    this.createSlider = createSlider.bind(this);
-    this.createTipNumber = createTipNumber.bind(this);
-    this.updateBarPosition = updateBarPosition.bind(this);
-    this.updateTipNumber = updateTipNumber.bind(this);
-    this.updateSliderPosition = updateSliderPosition.bind(this);
-    this.initializeValues = initializeValues.bind(this);
+    this.createBar = createBar.bind(this) as () => void;
+    this.createSlider = createSlider.bind(this) as () => void;
+    this.createTipNumber = createTipNumber.bind(this) as () => void;
+    this.updateBarPosition = updateBarPosition.bind(this) as () => void;
+    this.updateTipNumber = updateTipNumber.bind(this) as () => void;
+    this.updateSliderPosition = updateSliderPosition.bind(this) as () => void;
+    this.initializeValues = initializeValues.bind(this) as () => void;
   }
 }

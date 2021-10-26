@@ -1,4 +1,6 @@
-const notify = function notifySubscribers() {
+import SliderModel from '../slider-model';
+
+const notify = function notifySubscribers(this: SliderModel): void {
   this.subscriber.recieve(this);
 };
 

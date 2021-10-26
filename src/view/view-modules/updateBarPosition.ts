@@ -1,3 +1,5 @@
+import SliderModel from '../../model/slider-model';
+import SliderView from '../slider-view';
 import {
   defineBarType,
   calcLengthOfRangeBar,
@@ -6,7 +8,11 @@ import {
   updateRangeBarPosition,
 } from './updateBarPosition/updateBarPositionUtility';
 
-const updateBarPosition = function updateBarPositionToDOM(isRange, activeSlider) {
+const updateBarPosition = function updateBarPositionToDOM(
+  this: SliderView,
+  isRange: boolean,
+  activeSlider: SliderModel,
+): void {
   defineBarType({
     isRange,
     activeSlider,

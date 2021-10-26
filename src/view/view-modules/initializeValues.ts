@@ -1,4 +1,11 @@
-const initializeValues = function initializeDefaultViewValues(sliderSize, fieldSize, isVertical) {
+import SliderView from '../slider-view';
+
+const initializeValues = function initializeDefaultViewValues(
+  this: SliderView,
+  sliderSize: number[],
+  fieldSize: number[],
+  isVertical: boolean,
+): void {
   this.sliderSize = sliderSize;
   this.fieldSize = fieldSize;
   this.isVertical = isVertical;

@@ -7,14 +7,28 @@ import {
 
 export type DataType = { field: FieldModel; sliders: SliderModel[]; isRange: boolean };
 
-const defineNearestSlider = (event: JQuery.ClickEvent, sliders: SliderModel[]): number => {
-  const { cursorXY, slidersPosition } = prepareDataForCompare(event, sliders);
-  return calculateAndCompareLengths(cursorXY, slidersPosition);
+const defineNearestSlider = (
+  cursorXY: number[],
+  slidersPosition: number[],
+  isVertical: boolean,
+  fieldSize: string[],
+): number => {
+  const cursorXYInPercent = prepareDataForCompare(cursorXY, isVertical, fieldSize);
+  return calculateAndCompareLengths(cursorXYInPercent, slidersPosition);
 };
 const handleClick = (event: JQuery.ClickEvent) => {
   const evenData = event.data as DataType;
   let nearest = 0;
-  if (evenData.isRange) nearest = defineNearestSlider(event, evenData.sliders);
+
+  // prettier-ignore
+  if (evenData.isRange) {
+    nearest = defineNearestSlider(
+      [event.offsetX, event.offsetY],
+      [evenData.sliders[0].positionInPercent, evenData.sliders[1].positionInPercent],
+      evenData.field.isVertical,
+      evenData.field.size,
+    );
+  }
   evenData.sliders[nearest].updatePosition(
     event,
     evenData.field,

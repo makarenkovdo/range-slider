@@ -1,8 +1,8 @@
 import SliderController from '../controller/slider-controller';
-import InitDataStartEndArgs from './field-modules/fieldModulesInterfaces';
+import InitDataAndSizeArgs from './field-modules/fieldModulesInterfaces';
 import notify from './field-modules/notify';
 import onClick from './field-modules/onClick';
-import initDataStartEnd from './field-modules/setDataStartEnd';
+import initValues from './field-modules/setDataStartEnd';
 import setMinMax from './field-modules/setMinMax';
 import SliderModel from './slider-model';
 
@@ -41,7 +41,7 @@ export default class FieldModel {
 
   onClick: (slider: SliderModel[], isRange: boolean) => void;
 
-  initDataStartEnd: (a: InitDataStartEndArgs) => void;
+  initValues: (a: InitDataAndSizeArgs) => void;
 
   constructor(id: string, subscriber: SliderController) {
     this.$element = $(`#${id}`);
@@ -61,6 +61,6 @@ export default class FieldModel {
     this.notify = notify.bind(this) as () => void;
     this.setMinMax = setMinMax.bind(this) as () => void;
     this.onClick = onClick.bind(this) as () => void;
-    this.initDataStartEnd = initDataStartEnd as (a: InitDataStartEndArgs) => void;
+    this.initValues = initValues as (a: InitDataAndSizeArgs) => void;
   }
 }

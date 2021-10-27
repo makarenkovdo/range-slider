@@ -86,7 +86,7 @@ export default class SliderController {
   }
 
   initLayers(sliderSize: number[]): this {
-    this.field.initDataStartEnd(this.field);
+    this.field.initValues(this.field);
     this.view.initializeValues(sliderSize, this.field.size, this.field.isVertical);
     // this.setMaxValue();
     return this;

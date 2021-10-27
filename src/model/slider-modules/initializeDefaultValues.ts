@@ -5,6 +5,8 @@ const initializeDefaultValues = function initializeDefaultPositionAndValue(
   minMax: number[],
 ): void {
   const minMaxStepPosition = [0, 100];
+  this.positionInPercent = minMaxStepPosition[this.instance];
+  this.value = minMax[this.instance];
   this.stepPosition = minMaxStepPosition[this.instance];
   this.stepValue = minMax[this.instance];
 };

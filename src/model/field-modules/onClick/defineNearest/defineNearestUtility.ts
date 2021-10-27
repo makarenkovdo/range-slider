@@ -5,10 +5,6 @@ const calculateAndCompareLengths = (
   const lengthToFirstSlider = Math.abs(cursorXYInPercent - slidersPosition[0]);
   const lengthToSecondSlider = Math.abs(cursorXYInPercent - slidersPosition[1]);
   console.log('sliderspos:', slidersPosition[0], slidersPosition[1]);
-  console.log('cursorXY', cursorXYInPercent);
-
-  console.log('cursor - sPos0', cursorXYInPercent - slidersPosition[0]);
-  console.log('cursor - sPos1', cursorXYInPercent - slidersPosition[1]);
 
   return lengthToFirstSlider - lengthToSecondSlider < 0 ? 0 : 1;
 };

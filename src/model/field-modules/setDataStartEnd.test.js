@@ -18,9 +18,10 @@ beforeEach(() => {
   });
 });
 
-describe('test-zone', () => {
-  test('uses jest-dom', () => {
+describe('create slider test', () => {
+  test('if function "createSlider" creating html-element', () => {
     // expect(screen.queryByTestId('not-empty')).not.toBeEmptyDOMElement();
-    expect(screen.getByTestId('first')).toBeInTheDocument();
+    expect(screen.getByTestId('test-slider-0')).toBeInTheDocument();
+    expect(screen.getByTestId('test-slider-1')).toBeInTheDocument();
   });
 });

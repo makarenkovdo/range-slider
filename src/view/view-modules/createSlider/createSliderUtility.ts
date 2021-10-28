@@ -21,7 +21,7 @@ const addSliderToDOM = (
 ): void => {
   const { i, positioning, minMax } = preparedData;
   $id.append(
-    `<span class="slider instance-${i}" style="${positioning}:${minMax}%; width:${sliderSize[0]}px; height:${sliderSize[1]}px"></span>`,
+    `<span data-testid="test-slider-${i}" class="slider instance-${i}" style="${positioning}:${minMax}%; width:${sliderSize[0]}px; height:${sliderSize[1]}px"></span>`,
   );
 };
 

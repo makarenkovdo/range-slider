@@ -17,11 +17,8 @@ const assignIfHasOwn = (obj: RunnerModel, key: TKey, value: number) => {
 const calculatePositionInPercent = (
   isVertical: boolean,
   thisRunner: RunnerModel,
-  offsetX: number,
-  offsetY: number,
+  cursorXY: number[],
 ): number => {
-  const cursorXY = [offsetX, offsetY];
-
   if (isVertical) {
     const fieldHeight = thisRunner.$field[0].offsetHeight;
     return ((fieldHeight - (cursorXY[1] + 1)) * 100) / fieldHeight;

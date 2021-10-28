@@ -1,4 +1,3 @@
-import FieldModel from '../../FieldModel';
 import RunnerModel from '../../RunnerModel';
 import {
   checkCollision,
@@ -25,16 +24,13 @@ type UpdatePositionSubargsType = {
 // };
 
 const updatePosition = (
-  event: JQuery.DragEvent | JQuery.ClickEvent,
+  cursorXY: number[],
   { isVertical, minValue, maxValue }: UpdatePositionSubargsType,
   runner: RunnerModel[],
   isRange: boolean,
   thisRunner: RunnerModel,
 ): void => {
-  setPositionInPercent(
-    thisRunner,
-    calculatePositionInPercent(isVertical, thisRunner, event.offsetX, event.offsetY),
-  );
+  setPositionInPercent(thisRunner, calculatePositionInPercent(isVertical, thisRunner, cursorXY));
 
   setValue(thisRunner, calculateValue(minValue, maxValue, thisRunner));
 
@@ -49,3 +45,5 @@ const updatePosition = (
   }
   thisRunner.notify(this);
 };
+
+export default updatePosition;

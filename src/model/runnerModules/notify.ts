@@ -1,7 +1,7 @@
 import RunnerModel from '../RunnerModel';
 
 const notify = function notifySubscribers(this: RunnerModel): void {
-  this.subscriber.recieve(this);
+  this.subscriber.recieveModelLogic(this);
 };
 
 export default notify;

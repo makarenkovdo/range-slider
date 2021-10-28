@@ -1,4 +1,4 @@
-interface ControllerBuildParams {
+type PresenterBuildParams = {
   minValue?: number;
   maxValue?: number;
   step?: number;
@@ -6,6 +6,14 @@ interface ControllerBuildParams {
   shouldAddBar?: boolean;
   isRange?: boolean;
   runnerSize?: number[];
-}
+};
 
-export default ControllerBuildParams;
+type CreateRangeSliderArgsType = {
+  isRange: boolean;
+  shouldAddTip: boolean;
+  runnerSize: number[];
+  minValue: number;
+  maxValue: number;
+};
+
+export { PresenterBuildParams, CreateRangeSliderArgsType };

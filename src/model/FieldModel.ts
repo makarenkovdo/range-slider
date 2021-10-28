@@ -1,7 +1,7 @@
-import RunnerController from '../presenter/SliderPresenter';
+import SliderPresenter from '../presenter/SliderPresenter';
 import InitDataAndSizeArgs from './fieldModules/fieldModulesInterfaces';
 import notify from './fieldModules/notify';
-import onClick from './fieldModules/onClick';
+import onClick from '../view/viewModules/activateOnClickListener';
 import initValues from './fieldModules/setDataStartEnd';
 import setMinMax from './fieldModules/setMinMax';
 import RunnerModel from './RunnerModel';
@@ -29,7 +29,7 @@ export default class FieldModel {
 
   isRange: boolean;
 
-  subscriber: RunnerController;
+  subscriber: SliderPresenter;
 
   isBarAdded: boolean;
 
@@ -43,7 +43,7 @@ export default class FieldModel {
 
   initValues: (a: InitDataAndSizeArgs) => void;
 
-  constructor(id: string, subscriber: RunnerController) {
+  constructor(id: string, subscriber: SliderPresenter) {
     this.$element = $(`#${id}`);
     this.class = this.$element.attr('class');
     this.size = [$(`#${id}`).css('width'), $(`#${id}`).css('height')];

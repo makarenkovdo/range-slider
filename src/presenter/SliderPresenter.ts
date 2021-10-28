@@ -2,17 +2,9 @@
 import FieldModel from '../model/FieldModel';
 import RunnerModel from '../model/RunnerModel';
 import SliderView from '../view/SliderView';
-import ControllerBuildParams from './presenterInterfaces';
+import { PresenterBuildParams, CreateRangeSliderArgsType } from './presenterInterfaces';
 
-type CreateRangeRunnerArgsType = {
-  isRange: boolean;
-  shouldAddTip: boolean;
-  runnerSize: number[];
-  minValue: number;
-  maxValue: number;
-};
-
-export default class SliderController {
+export default class SliderPresenter {
   id: string;
 
   hasBar: boolean;
@@ -27,20 +19,20 @@ export default class SliderController {
 
   view: SliderView;
 
-  constructor(id: string, params?: ControllerBuildParams) {
+  constructor(id: string, params?: PresenterBuildParams) {
     this.id = id;
     this.hasBar = false;
     this.isRange = false;
     this.runnerCounter = 0;
     this.field = new FieldModel(this.id, this);
     this.runner = [];
-    this.view = new SliderView(this.id);
+    this.view = new SliderView(this.id, this);
     this.build(params);
   }
 
-  // build(params: ControllerBuildParams) {
+  // build(params: PresenterBuildParams) {
   // prettier-ignore
-  build(params: ControllerBuildParams):void {
+  build(params: PresenterBuildParams):void {
     let {
       minValue = 0,
       maxValue = 100,
@@ -72,16 +64,13 @@ export default class SliderController {
     this.setMinValue(minValue)
       .setMaxValue(maxValue)
       .initLayers(runnerSize)
-      .createRangeRunner({
+      .createRangeSlider({
         isRange, shouldAddTip, runnerSize, minValue, maxValue,
       })
-      // .correctRunnerPosition()
       .setStep(step)
       .createBar(shouldAddBar)
       .updateTipNumber(minValue, 0)
       .updateTipNumber(maxValue, 1)
-      .onDrag()
-      .onDrop()
       .onClick();
   }
 
@@ -93,18 +82,20 @@ export default class SliderController {
   }
 
   //  prettier-ignore
-  createRangeRunner({
+  createRangeSlider({
     isRange, shouldAddTip, runnerSize, minValue, maxValue,
-  }:CreateRangeRunnerArgsType): this {
-    this.createSliderView(this.runnerCounter);
+  }:CreateRangeSliderArgsType): this {
+    this.createRunnerView(this.runnerCounter);
     this.createRunner(runnerSize, minValue, maxValue);
     this.createTipNumber(shouldAddTip);
+    this.onDrag();
+    this.onDrop();
 
     if (isRange) {
       this.runnerCounter += 1;
       this.isRange = true;
       this.field.isRange = true;
-      this.createSliderView(this.runnerCounter);
+      this.createRunnerView(this.runnerCounter);
       this.createRunner(runnerSize, minValue, maxValue);
 
       this.createTipNumber(shouldAddTip);
@@ -125,7 +116,7 @@ export default class SliderController {
   //   return this;
   // }
 
-  createSliderView(i: number): this {
+  createRunnerView(i: number): this {
     this.view.createRunner(i, this.field.isVertical);
     return this;
   }
@@ -164,23 +155,26 @@ export default class SliderController {
     // [this.runner[0].stepPosition]
 
     $(document).ready(() => {
-      // this.recieve(this.runner.forEach((v) => v.onDrag(this.runner, this.isRange, this.field)));
-      this.view.forEach((v) => v.onDrag(this.runner, this.isRange, this.field));
+      this.view.activateOnDragListener(this.runner, this.isRange, this.field, this.runnerCounter);
     });
     return this;
   }
 
   onDrop(): this {
-    this.runner.forEach((v) => v.onDrop(this.field.$element));
+    this.view.activateOnDropListener(this.field.$element);
     return this;
   }
 
-  recieve(activeRunner: RunnerModel): void {
+  recieveModelLogic(activeRunner: RunnerModel): void {
     if (activeRunner) {
       this.updateRunnerPosition(activeRunner);
       this.updateTipNumber(activeRunner.stepValue, activeRunner.instance);
       if (this.hasBar) this.updateBarPosition(activeRunner);
     }
+  }
+
+  recieveUserAction(cursorXY: number[], i: number): void {
+    this.runner[i].updatePosition(cursorXY, this.field, this.runner, this.isRange, this.runner[i]);
   }
 
   updateRunnerPosition(activeRunner: RunnerModel): void {

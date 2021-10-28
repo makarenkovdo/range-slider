@@ -1,14 +1,12 @@
 /* eslint-env jquery */
 
-import RunnerController from '../presenter/SliderPresenter';
+import SliderPresenter from '../presenter/SliderPresenter';
 import FieldModel from './FieldModel';
-import defineSignAfterComma from './runner-modules/defineSignAfterComma';
-import initializeDefaultValues from './runner-modules/initializeDefaultValues';
-import notify from './runner-modules/notify';
-import onDrag from '../view/view-modules/onDrag';
-import { updatePosition } from './runner-modules/onDrag/onDragUtility';
-import onDrop from '../view/view-modules/onDrop';
-import setStep from './runner-modules/setStep';
+import defineSignAfterComma from './runnerModules/defineSignAfterComma';
+import initializeDefaultValues from './runnerModules/initializeDefaultValues';
+import notify from './runnerModules/notify';
+import updatePosition from './runnerModules/onDrag/onDragUtility';
+import setStep from './runnerModules/setStep';
 
 class RunnerModel {
   id: string;
@@ -35,7 +33,7 @@ class RunnerModel {
 
   stepValue: number;
 
-  subscriber: RunnerController;
+  subscriber: SliderPresenter;
 
   defineSignAfterComma: (step: number) => void;
 
@@ -44,7 +42,7 @@ class RunnerModel {
   setStep: (step: number) => void;
 
   updatePosition: (
-    event: JQuery.ClickEvent,
+    cursorXY: number[],
     field: FieldModel,
     runners: RunnerModel[],
     isRange: boolean,
@@ -56,7 +54,7 @@ class RunnerModel {
   constructor(
     id: string,
     instance: number,
-    subscriber: RunnerController,
+    subscriber: SliderPresenter,
     runnerSize: number[],
     $field: JQuery<HTMLElement>,
   ) {

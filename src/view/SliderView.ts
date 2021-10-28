@@ -1,25 +1,25 @@
 /* eslint-disable padded-blocks */
 /* eslint-env jquery */
 import '../index.scss';
-// import { addRunnerToDom, prepareRunnerArgs } from './view-modules/createSliderView';
-import createBar from './view-modules/createBar';
-import createRunner from './view-modules/createRunner';
-import createTipNumber from './view-modules/createTipNumber';
-import updateTipNumber from './view-modules/updateTipNumber';
-import updateBarPosition from './view-modules/updateBarPosition';
-import updateRunnerPosition from './view-modules/updateRunnerPosition';
-import initializeValues from './view-modules/initializeValues';
-import RunnerController from '../presenter/SliderPresenter';
+// import { addRunnerToDom, prepareRunnerArgs } from './viewModules/createSliderView';
+import createBar from './viewModules/createBar';
+import createRunner from './viewModules/createRunner';
+import createTipNumber from './viewModules/createTipNumber';
+import updateTipNumber from './viewModules/updateTipNumber';
+import updateBarPosition from './viewModules/updateBarPosition';
+import updateRunnerPosition from './viewModules/updateRunnerPosition';
+import initializeValues from './viewModules/initializeValues';
+import SliderPresenter from '../presenter/SliderPresenter';
 import RunnerModel from '../model/RunnerModel';
 import { UpdateTipNumberArgs } from './viewInterfaces';
 import FieldModel from '../model/FieldModel';
-import onDrag from './view-modules/onDrag';
-import onDrop from './view-modules/onDrop';
-
+import { activateOnDragListener } from './viewModules/activateOnDragListener';
+import activateOnDropListener from './viewModules/activateOnDropListener';
+import notify from './viewModules/notify';
 export default class SliderView {
   $field: JQuery<HTMLElement>;
 
-  $runner: JQuery<HTMLElement>;
+  $runner: JQuery<HTMLElement>[];
 
   $bar: JQuery<HTMLElement>;
 
@@ -33,9 +33,13 @@ export default class SliderView {
 
   stepSignAfterComma: number;
 
+  clickXY: number[];
+
   corrector: number;
 
-  createBar: (that: RunnerController) => void;
+  subscriber: SliderPresenter;
+
+  createBar: (that: SliderPresenter) => void;
 
   createRunner: (i: number, isVertical: boolean) => void;
 
@@ -49,19 +53,29 @@ export default class SliderView {
 
   initializeValues: (runnerSize: number[], size: string[], isVertical: boolean) => void;
 
-  onDrag: (runner: RunnerModel[], isRange: boolean, field: FieldModel) => void;
+  activateOnDragListener: (
+    this: SliderView,
+    runner: RunnerModel[],
+    isRange: boolean,
+    field: FieldModel,
+    runnerInstance: number,
+  ) => void;
 
-  onDrop: ($element: JQuery<HTMLElement>) => void;
+  activateOnDropListener: ($element: JQuery<HTMLElement>) => void;
 
-  constructor(id: string) {
+  notify: (this: SliderView) => void;
+
+  constructor(id: string, subscriber: SliderPresenter) {
     this.$field = $(`#${id}`);
-    // this.$runner = '';
+    this.$runner = [];
     // this.$bar = '';
     this.isVertical = false;
     this.runnersPosition = [0, 100];
     this.runnerSize = [];
     this.stepSignAfterComma = 0;
     this.corrector = 0;
+    this.clickXY = [0, 0];
+    this.subscriber = subscriber;
 
     this.createBar = createBar.bind(this) as () => void;
     this.createRunner = createRunner.bind(this) as () => void;
@@ -70,6 +84,8 @@ export default class SliderView {
     this.updateTipNumber = updateTipNumber.bind(this) as () => void;
     this.updateRunnerPosition = updateRunnerPosition.bind(this) as () => void;
     this.initializeValues = initializeValues.bind(this) as () => void;
-    this.onDrag = onDrag.bind(this) as () => void;
-    this.onDrop = onDrop;
+    this.activateOnDragListener = activateOnDragListener.bind(this) as () => void;
+    this.activateOnDropListener = activateOnDropListener as () => void;
+    this.notify = notify.bind(this) as () => void;
+  }
 }

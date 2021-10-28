@@ -3,7 +3,7 @@
  */
 import '@testing-library/jest-dom';
 import { screen } from '@testing-library/dom';
-import RunnerController from './SliderPresenter';
+import SliderPresenter from './SliderPresenter';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -12,7 +12,7 @@ beforeEach(() => {
 });
 
 describe('runnerController test', () => {
-  const firstRunner = new RunnerController('first', {
+  const firstRunner = new SliderPresenter('first', {
     shouldAddTip: true,
     shouldAddBar: true,
     step: 0.1,

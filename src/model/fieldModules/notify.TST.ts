@@ -1,6 +1,6 @@
-// import RunnerController from '../../controller/SliderPresenter';
+// import SliderPresenter from '../../controller/SliderPresenter';
 // import RunnerModel from '../RunnerModel';
-// import notify from '../runner-modules/notify';
+// import notify from '../runnerModules/notify';
 
 // const jsdom = require('jsdom');
 // const { JSDOM } = jsdom;
@@ -26,7 +26,7 @@
 // global.jQuery = $;
 // global.$ = $;
 // beforeEach(() => {
-//   const firstRunner = new RunnerController('first', {
+//   const firstRunner = new SliderPresenter('first', {
 //     shouldAddTip: true,
 //     shouldAddBar: true,
 //     step: 0.1,

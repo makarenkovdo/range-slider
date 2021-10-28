@@ -3,13 +3,13 @@
  */
 import '@testing-library/jest-dom';
 import { screen } from '@testing-library/dom';
-import RunnerController from '../../presenter/SliderPresenter';
+import SliderPresenter from '../../presenter/SliderPresenter';
 
 beforeEach(() => {
   document.body.innerHTML = `
    <div data-testid="first" id="first" class="range-runner horizontal" data-start="0"></div>
    `;
-  const firstRunner = new RunnerController('first', {
+  const firstRunner = new SliderPresenter('first', {
     shouldAddTip: true,
     shouldAddBar: true,
     step: 0.1,

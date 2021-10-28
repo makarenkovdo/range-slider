@@ -1,14 +1,5 @@
 {
   "name": "metalamp__task-4",
-  "jest": {
-    "verbose": true,
-    "moduleNameMapper": {
-      "^.+\\.(css|less|scss)$": "babel-jest",
-      "setupFiles": [
-        "/src/setup-jest.js"
-      ]
-    }
-  },
   "version": "1.0.0",
   "prettier": "prettier-airbnb-config",
   "description": "",
@@ -24,6 +15,7 @@
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-typescript": "^7.15.0",
     "@testing-library/dom": "^8.10.1",
+    "@testing-library/jest-dom": "^5.14.1",
     "@types/jest": "^27.0.2",
     "@types/jquery": "^3.5.8",
     "babel-jest": "^27.3.1",

@@ -1,5 +1,14 @@
 {
   "name": "metalamp__task-4",
+  "jest": {
+    "verbose": true,
+    "moduleNameMapper": {
+      "^.+\\.(css|less|scss)$": "babel-jest",
+      "setupFiles": [
+        "/src/setup-jest.js"
+      ]
+    }
+  },
   "version": "1.0.0",
   "prettier": "prettier-airbnb-config",
   "description": "",
@@ -14,6 +23,7 @@
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-typescript": "^7.15.0",
+    "@testing-library/dom": "^8.10.1",
     "@types/jest": "^27.0.2",
     "@types/jquery": "^3.5.8",
     "babel-jest": "^27.3.1",
@@ -24,8 +34,10 @@
     "eslint-plugin-fsd": "^1.0.1",
     "eslint-plugin-import": "^2.22.1",
     "file-loader": "^6.2.0",
+    "global-jsdom": "^8.3.0",
     "html-webpack-plugin": "^5.3.2",
     "jest": "^27.3.1",
+    "jsdom": "^18.0.0",
     "mini-css-extract-plugin": "^2.3.0",
     "postcss": "^8.3.9",
     "postcss-loader": "^6.1.1",
@@ -47,7 +59,6 @@
     "eslint-config-airbnb-typescript": "^14.0.1",
     "jquery": "^3.6.0",
     "jquery-ui": "^1.12.1",
-    "jsdom": "^17.0.0",
     "style-loader": "^3.2.1"
   },
   "env": {

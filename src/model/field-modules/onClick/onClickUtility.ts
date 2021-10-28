@@ -14,9 +14,10 @@ const defineNearestSlider = (
   fieldSize: string[],
 ): number => {
   const cursorXYInPercent = prepareDataForCompare(cursorXY, isVertical, fieldSize);
+
   return calculateAndCompareLengths(cursorXYInPercent, slidersPosition);
 };
-const handleClick = (event: JQuery.ClickEvent) => {
+const handleClick = (event: JQuery.ClickEvent): void => {
   const evenData = event.data as DataType;
   let nearest = 0;
 
@@ -47,4 +48,4 @@ const activateOnClickListener = (
   field.$element.on('click', eventData, handleClick);
 };
 
-export default activateOnClickListener;
+export { defineNearestSlider, activateOnClickListener, handleClick };

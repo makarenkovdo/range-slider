@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import SliderController from './controller/slider-controller';
+import RunnerController from './presenter/SliderPresenter';
 
-const firstSlider = new SliderController('first', {
+const firstRunner = new RunnerController('first', {
   shouldAddTip: true,
   shouldAddBar: true,
   step: 0.1,
@@ -9,26 +9,26 @@ const firstSlider = new SliderController('first', {
   isRange: true,
 });
 
-const secondSlider = new SliderController('second', {
+const secondRunner = new RunnerController('second', {
   shouldAddTip: true,
   shouldAddBar: true,
   step: 10,
   isRange: true,
 });
 
-const thirdSlider = new SliderController('third', {
+const thirdRunner = new RunnerController('third', {
   shouldAddTip: true,
   shouldAddBar: true,
   maxValue: 10,
 });
 
-const fourthSlider = new SliderController('fourth', {
+const fourthRunner = new RunnerController('fourth', {
   shouldAddTip: true,
   shouldAddBar: true,
   maxValue: 10,
 });
 
-const fifthSlider = new SliderController('fifth', {
+const fifthRunner = new RunnerController('fifth', {
   minValue: 20,
   maxValue: 35,
 });

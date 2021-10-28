@@ -155,7 +155,7 @@ export default class SliderPresenter {
     // [this.runner[0].stepPosition]
 
     $(document).ready(() => {
-      this.view.activateOnDragListener(this.runner, this.isRange, this.field, this.runnerCounter);
+      this.view.activateOnDragListener(this.runnerCounter);
     });
     return this;
   }
@@ -174,7 +174,13 @@ export default class SliderPresenter {
   }
 
   recieveUserAction(cursorXY: number[], i: number): void {
-    this.runner[i].updatePosition(cursorXY, this.field, this.runner, this.isRange, this.runner[i]);
+    this.runner[i].updateRunnerValues(
+      cursorXY,
+      this.field,
+      this.runner,
+      this.isRange,
+      this.runner[i],
+    );
   }
 
   updateRunnerPosition(activeRunner: RunnerModel): void {

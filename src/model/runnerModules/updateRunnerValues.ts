@@ -1,4 +1,4 @@
-import RunnerModel from '../../RunnerModel';
+import RunnerModel from '../RunnerModel';
 import {
   checkCollision,
   calculatePositionInPercent,
@@ -7,7 +7,7 @@ import {
   setPositionInPercent,
   setValue,
   setStepValueAndPosition,
-} from './updatePositionUtility';
+} from './updateRunnerValues/updateRunnerValuesUtility';
 
 type UpdatePositionSubargsType = {
   isVertical: boolean;
@@ -23,7 +23,7 @@ type UpdatePositionSubargsType = {
 //   thisRunner: RunnerModel;
 // };
 
-const updatePosition = (
+const updateRunnerValues = (
   cursorXY: number[],
   { isVertical, minValue, maxValue }: UpdatePositionSubargsType,
   runner: RunnerModel[],
@@ -46,4 +46,4 @@ const updatePosition = (
   thisRunner.notify(this);
 };
 
-export default updatePosition;
+export default updateRunnerValues;

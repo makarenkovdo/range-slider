@@ -1,7 +1,11 @@
 import SliderView from '../SliderView';
 
-const notify = function notifySubscribers(this: SliderView): void {
-  this.subscriber.recieveUserAction(this);
+const notify = function notifySubscribers(
+  this: SliderView,
+  cursorXY: number[],
+  instance: number,
+): void {
+  this.subscriber.recieveUserAction(cursorXY, instance);
 };
 
 export default notify;

@@ -30,8 +30,8 @@ const handleClick = (event: JQuery.ClickEvent): void => {
       evenData.field.size,
     );
   }
-  evenData.runners[nearest].updatePosition(
-    event,
+  evenData.runners[nearest].updateRunnerValues(
+    [event.offsetX, event.offsetY],
     evenData.field,
     evenData.runners,
     evenData.isRange,

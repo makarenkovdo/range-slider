@@ -1,9 +1,6 @@
-import FieldModel from '../../model/FieldModel';
-import RunnerModel from '../../model/RunnerModel';
-import { activateOnDragListener } from '../../model/runnerModules/onDrag/onDragUtility';
-import assignIfHasOwn from '../../utility/assignIfOwnHas';
+// import assignIfHasOwn from '../../utility/assignIfOwnHas';
 import SliderView from '../SliderView';
-import notify from './notify';
+// import notify from './notify';
 
 // const onDrag = function activateOnDragUpdatingPosition(
 //   runner: RunnerModel[],
@@ -19,34 +16,31 @@ const setThisData = (event: JQuery.ClickEvent) => {
   event.stopPropagation();
   type EventDataType = {
     thisView: SliderView;
+    instance: number;
   };
   const eventData = event.data as EventDataType;
-  assignIfHasOwn;
-  notify();
-  // updatePosition(event, eventData.field, eventData.runner, eventData.isRange, eventData.thisRunner);
+  // type TKey = 'stepPosition' | 'stepValue' | 'value' | 'positionInPercent';
+  // const assignIfHasOwn = (obj: SliderView, key: TKey, value: number | number[]) => {
+  //   const newObj: SliderView = obj;
+  //   if (Object.prototype.hasOwnProperty.call(obj, key)) {
+  //     newObj[key] = value; // enum???
+  //   }
+  // };
+  // assignIfHasOwn(eventData.thisView, 'cursorXY', [event.offsetX, event.offsetY]);
+
+  eventData.thisView.notify([event.offsetX, event.offsetY], eventData.instance);
 };
 
-const activateOnDragListener = (
-  thisView: SliderView,
-  thisRunner: RunnerModel,
-  field: FieldModel,
-  runner: RunnerModel[],
-  isRange: boolean,
-): void => {
-  thisRunner.$field.on(
-    'mousedown touchstart',
-    `.instance-${thisRunner.instance}`,
-    (event: JQuery.DragEvent) => {
-      event.preventDefault();
-      event.stopPropagation();
-      thisRunner.$field.addClass('tap');
-      thisRunner.$field.on(
-        'mousemove touchmove',
-        { thisView, thisRunner, field, runner, isRange },
-        setThisData,
-      );
-    },
-  );
+const activateOnDragListener = function activateOnDragListenerAndNotify(
+  this: SliderView,
+  instance: number,
+): void {
+  this.$field.on('mousedown touchstart', `.instance-${instance}`, (event: JQuery.DragEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    this.$field.addClass('tap');
+    this.$field.on('mousemove touchmove', { thisView: this, instance }, setThisData);
+  });
 };
 
-export { activateOnDragListener };
+export default activateOnDragListener;

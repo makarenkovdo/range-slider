@@ -5,7 +5,7 @@ import FieldModel from './FieldModel';
 import defineSignAfterComma from './runnerModules/defineSignAfterComma';
 import initializeDefaultValues from './runnerModules/initializeDefaultValues';
 import notify from './runnerModules/notify';
-import updatePosition from './runnerModules/onDrag/onDragUtility';
+import updateRunnerValues from './runnerModules/updateRunnerValues';
 import setStep from './runnerModules/setStep';
 
 class RunnerModel {
@@ -41,7 +41,7 @@ class RunnerModel {
 
   setStep: (step: number) => void;
 
-  updatePosition: (
+  updateRunnerValues: (
     cursorXY: number[],
     field: FieldModel,
     runners: RunnerModel[],
@@ -75,7 +75,7 @@ class RunnerModel {
     this.defineSignAfterComma = defineSignAfterComma.bind(this) as () => void;
     this.notify = notify.bind(this) as () => void;
     this.setStep = setStep.bind(this) as () => void;
-    this.updatePosition = updatePosition.bind(this) as () => void;
+    this.updateRunnerValues = updateRunnerValues.bind(this) as () => void;
     this.initializeDefaultValues = initializeDefaultValues.bind(this) as () => void;
   }
 }

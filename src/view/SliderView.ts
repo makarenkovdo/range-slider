@@ -12,10 +12,10 @@ import initializeValues from './viewModules/initializeValues';
 import SliderPresenter from '../presenter/SliderPresenter';
 import RunnerModel from '../model/RunnerModel';
 import { UpdateTipNumberArgs } from './viewInterfaces';
-import FieldModel from '../model/FieldModel';
-import { activateOnDragListener } from './viewModules/activateOnDragListener';
+import activateOnDragListener from './viewModules/activateOnDragListener';
 import activateOnDropListener from './viewModules/activateOnDropListener';
 import notify from './viewModules/notify';
+
 export default class SliderView {
   $field: JQuery<HTMLElement>;
 
@@ -33,7 +33,7 @@ export default class SliderView {
 
   stepSignAfterComma: number;
 
-  clickXY: number[];
+  cursorXY: number[];
 
   corrector: number;
 
@@ -53,17 +53,11 @@ export default class SliderView {
 
   initializeValues: (runnerSize: number[], size: string[], isVertical: boolean) => void;
 
-  activateOnDragListener: (
-    this: SliderView,
-    runner: RunnerModel[],
-    isRange: boolean,
-    field: FieldModel,
-    runnerInstance: number,
-  ) => void;
+  activateOnDragListener: (this: SliderView, runnerInstance: number) => void;
 
   activateOnDropListener: ($element: JQuery<HTMLElement>) => void;
 
-  notify: (this: SliderView) => void;
+  notify: (cursorXY: number[], instance: number) => void;
 
   constructor(id: string, subscriber: SliderPresenter) {
     this.$field = $(`#${id}`);
@@ -74,7 +68,7 @@ export default class SliderView {
     this.runnerSize = [];
     this.stepSignAfterComma = 0;
     this.corrector = 0;
-    this.clickXY = [0, 0];
+    this.cursorXY = [0, 0];
     this.subscriber = subscriber;
 
     this.createBar = createBar.bind(this) as () => void;

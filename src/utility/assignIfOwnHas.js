@@ -1,6 +1,8 @@
-const assignIfHasOwn = (obj, key, value) => {
-  const newObj = Object.prototype.hasOwnProperty.call(obj, key) ? obj : false;
-  newObj[key] = value;
-};
+// import SliderView from '../view/SliderView';
 
-export default assignIfHasOwn;
+// const assignIfHasOwn = (obj: SliderView, key, value) => {
+//   const newObj = Object.prototype.hasOwnProperty.call(obj, key) ? obj : false;
+//   newObj[key] = value;
+// };
+
+// export default assignIfHasOwn;

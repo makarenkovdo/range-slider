@@ -5,7 +5,7 @@ const notifySliderMoving = function notifySubscribers(
   cursorXY: number[],
   instance: number,
 ): void {
-  this.subscriber.recieveUserAction(this, cursorXY, instance);
+  this.subscriber.recieveDragData(this, cursorXY, instance);
 };
 
 export default notifySliderMoving;

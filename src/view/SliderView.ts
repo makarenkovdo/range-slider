@@ -13,9 +13,8 @@ import SliderPresenter from '../presenter/SliderPresenter';
 import RunnerModel from '../model/RunnerModel';
 import { UpdateTipNumberArgs } from './viewInterfaces';
 import activateOnDragListener from './viewModules/activateOnDragListener';
-import activateOnDropListener from './viewModules/activateOnDropListener';
-import notify from './viewModules/notifySliderMoving';
 import activateOnClickListener from './viewModules/activateOnClickListener';
+import activateOnDropListener from './viewModules/activateOnDropListener';
 import FieldModel from '../model/FieldModel';
 import initStartEnd from './viewModules/initStartEnd';
 import notifyFieldClick from './viewModules/notifyFieldClick';
@@ -74,7 +73,7 @@ export default class SliderView {
 
   notifySliderMoving: (cursorXY: number[], instance: number) => void;
 
-  notifyFieldClick: (cursorXY: number[], instance: number) => void;
+  notifyFieldClick: (cursorXY: number[]) => void;
 
   initStartEnd: (minValue: number, maxValue: number) => void;
 

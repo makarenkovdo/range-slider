@@ -1,29 +1,16 @@
 /* eslint-env jquery */
 import { DataForRunnerUpdatingArgsType } from '../presenter/presenterInterfaces';
 import SliderPresenter from '../presenter/SliderPresenter';
-import { InitDataAndSizeArgs } from './fieldModules/fieldModulesInterfaces';
 import notify from './fieldModules/notify';
 import prepareDataForRunnerUpdating from './fieldModules/prepareDataForRunnerUpdating';
-// import initValues from './fieldModules/setDataStartEnd';
 import setMinMax from './fieldModules/setMinMax';
-import RunnerModel from './RunnerModel';
 
 export default class FieldModel {
-  // $element: JQuery<HTMLElement>;
-
   class: string;
-
-  // size: Array<string>;
-
-  // id: string;
 
   minValue: number;
 
   maxValue: number;
-
-  // step: number;
-
-  // stepSignAfterComma: number;
 
   isVertical: boolean;
 

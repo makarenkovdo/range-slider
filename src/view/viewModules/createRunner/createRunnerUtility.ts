@@ -26,7 +26,7 @@ const addRunnerToDOM = (
 };
 
 const setThis = function setThis$runner(this: SliderView, i: number): void {
-  this.$runner[i] = this.$field.children('.runner');
+  this.$runners[i] = this.$field.children('.runner');
 };
 
 export { setThis, addRunnerToDOM, prepareRunnerArgs };

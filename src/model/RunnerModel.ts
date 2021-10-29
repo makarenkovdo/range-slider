@@ -1,13 +1,11 @@
 /* eslint-env jquery */
 
 import SliderPresenter from '../presenter/SliderPresenter';
-import FieldModel from './FieldModel';
 import defineSignAfterComma from './runnerModules/defineSignAfterComma';
 import initializeDefaultValues from './runnerModules/initializeDefaultValues';
 import notify from './runnerModules/notify';
 import updateRunnerValues from './runnerModules/updateRunnerValues';
 import setStep from './runnerModules/setStep';
-import SliderView from '../view/SliderView';
 import { UpdateRunnerValuesArgs } from './runnerModules/runnerInterfaces';
 
 class RunnerModel {
@@ -47,13 +45,7 @@ class RunnerModel {
 
   initializeDefaultValues: (a: number[]) => void;
 
-  constructor(
-    id: string,
-    instance: number,
-    subscriber: SliderPresenter,
-    runnerSize: number[],
-    $field: JQuery<HTMLElement>,
-  ) {
+  constructor(id: string, instance: number, subscriber: SliderPresenter) {
     // this.id = id;
     // this.class = $(`#${this.id}`).attr('class');
     // this.$field = $field;

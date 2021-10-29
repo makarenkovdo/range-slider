@@ -26,7 +26,6 @@ type DataForRunnerUpdatingArgsType = {
   fieldSize: number[];
   cursorXY: number[];
   runners: RunnerModel[];
-  activeRunner: RunnerModel;
 };
 
 export { PresenterBuildParams, CreateRangeSliderArgsType, DataForRunnerUpdatingArgsType };

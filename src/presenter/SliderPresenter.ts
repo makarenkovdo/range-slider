@@ -107,9 +107,7 @@ export default class SliderPresenter {
   }
 
   createRunner(runnerSize: number[], minValue: number, maxValue: number): this {
-    this.runners.push(
-      new RunnerModel(this.id, this.runnerCounter, this, runnerSize, this.view.$field),
-    );
+    this.runners.push(new RunnerModel(this.id, this.runnerCounter, this));
     this.runners[this.runnerCounter].initializeDefaultValues([minValue, maxValue]);
     return this;
   }
@@ -176,8 +174,11 @@ export default class SliderPresenter {
     }
   }
 
+  // prettier-ignore
   recieveDragData(
-    { isVertical, minMax, isRange, fieldSize }: SliderView,
+    {
+      isVertical, minMax, isRange, fieldSize,
+    }: SliderView,
     cursorXY: number[],
     i: number,
   ): void {
@@ -193,8 +194,11 @@ export default class SliderPresenter {
     this.runners[i].updateRunnerValues(dataForRunnerUpdatingArgs);
   }
 
+  // prettier-ignore
   recieveClickData(
-    { runnersPosition, isVertical, minMax, isRange, fieldSize }: SliderView,
+    {
+      runnersPosition, isVertical, minMax, isRange, fieldSize,
+    }: SliderView,
     cursorXY: number[],
   ): void {
     const dataForRunnerUpdatingArgs: DataForRunnerUpdatingArgsType = {
@@ -219,7 +223,7 @@ export default class SliderPresenter {
   }
 
   updateBarPosition(activeRunner: RunnerModel): this {
-    this.view.updateBarPosition(this.view.isRange, activeRunner);
+    this.view.updateBarPosition(activeRunner);
     return this;
   }
 

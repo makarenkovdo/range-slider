@@ -56,7 +56,7 @@ export default class SliderView {
 
   createTipNumber: (runnerCounter: number, isVertical: boolean) => void;
 
-  updateBarPosition: (isRange: boolean, activeRunner: RunnerModel) => void;
+  updateBarPosition: (activeRunner: RunnerModel) => void;
 
   updateTipNumber: (obj: UpdateTipNumberArgs) => void;
 

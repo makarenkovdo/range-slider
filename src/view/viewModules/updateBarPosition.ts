@@ -10,11 +10,11 @@ import {
 
 const updateBarPosition = function updateBarPositionToDOM(
   this: SliderView,
-  isRange: boolean,
   activeRunner: RunnerModel,
 ): void {
   defineBarKind({
-    isRange,
+    // todo destruction
+    isRange: this.isRange,
     activeRunner,
     isVertical: this.isVertical,
     $bar: this.$bar,

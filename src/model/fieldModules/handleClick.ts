@@ -1,23 +1,25 @@
-import { defineNearestRunner } from './onClick/defineNearestRunner';
+import { HandleClickDataType } from './fieldModulesInterfaces';
+import defineNearestRunner from './handleClick/defineNearestRunner';
 
 const handleClick = (event: JQuery.ClickEvent): void => {
-  const { $field, fieldSize, runners, isVertical, isRange } = event.data as DataType;
+  const { fieldSize, runners, isVertical, isRange } = event.data as HandleClickDataType;
   const cursorXY = [event.offsetX, event.offsetY];
 
   let nearest = 0;
 
-  // prettier-ignore
   if (isRange) {
-      nearest = defineNearestRunner(
-        cursorXY,
-        [runners[0].positionInPercent, runners[1].positionInPercent],
-        isVertical,
-        fieldSize,
-      );
-    }
+    nearest = defineNearestRunner(
+      cursorXY,
+      [runners[0].positionInPercent, runners[1].positionInPercent],
+      isVertical,
+      fieldSize,
+    );
+  }
   runners[nearest].updateRunnerValues(
     cursorXY,
-    { isVertical, minValue, maxValue },
+    isVertical, 
+    minValue, 
+    maxValue },
     runners,
     isRange,
     runners[nearest],

@@ -4,4 +4,11 @@ interface InitDataAndSizeArgs {
   maxValue: number;
 }
 
-export default InitDataAndSizeArgs;
+type HandleClickDataType = {
+  fieldSize: number[];
+  runners: RunnerModel[];
+  isVertical: boolean;
+  isRange: boolean;
+  minMax: number[];
+};
+export { HandleClickDataType, InitDataAndSizeArgs };

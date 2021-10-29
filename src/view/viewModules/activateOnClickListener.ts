@@ -1,22 +1,18 @@
 import RunnerModel from '../../model/RunnerModel';
-import { handleClick } from '../../model/fieldModules/handleClick';
-import { DataType } from '../../model/fieldModules/onClick/defineNearestRunner';
-import FieldModel from '../../model/FieldModel';
+import handleClick from '../../model/fieldModules/handleClick';
 import SliderView from '../SliderView';
+import { HandleClickDataType } from '../../model/fieldModules/fieldModulesInterfaces';
 
 const activateOnClickListener = function activateOnClickListenerAndNotify(
-  this: SliderView,
+  { $field, fieldSize, isVertical, minMax, isRange }: SliderView,
   runners: RunnerModel[],
-  { isVertical, minValue, maxValue }: FieldModel,
 ): void {
-  const eventData: DataType = {
-    cursorXY,
+  const eventData: HandleClickDataType = {
     fieldSize,
     runners,
-    isVertical,
     isRange,
-    minValue,
-    maxValue,
+    isVertical,
+    minMax,
   };
   $field.on('click', eventData, handleClick);
 };

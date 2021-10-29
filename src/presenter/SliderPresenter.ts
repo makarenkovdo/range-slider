@@ -9,7 +9,7 @@ export default class SliderPresenter {
 
   // hasBar: boolean;
 
-  isRange: boolean;
+  // isRange: boolean;
 
   runnerCounter: number;
 
@@ -20,8 +20,8 @@ export default class SliderPresenter {
   view: SliderView;
 
   constructor(id: string, params?: PresenterBuildParams) {
-    this.id = id;
-    this.isRange = false;
+    // this.id = id;
+    // this.isRange = false;
     this.runnerCounter = 0;
     this.field = new FieldModel(id, this);
     this.runners = [];
@@ -90,20 +90,20 @@ export default class SliderPresenter {
 
     if (isRange) {
       this.runnerCounter += 1;
-      this.isRange = true;
+      this.view.isRange = true;
       this.field.isRange = true;
       this.createRunnerView(this.runnerCounter);
       this.createRunner(runnerSize, minValue, maxValue);
       this.createTipNumber(shouldAddTip);
       this.onDrag(this.runnerCounter);
       this.onDrop();
-    } else this.isRange = false;
+    } else this.view.isRange = false;
     return this;
   }
 
   createRunner(runnerSize: number[], minValue: number, maxValue: number): this {
     this.runners.push(
-      new RunnerModel(this.id, this.runnerCounter, this, runnerSize, this.field.$element),
+      new RunnerModel(this.id, this.runnerCounter, this, runnerSize, this.view.$field),
     );
     this.runners[this.runnerCounter].initializeDefaultValues([minValue, maxValue]);
     return this;
@@ -134,9 +134,9 @@ export default class SliderPresenter {
 
   createBar(shouldAddBar: boolean): this {
     if (shouldAddBar) {
-      this.hasBar = true;
+      this.view.hasBar = true;
       this.view.createBar(this);
-      this.view.updateBarPosition(this.isRange, this.runners[0]);
+      this.view.updateBarPosition(this.runners[0]);
     }
 
     return this;
@@ -176,7 +176,7 @@ export default class SliderPresenter {
       cursorXY,
       this.field,
       this.runners,
-      this.isRange,
+      this.view.isRange,
       this.runners[i],
       fieldSize,
     );

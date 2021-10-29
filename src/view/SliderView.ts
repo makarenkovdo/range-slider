@@ -16,17 +16,21 @@ import activateOnDragListener from './viewModules/activateOnDragListener';
 import activateOnDropListener from './viewModules/activateOnDropListener';
 import notify from './viewModules/notify';
 import activateOnClickListener from './viewModules/activateOnClickListener';
+import FieldModel from '../model/FieldModel';
+import initStartEnd from './viewModules/initStartEnd';
 
 export default class SliderView {
   $field: JQuery<HTMLElement>;
 
-  $runner: JQuery<HTMLElement>[];
+  $runners: JQuery<HTMLElement>[];
 
   $bar: JQuery<HTMLElement>;
 
   isVertical: boolean;
 
   isRange: boolean;
+
+  hasBar: boolean;
 
   runnersPosition: number[];
 
@@ -35,6 +39,8 @@ export default class SliderView {
   borderWidth: number;
 
   fieldSize: number[];
+
+  minMax: number[];
 
   stepSignAfterComma: number;
 
@@ -56,25 +62,30 @@ export default class SliderView {
 
   updateRunnerPosition: (activeRunner: RunnerModel) => void;
 
-  initializeValues: (runnerSize: number[], size: string[], isVertical: boolean) => void;
+  initializeValues: (runnerSize: number[], size: number[], isVertical: boolean) => void;
 
   activateOnDragListener: (this: SliderView, runnerInstance: number) => void;
 
-  activateOnDropListener: ($element: JQuery<HTMLElement>) => void;
+  activateOnDropListener: (this: SliderView) => void;
 
-  activateOnClickListener: (isVertical: number) => void;
+  activateOnClickListener: (this: SliderView, runners: RunnerModel[], field: FieldModel) => void;
 
   notify: (cursorXY: number[], instance: number) => void;
 
+  initStartEnd: (minValue: number, maxValue: number) => void;
+
   constructor(id: string, subscriber: SliderPresenter) {
     this.$field = $(`#${id}`);
-    this.$runner = [];
+    this.$runners = [];
     // this.$bar = '';
     this.isVertical = false;
+    this.isRange = false;
+    this.hasBar = false;
     this.runnersPosition = [0, 100];
     this.fieldSize = [];
     this.runnerSize = [];
     this.borderWidth = 1;
+    this.minMax = [];
     this.stepSignAfterComma = 0;
     this.corrector = 0;
     this.cursorXY = [0, 0];
@@ -88,8 +99,9 @@ export default class SliderView {
     this.updateRunnerPosition = updateRunnerPosition.bind(this) as () => void;
     this.initializeValues = initializeValues.bind(this) as () => void;
     this.activateOnDragListener = activateOnDragListener.bind(this) as () => void;
-    this.activateOnDropListener = activateOnDropListener as () => void;
-    this.activateOnClickListener = activateOnClickListener as () => void;
+    this.activateOnDropListener = activateOnDropListener.bind(this) as () => void;
+    this.activateOnClickListener = activateOnClickListener.bind(this) as () => void;
     this.notify = notify.bind(this) as () => void;
+    this.initStartEnd = initStartEnd as () => void;
   }
 }

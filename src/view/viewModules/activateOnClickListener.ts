@@ -1,20 +1,23 @@
 import RunnerModel from '../../model/RunnerModel';
-import {
-  handleClick,
-} from '../../model/fieldModules/onClick/defineNearestRunner';
+import { handleClick } from '../../model/fieldModules/handleClick';
+import { DataType } from '../../model/fieldModules/onClick/defineNearestRunner';
+import FieldModel from '../../model/FieldModel';
+import SliderView from '../SliderView';
 
-const activateOnClickListener = (
-  $field: JQuery<HTMLElement>,
-  fieldSize: number[],
+const activateOnClickListener = function activateOnClickListenerAndNotify(
+  this: SliderView,
   runners: RunnerModel[],
-  isVertical: boolean,
-  isRange: boolean,
-): void => {
-    $field: JQuery<HTMLElement>,
-    fieldSize: number[],
-    runners: RunnerModel[],
-    isVertical: boolean,
-    isRange: boolean, } as DataType;
+  { isVertical, minValue, maxValue }: FieldModel,
+): void {
+  const eventData: DataType = {
+    cursorXY,
+    fieldSize,
+    runners,
+    isVertical,
+    isRange,
+    minValue,
+    maxValue,
+  };
   $field.on('click', eventData, handleClick);
 };
 

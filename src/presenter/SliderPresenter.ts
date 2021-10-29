@@ -7,7 +7,7 @@ import { PresenterBuildParams, CreateRangeSliderArgsType } from './presenterInte
 export default class SliderPresenter {
   id: string;
 
-  hasBar: boolean;
+  // hasBar: boolean;
 
   isRange: boolean;
 
@@ -15,18 +15,17 @@ export default class SliderPresenter {
 
   field: FieldModel;
 
-  runner: Array<RunnerModel>;
+  runners: RunnerModel[];
 
   view: SliderView;
 
   constructor(id: string, params?: PresenterBuildParams) {
     this.id = id;
-    this.hasBar = false;
     this.isRange = false;
     this.runnerCounter = 0;
-    this.field = new FieldModel(this.id, this);
-    this.runner = [];
-    this.view = new SliderView(this.id, this);
+    this.field = new FieldModel(id, this);
+    this.runners = [];
+    this.view = new SliderView(id, this);
     this.build(params);
   }
 
@@ -61,8 +60,7 @@ export default class SliderPresenter {
     };
     checkedValues();
 
-    this.setMinValue(minValue)
-      .setMaxValue(maxValue)
+    this.setMinMax(minValue, maxValue)
       .initLayers(runnerSize)
       .createRangeSlider({
         isRange, shouldAddTip, runnerSize, minValue, maxValue,
@@ -75,8 +73,7 @@ export default class SliderPresenter {
   }
 
   initLayers(runnerSize: number[]): this {
-    this.field.initValues(this.field);
-    this.view.initializeValues(runnerSize, this.field.size, this.field.isVertical);
+    this.view.initializeValues(runnerSize, this.view.fieldSize, this.field.isVertical);
     // this.setMaxValue();
     return this;
   }
@@ -99,16 +96,16 @@ export default class SliderPresenter {
       this.createRunner(runnerSize, minValue, maxValue);
       this.createTipNumber(shouldAddTip);
       this.onDrag(this.runnerCounter);
-      this.onDrop();  
+      this.onDrop();
     } else this.isRange = false;
     return this;
   }
 
   createRunner(runnerSize: number[], minValue: number, maxValue: number): this {
-    this.runner.push(
+    this.runners.push(
       new RunnerModel(this.id, this.runnerCounter, this, runnerSize, this.field.$element),
     );
-    this.runner[this.runnerCounter].initializeDefaultValues([minValue, maxValue]);
+    this.runners[this.runnerCounter].initializeDefaultValues([minValue, maxValue]);
     return this;
   }
 
@@ -139,7 +136,7 @@ export default class SliderPresenter {
     if (shouldAddBar) {
       this.hasBar = true;
       this.view.createBar(this);
-      this.view.updateBarPosition(this.isRange, this.runner[0]);
+      this.view.updateBarPosition(this.isRange, this.runners[0]);
     }
 
     return this;
@@ -147,7 +144,7 @@ export default class SliderPresenter {
 
   // todo NEARES OF TWO RANGES
   onClick(): this {
-    this.view.activateOnClickListener(this.runner, this.isRange);
+    this.view.activateOnClickListener(this.runners, this.field);
     // this.recieve(this); // ? is it needed? or it call from onDrag notify?
     return this;
   }
@@ -162,7 +159,7 @@ export default class SliderPresenter {
   }
 
   onDrop(): this {
-    this.view.activateOnDropListener(this.field.$element);
+    this.view.activateOnDropListener();
     return this;
   }
 
@@ -170,17 +167,17 @@ export default class SliderPresenter {
     if (activeRunner) {
       this.updateRunnerPosition(activeRunner);
       this.updateTipNumber(activeRunner.stepValue, activeRunner.instance);
-      if (this.hasBar) this.updateBarPosition(activeRunner);
+      if (this.view.hasBar) this.updateBarPosition(activeRunner);
     }
   }
 
   recieveUserAction(cursorXY: number[], i: number, fieldSize: number[]): void {
-    this.runner[i].updateRunnerValues(
+    this.runners[i].updateRunnerValues(
       cursorXY,
       this.field,
-      this.runner,
+      this.runners,
       this.isRange,
-      this.runner[i],
+      this.runners[i],
       fieldSize,
     );
   }
@@ -195,24 +192,24 @@ export default class SliderPresenter {
   }
 
   updateBarPosition(activeRunner: RunnerModel): this {
-    this.view.updateBarPosition(this.isRange, activeRunner);
+    this.view.updateBarPosition(this.view.isRange, activeRunner);
     return this;
   }
 
   // how to test? read css data-start/end, read this.field.min/max and compare
-  setMaxValue(maxValue: number): this {
-    this.field.setMinMax(['maxValue', maxValue]);
-    return this;
-  }
-
-  setMinValue(minValue: number): this {
-    this.field.setMinMax(['minValue', minValue]);
+  setMinMax(minValue: number, maxValue: number): this {
+    const setFieldMinMaxArgs = [
+      ['minValue', minValue],
+      ['maxValue', maxValue],
+    ];
+    setFieldMinMaxArgs.forEach((v) => this.field.setMinMax(v));
+    this.view.initStartEnd(minValue, maxValue);
     return this;
   }
 
   setStep(step: number): this {
-    this.runner.forEach((v) => v.setStep(step));
-    if (step < 1) this.runner.forEach((v) => v.defineSignAfterComma(step));
+    this.runners.forEach((v) => v.setStep(step));
+    if (step < 1) this.runners.forEach((v) => v.defineSignAfterComma(step));
 
     return this;
   }

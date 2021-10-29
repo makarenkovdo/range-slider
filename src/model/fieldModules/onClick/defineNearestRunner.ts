@@ -6,11 +6,13 @@ import {
 } from './defineNearest/defineNearestUtility';
 
 export type DataType = {
-  $field: JQuery<HTMLElement>;
   fieldSize: number[];
   runners: RunnerModel[];
   isVertical: boolean;
   isRange: boolean;
+  cursorXY: number[];
+  minValue: number;
+  maxValue: number;
 };
 
 const defineNearestRunner = (

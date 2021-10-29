@@ -9,17 +9,17 @@ import updateRunnerValues from './runnerModules/updateRunnerValues';
 import setStep from './runnerModules/setStep';
 
 class RunnerModel {
-  id: string;
+  // id: string;
 
-  class: string;
+  // class: string;
 
-  $field: JQuery<HTMLElement>;
+  // $field: JQuery<HTMLElement>;
 
   instance: number;
 
-  $runner: JQuery<HTMLElement>;
+  // $runner: JQuery<HTMLElement>;
 
-  size: number[];
+  // size: number[];
 
   positionInPercent: number;
 
@@ -59,12 +59,12 @@ class RunnerModel {
     runnerSize: number[],
     $field: JQuery<HTMLElement>,
   ) {
-    this.id = id;
-    this.class = $(`#${this.id}`).attr('class');
-    this.$field = $field;
+    // this.id = id;
+    // this.class = $(`#${this.id}`).attr('class');
+    // this.$field = $field;
     this.instance = instance;
     // this.$runner = '';
-    this.size = runnerSize;
+    // this.size = runnerSize;
     this.positionInPercent = 0;
     this.value = 0;
     this.step = 1;

@@ -32,3 +32,9 @@ const fifthRunner = new SliderPresenter('fifth', {
   minValue: 20,
   maxValue: 35,
 });
+const sixthRunner = new SliderPresenter('sixth', {
+  minValue: 0,
+  maxValue: 1,
+  step: 0.001,
+  shouldAddTip: true,
+});

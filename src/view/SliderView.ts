@@ -29,6 +29,8 @@ export default class SliderView {
 
   runnerSize: number[];
 
+  borderWidth: number;
+
   fieldSize: number[];
 
   stepSignAfterComma: number;
@@ -65,7 +67,9 @@ export default class SliderView {
     // this.$bar = '';
     this.isVertical = false;
     this.runnersPosition = [0, 100];
+    this.fieldSize = [];
     this.runnerSize = [];
+    this.borderWidth = 1;
     this.stepSignAfterComma = 0;
     this.corrector = 0;
     this.cursorXY = [0, 0];

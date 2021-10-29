@@ -30,8 +30,6 @@ const updateRunnerValues = (
   isRange: boolean,
   thisRunner: RunnerModel,
 ): void => {
-  console.log('update:', isVertical);
-
   setPositionInPercent(thisRunner, calculatePositionInPercent(isVertical, thisRunner, cursorXY));
 
   setValue(thisRunner, calculateValue(minValue, maxValue, thisRunner));

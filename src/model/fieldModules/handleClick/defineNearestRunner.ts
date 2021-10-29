@@ -8,7 +8,9 @@ import {
 
 const defineNearestRunner = (
   cursorXY: number[],
-  { isVertical, fieldSize, runnersPosition }: SliderView,
+  isVertical,
+  fieldSize,
+  runnersPosition,
 ): number => {
   const cursorXYInPercent = prepareDataForCompare(cursorXY, isVertical, fieldSize);
 

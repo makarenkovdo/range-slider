@@ -1,5 +1,6 @@
 import SliderView from '../../view/SliderView';
 import RunnerModel from '../RunnerModel';
+import { UpdateRunnerValuesArgs } from './runnerInterfaces';
 import {
   checkCollision,
   calculatePositionInPercent,
@@ -24,12 +25,15 @@ type UpdatePositionSubargsType = {
 //   thisRunner: RunnerModel;
 // };
 
-const updateRunnerValues = (
-  cursorXY: number[],
-  { isVertical, minMax, isRange, fieldSize }: SliderView,
-  runner: RunnerModel[],
-  thisRunner: RunnerModel,
-): void => {
+const updateRunnerValues = ({
+  cursorXY,
+  isVertical,
+  minMax,
+  isRange,
+  fieldSize,
+  runner,
+  thisRunner,
+}: UpdateRunnerValuesArgs): void => {
   setPositionInPercent(
     thisRunner,
     calculatePositionInPercent(isVertical, thisRunner, cursorXY, fieldSize),

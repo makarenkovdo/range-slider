@@ -1,6 +1,7 @@
 /* eslint-env jquery */
 import FieldModel from '../model/FieldModel';
 import RunnerModel from '../model/RunnerModel';
+import { UpdateRunnerValuesArgs } from '../model/runnerModules/runnerInterfaces';
 import SliderView from '../view/SliderView';
 import {
   PresenterBuildParams,
@@ -176,11 +177,20 @@ export default class SliderPresenter {
   }
 
   recieveDragData(
-    { runnersPosition, isVertical, minMax, isRange, fieldSize }: SliderView,
+    { isVertical, minMax, isRange, fieldSize }: SliderView,
     cursorXY: number[],
     i: number,
   ): void {
-    this.runners[i].updateRunnerValues(cursorXY, this.runners, this.runners[i]);
+    const dataForRunnerUpdatingArgs: UpdateRunnerValuesArgs = {
+      cursorXY,
+      isVertical,
+      minMax,
+      isRange,
+      fieldSize,
+      runners: this.runners,
+      activeRunner: this.runners[i],
+    };
+    this.runners[i].updateRunnerValues(dataForRunnerUpdatingArgs);
   }
 
   recieveClickData(

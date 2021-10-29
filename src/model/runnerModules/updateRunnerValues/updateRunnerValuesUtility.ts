@@ -19,6 +19,8 @@ const calculatePositionInPercent = (
   thisRunner: RunnerModel,
   cursorXY: number[],
 ): number => {
+  console.log(isVertical, thisRunner, cursorXY);
+
   if (isVertical) {
     const fieldHeight = thisRunner.$field[0].offsetHeight;
     return ((fieldHeight - (cursorXY[1] + 1)) * 100) / fieldHeight;

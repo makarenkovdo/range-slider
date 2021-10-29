@@ -52,7 +52,7 @@ export default class FieldModel {
     this.maxValue = 100;
     this.step = 1;
     this.stepSignAfterComma = 0;
-    this.isVertical = this.class === 'range-runner vertical';
+    this.isVertical = this.class === 'range-slider vertical';
     this.isRange = false;
     this.subscriber = subscriber;
     this.isBarAdded = false;

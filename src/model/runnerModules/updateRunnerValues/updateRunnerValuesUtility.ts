@@ -20,17 +20,18 @@ const calculatePositionInPercent = (
   cursorXY: number[],
   fieldSize: number[],
 ): number => {
+  let [cursorX, cursorY] = cursorXY;
   if (isVertical) {
-    if (cursorXY[1] < 0) {
-      cursorXY[1] = 0;
+    if (cursorY < 0) {
+      cursorY = 0;
     }
-    return ((fieldSize[1] - cursorXY[1]) * 100) / fieldSize[1];
+    return ((fieldSize[1] - cursorY) * 100) / fieldSize[1];
   }
-  if (cursorXY[0] < 0) {
-    cursorXY[0] = 0;
+  if (cursorX < 0) {
+    cursorX = 0;
   }
 
-  return (cursorXY[0] * 100) / fieldSize[0];
+  return (cursorX * 100) / fieldSize[0];
 };
 
 type CheckCollisionSubargsType = {
@@ -82,9 +83,9 @@ const setStepValueAndPosition = (
   assignIfHasOwn(thisRunner, 'stepValue', stepValue);
 };
 
-const calculateValue = (minValue: number, maxValue: number, thisRunner: RunnerModel): number => {
-  const fieldLength = maxValue - minValue;
-  return thisRunner.positionInPercent * (fieldLength / 100) + +minValue;
+const calculateValue = (minMax: number[], thisRunner: RunnerModel): number => {
+  const fieldLength = minMax[1] - minMax[0];
+  return thisRunner.positionInPercent * (fieldLength / 100) + +minMax[0];
 };
 
 type CalculateStepValueAndPositionArgsType = {

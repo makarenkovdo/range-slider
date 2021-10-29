@@ -1,5 +1,3 @@
-import SliderView from '../../view/SliderView';
-import RunnerModel from '../RunnerModel';
 import { UpdateRunnerValuesArgs } from './runnerInterfaces';
 import {
   checkCollision,
@@ -11,18 +9,18 @@ import {
   setStepValueAndPosition,
 } from './updateRunnerValues/updateRunnerValuesUtility';
 
-type UpdatePositionSubargsType = {
-  isVertical: boolean;
-  minValue: number;
-  maxValue: number;
-};
+// type UpdatePositionSubargsType = {
+//   isVertical: boolean;
+//   minValue: number;
+//   maxValue: number;
+// };
 // type UpdatePositionArgsType = {
 //   event: JQuery.DragEvent | JQuery.ClickEvent;
 //   obj:UpdatePositionSubargsType;
 //   field: FieldModel;
 //   runner: RunnerModel[];
 //   isRange: boolean;
-//   thisRunner: RunnerModel;
+//   activeRunner: RunnerModel;
 // };
 
 const updateRunnerValues = ({
@@ -31,26 +29,31 @@ const updateRunnerValues = ({
   minMax,
   isRange,
   fieldSize,
-  runner,
-  thisRunner,
+  runners,
+  activeRunner,
 }: UpdateRunnerValuesArgs): void => {
   setPositionInPercent(
-    thisRunner,
-    calculatePositionInPercent(isVertical, thisRunner, cursorXY, fieldSize),
+    activeRunner,
+    calculatePositionInPercent(isVertical, activeRunner, cursorXY, fieldSize),
   );
 
-  setValue(thisRunner, calculateValue(minMax, thisRunner));
+  setValue(activeRunner, calculateValue(minMax, activeRunner));
 
-  // const returned = thisRunner.checkBordersCollision(stepPosition, runner);
+  // const returned = activeRunner.checkBordersCollision(stepPosition, runner);
   if (isRange) {
     setStepValueAndPosition(
-      thisRunner,
-      checkCollision(calculateStepValueAndPosition(thisRunner), runner, thisRunner, isVertical),
+      activeRunner,
+      checkCollision(
+        calculateStepValueAndPosition(activeRunner),
+        runners,
+        activeRunner,
+        isVertical,
+      ),
     );
   } else {
-    setStepValueAndPosition(thisRunner, calculateStepValueAndPosition(thisRunner));
+    setStepValueAndPosition(activeRunner, calculateStepValueAndPosition(activeRunner));
   }
-  thisRunner.notify(this);
+  activeRunner.notify(this);
 };
 
 export default updateRunnerValues;

@@ -186,7 +186,6 @@ export default class SliderPresenter {
   recieveClickData(
     { runnersPosition, isVertical, minMax, isRange, fieldSize }: SliderView,
     cursorXY: number[],
-    i: number,
   ): void {
     const dataForRunnerUpdatingArgs: DataForRunnerUpdatingArgsType = {
       runnersPosition,
@@ -196,7 +195,6 @@ export default class SliderPresenter {
       fieldSize,
       cursorXY,
       runners: this.runners,
-      activeRunner: this.runners[i],
     };
     this.field.prepareDataForRunnerUpdating(dataForRunnerUpdatingArgs);
   }

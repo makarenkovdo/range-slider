@@ -1,6 +1,4 @@
 import { DataForRunnerUpdatingArgsType } from '../../presenter/presenterInterfaces';
-import SliderView from '../../view/SliderView';
-import RunnerModel from '../RunnerModel';
 import { UpdateRunnerValuesArgs } from '../runnerModules/runnerInterfaces';
 import defineNearestRunner from './handleClick/defineNearestRunner';
 
@@ -12,20 +10,19 @@ const prepareDataForRunnerUpdating = ({
   fieldSize,
   cursorXY,
   runners,
-  activeRunner,
 }: DataForRunnerUpdatingArgsType): void => {
   let nearest = 0;
 
-  if (thisView.isRange) {
+  if (isRange) {
     nearest = defineNearestRunner(cursorXY, isVertical, fieldSize, runnersPosition);
   }
 
   const updateRunnerValuesArgs: UpdateRunnerValuesArgs = {
+    cursorXY,
     isVertical,
     minMax,
     isRange,
     fieldSize,
-    cursorXY,
     runners,
     activeRunner: runners[nearest],
   };

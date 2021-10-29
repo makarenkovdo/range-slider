@@ -35,7 +35,11 @@ const activateOnDragListener = function activateOnDragListenerAndNotify(
   this: SliderView,
   instance: number,
 ): void {
+  console.log('add', this.$field, instance);
+
   this.$field.on('mousedown touchstart', `.instance-${instance}`, (event: JQuery.DragEvent) => {
+    console.log('add', this.$field, instance);
+
     event.preventDefault();
     event.stopPropagation();
     this.$field.addClass('tap');

@@ -88,7 +88,7 @@ export default class SliderPresenter {
     this.createRunnerView(this.runnerCounter);
     this.createRunner(runnerSize, minValue, maxValue);
     this.createTipNumber(shouldAddTip);
-    this.onDrag();
+    this.onDrag(this.runnerCounter);
     this.onDrop();
 
     if (isRange) {
@@ -97,8 +97,9 @@ export default class SliderPresenter {
       this.field.isRange = true;
       this.createRunnerView(this.runnerCounter);
       this.createRunner(runnerSize, minValue, maxValue);
-
       this.createTipNumber(shouldAddTip);
+      this.onDrag(this.runnerCounter);
+      this.onDrop();  
     } else this.isRange = false;
     return this;
   }
@@ -151,11 +152,11 @@ export default class SliderPresenter {
     return this;
   }
 
-  onDrag(): this {
+  onDrag(runnerCounter: number): this {
     // [this.runner[0].stepPosition]
 
     $(document).ready(() => {
-      this.view.activateOnDragListener(this.runnerCounter);
+      this.view.activateOnDragListener(runnerCounter);
     });
     return this;
   }

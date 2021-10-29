@@ -1,3 +1,4 @@
+import SliderView from '../../../view/SliderView';
 import FieldModel from '../../FieldModel';
 import RunnerModel from '../../RunnerModel';
 import {
@@ -7,9 +8,7 @@ import {
 
 const defineNearestRunner = (
   cursorXY: number[],
-  runnersPosition: number[],
-  isVertical: boolean,
-  fieldSize: number[],
+  { isVertical, fieldSize, runnersPosition }: SliderView,
 ): number => {
   const cursorXYInPercent = prepareDataForCompare(cursorXY, isVertical, fieldSize);
 

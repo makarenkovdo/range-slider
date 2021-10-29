@@ -1,3 +1,5 @@
+import RunnerModel from '../model/RunnerModel';
+
 type PresenterBuildParams = {
   minValue?: number;
   maxValue?: number;
@@ -16,4 +18,15 @@ type CreateRangeSliderArgsType = {
   maxValue: number;
 };
 
-export { PresenterBuildParams, CreateRangeSliderArgsType };
+type DataForRunnerUpdatingArgsType = {
+  runnersPosition: number[];
+  isVertical: boolean;
+  minMax: number[];
+  isRange: boolean;
+  fieldSize: number[];
+  cursorXY: number[];
+  runners: RunnerModel[];
+  activeRunner: RunnerModel;
+};
+
+export { PresenterBuildParams, CreateRangeSliderArgsType, DataForRunnerUpdatingArgsType };

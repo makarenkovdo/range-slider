@@ -11,7 +11,7 @@ import SliderView from '../SliderView';
 //   activateOnDragListener(this, field, runner, isRange);
 // };
 // implementation of Adapter-pattern
-const setThisData = (event: JQuery.ClickEvent) => {
+const notifySubscriber = (event: JQuery.ClickEvent) => {
   event.preventDefault();
   event.stopPropagation();
   type EventDataType = {
@@ -19,15 +19,6 @@ const setThisData = (event: JQuery.ClickEvent) => {
     instance: number;
   };
   const eventData = event.data as EventDataType;
-  // type TKey = 'stepPosition' | 'stepValue' | 'value' | 'positionInPercent';
-  // const assignIfHasOwn = (obj: SliderView, key: TKey, value: number | number[]) => {
-  //   const newObj: SliderView = obj;
-  //   if (Object.prototype.hasOwnProperty.call(obj, key)) {
-  //     newObj[key] = value; // enum???
-  //   }
-  // };
-  // assignIfHasOwn(eventData.thisView, 'cursorXY', [event.offsetX, event.offsetY]);
-
   eventData.thisView.notify([event.offsetX, event.offsetY], eventData.instance);
 };
 
@@ -43,7 +34,7 @@ const activateOnDragListener = function activateOnDragListenerAndNotify(
     event.preventDefault();
     event.stopPropagation();
     this.$field.addClass('tap');
-    this.$field.on('mousemove touchmove', { thisView: this, instance }, setThisData);
+    this.$field.on('mousemove touchmove', { thisView: this, instance }, notifySubscriber);
   });
 };
 

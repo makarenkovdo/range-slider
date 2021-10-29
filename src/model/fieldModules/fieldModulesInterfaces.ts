@@ -1,3 +1,5 @@
+import RunnerModel from '../RunnerModel';
+
 interface InitDataAndSizeArgs {
   $element: JQuery<HTMLElement>;
   minValue: number;

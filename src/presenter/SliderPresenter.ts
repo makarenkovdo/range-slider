@@ -2,7 +2,11 @@
 import FieldModel from '../model/FieldModel';
 import RunnerModel from '../model/RunnerModel';
 import SliderView from '../view/SliderView';
-import { PresenterBuildParams, CreateRangeSliderArgsType } from './presenterInterfaces';
+import {
+  PresenterBuildParams,
+  CreateRangeSliderArgsType,
+  DataForRunnerUpdatingArgsType,
+} from './presenterInterfaces';
 
 export default class SliderPresenter {
   id: string;
@@ -171,15 +175,30 @@ export default class SliderPresenter {
     }
   }
 
-  recieveUserAction(cursorXY: number[], i: number, fieldSize: number[]): void {
-    this.runners[i].updateRunnerValues(
-      cursorXY,
-      this.field,
-      this.runners,
-      this.view.isRange,
-      this.runners[i],
+  recieveDragData(
+    { runnersPosition, isVertical, minMax, isRange, fieldSize }: SliderView,
+    cursorXY: number[],
+    i: number,
+  ): void {
+    this.runners[i].updateRunnerValues(cursorXY, this.runners, this.runners[i]);
+  }
+
+  recieveClickData(
+    { runnersPosition, isVertical, minMax, isRange, fieldSize }: SliderView,
+    cursorXY: number[],
+    i: number,
+  ): void {
+    const dataForRunnerUpdatingArgs: DataForRunnerUpdatingArgsType = {
+      runnersPosition,
+      isVertical,
+      minMax,
+      isRange,
       fieldSize,
-    );
+      cursorXY,
+      runners: this.runners,
+      activeRunner: this.runners[i],
+    };
+    this.field.prepareDataForRunnerUpdating(dataForRunnerUpdatingArgs);
   }
 
   updateRunnerPosition(activeRunner: RunnerModel): void {

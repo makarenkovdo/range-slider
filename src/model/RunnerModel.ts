@@ -7,6 +7,7 @@ import initializeDefaultValues from './runnerModules/initializeDefaultValues';
 import notify from './runnerModules/notify';
 import updateRunnerValues from './runnerModules/updateRunnerValues';
 import setStep from './runnerModules/setStep';
+import SliderView from '../view/SliderView';
 
 class RunnerModel {
   // id: string;
@@ -42,12 +43,10 @@ class RunnerModel {
   setStep: (step: number) => void;
 
   updateRunnerValues: (
+    thisView: SliderView,
     cursorXY: number[],
-    field: FieldModel,
     runners: RunnerModel[],
-    isRange: boolean,
-    runner: RunnerModel,
-    fieldSize: number[],
+    activeRunner: RunnerModel,
   ) => void;
 
   initializeDefaultValues: (a: number[]) => void;

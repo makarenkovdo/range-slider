@@ -1,12 +1,12 @@
+/* eslint-env jquery */
+import { DataForRunnerUpdatingArgsType } from '../presenter/presenterInterfaces';
 import SliderPresenter from '../presenter/SliderPresenter';
-import InitDataAndSizeArgs from './fieldModules/fieldModulesInterfaces';
+import { InitDataAndSizeArgs } from './fieldModules/fieldModulesInterfaces';
 import notify from './fieldModules/notify';
-import onClick from '../view/viewModules/activateOnClickListener';
+import prepareDataForRunnerUpdating from './fieldModules/prepareDataForRunnerUpdating';
 // import initValues from './fieldModules/setDataStartEnd';
 import setMinMax from './fieldModules/setMinMax';
 import RunnerModel from './RunnerModel';
-
-/* eslint-env jquery */
 
 export default class FieldModel {
   // $element: JQuery<HTMLElement>;
@@ -39,7 +39,7 @@ export default class FieldModel {
 
   setMinMax: (minMax: Array<string | number>) => void;
 
-  onClick: (runner: RunnerModel[], isRange: boolean) => void;
+  prepareDataForRunnerUpdating: (DataForRunnerUpdating: DataForRunnerUpdatingArgsType) => void;
 
   // initValues: (args: InitDataAndSizeArgs) => void;
 
@@ -56,7 +56,7 @@ export default class FieldModel {
 
     this.notify = notify.bind(this) as () => void;
     this.setMinMax = setMinMax.bind(this) as () => void;
-    this.onClick = onClick.bind(this) as () => void;
+    this.prepareDataForRunnerUpdating = prepareDataForRunnerUpdating.bind(this) as () => void;
     // this.initValues = initValues as (a: InitDataAndSizeArgs) => void;
   }
 }

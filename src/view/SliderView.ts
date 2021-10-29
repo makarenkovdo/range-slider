@@ -14,10 +14,12 @@ import RunnerModel from '../model/RunnerModel';
 import { UpdateTipNumberArgs } from './viewInterfaces';
 import activateOnDragListener from './viewModules/activateOnDragListener';
 import activateOnDropListener from './viewModules/activateOnDropListener';
-import notify from './viewModules/notify';
+import notify from './viewModules/notifySliderMoving';
 import activateOnClickListener from './viewModules/activateOnClickListener';
 import FieldModel from '../model/FieldModel';
 import initStartEnd from './viewModules/initStartEnd';
+import notifyFieldClick from './viewModules/notifyFieldClick';
+import notifySliderMoving from './viewModules/notifySliderMoving';
 
 export default class SliderView {
   $field: JQuery<HTMLElement>;
@@ -70,7 +72,9 @@ export default class SliderView {
 
   activateOnClickListener: (this: SliderView, runners: RunnerModel[], field: FieldModel) => void;
 
-  notify: (cursorXY: number[], instance: number) => void;
+  notifySliderMoving: (cursorXY: number[], instance: number) => void;
+
+  notifyFieldClick: (cursorXY: number[], instance: number) => void;
 
   initStartEnd: (minValue: number, maxValue: number) => void;
 
@@ -101,7 +105,8 @@ export default class SliderView {
     this.activateOnDragListener = activateOnDragListener.bind(this) as () => void;
     this.activateOnDropListener = activateOnDropListener.bind(this) as () => void;
     this.activateOnClickListener = activateOnClickListener.bind(this) as () => void;
-    this.notify = notify.bind(this) as () => void;
+    this.notifySliderMoving = notifySliderMoving.bind(this) as () => void;
+    this.notifyFieldClick = notifyFieldClick.bind(this) as () => void;
     this.initStartEnd = initStartEnd as () => void;
   }
 }

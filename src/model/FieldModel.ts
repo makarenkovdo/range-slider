@@ -2,7 +2,7 @@ import SliderPresenter from '../presenter/SliderPresenter';
 import InitDataAndSizeArgs from './fieldModules/fieldModulesInterfaces';
 import notify from './fieldModules/notify';
 import onClick from '../view/viewModules/activateOnClickListener';
-import initValues from './fieldModules/setDataStartEnd';
+// import initValues from './fieldModules/setDataStartEnd';
 import setMinMax from './fieldModules/setMinMax';
 import RunnerModel from './RunnerModel';
 
@@ -15,15 +15,15 @@ export default class FieldModel {
 
   // size: Array<string>;
 
-  id: string;
+  // id: string;
 
   minValue: number;
 
   maxValue: number;
 
-  step: number;
+  // step: number;
 
-  stepSignAfterComma: number;
+  // stepSignAfterComma: number;
 
   isVertical: boolean;
 
@@ -33,7 +33,7 @@ export default class FieldModel {
 
   // isBarAdded: boolean;
 
-  range: [];
+  // range: [];
 
   notify: () => void;
 
@@ -41,7 +41,7 @@ export default class FieldModel {
 
   onClick: (runner: RunnerModel[], isRange: boolean) => void;
 
-  initValues: (a: InitDataAndSizeArgs) => void;
+  // initValues: (args: InitDataAndSizeArgs) => void;
 
   constructor(id: string, subscriber: SliderPresenter) {
     // this.$element = $(`#${id}`);
@@ -56,7 +56,6 @@ export default class FieldModel {
     this.isRange = false;
     this.subscriber = subscriber;
     // this.isBarAdded = false;
-    this.range = []; // ?????????????????????????
 
     this.notify = notify.bind(this) as () => void;
     this.setMinMax = setMinMax.bind(this) as () => void;

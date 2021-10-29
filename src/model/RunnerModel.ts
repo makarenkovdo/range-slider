@@ -47,6 +47,7 @@ class RunnerModel {
     runners: RunnerModel[],
     isRange: boolean,
     runner: RunnerModel,
+    fieldSize: number[],
   ) => void;
 
   initializeDefaultValues: (a: number[]) => void;

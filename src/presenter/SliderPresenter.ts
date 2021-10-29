@@ -147,7 +147,7 @@ export default class SliderPresenter {
 
   // todo NEARES OF TWO RANGES
   onClick(): this {
-    this.field.onClick(this.runner, this.isRange);
+    this.view.activateOnClickListener(this.runner, this.isRange);
     // this.recieve(this); // ? is it needed? or it call from onDrag notify?
     return this;
   }
@@ -174,13 +174,14 @@ export default class SliderPresenter {
     }
   }
 
-  recieveUserAction(cursorXY: number[], i: number): void {
+  recieveUserAction(cursorXY: number[], i: number, fieldSize: number[]): void {
     this.runner[i].updateRunnerValues(
       cursorXY,
       this.field,
       this.runner,
       this.isRange,
       this.runner[i],
+      fieldSize,
     );
   }
 

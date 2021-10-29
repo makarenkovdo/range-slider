@@ -11,13 +11,13 @@ const calculateAndCompareLengths = (
 const prepareDataForCompare = (
   cursorXY: number[],
   isVertical: boolean,
-  fieldSize: string[],
+  fieldSize: number[],
 ): number => {
   const xySwitcher = isVertical ? 1 : 0;
   // prettier-ignore
 
   const cursorXYInPercent: number = Math.abs(
-    100 * xySwitcher - (cursorXY[xySwitcher] / parseInt(fieldSize[xySwitcher], 10)) * 100,
+    100 * xySwitcher - (cursorXY[xySwitcher] / fieldSize[xySwitcher]) * 100,
   );
   return cursorXYInPercent;
 };

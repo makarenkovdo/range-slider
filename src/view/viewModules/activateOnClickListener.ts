@@ -1,8 +1,21 @@
 import RunnerModel from '../../model/RunnerModel';
-import { activateOnClickListener } from '../../model/fieldModules/onClick/onClickUtility';
+import {
+  handleClick,
+} from '../../model/fieldModules/onClick/defineNearestRunner';
 
-const onClick = function updateRunnerOnFieldClick(runners: RunnerModel[], isRange: boolean): void {
-  activateOnClickListener(this, runners, isRange);
+const activateOnClickListener = (
+  $field: JQuery<HTMLElement>,
+  fieldSize: number[],
+  runners: RunnerModel[],
+  isVertical: boolean,
+  isRange: boolean,
+): void => {
+    $field: JQuery<HTMLElement>,
+    fieldSize: number[],
+    runners: RunnerModel[],
+    isVertical: boolean,
+    isRange: boolean, } as DataType;
+  $field.on('click', eventData, handleClick);
 };
 
-export default onClick;
+export default activateOnClickListener;

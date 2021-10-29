@@ -18,22 +18,19 @@ const calculatePositionInPercent = (
   isVertical: boolean,
   thisRunner: RunnerModel,
   cursorXY: number[],
+  fieldSize: number[],
 ): number => {
   if (isVertical) {
-    const fieldHeight = thisRunner.$field[0].offsetHeight; //todo field size?
     if (cursorXY[1] < 0) {
       cursorXY[1] = 0;
     }
-    console.log(cursorXY[1]);
-    return ((fieldHeight - cursorXY[1]) * 100) / fieldHeight;
+    return ((fieldSize[1] - cursorXY[1]) * 100) / fieldSize[1];
   }
   if (cursorXY[0] < 0) {
     cursorXY[0] = 0;
   }
-  console.log(cursorXY[0]);
-  console.log('offsetW', thisRunner.$field[0].offsetWidth);
 
-  return (cursorXY[0] * 100) / thisRunner.$field[0].offsetWidth;
+  return (cursorXY[0] * 100) / fieldSize[0];
 };
 
 type CheckCollisionSubargsType = {

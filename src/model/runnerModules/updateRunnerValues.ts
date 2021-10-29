@@ -29,8 +29,12 @@ const updateRunnerValues = (
   runner: RunnerModel[],
   isRange: boolean,
   thisRunner: RunnerModel,
+  fieldSize: number[],
 ): void => {
-  setPositionInPercent(thisRunner, calculatePositionInPercent(isVertical, thisRunner, cursorXY));
+  setPositionInPercent(
+    thisRunner,
+    calculatePositionInPercent(isVertical, thisRunner, cursorXY, fieldSize),
+  );
 
   setValue(thisRunner, calculateValue(minValue, maxValue, thisRunner));
 

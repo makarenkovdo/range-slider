@@ -27,9 +27,6 @@ const addRunnerToDOM = (
 
 const setThis = function setThis$runner(this: SliderView, i: number): void {
   this.$runner[i] = this.$field.children('.runner');
-  console.log(this.borderWidth);
-  this.borderWidth = parseInt(this.$field.css('border-width'), 10);
-  console.log(this.borderWidth);
 };
 
 export { setThis, addRunnerToDOM, prepareRunnerArgs };

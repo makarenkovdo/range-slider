@@ -1,4 +1,4 @@
-import { defineNearestRunner } from './onClickUtility';
+import { defineNearestRunner } from './defineNearestRunner';
 
 /*   cursorXY: number[],
   runnersPosition: number[],

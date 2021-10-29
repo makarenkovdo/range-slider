@@ -9,11 +9,11 @@ import RunnerModel from './RunnerModel';
 /* eslint-env jquery */
 
 export default class FieldModel {
-  $element: JQuery<HTMLElement>;
+  // $element: JQuery<HTMLElement>;
 
-  class: string;
+  // class: string;
 
-  size: Array<string>;
+  // size: Array<string>;
 
   id: string;
 
@@ -31,7 +31,7 @@ export default class FieldModel {
 
   subscriber: SliderPresenter;
 
-  isBarAdded: boolean;
+  // isBarAdded: boolean;
 
   range: [];
 
@@ -44,9 +44,9 @@ export default class FieldModel {
   initValues: (a: InitDataAndSizeArgs) => void;
 
   constructor(id: string, subscriber: SliderPresenter) {
-    this.$element = $(`#${id}`);
-    this.class = this.$element.attr('class');
-    this.size = [$(`#${id}`).css('width'), $(`#${id}`).css('height')];
+    // this.$element = $(`#${id}`);
+    // this.class = this.$element.attr('class');
+    // this.size = [$(`#${id}`).css('width'), $(`#${id}`).css('height')];
     this.id = id;
     this.minValue = 0;
     this.maxValue = 100;
@@ -55,7 +55,7 @@ export default class FieldModel {
     this.isVertical = this.class === 'range-slider vertical';
     this.isRange = false;
     this.subscriber = subscriber;
-    this.isBarAdded = false;
+    // this.isBarAdded = false;
     this.range = []; // ?????????????????????????
 
     this.notify = notify.bind(this) as () => void;

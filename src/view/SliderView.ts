@@ -15,6 +15,7 @@ import { UpdateTipNumberArgs } from './viewInterfaces';
 import activateOnDragListener from './viewModules/activateOnDragListener';
 import activateOnDropListener from './viewModules/activateOnDropListener';
 import notify from './viewModules/notify';
+import activateOnClickListener from './viewModules/activateOnClickListener';
 
 export default class SliderView {
   $field: JQuery<HTMLElement>;
@@ -24,6 +25,8 @@ export default class SliderView {
   $bar: JQuery<HTMLElement>;
 
   isVertical: boolean;
+
+  isRange: boolean;
 
   runnersPosition: number[];
 
@@ -59,6 +62,8 @@ export default class SliderView {
 
   activateOnDropListener: ($element: JQuery<HTMLElement>) => void;
 
+  activateOnClickListener: (isVertical: number) => void;
+
   notify: (cursorXY: number[], instance: number) => void;
 
   constructor(id: string, subscriber: SliderPresenter) {
@@ -84,6 +89,7 @@ export default class SliderView {
     this.initializeValues = initializeValues.bind(this) as () => void;
     this.activateOnDragListener = activateOnDragListener.bind(this) as () => void;
     this.activateOnDropListener = activateOnDropListener as () => void;
+    this.activateOnClickListener = activateOnClickListener as () => void;
     this.notify = notify.bind(this) as () => void;
   }
 }

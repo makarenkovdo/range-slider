@@ -5,7 +5,7 @@ const notify = function notifySubscribers(
   cursorXY: number[],
   instance: number,
 ): void {
-  this.subscriber.recieveUserAction(cursorXY, instance);
+  this.subscriber.recieveUserAction(cursorXY, instance, this.fieldSize);
 };
 
 export default notify;

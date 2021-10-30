@@ -1,4 +1,4 @@
-import defineNearestRunner from '../../model/fieldModules/handleClick/defineNearestRunner';
+import defineNearestRunner from '../../src/model/fieldModules/handleClick/defineNearestRunner';
 
 /* cursorXY: number[],
   isVertical: boolean,

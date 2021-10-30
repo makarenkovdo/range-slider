@@ -4,8 +4,8 @@
 // import { beforeEach, describe, expect } from 'jest';
 import '@testing-library/jest-dom';
 import { screen } from '@testing-library/dom';
-import SliderPresenter from '../presenter/SliderPresenter';
-import { CreateRangeSliderArgsType } from '../presenter/presenterInterfaces';
+import SliderPresenter from '../src/presenter/SliderPresenter';
+import { CreateRangeSliderArgsType } from '../src/presenter/presenterInterfaces';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -15,30 +15,30 @@ beforeEach(() => {
 
 describe('runnerController test', () => {
   const $field: JQuery<HTMLElement> = $('#first');
-  const firstRunner = new SliderPresenter('first', {
+  const testedSlider = new SliderPresenter('first', {
     isTestMode: true,
   });
   test('constructor testing', () => {
-    expect(firstRunner).toHaveProperty('runnerCounter', 0);
-    expect(firstRunner).toHaveProperty('field.isVertical', false);
-    expect(firstRunner).toHaveProperty('runners');
-    expect(firstRunner).toHaveProperty('view');
-    expect(firstRunner).not.toHaveProperty('runners[1]');
+    expect(testedSlider).toHaveProperty('runnerCounter', 0);
+    expect(testedSlider).toHaveProperty('field.isVertical', false);
+    expect(testedSlider).toHaveProperty('runners');
+    expect(testedSlider).toHaveProperty('view');
+    expect(testedSlider).not.toHaveProperty('runners[1]');
   });
 
-  firstRunner.setMinMax(14, 19);
+  testedSlider.setMinMax(14, 19);
   test('if function "setMinMax" assign values to field/view keys', () => {
-    expect(firstRunner.field.minMax[0]).toBe(14);
-    expect(firstRunner.field.minMax[1]).toBe(19);
-    expect(firstRunner.view.minMax[0]).toBe(14);
-    expect(firstRunner.view.minMax[1]).toBe(19);
+    expect(testedSlider.field.minMax[0]).toBe(14);
+    expect(testedSlider.field.minMax[1]).toBe(19);
+    expect(testedSlider.view.minMax[0]).toBe(14);
+    expect(testedSlider.view.minMax[1]).toBe(19);
   });
 
   const runnerSize: number[] = [50, 50];
-  firstRunner.view.initializeValues(runnerSize);
+  testedSlider.view.initializeValues(runnerSize);
   $(document).ready(() => {
     test('if function initLayers runs ', () => {
-      expect(firstRunner.view.runnerSize[0]).toBe(50);
+      expect(testedSlider.view.runnerSize[0]).toBe(50);
     });
   });
 
@@ -51,39 +51,39 @@ describe('runnerController test', () => {
   };
 
   test('if createRangeSlider runs', () => {
-    firstRunner.createRangeSlider(createRangeSliderTestArgs);
-    expect(firstRunner.view.isRange).toBe(false);
+    testedSlider.createRangeSlider(createRangeSliderTestArgs);
+    expect(testedSlider.view.isRange).toBe(false);
   });
 
   describe('creating slider and setStep', () => {
     test('if createRangeSlider runs if/else block', () => {
       createRangeSliderTestArgs.isRange = true;
-      firstRunner.createRangeSlider(createRangeSliderTestArgs);
-      expect(firstRunner.view.isRange).toBe(true);
+      testedSlider.createRangeSlider(createRangeSliderTestArgs);
+      expect(testedSlider.view.isRange).toBe(true);
     });
     test('if setStep', () => {
       createRangeSliderTestArgs.isRange = true;
-      firstRunner.setStep(1991);
-      expect(firstRunner.runners[0].step).toBe(1991);
+      testedSlider.setStep(1991);
+      expect(testedSlider.runners[0].step).toBe(1991);
     });
   });
 
   test('if createBar runs', () => {
-    expect(firstRunner.view.hasBar).toBe(false);
-    firstRunner.createBar(true);
-    expect(firstRunner.view.hasBar).toBe(true);
+    expect(testedSlider.view.hasBar).toBe(false);
+    testedSlider.createBar(true);
+    expect(testedSlider.view.hasBar).toBe(true);
   });
 
   test('if updateTipNumber runs', () => {
     $(document).ready(() => {
-      firstRunner.updateTipNumber(70, 0);
+      testedSlider.updateTipNumber(70, 0);
       const textContent: string = $field.find('.js-instance-0 span').text();
       expect(textContent).toBe(70);
     });
   });
 
   // test('if function "createRunner" creating html-element', () => {
-  //   const firstRunner = new SliderPresenter('first', {
+  //   const testedSlider = new SliderPresenter('first', {
   //     shouldAddTip: true,
   //     shouldAddBar: true,
   //     step: 0.1,
@@ -97,9 +97,9 @@ describe('runnerController test', () => {
 });
 
 // test('if function "setMinvalue" set', () => {
-//   expect(firstRunner.field.minValue).toBe(14);
+//   expect(testedSlider.field.minValue).toBe(14);
 // });
 // test('if function "setMaxValue" set', () => {
-//   expect(firstRunner.field.maxValue).toBe(19);
+//   expect(testedSlider.field.maxValue).toBe(19);
 // });
 // expect(screen.queryByTestId('not-empty')).not.toBeEmptyDOMElement();

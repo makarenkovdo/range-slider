@@ -8,6 +8,7 @@ type PresenterBuildParams = {
   shouldAddBar?: boolean;
   isRange?: boolean;
   runnerSize?: number[];
+  isTestMode?: boolean;
 };
 
 type CreateRangeSliderArgsType = {

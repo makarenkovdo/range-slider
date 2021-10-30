@@ -44,7 +44,8 @@ export default class SliderPresenter {
     } = params;
 
     const {
-      shouldAddTip = false, shouldAddBar = false, isRange = false, runnerSize = [40, 40], isTestMode = false
+      shouldAddTip = false, shouldAddBar = false, isRange = false, runnerSize = [40, 40],
+      isTestMode = false,
     } = params;
 
     const checkedValues = () => {

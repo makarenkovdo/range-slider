@@ -14,6 +14,7 @@ beforeEach(() => {
 });
 
 describe('runnerController test', () => {
+  const $field: JQuery<HTMLElement> = $('#first');
   const firstRunner = new SliderPresenter('first', {
     isTestMode: true,
   });
@@ -43,7 +44,7 @@ describe('runnerController test', () => {
 
   const createRangeSliderTestArgs: CreateRangeSliderArgsType = {
     isRange: false,
-    shouldAddTip: false,
+    shouldAddTip: true,
     runnerSize: [70, 70],
     minValue: 10,
     maxValue: 100,
@@ -71,6 +72,14 @@ describe('runnerController test', () => {
     expect(firstRunner.view.hasBar).toBe(false);
     firstRunner.createBar(true);
     expect(firstRunner.view.hasBar).toBe(true);
+  });
+
+  test('if updateTipNumber runs', () => {
+    $(document).ready(() => {
+      firstRunner.updateTipNumber(70, 0);
+      const textContent: string = $field.find('.js-instance-0 span').text();
+      expect(textContent).toBe(70);
+    });
   });
 
   // test('if function "createRunner" creating html-element', () => {

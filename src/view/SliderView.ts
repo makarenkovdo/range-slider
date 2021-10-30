@@ -84,7 +84,7 @@ export default class SliderView {
     this.$runners = [];
     // this.$bar = '';
     this.class = $(`#${id}`).attr('class');
-    this.isVertical = this.class === 'range-slider vertical';
+    this.isVertical = this.$field.hasClass('js-vertical');
     this.isRange = false;
     this.hasBar = false;
     this.runnersPosition = [0, 100];

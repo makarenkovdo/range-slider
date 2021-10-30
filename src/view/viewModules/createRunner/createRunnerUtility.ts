@@ -23,12 +23,12 @@ const addRunnerToDOM = (
 ): void => {
   const { i, positioning, minMax } = preparedData;
   $id.append(
-    `<span data-testid="test-runner-${i}" class="runner instance-${i}" style="${positioning}:${minMax}%; width:${runnerSize[0]}px; height:${runnerSize[1]}px"></span>`,
+    `<span data-testid="test-runner-${i}" class="runner js-runner js-instance-${i}" style="${positioning}:${minMax}%; width:${runnerSize[0]}px; height:${runnerSize[1]}px"></span>`,
   );
 };
 
 const setThis = function setThis$runner(this: SliderView, i: number): void {
-  this.$runners[i] = this.$field.children('.runner');
+  this.$runners[i] = this.$field.children('.js-runner');
 };
 
 export { setThis, addRunnerToDOM, prepareRunnerArgs };

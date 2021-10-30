@@ -44,7 +44,7 @@ const updatePositionToDOM = (
   const position = isVertical
     ? getVerticalPosition()
     : getHorizontalPosition();
-  $field.find(`.instance-${instance}`).css(positioning[0], position);
+  $field.find(`.js-instance-${instance}`).css(positioning[0], position);
 };
 
 export { setThisRunnerPosition, defineRunnerType, updatePositionToDOM };

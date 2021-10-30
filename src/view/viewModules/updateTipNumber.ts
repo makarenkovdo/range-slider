@@ -5,7 +5,7 @@ const updateTipNumber = function updateTipNumberAtDOM(
   this: SliderView,
   { stepValue, instance }: UpdateTipNumberArgs,
 ): void {
-  this.$field.find(`.instance-${instance} span`).text(`${stepValue}`);
+  this.$field.find(`.js-instance-${instance} span`).text(`${stepValue}`);
 };
 
 export default updateTipNumber;

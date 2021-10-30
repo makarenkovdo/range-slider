@@ -35,7 +35,7 @@ class RunnerModel {
 
   subscriber: SliderPresenter;
 
-  defineSignAfterComma: (step: number) => void;
+  defineSignAfterComma: (this: RunnerModel) => void;
 
   notify: (that: RunnerModel) => void;
 

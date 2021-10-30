@@ -24,9 +24,16 @@ describe('RunnerModel test', () => {
     expect(testRunner).toHaveProperty('instance', 0);
     expect(testRunner).not.toHaveProperty('id');
   });
-  test('constructor testing', () => {
-    expect(testRunner).toHaveProperty('instance', 0);
-    expect(testRunner).not.toHaveProperty('id');
+  describe('step and sign', () => {
+    testRunner.setStep(0.15);
+    test('set step', () => {
+      expect(testRunner).toHaveProperty('step', 0.15);
+    });
+    test('defineSignAfterComma', () => {
+      testRunner.defineSignAfterComma();
+      expect(testRunner).toHaveProperty('step', 0.15);
+      expect(testRunner).toHaveProperty('stepSignAfterComma', 2);
+    });
   });
 });
 

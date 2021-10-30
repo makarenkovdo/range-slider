@@ -44,7 +44,7 @@ export default class SliderPresenter {
     } = params;
 
     const {
-      shouldAddTip = false, shouldAddBar = false, isRange = false, runnerSize = [40, 40],
+      shouldAddTip = false, shouldAddBar = false, isRange = false, runnerSize = [40, 40], isTestMode = false
     } = params;
 
     const checkedValues = () => {
@@ -65,16 +65,18 @@ export default class SliderPresenter {
     };
     checkedValues();
 
-    this.setMinMax(minValue, maxValue)
-      .initLayers(runnerSize)
-      .createRangeSlider({
-        isRange, shouldAddTip, runnerSize, minValue, maxValue,
-      })
-      .setStep(step)
-      .createBar(shouldAddBar)
-      .updateTipNumber(minValue, 0)
-      .updateTipNumber(maxValue, 1)
-      .onClick();
+    if (!isTestMode) {
+      this.setMinMax(minValue, maxValue)
+        .initLayers(runnerSize)
+        .createRangeSlider({
+          isRange, shouldAddTip, runnerSize, minValue, maxValue,
+        })
+        .setStep(step)
+        .createBar(shouldAddBar)
+        .updateTipNumber(minValue, 0)
+        .updateTipNumber(maxValue, 1)
+        .onClick();
+    }
   }
 
   initLayers(runnerSize: number[]): this {

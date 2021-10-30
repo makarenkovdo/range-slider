@@ -179,23 +179,21 @@ export default class SliderPresenter {
       runners: this.runners,
       activeRunner: this.runners[i],
     };
-    console.log(dataForRunnerUpdatingArgs);
-    
     this.runners[i].updateRunnerValues(dataForRunnerUpdatingArgs);
   }
 
   // prettier-ignore
   recieveClickData(
     {
-      runnersPosition, isVertical, minMax, isRange, fieldSize,
+      runnersPosition, fieldSize,
     }: SliderView,
     cursorXY: number[],
   ): void {
     const dataForRunnerUpdatingArgs: DataForRunnerUpdatingArgsType = {
       runnersPosition,
-      isVertical,
-      minMax,
-      isRange,
+      isVertical: this.field.isVertical,
+      minMax: this.field.minMax,
+      isRange: this.field.isRange,
       fieldSize,
       cursorXY,
       runners: this.runners,

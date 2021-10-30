@@ -4,8 +4,7 @@ import SliderView from '../SliderView';
 const initializeValues = function initializeDefaultViewValues(
   this: SliderView,
   runnerSize: number[],
-): // todo DESTRUCTION
-  void {
+): void {
   $(document).ready(() => {
     const {
       $runners, $field, isVertical, fieldSize,

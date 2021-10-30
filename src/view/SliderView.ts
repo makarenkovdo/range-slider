@@ -10,14 +10,16 @@ import createRunner from './viewModules/createRunner';
 import createTipNumber from './viewModules/createTipNumber';
 import initializeValues from './viewModules/initializeValues';
 import initStartEnd from './viewModules/initStartEnd';
-import FieldModel from '../model/FieldModel';
 import notifyFieldClick from './viewModules/notifyFieldClick';
 import notifySliderMoving from './viewModules/notifySliderMoving';
-import SliderPresenter from '../presenter/SliderPresenter';
-import RunnerModel from '../model/RunnerModel';
 import updateTipNumber from './viewModules/updateTipNumber';
 import updateBarPosition from './viewModules/updateBarPosition';
 import updateRunnerPosition from './viewModules/updateRunnerPosition';
+
+import FieldModel from '../model/FieldModel';
+import SliderPresenter from '../presenter/SliderPresenter';
+import RunnerModel from '../model/RunnerModel';
+
 import { UpdateTipNumberArgs } from './viewInterfaces';
 
 export default class SliderView {

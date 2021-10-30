@@ -56,11 +56,17 @@ describe('RunnerModel test', () => {
     expect(screen.getByTestId('test-tip-number-0')).toBeInTheDocument();
   });
 
-  const runnerSize: number[] = [50, 50];
-  testView.initializeValues(runnerSize);
-  $(document).ready(() => {
-    test('if function initLayers runs ', () => {
-      expect(testedSlider.view.runnerSize[0]).toBe(50);
-    });
+  //   $(document).ready(() => {
+  //     const runnerSize: number[] = [50, 50];
+  //     testView.initializeValues(runnerSize);
+  //     test('if function initLayers runs ', () => {
+  //       expect(testView.runnerSize[0]).toBe(60);
+  //     });
+  //   });
+
+  testView.initStartEnd(20, 60);
+  test('if function initStartEnd append start-end to html', () => {
+    expect($field.attr('data-start')).toBe('20');
+    expect($field.attr('data-end')).toBe('60');
   });
 });

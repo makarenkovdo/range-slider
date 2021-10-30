@@ -25,7 +25,7 @@ const addTipNumberToDOM = (
 ): UpdateTipNumberArgs => {
   const { i, positioning, minMax } = preparedData;
   $id.append(
-    `<span class='tip-number js-tip-number js-instance-${i}' style="${positioning}:${minMax}%"><span>0</span></span>`,
+    `<span data-testid="test-tip-number-${i}" class='tip-number js-tip-number js-instance-${i}' style="${positioning}:${minMax}%"><span>0</span></span>`,
   );
   return { stepValue: minMax, instance: i };
 };

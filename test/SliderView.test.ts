@@ -8,45 +8,10 @@ import SliderView from '../src/view/SliderView';
 import SliderPresenter from '../src/presenter/SliderPresenter';
 import { setThis } from '../src/view/viewModules/createRunner/createRunnerUtility';
 
-beforeEach(() => {
-  document.body.innerHTML = `
-    <div data-testid="testId" id="testId" class="range-runner horizontal" data-start="0"></div>
-    `;
-});
-
-describe('RunnerModel test', () => {
-  const $field: JQuery<HTMLElement> = $('#testId');
-  const testPresenter = new SliderPresenter('testId', {
-    isTestMode: true,
-  });
-  const testView = new SliderView('testId', 0, testPresenter);
-
-  test('if function "createRunner" creating html-element', () => {
-    testView.createRunner.call(this, 0);
-    testView.createRunner.call(this, 1);
-    expect(testView.$runners[0]).not.toBeFalsy();
-    $(document).ready(() => {
-      const $foundRunner: JQuery<HTMLElement> = $field.find('.js-runner');
-      expect($foundRunner).not.toBeFalsy();
-    });
-
-    // expect(screen.queryByTestId('not-empty')).not.toBeEmptyDOMElement();
-    // expect(screen.getByTestId('test-runner-0')).toBeInTheDocument();
-    // expect(screen.getByTestId('test-runner-1')).toBeInTheDocument();
-  });
-  test('if function "createBar" creating html-element', () => {
-    testView.createBar.call(this);
-    expect(testView.$bar).not.toBeFalsy();
-    $(document).ready(() => {
-      const $foundBar: JQuery<HTMLElement> = $field.find('.js-bar');
-      expect($foundBar).not.toBeFalsy();
-    });
-  });
-});
 describe('if function "setThis" set this.$runners', () => {
   document.body.innerHTML = `
-    <div data-testid="testId" id="testId" class="range-runner horizontal" data-start="0"><div class=".js-runner"></div></div>
-    `;
+      <div data-testid="testId" id="testId" class="range-runner horizontal" data-start="0"><div class=".js-runner"></div></div>
+      `;
   const testPresenter = new SliderPresenter('testId', {
     isTestMode: true,
   });
@@ -58,5 +23,34 @@ describe('if function "setThis" set this.$runners', () => {
   test('must NOT be empty array', () => {
     setThis.call(testView, 0);
     expect(testView.$runners[0]).not.toBeFalsy();
+  });
+});
+
+describe('RunnerModel test', () => {
+  document.body.innerHTML = `
+    <div data-testid="testId" id="testId" class="range-runner horizontal" data-start="0"></div>
+    `;
+  const $field: JQuery<HTMLElement> = $('#testId');
+  const testPresenter = new SliderPresenter('testId', {
+    // shouldAddTip: true,
+    isTestMode: true,
+  });
+  const testView = new SliderView('testId', testPresenter);
+
+  test('if function "createRunner" creating html-element', () => {
+    testView.createRunner.call(this, 0);
+    testView.createRunner.call(this, 1);
+    expect(testView.$runners[0]).not.toBeFalsy();
+    expect(screen.getByTestId('test-runner-0')).toBeInTheDocument();
+    expect(screen.getByTestId('test-runner-1')).toBeInTheDocument();
+  });
+  test('if function "createBar" creating html-element', () => {
+    testView.createBar.call(this);
+    expect(testView.$bar).not.toBeFalsy();
+    expect(screen.getByTestId('test-slider-bar')).toBeInTheDocument();
+  });
+  test('if function "createTipNumber" creating html-element', () => {
+    testView.createTipNumber.call(this, 0, false);
+    expect(screen.getByTestId('test-tip-number-0')).toBeInTheDocument();
   });
 });

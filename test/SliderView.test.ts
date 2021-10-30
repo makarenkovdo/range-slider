@@ -34,6 +34,14 @@ describe('RunnerModel test', () => {
     // expect(screen.getByTestId('test-runner-0')).toBeInTheDocument();
     // expect(screen.getByTestId('test-runner-1')).toBeInTheDocument();
   });
+  test('if function "createBar" creating html-element', () => {
+    testView.createBar.call(this);
+    expect(testView.$bar).not.toBeFalsy();
+    $(document).ready(() => {
+      const $foundBar: JQuery<HTMLElement> = $field.find('.js-bar');
+      expect($foundBar).not.toBeFalsy();
+    });
+  });
 });
 describe('if function "setThis" set this.$runners', () => {
   document.body.innerHTML = `

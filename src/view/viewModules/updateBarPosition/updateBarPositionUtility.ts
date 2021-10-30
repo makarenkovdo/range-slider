@@ -1,4 +1,3 @@
-import RunnerModel from '../../../model/RunnerModel';
 import { DefineBarKindArgsType } from '../../viewInterfaces';
 
 enum NumbersEnum {
@@ -8,7 +7,6 @@ enum NumbersEnum {
 /* eslint-env jquery */
 const defineBarKind = ({
   isRange,
-  activeRunner,
   isVertical,
   $bar,
   runnersPosition,
@@ -20,7 +18,6 @@ const defineBarKind = ({
   if (isRange && isVertical) {
     updateRangeBarPosition(
       NumbersEnum.one, // todo enum
-      activeRunner,
       $bar,
       runnersPosition,
       calcLengthOfRangeBar(runnersPosition),
@@ -29,14 +26,13 @@ const defineBarKind = ({
   if (isRange && !isVertical) {
     updateRangeBarPosition(
       NumbersEnum.zero,
-      activeRunner,
       $bar,
       runnersPosition,
       calcLengthOfRangeBar(runnersPosition),
     );
   }
-  if (!isRange && isVertical) updateSingleVerticalBarPosition(activeRunner, $bar);
-  if (!isRange && !isVertical) updateSingleHorizontalBarPosition(activeRunner, $bar);
+  if (!isRange && isVertical) updateSingleVerticalBarPosition(runnersPosition, $bar);
+  if (!isRange && !isVertical) updateSingleHorizontalBarPosition(runnersPosition, $bar);
 
   return this;
 };
@@ -46,24 +42,21 @@ const calcLengthOfRangeBar = (runnersPosition: number[]): number => Math.abs(run
   - runnersPosition[0]);
 
 const updateSingleVerticalBarPosition = (
-  activeRunner: RunnerModel,
+  runnersPosition: number[],
   $bar: JQuery<HTMLElement>,
 ): void => {
-  $bar
-    .css('height', `${activeRunner.stepPosition}%`)
-    .css('top', `${100 - activeRunner.stepPosition}%`);
+  $bar.css('height', `${runnersPosition[0]}%`).css('top', `${100 - runnersPosition[0]}%`);
 };
 
 const updateSingleHorizontalBarPosition = (
-  activeRunner: RunnerModel,
+  runnersPosition: number[],
   $bar: JQuery<HTMLElement>,
 ): void => {
-  $(document).ready(() => $bar.css('width', `${activeRunner.stepPosition}%`));
+  $(document).ready(() => $bar.css('width', `${runnersPosition[0]}%`));
 };
 
 const updateRangeBarPosition = (
   index: NumbersEnum,
-  activeRunner: RunnerModel,
   $bar: JQuery<HTMLElement>,
   runnersPosition: number[],
   barLength: number,
@@ -76,6 +69,7 @@ const updateRangeBarPosition = (
   //  helpVariable for rotation left/top with width/height value
 
   const positionAndLengthSwitcher = [Math.abs(100 * index - runnersPosition[index]), barLength];
+  console.log('BAR', runnersPosition, barLength);
 
   positioningSwitcher[index].forEach((v, i) => {
     $bar.css(`${v}`, `${positionAndLengthSwitcher[i]}%`);

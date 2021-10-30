@@ -1,4 +1,3 @@
-import RunnerModel from '../../model/RunnerModel';
 import SliderView from '../SliderView';
 import {
   defineBarKind,
@@ -8,14 +7,10 @@ import {
   updateRangeBarPosition,
 } from './updateBarPosition/updateBarPositionUtility';
 
-const updateBarPosition = function updateBarPositionToDOM(
-  this: SliderView,
-  activeRunner: RunnerModel,
-): void {
+const updateBarPosition = function updateBarPositionToDOM(this: SliderView): void {
   defineBarKind({
     // todo destruction
     isRange: this.isRange,
-    activeRunner,
     isVertical: this.isVertical,
     $bar: this.$bar,
     runnersPosition: this.runnersPosition,

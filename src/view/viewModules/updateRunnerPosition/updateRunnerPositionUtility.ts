@@ -1,28 +1,29 @@
-import RunnerModel from '../../../model/RunnerModel';
 import SliderView from '../../SliderView';
 
 type DatasForUpdating = { stepPosition: number; instance: number; positioning: string[] };
 
-const defineRunnerType = (isVertical: boolean, updatingRunner: RunnerModel): DatasForUpdating => {
+const defineRunnerType = (
+  isVertical: boolean,
+  stepPosition: number,
+  instance: number,
+): DatasForUpdating => {
   const positioning = [
     ['left', 'width'],
     ['top', 'height'],
   ];
-  const { stepPosition, instance } = updatingRunner;
   const datasForUpdating = { stepPosition, instance, positioning: positioning[0] };
   // eslint-disable-next-line prefer-destructuring
   if (isVertical) datasForUpdating.positioning = positioning[1];
   return datasForUpdating;
 };
-type SetThisRunnerPositionArgs = {
-  instance: number;
-  stepPosition: number;
-};
+
 const setThisRunnerPosition = function setThisRunnerPositionToThis(
   this: SliderView,
-  { instance, stepPosition }: SetThisRunnerPositionArgs,
+  stepPosition: number,
+  instance: number,
 ): void {
   this.runnersPosition[instance] = stepPosition;
+  console.log('set', this.runnersPosition);
 };
 
 //  prettier-ignore
@@ -45,6 +46,8 @@ const updatePositionToDOM = (
     ? getVerticalPosition()
     : getHorizontalPosition();
   $field.find(`.instance-${instance}`).css(positioning[0], position);
+  console.log('DOM runner:', position);
+
 };
 
 export { setThisRunnerPosition, defineRunnerType, updatePositionToDOM };

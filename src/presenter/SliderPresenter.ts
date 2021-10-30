@@ -214,8 +214,8 @@ export default class SliderPresenter {
     return this;
   }
 
-  updateRunnerPosition(activeRunner: RunnerModel): void {
-    this.view.updateRunnerPosition(activeRunner);
+  updateRunnerPosition({ stepPosition, instance }: RunnerModel): void {
+    this.view.updateRunnerPosition(stepPosition, instance);
   }
 
   updateTipNumber(stepValue: number, instance: number): this {

@@ -1,4 +1,3 @@
-import RunnerModel from '../../model/RunnerModel';
 import SliderView from '../SliderView';
 import {
   setThisRunnerPosition,
@@ -8,11 +7,12 @@ import {
 
 const updateRunnerPosition = function updateRunnerPositionToThisAndDOM(
   this: SliderView,
-  updatingRunner: RunnerModel,
+  stepPosition: number,
+  instance: number,
 ): void {
-  if (updatingRunner.stepPosition) setThisRunnerPosition.call(this, updatingRunner);
+  setThisRunnerPosition.call(this, stepPosition, instance);
   updatePositionToDOM(
-    defineRunnerType(this.isVertical, updatingRunner),
+    defineRunnerType(this.isVertical, stepPosition, instance),
     this.isVertical,
     this.$field,
   );

@@ -63,7 +63,7 @@ export default class SliderView {
 
   updateTipNumber: (obj: UpdateTipNumberArgs) => void;
 
-  updateRunnerPosition: (activeRunner: RunnerModel) => void;
+  updateRunnerPosition: (this: SliderView, stepPosition: number, instance: number) => void;
 
   initializeValues: (runnerSize: number[], size: number[], isVertical: boolean) => void;
 

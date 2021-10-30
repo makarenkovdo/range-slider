@@ -17,7 +17,7 @@ describe('if function "setThis" set this.$runners', () => {
   });
 
   const testView = new SliderView('testId', testPresenter);
-  test('must be empty array', () => {
+  test('before setThis.call must be empty array', () => {
     expect(testView.$runners[0]).toBeFalsy();
   });
   test('must NOT be empty array', () => {
@@ -44,13 +44,23 @@ describe('RunnerModel test', () => {
     expect(screen.getByTestId('test-runner-0')).toBeInTheDocument();
     expect(screen.getByTestId('test-runner-1')).toBeInTheDocument();
   });
+
   test('if function "createBar" creating html-element', () => {
     testView.createBar.call(this);
     expect(testView.$bar).not.toBeFalsy();
     expect(screen.getByTestId('test-slider-bar')).toBeInTheDocument();
   });
+
   test('if function "createTipNumber" creating html-element', () => {
     testView.createTipNumber.call(this, 0, false);
     expect(screen.getByTestId('test-tip-number-0')).toBeInTheDocument();
+  });
+
+  const runnerSize: number[] = [50, 50];
+  testView.initializeValues(runnerSize);
+  $(document).ready(() => {
+    test('if function initLayers runs ', () => {
+      expect(testedSlider.view.runnerSize[0]).toBe(50);
+    });
   });
 });

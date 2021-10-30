@@ -1,7 +1,7 @@
 import {
   calculateAndCompareLengths,
   prepareDataForCompare,
-} from '../../src/model/fieldModules/handleClick/defineNearest/defineNearestUtility';
+} from '../../../src/model/fieldModules/handleClick/defineNearest/defineNearestUtility';
 
 test('compare length: first number is a cursorXY, and second is a runners coordinates', () => {
   /* cursorXYInPercent: number,

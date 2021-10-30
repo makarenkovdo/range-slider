@@ -5,6 +5,7 @@
 import '@testing-library/jest-dom';
 import { screen } from '@testing-library/dom';
 import SliderPresenter from '../presenter/SliderPresenter';
+import { CreateRangeSliderArgsType } from '../presenter/presenterInterfaces';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -23,15 +24,41 @@ describe('runnerController test', () => {
     expect(firstRunner).toHaveProperty('view');
     expect(firstRunner).not.toHaveProperty('runners[1]');
   });
+
   firstRunner.setMinMax(14, 19);
-  test('if function "setMinvalue" set', () => {
+  test('if function "setMinMax" assign values to field/view keys', () => {
     expect(firstRunner.field.minMax[0]).toBe(14);
     expect(firstRunner.field.minMax[1]).toBe(19);
     expect(firstRunner.view.minMax[0]).toBe(14);
     expect(firstRunner.view.minMax[1]).toBe(19);
   });
+
   const runnerSize: number[] = [50, 50];
   firstRunner.view.initializeValues(runnerSize);
+  $(document).ready(() => {
+    test('if function initLayers run ', () => {
+      expect(firstRunner.view.runnerSize[0]).toBe(50);
+    });
+  });
+
+  const createRangeSliderTestArgs: CreateRangeSliderArgsType = {
+    isRange: false,
+    shouldAddTip: false,
+    runnerSize: [70, 70],
+    minValue: 10,
+    maxValue: 100,
+  };
+
+  test('if createRangeSlider is running', () => {
+    firstRunner.createRangeSlider(createRangeSliderTestArgs);
+    expect(firstRunner.view.isRange).toBe(false);
+  });
+
+  test('if createRangeSlider is run if/else block', () => {
+    createRangeSliderTestArgs.isRange = true;
+    firstRunner.createRangeSlider(createRangeSliderTestArgs);
+    expect(firstRunner.view.isRange).toBe(true);
+  });
 
   // test('if function "createRunner" creating html-element', () => {
   //   const firstRunner = new SliderPresenter('first', {

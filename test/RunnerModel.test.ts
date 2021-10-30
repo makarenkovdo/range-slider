@@ -7,6 +7,7 @@ import { screen } from '@testing-library/dom';
 import SliderPresenter from '../src/presenter/SliderPresenter';
 import { CreateRangeSliderArgsType } from '../src/presenter/presenterInterfaces';
 import RunnerModel from '../src/model/RunnerModel';
+import { UpdateRunnerValuesArgs } from '../src/model/runnerModules/runnerInterfaces';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -34,6 +35,21 @@ describe('RunnerModel test', () => {
       expect(testRunner).toHaveProperty('step', 0.15);
       expect(testRunner).toHaveProperty('stepSignAfterComma', 2);
     });
+  });
+  test('updateRunnerValues', () => {
+    const updateRunnerValuesArgsTest: UpdateRunnerValuesArgs = {
+      cursorXY: [0.2, 0.5],
+      isVertical: false,
+      minMax: [0, 100],
+      isRange: false,
+      fieldSize: [100, 200],
+      runners: [testRunner],
+      activeRunner: testRunner,
+    };
+    testRunner.setStep(1);
+    testRunner.updateRunnerValues(updateRunnerValuesArgsTest);
+    expect(testRunner).toHaveProperty('stepPosition', 20);
+    expect(testRunner).toHaveProperty('stepValue', 20);
   });
 });
 

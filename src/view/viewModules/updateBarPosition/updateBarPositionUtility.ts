@@ -69,7 +69,6 @@ const updateRangeBarPosition = (
   //  helpVariable for rotation left/top with width/height value
 
   const positionAndLengthSwitcher = [Math.abs(100 * index - runnersPosition[index]), barLength];
-  console.log('BAR', runnersPosition, barLength);
 
   positioningSwitcher[index].forEach((v, i) => {
     $bar.css(`${v}`, `${positionAndLengthSwitcher[i]}%`);

@@ -23,7 +23,6 @@ const setThisRunnerPosition = function setThisRunnerPositionToThis(
   instance: number,
 ): void {
   this.runnersPosition[instance] = stepPosition;
-  console.log('set', this.runnersPosition);
 };
 
 //  prettier-ignore
@@ -46,8 +45,6 @@ const updatePositionToDOM = (
     ? getVerticalPosition()
     : getHorizontalPosition();
   $field.find(`.instance-${instance}`).css(positioning[0], position);
-  console.log('DOM runner:', position);
-
 };
 
 export { setThisRunnerPosition, defineRunnerType, updatePositionToDOM };

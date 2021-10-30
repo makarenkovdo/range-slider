@@ -51,7 +51,9 @@
     "eslint-config-airbnb-typescript": "^14.0.1",
     "jquery": "^3.6.0",
     "jquery-ui": "^1.12.1",
-    "style-loader": "^3.2.1"
+    "style-loader": "^3.2.1",
+    "ts-jest": "^27.0.7",
+    "ts-node": "^10.4.0"
   },
   "env": {
     "browser": true,

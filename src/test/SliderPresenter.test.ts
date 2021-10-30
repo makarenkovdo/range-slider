@@ -23,19 +23,28 @@ describe('runnerController test', () => {
     expect(firstRunner).toHaveProperty('view');
     expect(firstRunner).not.toHaveProperty('runners[1]');
   });
-
-  test('if function "createRunner" creating html-element', () => {
-    const firstRunner = new SliderPresenter('first', {
-      shouldAddTip: true,
-      shouldAddBar: true,
-      step: 0.1,
-      maxValue: 17,
-      isRange: true,
-    });
-    // expect(screen.queryByTestId('not-empty')).not.toBeEmptyDOMElement();
-    expect(screen.getByTestId('test-runner-0')).toBeInTheDocument();
-    expect(screen.getByTestId('test-runner-1')).toBeInTheDocument();
+  firstRunner.setMinMax(14, 19);
+  test('if function "setMinvalue" set', () => {
+    expect(firstRunner.field.minMax[0]).toBe(14);
+    expect(firstRunner.field.minMax[1]).toBe(19);
+    expect(firstRunner.view.minMax[0]).toBe(14);
+    expect(firstRunner.view.minMax[1]).toBe(19);
   });
+  const runnerSize: number[] = [50, 50];
+  firstRunner.view.initializeValues(runnerSize);
+
+  // test('if function "createRunner" creating html-element', () => {
+  //   const firstRunner = new SliderPresenter('first', {
+  //     shouldAddTip: true,
+  //     shouldAddBar: true,
+  //     step: 0.1,
+  //     maxValue: 17,
+  //     isRange: true,
+  //   });
+  //   // expect(screen.queryByTestId('not-empty')).not.toBeEmptyDOMElement();
+  //   expect(screen.getByTestId('test-runner-0')).toBeInTheDocument();
+  //   expect(screen.getByTestId('test-runner-1')).toBeInTheDocument();
+  // });
 });
 
 // test('if function "setMinvalue" set', () => {

@@ -2,23 +2,23 @@
 /* eslint-env jquery */
 import '../index.scss';
 // import { addRunnerToDom, prepareRunnerArgs } from './viewModules/createSliderView';
-import createBar from './viewModules/createBar';
-import createRunner from './viewModules/createRunner';
-import createTipNumber from './viewModules/createTipNumber';
-import updateTipNumber from './viewModules/updateTipNumber';
-import updateBarPosition from './viewModules/updateBarPosition';
-import updateRunnerPosition from './viewModules/updateRunnerPosition';
-import initializeValues from './viewModules/initializeValues';
-import SliderPresenter from '../presenter/SliderPresenter';
-import RunnerModel from '../model/RunnerModel';
-import { UpdateTipNumberArgs } from './viewInterfaces';
 import activateOnDragListener from './viewModules/activateOnDragListener';
 import activateOnClickListener from './viewModules/activateOnClickListener';
 import activateOnDropListener from './viewModules/activateOnDropListener';
-import FieldModel from '../model/FieldModel';
+import createBar from './viewModules/createBar';
+import createRunner from './viewModules/createRunner';
+import createTipNumber from './viewModules/createTipNumber';
+import initializeValues from './viewModules/initializeValues';
 import initStartEnd from './viewModules/initStartEnd';
+import FieldModel from '../model/FieldModel';
 import notifyFieldClick from './viewModules/notifyFieldClick';
 import notifySliderMoving from './viewModules/notifySliderMoving';
+import SliderPresenter from '../presenter/SliderPresenter';
+import RunnerModel from '../model/RunnerModel';
+import updateTipNumber from './viewModules/updateTipNumber';
+import updateBarPosition from './viewModules/updateBarPosition';
+import updateRunnerPosition from './viewModules/updateRunnerPosition';
+import { UpdateTipNumberArgs } from './viewInterfaces';
 
 export default class SliderView {
   class: string;
@@ -65,7 +65,7 @@ export default class SliderView {
 
   updateRunnerPosition: (this: SliderView, stepPosition: number, instance: number) => void;
 
-  initializeValues: (runnerSize: number[], size: number[], isVertical: boolean) => void;
+  initializeValues: (runnerSize: number[]) => void;
 
   activateOnDragListener: (this: SliderView, runnerInstance: number) => void;
 

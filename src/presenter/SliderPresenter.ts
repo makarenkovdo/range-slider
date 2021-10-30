@@ -135,7 +135,7 @@ export default class SliderPresenter {
   }
 
   initLayers(runnerSize: number[]): this {
-    this.view.initializeValues(runnerSize, this.view.fieldSize, this.field.isVertical);
+    this.view.initializeValues(runnerSize);
     return this;
   }
 

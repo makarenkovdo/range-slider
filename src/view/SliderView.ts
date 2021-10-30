@@ -21,6 +21,8 @@ import notifyFieldClick from './viewModules/notifyFieldClick';
 import notifySliderMoving from './viewModules/notifySliderMoving';
 
 export default class SliderView {
+  class: string;
+
   $field: JQuery<HTMLElement>;
 
   $runners: JQuery<HTMLElement>[];
@@ -81,7 +83,8 @@ export default class SliderView {
     this.$field = $(`#${id}`);
     this.$runners = [];
     // this.$bar = '';
-    this.isVertical = false;
+    this.class = $(`#${id}`).attr('class');
+    this.isVertical = this.class === 'range-slider vertical';
     this.isRange = false;
     this.hasBar = false;
     this.runnersPosition = [0, 100];

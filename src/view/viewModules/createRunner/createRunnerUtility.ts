@@ -11,6 +11,8 @@ const prepareRunnerArgs = (i: number, isVertical: boolean): PreparedDataType => 
   }
 
   //  set min = 0%, max = 100% for left/top positions
+  // console.log(i, positioning, minMax, isVertical);
+
   return { i, positioning, minMax };
 };
 

@@ -38,7 +38,7 @@ describe('RunnerModel test', () => {
   });
   test('updateRunnerValues', () => {
     const updateRunnerValuesArgsTest: UpdateRunnerValuesArgs = {
-      cursorXY: [0.2, 0.5],
+      cursorXY: [20, 50],
       isVertical: false,
       minMax: [0, 100],
       isRange: false,
@@ -48,7 +48,7 @@ describe('RunnerModel test', () => {
     };
     testRunner.setStep(1);
     testRunner.updateRunnerValues(updateRunnerValuesArgsTest);
-    expect(testRunner).toHaveProperty('stepPosition', 20);
+    expect(testRunner).toHaveProperty('positionInPercent', 20);
     expect(testRunner).toHaveProperty('stepValue', 20);
   });
 });

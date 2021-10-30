@@ -36,7 +36,7 @@ describe('runnerController test', () => {
   const runnerSize: number[] = [50, 50];
   firstRunner.view.initializeValues(runnerSize);
   $(document).ready(() => {
-    test('if function initLayers run ', () => {
+    test('if function initLayers runs ', () => {
       expect(firstRunner.view.runnerSize[0]).toBe(50);
     });
   });
@@ -49,15 +49,28 @@ describe('runnerController test', () => {
     maxValue: 100,
   };
 
-  test('if createRangeSlider is running', () => {
+  test('if createRangeSlider runs', () => {
     firstRunner.createRangeSlider(createRangeSliderTestArgs);
     expect(firstRunner.view.isRange).toBe(false);
   });
 
-  test('if createRangeSlider is run if/else block', () => {
-    createRangeSliderTestArgs.isRange = true;
-    firstRunner.createRangeSlider(createRangeSliderTestArgs);
-    expect(firstRunner.view.isRange).toBe(true);
+  describe('creating slider and setStep', () => {
+    test('if createRangeSlider runs if/else block', () => {
+      createRangeSliderTestArgs.isRange = true;
+      firstRunner.createRangeSlider(createRangeSliderTestArgs);
+      expect(firstRunner.view.isRange).toBe(true);
+    });
+    test('if setStep', () => {
+      createRangeSliderTestArgs.isRange = true;
+      firstRunner.setStep(1991);
+      expect(firstRunner.runners[0].step).toBe(1991);
+    });
+  });
+
+  test('if createBar runs', () => {
+    expect(firstRunner.view.hasBar).toBe(false);
+    firstRunner.createBar(true);
+    expect(firstRunner.view.hasBar).toBe(true);
   });
 
   // test('if function "createRunner" creating html-element', () => {

@@ -4,20 +4,20 @@
 // import { beforeEach, describe, expect } from 'jest';
 import '@testing-library/jest-dom';
 import { screen } from '@testing-library/dom';
-import SliderPresenter from '../src/presenter/SliderPresenter';
-import { CreateRangeSliderArgsType } from '../src/presenter/presenterInterfaces';
-import RunnerModel from '../src/model/RunnerModel';
-import { UpdateRunnerValuesArgs } from '../src/model/runnerModules/runnerInterfaces';
+import SliderPresenter from '../../src/presenter/SliderPresenter';
+import { CreateRangeSliderArgsType } from '../../src/presenter/presenterInterfaces';
+import RunnerModel from '../../src/model/RunnerModel';
+import { UpdateRunnerValuesArgs } from '../../src/model/runnerModules/runnerInterfaces';
 
 beforeEach(() => {
   document.body.innerHTML = `
-    <div data-testid="first" id="first" class="range-runner horizontal" data-start="0"></div>
+    <div data-testid="testId" id="testId" class="range-runner horizontal" data-start="0"></div>
     `;
 });
 
 describe('RunnerModel test', () => {
   const $field: JQuery<HTMLElement> = $('#testId');
-  const testPresenter = new SliderPresenter('first', {
+  const testPresenter = new SliderPresenter('testId', {
     isTestMode: true,
   });
   const testRunner = new RunnerModel('testId', 0, testPresenter);

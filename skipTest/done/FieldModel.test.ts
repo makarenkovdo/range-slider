@@ -4,23 +4,26 @@
 // import { beforeEach, describe, expect } from 'jest';
 import '@testing-library/jest-dom';
 import { screen } from '@testing-library/dom';
-import FieldModel from '../src/model/FieldModel';
-import SliderPresenter from '../src/presenter/SliderPresenter';
-import RunnerModel from '../src/model/RunnerModel';
-import { DataForRunnerUpdatingArgsType } from '../src/presenter/presenterInterfaces';
+import FieldModel from '../../src/model/FieldModel';
+import SliderPresenter from '../../src/presenter/SliderPresenter';
+import RunnerModel from '../../src/model/RunnerModel';
+import { DataForRunnerUpdatingArgsType } from '../../src/presenter/presenterInterfaces';
 
 beforeEach(() => {
   document.body.innerHTML = `
-    <div data-testid="first" id="first" class="range-runner horizontal" data-start="0"></div>
+    <div data-testid="testId" id="testId" class="range-runner horizontal" data-start="0"></div>
     `;
 });
 
 describe('RunnerModel test', () => {
   const $field: JQuery<HTMLElement> = $('#testId');
-  const testPresenter: SliderPresenter = new SliderPresenter('first', {
+  const testPresenter: SliderPresenter = new SliderPresenter('testId', {
     isRange: true,
   });
   const testField = new FieldModel('testId', testPresenter);
+  test('constructor create own property isVertical', () => {
+    expect(testField).toHaveProperty('isVertical', false);
+  });
   testField.setMinMax(14, 19);
 
   test('if function "setMinMax" set min=14', () => {

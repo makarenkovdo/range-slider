@@ -25,8 +25,6 @@ export default class SliderPresenter {
   view: SliderView;
 
   constructor(id: string, params?: PresenterBuildParams) {
-    // this.id = id;
-    // this.isRange = false;
     this.runnerCounter = 0;
     this.field = new FieldModel(id, this);
     this.runners = [];
@@ -80,12 +78,6 @@ export default class SliderPresenter {
     }
   }
 
-  initLayers(runnerSize: number[]): this {
-    this.view.initializeValues(runnerSize, this.view.fieldSize, this.field.isVertical);
-    // this.setMaxValue();
-    return this;
-  }
-
   //  prettier-ignore
   createRangeSlider({
     isRange, shouldAddTip, runnerSize, minValue, maxValue,
@@ -115,17 +107,11 @@ export default class SliderPresenter {
     return this;
   }
 
-  // correctRunnerPosition() {
-  //   this.view.correctRunnerPosition(this.id);
-  //   return this;
-  // }
-
   createRunnerView(i: number): this {
     this.view.createRunner(i, this.field.isVertical);
     return this;
   }
 
-  // createTipNumber(isOn: boolean) {
   createTipNumber(isOn: boolean): this {
     if (isOn) {
       this.view.createTipNumber(
@@ -148,16 +134,17 @@ export default class SliderPresenter {
     return this;
   }
 
-  // todo NEARES OF TWO RANGES
+  initLayers(runnerSize: number[]): this {
+    this.view.initializeValues(runnerSize, this.view.fieldSize, this.field.isVertical);
+    return this;
+  }
+
   onClick(): this {
     this.view.activateOnClickListener(this.runners, this.field);
-    // this.recieve(this); // ? is it needed? or it call from onDrag notify?
     return this;
   }
 
   onDrag(runnerCounter: number): this {
-    // [this.runner[0].stepPosition]
-
     $(document).ready(() => {
       this.view.activateOnDragListener(runnerCounter);
     });
@@ -179,21 +166,21 @@ export default class SliderPresenter {
 
   // prettier-ignore
   recieveDragData(
-    {
-      isVertical, minMax, isRange, fieldSize,
-    }: SliderView,
+    { fieldSize }: SliderView,
     cursorXY: number[],
     i: number,
   ): void {
     const dataForRunnerUpdatingArgs: UpdateRunnerValuesArgs = {
       cursorXY,
-      isVertical,
-      minMax,
-      isRange,
+      isVertical: this.field.isVertical,
+      minMax: this.field.minMax,
+      isRange: this.field.isRange,
       fieldSize,
       runners: this.runners,
       activeRunner: this.runners[i],
     };
+    console.log(dataForRunnerUpdatingArgs);
+    
     this.runners[i].updateRunnerValues(dataForRunnerUpdatingArgs);
   }
 
@@ -216,6 +203,19 @@ export default class SliderPresenter {
     this.field.prepareDataForRunnerUpdating(dataForRunnerUpdatingArgs);
   }
 
+  setMinMax(minValue: number, maxValue: number): this {
+    this.field.setMinMax(minValue, maxValue);
+    this.view.initStartEnd(minValue, maxValue);
+    return this;
+  }
+
+  setStep(step: number): this {
+    this.runners.forEach((v) => v.setStep(step));
+    if (step < 1) this.runners.forEach((v) => v.defineSignAfterComma(step));
+
+    return this;
+  }
+
   updateRunnerPosition(activeRunner: RunnerModel): void {
     this.view.updateRunnerPosition(activeRunner);
   }
@@ -227,24 +227,6 @@ export default class SliderPresenter {
 
   updateBarPosition(activeRunner: RunnerModel): this {
     this.view.updateBarPosition(activeRunner);
-    return this;
-  }
-
-  // how to test? read css data-start/end, read this.field.min/max and compare
-  setMinMax(minValue: number, maxValue: number): this {
-    const setFieldMinMaxArgs = [
-      ['minValue', minValue],
-      ['maxValue', maxValue],
-    ];
-    setFieldMinMaxArgs.forEach((v) => this.field.setMinMax(v));
-    this.view.initStartEnd(minValue, maxValue);
-    return this;
-  }
-
-  setStep(step: number): this {
-    this.runners.forEach((v) => v.setStep(step));
-    if (step < 1) this.runners.forEach((v) => v.defineSignAfterComma(step));
-
     return this;
   }
 }

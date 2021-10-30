@@ -1,16 +1,13 @@
 /* eslint-env jquery */
 import { DataForRunnerUpdatingArgsType } from '../presenter/presenterInterfaces';
 import SliderPresenter from '../presenter/SliderPresenter';
-import notify from './fieldModules/notify';
 import prepareDataForRunnerUpdating from './fieldModules/prepareDataForRunnerUpdating';
 import setMinMax from './fieldModules/setMinMax';
 
 export default class FieldModel {
   class: string;
 
-  minValue: number;
-
-  maxValue: number;
+  minMax: number[];
 
   isVertical: boolean;
 
@@ -22,28 +19,20 @@ export default class FieldModel {
 
   // range: [];
 
-  notify: () => void;
+  // notify: () => void;
 
-  setMinMax: (minMax: Array<string | number>) => void;
+  setMinMax: (this: FieldModel, minValue: number, maxValue: number) => void;
 
   prepareDataForRunnerUpdating: (DataForRunnerUpdating: DataForRunnerUpdatingArgsType) => void;
 
-  // initValues: (args: InitDataAndSizeArgs) => void;
-
   constructor(id: string, subscriber: SliderPresenter) {
     this.class = $(`#${id}`).attr('class');
-    this.minValue = 0;
-    this.maxValue = 100;
-    // this.step = 1;
-    // this.stepSignAfterComma = 0;
+    this.minMax = [0, 100];
     this.isVertical = this.class === 'range-slider vertical';
     this.isRange = false;
     this.subscriber = subscriber;
-    // this.isBarAdded = false;
 
-    this.notify = notify.bind(this) as () => void;
     this.setMinMax = setMinMax.bind(this) as () => void;
     this.prepareDataForRunnerUpdating = prepareDataForRunnerUpdating.bind(this) as () => void;
-    // this.initValues = initValues as (a: InitDataAndSizeArgs) => void;
   }
 }

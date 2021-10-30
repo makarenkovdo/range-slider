@@ -14,8 +14,8 @@ const prepareDataForCompare = (
   fieldSize: number[],
 ): number => {
   const xySwitcher = isVertical ? 1 : 0;
-  // prettier-ignore
 
+  // prettier-ignore
   const cursorXYInPercent: number = Math.abs(
     100 * xySwitcher - (cursorXY[xySwitcher] / fieldSize[xySwitcher]) * 100,
   );

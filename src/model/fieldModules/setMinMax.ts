@@ -2,12 +2,10 @@ import FieldModel from '../FieldModel';
 
 const setMinMax = function setMinimalMaximun(
   this: FieldModel,
-  args: ['minValue' | 'maxValue', number],
+  minValue: number,
+  maxValue: number,
 ): void {
-  const [minOrMax, value] = args;
-  if (value !== undefined) {
-    this[minOrMax] = value;
-  }
+  this.minMax = [minValue, maxValue];
 };
 
 export default setMinMax;

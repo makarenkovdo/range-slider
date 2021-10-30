@@ -9,20 +9,6 @@ import {
   setStepValueAndPosition,
 } from './updateRunnerValues/updateRunnerValuesUtility';
 
-// type UpdatePositionSubargsType = {
-//   isVertical: boolean;
-//   minValue: number;
-//   maxValue: number;
-// };
-// type UpdatePositionArgsType = {
-//   event: JQuery.DragEvent | JQuery.ClickEvent;
-//   obj:UpdatePositionSubargsType;
-//   field: FieldModel;
-//   runner: RunnerModel[];
-//   isRange: boolean;
-//   activeRunner: RunnerModel;
-// };
-
 const updateRunnerValues = ({
   cursorXY,
   isVertical,
@@ -39,7 +25,6 @@ const updateRunnerValues = ({
 
   setValue(activeRunner, calculateValue(minMax, activeRunner));
 
-  // const returned = activeRunner.checkBordersCollision(stepPosition, runner);
   if (isRange) {
     setStepValueAndPosition(
       activeRunner,

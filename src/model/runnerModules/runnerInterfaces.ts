@@ -10,4 +10,23 @@ type UpdateRunnerValuesArgs = {
   activeRunner: RunnerModel;
 };
 
-export { UpdateRunnerValuesArgs };
+type CalculateStepValueAndPositionArgs = {
+  positionInPercent: number;
+  step: number;
+  value: number;
+  stepSignAfterComma: number;
+};
+
+type AssignIfHasOwnKeys = 'stepPosition' | 'stepValue' | 'value' | 'positionInPercent';
+
+type CheckCollisionSubargs = {
+  stepPosition: number;
+  stepValue: number;
+};
+
+export {
+  UpdateRunnerValuesArgs,
+  AssignIfHasOwnKeys,
+  CalculateStepValueAndPositionArgs,
+  CheckCollisionSubargs,
+};

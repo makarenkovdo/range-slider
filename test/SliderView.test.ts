@@ -77,11 +77,23 @@ describe('RunnerModel test', () => {
     expect(element).toHaveTextContent('70');
     expect($field.find('.js-instance-0 span').text()).toBe('70');
   });
+  test('if function updateBarPosition update width of horizontal range slider', () => {
+    testView.runnersPosition = [20, 80];
+    testView.isRange = true;
+    testView.updateBarPosition.call(this);
+    expect($field.find('.js-slider-bar').css('width')).toBe('60%');
+  });
+  test('if function updateBarPosition update height of vertical slider', () => {
+    testView.runnersPosition = [60, 100];
+    testView.isRange = false;
+    testView.isVertical = true;
+    testView.updateBarPosition.call(this);
+    expect($field.find('.js-slider-bar').css('height')).toBe('60%');
+  });
 });
 
 describe('if function "notify" call subscribers', () => {
   const testPresenter = new SliderPresenter('testId', {
-    // shouldAddTip: true,
     isTestMode: true,
   });
 

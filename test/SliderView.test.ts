@@ -26,6 +26,34 @@ describe('if function "setThis" set this.$runners', () => {
   });
 });
 
+// describe('test function updateRunnerPosition', () => {
+//   document.body.innerHTML = `
+//       <div style="width: 500px" data-testid="testId" id="testId" class="range-runner horizontal" data-start="0"></div>
+//       `;
+//   const $field: JQuery<HTMLElement> = $('#testId');
+//   const testPresenter = new SliderPresenter('testId', {});
+//   const testView = new SliderView('testId', testPresenter);
+//   testView.runnersPosition = [60, 100];
+//   testView.isRange = false;
+//   testView.isVertical = false;
+//   testView.fieldSize = [100, 100];
+//   testView.runnerSize = [40, 40];
+//   testView.updateRunnerPosition.call(this, 50, 0);
+//   test('must setThisRunnerPosition to 50', () => {
+//     expect(testView.runnersPosition[0]).toBe(50);
+//     testView.runnersPosition = [60, 100];
+//     testView.isRange = false;
+//     testView.isVertical = false;
+//     testView.fieldSize = [100, 100];
+//     testView.runnerSize = [40, 40];
+//     testView.updateRunnerPosition.call(this, 50, 0);
+//     const element = screen.getByTestId('test-runner-0');
+//     expect(element).toHaveStyle('left:30%');
+//   });
+//   // test('must set left to 50-((40/100)*50) = 30', () => {
+//   // });
+// });
+
 describe('RunnerModel test', () => {
   document.body.innerHTML = `
     <div data-testid="testId" id="testId" class="range-runner horizontal" data-start="0"></div>
@@ -89,6 +117,18 @@ describe('RunnerModel test', () => {
     testView.isVertical = true;
     testView.updateBarPosition.call(this);
     expect($field.find('.js-slider-bar').css('height')).toBe('60%');
+  });
+  test('must setThisRunnerPosition to 50', () => {
+    testView.runnersPosition = [60, 100];
+    testView.isRange = false;
+    testView.isVertical = false;
+    testView.fieldSize = [100, 100];
+    testView.runnerSize = [40, 40];
+    testView.updateRunnerPosition.call(this, 50, 0);
+    expect(testView.runnersPosition[0]).toBe(50);
+    const element = screen.getByTestId('test-runner-0');
+    // must set left to 50-((40/100)*50) = 30
+    expect(element).toHaveStyle('left:30%');
   });
 });
 

@@ -2,7 +2,6 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import { screen } from '@testing-library/dom';
 import { prepareRunnerArgs } from '../../../src/view/viewModules/createRunner/createRunnerUtility';
 
 beforeEach(() => {

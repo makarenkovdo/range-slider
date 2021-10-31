@@ -4,8 +4,8 @@
 // import { beforeEach, describe, expect } from 'jest';
 import '@testing-library/jest-dom';
 import { screen } from '@testing-library/dom';
-import SliderPresenter from '../src/presenter/SliderPresenter';
-import { CreateRangeSliderArgsType } from '../src/presenter/presenterInterfaces';
+import SliderPresenter from '../../src/presenter/SliderPresenter';
+import { CreateRangeSliderArgsType } from '../../src/presenter/presenterInterfaces';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -13,7 +13,7 @@ beforeEach(() => {
     `;
 });
 
-describe('runnerController test', () => {
+describe('runnerPresenter test', () => {
   const $field: JQuery<HTMLElement> = $('#first');
   const testedSlider = new SliderPresenter('first', {
     isTestMode: true,
@@ -55,16 +55,30 @@ describe('runnerController test', () => {
     expect(testedSlider.view.isRange).toBe(false);
   });
 
-  describe('creating slider and setStep', () => {
+  describe('creating slider', () => {
     test('if createRangeSlider runs if/else block', () => {
       createRangeSliderTestArgs.isRange = true;
       testedSlider.createRangeSlider(createRangeSliderTestArgs);
       expect(testedSlider.view.isRange).toBe(true);
     });
-    test('if setStep', () => {
-      createRangeSliderTestArgs.isRange = true;
-      testedSlider.setStep(1991);
-      expect(testedSlider.runners[0].step).toBe(1991);
+
+    test('if createRangeSlider calls functions', () => {
+      const createRunnerView = jest.fn();
+      const createRunner = jest.fn();
+      const createTipNumber = jest.fn();
+      const onDrag = jest.fn();
+      const onDrop = jest.fn();
+      testedSlider.createRunnerView = createRunnerView;
+      testedSlider.createRunner = createRunner;
+      testedSlider.createTipNumber = createTipNumber;
+      testedSlider.onDrag = onDrag;
+      testedSlider.onDrop = onDrop;
+      testedSlider.createRangeSlider(createRangeSliderTestArgs);
+      expect(createRunnerView).toHaveBeenCalled();
+      expect(createRunner).toHaveBeenCalled();
+      expect(createTipNumber).toHaveBeenCalled();
+      expect(onDrag).toHaveBeenCalled();
+      expect(onDrop).toHaveBeenCalled();
     });
   });
 
@@ -80,6 +94,10 @@ describe('runnerController test', () => {
       const textContent: string = $field.find('.js-instance-0 span').text();
       expect(textContent).toBe(70);
     });
+  });
+  test('if setStep set runner.step', () => {
+    testedSlider.setStep(1991);
+    expect(testedSlider.runners[0].step).toBe(1991);
   });
 
   // test('if function "createRunner" creating html-element', () => {

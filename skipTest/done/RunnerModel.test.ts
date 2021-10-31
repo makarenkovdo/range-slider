@@ -53,6 +53,23 @@ describe('RunnerModel test', () => {
   });
 });
 
+describe('if function "notify" call subscribers', () => {
+  const testPresenter = new SliderPresenter('testId', {
+    // shouldAddTip: true,
+    isTestMode: true,
+  });
+
+  const testRunner = new RunnerModel('testId', 0, testPresenter);
+
+  const recieveModelLogic = jest.fn();
+  testPresenter.recieveModelLogic = recieveModelLogic;
+
+  test('must call fakeSubscriber', () => {
+    testRunner.notify.call(this);
+    expect(recieveModelLogic).toHaveBeenCalled();
+  });
+});
+
 // test('if function "setMinvalue" set', () => {
 //   expect(testRunner.field.minValue).toBe(14);
 // });

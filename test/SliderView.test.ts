@@ -91,9 +91,4 @@ describe('if function "notify" call subscribers', () => {
     testView.notifySliderMoving.call(this, [0, 100]);
     expect(recieveDragData).toHaveBeenCalled();
   });
-
-  // test('must NOT be empty array', () => {
-  //   setThis.call(testView, 0);
-  //   expect(testView.$runners[0]).not.toBeFalsy();
-  // });
 });

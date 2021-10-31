@@ -70,3 +70,30 @@ describe('RunnerModel test', () => {
     expect($field.attr('data-end')).toBe('60');
   });
 });
+
+describe('if function "notify" call subscribers', () => {
+  const testPresenter = new SliderPresenter('testId', {
+    // shouldAddTip: true,
+    isTestMode: true,
+  });
+
+  const recieveClickData = jest.fn();
+  const recieveDragData = jest.fn();
+  testPresenter.recieveClickData = recieveClickData;
+  testPresenter.recieveDragData = recieveDragData;
+
+  const testView = new SliderView('testId', testPresenter);
+  test('must call fakeSubscriber', () => {
+    testView.notifyFieldClick.call(this, [0, 100]);
+    expect(recieveClickData).toHaveBeenCalled();
+  });
+  test('must call fakeSubscriber', () => {
+    testView.notifySliderMoving.call(this, [0, 100]);
+    expect(recieveDragData).toHaveBeenCalled();
+  });
+
+  // test('must NOT be empty array', () => {
+  //   setThis.call(testView, 0);
+  //   expect(testView.$runners[0]).not.toBeFalsy();
+  // });
+});

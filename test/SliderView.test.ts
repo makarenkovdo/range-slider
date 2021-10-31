@@ -112,3 +112,20 @@ describe('if function "notify" call subscribers', () => {
     expect(recieveDragData).toHaveBeenCalled();
   });
 });
+
+// describe('if function updateRunner update html attributes', () => {
+//   const $field: JQuery<HTMLElement> = $('#testId');
+//   const testPresenter = new SliderPresenter('testId', {});
+//   const testView = new SliderView('testId', testPresenter);
+
+//   test('must setThisRunnerPosition and change html-left to 50', () => {
+//     testView.runnersPosition = [60, 100];
+//     testView.isRange = false;
+//     testView.isVertical = false;
+//     testView.updateRunnerPosition.call(this, 50, 0);
+//     expect(testView.runnersPosition[0]).toBe(50);
+//     const element = screen.getByTestId('test-runner-0');
+//     expect(element).toHaveStyle('left:50%');
+//     // expect($field.find('.js-instance-0').css('left')).toBe('50%');
+//   });
+// });

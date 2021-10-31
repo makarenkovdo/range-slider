@@ -11,11 +11,7 @@ const updateRunnerPosition = function updateRunnerPositionToThisAndDOM(
   instance: number,
 ): void {
   setThisRunnerPosition.call(this, stepPosition, instance);
-  updatePositionToDOM(
-    defineRunnerType(this.isVertical, stepPosition, instance),
-    this.isVertical,
-    this.$field,
-  );
+  updatePositionToDOM.call(this, defineRunnerType(this.isVertical, stepPosition, instance));
 };
 
 export default updateRunnerPosition;

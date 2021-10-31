@@ -31,8 +31,6 @@ const calculatePreperatoryPosition = (
   $field: JQuery<HTMLElement>, isVertical: boolean, fieldSize:number[], runnerSize:number[],
 ):number => {
   const i = isVertical ? 1 : 0;
-  console.log('SIZES', runnerSize[i], fieldSize[i]);
-  
   return (runnerSize[i] / fieldSize[i]) * 50;
 };
 
@@ -53,12 +51,7 @@ const updatePositionToDOM = function updateRunnerPositionToDom(this:SliderView,
   const position = isVertical
     ? getVerticalPosition()
     : getHorizontalPosition();
-    console.log('THIIIIIS1:', stepPosition, preperatoryPosition);
-
-
   $field.find(`.js-instance-${instance}`).css(positioning[0], position);
-
-  console.log('THIIIIIS2:', $field.find(`.js-instance-${instance}`).css('left'));
 };
 
 export { setThisRunnerPosition, defineRunnerType, updatePositionToDOM };

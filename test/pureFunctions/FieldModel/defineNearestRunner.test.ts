@@ -1,10 +1,5 @@
 import defineNearestRunner from '../../../src/model/fieldModules/handleClick/defineNearestRunner';
 
-/* cursorXY: number[],
-  isVertical: boolean,
-  fieldSize: number[],
-  runnersPosition: number[],
-  */
 /* note, that vertical cursorY starting in upper part of screen, and
  it is expected contraversary result */
 test('return instance number of nearest runner to click-coordinates', () => {

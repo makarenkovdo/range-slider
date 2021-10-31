@@ -4,8 +4,8 @@
 // import { beforeEach, describe, expect } from 'jest';
 import '@testing-library/jest-dom';
 import { screen } from '@testing-library/dom';
-import SliderPresenter from '../../src/presenter/SliderPresenter';
-import { CreateRangeSliderArgsType } from '../../src/presenter/presenterInterfaces';
+import SliderPresenter from '../src/presenter/SliderPresenter';
+import { CreateRangeSliderArgsType } from '../src/presenter/presenterInterfaces';
 
 beforeEach(() => {
   document.body.innerHTML = `

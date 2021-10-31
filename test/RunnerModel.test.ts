@@ -4,10 +4,10 @@
 // import { beforeEach, describe, expect } from 'jest';
 import '@testing-library/jest-dom';
 import { screen } from '@testing-library/dom';
-import SliderPresenter from '../../src/presenter/SliderPresenter';
-import { CreateRangeSliderArgsType } from '../../src/presenter/presenterInterfaces';
-import RunnerModel from '../../src/model/RunnerModel';
-import { UpdateRunnerValuesArgs } from '../../src/model/runnerModules/runnerInterfaces';
+import SliderPresenter from '../src/presenter/SliderPresenter';
+import { CreateRangeSliderArgsType } from '../src/presenter/presenterInterfaces';
+import RunnerModel from '../src/model/RunnerModel';
+import { UpdateRunnerValuesArgs } from '../src/model/runnerModules/runnerInterfaces';
 
 beforeEach(() => {
   document.body.innerHTML = `

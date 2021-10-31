@@ -69,6 +69,14 @@ describe('RunnerModel test', () => {
     expect($field.attr('data-start')).toBe('20');
     expect($field.attr('data-end')).toBe('60');
   });
+
+  test('if function updateTipNumber update html content', () => {
+    const updateTipTestArgs = { stepValue: 70, instance: 0 };
+    testView.updateTipNumber.call(this, updateTipTestArgs);
+    const element = screen.getByTestId('test-tip-number-0');
+    expect(element).toHaveTextContent('70');
+    expect($field.find('.js-instance-0 span').text()).toBe('70');
+  });
 });
 
 describe('if function "notify" call subscribers', () => {

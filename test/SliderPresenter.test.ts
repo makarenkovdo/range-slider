@@ -1,9 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-// import { beforeEach, describe, expect } from 'jest';
 import '@testing-library/jest-dom';
-import { screen } from '@testing-library/dom';
 import SliderPresenter from '../src/presenter/SliderPresenter';
 import { CreateRangeSliderArgsType } from '../src/presenter/presenterInterfaces';
 
@@ -99,25 +97,4 @@ describe('runnerPresenter test', () => {
     testedSlider.setStep(1991);
     expect(testedSlider.runners[0].step).toBe(1991);
   });
-
-  // test('if function "createRunner" creating html-element', () => {
-  //   const testedSlider = new SliderPresenter('first', {
-  //     shouldAddTip: true,
-  //     shouldAddBar: true,
-  //     step: 0.1,
-  //     maxValue: 17,
-  //     isRange: true,
-  //   });
-  //   // expect(screen.queryByTestId('not-empty')).not.toBeEmptyDOMElement();
-  //   expect(screen.getByTestId('test-runner-0')).toBeInTheDocument();
-  //   expect(screen.getByTestId('test-runner-1')).toBeInTheDocument();
-  // });
 });
-
-// test('if function "setMinvalue" set', () => {
-//   expect(testedSlider.field.minValue).toBe(14);
-// });
-// test('if function "setMaxValue" set', () => {
-//   expect(testedSlider.field.maxValue).toBe(19);
-// });
-// expect(screen.queryByTestId('not-empty')).not.toBeEmptyDOMElement();

@@ -1,11 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-// import { beforeEach, describe, expect } from 'jest';
 import '@testing-library/jest-dom';
-import { screen } from '@testing-library/dom';
-import SliderPresenter from '../../../src/presenter/SliderPresenter';
-import RunnerModel from '../../../src/model/RunnerModel';
 import { calculateStepValueAndPosition } from '../../../src/model/runnerModules/updateRunnerValues/updateRunnerValuesUtility';
 import { CalculateStepValueAndPositionArgs } from '../../../src/model/runnerModules/runnerInterfaces';
 
@@ -16,10 +12,6 @@ beforeEach(() => {
 });
 
 describe('calculateValue test', () => {
-  const testPresenter = new SliderPresenter('first', {
-    isTestMode: true,
-  });
-  const testRunner = new RunnerModel('testId', 0, testPresenter);
   test('calculateValue', () => {
     const CalculateStepValueAndPositionArgsTest: CalculateStepValueAndPositionArgs = {
       positionInPercent: 23,

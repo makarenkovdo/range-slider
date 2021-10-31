@@ -3,13 +3,9 @@
  */
 // import { beforeEach, describe, expect } from 'jest';
 import '@testing-library/jest-dom';
-import { screen } from '@testing-library/dom';
 import SliderPresenter from '../../../src/presenter/SliderPresenter';
 import RunnerModel from '../../../src/model/RunnerModel';
-import {
-  calculatePositionInPercent,
-  calculateValue,
-} from '../../../src/model/runnerModules/updateRunnerValues/updateRunnerValuesUtility';
+import { calculateValue } from '../../../src/model/runnerModules/updateRunnerValues/updateRunnerValuesUtility';
 
 beforeEach(() => {
   document.body.innerHTML = `

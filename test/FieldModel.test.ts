@@ -1,9 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-// import { beforeEach, describe, expect } from 'jest';
 import '@testing-library/jest-dom';
-import { screen } from '@testing-library/dom';
 import FieldModel from '../src/model/FieldModel';
 import SliderPresenter from '../src/presenter/SliderPresenter';
 // import RunnerModel from '../../src/model/RunnerModel';
@@ -16,7 +14,6 @@ beforeEach(() => {
 });
 
 describe('RunnerModel test', () => {
-  const $field: JQuery<HTMLElement> = $('#testId');
   const testPresenter: SliderPresenter = new SliderPresenter('testId', {
     isRange: true,
   });
@@ -49,5 +46,3 @@ describe('RunnerModel test', () => {
     });
   });
 });
-
-// expect(screen.queryByTestId('not-empty')).not.toBeEmptyDOMElement();

@@ -25,36 +25,7 @@ describe('if function "setThis" set this.$runners', () => {
     expect(testView.$runners[0]).not.toBeFalsy();
   });
 });
-
-// describe('test function updateRunnerPosition', () => {
-//   document.body.innerHTML = `
-//       <div style="width: 500px" data-testid="testId" id="testId" class="range-runner horizontal" data-start="0"></div>
-//       `;
-//   const $field: JQuery<HTMLElement> = $('#testId');
-//   const testPresenter = new SliderPresenter('testId', {});
-//   const testView = new SliderView('testId', testPresenter);
-//   testView.runnersPosition = [60, 100];
-//   testView.isRange = false;
-//   testView.isVertical = false;
-//   testView.fieldSize = [100, 100];
-//   testView.runnerSize = [40, 40];
-//   testView.updateRunnerPosition.call(this, 50, 0);
-//   test('must setThisRunnerPosition to 50', () => {
-//     expect(testView.runnersPosition[0]).toBe(50);
-//     testView.runnersPosition = [60, 100];
-//     testView.isRange = false;
-//     testView.isVertical = false;
-//     testView.fieldSize = [100, 100];
-//     testView.runnerSize = [40, 40];
-//     testView.updateRunnerPosition.call(this, 50, 0);
-//     const element = screen.getByTestId('test-runner-0');
-//     expect(element).toHaveStyle('left:30%');
-//   });
-//   // test('must set left to 50-((40/100)*50) = 30', () => {
-//   // });
-// });
-
-describe('RunnerModel test', () => {
+describe('ViewModel test', () => {
   document.body.innerHTML = `
     <div data-testid="testId" id="testId" class="range-runner horizontal" data-start="0"></div>
     `;
@@ -83,14 +54,6 @@ describe('RunnerModel test', () => {
     testView.createTipNumber.call(this, 0, false);
     expect(screen.getByTestId('test-tip-number-0')).toBeInTheDocument();
   });
-
-  //   $(document).ready(() => {
-  //     const runnerSize: number[] = [50, 50];
-  //     testView.initializeValues(runnerSize);
-  //     test('if function initLayers runs ', () => {
-  //       expect(testView.runnerSize[0]).toBe(60);
-  //     });
-  //   });
 
   testView.initStartEnd(20, 60);
   test('if function initStartEnd append start-end to html', () => {
@@ -152,20 +115,3 @@ describe('if function "notify" call subscribers', () => {
     expect(recieveDragData).toHaveBeenCalled();
   });
 });
-
-// describe('if function updateRunner update html attributes', () => {
-//   const $field: JQuery<HTMLElement> = $('#testId');
-//   const testPresenter = new SliderPresenter('testId', {});
-//   const testView = new SliderView('testId', testPresenter);
-
-//   test('must setThisRunnerPosition and change html-left to 50', () => {
-//     testView.runnersPosition = [60, 100];
-//     testView.isRange = false;
-//     testView.isVertical = false;
-//     testView.updateRunnerPosition.call(this, 50, 0);
-//     expect(testView.runnersPosition[0]).toBe(50);
-//     const element = screen.getByTestId('test-runner-0');
-//     expect(element).toHaveStyle('left:50%');
-//     // expect($field.find('.js-instance-0').css('left')).toBe('50%');
-//   });
-// });

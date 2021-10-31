@@ -9,49 +9,34 @@ import setStep from './runnerModules/setStep';
 import { UpdateRunnerValuesArgs } from './runnerModules/runnerInterfaces';
 
 class RunnerModel {
-  // id: string;
+  public instance: number;
 
-  // class: string;
+  public positionInPercent: number;
 
-  // $field: JQuery<HTMLElement>;
+  public value: number;
 
-  instance: number;
+  public step: number;
 
-  // $runner: JQuery<HTMLElement>;
+  public stepSignAfterComma: number;
 
-  // size: number[];
+  public stepPosition: number;
 
-  positionInPercent: number;
+  public stepValue: number;
 
-  value: number;
+  public subscriber: SliderPresenter;
 
-  step: number;
+  public defineSignAfterComma: (this: RunnerModel) => void;
 
-  stepSignAfterComma: number;
+  public notify: (that: RunnerModel) => void;
 
-  stepPosition: number;
+  public setStep: (step: number) => void;
 
-  stepValue: number;
+  public updateRunnerValues: (updateRunnerValuesArgs: UpdateRunnerValuesArgs) => void;
 
-  subscriber: SliderPresenter;
-
-  defineSignAfterComma: (this: RunnerModel) => void;
-
-  notify: (that: RunnerModel) => void;
-
-  setStep: (step: number) => void;
-
-  updateRunnerValues: (updateRunnerValuesArgs: UpdateRunnerValuesArgs) => void;
-
-  initializeDefaultValues: (a: number[]) => void;
+  public initializeDefaultValues: (a: number[]) => void;
 
   constructor(id: string, instance: number, subscriber: SliderPresenter) {
-    // this.id = id;
-    // this.class = $(`#${this.id}`).attr('class');
-    // this.$field = $field;
     this.instance = instance;
-    // this.$runner = '';
-    // this.size = runnerSize;
     this.positionInPercent = 0;
     this.value = 0;
     this.step = 1;

@@ -23,63 +23,67 @@ import RunnerModel from '../model/RunnerModel';
 import { UpdateTipNumberArgs } from './viewInterfaces';
 
 export default class SliderView {
-  class: string;
+  public $runners: JQuery<HTMLElement>[];
 
-  $field: JQuery<HTMLElement>;
+  public $bar: JQuery<HTMLElement>;
 
-  $runners: JQuery<HTMLElement>[];
+  public isVertical: boolean;
 
-  $bar: JQuery<HTMLElement>;
+  public isRange: boolean;
 
-  isVertical: boolean;
+  public hasBar: boolean;
 
-  isRange: boolean;
+  public runnersPosition: number[];
 
-  hasBar: boolean;
+  public runnerSize: number[];
 
-  runnersPosition: number[];
+  public fieldSize: number[];
 
-  runnerSize: number[];
+  public minMax: number[];
 
-  borderWidth: number;
+  readonly $field: JQuery<HTMLElement>;
 
-  fieldSize: number[];
+  readonly subscriber: SliderPresenter;
 
-  minMax: number[];
+  public cursorXY: number[];
 
-  stepSignAfterComma: number;
+  public corrector: number;
 
-  cursorXY: number[];
+  private stepSignAfterComma: number;
 
-  corrector: number;
+  private borderWidth: number;
 
-  subscriber: SliderPresenter;
+  private class: string;
 
-  createBar: (that: SliderPresenter) => void;
+  public createBar: (that: SliderPresenter) => void;
 
-  createRunner: (i: number, isVertical: boolean) => void;
+  public createRunner: (i: number, isVertical: boolean) => void;
 
-  createTipNumber: (runnerCounter: number, isVertical: boolean) => void;
+  public createTipNumber: (runnerCounter: number, isVertical: boolean) => void;
 
-  updateBarPosition: (activeRunner: RunnerModel) => void;
+  public updateBarPosition: (activeRunner: RunnerModel) => void;
 
-  updateTipNumber: (obj: UpdateTipNumberArgs) => void;
+  public updateTipNumber: (obj: UpdateTipNumberArgs) => void;
 
-  updateRunnerPosition: (this: SliderView, stepPosition: number, instance: number) => void;
+  public updateRunnerPosition: (this: SliderView, stepPosition: number, instance: number) => void;
 
-  initializeValues: (runnerSize: number[]) => void;
+  public initializeValues: (runnerSize: number[]) => void;
 
-  activateOnDragListener: (this: SliderView, runnerInstance: number) => void;
+  public activateOnDragListener: (this: SliderView, runnerInstance: number) => void;
 
-  activateOnDropListener: (this: SliderView) => void;
+  public activateOnDropListener: (this: SliderView) => void;
 
-  activateOnClickListener: (this: SliderView, runners: RunnerModel[], field: FieldModel) => void;
+  public activateOnClickListener: (
+    this: SliderView,
+    runners: RunnerModel[],
+    field: FieldModel,
+  ) => void;
 
-  notifySliderMoving: (cursorXY: number[], instance: number) => void;
+  public notifySliderMoving: (cursorXY: number[], instance: number) => void;
 
-  notifyFieldClick: (cursorXY: number[]) => void;
+  public notifyFieldClick: (cursorXY: number[]) => void;
 
-  initStartEnd: (minValue: number, maxValue: number) => void;
+  public initStartEnd: (minValue: number, maxValue: number) => void;
 
   constructor(id: string, subscriber: SliderPresenter) {
     this.$field = $(`#${id}`);

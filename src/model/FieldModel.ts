@@ -5,25 +5,21 @@ import prepareDataForRunnerUpdating from './fieldModules/prepareDataForRunnerUpd
 import setMinMax from './fieldModules/setMinMax';
 
 export default class FieldModel {
-  class: string;
+  public minMax: number[];
 
-  minMax: number[];
+  public isVertical: boolean;
 
-  isVertical: boolean;
+  public isRange: boolean;
 
-  isRange: boolean;
+  private class: string;
 
-  subscriber: SliderPresenter;
+  private subscriber: SliderPresenter;
 
-  // isBarAdded: boolean;
+  public setMinMax: (this: FieldModel, minValue: number, maxValue: number) => void;
 
-  // range: [];
-
-  // notify: () => void;
-
-  setMinMax: (this: FieldModel, minValue: number, maxValue: number) => void;
-
-  prepareDataForRunnerUpdating: (DataForRunnerUpdating: DataForRunnerUpdatingArgsType) => void;
+  public prepareDataForRunnerUpdating: (
+    DataForRunnerUpdating: DataForRunnerUpdatingArgsType,
+  ) => void;
 
   constructor(id: string, subscriber: SliderPresenter) {
     this.class = $(`#${id}`).attr('class');

@@ -23,6 +23,7 @@ const setThisRunnerPosition = function setThisRunnerPositionToThis(
   instance: number,
 ): void {
   this.runnersPosition[instance] = stepPosition;
+  this.activeInstance = instance;
 };
 
 //  prettier-ignore

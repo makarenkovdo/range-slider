@@ -21,6 +21,7 @@ import SliderPresenter from '../presenter/SliderPresenter';
 import RunnerModel from '../model/RunnerModel';
 
 import { UpdateTipNumberArgs } from './viewInterfaces';
+import updateZIndex from './viewModules/updateZIndex';
 
 export default class SliderView {
   public $runners: JQuery<HTMLElement>[];
@@ -49,6 +50,10 @@ export default class SliderView {
 
   public corrector: number;
 
+  public activeInstance: number;
+
+  public isZIndexUpdated: boolean;
+
   private stepSignAfterComma: number;
 
   private borderWidth: number;
@@ -66,6 +71,8 @@ export default class SliderView {
   public updateTipNumber: (obj: UpdateTipNumberArgs) => void;
 
   public updateRunnerPosition: (this: SliderView, stepPosition: number, instance: number) => void;
+
+  public updateZIndex: (this: SliderView, i: number) => void;
 
   public initializeValues: (runnerSize: number[]) => void;
 
@@ -101,6 +108,8 @@ export default class SliderView {
     this.stepSignAfterComma = 0;
     this.corrector = 0;
     this.cursorXY = [0, 0];
+    this.activeInstance = 0;
+    this.isZIndexUpdated = false;
     this.subscriber = subscriber;
 
     this.createBar = createBar.bind(this) as () => void;
@@ -109,6 +118,7 @@ export default class SliderView {
     this.updateBarPosition = updateBarPosition.bind(this) as () => void;
     this.updateTipNumber = updateTipNumber.bind(this) as () => void;
     this.updateRunnerPosition = updateRunnerPosition.bind(this) as () => void;
+    this.updateZIndex = updateZIndex.bind(this) as () => void;
     this.initializeValues = initializeValues.bind(this) as () => void;
     this.activateOnDragListener = activateOnDragListener.bind(this) as () => void;
     this.activateOnDropListener = activateOnDropListener.bind(this) as () => void;

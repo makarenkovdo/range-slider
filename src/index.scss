@@ -34,6 +34,12 @@ h1 {
     height: $size * 2;
     cursor: pointer;
     background: linear-gradient(#6fcf97 50%, #66d2ea);
+    &.current {
+      z-index: 2;
+    }
+    &.last {
+      z-index: 1;
+    }
   }
   &.horizontal {
     position: relative;

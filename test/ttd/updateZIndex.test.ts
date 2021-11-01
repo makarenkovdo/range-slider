@@ -15,23 +15,18 @@ describe('updateZIndex TDD-test', () => {
   const testPresenter = new SliderPresenter('testId', { isRange: true });
   const testView = new SliderView('testId', testPresenter);
 
-  test('must set z-index of active runner to 1', () => {
+  test('must set z-index of active runner to 2', () => {
     testView.updateRunnerPosition.call(this, 50, 0);
-    expect($field.find('.js-slider-bar').css('z-index')).toBe('1');
-    expect($field.find('.js-slider-bar').css('z-index')).toBe('0');
+    testView.updateZIndex(0);
+    console.log(testView.$runners);
+
+    // const element0 = screen.getByTestId('test-runner-0');
+    // expect(element0).toHaveClass('current');
   });
-  test('must set z-index of active runner to 1', () => {
-    testView.updateRunnerPosition.call(this, 50, 0);
-    const element0 = screen.getByTestId('test-runner-0');
-    expect(element0).toHaveStyle('z-index:1');
-    const element1 = screen.getByTestId('test-runner-1');
-    expect(element1).toHaveStyle('z-index:0');
-  });
-  test('must set z-index of active runner to 1', () => {
+  test('must set z-index of active runner to 2', () => {
     testView.updateRunnerPosition.call(this, 50, 1);
-    const element0 = screen.getByTestId('test-runner-0');
-    expect(element0).toHaveStyle('z-index:0');
-    const element1 = screen.getByTestId('test-runner-1');
-    expect(element1).toHaveStyle('z-index:1');
+    testView.updateZIndex(1);
+    // const element1 = screen.getByTestId('test-runner-1');
+    // expect(element1).toHaveClass('current');
   });
 });

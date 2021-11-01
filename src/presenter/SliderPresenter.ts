@@ -157,6 +157,11 @@ export default class SliderPresenter {
     return this;
   }
 
+  // public updateZIndex(instance: number): this {
+  //   this.view.updateZIndex(instance);
+  //   return this;
+  // }
+
   //  prettier-ignore
   private build(params: PresenterBuildParams): void {
     let {

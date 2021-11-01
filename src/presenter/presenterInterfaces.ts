@@ -29,4 +29,16 @@ type DataForRunnerUpdatingArgsType = {
   runners: RunnerModel[];
 };
 
-export { PresenterBuildParams, CreateRangeSliderArgsType, DataForRunnerUpdatingArgsType };
+type CheckValuesArgs = {
+  minValue: number;
+  maxValue: number;
+  step: number;
+  runnerSize: number[];
+};
+
+export {
+  PresenterBuildParams,
+  CreateRangeSliderArgsType,
+  DataForRunnerUpdatingArgsType,
+  CheckValuesArgs,
+};

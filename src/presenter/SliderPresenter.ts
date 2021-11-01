@@ -8,6 +8,7 @@ import {
   CreateRangeSliderArgsType,
   DataForRunnerUpdatingArgsType,
 } from './presenterInterfaces';
+import checkValues from './presenterModules/checkValues';
 
 export default class SliderPresenter {
   public field: FieldModel;
@@ -156,34 +157,27 @@ export default class SliderPresenter {
     return this;
   }
 
+  //  prettier-ignore
   private build(params: PresenterBuildParams): void {
-    let { minValue = 0, maxValue = 100, step = 1 } = params;
+    let {
+      minValue = 0, maxValue = 100, step = 1, runnerSize = [40, 40],
+    } = params;
 
     const {
       shouldAddTip = false,
       shouldAddBar = false,
       isRange = false,
-      runnerSize = [40, 40],
       isTestMode = false,
     } = params;
 
-    const checkedValues = () => {
-      if (minValue > maxValue) {
-        [minValue, maxValue] = [maxValue, minValue];
-      } else if (minValue === maxValue) {
-        minValue = 0;
-        maxValue = 100;
-      }
-
-      if (step <= 0) {
-        step = 1;
-      }
-      if (runnerSize[0] <= 0 || runnerSize[1] <= 0) {
-        runnerSize[0] = 40;
-        runnerSize[1] = 40;
-      }
-    };
-    checkedValues();
+    //  prettier-ignore
+    ({
+      minValue, maxValue, step, runnerSize,
+    } = checkValues(
+      {
+        minValue, maxValue, step, runnerSize,
+      },
+    ));
 
     if (!isTestMode) {
       this.setMinMax(minValue, maxValue)

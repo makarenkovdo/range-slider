@@ -7,7 +7,12 @@ import {
   PresenterBuildParams,
   CreateRangeSliderArgsType,
   DataForRunnerUpdatingArgsType,
+  Payload,
+  SetMinMaxArgs,
+  CreateBarArgs,
+  ActionType,
 } from './presenterInterfaces';
+import createBar from './presenterModules/createBar';
 
 export default class SliderPresenter {
   public field: FieldModel;
@@ -20,15 +25,39 @@ export default class SliderPresenter {
 
   private runnerCounter: number;
 
+  private createBar: (this: SliderPresenter, { shouldAddBar }: CreateBarArgs) => SliderPresenter;
+
   constructor(id: string, params?: PresenterBuildParams) {
     this.runnerCounter = 0;
     this.field = new FieldModel(id, this);
     this.runners = [];
     this.view = new SliderView(id, this);
     this.build(params);
+    this.createBar = createBar.call(this) as () => SliderPresenter;
   }
 
-  // prettier-ignore
+  dispatch(this: SliderPresenter, action: ActionType, payload: Payload): SliderPresenter {
+    switch (action) {
+      case 'createBar': {
+        this.createBar(payload.createBarArgs);
+        break;
+      }
+      case 'setMinMax': {
+        this.setMinMax(payload.setMinMaxArgs);
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+    return this;
+  }
+
+  private setMinMax({ minValue, maxValue }: SetMinMaxArgs): this {
+    this.field.setMinMax(minValue, maxValue);
+    this.view.initStartEnd(minValue, maxValue);
+    return this;
+  }
 
   //  prettier-ignore
   public createRangeSlider({
@@ -68,16 +97,6 @@ export default class SliderPresenter {
     if (isOn) {
       this.view.createTipNumber(this.runnerCounter, this.field.isVertical);
     }
-    return this;
-  }
-
-  public createBar(shouldAddBar: boolean): this {
-    if (shouldAddBar) {
-      this.view.hasBar = true;
-      this.view.createBar(this);
-      this.view.updateBarPosition(this.runners[0]);
-    }
-
     return this;
   }
 
@@ -138,12 +157,6 @@ export default class SliderPresenter {
     this.field.prepareDataForRunnerUpdating(dataForRunnerUpdatingArgs);
   }
 
-  public setMinMax(minValue: number, maxValue: number): this {
-    this.field.setMinMax(minValue, maxValue);
-    this.view.initStartEnd(minValue, maxValue);
-    return this;
-  }
-
   public setStep(step: number): this {
     this.runners.forEach((v) => v.setStep(step));
     if (step < 1) this.runners.forEach((v) => v.defineSignAfterComma());
@@ -184,9 +197,10 @@ export default class SliderPresenter {
       }
     };
     checkedValues();
-
+    const payload: Payload = {};
+    payload.setMinMaxArgs = { minValue, maxValue };
     if (!isTestMode) {
-      this.setMinMax(minValue, maxValue)
+      this.dispatch('setMinMax', payload)
         .initLayers(runnerSize)
         .createRangeSlider({
           isRange,
@@ -196,7 +210,7 @@ export default class SliderPresenter {
           maxValue,
         })
         .setStep(step)
-        .createBar(shouldAddBar)
+        .createBar({ shouldAddBar })
         .updateTipNumber(minValue, 0)
         .updateTipNumber(maxValue, 1)
         .onClick();

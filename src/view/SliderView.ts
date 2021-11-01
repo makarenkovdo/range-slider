@@ -47,7 +47,7 @@ export default class SliderView {
 
   public cursorXY: number[];
 
-  public corrector: number;
+  // public corrector: number;
 
   private stepSignAfterComma: number;
 
@@ -99,7 +99,7 @@ export default class SliderView {
     this.borderWidth = 1;
     this.minMax = [];
     this.stepSignAfterComma = 0;
-    this.corrector = 0;
+    // this.corrector = 0;
     this.cursorXY = [0, 0];
     this.subscriber = subscriber;
 

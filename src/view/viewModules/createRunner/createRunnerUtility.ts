@@ -9,10 +9,6 @@ const prepareRunnerArgs = (i: number, isVertical: boolean): PreparedDataType => 
     positioning = 'top';
     minMax = 100 - minMax;
   }
-
-  //  set min = 0%, max = 100% for left/top positions
-  // console.log(i, positioning, minMax, isVertical);
-
   return { i, positioning, minMax };
 };
 
@@ -22,6 +18,7 @@ const addRunnerToDOM = (
   runnerSize: number[],
 ): void => {
   const { i, positioning, minMax } = preparedData;
+
   $id.append(
     `<span data-testid="test-runner-${i}" class="runner js-runner js-instance-${i}" style="${positioning}:${minMax}%; width:${runnerSize[0]}px; height:${runnerSize[1]}px"></span>`,
   );

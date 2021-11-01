@@ -3,7 +3,7 @@
  */
 import '@testing-library/jest-dom';
 import SliderPresenter from '../src/presenter/SliderPresenter';
-import { CreateRangeSliderArgsType } from '../src/presenter/presenterInterfaces';
+import { CreateRangeSliderArgsType, Payload } from '../src/presenter/presenterInterfaces';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -24,8 +24,14 @@ describe('runnerPresenter test', () => {
     expect(testedSlider).not.toHaveProperty('runners[1]');
   });
 
-  testedSlider.setMinMax(14, 19);
   test('if function "setMinMax" assign values to field/view keys', () => {
+    const payload: Payload = {
+      setMinMaxArgs: {
+        minValue: 14,
+        maxValue: 19,
+      },
+    };
+    testedSlider.dispatch('setMinMax', payload);
     expect(testedSlider.field.minMax[0]).toBe(14);
     expect(testedSlider.field.minMax[1]).toBe(19);
     expect(testedSlider.view.minMax[0]).toBe(14);
@@ -82,7 +88,10 @@ describe('runnerPresenter test', () => {
 
   test('if createBar runs', () => {
     expect(testedSlider.view.hasBar).toBe(false);
-    testedSlider.createBar(true);
+    const payload: Payload = {
+      createBarArgs: { shouldAddBar: true },
+    };
+    testedSlider.dispatch('createBar', payload);
     expect(testedSlider.view.hasBar).toBe(true);
   });
 

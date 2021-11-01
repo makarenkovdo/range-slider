@@ -29,4 +29,27 @@ type DataForRunnerUpdatingArgsType = {
   runners: RunnerModel[];
 };
 
-export { PresenterBuildParams, CreateRangeSliderArgsType, DataForRunnerUpdatingArgsType };
+type Payload = {
+  setMinMaxArgs?: SetMinMaxArgs;
+  createBarArgs?: CreateBarArgs;
+};
+
+type SetMinMaxArgs = {
+  minValue: number;
+  maxValue: number;
+};
+type CreateBarArgs = {
+  shouldAddBar: boolean;
+};
+
+type ActionType = 'createBar' | 'setMinMax';
+
+export {
+  PresenterBuildParams,
+  CreateRangeSliderArgsType,
+  DataForRunnerUpdatingArgsType,
+  Payload,
+  SetMinMaxArgs,
+  CreateBarArgs,
+  ActionType,
+};

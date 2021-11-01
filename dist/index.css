@@ -2,7 +2,7 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[5].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/
 body {
-  font-family: "Impact", sans-serif;
+  font-family: 'Impact', sans-serif;
   background-color: #fff;
   padding: 100px 15px;
 }
@@ -39,6 +39,7 @@ h1 {
   height: 40px;
   cursor: pointer;
   background: linear-gradient(#6fcf97 50%, #66d2ea);
+  z-index: 0;
 }
 .range-slider.horizontal {
   position: relative;
@@ -48,7 +49,8 @@ h1 {
 .range-slider.horizontal + .range-slider {
   margin-top: 60px;
 }
-.range-slider.horizontal:before, .range-slider.horizontal:after {
+.range-slider.horizontal:before,
+.range-slider.horizontal:after {
   box-sizing: border-box;
   position: absolute;
   top: 20px;
@@ -92,7 +94,8 @@ h1 {
 .range-slider.vertical + .range-slider {
   margin-bottom: 100px;
 }
-.range-slider.vertical:before, .range-slider.vertical:after {
+.range-slider.vertical:before,
+.range-slider.vertical:after {
   box-sizing: border-box;
   position: absolute;
   right: 20px;

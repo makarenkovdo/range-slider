@@ -6,6 +6,7 @@ import { setThis, addRunnerToDOM, prepareRunnerArgs } from './createRunner/creat
 const createRunner = function addRunnerToDOMAndSetThis$runner(this: SliderView, i: number): void {
   addRunnerToDOM(prepareRunnerArgs(i, this.isVertical), this.$field, this.runnerSize);
   setThis.call(this, i);
+  this.updateRunnerPosition.call(this, this.runnersPosition[i], i);
 };
 
 export default createRunner;

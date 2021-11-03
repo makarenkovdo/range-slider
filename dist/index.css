@@ -30,6 +30,27 @@ h1 {
   margin-bottom: 100px;
   border-radius: 3px;
 }
+.range-slider .scale-lines {
+  display: grid;
+  position: absolute;
+  z-index: -1;
+  grid-template-columns: repeat(18, 1fr);
+}
+.range-slider .scale-lines .scale-line {
+  border-left: 1px solid black;
+  width: 1px;
+}
+.range-slider .scale-numbers {
+  display: grid;
+  position: absolute;
+  z-index: 0;
+  grid-template-columns: repeat(18, 1fr);
+}
+.range-slider .scale-numbers .scale-number {
+  color: black;
+  justify-content: center;
+  text-align: center;
+}
 .range-slider .runner {
   position: absolute;
   top: -12px;
@@ -40,6 +61,12 @@ h1 {
   cursor: pointer;
   background: linear-gradient(#6fcf97 50%, #66d2ea);
 }
+.range-slider .runner.current {
+  z-index: 2;
+}
+.range-slider .runner.last {
+  z-index: 1;
+}
 .range-slider.horizontal {
   position: relative;
   height: 20px;
@@ -47,6 +74,9 @@ h1 {
 }
 .range-slider.horizontal + .range-slider {
   margin-top: 60px;
+}
+.range-slider.horizontal .scale {
+  width: 100%;
 }
 .range-slider.horizontal:before, .range-slider.horizontal:after {
   box-sizing: border-box;
@@ -91,6 +121,9 @@ h1 {
 }
 .range-slider.vertical + .range-slider {
   margin-bottom: 100px;
+}
+.range-slider.vertical .scale {
+  height: 100%;
 }
 .range-slider.vertical:before, .range-slider.vertical:after {
   box-sizing: border-box;

@@ -99,7 +99,7 @@ export default class SliderPresenter {
   }
 
   public onDrop(): this {
-    this.view.activateOnDropListener();
+    this.view.handleDrop();
     return this;
   }
 
@@ -219,7 +219,7 @@ export default class SliderPresenter {
   }
 
   private onClick(): this {
-    this.view.activateOnClickListener(this.runners, this.field);
+    this.view.handleClick(this.runners, this.field);
     return this;
   }
 

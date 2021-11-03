@@ -2,9 +2,6 @@
 /* eslint-env jquery */
 import '../index.scss';
 // import { addRunnerToDom, prepareRunnerArgs } from './viewModules/createSliderView';
-import activateOnDragListener from './viewModules/handleDrag/handleDragUtility';
-import activateOnClickListener from './viewModules/activateOnClickListener';
-import activateOnDropListener from './viewModules/activateOnDropListener';
 import createBar from './viewModules/createBar';
 import createRunner from './viewModules/createRunner';
 import createTipNumber from './viewModules/createTipNumber';
@@ -24,6 +21,8 @@ import { UpdateTipNumberArgs } from './viewInterfaces';
 import updateZIndex from './viewModules/updateZIndex';
 import createScale from './viewModules/createScale';
 import handleDrag from './viewModules/handleDrag';
+import handleClick from './viewModules/handleClick';
+import handleDrop from './viewModules/handleDrop';
 
 export default class SliderView {
   public $runners: JQuery<HTMLElement>[];
@@ -84,13 +83,9 @@ export default class SliderView {
 
   public handleDrag: (this: SliderView, runnerInstance: number) => void;
 
-  public activateOnDropListener: (this: SliderView) => void;
+  public handleDrop: (this: SliderView) => void;
 
-  public activateOnClickListener: (
-    this: SliderView,
-    runners: RunnerModel[],
-    field: FieldModel,
-  ) => void;
+  public handleClick: (this: SliderView, runners: RunnerModel[], field: FieldModel) => void;
 
   public notifySliderMoving: (cursorXY: number[], instance: number) => void;
 
@@ -129,8 +124,8 @@ export default class SliderView {
     this.updateZIndex = updateZIndex.bind(this) as () => void;
     this.initializeValues = initializeValues.bind(this) as () => void;
     this.handleDrag = handleDrag.bind(this) as () => void;
-    this.activateOnDropListener = activateOnDropListener.bind(this) as () => void;
-    this.activateOnClickListener = activateOnClickListener.bind(this) as () => void;
+    this.handleDrop = handleDrop.bind(this) as () => void;
+    this.handleClick = handleClick.bind(this) as () => void;
     this.notifySliderMoving = notifySliderMoving.bind(this) as () => void;
     this.notifyFieldClick = notifyFieldClick.bind(this) as () => void;
     this.initStartEnd = initStartEnd as () => void;

@@ -312,7 +312,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar handleClick = function (event) {\r\n    var thisView = event.data;\r\n    var cursorXY = [event.offsetX, event.offsetY];\r\n    console.log(cursorXY);\r\n    thisView.notifyFieldClick(cursorXY);\r\n};\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (handleClick);\r\n\n\n//# sourceURL=webpack://metalamp__task-4/./src/view/viewModules/handleClick/handleClickUtility.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar handleClickUtility = function (event) {\r\n    var thisView = event.data;\r\n    var cursorXY = [event.offsetX, event.offsetY];\r\n    thisView.notifyFieldClick(cursorXY);\r\n};\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (handleClickUtility);\r\n\n\n//# sourceURL=webpack://metalamp__task-4/./src/view/viewModules/handleClick/handleClickUtility.ts?");
 
 /***/ }),
 

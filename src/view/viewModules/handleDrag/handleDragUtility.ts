@@ -11,6 +11,13 @@ const prepareMovingCoordinates = (
     event.pageX - eventData.thisView.$field.position().left,
     event.pageY - eventData.thisView.$field.position().top,
   ];
+  if (cursorXY[0] < 0) {
+    cursorXY[0] = 0;
+  }
+  if (cursorXY[0] > eventData.thisView.fieldSize[0]) {
+    console.log(eventData.thisView.fieldSize[0]);
+    cursorXY[0] = eventData.thisView.fieldSize[0];
+  }
   return cursorXY;
 };
 

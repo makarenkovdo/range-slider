@@ -25,6 +25,12 @@ h1 {
   margin: auto;
   margin-bottom: 100px;
   border-radius: 3px;
+  .scale {
+    display: grid;
+    border: 1px solid black;
+    position: absolute;
+    z-index: -1;
+  }
   .runner {
     position: absolute;
     top: -($size * 1.2) * 0.5;
@@ -48,6 +54,9 @@ h1 {
 
     + .range-slider {
       margin-top: 60px;
+    }
+    .scale {
+      width: 100%;
     }
     &:before,
     &:after {
@@ -95,6 +104,9 @@ h1 {
 
     + .range-slider {
       margin-bottom: 100px;
+    }
+    .scale {
+      height: 100%;
     }
     &:before,
     &:after {

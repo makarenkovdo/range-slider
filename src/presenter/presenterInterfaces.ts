@@ -6,6 +6,7 @@ type PresenterBuildParams = {
   step?: number;
   shouldAddTip?: boolean;
   shouldAddBar?: boolean;
+  shouldAddScale?: boolean;
   isRange?: boolean;
   runnerSize?: number[];
   isTestMode?: boolean;

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import { calcLengthOfRangeBar } from '../../../src/view/viewModules/updateBarPosition/updateBarPositionUtility';
+import { calcLengthOfRangeBar } from '../../../../src/view/viewModules/updateBarPosition/updateBarPositionUtility';
 
 beforeEach(() => {
   document.body.innerHTML = `

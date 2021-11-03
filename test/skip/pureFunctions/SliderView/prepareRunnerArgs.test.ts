@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import { prepareRunnerArgs } from '../../../src/view/viewModules/createRunner/createRunnerUtility';
+import { prepareRunnerArgs } from '../../../../src/view/viewModules/createRunner/createRunnerUtility';
 
 beforeEach(() => {
   document.body.innerHTML = `

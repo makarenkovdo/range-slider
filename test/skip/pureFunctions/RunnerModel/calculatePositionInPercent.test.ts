@@ -2,9 +2,9 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import SliderPresenter from '../../../src/presenter/SliderPresenter';
-import RunnerModel from '../../../src/model/RunnerModel';
-import { calculatePositionInPercent } from '../../../src/model/runnerModules/updateRunnerValues/updateRunnerValuesUtility';
+import SliderPresenter from '../../../../src/presenter/SliderPresenter';
+import RunnerModel from '../../../../src/model/RunnerModel';
+import { calculatePositionInPercent } from '../../../../src/model/runnerModules/updateRunnerValues/updateRunnerValuesUtility';
 
 beforeEach(() => {
   document.body.innerHTML = `

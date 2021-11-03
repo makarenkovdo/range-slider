@@ -82,6 +82,15 @@ export default class SliderPresenter {
     return this;
   }
 
+  public createScale(shouldAddScale: boolean): this {
+    if (shouldAddScale) {
+      this.view.hasScale = true;
+      this.view.createScale();
+    }
+
+    return this;
+  }
+
   public onDrag(runnerCounter: number): this {
     $(document).ready(() => {
       this.view.activateOnDragListener(runnerCounter);
@@ -157,11 +166,6 @@ export default class SliderPresenter {
     return this;
   }
 
-  // public updateZIndex(instance: number): this {
-  //   this.view.updateZIndex(instance);
-  //   return this;
-  // }
-
   //  prettier-ignore
   private build(params: PresenterBuildParams): void {
     let {
@@ -171,6 +175,7 @@ export default class SliderPresenter {
     const {
       shouldAddTip = false,
       shouldAddBar = false,
+      shouldAddScale = false,
       isRange = false,
       isTestMode = false,
     } = params;
@@ -196,6 +201,7 @@ export default class SliderPresenter {
         })
         .setStep(step)
         .createBar(shouldAddBar)
+        .createScale(shouldAddScale)
         .updateTipNumber(minValue, 0)
         .updateTipNumber(maxValue, 1)
         .onClick();

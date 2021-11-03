@@ -2,8 +2,8 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import { calculateStepValueAndPosition } from '../../../src/model/runnerModules/updateRunnerValues/updateRunnerValuesUtility';
-import { CalculateStepValueAndPositionArgs } from '../../../src/model/runnerModules/runnerInterfaces';
+import { calculateStepValueAndPosition } from '../../../../src/model/runnerModules/updateRunnerValues/updateRunnerValuesUtility';
+import { CalculateStepValueAndPositionArgs } from '../../../../src/model/runnerModules/runnerInterfaces';
 
 beforeEach(() => {
   document.body.innerHTML = `

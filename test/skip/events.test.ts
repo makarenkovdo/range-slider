@@ -4,7 +4,7 @@
 // import { beforeEach, describe, expect } from 'jest';
 import '@testing-library/jest-dom';
 import { screen } from '@testing-library/dom';
-import SliderPresenter from '../src/presenter/SliderPresenter';
+import SliderPresenter from '../../src/presenter/SliderPresenter';
 
 describe('testing events ', () => {
   document.body.innerHTML = `

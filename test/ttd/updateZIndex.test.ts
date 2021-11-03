@@ -14,19 +14,24 @@ describe('updateZIndex TDD-test', () => {
   const $field: JQuery<HTMLElement> = $('#testId');
   const testPresenter = new SliderPresenter('testId', { isRange: true });
   const testView = new SliderView('testId', testPresenter);
+  testView.updateRunnerPosition.call(this, 50, 0);
+  const element0 = screen.getByTestId('test-runner-0');
+  // function ready() {
+  //   return new Promise((resolve) => {
+  //     window.onload = (event) => {
+  //       testView.updateZIndex(0);
+  //     };
+  //   });
+  // }
 
   test('must set z-index of active runner to 2', () => {
-    testView.updateRunnerPosition.call(this, 50, 0);
     testView.updateZIndex(0);
-    console.log(testView.$runners);
-
-    // const element0 = screen.getByTestId('test-runner-0');
-    // expect(element0).toHaveClass('current');
+    expect(element0).toHaveClass('current');
   });
-  test('must set z-index of active runner to 2', () => {
-    testView.updateRunnerPosition.call(this, 50, 1);
-    testView.updateZIndex(1);
-    // const element1 = screen.getByTestId('test-runner-1');
-    // expect(element1).toHaveClass('current');
-  });
+  // test('must set z-index of active runner to 2', () => {
+  //   testView.updateRunnerPosition.call(this, 50, 1);
+  //   testView.updateZIndex(1);
+  //   const element1 = screen.getByTestId('test-runner-1');
+  //   expect(element1).toHaveClass('current');
+  // });
 });

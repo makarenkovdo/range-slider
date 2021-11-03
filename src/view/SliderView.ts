@@ -22,6 +22,7 @@ import RunnerModel from '../model/RunnerModel';
 
 import { UpdateTipNumberArgs } from './viewInterfaces';
 import updateZIndex from './viewModules/updateZIndex';
+import createScale from './viewModules/createScale';
 
 export default class SliderView {
   public $runners: JQuery<HTMLElement>[];
@@ -54,6 +55,8 @@ export default class SliderView {
 
   public isZIndexUpdated: boolean;
 
+  public hasScale: boolean;
+
   private stepSignAfterComma: number;
 
   private borderWidth: number;
@@ -65,6 +68,8 @@ export default class SliderView {
   public createRunner: (i: number, isVertical: boolean) => void;
 
   public createTipNumber: (runnerCounter: number, isVertical: boolean) => void;
+
+  public createScale: (this: SliderView) => void;
 
   public updateBarPosition: (activeRunner: RunnerModel) => void;
 
@@ -100,6 +105,7 @@ export default class SliderView {
     this.isVertical = this.$field.hasClass('js-vertical');
     this.isRange = false;
     this.hasBar = false;
+    this.hasScale = false;
     this.runnersPosition = [0, 100];
     this.fieldSize = [];
     this.runnerSize = [];
@@ -115,6 +121,7 @@ export default class SliderView {
     this.createBar = createBar.bind(this) as () => void;
     this.createRunner = createRunner.bind(this) as () => void;
     this.createTipNumber = createTipNumber.bind(this) as () => void;
+    this.createScale = createScale.bind(this) as () => void;
     this.updateBarPosition = updateBarPosition.bind(this) as () => void;
     this.updateTipNumber = updateTipNumber.bind(this) as () => void;
     this.updateRunnerPosition = updateRunnerPosition.bind(this) as () => void;

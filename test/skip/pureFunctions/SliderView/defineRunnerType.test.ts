@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import { defineRunnerType } from '../../../src/view/viewModules/updateRunnerPosition/updateRunnerPositionUtility';
+import { defineRunnerType } from '../../../../src/view/viewModules/updateRunnerPosition/updateRunnerPositionUtility';
 
 beforeEach(() => {
   document.body.innerHTML = `

@@ -1,4 +1,4 @@
-import defineNearestRunner from '../../../src/model/fieldModules/handleClick/defineNearestRunner';
+import defineNearestRunner from '../../../../src/model/fieldModules/handleClick/defineNearestRunner';
 
 /* note, that vertical cursorY starting in upper part of screen, and
  it is expected contraversary result */

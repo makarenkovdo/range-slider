@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import { prepareTipNumberArgs } from '../../../src/view/viewModules/createTipNumber/createTipNumberUtility';
+import { prepareTipNumberArgs } from '../../../../src/view/viewModules/createTipNumber/createTipNumberUtility';
 
 beforeEach(() => {
   document.body.innerHTML = `

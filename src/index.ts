@@ -7,6 +7,7 @@ const firstRunner = new SliderPresenter('first', {
   step: 0.1,
   maxValue: 17,
   isRange: true,
+  shouldAddScale: true,
 });
 
 const secondRunner = new SliderPresenter('second', {

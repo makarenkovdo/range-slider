@@ -32,6 +32,7 @@ h1 {
     grid-template-columns: repeat(18, 1fr);
     .scale-line {
       border-left: 1px solid black;
+      width: 1px;
     }
   }
   .scale-numbers {
@@ -41,6 +42,8 @@ h1 {
     grid-template-columns: repeat(18, 1fr);
     .scale-number {
       color: black;
+      justify-content: center;
+      text-align: center;
     }
   }
 

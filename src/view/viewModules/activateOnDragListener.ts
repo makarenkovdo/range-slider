@@ -19,7 +19,14 @@ const notifySubscriber = (event: JQuery.ClickEvent) => {
     instance: number;
   };
   const eventData = event.data as EventDataType;
-  eventData.thisView.notifySliderMoving([event.offsetX, event.offsetY], eventData.instance);
+  console.log(event.offsetX, event.pageX, eventData.thisView.$field.position().left);
+  eventData.thisView.notifySliderMoving(
+    [
+      event.pageX - eventData.thisView.$field.position().left,
+      event.pageY - eventData.thisView.$field.position().top,
+    ],
+    eventData.instance,
+  );
 };
 
 const activateOnDragListener = function activateOnDragListenerAndNotify(

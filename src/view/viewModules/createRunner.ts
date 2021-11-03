@@ -4,7 +4,11 @@ import { setThis, addRunnerToDOM, prepareRunnerArgs } from './createRunner/creat
 // how to test? this.$runner is a the result of div-appending and ALL THIS MODULE
 
 const createRunner = function addRunnerToDOMAndSetThis$runner(this: SliderView, i: number): void {
-  addRunnerToDOM(prepareRunnerArgs(i, this.isVertical), this.$field, this.runnerSize);
+  $().ready(() => {
+    addRunnerToDOM(
+      prepareRunnerArgs(i, this.isVertical, this.runnerSize, this.fieldSize), this.$field, this.runnerSize, this.fieldSize,
+    );
+  });
   setThis.call(this, i);
 };
 

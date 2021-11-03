@@ -23,8 +23,11 @@ import createScale from './viewModules/createScale';
 import handleDrag from './viewModules/handleDrag';
 import handleClick from './viewModules/handleClick';
 import handleDrop from './viewModules/handleDrop';
+import setStep from './viewModules/setStep';
 
 export default class SliderView {
+  public $body: JQuery<HTMLElement>;
+
   public $runners: JQuery<HTMLElement>[];
 
   public $bar: JQuery<HTMLElement>;
@@ -57,7 +60,7 @@ export default class SliderView {
 
   public hasScale: boolean;
 
-  private stepSignAfterComma: number;
+  public step: number;
 
   private borderWidth: number;
 
@@ -93,7 +96,10 @@ export default class SliderView {
 
   public initStartEnd: (minValue: number, maxValue: number) => void;
 
+  public setStep: (step:number) => void;
+
   constructor(id: string, subscriber: SliderPresenter) {
+    this.$body = $('body');
     this.$field = $(`#${id}`);
     this.$runners = [];
     // this.$bar = '';
@@ -107,7 +113,8 @@ export default class SliderView {
     this.runnerSize = [];
     this.borderWidth = 1;
     this.minMax = [];
-    this.stepSignAfterComma = 0;
+    // this.stepSignAfterComma = 0;
+    this.step = 1;
     this.corrector = 0;
     this.cursorXY = [0, 0];
     this.activeInstance = 0;
@@ -129,5 +136,6 @@ export default class SliderView {
     this.notifySliderMoving = notifySliderMoving.bind(this) as () => void;
     this.notifyFieldClick = notifyFieldClick.bind(this) as () => void;
     this.initStartEnd = initStartEnd as () => void;
+    this.setStep = setStep as () => void;
   }
 }

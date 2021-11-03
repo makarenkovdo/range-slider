@@ -28,22 +28,24 @@ h1 {
   .scale-lines {
     display: grid;
     position: absolute;
-    z-index: -1;
-    grid-template-columns: repeat(18, 1fr);
+    z-index: 1;
+    // grid-template-columns: repeat(18, 1fr);
     .scale-line {
-      border-left: 1px solid black;
-      width: 1px;
+      background-color: black;
+      cursor: pointer;
     }
   }
   .scale-numbers {
     display: grid;
     position: absolute;
     z-index: 0;
-    grid-template-columns: repeat(18, 1fr);
+    justify-content: space-between;
     .scale-number {
       color: black;
       justify-content: center;
       text-align: center;
+      z-index: 1;
+      cursor: pointer;
     }
   }
 
@@ -71,9 +73,15 @@ h1 {
     + .range-slider {
       margin-top: 60px;
     }
-    .scale {
-      width: 100%;
+
+    .scale-lines {
+      justify-content: space-between;
+      // align-content: space-between;
+      .scale-line {
+        width: 3px;
+      }
     }
+
     &:before,
     &:after {
       box-sizing: border-box;
@@ -121,8 +129,13 @@ h1 {
     + .range-slider {
       margin-bottom: 100px;
     }
-    .scale {
-      height: 100%;
+    .scale-lines {
+      // justify-content: space-between;
+      align-content: space-between;
+      .scale-line {
+        height: 3px;
+        grid-template-columns: 1fr;
+      }
     }
     &:before,
     &:after {

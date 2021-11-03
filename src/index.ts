@@ -15,6 +15,7 @@ const secondRunner = new SliderPresenter('second', {
   shouldAddBar: true,
   step: 10,
   isRange: true,
+  shouldAddScale: true,
 });
 
 const thirdRunner = new SliderPresenter('third', {

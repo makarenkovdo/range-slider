@@ -1,29 +1,34 @@
 import SliderView from '../../SliderView';
 import { PreparedDataType } from '../createTipNumber/createTipNumberUtility';
 
-const prepareRunnerArgs = (i: number, isVertical: boolean): PreparedDataType => {
+const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
+  fieldSize: number[]): PreparedDataType => {
   let positioning = 'left';
   let minMax = 100 * i;
+  let switcher = 0;
 
   if (isVertical) {
     positioning = 'top';
     minMax = 100 - minMax;
+    switcher = 1;
   }
-
-  //  set min = 0%, max = 100% for left/top positions
-  // console.log(i, positioning, minMax, isVertical);
-
-  return { i, positioning, minMax };
+  const position = (minMax - ((runnerSize[0] / fieldSize[0]) * 50));
+  return { i, positioning, position };
 };
 
 const addRunnerToDOM = (
   preparedData: PreparedDataType,
   $id: JQuery<HTMLElement>,
   runnerSize: number[],
+  fieldSize: number[],
+
 ): void => {
-  const { i, positioning, minMax } = preparedData;
+  console.log('runnerSize', runnerSize);
+
+  const { i, positioning, position } = preparedData;
+
   $id.append(
-    `<span data-testid="test-runner-${i}" class="runner js-runner js-instance-${i}" style="${positioning}:${minMax}%; width:${runnerSize[0]}px; height:${runnerSize[1]}px"></span>`,
+    `<span data-testid="test-runner-${i}" class="runner js-runner js-instance-${i}" style="${positioning}:${position}%; width:${runnerSize[0]}px; height:${runnerSize[1]}px"></span>`,
   );
 };
 

@@ -30,7 +30,7 @@ const activateOnDragListener = function activateOnDragListenerAndNotify(
     event.preventDefault();
     event.stopPropagation();
     this.$field.addClass('tap');
-    this.$field.on('mousemove touchmove', { thisView: this, instance }, notifySubscriber);
+    $('body').on('mousemove touchmove', { thisView: this, instance }, notifySubscriber);
   });
 };
 

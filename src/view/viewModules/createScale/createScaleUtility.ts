@@ -15,10 +15,18 @@ const addScaleToDom = (
 ): void => {
   // const { positioning, minMax } = preparedData;
   $id.append(
-    `<div data-testid="test-scale" class="scale js-scale" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; top:${fieldSize[1]}px"></div>`,
+    `<div data-testid="test-scale" class="scale-lines js-scale-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; top:${fieldSize[1]}px"></div>`,
   );
-  for (let i = 0; i < divisionQuantity; i += 1) {
-    $id.find('.js-scale').append(`<div class="scale-division js-scale-division"></div>`);
+  $id.append(
+    `<div data-testid="test-scale" class="scale-numbers js-scale-numbers" style="height:${
+      fieldSize[1]
+    }px; width:${fieldSize[0]}px; top:${2 * fieldSize[1]}px"></div>`,
+  );
+  for (let i = 0; i < 18; i += 1) {
+    $id.find('.js-scale-lines').append(`<div class="scale-line js-scale-line"></div>`);
+  }
+  for (let i = 0; i < 18; i += 1) {
+    $id.find('.js-scale-numbers').append(`<div class="scale-number js-scale-number">${i}</div>`);
   }
 };
 

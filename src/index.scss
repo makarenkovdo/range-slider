@@ -25,13 +25,22 @@ h1 {
   margin: auto;
   margin-bottom: 100px;
   border-radius: 3px;
-  .scale {
+  .scale-lines {
     display: grid;
     position: absolute;
     z-index: -1;
-    grid-template-columns: repeat(25, 1fr);
-    .scale-division {
+    grid-template-columns: repeat(18, 1fr);
+    .scale-line {
       border-left: 1px solid black;
+    }
+  }
+  .scale-numbers {
+    display: grid;
+    position: absolute;
+    z-index: 0;
+    grid-template-columns: repeat(18, 1fr);
+    .scale-number {
+      color: black;
     }
   }
 

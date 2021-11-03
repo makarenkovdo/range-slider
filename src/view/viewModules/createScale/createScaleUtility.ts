@@ -23,7 +23,7 @@ const addScaleToDom = (
     }px; width:${fieldSize[0]}px; top:${2 * fieldSize[1]}px"></div>`,
   );
   for (let i = 0; i < 18; i += 1) {
-    $id.find('.js-scale-lines').append(`<div class="scale-line js-scale-line"></div>`);
+    $id.find('.js-scale-lines').append('<div class="scale-line js-scale-line"></div>');
   }
   for (let i = 0; i < 18; i += 1) {
     $id.find('.js-scale-numbers').append(`<div class="scale-number js-scale-number">${i}</div>`);

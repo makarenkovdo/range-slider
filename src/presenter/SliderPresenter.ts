@@ -93,7 +93,7 @@ export default class SliderPresenter {
 
   public onDrag(runnerCounter: number): this {
     $(document).ready(() => {
-      this.view.activateOnDragListener(runnerCounter);
+      this.view.handleDrag(runnerCounter);
     });
     return this;
   }

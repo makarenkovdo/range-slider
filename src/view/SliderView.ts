@@ -2,7 +2,7 @@
 /* eslint-env jquery */
 import '../index.scss';
 // import { addRunnerToDom, prepareRunnerArgs } from './viewModules/createSliderView';
-import activateOnDragListener from './viewModules/activateOnDragListener';
+import activateOnDragListener from './viewModules/handleDrag/handleDragUtility';
 import activateOnClickListener from './viewModules/activateOnClickListener';
 import activateOnDropListener from './viewModules/activateOnDropListener';
 import createBar from './viewModules/createBar';
@@ -23,6 +23,7 @@ import RunnerModel from '../model/RunnerModel';
 import { UpdateTipNumberArgs } from './viewInterfaces';
 import updateZIndex from './viewModules/updateZIndex';
 import createScale from './viewModules/createScale';
+import handleDrag from './viewModules/handleDrag';
 
 export default class SliderView {
   public $runners: JQuery<HTMLElement>[];
@@ -81,7 +82,7 @@ export default class SliderView {
 
   public initializeValues: (runnerSize: number[]) => void;
 
-  public activateOnDragListener: (this: SliderView, runnerInstance: number) => void;
+  public handleDrag: (this: SliderView, runnerInstance: number) => void;
 
   public activateOnDropListener: (this: SliderView) => void;
 
@@ -127,7 +128,7 @@ export default class SliderView {
     this.updateRunnerPosition = updateRunnerPosition.bind(this) as () => void;
     this.updateZIndex = updateZIndex.bind(this) as () => void;
     this.initializeValues = initializeValues.bind(this) as () => void;
-    this.activateOnDragListener = activateOnDragListener.bind(this) as () => void;
+    this.handleDrag = handleDrag.bind(this) as () => void;
     this.activateOnDropListener = activateOnDropListener.bind(this) as () => void;
     this.activateOnClickListener = activateOnClickListener.bind(this) as () => void;
     this.notifySliderMoving = notifySliderMoving.bind(this) as () => void;

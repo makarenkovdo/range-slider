@@ -1,3 +1,5 @@
+import SliderView from './SliderView';
+
 type AddTipNumberToDOMReturned = { minMax: number; i: number };
 type UpdateTipNumberArgs = { stepValue: number; instance: number };
 
@@ -16,4 +18,8 @@ type DefineBarKindArgsType = {
     barLength: number,
   ) => void;
 };
-export { AddTipNumberToDOMReturned, UpdateTipNumberArgs, DefineBarKindArgsType };
+type DragEventDataType = {
+  thisView: SliderView;
+  instance: number;
+};
+export { AddTipNumberToDOMReturned, UpdateTipNumberArgs, DefineBarKindArgsType, DragEventDataType };

@@ -11,10 +11,10 @@ function cancelDragging(event: JQuery.DragOverEvent): void {
   const eventData = event.data as EventData;
   eventData.thisView.$field.removeClass('tap');
   eventData.thisView.$runners[0].removeClass('current');
-  eventData.thisView.$runners[1].removeClass('last');
-  eventData.thisView.$runners[0].removeClass('last');
-  eventData.thisView.$runners[1].removeClass('current ');
-  $('body').off('mousemove touchmove');
+  if (eventData.thisView.isRange) {
+    eventData.thisView.$runners[1].removeClass('current ');
+  }
+  eventData.thisView.$body.off('mousemove touchmove');
   eventData.thisView.updateZIndex(eventData.thisView.activeInstance);
 }
 

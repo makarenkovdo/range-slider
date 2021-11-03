@@ -16,8 +16,6 @@ const initializeValues = function initializeDefaultViewValues(
     this.runnerSize = [runnerWidth, runnerHeight];
 
     this.fieldSize = [fieldWidth - borderWidth - 1, fieldHeight - borderWidth - 1];
-    console.log(this.fieldSize);
-    
   });
 };
 

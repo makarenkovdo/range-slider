@@ -27,10 +27,14 @@ h1 {
   border-radius: 3px;
   .scale {
     display: grid;
-    border: 1px solid black;
     position: absolute;
     z-index: -1;
+    grid-template-columns: repeat(25, 1fr);
+    .scale-division {
+      border-left: 1px solid black;
+    }
   }
+
   .runner {
     position: absolute;
     top: -($size * 1.2) * 0.5;

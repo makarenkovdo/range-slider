@@ -6,7 +6,8 @@ import { setThis, addRunnerToDOM, prepareRunnerArgs } from './createRunner/creat
 const createRunner = function addRunnerToDOMAndSetThis$runner(this: SliderView, i: number): void {
   $().ready(() => {
     addRunnerToDOM(
-      prepareRunnerArgs(i, this.isVertical, this.runnerSize, this.fieldSize), this.$field, this.runnerSize, this.fieldSize,
+      prepareRunnerArgs(
+        i, this.isVertical, this.runnerSize, this.fieldSize), this.$field, this.runnerSize,
     );
   });
   setThis.call(this, i);

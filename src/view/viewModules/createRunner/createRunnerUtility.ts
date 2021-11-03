@@ -12,7 +12,7 @@ const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
     minMax = 100 - minMax;
     switcher = 1;
   }
-  const position = (minMax - ((runnerSize[0] / fieldSize[0]) * 50));
+  const position:number = (minMax - ((runnerSize[switcher] / fieldSize[switcher]) * 50));
   return { i, positioning, position };
 };
 
@@ -20,8 +20,6 @@ const addRunnerToDOM = (
   preparedData: PreparedDataType,
   $id: JQuery<HTMLElement>,
   runnerSize: number[],
-  fieldSize: number[],
-
 ): void => {
   console.log('runnerSize', runnerSize);
 

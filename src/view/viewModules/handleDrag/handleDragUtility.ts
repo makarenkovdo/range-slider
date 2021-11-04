@@ -11,12 +11,13 @@ const prepareMovingCoordinates = (
     event.pageX - eventData.thisView.$field.position().left,
     event.pageY - eventData.thisView.$field.position().top,
   ];
-  if (cursorXY[0] < 0) {
-    cursorXY[0] = 0;
+  let switcher = 0;
+  if (eventData.thisView.isVertical) switcher = 1;
+  if (cursorXY[switcher] < 0) {
+    cursorXY[switcher] = 0;
   }
-  if (cursorXY[0] > eventData.thisView.fieldSize[0]) {
-    console.log(eventData.thisView.fieldSize[0]);
-    cursorXY[0] = eventData.thisView.fieldSize[0];
+  if (cursorXY[switcher] > eventData.thisView.fieldSize[switcher]) {
+    cursorXY[switcher] = eventData.thisView.fieldSize[switcher];
   }
   return cursorXY;
 };

@@ -7,6 +7,8 @@ const defineRunnerType = (
   stepPosition: number,
   instance: number,
 ): DatasForUpdating => {
+  console.log('stepPosition',stepPosition );
+  
   const positioning = [
     ['left', 'width'],
     ['top', 'height'],
@@ -52,6 +54,7 @@ const updatePositionToDOM = function updateRunnerPositionToDom(this:SliderView,
   const position = isVertical
     ? getVerticalPosition()
     : getHorizontalPosition();
+    console.log('runner VIEW position', position);
   $field.find(`.js-instance-${instance}`).css(positioning[0], position);
 };
 

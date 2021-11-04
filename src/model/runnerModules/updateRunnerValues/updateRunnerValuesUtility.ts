@@ -25,17 +25,21 @@ const calculatePositionInPercent = (
   fieldSize: number[],
 ): number => {
   let [cursorX, cursorY] = cursorXY;
+  cursorX-=20;
+  cursorY-=20;
   if (isVertical) {
     if (cursorY < 0) {
       cursorY = 0;
     }
-    return ((fieldSize[1] - cursorY) * 100) / fieldSize[1];
+    return ((fieldSize[1] - cursorY) * 100) / (fieldSize[1]-40);
   }
   if (cursorX < 0) {
     cursorX = 0;
   }
-
-  return (cursorX * 100) / fieldSize[0];
+  const positionInPercent = ((cursorX) * 100) / (fieldSize[0]-40)
+  console.log('positionInPercent',positionInPercent) ;
+  
+  return positionInPercent;
 };
 
 // prettier-ignore

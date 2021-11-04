@@ -1,4 +1,4 @@
-const prepareDivisionsQuantity = (
+const prepareScaleData = (
   fieldSize: number[],
   isVertical: boolean,
   minMax: number[],
@@ -8,8 +8,9 @@ const prepareDivisionsQuantity = (
   if (isVertical) {
     i += 1;
   }
-  const divisionQuantity = (minMax[1] - minMax[0]) / step;
-  console.log('divisionQuantity', divisionQuantity);
+  const stepLimits = (minMax[1] - minMax[0]) / step;
+  const pixelLimits = fieldSize[i] / 20;
+  const divisionQuantity = Math.trunc(Math.min(stepLimits, pixelLimits));
   return divisionQuantity;
 };
 
@@ -18,6 +19,7 @@ const addScaleToDom = (
   $id: JQuery<HTMLElement>,
   fieldSize: number[],
   step: number,
+  minMax: number[],
   divisionQuantity: number,
 ): void => {
   // const { positioning, minMax } = preparedData;
@@ -46,7 +48,7 @@ const addScaleToDom = (
         * fieldSize[1]}px; grid-template-columns: repeat(${divisionQuantity}, 1fr)"></div>`,
     );
     for (let i = 0; i <= divisionQuantity; i += 1) {
-      $id.find('.js-scale-numbers').append(`<div class="scale-number js-scale-number">${i * step}</div>`);
+      $id.find('.js-scale-numbers').append(`<div class="scale-number js-scale-number">${i * (divisionQuantity / minMax[1])}</div>`);
     }
   }
   for (let i = 0; i <= divisionQuantity; i += 1) {
@@ -54,4 +56,4 @@ const addScaleToDom = (
   }
 };
 
-export { prepareDivisionsQuantity, addScaleToDom };
+export { prepareScaleData, addScaleToDom };

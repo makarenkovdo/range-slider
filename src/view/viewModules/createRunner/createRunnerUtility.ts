@@ -21,10 +21,7 @@ const addRunnerToDOM = (
   $id: JQuery<HTMLElement>,
   runnerSize: number[],
 ): void => {
-  console.log('runnerSize', runnerSize);
-
   const { i, positioning, position } = preparedData;
-
   $id.append(
     `<span data-testid="test-runner-${i}" class="runner js-runner js-instance-${i}" style="${positioning}:${position}%; width:${runnerSize[0]}px; height:${runnerSize[1]}px"></span>`,
   );

@@ -22,4 +22,15 @@ type DragEventDataType = {
   thisView: SliderView;
   instance: number;
 };
-export { AddTipNumberToDOMReturned, UpdateTipNumberArgs, DefineBarKindArgsType, DragEventDataType };
+
+type PrepareScaleDataArgs = {
+  divisionQuantity:number; divisionNumber:number;
+};
+
+export {
+  AddTipNumberToDOMReturned,
+  UpdateTipNumberArgs,
+  DefineBarKindArgsType,
+  DragEventDataType,
+  PrepareScaleDataArgs,
+};

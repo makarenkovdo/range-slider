@@ -1,17 +1,30 @@
+import { PrepareScaleDataArgs } from '../../viewInterfaces';
+
 const prepareScaleData = (
   fieldSize: number[],
   isVertical: boolean,
   minMax: number[],
   step: number,
-): number => {
+  stepSignAfterComma: number,
+): PrepareScaleDataArgs => {
   let i = 0;
   if (isVertical) {
     i += 1;
   }
-  const stepLimits = (minMax[1] - minMax[0]) / step;
-  const pixelLimits = fieldSize[i] / 20;
+  const stepLimits = Math.trunc((minMax[1] - minMax[0]) / step);
+  const pixelLimits = Math.trunc(fieldSize[i] / 30);
   const divisionQuantity = Math.trunc(Math.min(stepLimits, pixelLimits));
-  return divisionQuantity;
+  const greatestCommonDivisor = (a:number, b:number):number => {
+    if (!b) {
+      return a;
+    }
+
+    return greatestCommonDivisor(b, a % b);
+  };
+  // greatestCommonDivisor(stepLimits, pixelLimits);
+  const divisionNumber = Number((minMax[1] / divisionQuantity).toFixed(stepSignAfterComma));
+  console.log(divisionNumber);
+  return { divisionQuantity, divisionNumber };
 };
 
 const addScaleToDom = (
@@ -19,13 +32,13 @@ const addScaleToDom = (
   $id: JQuery<HTMLElement>,
   fieldSize: number[],
   step: number,
-  minMax: number[],
-  divisionQuantity: number,
+  stepSignAfterComma: number,
+  { divisionQuantity, divisionNumber }: PrepareScaleDataArgs,
 ): void => {
   // const { positioning, minMax } = preparedData;
   if (isVertical) {
     $id.append(
-      `<div data-testid="test-scale" class="scale-lines js-scale-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; left:${fieldSize[0]}px; grid-template-rows: repeat(${divisionQuantity}, 1px)"></div>`,
+      `<div data-testid="test-scale" class="scale-lines js-scale-lines" style="height:${fieldSize[1] - 40}px; width:${fieldSize[0]}px; top: 20px; left:${fieldSize[0]}px; grid-template-rows: repeat(${divisionQuantity}, 1px)"></div>`,
     );
     $id.append(
       `<div data-testid="test-scale" class="scale-numbers js-scale-numbers" style="height:${
@@ -38,7 +51,7 @@ const addScaleToDom = (
     }
   } else {
     $id.append(
-      `<div data-testid="test-scale" class="scale-lines js-scale-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; top:${fieldSize[1]}px; grid-template-columns: repeat(${divisionQuantity}, 1px)"></div>`,
+      `<div data-testid="test-scale" class="scale-lines js-scale-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0] - 40}px; left: 20px; top:${fieldSize[1]}px; grid-template-columns: repeat(${divisionQuantity}, 1px)"></div>`,
     );
     $id.append(
       `<div data-testid="test-scale" class="scale-numbers js-scale-numbers" style="height:${
@@ -47,11 +60,11 @@ const addScaleToDom = (
       }px; width:${fieldSize[0]}px; top:${2
         * fieldSize[1]}px; grid-template-columns: repeat(${divisionQuantity}, 1fr)"></div>`,
     );
-    for (let i = 0; i <= divisionQuantity; i += 1) {
-      $id.find('.js-scale-numbers').append(`<div class="scale-number js-scale-number">${i * (divisionQuantity / minMax[1])}</div>`);
+    for (let i = 0; i < divisionQuantity; i += 1) {
+      $id.find('.js-scale-numbers').append(`<div class="scale-number js-scale-number">${(i * divisionNumber).toFixed(stepSignAfterComma)}</div>`);
     }
   }
-  for (let i = 0; i <= divisionQuantity; i += 1) {
+  for (let i = 0; i < divisionQuantity; i += 1) {
     $id.find('.js-scale-lines').append('<div class="scale-line js-scale-line"></div>');
   }
 };

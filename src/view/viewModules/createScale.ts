@@ -8,8 +8,10 @@ const createScale = function addRunnerToDOMAndSetThis$runner(this: SliderView): 
       this.$field,
       this.fieldSize,
       this.step,
-      this.minMax,
-      prepareScaleData(this.fieldSize, this.isVertical, this.minMax, this.step),
+      this.stepSignAfterComma,
+      prepareScaleData(
+        this.fieldSize, this.isVertical, this.minMax, this.step, this.stepSignAfterComma,
+      ),
     );
     // setThis.call(this, i);
   });

@@ -23,8 +23,8 @@ export default class SliderPresenter {
 
   constructor(id: string, params?: PresenterBuildParams) {
     this.runnerCounter = 0;
-    this.field = new FieldModel(id, this);
     this.runners = [];
+    this.field = new FieldModel(id, this);
     this.view = new SliderView(id, this);
     this.build(params);
   }
@@ -157,7 +157,7 @@ export default class SliderPresenter {
   public setStep(step: number): this {
     this.runners.forEach((v) => v.setStep(step));
     if (step < 1) this.runners.forEach((v) => v.defineSignAfterComma());
-    this.view.setStep(step);
+    this.view.setStep(step, this.runners[0].stepSignAfterComma);
 
     return this;
   }

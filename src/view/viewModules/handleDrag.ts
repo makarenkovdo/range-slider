@@ -9,7 +9,7 @@ const handleDrag = function activateOnDragListenerAndNotify(
     event.preventDefault();
     event.stopPropagation();
     this.$field.addClass('tap');
-    $('body').on('mousemove touchmove', { thisView: this, instance }, notifySubscriber);
+    this.$body.on('mousemove touchmove', { thisView: this, instance }, notifySubscriber);
   });
 };
 export default handleDrag;

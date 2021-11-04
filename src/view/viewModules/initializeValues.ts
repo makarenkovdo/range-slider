@@ -11,7 +11,12 @@ const initializeValues = function initializeDefaultViewValues(
     const borderWidth = parseInt($field.css('border-width'), 10);
     const fieldWidth = parseInt($field.css('width'), 10);
     const fieldHeight = parseInt($field.css('height'), 10);
-    this.fieldSize = [fieldWidth - borderWidth - 1, fieldHeight - borderWidth - 1];
+    if (this.isVertical) {
+      this.fieldSize = [fieldWidth - borderWidth - 1, fieldHeight - borderWidth - 41];
+    }
+    else {
+      this.fieldSize = [fieldWidth - borderWidth - 41, fieldHeight - borderWidth - 1];
+    }
   });
 };
 

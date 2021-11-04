@@ -62,6 +62,8 @@ export default class SliderView {
 
   public step: number;
 
+  public stepSignAfterComma: number;
+
   private borderWidth: number;
 
   private class: string;
@@ -96,7 +98,7 @@ export default class SliderView {
 
   public initStartEnd: (minValue: number, maxValue: number) => void;
 
-  public setStep: (step:number) => void;
+  public setStep: (step:number, stepSignAfterComma:number) => void;
 
   constructor(id: string, subscriber: SliderPresenter) {
     this.$body = $('body');
@@ -113,7 +115,7 @@ export default class SliderView {
     this.runnerSize = [];
     this.borderWidth = 1;
     this.minMax = [];
-    // this.stepSignAfterComma = 0;
+    this.stepSignAfterComma = 0;
     this.step = 1;
     this.corrector = 0;
     this.cursorXY = [0, 0];

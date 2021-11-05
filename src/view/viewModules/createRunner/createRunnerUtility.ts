@@ -12,7 +12,7 @@ const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
     minMax = 100 - minMax;
     switcher = 1;
   }
-  const position:number = (minMax - ((runnerSize[switcher] / fieldSize[switcher]) * 50));
+  const position:number = (minMax - i * ((runnerSize[switcher] / fieldSize[switcher]) * 100));
   return { i, positioning, position };
 };
 

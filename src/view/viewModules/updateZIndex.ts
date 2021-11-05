@@ -2,8 +2,6 @@ import SliderView from '../SliderView';
 
 const updateZIndex = function updateZIndexOfRunners(this: SliderView, instance: number): void {
   $(document).ready(() => { //todo: window.onload ????
-    console.log(this.$runners);
-    
     this.$runners[instance].addClass('current');
   });
 };

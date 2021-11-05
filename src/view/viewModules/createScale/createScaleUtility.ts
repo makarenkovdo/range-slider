@@ -13,11 +13,7 @@ const prepareScaleData = (
   }
   const stepLimits = Math.trunc((minMax[1] - minMax[0]) / step);
   const pixelLimits = Math.trunc(fieldSize[i] / 40);
-  console.log('fieldSize[i]',fieldSize[i]);
-  
   const divisionQuantity = Math.max((Math.trunc(Math.min(stepLimits, pixelLimits))),2);
-  console.log('divisionQuantity',divisionQuantity);
-  
   const greatestCommonDivisor = (a:number, b:number):number => {
     if (!b) {
       return a;
@@ -59,6 +55,9 @@ const addScaleToDom = (
   } else {
     $id.append(
       `<div data-testid="test-scale" class="scale-lines js-scale-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; left: 20px; top:${fieldSize[1]}px; grid-template-columns: repeat(${divisionQuantity}, 1px)"></div>`,
+    );
+    $id.append(
+      `<div data-testid="test-scale" class="scale-lines js-scale-small-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; left: 20px; top:${fieldSize[1]}px; grid-template-columns: repeat(${divisionQuantity*2}, 1px)"></div>`,
     );
     $id.append(
       `<div data-testid="test-scale" class="scale-numbers js-scale-numbers" style="height:${

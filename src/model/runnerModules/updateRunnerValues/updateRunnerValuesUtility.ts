@@ -25,18 +25,20 @@ const calculatePositionInPercent = (
   fieldSize: number[],
 ): number => {
   let [cursorX, cursorY] = cursorXY;
-  cursorX -= 20;
-  cursorY -= 20;
+  // cursorX -= 20;
+  // cursorY -= 20;
   if (isVertical) {
     if (cursorY < 0) {
       cursorY = 0;
     }
-    return ((fieldSize[1] - cursorY) * 100) / (fieldSize[1] - 40);
+    return ((fieldSize[1] - cursorY) * 100) / (fieldSize[1]);
   }
   if (cursorX < 0) {
     cursorX = 0;
   }
-  const positionInPercent = ((cursorX) * 100) / (fieldSize[0]-40);
+  console.log((cursorX * 100),(fieldSize[0]));
+  
+  const positionInPercent = ((cursorX) * 100) / (fieldSize[0]);
   //  todo for vertical fieldSize[i]
   console.log('positionInPercent', positionInPercent);
 

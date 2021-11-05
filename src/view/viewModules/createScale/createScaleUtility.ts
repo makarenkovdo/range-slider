@@ -53,7 +53,7 @@ const addScaleToDom = (
     }
   } else {
     $id.append(
-      `<div data-testid="test-scale" class="scale-lines js-scale-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0] - 40}px; left: 20px; top:${fieldSize[1]}px; grid-template-columns: repeat(${divisionQuantity}, 1px)"></div>`,
+      `<div data-testid="test-scale" class="scale-lines js-scale-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; left: 20px; top:${fieldSize[1]}px; grid-template-columns: repeat(${divisionQuantity}, 1px)"></div>`,
     );
     $id.append(
       `<div data-testid="test-scale" class="scale-numbers js-scale-numbers" style="height:${

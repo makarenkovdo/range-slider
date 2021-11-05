@@ -16,14 +16,14 @@ describe('updateZIndex TDD-test', () => {
   const testView = new SliderView('testId', testPresenter);
   testView.updateRunnerPosition.call(this, 50, 0);
   const element0 = screen.getByTestId('test-runner-0');
-  // function ready() {
-  //   return new Promise((resolve) => {
-  //     window.onload = (event) => {
-  //       testView.updateZIndex(0);
-  //     };
-  //   });
-  // }
-
+  function ready() {
+    return new Promise((resolve) => {
+      window.onload = (event) => {
+        testView.updateZIndex(0);
+      };
+    });
+  }
+// ready().then(expect(element0).toHaveClass('current');)
   test('must set z-index of active runner to 2', () => {
     testView.updateZIndex(0);
     expect(element0).toHaveClass('current');

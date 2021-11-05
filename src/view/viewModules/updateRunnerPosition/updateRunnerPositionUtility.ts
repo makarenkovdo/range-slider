@@ -34,7 +34,7 @@ const calculatePreperatoryPosition = (
   $field: JQuery<HTMLElement>, isVertical: boolean, fieldSize:number[], runnerSize:number[],
 ):number => {
   const i = isVertical ? 1 : 0;
-  return (runnerSize[i] / fieldSize[i]) * 50;
+  return (runnerSize[i] / (fieldSize[i])) * 50;
 };
 
 type UpdatePositionToDOMArgs = { stepPosition: number; instance: number; positioning: string[] };

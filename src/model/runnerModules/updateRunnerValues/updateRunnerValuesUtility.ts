@@ -25,8 +25,6 @@ const calculatePositionInPercent = (
   fieldSize: number[],
 ): number => {
   let [cursorX, cursorY] = cursorXY;
-  // cursorX -= 20;
-  // cursorY -= 20;
   if (isVertical) {
     if (cursorY < 0) {
       cursorY = 0;

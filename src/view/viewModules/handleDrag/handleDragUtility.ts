@@ -1,5 +1,4 @@
 // import assignIfHasOwn from '../../utility/assignIfOwnHas';
-import SliderView from '../../SliderView';
 import { DragEventDataType } from '../../viewInterfaces';
 // import notify from './notify';
 
@@ -8,8 +7,8 @@ const prepareMovingCoordinates = (
   eventData: DragEventDataType,
 ): number[] => {
   const cursorXY = [
-    event.pageX - eventData.thisView.$field.position().left-20,
-    event.pageY - eventData.thisView.$field.position().top-20,
+    event.pageX - eventData.thisView.$field.position().left - 20,
+    event.pageY - eventData.thisView.$field.position().top - 20,
   ];
   let switcher = 0;
   if (eventData.thisView.isVertical) switcher = 1;

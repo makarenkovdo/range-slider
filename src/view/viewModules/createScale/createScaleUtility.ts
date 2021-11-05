@@ -24,7 +24,7 @@ const prepareScaleData = (
   // greatestCommonDivisor(stepLimits, pixelLimits);
   let fractionalNumber = 0;
   if (stepSignAfterComma) fractionalNumber = 1;
-  const divisionNumber = Number(((minMax[1]-minMax[0]) / divisionQuantity).toFixed(2));
+  const divisionNumber = Number(((minMax[1] - minMax[0]) / divisionQuantity).toFixed(2));
   console.log(divisionNumber);
   return { divisionQuantity, divisionNumber };
 };

@@ -7,8 +7,6 @@ const defineRunnerType = (
   stepPosition: number,
   instance: number,
 ): DatasForUpdating => {
-  console.log('stepPosition',stepPosition );
-  
   const positioning = [
     ['left', 'width'],
     ['top', 'height'],
@@ -30,12 +28,12 @@ const setThisRunnerPosition = function setThisRunnerPositionToThis(
 
 //  prettier-ignore
 // getting the percent of runnerWidth to fieldWidth
-const calculatePreperatoryPosition = (
-  $field: JQuery<HTMLElement>, isVertical: boolean, fieldSize:number[], runnerSize:number[],
-):number => {
-  const i = isVertical ? 1 : 0;
-  return (runnerSize[i] / ((fieldSize[i])+40)) * 50;
-};
+// const calculatePreperatoryPosition = (
+//   $field: JQuery<HTMLElement>, isVertical: boolean, fieldSize:number[], runnerSize:number[],
+// ):number => {
+//   const i = isVertical ? 1 : 0;
+//   return (runnerSize[i] / ((fieldSize[i]) + 40)) * 50;
+// };
 
 type UpdatePositionToDOMArgs = { stepPosition: number; instance: number; positioning: string[] };
 
@@ -46,18 +44,15 @@ const updatePositionToDOM = function updateRunnerPositionToDom(this:SliderView,
     isVertical, $field, fieldSize, runnerSize,
   } = this;
 
-  const preperatoryPosition = calculatePreperatoryPosition(
-    $field, isVertical, fieldSize, runnerSize,
-  );
-  console.log('fieldSize[0]',fieldSize[0]);
-  
-  const viewPosition = stepPosition*(fieldSize[0])/(fieldSize[0]+40)
-  const getVerticalPosition = () => `${100 - viewPosition }%`;
-  const getHorizontalPosition = () => `${viewPosition }%`;
+  // const preperatoryPosition = calculatePreperatoryPosition(
+  //   $field, isVertical, fieldSize, runnerSize,
+  // );
+  const viewPosition = (stepPosition * (fieldSize[0])) / (fieldSize[0] + 40);
+  const getVerticalPosition = () => `${100 - viewPosition}%`;
+  const getHorizontalPosition = () => `${viewPosition}%`;
   const position = isVertical
     ? getVerticalPosition()
     : getHorizontalPosition();
-    console.log('runner VIEW position', position);
   $field.find(`.js-instance-${instance}`).css(positioning[0], position);
 };
 

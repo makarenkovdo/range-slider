@@ -13,7 +13,7 @@ const prepareScaleData = (
   }
   const stepLimits = Math.trunc((minMax[1] - minMax[0]) / step);
   const pixelLimits = Math.trunc(fieldSize[i] / 40);
-  const divisionQuantity = Math.max((Math.trunc(Math.min(stepLimits, pixelLimits))),2);
+  const divisionQuantity = Math.max((Math.trunc(Math.min(stepLimits, pixelLimits))), 2);
   const greatestCommonDivisor = (a:number, b:number):number => {
     if (!b) {
       return a;
@@ -22,10 +22,10 @@ const prepareScaleData = (
     return greatestCommonDivisor(b, a % b);
   };
   // greatestCommonDivisor(stepLimits, pixelLimits);
-  let fractionalNumber = 0;
+  const fractionalNumber = 0;
   // if (stepSignAfterComma) fractionalNumber = 1;
   const divisionNumber = Number(((minMax[1] - minMax[0]) / (divisionQuantity - 1)).toFixed(2));
-  console.log('divisionNumber',divisionNumber);
+  console.log('divisionNumber', divisionNumber);
   return { divisionQuantity, divisionNumber };
 };
 
@@ -54,27 +54,29 @@ const addScaleToDom = (
     }
   } else {
     $id.append(
-      `<div data-testid="test-scale" class="scale-lines js-scale-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; left: 20px; top:${fieldSize[1]}px; grid-template-columns: repeat(${divisionQuantity}, 1px)"></div>`,
-    );
-    $id.append(
-      `<div data-testid="test-scale" class="scale-lines js-scale-small-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; left: 20px; top:${fieldSize[1]}px; grid-template-columns: repeat(${divisionQuantity*2}, 1px)"></div>`,
+      `<div data-testid="test-scale" class="scale-lines js-scale-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; left: 20px; top:${fieldSize[1] + 2}px; grid-template-columns: repeat(${2 * divisionQuantity - 1}, 1px)"></div>`,
     );
     $id.append(
       `<div data-testid="test-scale" class="scale-numbers js-scale-numbers" style="height:${
         fieldSize[1]
         // prettier-ignore
-      }px; width:${fieldSize[0]}px; top:${2
+      }px; width:${fieldSize[0]}px; top:${3
         * fieldSize[1]}px; left: 10px; grid-template-columns: repeat(${divisionQuantity}, 1px)"></div>`,
     );
-    
-    for (let i = minMax[0]; i < (divisionQuantity+minMax[0]); i += 1) {
+
+    for (let i = minMax[0]; i < (divisionQuantity + minMax[0]); i += 1) {
       console.log('i, divisionNumber, divisionQuantity', i, divisionNumber, divisionQuantity);
 
       $id.find('.js-scale-numbers').append(`<div class="scale-number js-scale-number">${(i * divisionNumber).toFixed(stepSignAfterComma)}</div>`);
     }
   }
-  for (let i = 0; i < divisionQuantity; i += 1) {
-    $id.find('.js-scale-lines').append('<div class="scale-line js-scale-line"></div>');
+  // for (let i = 0; i < 2 * divisionQuantity; i += 1) {
+  //   $id.find('.js-scale-small-lines').append('<div class="scale-line js-scale-line"></div>');
+  // }
+  for (let i = 0; i < 2 * divisionQuantity - 1; i += 1) {
+    if (i % 2) {
+      $id.find('.js-scale-lines').append('<div class="scale-line js-scale-line" style="height: 5px"></div>');
+    } else $id.find('.js-scale-lines').append('<div class="scale-line js-scale-line"></div>');
   }
 };
 

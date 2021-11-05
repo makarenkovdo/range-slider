@@ -28,10 +28,10 @@ h1 {
   .scale-lines {
     display: grid;
     position: absolute;
-    z-index: 1;
+    z-index: 5;
     // grid-template-columns: repeat(18, 1fr);
     .scale-line {
-      background-color: #555;
+      background-color: #888;
       cursor: pointer;
     }
   }
@@ -114,7 +114,7 @@ h1 {
       z-index: -3;
     }
     .runner {
-      top: -($size * 1.2) * 0.5;
+      top: -($size * 1.2) * 0.6;
       &.instance-1 {
         left: 50%;
       }

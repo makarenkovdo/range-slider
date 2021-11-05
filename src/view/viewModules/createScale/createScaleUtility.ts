@@ -25,6 +25,9 @@ const prepareScaleData = (
   const fractionalNumber = 0;
   // if (stepSignAfterComma) fractionalNumber = 1;
   const divisionNumber = Number(((minMax[1] - minMax[0]) / (divisionQuantity - 1)).toFixed(2));
+  console.log('minMax[1] - minMax[0]', minMax[1] - minMax[0]);
+  console.log('divisionQuantity', divisionQuantity);
+
   console.log('divisionNumber', divisionNumber);
   return { divisionQuantity, divisionNumber };
 };
@@ -63,20 +66,21 @@ const addScaleToDom = (
       }px; width:${fieldSize[0]}px; top:${3
         * fieldSize[1]}px; left: 10px; grid-template-columns: repeat(${divisionQuantity}, 1px)"></div>`,
     );
-
-    for (let i = minMax[0]; i < (divisionQuantity + minMax[0]); i += 1) {
-      console.log('i, divisionNumber, divisionQuantity', i, divisionNumber, divisionQuantity);
-
-      $id.find('.js-scale-numbers').append(`<div class="scale-number js-scale-number">${(i * divisionNumber).toFixed(stepSignAfterComma)}</div>`);
+    if (minMax[0] === 0) {
+      for (let i = minMax[0]; i < (divisionQuantity + minMax[0]); i += 1) {
+        $id.find('.js-scale-numbers').append(`<div class="scale-number js-scale-number">${(i * divisionNumber).toFixed(stepSignAfterComma)}</div>`);
+      }
+    } else {
+      for (let i = minMax[0] - divisionNumber; i < (divisionQuantity + minMax[0]-2); i += 1) {
+        $id.find('.js-scale-numbers').append(`<div class="scale-number js-scale-number">${(i * divisionNumber).toFixed(stepSignAfterComma)}</div>`);
+      }
     }
-  }
-  // for (let i = 0; i < 2 * divisionQuantity; i += 1) {
-  //   $id.find('.js-scale-small-lines').append('<div class="scale-line js-scale-line"></div>');
-  // }
-  for (let i = 0; i < 2 * divisionQuantity - 1; i += 1) {
-    if (i % 2) {
-      $id.find('.js-scale-lines').append('<div class="scale-line js-scale-line" style="height: 5px"></div>');
-    } else $id.find('.js-scale-lines').append('<div class="scale-line js-scale-line"></div>');
+
+    for (let i = 0; i < 2 * divisionQuantity - 1; i += 1) {
+      if (i % 2) {
+        $id.find('.js-scale-lines').append('<div class="scale-line js-scale-line" style="height: 5px"></div>');
+      } else $id.find('.js-scale-lines').append('<div class="scale-line js-scale-line"></div>');
+    }
   }
 };
 

@@ -7,8 +7,9 @@ const createRunner = function addRunnerToDOMAndSetThis$runner(this: SliderView, 
       prepareRunnerArgs(
         i, this.isVertical, this.runnerSize, this.fieldSize), this.$field, this.runnerSize,
     );
-  });
+
   setThis.call(this, i);
+});
 };
 
 export default createRunner;

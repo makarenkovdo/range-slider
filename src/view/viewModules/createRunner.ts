@@ -5,10 +5,11 @@ const createRunner = function addRunnerToDOMAndSetThis$runner(this: SliderView, 
   $().ready(() => {
     addRunnerToDOM(
       prepareRunnerArgs(
-        i, this.isVertical, this.runnerSize, this.fieldSize), this.$field, this.runnerSize,
+        i, this.isVertical, this.runnerSize, this.fieldSize
+      ), this.$field, this.runnerSize,
     );
 
-  setThis.call(this, i);
+    setThis.call(this, i);
 });
 };
 

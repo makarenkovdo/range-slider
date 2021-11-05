@@ -12,8 +12,12 @@ const prepareScaleData = (
     i += 1;
   }
   const stepLimits = Math.trunc((minMax[1] - minMax[0]) / step);
-  const pixelLimits = Math.trunc(fieldSize[i] / 30);
-  const divisionQuantity = Math.trunc(Math.min(stepLimits, pixelLimits));
+  const pixelLimits = Math.trunc(fieldSize[i] / 40);
+  console.log('fieldSize[i]',fieldSize[i]);
+  
+  const divisionQuantity = Math.max((Math.trunc(Math.min(stepLimits, pixelLimits))),2);
+  console.log('divisionQuantity',divisionQuantity);
+  
   const greatestCommonDivisor = (a:number, b:number):number => {
     if (!b) {
       return a;
@@ -23,9 +27,9 @@ const prepareScaleData = (
   };
   // greatestCommonDivisor(stepLimits, pixelLimits);
   let fractionalNumber = 0;
-  if (stepSignAfterComma) fractionalNumber = 1;
-  const divisionNumber = Number(((minMax[1] - minMax[0]) / divisionQuantity).toFixed(2));
-  console.log(divisionNumber);
+  // if (stepSignAfterComma) fractionalNumber = 1;
+  const divisionNumber = Number(((minMax[1] - minMax[0]) / (divisionQuantity - 1)).toFixed(2));
+  console.log('divisionNumber',divisionNumber);
   return { divisionQuantity, divisionNumber };
 };
 
@@ -35,6 +39,7 @@ const addScaleToDom = (
   fieldSize: number[],
   step: number,
   stepSignAfterComma: number,
+  minMax: number[],
   { divisionQuantity, divisionNumber }: PrepareScaleDataArgs,
 ): void => {
   // const { positioning, minMax } = preparedData;
@@ -60,9 +65,12 @@ const addScaleToDom = (
         fieldSize[1]
         // prettier-ignore
       }px; width:${fieldSize[0]}px; top:${2
-        * fieldSize[1]}px; grid-template-columns: repeat(${divisionQuantity}, 1fr)"></div>`,
+        * fieldSize[1]}px; left: 10px; grid-template-columns: repeat(${divisionQuantity}, 1px)"></div>`,
     );
-    for (let i = 0; i < divisionQuantity; i += 1) {
+    
+    for (let i = minMax[0]; i < (divisionQuantity+minMax[0]); i += 1) {
+      console.log('i, divisionNumber, divisionQuantity', i, divisionNumber, divisionQuantity);
+
       $id.find('.js-scale-numbers').append(`<div class="scale-number js-scale-number">${(i * divisionNumber).toFixed(stepSignAfterComma)}</div>`);
     }
   }

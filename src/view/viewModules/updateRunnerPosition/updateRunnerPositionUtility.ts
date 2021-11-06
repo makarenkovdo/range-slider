@@ -41,7 +41,7 @@ type UpdatePositionToDOMArgs = { stepPosition: number; instance: number; positio
 const updatePositionToDOM = function updateRunnerPositionToDom(this:SliderView,
   { stepPosition, instance, positioning }:UpdatePositionToDOMArgs):void {
   const {
-    isVertical, $field, fieldSize, runnerSize,
+    isVertical, $field, fieldSize, runnerSize, $runners
   } = this;
 
   // const preperatoryPosition = calculatePreperatoryPosition(
@@ -53,7 +53,7 @@ const updatePositionToDOM = function updateRunnerPositionToDom(this:SliderView,
   const position = isVertical
     ? getVerticalPosition()
     : getHorizontalPosition();
-  $field.find(`.js-instance-${instance}`).css(positioning[0], position);
+    $runners[instance].css(positioning[0], position);
 };
 
 export { setThisRunnerPosition, defineRunnerType, updatePositionToDOM };

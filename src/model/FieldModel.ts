@@ -24,7 +24,7 @@ export default class FieldModel {
   constructor(id: string, subscriber: SliderPresenter) {
     this.class = $(`#${id}`).attr('class');
     this.minMax = [0, 100];
-    this.isVertical = $(`#${id}`).hasClass('js-vertical');
+    this.isVertical = $(`#${id}`).hasClass('js-slider_vertical');
     this.isRange = false;
     this.subscriber = subscriber;
 

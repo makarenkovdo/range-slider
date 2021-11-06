@@ -42,6 +42,7 @@ const addScaleToDom = (
   { divisionQuantity, divisionNumber }: PrepareScaleDataArgs,
 ): void => {
   // const { positioning, minMax } = preparedData;
+
   if (isVertical) {
     $id.append(
       `<div data-testid="test-scale" class="scale-lines js-scale-lines" style="height:${fieldSize[1] - 40}px; width:${fieldSize[0]}px; top: 20px; left:${fieldSize[0]}px; grid-template-rows: repeat(${divisionQuantity}, 1px)"></div>`,
@@ -71,7 +72,7 @@ const addScaleToDom = (
         $id.find('.js-scale-numbers').append(`<div class="scale-number js-scale-number">${(i * divisionNumber).toFixed(stepSignAfterComma)}</div>`);
       }
     } else {
-      for (let i = minMax[0] - divisionNumber; i < (divisionQuantity + minMax[0]-2); i += 1) {
+      for (let i = minMax[0] - divisionNumber; i < (divisionQuantity + minMax[0] - 2); i += 1) {
         $id.find('.js-scale-numbers').append(`<div class="scale-number js-scale-number">${(i * divisionNumber).toFixed(stepSignAfterComma)}</div>`);
       }
     }

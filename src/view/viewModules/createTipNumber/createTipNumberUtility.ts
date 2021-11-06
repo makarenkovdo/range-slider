@@ -4,6 +4,7 @@ export type PreparedDataType = {
   i: number;
   positioning: string;
   position: number;
+  modificator: string;
 };
 
 const prepareTipNumberArgs = (i: number, isVertical: boolean): PreparedDataType => {

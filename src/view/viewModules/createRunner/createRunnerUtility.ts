@@ -13,7 +13,10 @@ const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
     switcher = 1;
   }
   const position:number = (minMax - i * ((runnerSize[switcher] / fieldSize[switcher]) * 100));
-  return { i, positioning, position };
+  const modificator = isVertical ? 'vertical' : 'horizontal';
+  return {
+    i, positioning, position, modificator,
+  };
 };
 
 const addRunnerToDOM = (
@@ -21,14 +24,16 @@ const addRunnerToDOM = (
   $id: JQuery<HTMLElement>,
   runnerSize: number[],
 ): void => {
-  const { i, positioning, position } = preparedData;
+  const {
+    i, positioning, position, modificator,
+  } = preparedData;
   $id.append(
-    `<span data-testid="test-runner-${i}" class="runner js-runner js-instance-${i}" style="${positioning}:${position}%; width:${runnerSize[0]}px; height:${runnerSize[1]}px"></span>`,
+    `<span data-testid="test-runner-${i}" class="slider__runner slider__runner_${modificator} js-slider__runner_instance-${i}" style="${positioning}:${position}%; width:${runnerSize[0]}px; height:${runnerSize[1]}px"></span>`,
   );
 };
 
 const setThis = function setThis$runner(this: SliderView, i: number): void {
-  this.$runners[i] = this.$field.children(`.js-runner.js-instance-${i}`);
+  this.$runners[i] = this.$field.children(`.js-slider__runner_instance-${i}`);
 };
 
 export { setThis, addRunnerToDOM, prepareRunnerArgs };

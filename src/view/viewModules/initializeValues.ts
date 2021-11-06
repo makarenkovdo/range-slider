@@ -8,6 +8,7 @@ const initializeValues = function initializeDefaultViewValues(
 ): void {
   this.runnerSize = runnerSize;
   this.orientation = orientation;
+  this.isVertical = orientation === 'vertical';
   $(document).ready(() => {
     const { $field }: SliderView = this;
     const borderWidth = parseInt($field.css('border-width'), 10);

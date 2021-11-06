@@ -8,7 +8,6 @@ const firstRunner = new SliderPresenter('first', {
   maxValue: 17,
   isRange: true,
   shouldAddScale: true,
-  orientation: 'horizontal',
 });
 
 const secondRunner = new SliderPresenter('second', {
@@ -17,6 +16,8 @@ const secondRunner = new SliderPresenter('second', {
   step: 10,
   isRange: true,
   shouldAddScale: true,
+  orientation: 'vertical',
+
 });
 
 const thirdRunner = new SliderPresenter('third', {
@@ -32,6 +33,8 @@ const fourthRunner = new SliderPresenter('fourth', {
   shouldAddBar: true,
   maxValue: 10,
   shouldAddScale: true,
+  orientation: 'vertical',
+
 
 });
 

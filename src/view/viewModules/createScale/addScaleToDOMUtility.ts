@@ -36,11 +36,16 @@ const createScaleNumber = (
 ):void => {
   if (minMax[0] === 0) {
     for (let i = minMax[0]; i < (divisionQuantity + minMax[0]); i += 1) {
-      $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${(i * divisionNumber).toFixed(stepSignAfterComma)}</div>`);
+      if (i === divisionQuantity + minMax[0] - 1) {
+        $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${minMax[1].toFixed(Math.min(2, stepSignAfterComma))}</div>`);
+      } else {
+        $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${(i * divisionNumber).toFixed(Math.min(2, stepSignAfterComma))}</div>`);
+        console.log('i,divisionQuantity,minMax,divisionNumber', i, divisionQuantity, minMax, divisionNumber);
+      }
     }
   } else {
     for (let i = minMax[0] - divisionNumber; i < (divisionQuantity + minMax[0] - 2); i += 1) {
-      $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${(i * divisionNumber).toFixed(stepSignAfterComma)}</div>`);
+      $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${(i * divisionNumber).toFixed(Math.min(2, stepSignAfterComma))}</div>`);
     }
   }
 };

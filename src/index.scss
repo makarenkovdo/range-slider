@@ -94,10 +94,11 @@ h1 {
   &__bar {
     position: absolute;
     background: linear-gradient(#6fcf97 50%, #66d2ea);
-    z-index: -3;
+    z-index: 0;
     &_horizontal {
       width: 0;
-      height: $size;
+      height: $size  ;
+      top: 0px;
     }
     &_vertical {
       height: 0;

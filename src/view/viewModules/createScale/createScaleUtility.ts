@@ -1,3 +1,4 @@
+import { Orientation } from '../../../presenter/presenterInterfaces';
 import { PrepareScaleDataArgs } from '../../viewInterfaces';
 
 const prepareScaleData = (
@@ -39,6 +40,7 @@ const addScaleToDom = (
   step: number,
   stepSignAfterComma: number,
   minMax: number[],
+  orientation: Orientation,
   { divisionQuantity, divisionNumber }: PrepareScaleDataArgs,
 ): void => {
   // const { positioning, minMax } = preparedData;
@@ -58,10 +60,10 @@ const addScaleToDom = (
     }
   } else {
     $id.append(
-      `<div data-testid="test-scale" class="scale-lines js-scale-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; left: 20px; top:${fieldSize[1] + 2}px; grid-template-columns: repeat(${2 * divisionQuantity - 1}, 1px)"></div>`,
+      `<div data-testid="test-scale" class="slider__scale-lines slider__scale-lines_${orientation} js-slider__scale-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; left: 20px; top:${fieldSize[1] + 2}px; grid-template-columns: repeat(${2 * divisionQuantity - 1}, 1px)"></div>`,
     );
     $id.append(
-      `<div data-testid="test-scale" class="scale-numbers js-scale-numbers" style="height:${
+      `<div data-testid="test-scale" class="slider__scale-numbers js-slider__scale-numbers" style="height:${
         fieldSize[1]
         // prettier-ignore
       }px; width:${fieldSize[0]}px; top:${3
@@ -69,20 +71,23 @@ const addScaleToDom = (
     );
     if (minMax[0] === 0) {
       for (let i = minMax[0]; i < (divisionQuantity + minMax[0]); i += 1) {
-        $id.find('.js-scale-numbers').append(`<div class="scale-number js-scale-number">${(i * divisionNumber).toFixed(stepSignAfterComma)}</div>`);
+        $id.find('.js-slider__scale-numbers').append(`<div class="slider__scale-number js-slider__scale-number">${(i * divisionNumber).toFixed(stepSignAfterComma)}</div>`);
       }
     } else {
       for (let i = minMax[0] - divisionNumber; i < (divisionQuantity + minMax[0] - 2); i += 1) {
-        $id.find('.js-scale-numbers').append(`<div class="scale-number js-scale-number">${(i * divisionNumber).toFixed(stepSignAfterComma)}</div>`);
+        $id.find('.js-slider__scale-numbers').append(`<div class="slider__scale-number js-slider__scale-number">${(i * divisionNumber).toFixed(stepSignAfterComma)}</div>`);
       }
     }
 
     for (let i = 0; i < 2 * divisionQuantity - 1; i += 1) {
       if (i % 2) {
-        $id.find('.js-scale-lines').append('<div class="scale-line js-scale-line" style="height: 5px"></div>');
-      } else $id.find('.js-scale-lines').append('<div class="scale-line js-scale-line"></div>');
+        $id.find('.js-slider__scale-lines').append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="height: 5px"></div>`);
+      } else $id.find('.js-slider__scale-lines').append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line"></div>`);
     }
   }
+  // function createScaleLine() {
+  //   $id.find('.js-slider__scale-lines').append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="height: 5px"></div>`);
+  // }
 };
 
 export { prepareScaleData, addScaleToDom };

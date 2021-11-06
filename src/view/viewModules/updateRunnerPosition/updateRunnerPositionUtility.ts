@@ -43,6 +43,8 @@ const updatePositionToDOM = function updateRunnerPositionToDom(this:SliderView,
   const {
     isVertical, $field, fieldSize, runnerSize, $runners
   } = this;
+  console.log(stepPosition);
+  
   // const preperatoryPosition = calculatePreperatoryPosition(
   //   $field, isVertical, fieldSize, runnerSize,
   // );

@@ -93,10 +93,11 @@ const calculateValue = (minMax: number[], thisRunner: RunnerModel): number => {
 const calculateStepValueAndPosition = ({
   positionInPercent,
   step,
+  stepInPercent,
   value,
   stepSignAfterComma,
 }:CalculateStepValueAndPositionArgs):CheckCollisionSubargs => {
-  const stepPosition = Number((Math.round(positionInPercent / step) * step)
+  const stepPosition = Number((Math.round(positionInPercent / stepInPercent) * (stepInPercent))
     .toFixed(stepSignAfterComma));
   const stepValue = Number((Math.round(value / step) * step).toFixed(stepSignAfterComma));
   return { stepPosition, stepValue };

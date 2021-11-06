@@ -17,6 +17,8 @@ class RunnerModel {
 
   public step: number;
 
+  public stepInPercent: number;
+
   public stepSignAfterComma: number;
 
   public stepPosition: number;
@@ -29,7 +31,7 @@ class RunnerModel {
 
   public notify: (that: RunnerModel) => void;
 
-  public setStep: (step: number) => void;
+  public setStep: (step: number, minMax: number[]) => void;
 
   public updateRunnerValues: (updateRunnerValuesArgs: UpdateRunnerValuesArgs) => void;
 
@@ -40,6 +42,7 @@ class RunnerModel {
     this.positionInPercent = 0;
     this.value = 0;
     this.step = 1;
+    this.stepInPercent = 1;
     this.stepSignAfterComma = 0;
     this.stepPosition = 0;
     this.stepValue = 0;

@@ -13,6 +13,7 @@ type UpdateRunnerValuesArgs = {
 type CalculateStepValueAndPositionArgs = {
   positionInPercent: number;
   step: number;
+  stepInPercent: number;
   value: number;
   stepSignAfterComma: number;
 };

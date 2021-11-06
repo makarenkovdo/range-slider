@@ -21,12 +21,20 @@ function createScaleNumbers(
 }
 
 const createScaleLine = (
-  $scaleLines:JQuery<HTMLElement>, divisionQuantity:number, orientation:Orientation,
+  $scaleLines:JQuery<HTMLElement>, divisionQuantity:number, orientation:Orientation,minMax:number[],
 ):void => {
-  for (let i = 0; i < 2 * divisionQuantity - 1; i += 1) {
-    if (i % 2) {
-      $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="height: 5px"></div>`);
-    } else $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line"></div>`);
+  if (minMax[0] === 0) {
+    for (let i = 0; i < 2 * divisionQuantity - 1; i += 1) {
+      if (i % 2) {
+        $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="height: 5px"></div>`);
+      } else $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line"></div>`);
+    }
+  } else {
+    for (let i = 0; i < 2 * divisionQuantity; i += 1) {
+      if (i % 2) {
+        $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="height: 5px"></div>`);
+      } else $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line"></div>`);
+    }
   }
 };
 
@@ -40,11 +48,10 @@ const createScaleNumber = (
         $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${minMax[1].toFixed(Math.min(2, stepSignAfterComma))}</div>`);
       } else {
         $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${(i * divisionNumber).toFixed(Math.min(2, stepSignAfterComma))}</div>`);
-        console.log('i,divisionQuantity,minMax,divisionNumber', i, divisionQuantity, minMax, divisionNumber);
       }
     }
   } else {
-    for (let i = minMax[0] - divisionNumber; i < (divisionQuantity + minMax[0] - 2); i += 1) {
+    for (let i = minMax[0]; i < (divisionQuantity + minMax[0]); i += 1) {
       $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${(i * divisionNumber).toFixed(Math.min(2, stepSignAfterComma))}</div>`);
     }
   }

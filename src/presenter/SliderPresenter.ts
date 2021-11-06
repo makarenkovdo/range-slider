@@ -156,7 +156,7 @@ export default class SliderPresenter {
   }
 
   public setStep(step: number): this {
-    this.runners.forEach((v) => v.setStep(step));
+    this.runners.forEach((v) => v.setStep(step, this.field.minMax));
     if (step < 1) this.runners.forEach((v) => v.defineSignAfterComma());
     this.view.setStep(step, this.runners[0].stepSignAfterComma);
 

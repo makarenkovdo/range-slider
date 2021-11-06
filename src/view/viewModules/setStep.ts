@@ -5,6 +5,9 @@ const setStep = function setRunnerStepInView(
 ): void {
   this.step = step;
   this.stepSignAfterComma = stepSignAfterComma;
+  this.lengthInStep = (this.minMax[1] - this.minMax[0]) / step;
+  console.log(this.lengthInStep);
+  
 };
 
 export default setStep;

@@ -17,20 +17,21 @@ const prepareScaleData = (
   }
   const stepLimits = Math.trunc((minMax[1] - minMax[0]) / step);
   const pixelLimits = Math.trunc(fieldSize[i] / 40);
-  const divisionQuantity = Math.max((Math.trunc(Math.min(stepLimits, pixelLimits))), 2);
-  const greatestCommonDivisor = (a:number, b:number):number => {
-    if (!b) {
-      return a;
-    }
+  const divisionQuantity = Math.max((Math.trunc(Math.min(stepLimits + 1, pixelLimits + 1))), 2);
+  // const greatestCommonDivisor = (a:number, b:number):number => {
+  //   if (!b) {
+  //     return a;
+  //   }
 
-    return greatestCommonDivisor(b, a % b);
-  };
+  //   return greatestCommonDivisor(b, a % b);
+  // };
   // greatestCommonDivisor(stepLimits, pixelLimits);
-  const fractionalNumber = 0;
+  // const fractionalNumber = 0;
   // if (stepSignAfterComma) fractionalNumber = 1;
-  const divisionNumber = Number(((minMax[1] - minMax[0]) / (divisionQuantity - 1)).toFixed(3));
-  console.log('divisionNumber', ((minMax[1] - minMax[0]) / (divisionQuantity - 1)).toFixed(3));
-  
+  let divisionNumber = Number(((minMax[1] - minMax[0]) / (divisionQuantity - 1)).toFixed(3));
+  if (minMax[0] > 0) {
+    divisionNumber = Number(((minMax[1] - minMax[0]) / (divisionQuantity - 1)).toFixed(3));
+  }
   return { divisionQuantity, divisionNumber };
 };
 
@@ -65,7 +66,7 @@ const addScaleToDom = (
     const $scaleNumbers = $id.find('.js-slider__scale-numbers');
     const $scaleLines = $id.find('.js-slider__scale-lines');
     createScaleNumber($scaleNumbers, minMax, divisionNumber, divisionQuantity, stepSignAfterComma);
-    createScaleLine($scaleLines, divisionQuantity, orientation);
+    createScaleLine($scaleLines, divisionQuantity, orientation, minMax);
   }
 };
 

@@ -15,18 +15,20 @@ const prepareTipNumberArgs = (i: number, isVertical: boolean): PreparedDataType 
     positioning = 'top';
     position = 100 - position;
   }
+  const modificator = isVertical ? 'vertical' : 'horizontal';
 
   //  set min = 0%, max = 100% for left/top positions
-  return { i, positioning, position } as PreparedDataType;
+  return { i, positioning, position, modificator } as PreparedDataType;
 };
 
 const addTipNumberToDOM = (
   preparedData: PreparedDataType,
   $id: JQuery<HTMLElement>,
 ): UpdateTipNumberArgs => {
-  const { i, positioning, position } = preparedData;
+  const { i, positioning, position, modificator } = preparedData;
+
   $id.append(
-    `<span data-testid="test-tip-number-${i}" class='tip-number js-tip-number js-instance-${i}' style="${positioning}:${position}%"><span>0</span></span>`,
+    `<span data-testid="test-tip-number-${i}" class='slider__tip slider__tip_${modificator} js-slider__tip_instance-${i}' style="${positioning}:${position}%"><span>0</span></span>`,
   );
   return { stepValue: position, instance: i };
 };

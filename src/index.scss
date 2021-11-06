@@ -106,7 +106,7 @@ h1 {
     }
   }
   
-  &__tip-number {
+  &__tip {
     position: absolute;
     transform: translateY(10%);
     user-select: none;
@@ -121,7 +121,7 @@ h1 {
       top: 0px;
     }
   }
-  &__tip-number span {
+  &__tip span {
     border-radius: 5px;
     border: 1px solid #333;
     box-sizing: border-box;

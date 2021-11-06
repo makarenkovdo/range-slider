@@ -1,5 +1,8 @@
 import { Orientation } from '../../../presenter/presenterInterfaces';
 import { PrepareScaleDataArgs } from '../../viewInterfaces';
+import {
+  createScaleLine, createScaleLines, createScaleNumber, createScaleNumbers,
+} from './addScaleToDOMUtility';
 
 const prepareScaleData = (
   fieldSize: number[],
@@ -59,35 +62,13 @@ const addScaleToDom = (
       $id.find('.js-scale-numbers').append(`<div class="scale-number js-scale-number">${100 - i * step}</div>`);
     }
   } else {
-    $id.append(
-      `<div data-testid="test-scale" class="slider__scale-lines slider__scale-lines_${orientation} js-slider__scale-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; left: 20px; top:${fieldSize[1] + 2}px; grid-template-columns: repeat(${2 * divisionQuantity - 1}, 1px)"></div>`,
-    );
-    $id.append(
-      `<div data-testid="test-scale" class="slider__scale-numbers js-slider__scale-numbers" style="height:${
-        fieldSize[1]
-        // prettier-ignore
-      }px; width:${fieldSize[0]}px; top:${3
-        * fieldSize[1]}px; left: 10px; grid-template-columns: repeat(${divisionQuantity}, 1px)"></div>`,
-    );
-    if (minMax[0] === 0) {
-      for (let i = minMax[0]; i < (divisionQuantity + minMax[0]); i += 1) {
-        $id.find('.js-slider__scale-numbers').append(`<div class="slider__scale-number js-slider__scale-number">${(i * divisionNumber).toFixed(stepSignAfterComma)}</div>`);
-      }
-    } else {
-      for (let i = minMax[0] - divisionNumber; i < (divisionQuantity + minMax[0] - 2); i += 1) {
-        $id.find('.js-slider__scale-numbers').append(`<div class="slider__scale-number js-slider__scale-number">${(i * divisionNumber).toFixed(stepSignAfterComma)}</div>`);
-      }
-    }
-
-    for (let i = 0; i < 2 * divisionQuantity - 1; i += 1) {
-      if (i % 2) {
-        $id.find('.js-slider__scale-lines').append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="height: 5px"></div>`);
-      } else $id.find('.js-slider__scale-lines').append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line"></div>`);
-    }
+    createScaleLines($id, orientation, fieldSize, divisionQuantity);
+    createScaleNumbers($id, orientation, fieldSize, divisionQuantity);
+    const $scaleNumbers = $id.find('.js-slider__scale-numbers');
+    const $scaleLines = $id.find('.js-slider__scale-lines');
+    createScaleNumber($scaleNumbers, minMax, divisionNumber, divisionQuantity, stepSignAfterComma);
+    createScaleLine($scaleLines, divisionQuantity, orientation);
   }
-  // function createScaleLine() {
-  //   $id.find('.js-slider__scale-lines').append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="height: 5px"></div>`);
-  // }
 };
 
 export { prepareScaleData, addScaleToDom };

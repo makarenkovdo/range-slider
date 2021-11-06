@@ -1,8 +1,9 @@
 /* eslint-env jquery */
-import { DataForRunnerUpdatingArgsType } from '../presenter/presenterInterfaces';
+import { DataForRunnerUpdatingArgsType, Orientation } from '../presenter/presenterInterfaces';
 import SliderPresenter from '../presenter/SliderPresenter';
 import prepareDataForRunnerUpdating from './fieldModules/prepareDataForRunnerUpdating';
 import setMinMax from './fieldModules/setMinMax';
+import setIsVertical from './fieldModules/setOrientation';
 
 export default class FieldModel {
   public minMax: number[];
@@ -15,6 +16,8 @@ export default class FieldModel {
 
   private subscriber: SliderPresenter;
 
+  public setIsVertical: (this: FieldModel, orientation: Orientation) => void;
+
   public setMinMax: (this: FieldModel, minValue: number, maxValue: number) => void;
 
   public prepareDataForRunnerUpdating: (
@@ -24,10 +27,11 @@ export default class FieldModel {
   constructor(id: string, subscriber: SliderPresenter) {
     this.class = $(`#${id}`).attr('class');
     this.minMax = [0, 100];
-    this.isVertical = $(`#${id}`).hasClass('js-slider_vertical');
+    this.isVertical = false;
     this.isRange = false;
     this.subscriber = subscriber;
 
+    this.setIsVertical = setIsVertical.bind(this) as () => void;
     this.setMinMax = setMinMax.bind(this) as () => void;
     this.prepareDataForRunnerUpdating = prepareDataForRunnerUpdating.bind(this) as () => void;
   }

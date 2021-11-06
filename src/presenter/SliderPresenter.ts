@@ -118,6 +118,8 @@ export default class SliderPresenter {
     cursorXY: number[],
     i: number,
   ): void {
+    console.log();
+    
     const dataForRunnerUpdatingArgs: UpdateRunnerValuesArgs = {
       cursorXY,
       isVertical: this.field.isVertical,
@@ -217,6 +219,7 @@ export default class SliderPresenter {
   }
 
   private initLayers(runnerSize: number[], orientation: Orientation): this {
+    this.field.setIsVertical(orientation);
     this.view.initializeValues(runnerSize, orientation);
     return this;
   }

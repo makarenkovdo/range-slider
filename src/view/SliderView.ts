@@ -60,6 +60,8 @@ export default class SliderView {
 
   public hasScale: boolean;
 
+  public hasTip: boolean;
+
   public step: number;
 
   public stepSignAfterComma: number;
@@ -110,6 +112,7 @@ export default class SliderView {
     this.isRange = false;
     this.hasBar = false;
     this.hasScale = false;
+    this.hasTip = false;
     this.runnersPosition = [0, 100];
     this.fieldSize = [];
     this.runnerSize = [];

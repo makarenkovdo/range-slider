@@ -106,7 +106,7 @@ export default class SliderPresenter {
   public recieveModelLogic(activeRunner: RunnerModel): void {
     if (activeRunner) {
       this.updateRunnerPosition(activeRunner);
-      this.updateTipNumber(activeRunner.stepValue, activeRunner.instance);
+      if (this.view.hasTip) this.updateTipNumber(activeRunner.stepValue, activeRunner.instance);
       if (this.view.hasBar) this.updateBarPosition(activeRunner);
     }
   }

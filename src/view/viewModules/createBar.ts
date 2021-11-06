@@ -3,9 +3,8 @@ import SliderView from '../SliderView';
 // how to test? this.$bar is a the result of div-appending and ALL THIS MODULE
 const createBar = function addBarToDomAndSetThisBar(this: SliderView): void {
   const addBarToDom = () => {
-    const modificator = this.isVertical ? 'vertical' : 'horizontal';
     this.$field.append(
-      `<div data-testid='test-slider-bar' class='slider__bar slider__bar_${modificator} js-slider__bar'></div>`,
+      `<div data-testid='test-slider-bar' class='slider__bar slider__bar_${this.orientation} js-slider__bar'></div>`,
     );
   };
   const setThis$bar = () => {

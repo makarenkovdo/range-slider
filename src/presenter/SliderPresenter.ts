@@ -7,6 +7,7 @@ import {
   PresenterBuildParams,
   CreateRangeSliderArgsType,
   DataForRunnerUpdatingArgsType,
+  Orientation,
 } from './presenterInterfaces';
 import checkValues from './presenterModules/checkValues';
 
@@ -179,6 +180,7 @@ export default class SliderPresenter {
       shouldAddScale = false,
       isRange = false,
       isTestMode = false,
+      orientation = 'horizontal',
     } = params;
 
     //  prettier-ignore
@@ -192,7 +194,7 @@ export default class SliderPresenter {
 
     if (!isTestMode) {
       this.setMinMax(minValue, maxValue)
-        .initLayers(runnerSize)
+        .initLayers(runnerSize, orientation)
         .createRangeSlider({
           isRange,
           shouldAddTip,
@@ -214,8 +216,8 @@ export default class SliderPresenter {
     return this;
   }
 
-  private initLayers(runnerSize: number[]): this {
-    this.view.initializeValues(runnerSize);
+  private initLayers(runnerSize: number[], orientation: Orientation): this {
+    this.view.initializeValues(runnerSize, orientation);
     return this;
   }
 

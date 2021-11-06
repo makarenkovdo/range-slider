@@ -1,3 +1,4 @@
+import { Orientation } from '../../../presenter/presenterInterfaces';
 import SliderView from '../../SliderView';
 import { PreparedDataType } from '../createTipNumber/createTipNumberUtility';
 
@@ -13,9 +14,8 @@ const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
     switcher = 1;
   }
   const position:number = (minMax - i * ((runnerSize[switcher] / fieldSize[switcher]) * 100));
-  const modificator = isVertical ? 'vertical' : 'horizontal';
   return {
-    i, positioning, position, modificator,
+    i, positioning, position,
   };
 };
 
@@ -23,12 +23,13 @@ const addRunnerToDOM = (
   preparedData: PreparedDataType,
   $id: JQuery<HTMLElement>,
   runnerSize: number[],
+  orientation: Orientation,
 ): void => {
   const {
-    i, positioning, position, modificator,
+    i, positioning, position,
   } = preparedData;
   $id.append(
-    `<span data-testid="test-runner-${i}" class="slider__runner slider__runner_${modificator} js-slider__runner_instance-${i}" style="${positioning}:${position}%; width:${runnerSize[0]}px; height:${runnerSize[1]}px"></span>`,
+    `<span data-testid="test-runner-${i}" class="slider__runner slider__runner_${orientation} js-slider__runner_instance-${i}" style="${positioning}:${position}%; width:${runnerSize[0]}px; height:${runnerSize[1]}px"></span>`,
   );
 };
 

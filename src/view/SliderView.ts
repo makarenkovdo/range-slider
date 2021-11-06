@@ -24,6 +24,7 @@ import handleDrag from './viewModules/handleDrag';
 import handleClick from './viewModules/handleClick';
 import handleDrop from './viewModules/handleDrop';
 import setStep from './viewModules/setStep';
+import { Orientation } from '../presenter/presenterInterfaces';
 
 export default class SliderView {
   public $body: JQuery<HTMLElement>;
@@ -33,6 +34,8 @@ export default class SliderView {
   public $bar: JQuery<HTMLElement>;
 
   public isVertical: boolean;
+
+  public orientation: Orientation;
 
   public isRange: boolean;
 
@@ -86,7 +89,7 @@ export default class SliderView {
 
   public updateZIndex: (this: SliderView, i: number) => void;
 
-  public initializeValues: (runnerSize: number[]) => void;
+  public initializeValues: (runnerSize: number[], orientation: Orientation) => void;
 
   public handleDrag: (this: SliderView, runnerInstance: number) => void;
 
@@ -108,11 +111,12 @@ export default class SliderView {
     this.$runners = [];
     // this.$bar = '';
     this.class = $(`#${id}`).attr('class');
-    this.isVertical = this.$field.hasClass('js-vertical');
+    this.isVertical = this.$field.hasClass('js-slider_vertical');
     this.isRange = false;
     this.hasBar = false;
     this.hasScale = false;
     this.hasTip = false;
+    this.orientation = 'horizontal';
     this.runnersPosition = [0, 100];
     this.fieldSize = [];
     this.runnerSize = [];

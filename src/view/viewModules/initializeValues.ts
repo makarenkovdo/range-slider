@@ -4,8 +4,10 @@ import SliderView from '../SliderView';
 const initializeValues = function initializeDefaultViewValues(
   this: SliderView,
   runnerSize: number[],
+  orientation: 'vertical' | 'horizontal',
 ): void {
   this.runnerSize = runnerSize;
+  this.orientation = orientation;
   $(document).ready(() => {
     const { $field }: SliderView = this;
     const borderWidth = parseInt($field.css('border-width'), 10);
@@ -17,6 +19,7 @@ const initializeValues = function initializeDefaultViewValues(
       this.fieldSize = [fieldWidth - borderWidth - 41, fieldHeight - borderWidth - 1];
     }
   });
+  this.$field.addClass(`slider_${this.orientation} js_slider_${this.orientation}`);
 };
 
 export default initializeValues;

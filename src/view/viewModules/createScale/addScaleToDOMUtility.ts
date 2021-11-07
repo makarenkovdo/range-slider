@@ -21,18 +21,19 @@ function createScaleNumbers(
 }
 
 const createScaleLine = (
-  $scaleLines:JQuery<HTMLElement>, divisionQuantity:number, orientation:Orientation,minMax:number[],
+  $scaleLines:JQuery<HTMLElement>, divisionQuantity:number, orientation:Orientation,
+  minMax:number[], size: string,
 ):void => {
   if (minMax[0] === 0) {
     for (let i = 0; i < 2 * divisionQuantity - 1; i += 1) {
       if (i % 2) {
-        $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="height: 5px"></div>`);
+        $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="${size}"></div>`);
       } else $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line"></div>`);
     }
   } else {
     for (let i = 0; i < 2 * divisionQuantity; i += 1) {
       if (i % 2) {
-        $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="height: 5px"></div>`);
+        $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="${size}"></div>`);
       } else $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line"></div>`);
     }
   }

@@ -41,7 +41,7 @@ const addScaleToDom = (
   const createScaleNumbersArgs: CreateScaleNumbersArgs = {
     switcher: 1,
     corrector: minMax[0] - divisionNumber,
-    lastOrFirstIterration: minMax[0],
+    lastOrFirstIterration: 0,
     minMax,
     divisionNumber,
     divisionQuantity,
@@ -77,7 +77,7 @@ const addScaleToDom = (
     createScaleNumbersArgs.$scaleNumbers = $id.find('.js-slider__scale-numbers');
     createScaleNumbersArgs.switcher = 0;
     createScaleNumbersArgs.corrector = 0;
-    createScaleNumbersArgs.lastOrFirstIterration = divisionQuantity + minMax[0] - 1;
+    createScaleNumbersArgs.lastOrFirstIterration = divisionQuantity - 1;
     createScaleNumbers(createScaleNumbersArgs);
     createScaleLines($scaleLines, divisionQuantity, orientation, minMax, smallLine, bigLine);
   }

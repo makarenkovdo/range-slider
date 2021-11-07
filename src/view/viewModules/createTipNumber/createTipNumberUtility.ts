@@ -31,8 +31,6 @@ const addTipNumberToDOM = (
   const {
     instance, positioning, position,
   } = preparedData;
-  console.log(instance,positioning[0], position[0], 'instance');
-
   $id.append(
     `<span data-testid="test-tip-number-${instance}" class='slider__tip slider__tip_${orientation} js-slider__tip_instance-${instance}' style="${positioning[0]}:${position[0]}%"><span>0</span></span>`,
   );

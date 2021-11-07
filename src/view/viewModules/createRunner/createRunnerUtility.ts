@@ -14,9 +14,6 @@ const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
     minMax = fieldSize[1];
     switcher = [1, 0];
   }
-  // const position:number = (minMax - i * ((runnerSize[switcher] / fieldSize[switcher]) * 100));
-  console.log(runnerSize[switcher[0]], fieldSize[switcher[1]], ' runnerSize[switcher[0]] fieldSize[switcher[1]]');
-
   const position = [
     Math.abs(minMax - i * fieldSize[switcher[0]]),
     -runnerSize[switcher[0]] * 0.5 + fieldSize[switcher[1]] * 0.5 + 1];

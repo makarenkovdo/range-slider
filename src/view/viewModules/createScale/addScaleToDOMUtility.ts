@@ -18,7 +18,7 @@ function createScaleNumbersBox(
     `<div data-testid="test-scale" class="slider__scale-numbers js-slider__scale-numbers" style="height:${
       fieldSize[1]
       // prettier-ignore
-    }px; width:${fieldSize[0] + fieldSize[0] / (divisionQuantity-1)}px; top:${fieldSize[1] + 20}px; left: -17px; grid-template-columns: repeat(${divisionQuantity}, 1fr)"></div>`,
+    }px; width:${fieldSize[0] + fieldSize[0] / (divisionQuantity - 1)}px; top:${fieldSize[1] + 20}px; left: -17px; grid-template-columns: repeat(${divisionQuantity}, 1fr)"></div>`,
   );
 }
 
@@ -48,18 +48,12 @@ const createScaleNumbers = (
     corrector, lastOrFirstIterration,
   }:CreateScaleNumbersArgs,
 ):void => {
-  if (minMax[0] === 0) {
-    for (let i = minMax[0]; i < (divisionQuantity + minMax[0]); i += 1) {
-      if (i === lastOrFirstIterration) {
-        $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${minMax[1].toFixed(Math.min(2, stepSignAfterComma))}</div>`);
-      } else {
-        $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${Math.abs(minMax[1] * switcher - (i * divisionNumber)).toFixed(Math.min(2, stepSignAfterComma))}</div>`);
-      }
-    }
-  } else {
-    for (let i = minMax[0]; i < (divisionQuantity + minMax[0]); i += 1) {
-      $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${(Math.abs(minMax[1] * switcher - (i * divisionNumber)) + corrector).toFixed(Math.min(2, stepSignAfterComma))}</div>`);
-    }
+  for (let i = 0; i < divisionQuantity; i += 1) {
+    if (i === lastOrFirstIterration) {
+      $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${minMax[1].toFixed(Math.min(2, stepSignAfterComma))}</div>`);
+    } else {
+      $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${(Math.abs(minMax[1] * switcher - (minMax[0]*(1-switcher) + i * divisionNumber))).toFixed(Math.min(2, stepSignAfterComma))}</div>`);
+    } 
   }
 };
 

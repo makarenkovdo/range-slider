@@ -1,3 +1,4 @@
+import { Orientation } from '../presenter/presenterInterfaces';
 import SliderView from './SliderView';
 
 type AddTipNumberToDOMReturned = { minMax: number; i: number };
@@ -33,6 +34,11 @@ type CreateScaleNumbersArgs = {
   corrector:number; lastOrFirstIterration: number;
 };
 
+type CreateScaleLinesBoxArgs = {
+  $id:JQuery<HTMLElement>; orientation:Orientation; fieldSize:number[]; divisionQuantity:number; top: number; left: number; columnOrRow:string;
+
+};
+
 export {
   AddTipNumberToDOMReturned,
   UpdateTipNumberArgs,
@@ -40,4 +46,5 @@ export {
   DragEventDataType,
   PrepareScaleDataArgs,
   CreateScaleNumbersArgs,
+  CreateScaleLinesBoxArgs,
 };

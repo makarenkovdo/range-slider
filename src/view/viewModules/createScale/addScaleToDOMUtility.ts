@@ -1,15 +1,15 @@
 import { Orientation } from '../../../presenter/presenterInterfaces';
-import { CreateScaleNumbersArgs } from '../../viewInterfaces';
+import { CreateScaleLinesBoxArgs, CreateScaleNumbersArgs } from '../../viewInterfaces';
 
-function createScaleLines(
-  $id:JQuery<HTMLElement>, orientation:Orientation, fieldSize:number[], divisionQuantity:number,
+function createScaleLinesBox(
+  {$id, orientation, fieldSize, divisionQuantity, top, left, columnOrRow}:CreateScaleLinesBoxArgs,
 ):void {
   $id.append(
-    `<div data-testid="test-scale" class="slider__scale-lines slider__scale-lines_${orientation} js-slider__scale-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; left: 20px; top:${fieldSize[1] + 2}px; grid-template-columns: repeat(${2 * divisionQuantity - 1}, 1px)"></div>`,
+    `<div data-testid="test-scale" class="slider__scale-lines slider__scale-lines_${orientation} js-slider__scale-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; left: ${left}px; top:${top}px; grid-template-${columnOrRow}: repeat(${2 * divisionQuantity - 1}, 1px)"></div>`,
   );
 }
 
-function createScaleNumbers(
+function createScaleNumbersBox(
   $id:JQuery<HTMLElement>, orientation:Orientation, fieldSize:number[], divisionQuantity:number,
 ):void {
   $id.append(
@@ -21,7 +21,7 @@ function createScaleNumbers(
   );
 }
 
-const createScaleLine = (
+const createScaleLines = (
   $scaleLines:JQuery<HTMLElement>, divisionQuantity:number, orientation:Orientation,
   minMax:number[], size: string,
 ):void => {
@@ -40,7 +40,7 @@ const createScaleLine = (
   }
 };
 
-const createScaleNumber = (
+const createScaleNumbers = (
   {
     $scaleNumbers, minMax, divisionNumber,
     divisionQuantity, stepSignAfterComma, switcher,
@@ -63,5 +63,5 @@ const createScaleNumber = (
 };
 
 export {
-  createScaleLines, createScaleNumbers, createScaleLine, createScaleNumber,
+  createScaleLinesBox, createScaleNumbersBox, createScaleLines, createScaleNumbers,
 };

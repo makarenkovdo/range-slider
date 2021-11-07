@@ -35,7 +35,6 @@ const fourthRunner = new SliderPresenter('fourth', {
   shouldAddScale: true,
   orientation: 'vertical',
 
-
 });
 
 const fifthRunner = new SliderPresenter('fifth', {
@@ -53,4 +52,13 @@ const sixthRunner = new SliderPresenter('sixth', {
   shouldAddTip: true,
   shouldAddScale: true,
 
+});
+
+const seventhRunner = new SliderPresenter('seventh', {
+  minValue: 7,
+  maxValue: 14,
+  step: 0.01,
+  shouldAddTip: true,
+  shouldAddScale: true,
+  orientation: 'vertical',
 });

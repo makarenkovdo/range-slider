@@ -8,7 +8,7 @@ const prepareMovingCoordinates = (
 ): number[] => {
   const cursorXY = [
     event.pageX - eventData.thisView.$field.position().left - 20,
-    event.pageY - eventData.thisView.$field.position().top - 20,
+    event.pageY - eventData.thisView.$field.position().top - 30,
   ];
   let switcher = 0;
   if (eventData.thisView.isVertical) switcher = 1;
@@ -18,6 +18,8 @@ const prepareMovingCoordinates = (
   if (cursorXY[switcher] > eventData.thisView.fieldSize[switcher]) {
     cursorXY[switcher] = eventData.thisView.fieldSize[switcher];
   }
+  console.log(cursorXY, 'cursorXY');
+  
   return cursorXY;
 };
 

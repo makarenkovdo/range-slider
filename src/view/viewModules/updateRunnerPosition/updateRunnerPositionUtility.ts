@@ -41,20 +41,26 @@ type UpdatePositionToDOMArgs = { stepPosition: number; instance: number; positio
 const updatePositionToDOM = function updateRunnerPositionToDom(this:SliderView,
   { stepPosition, instance, positioning }:UpdatePositionToDOMArgs):void {
   const {
-    isVertical, $field, fieldSize, runnerSize, $runners
+    isVertical, $field, fieldSize, runnerSize, $runners,
   } = this;
   console.log(stepPosition);
-  
+
   // const preperatoryPosition = calculatePreperatoryPosition(
   //   $field, isVertical, fieldSize, runnerSize,
   // );
-  const viewPosition = (stepPosition * (fieldSize[0])) / (fieldSize[0] + 40);
-  const getVerticalPosition = () => `${100 - viewPosition}%`;
-  const getHorizontalPosition = () => `${viewPosition}%`;
+  const switcher = isVertical ? 1 : 0;
+  const corrector = isVertical ? 20 : 0;
+  // const viewPosition = (stepPosition * (fieldSize[switcher])) / (fieldSize[switcher] + 40)+10;
+  const viewPosition = (stepPosition * (fieldSize[switcher]/100));
+
+  console.log('stepPosition, viewPosition', stepPosition, viewPosition);
+
+  const getVerticalPosition = () => `${fieldSize[1] - viewPosition}px`;
+  const getHorizontalPosition = () => `${viewPosition}px`;
   const position = isVertical
     ? getVerticalPosition()
     : getHorizontalPosition();
-    $runners[instance].css(positioning[0], position);
+  $runners[instance].css(positioning[0], position);
 };
 
 export { setThisRunnerPosition, defineRunnerType, updatePositionToDOM };

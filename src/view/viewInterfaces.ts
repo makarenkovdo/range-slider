@@ -35,7 +35,13 @@ type CreateScaleNumbersArgs = {
 };
 
 type CreateScaleLinesBoxArgs = {
-  $id:JQuery<HTMLElement>; orientation:Orientation; fieldSize:number[]; divisionQuantity:number; top: number; left: number; columnOrRow:string;
+  $id:JQuery<HTMLElement>;
+  orientation:Orientation;
+  fieldSize:number[];
+  divisionQuantity:number;
+  top: number;
+  left: number;
+  columnOrRow:string;
 
 };
 

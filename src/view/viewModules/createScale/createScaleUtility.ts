@@ -62,9 +62,10 @@ const addScaleToDom = (
     const $scaleLines = $id.find('.js-slider__scale-lines');
     const switcher = 1;
     const corrector = minMax[0] - divisionNumber;
+    const lastOrFirstIterration = minMax[0];
     createScaleNumber(
       $scaleNumbers, minMax, divisionNumber, divisionQuantity, stepSignAfterComma,
-      switcher, corrector,
+      switcher, corrector, lastOrFirstIterration,
     );
     createScaleLine($scaleLines, divisionQuantity, orientation, minMax, size);
   } else {
@@ -75,8 +76,9 @@ const addScaleToDom = (
     const size = 'height: 5px';
     const switcher = 0;
     const corrector = 0;
+    const lastOrFirstIterration = divisionQuantity + minMax[0] - 1;
     createScaleNumber($scaleNumbers, minMax, divisionNumber, divisionQuantity, stepSignAfterComma,
-      switcher, corrector);
+      switcher, corrector, lastOrFirstIterration);
     createScaleLine($scaleLines, divisionQuantity, orientation, minMax, size);
   }
 };

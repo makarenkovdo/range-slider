@@ -49,7 +49,7 @@ const addScaleToDom = (
 
   if (isVertical) {
     $id.append(
-      `<div data-testid="test-scale" class="scale-lines js-scale-lines" style="height:${fieldSize[1] - 40}px; width:${fieldSize[0]}px; top: 20px; left:${fieldSize[0]}px; grid-template-rows: repeat(${divisionQuantity}, 1px)"></div>`,
+      `<div data-testid="test-scale" class="scale-lines js-scale-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; top: 20px; left:${fieldSize[0]+2}px; grid-template-rows: repeat(${2 * divisionQuantity - 1}, 1px)"></div>`,
     );
     $id.append(
       `<div data-testid="test-scale" class="scale-numbers js-scale-numbers" style="height:${

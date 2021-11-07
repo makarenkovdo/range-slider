@@ -1,5 +1,7 @@
 import { Orientation } from '../../../presenter/presenterInterfaces';
-import { CreateScaleLinesBoxArgs, CreateScaleNumbersArgs, PrepareScaleDataArgs } from '../../viewInterfaces';
+import {
+  CreateScaleLinesBoxArgs, CreateScaleNumbersArgs, PrepareScaleDataArgs, CreateScaleNumbersBoxArgs,
+} from '../../viewInterfaces';
 import {
   createScaleLines, createScaleLinesBox, createScaleNumbers, createScaleNumbersBox,
 } from './addScaleToDOMUtility';
@@ -50,6 +52,18 @@ const addScaleToDom = (
 
   if (isVertical) {
     createScaleLinesBox(createScaleLinesBoxArgs);
+    const createScaleNumbersBoxArgs = {
+      $id,
+      orientation,
+      fieldSize,
+      divisionQuantity,
+      width: fieldSize[0],
+      height: fieldSize[1] + fieldSize[1] / (divisionQuantity - 1),
+      top: 0,
+      left: fieldSize[0] + 20,
+      columnOrRow: 'row',
+    };
+    createScaleNumbersBox(createScaleNumbersBoxArgs);
 
     $id.append(
       `<div data-testid="test-scale" class="slider__scale-numbers js-slider__scale-numbers" style="height:${
@@ -70,7 +84,18 @@ const addScaleToDom = (
     createScaleLinesBoxArgs.left = 4;
     createScaleLinesBoxArgs.columnOrRow = 'columns';
     createScaleLinesBox(createScaleLinesBoxArgs);
-    createScaleNumbersBox($id, orientation, fieldSize, divisionQuantity);
+    const createScaleNumbersBoxArgs = {
+      $id,
+      orientation,
+      fieldSize,
+      divisionQuantity,
+      width: fieldSize[0] + fieldSize[0] / (divisionQuantity - 1),
+      height: fieldSize[1],
+      top: fieldSize[1] + 20,
+      left: -17,
+      columnOrRow: 'columns',
+    };
+    createScaleNumbersBox(createScaleNumbersBoxArgs);
     const $scaleLines = $id.find('.js-slider__scale-lines');
     const smallLine = 'height: 5px';
     const bigLine = 'height: 10px';

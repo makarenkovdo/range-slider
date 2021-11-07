@@ -1,5 +1,5 @@
 import { Orientation } from '../../../presenter/presenterInterfaces';
-import { CreateScaleLinesBoxArgs, CreateScaleNumbersArgs } from '../../viewInterfaces';
+import { CreateScaleLinesBoxArgs, CreateScaleNumbersArgs, CreateScaleNumbersBoxArgs } from '../../viewInterfaces';
 
 function createScaleLinesBox(
   {
@@ -12,13 +12,18 @@ function createScaleLinesBox(
 }
 
 function createScaleNumbersBox(
-  $id:JQuery<HTMLElement>, orientation:Orientation, fieldSize:number[], divisionQuantity:number,
+  {
+    $id, orientation, fieldSize, divisionQuantity, width,
+    height,
+    top,
+    left,
+    columnOrRow,
+  }:CreateScaleNumbersBoxArgs,
 ):void {
   $id.append(
     `<div data-testid="test-scale" class="slider__scale-numbers js-slider__scale-numbers" style="height:${
-      fieldSize[1]
-      // prettier-ignore
-    }px; width:${fieldSize[0] + fieldSize[0] / (divisionQuantity - 1)}px; top:${fieldSize[1] + 20}px; left: -17px; grid-template-columns: repeat(${divisionQuantity}, 1fr)"></div>`,
+      height
+    }px; width:${width}px; top:${top}px; left: ${left}px; grid-template-${columnOrRow}: repeat(${divisionQuantity}, 1fr)"></div>`,
   );
 }
 

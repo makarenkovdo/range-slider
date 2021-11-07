@@ -45,6 +45,18 @@ type CreateScaleLinesBoxArgs = {
 
 };
 
+type CreateScaleNumbersBoxArgs = {
+  $id:JQuery<HTMLElement>,
+  orientation:Orientation,
+  fieldSize:number[],
+  divisionQuantity:number,
+  width: number,
+  height: number,
+  top:number,
+  left:number,
+  columnOrRow: string,
+};
+
 export {
   AddTipNumberToDOMReturned,
   UpdateTipNumberArgs,
@@ -53,4 +65,5 @@ export {
   PrepareScaleDataArgs,
   CreateScaleNumbersArgs,
   CreateScaleLinesBoxArgs,
+  CreateScaleNumbersBoxArgs,
 };

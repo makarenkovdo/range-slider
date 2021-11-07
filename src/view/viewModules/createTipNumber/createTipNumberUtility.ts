@@ -2,7 +2,7 @@ import { Orientation } from '../../../presenter/presenterInterfaces';
 import { UpdateTipNumberArgs } from '../../viewInterfaces';
 
 export type PreparedDataType = {
-  i: number;
+  instance: number;
   positioning: string[];
   position: number[];
 };
@@ -10,14 +10,17 @@ export type PreparedDataType = {
 const prepareTipNumberArgs = (i: number, isVertical: boolean): PreparedDataType => {
   let positioning = ['left']; // for horizontal
   let position = [100 * i]; // i=0 for instance=0 and i=100 for instance=1
+  let instance = i
 
   if (isVertical) {
     positioning = ['top'];
-    position = [100 - position[0]];
+    position = [100 - 100 * i];
+    instance = i;
+
   }
 
   //  set min = 0%, max = 100% for left/top positions
-  return { i, positioning, position } as PreparedDataType;
+  return { instance, positioning, position } as PreparedDataType;
 };
 
 const addTipNumberToDOM = (
@@ -26,13 +29,14 @@ const addTipNumberToDOM = (
   orientation: Orientation,
 ): UpdateTipNumberArgs => {
   const {
-    i, positioning, position,
+    instance, positioning, position,
   } = preparedData;
+  console.log(instance,positioning[0], position[0], 'instance');
 
   $id.append(
-    `<span data-testid="test-tip-number-${i}" class='slider__tip slider__tip_${orientation} js-slider__tip_instance-${i}' style="${positioning[0]}:${position[0]}%"><span>0</span></span>`,
+    `<span data-testid="test-tip-number-${instance}" class='slider__tip slider__tip_${orientation} js-slider__tip_instance-${instance}' style="${positioning[0]}:${position[0]}%"><span>0</span></span>`,
   );
-  return { stepValue: position[0], instance: i };
+  return { stepValue: position[0], instance };
 };
 
 export { prepareTipNumberArgs, addTipNumberToDOM };

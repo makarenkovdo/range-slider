@@ -7,6 +7,7 @@ const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
   let positioning = ['left', 'top'];
   let minMax = 0;
   let switcher = [0, 1];
+  const instance = i;
 
   if (isVertical) {
     positioning = ['top', 'left'];
@@ -18,7 +19,7 @@ const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
     Math.abs(minMax - i * fieldSize[switcher[0]]),
     -runnerSize[switcher[0]] * 0.5 + fieldSize[switcher[1]] * 0.5];
   return {
-    i, positioning, position,
+    instance, positioning, position,
   };
 };
 
@@ -29,10 +30,10 @@ const addRunnerToDOM = (
   orientation: Orientation,
 ): void => {
   const {
-    i, positioning, position,
+    instance, positioning, position,
   } = preparedData;
   $id.append(
-    `<span data-testid="test-runner-${i}" class="slider__runner slider__runner_${orientation} js-slider__runner_instance-${i}" style="${positioning[0]}:${position[0]}px; ${positioning[1]}:${position[1]}px; width:${runnerSize[0]}px; height:${runnerSize[1]}px"></span>`,
+    `<span data-testid="test-runner-${instance}" class="slider__runner slider__runner_${orientation} js-slider__runner_instance-${instance}" style="${positioning[0]}:${position[0]}px; ${positioning[1]}:${position[1]}px; width:${runnerSize[0]}px; height:${runnerSize[1]}px"></span>`,
   );
 };
 

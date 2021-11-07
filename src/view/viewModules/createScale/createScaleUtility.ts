@@ -52,7 +52,7 @@ const addScaleToDom = (
       `<div data-testid="test-scale" class="slider__scale-lines slider__scale-lines_${orientation} js-slider__scale-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; top: 20px; left:${fieldSize[0] + 2}px; grid-template-rows: repeat(${2 * divisionQuantity - 1}, 1px)"></div>`,
     );
     $id.append(
-      `<div data-testid="test-scale" class="scale-numbers js-scale-numbers" style="height:${
+      `<div data-testid="test-scale" class="slider__scale-numbers js-slider__scale-numbers" style="height:${
         fieldSize[1]
       }px; width:${fieldSize[0]}px; left:${2 * fieldSize[0]}px; grid-template-rows: repeat(${divisionQuantity}, 1fr);
       "></div>`,
@@ -60,7 +60,12 @@ const addScaleToDom = (
     const size = 'width: 5px';
     const $scaleNumbers = $id.find('.js-slider__scale-numbers');
     const $scaleLines = $id.find('.js-slider__scale-lines');
-    createScaleNumber($scaleNumbers, minMax, divisionNumber, divisionQuantity, stepSignAfterComma);
+    const switcher = 1;
+    const corrector = minMax[0] - divisionNumber;
+    createScaleNumber(
+      $scaleNumbers, minMax, divisionNumber, divisionQuantity, stepSignAfterComma,
+      switcher, corrector,
+    );
     createScaleLine($scaleLines, divisionQuantity, orientation, minMax, size);
   } else {
     createScaleLines($id, orientation, fieldSize, divisionQuantity);
@@ -68,7 +73,10 @@ const addScaleToDom = (
     const $scaleNumbers = $id.find('.js-slider__scale-numbers');
     const $scaleLines = $id.find('.js-slider__scale-lines');
     const size = 'height: 5px';
-    createScaleNumber($scaleNumbers, minMax, divisionNumber, divisionQuantity, stepSignAfterComma);
+    const switcher = 0;
+    const corrector = 0;
+    createScaleNumber($scaleNumbers, minMax, divisionNumber, divisionQuantity, stepSignAfterComma,
+      switcher, corrector);
     createScaleLine($scaleLines, divisionQuantity, orientation, minMax, size);
   }
 };

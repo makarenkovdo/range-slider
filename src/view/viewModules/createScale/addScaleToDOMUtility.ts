@@ -41,19 +41,20 @@ const createScaleLine = (
 
 const createScaleNumber = (
   $scaleNumbers:JQuery<HTMLElement>, minMax:number[], divisionNumber:number,
-  divisionQuantity:number, stepSignAfterComma:number,
+  divisionQuantity:number, stepSignAfterComma:number, switcher: number,
+  corrector:number,
 ):void => {
   if (minMax[0] === 0) {
     for (let i = minMax[0]; i < (divisionQuantity + minMax[0]); i += 1) {
       if (i === divisionQuantity + minMax[0] - 1) {
         $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${minMax[1].toFixed(Math.min(2, stepSignAfterComma))}</div>`);
-      } else {
-        $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${(i * divisionNumber).toFixed(Math.min(2, stepSignAfterComma))}</div>`);
+      } else {        
+        $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${Math.abs(minMax[1] * switcher - (i * divisionNumber)).toFixed(Math.min(2, stepSignAfterComma))}</div>`);
       }
     }
   } else {
     for (let i = minMax[0]; i < (divisionQuantity + minMax[0]); i += 1) {
-      $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${(i * divisionNumber).toFixed(Math.min(2, stepSignAfterComma))}</div>`);
+      $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${(Math.abs(minMax[1] * switcher - (i * divisionNumber))+corrector).toFixed(Math.min(2, stepSignAfterComma))}</div>`);
     }
   }
 };

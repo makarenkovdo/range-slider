@@ -9,7 +9,7 @@ const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
   let switcher = [0, 1];
 
   if (isVertical) {
-    positioning = ['left', 'top'];
+    positioning = ['top', 'left'];
     minMax = fieldSize[1];
     switcher = [1, 0];
   }

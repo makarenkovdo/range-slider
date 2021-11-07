@@ -8,14 +8,14 @@ const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
   let minMax = 0;
   let switcher = [0, 1];
   const instance = i;
-
+  let initialPositionCorrector = 5 - runnerSize[0] / 2
   if (isVertical) {
     positioning = ['top', 'left'];
     minMax = fieldSize[1];
     switcher = [1, 0];
   }
   const position = [
-    Math.abs(minMax - i * fieldSize[switcher[0]]),
+    Math.abs(minMax - i * fieldSize[switcher[0]]) + initialPositionCorrector ,
     -runnerSize[switcher[0]] * 0.5 + fieldSize[switcher[1]] * 0.5 + 1];
   return {
     instance, positioning, position,

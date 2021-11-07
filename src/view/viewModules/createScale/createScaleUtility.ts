@@ -67,7 +67,7 @@ const addScaleToDom = (
     createScaleLines($scaleLines, divisionQuantity, orientation, minMax, smallLine, bigLine);
   } else {
     createScaleLinesBoxArgs.top = fieldSize[1]+2;
-    createScaleLinesBoxArgs.left = 5;
+    createScaleLinesBoxArgs.left = 4;
     createScaleLinesBoxArgs.columnOrRow = 'columns';
     createScaleLinesBox(createScaleLinesBoxArgs);
     createScaleNumbersBox($id, orientation, fieldSize, divisionQuantity);

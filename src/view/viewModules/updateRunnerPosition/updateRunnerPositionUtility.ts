@@ -55,8 +55,8 @@ const updatePositionToDOM = function updateRunnerPositionToDom(this:SliderView,
 
   console.log('stepPosition, viewPosition', stepPosition, viewPositionInPx);
 
-  const getVerticalPosition = () => `${fieldSize[1] - viewPositionInPx}px`;
-  const getHorizontalPosition = () => `${viewPositionInPx}px`;
+  const getVerticalPosition = () => `${fieldSize[1] - viewPositionInPx+5-runnerSize[0]/2}px`;
+  const getHorizontalPosition = () => `${viewPositionInPx+5-runnerSize[0]/2}px`;
   const position = isVertical
     ? getVerticalPosition()
     : getHorizontalPosition();

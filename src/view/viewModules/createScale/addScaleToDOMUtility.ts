@@ -2,7 +2,9 @@ import { Orientation } from '../../../presenter/presenterInterfaces';
 import { CreateScaleLinesBoxArgs, CreateScaleNumbersArgs } from '../../viewInterfaces';
 
 function createScaleLinesBox(
-  {$id, orientation, fieldSize, divisionQuantity, top, left, columnOrRow}:CreateScaleLinesBoxArgs,
+  {
+    $id, orientation, fieldSize, divisionQuantity, top, left, columnOrRow,
+  }:CreateScaleLinesBoxArgs,
 ):void {
   $id.append(
     `<div data-testid="test-scale" class="slider__scale-lines slider__scale-lines_${orientation} js-slider__scale-lines" style="height:${fieldSize[1]}px; width:${fieldSize[0]}px; left: ${left}px; top:${top}px; grid-template-${columnOrRow}: repeat(${2 * divisionQuantity - 1}, 1px)"></div>`,
@@ -32,7 +34,7 @@ const createScaleLines = (
       } else $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line"></div>`);
     }
   } else {
-    for (let i = 0; i < 2 * divisionQuantity; i += 1) {
+    for (let i = 0; i < 2 * divisionQuantity - 1; i += 1) {
       if (i % 2) {
         $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="${size}"></div>`);
       } else $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line"></div>`);

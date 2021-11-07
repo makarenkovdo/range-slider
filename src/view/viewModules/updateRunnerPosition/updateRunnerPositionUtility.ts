@@ -51,12 +51,12 @@ const updatePositionToDOM = function updateRunnerPositionToDom(this:SliderView,
   const switcher = isVertical ? 1 : 0;
   const corrector = isVertical ? 20 : 0;
   // const viewPosition = (stepPosition * (fieldSize[switcher])) / (fieldSize[switcher] + 40)+10;
-  const viewPosition = (stepPosition * (fieldSize[switcher]/100));
+  const viewPositionInPx = (stepPosition * (fieldSize[switcher] / 100));
 
-  console.log('stepPosition, viewPosition', stepPosition, viewPosition);
+  console.log('stepPosition, viewPosition', stepPosition, viewPositionInPx);
 
-  const getVerticalPosition = () => `${fieldSize[1] - viewPosition}px`;
-  const getHorizontalPosition = () => `${viewPosition}px`;
+  const getVerticalPosition = () => `${fieldSize[1] - viewPositionInPx}px`;
+  const getHorizontalPosition = () => `${viewPositionInPx}px`;
   const position = isVertical
     ? getVerticalPosition()
     : getHorizontalPosition();

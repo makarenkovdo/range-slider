@@ -49,20 +49,21 @@ const addScaleToDom = (
     divisionQuantity,
     stepSignAfterComma,
   };
+  const createScaleNumbersBoxArgs = {
+    $id,
+    orientation,
+    fieldSize,
+    divisionQuantity,
+    width: fieldSize[0],
+    height: fieldSize[1] + fieldSize[1] / (divisionQuantity - 1),
+    top: 0,
+    left: fieldSize[0] + 20,
+    columnOrRow: 'row',
+  };
 
   if (isVertical) {
     createScaleLinesBox(createScaleLinesBoxArgs);
-    const createScaleNumbersBoxArgs = {
-      $id,
-      orientation,
-      fieldSize,
-      divisionQuantity,
-      width: fieldSize[0],
-      height: fieldSize[1] + fieldSize[1] / (divisionQuantity - 1),
-      top: 0,
-      left: fieldSize[0] + 20,
-      columnOrRow: 'row',
-    };
+
     createScaleNumbersBox(createScaleNumbersBoxArgs);
 
     $id.append(
@@ -84,17 +85,11 @@ const addScaleToDom = (
     createScaleLinesBoxArgs.left = 4;
     createScaleLinesBoxArgs.columnOrRow = 'columns';
     createScaleLinesBox(createScaleLinesBoxArgs);
-    const createScaleNumbersBoxArgs = {
-      $id,
-      orientation,
-      fieldSize,
-      divisionQuantity,
-      width: fieldSize[0] + fieldSize[0] / (divisionQuantity - 1),
-      height: fieldSize[1],
-      top: fieldSize[1] + 20,
-      left: -17,
-      columnOrRow: 'columns',
-    };
+    createScaleNumbersBoxArgs.width = fieldSize[0] + fieldSize[0] / (divisionQuantity - 1);
+    createScaleNumbersBoxArgs.height = fieldSize[1];
+    createScaleNumbersBoxArgs.top = fieldSize[1] + 20;
+    createScaleNumbersBoxArgs.left = -17;
+    createScaleNumbersBoxArgs.columnOrRow = 'columns';
     createScaleNumbersBox(createScaleNumbersBoxArgs);
     const $scaleLines = $id.find('.js-slider__scale-lines');
     const smallLine = 'height: 5px';

@@ -18,16 +18,6 @@ const prepareScaleData = (
   const stepLimits = Math.trunc((minMax[1] - minMax[0]) / step);
   const pixelLimits = Math.trunc(fieldSize[i] / 40);
   const divisionQuantity = Math.max((Math.trunc(Math.min(stepLimits + 1, pixelLimits + 1))), 2);
-  // const greatestCommonDivisor = (a:number, b:number):number => {
-  //   if (!b) {
-  //     return a;
-  //   }
-
-  //   return greatestCommonDivisor(b, a % b);
-  // };
-  // greatestCommonDivisor(stepLimits, pixelLimits);
-  // const fractionalNumber = 0;
-  // if (stepSignAfterComma) fractionalNumber = 1;
   let divisionNumber = Number(((minMax[1] - minMax[0]) / (divisionQuantity - 1)).toFixed(3));
   if (minMax[0] > 0) {
     divisionNumber = Number(((minMax[1] - minMax[0]) / (divisionQuantity - 1)).toFixed(3));
@@ -49,6 +39,16 @@ const addScaleToDom = (
   const createScaleLinesBoxArgs:CreateScaleLinesBoxArgs = {
     $id, orientation, fieldSize, divisionQuantity, top: 20, left: fieldSize[0] + 2, columnOrRow: 'row',
   };
+  const createScaleNumbersArgs: CreateScaleNumbersArgs = {
+    // $scaleNumbers: $id.find('.js-slider__scale-numbers'),
+    switcher: 1,
+    corrector: minMax[0] - divisionNumber,
+    lastOrFirstIterration: minMax[0],
+    minMax,
+    divisionNumber,
+    divisionQuantity,
+    stepSignAfterComma,
+  };
 
   if (isVertical) {
     createScaleLinesBox(createScaleLinesBoxArgs);
@@ -61,16 +61,7 @@ const addScaleToDom = (
     );
     const size = 'width: 5px';
     const $scaleLines = $id.find('.js-slider__scale-lines');
-    const createScaleNumbersArgs: CreateScaleNumbersArgs = {
-      $scaleNumbers: $id.find('.js-slider__scale-numbers'),
-      switcher: 1,
-      corrector: minMax[0] - divisionNumber,
-      lastOrFirstIterration: minMax[0],
-      minMax,
-      divisionNumber,
-      divisionQuantity,
-      stepSignAfterComma,
-    };
+    createScaleNumbersArgs.$scaleNumbers = $id.find('.js-slider__scale-numbers');
     createScaleNumbers(
       createScaleNumbersArgs,
     );
@@ -83,16 +74,10 @@ const addScaleToDom = (
     createScaleNumbersBox($id, orientation, fieldSize, divisionQuantity);
     const $scaleLines = $id.find('.js-slider__scale-lines');
     const size = 'height: 5px';
-    const createScaleNumbersArgs: CreateScaleNumbersArgs = {
-      $scaleNumbers: $id.find('.js-slider__scale-numbers'),
-      switcher: 0,
-      corrector: 0,
-      lastOrFirstIterration: divisionQuantity + minMax[0] - 1,
-      minMax,
-      divisionNumber,
-      divisionQuantity,
-      stepSignAfterComma,
-    };
+    createScaleNumbersArgs.$scaleNumbers = $id.find('.js-slider__scale-numbers');
+    createScaleNumbersArgs.switcher = 0;
+    createScaleNumbersArgs.corrector = 0;
+    createScaleNumbersArgs.lastOrFirstIterration = divisionQuantity + minMax[0] - 1;
     createScaleNumbers(createScaleNumbersArgs);
     createScaleLines($scaleLines, divisionQuantity, orientation, minMax, size);
   }

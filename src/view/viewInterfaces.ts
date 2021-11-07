@@ -29,7 +29,7 @@ type PrepareScaleDataArgs = {
 };
 
 type CreateScaleNumbersArgs = {
-  $scaleNumbers:JQuery<HTMLElement>; minMax:number[]; divisionNumber:number;
+  $scaleNumbers?:JQuery<HTMLElement>; minMax:number[]; divisionNumber:number;
   divisionQuantity:number; stepSignAfterComma:number; switcher: number;
   corrector:number; lastOrFirstIterration: number;
 };

@@ -53,31 +53,33 @@ const addScaleToDom = (
 
     $id.append(
       `<div data-testid="test-scale" class="slider__scale-numbers js-slider__scale-numbers" style="height:${
-        fieldSize[1]+40
-      }px; width:${fieldSize[0]}px; top: 15px; left:${2.5 * fieldSize[0]}px; grid-template-rows: repeat(${divisionQuantity}, 1fr);
+        fieldSize[1] + 40
+      }px; width:${fieldSize[0]}px; top: 15px; left:${fieldSize[0]+20}px; grid-template-rows: repeat(${divisionQuantity}, 1fr);
       "></div>`,
     );
-    const size = 'width: 5px';
+    const smallLine = 'width: 5px';
+    const bigLine = 'width: 10px';
     const $scaleLines = $id.find('.js-slider__scale-lines');
     createScaleNumbersArgs.$scaleNumbers = $id.find('.js-slider__scale-numbers');
     createScaleNumbers(
       createScaleNumbersArgs,
     );
-    createScaleLines($scaleLines, divisionQuantity, orientation, minMax, size);
+    createScaleLines($scaleLines, divisionQuantity, orientation, minMax, smallLine, bigLine);
   } else {
-    createScaleLinesBoxArgs.top = 20;
-    createScaleLinesBoxArgs.left = fieldSize[1] + 2;
+    createScaleLinesBoxArgs.top = fieldSize[1]+2;
+    createScaleLinesBoxArgs.left = 20;
     createScaleLinesBoxArgs.columnOrRow = 'columns';
     createScaleLinesBox(createScaleLinesBoxArgs);
     createScaleNumbersBox($id, orientation, fieldSize, divisionQuantity);
     const $scaleLines = $id.find('.js-slider__scale-lines');
-    const size = 'height: 5px';
+    const smallLine = 'height: 5px';
+    const bigLine = 'height: 10px';
     createScaleNumbersArgs.$scaleNumbers = $id.find('.js-slider__scale-numbers');
     createScaleNumbersArgs.switcher = 0;
     createScaleNumbersArgs.corrector = 0;
     createScaleNumbersArgs.lastOrFirstIterration = divisionQuantity + minMax[0] - 1;
     createScaleNumbers(createScaleNumbersArgs);
-    createScaleLines($scaleLines, divisionQuantity, orientation, minMax, size);
+    createScaleLines($scaleLines, divisionQuantity, orientation, minMax, smallLine, bigLine);
   }
 };
 

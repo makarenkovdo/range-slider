@@ -18,26 +18,25 @@ function createScaleNumbersBox(
     `<div data-testid="test-scale" class="slider__scale-numbers js-slider__scale-numbers" style="height:${
       fieldSize[1]
       // prettier-ignore
-    }px; width:${fieldSize[0] + fieldSize[0] / (divisionQuantity - 1)}px; top:${2.5
-          * fieldSize[1]}px; left: 12px; grid-template-columns: repeat(${divisionQuantity}, 1fr)"></div>`,
+    }px; width:${fieldSize[0] + fieldSize[0] / (divisionQuantity - 1)}px; top:${fieldSize[1] + 20}px; left: 12px; grid-template-columns: repeat(${divisionQuantity}, 1fr)"></div>`,
   );
 }
 
 const createScaleLines = (
   $scaleLines:JQuery<HTMLElement>, divisionQuantity:number, orientation:Orientation,
-  minMax:number[], size: string,
+  minMax:number[], smallLine: string, bigLine: string,
 ):void => {
   if (minMax[0] === 0) {
     for (let i = 0; i < 2 * divisionQuantity - 1; i += 1) {
       if (i % 2) {
-        $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="${size}"></div>`);
-      } else $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line"></div>`);
+        $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="${smallLine}"></div>`);
+      } else $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="${bigLine}"></div>`);
     }
   } else {
     for (let i = 0; i < 2 * divisionQuantity - 1; i += 1) {
       if (i % 2) {
-        $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="${size}"></div>`);
-      } else $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line"></div>`);
+        $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="${smallLine}"></div>`);
+      } else $scaleLines.append(`<div class="slider__scale-line slider__scale-line_${orientation} js-slider__scale-line" style="${bigLine}" ></div>`);
     }
   }
 };

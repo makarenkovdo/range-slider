@@ -53,8 +53,8 @@ const addScaleToDom = (
 
     $id.append(
       `<div data-testid="test-scale" class="slider__scale-numbers js-slider__scale-numbers" style="height:${
-        fieldSize[1] + 40
-      }px; width:${fieldSize[0]}px; top: 15px; left:${fieldSize[0]+20}px; grid-template-rows: repeat(${divisionQuantity}, 1fr);
+        fieldSize[1] + fieldSize[1]/(divisionQuantity-1)
+      }px; width:${fieldSize[0]}px; top: 0px; left:${fieldSize[0]+20}px; grid-template-rows: repeat(${divisionQuantity}, 1fr);
       "></div>`,
     );
     const smallLine = 'width: 5px';

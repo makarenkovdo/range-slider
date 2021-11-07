@@ -7,16 +7,15 @@ export type PreparedDataType = {
   position: number[];
 };
 
-const prepareTipNumberArgs = (i: number, isVertical: boolean): PreparedDataType => {
+const prepareTipNumberArgs = (i: number, isVertical: boolean, fieldSize: number[]): PreparedDataType => {
   let positioning = ['left']; // for horizontal
-  let position = [100 * i]; // i=0 for instance=0 and i=100 for instance=1
-  let instance = i
+  let position = [100 * i - ((20 / fieldSize[0]) * 100)]; // i=0 for instance=0 and i=100 for instance=1
+  let instance = i;
 
   if (isVertical) {
     positioning = ['top'];
-    position = [100 - 100 * i];
+    position = [100 - 100 * i - ((20 / fieldSize[1]) * 100)];
     instance = i;
-
   }
 
   //  set min = 0%, max = 100% for left/top positions

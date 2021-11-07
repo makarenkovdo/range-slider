@@ -43,8 +43,6 @@ const updatePositionToDOM = function updateRunnerPositionToDom(this:SliderView,
   const {
     isVertical, $field, fieldSize, runnerSize, $runners,
   } = this;
-  console.log(stepPosition);
-
   // const preperatoryPosition = calculatePreperatoryPosition(
   //   $field, isVertical, fieldSize, runnerSize,
   // );
@@ -52,11 +50,8 @@ const updatePositionToDOM = function updateRunnerPositionToDom(this:SliderView,
   const corrector = isVertical ? 20 : 0;
   // const viewPosition = (stepPosition * (fieldSize[switcher])) / (fieldSize[switcher] + 40)+10;
   const viewPositionInPx = (stepPosition * (fieldSize[switcher] / 100));
-
-  console.log('stepPosition, viewPosition', stepPosition, viewPositionInPx);
-
-  const getVerticalPosition = () => `${fieldSize[1] - viewPositionInPx+5-runnerSize[0]/2}px`;
-  const getHorizontalPosition = () => `${viewPositionInPx+5-runnerSize[0]/2}px`;
+  const getVerticalPosition = () => `${fieldSize[1] - viewPositionInPx + 5 - runnerSize[0] / 2}px`;
+  const getHorizontalPosition = () => `${viewPositionInPx + 5 - runnerSize[0] / 2}px`;
   const position = isVertical
     ? getVerticalPosition()
     : getHorizontalPosition();

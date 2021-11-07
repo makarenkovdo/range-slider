@@ -52,8 +52,8 @@ const createScaleNumbers = (
     if (i === lastOrFirstIterration) {
       $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${minMax[1].toFixed(Math.min(2, stepSignAfterComma))}</div>`);
     } else {
-      $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${(Math.abs(minMax[1] * switcher - (minMax[0]*(1-switcher) + i * divisionNumber))).toFixed(Math.min(2, stepSignAfterComma))}</div>`);
-    } 
+      $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${(Math.abs(minMax[1] * switcher - (minMax[0] * (1 - switcher) + i * divisionNumber))).toFixed(Math.min(2, stepSignAfterComma))}</div>`);
+    }
   }
 };
 

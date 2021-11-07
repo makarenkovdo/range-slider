@@ -6,7 +6,9 @@ const createTipNumber = function addTipNumberToDOMAndUpdateTextNumber(
   i: number,
   isVertical: boolean,
 ): void {
-    addTipNumberToDOM(prepareTipNumberArgs(i, isVertical), this.$field, this.orientation),
+  $(document).ready(() => {
+    addTipNumberToDOM(prepareTipNumberArgs(i, isVertical, this.fieldSize), this.$field, this.orientation);
+  });
   this.hasTip = true;
 };
 

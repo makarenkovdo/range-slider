@@ -35,12 +35,10 @@ const addScaleToDom = (
   orientation: Orientation,
   { divisionQuantity, divisionNumber }: PrepareScaleDataArgs,
 ): void => {
-  // const { positioning, minMax } = preparedData;
   const createScaleLinesBoxArgs:CreateScaleLinesBoxArgs = {
     $id, orientation, fieldSize, divisionQuantity, top: 20, left: fieldSize[0] + 2, columnOrRow: 'row',
   };
   const createScaleNumbersArgs: CreateScaleNumbersArgs = {
-    // $scaleNumbers: $id.find('.js-slider__scale-numbers'),
     switcher: 1,
     corrector: minMax[0] - divisionNumber,
     lastOrFirstIterration: minMax[0],
@@ -55,8 +53,8 @@ const addScaleToDom = (
 
     $id.append(
       `<div data-testid="test-scale" class="slider__scale-numbers js-slider__scale-numbers" style="height:${
-        fieldSize[1]
-      }px; width:${fieldSize[0]}px; left:${2 * fieldSize[0]}px; grid-template-rows: repeat(${divisionQuantity}, 1fr);
+        fieldSize[1]+40
+      }px; width:${fieldSize[0]}px; top: 15px; left:${2.5 * fieldSize[0]}px; grid-template-rows: repeat(${divisionQuantity}, 1fr);
       "></div>`,
     );
     const size = 'width: 5px';

@@ -36,7 +36,7 @@ const addScaleToDom = (
   { divisionQuantity, divisionNumber }: PrepareScaleDataArgs,
 ): void => {
   const createScaleLinesBoxArgs:CreateScaleLinesBoxArgs = {
-    $id, orientation, fieldSize, divisionQuantity, top: 20, left: fieldSize[0] + 2, columnOrRow: 'row',
+    $id, orientation, fieldSize, divisionQuantity, top: 5, left: fieldSize[0] + 2, columnOrRow: 'row',
   };
   const createScaleNumbersArgs: CreateScaleNumbersArgs = {
     switcher: 1,
@@ -67,7 +67,7 @@ const addScaleToDom = (
     createScaleLines($scaleLines, divisionQuantity, orientation, minMax, smallLine, bigLine);
   } else {
     createScaleLinesBoxArgs.top = fieldSize[1]+2;
-    createScaleLinesBoxArgs.left = 20;
+    createScaleLinesBoxArgs.left = 5;
     createScaleLinesBoxArgs.columnOrRow = 'columns';
     createScaleLinesBox(createScaleLinesBoxArgs);
     createScaleNumbersBox($id, orientation, fieldSize, divisionQuantity);

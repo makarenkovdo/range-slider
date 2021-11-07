@@ -7,8 +7,8 @@ const prepareMovingCoordinates = (
   eventData: DragEventDataType,
 ): number[] => {
   const cursorXY = [
-    event.pageX - eventData.thisView.$field.position().left - 20,
-    event.pageY - eventData.thisView.$field.position().top - 30,
+    event.pageX - eventData.thisView.$field.position().left - 5,
+    event.pageY - eventData.thisView.$field.position().top - 5,
   ];
   let switcher = 0;
   if (eventData.thisView.isVertical) switcher = 1;

@@ -71,7 +71,7 @@ export default class SliderView {
 
   public lengthInStep: number;
 
-  private borderWidth: number;
+  public borderWidth: number;
 
   private class: string;
 

@@ -56,7 +56,7 @@ h1 {
     position: absolute;
     z-index: 0;
     justify-content: space-between;
-    justify-items: baseline;
+    justify-items: center;
   }
   &__scale-number {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -70,8 +70,8 @@ h1 {
 
   &__runner {
     position: absolute;
-    top: -($size * 1.2) * 0.5;
-    border: ($size * 0.2) solid white;
+    box-sizing: border-box;
+    border: 2px solid white;
     border-radius: 100%;
     width: $size * 2;
     height: $size * 2;

@@ -18,7 +18,7 @@ function createScaleNumbersBox(
     `<div data-testid="test-scale" class="slider__scale-numbers js-slider__scale-numbers" style="height:${
       fieldSize[1]
       // prettier-ignore
-    }px; width:${fieldSize[0] + fieldSize[0] / (divisionQuantity - 1)}px; top:${fieldSize[1] + 20}px; left: 12px; grid-template-columns: repeat(${divisionQuantity}, 1fr)"></div>`,
+    }px; width:${fieldSize[0] + fieldSize[0] / (divisionQuantity-1)}px; top:${fieldSize[1] + 20}px; left: -17px; grid-template-columns: repeat(${divisionQuantity}, 1fr)"></div>`,
   );
 }
 

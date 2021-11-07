@@ -3,6 +3,8 @@ import { setThis, addRunnerToDOM, prepareRunnerArgs } from './createRunner/creat
 
 const createRunner = function addRunnerToDOMAndSetThis$runner(this: SliderView, i: number): void {
   $().ready(() => {
+    console.log(this.borderWidth, 'this.borderWidth');
+    
     addRunnerToDOM(
       prepareRunnerArgs(
         i, this.isVertical, this.runnerSize, this.fieldSize,

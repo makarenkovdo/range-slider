@@ -27,10 +27,17 @@ type PrepareScaleDataArgs = {
   divisionQuantity:number; divisionNumber:number;
 };
 
+type CreateScaleNumbersArgs = {
+  $scaleNumbers:JQuery<HTMLElement>; minMax:number[]; divisionNumber:number;
+  divisionQuantity:number; stepSignAfterComma:number; switcher: number;
+  corrector:number; lastOrFirstIterration: number;
+};
+
 export {
   AddTipNumberToDOMReturned,
   UpdateTipNumberArgs,
   DefineBarKindArgsType,
   DragEventDataType,
   PrepareScaleDataArgs,
+  CreateScaleNumbersArgs,
 };

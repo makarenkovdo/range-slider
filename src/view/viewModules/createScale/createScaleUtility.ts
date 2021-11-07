@@ -1,5 +1,5 @@
 import { Orientation } from '../../../presenter/presenterInterfaces';
-import { PrepareScaleDataArgs } from '../../viewInterfaces';
+import { CreateScaleNumbersArgs, PrepareScaleDataArgs } from '../../viewInterfaces';
 import {
   createScaleLine, createScaleLines, createScaleNumber, createScaleNumbers,
 } from './addScaleToDOMUtility';
@@ -58,27 +58,37 @@ const addScaleToDom = (
       "></div>`,
     );
     const size = 'width: 5px';
-    const $scaleNumbers = $id.find('.js-slider__scale-numbers');
     const $scaleLines = $id.find('.js-slider__scale-lines');
-    const switcher = 1;
-    const corrector = minMax[0] - divisionNumber;
-    const lastOrFirstIterration = minMax[0];
+    const createScaleNumbersArgs: CreateScaleNumbersArgs = {
+      $scaleNumbers: $id.find('.js-slider__scale-numbers'),
+      switcher: 1,
+      corrector: minMax[0] - divisionNumber,
+      lastOrFirstIterration: minMax[0],
+      minMax,
+      divisionNumber,
+      divisionQuantity,
+      stepSignAfterComma,
+    };
     createScaleNumber(
-      $scaleNumbers, minMax, divisionNumber, divisionQuantity, stepSignAfterComma,
-      switcher, corrector, lastOrFirstIterration,
+      createScaleNumbersArgs,
     );
     createScaleLine($scaleLines, divisionQuantity, orientation, minMax, size);
   } else {
     createScaleLines($id, orientation, fieldSize, divisionQuantity);
     createScaleNumbers($id, orientation, fieldSize, divisionQuantity);
-    const $scaleNumbers = $id.find('.js-slider__scale-numbers');
     const $scaleLines = $id.find('.js-slider__scale-lines');
     const size = 'height: 5px';
-    const switcher = 0;
-    const corrector = 0;
-    const lastOrFirstIterration = divisionQuantity + minMax[0] - 1;
-    createScaleNumber($scaleNumbers, minMax, divisionNumber, divisionQuantity, stepSignAfterComma,
-      switcher, corrector, lastOrFirstIterration);
+    const createScaleNumbersArgs: CreateScaleNumbersArgs = {
+      $scaleNumbers: $id.find('.js-slider__scale-numbers'),
+      switcher: 0,
+      corrector: 0,
+      lastOrFirstIterration: divisionQuantity + minMax[0] - 1,
+      minMax,
+      divisionNumber,
+      divisionQuantity,
+      stepSignAfterComma,
+    };
+    createScaleNumber(createScaleNumbersArgs);
     createScaleLine($scaleLines, divisionQuantity, orientation, minMax, size);
   }
 };

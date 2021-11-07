@@ -1,4 +1,5 @@
 import { Orientation } from '../../../presenter/presenterInterfaces';
+import { CreateScaleNumbersArgs } from '../../viewInterfaces';
 
 function createScaleLines(
   $id:JQuery<HTMLElement>, orientation:Orientation, fieldSize:number[], divisionQuantity:number,
@@ -40,21 +41,23 @@ const createScaleLine = (
 };
 
 const createScaleNumber = (
-  $scaleNumbers:JQuery<HTMLElement>, minMax:number[], divisionNumber:number,
-  divisionQuantity:number, stepSignAfterComma:number, switcher: number,
-  corrector:number, lastOrFirstIterration: number,
+  {
+    $scaleNumbers, minMax, divisionNumber,
+    divisionQuantity, stepSignAfterComma, switcher,
+    corrector, lastOrFirstIterration,
+  }:CreateScaleNumbersArgs,
 ):void => {
   if (minMax[0] === 0) {
     for (let i = minMax[0]; i < (divisionQuantity + minMax[0]); i += 1) {
       if (i === lastOrFirstIterration) {
         $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${minMax[1].toFixed(Math.min(2, stepSignAfterComma))}</div>`);
-      } else {        
+      } else {
         $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${Math.abs(minMax[1] * switcher - (i * divisionNumber)).toFixed(Math.min(2, stepSignAfterComma))}</div>`);
       }
     }
   } else {
     for (let i = minMax[0]; i < (divisionQuantity + minMax[0]); i += 1) {
-      $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${(Math.abs(minMax[1] * switcher - (i * divisionNumber))+corrector).toFixed(Math.min(2, stepSignAfterComma))}</div>`);
+      $scaleNumbers.append(`<div class="slider__scale-number js-slider__scale-number">${(Math.abs(minMax[1] * switcher - (i * divisionNumber)) + corrector).toFixed(Math.min(2, stepSignAfterComma))}</div>`);
     }
   }
 };

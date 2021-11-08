@@ -14,7 +14,7 @@ const prepareTipNumberArgs = (i: number, isVertical: boolean, fieldSize: number[
 
   if (isVertical) {
     positioning = ['top'];
-    position = [100 - 100 * i - ((20 / fieldSize[1]) * 100)];
+    position = [100 - 100 * i - ((10 / fieldSize[1]) * 100)];
     instance = i;
   }
 

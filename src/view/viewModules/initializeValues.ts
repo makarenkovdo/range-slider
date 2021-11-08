@@ -9,7 +9,6 @@ const initializeValues = function initializeDefaultViewValues(
   this.runnerSize = runnerSize;
   this.orientation = orientation;
   this.isVertical = orientation === 'vertical';
-  $(document).ready(() => {
     const { $field }: SliderView = this;
     const borderWidth = parseInt($field.css('border-width'), 10);
     const fieldWidth = parseInt($field.css('width'), 10);
@@ -19,7 +18,8 @@ const initializeValues = function initializeDefaultViewValues(
     } else {
       this.fieldSize = [fieldWidth - borderWidth - 11, fieldHeight - borderWidth - 1];
     }
-  });
+    console.log('this.fieldSize',this.fieldSize);
+    
   this.$field.addClass(`slider_${this.orientation} js_slider_${this.orientation}`);
 };
 

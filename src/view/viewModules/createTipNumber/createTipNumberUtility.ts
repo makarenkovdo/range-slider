@@ -26,6 +26,7 @@ const addTipNumberToDOM = (
   preparedData: PreparedDataType,
   $id: JQuery<HTMLElement>,
   orientation: Orientation,
+  minMax: number[],
 ): UpdateTipNumberArgs => {
   const {
     instance, positioning, position,
@@ -33,6 +34,8 @@ const addTipNumberToDOM = (
   $id.append(
     `<span data-testid="test-tip-number-${instance}" class='slider__tip slider__tip_${orientation} js-slider__tip_instance-${instance}' style="${positioning[0]}:${position[0]}%"><span>0</span></span>`,
   );
+  $id.find(`.js-slider__tip_instance-${instance} span`).text(`${minMax[instance]}`);
+
   return { stepValue: position[0], instance };
 };
 

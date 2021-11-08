@@ -6,6 +6,7 @@ const firstRunner = new SliderPresenter('first', {
   shouldAddBar: true,
   step: 0.1,
   maxValue: 17,
+  // minValue: -5,
   isRange: true,
   shouldAddScale: true,
   runnerSize: [16, 16],
@@ -25,6 +26,7 @@ const thirdRunner = new SliderPresenter('third', {
   shouldAddTip: true,
   shouldAddBar: true,
   maxValue: 10,
+  // minValue: -11,
   shouldAddScale: true,
 
 });

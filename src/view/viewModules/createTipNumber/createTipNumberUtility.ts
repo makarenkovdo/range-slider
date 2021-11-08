@@ -7,16 +7,21 @@ export type PreparedDataType = {
   position: number[];
 };
 
-const prepareTipNumberArgs = (i: number, isVertical: boolean, fieldSize: number[]): PreparedDataType => {
-  let positioning = ['left']; // for horizontal
-  let position = [100 * i - ((20 / fieldSize[0]) * 100)]; // i=0 for instance=0 and i=100 for instance=1
+const prepareTipNumberArgs = (
+  i: number, isVertical: boolean, fieldSize: number[],
+): PreparedDataType => {
+  let positioning = ['left'];
+  let viewPosition = [100 * i];
   let instance = i;
 
   if (isVertical) {
-    positioning = ['top'];
-    position = [100 - 100 * i - ((10 / fieldSize[1]) * 100)];
     instance = i;
+    positioning = ['top'];
+    viewPosition = [100 * i];
   }
+  const position = isVertical
+    ? [fieldSize[1] - (viewPosition[0] * (fieldSize[1] / 100)) - 10]
+    : [((viewPosition[0] * (fieldSize[0] / 100)) - 20)];
 
   //  set min = 0%, max = 100% for left/top positions
   return { instance, positioning, position } as PreparedDataType;
@@ -32,7 +37,7 @@ const addTipNumberToDOM = (
     instance, positioning, position,
   } = preparedData;
   $id.append(
-    `<span data-testid="test-tip-number-${instance}" class='slider__tip slider__tip_${orientation} js-slider__tip_instance-${instance}' style="${positioning[0]}:${position[0]}%"><span>0</span></span>`,
+    `<span data-testid="test-tip-number-${instance}" class='slider__tip slider__tip_${orientation} js-slider__tip_instance-${instance}' style="${positioning[0]}:${position[0]}px"><span>0</span></span>`,
   );
   $id.find(`.js-slider__tip_instance-${instance} span`).text(`${minMax[instance]}`);
 

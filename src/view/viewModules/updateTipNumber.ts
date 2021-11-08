@@ -7,11 +7,10 @@ const updateTipNumber = function updateTipNumberAtDOM(
 ): void {
   const positioning = this.isVertical ? 'top' : 'left';
   const viewPosition = this.isVertical
-    ? 100 - this.runnersPosition[instance] - ((10 / this.fieldSize[1]) * 100)
-    : (this.runnersPosition[instance] - ((20 / this.fieldSize[0]) * 100));
-  const switcher = this.isVertical ? 1 - instance : instance;
+    ? this.fieldSize[1] - (this.runnersPosition[instance] * (this.fieldSize[1] / 100)) - 10
+    : ((this.runnersPosition[instance] * (this.fieldSize[0] / 100)) - 20);
   this.$field.find(`.js-slider__tip_instance-${instance} span`).text(`${stepValue}`);
-  this.$field.find(`.js-slider__tip_instance-${instance}`).css(positioning, `${viewPosition}%`);
+  this.$field.find(`.js-slider__tip_instance-${instance}`).css(positioning, `${viewPosition}px`);
 };
 
 export default updateTipNumber;

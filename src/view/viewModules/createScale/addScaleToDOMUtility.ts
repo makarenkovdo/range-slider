@@ -13,7 +13,9 @@ function createScaleLinesBox(
 
 function createScaleNumbersBox(
   {
-    $id, orientation, fieldSize, divisionQuantity, width,
+    $id,
+    divisionQuantity,
+    width,
     height,
     top,
     left,
@@ -50,7 +52,7 @@ const createScaleNumbers = (
   {
     $scaleNumbers, minMax, divisionNumber,
     divisionQuantity, stepSignAfterComma, switcher,
-    corrector, lastOrFirstIterration, isVertical,
+    lastOrFirstIterration, isVertical,
   }:CreateScaleNumbersArgs,
 ):void => {
   for (let i = 0; i < divisionQuantity; i += 1) {

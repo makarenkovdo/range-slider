@@ -25,7 +25,8 @@ type DragEventDataType = {
 };
 
 type PrepareScaleDataArgs = {
-  divisionQuantity:number; divisionNumber:number;
+  divisionQuantity:number;
+  divisionNumber:number;
 };
 
 type CreateScaleNumbersArgs = {
@@ -35,7 +36,6 @@ type CreateScaleNumbersArgs = {
   divisionQuantity:number;
   stepSignAfterComma:number;
   switcher: number;
-  corrector:number;
   lastOrFirstIterration: number;
   isVertical: boolean;
 };
@@ -53,8 +53,6 @@ type CreateScaleLinesBoxArgs = {
 
 type CreateScaleNumbersBoxArgs = {
   $id:JQuery<HTMLElement>,
-  orientation:Orientation,
-  fieldSize:number[],
   divisionQuantity:number,
   width: number,
   height: number,

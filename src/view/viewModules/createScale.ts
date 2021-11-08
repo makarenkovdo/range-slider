@@ -12,7 +12,7 @@ const createScale = function addRunnerToDOMAndSetThis$runner(this: SliderView): 
       this.minMax,
       this.orientation,
       prepareScaleData(
-        this.fieldSize, this.isVertical, this.minMax, this.step, this.stepSignAfterComma,
+        this.fieldSize, this.isVertical, this.minMax, this.step,
       ),
     );
     // setThis.call(this, i);

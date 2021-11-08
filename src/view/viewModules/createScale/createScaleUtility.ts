@@ -11,7 +11,6 @@ const prepareScaleData = (
   isVertical: boolean,
   minMax: number[],
   step: number,
-  stepSignAfterComma: number,
 ): PrepareScaleDataArgs => {
   let i = 0;
   if (isVertical) {
@@ -42,7 +41,6 @@ const addScaleToDom = (
   };
   const createScaleNumbersArgs: CreateScaleNumbersArgs = {
     switcher: 1,
-    corrector: minMax[0] - divisionNumber,
     lastOrFirstIterration: 0,
     minMax,
     divisionNumber,
@@ -50,10 +48,8 @@ const addScaleToDom = (
     stepSignAfterComma,
     isVertical,
   };
-  const createScaleNumbersBoxArgs = {
+  const createScaleNumbersBoxArgs: CreateScaleNumbersBoxArgs = {
     $id,
-    orientation,
-    fieldSize,
     divisionQuantity,
     width: fieldSize[0],
     height: fieldSize[1] + fieldSize[1] / (divisionQuantity - 1),
@@ -64,15 +60,7 @@ const addScaleToDom = (
 
   if (isVertical) {
     createScaleLinesBox(createScaleLinesBoxArgs);
-
     createScaleNumbersBox(createScaleNumbersBoxArgs);
-
-    // $id.append(
-    //   `<div data-testid="test-scale" class="slider__scale-numbers js-slider__scale-numbers" style="height:${
-    //     fieldSize[1] + fieldSize[1] / (divisionQuantity - 1)
-    //   }px; width:${fieldSize[0]}px; top: 0px; left:${fieldSize[0] + 20}px; grid-template-rows: repeat(${divisionQuantity}, 1fr);
-    //   "></div>`,
-    // );
     const smallLine = 'width: 5px';
     const bigLine = 'width: 10px';
     const $scaleLines = $id.find('.js-slider__scale-lines');
@@ -86,18 +74,19 @@ const addScaleToDom = (
     createScaleLinesBoxArgs.left = 4;
     createScaleLinesBoxArgs.columnOrRow = 'columns';
     createScaleLinesBox(createScaleLinesBoxArgs);
+
     createScaleNumbersBoxArgs.width = fieldSize[0] + fieldSize[0] / (divisionQuantity - 1);
     createScaleNumbersBoxArgs.height = fieldSize[1];
     createScaleNumbersBoxArgs.top = fieldSize[1] + 20;
-    createScaleNumbersBoxArgs.left = -17;
+    createScaleNumbersBoxArgs.left = Math.min((-fieldSize[0] / (2 * divisionQuantity)), -17);
     createScaleNumbersBoxArgs.columnOrRow = 'columns';
+
     createScaleNumbersBox(createScaleNumbersBoxArgs);
     const $scaleLines = $id.find('.js-slider__scale-lines');
     const smallLine = 'height: 5px';
     const bigLine = 'height: 10px';
     createScaleNumbersArgs.$scaleNumbers = $id.find('.js-slider__scale-numbers');
     createScaleNumbersArgs.switcher = 0;
-    createScaleNumbersArgs.corrector = 0;
     createScaleNumbersArgs.lastOrFirstIterration = divisionQuantity - 1;
     createScaleNumbers(createScaleNumbersArgs);
     createScaleLines($scaleLines, divisionQuantity, orientation, minMax, smallLine, bigLine);

@@ -41,13 +41,12 @@ type UpdatePositionToDOMArgs = { stepPosition: number; instance: number; positio
 const updatePositionToDOM = function updateRunnerPositionToDom(this:SliderView,
   { stepPosition, instance, positioning }:UpdatePositionToDOMArgs):void {
   const {
-    isVertical, $field, fieldSize, runnerSize, $runners,
+    isVertical, fieldSize, runnerSize, $runners,
   } = this;
   // const preperatoryPosition = calculatePreperatoryPosition(
   //   $field, isVertical, fieldSize, runnerSize,
   // );
   const switcher = isVertical ? 1 : 0;
-  const corrector = isVertical ? 20 : 0;
   // const viewPosition = (stepPosition * (fieldSize[switcher])) / (fieldSize[switcher] + 40)+10;
   const viewPositionInPx = (stepPosition * (fieldSize[switcher] / 100));
   const getVerticalPosition = () => `${fieldSize[1] - viewPositionInPx + 5 - runnerSize[0] / 2}px`;

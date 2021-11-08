@@ -3,9 +3,9 @@
  */
 import '@testing-library/jest-dom';
 import { getByTestId, screen, waitFor, getByText} from '@testing-library/dom';
-import SliderPresenter from '../../src/presenter/SliderPresenter';
-import SliderView from '../../src/view/SliderView';
-import createScale from '../../src/view/viewModules/createScale';
+import SliderPresenter from '../../../src/presenter/SliderPresenter';
+import SliderView from '../../../src/view/SliderView';
+import createScale from '../../../src/view/viewModules/createScale';
 
 
 
@@ -35,7 +35,7 @@ test('movie title appears', async () => {
   testPresenter.view.createScale.call(this); 
   // wait for appearance inside an assertion
   await waitFor(() => {
-    expect(getByTestId('test-scale')).toBeInTheDocument()
+    expect(screen.getByTestId('test-scale')).toBeInTheDocument()
   })
 })
 

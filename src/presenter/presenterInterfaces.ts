@@ -9,6 +9,7 @@ type PresenterBuildParams = {
   shouldAddScale?: boolean;
   isRange?: boolean;
   runnerSize?: number[];
+  fieldThickness?: number;
   isTestMode?: boolean;
   orientation?: Orientation;
 };
@@ -36,6 +37,7 @@ type CheckValuesArgs = {
   maxValue: number;
   step: number;
   runnerSize: number[];
+  fieldThickness: number;
 };
 
 type Orientation = 'vertical' | 'horizontal';

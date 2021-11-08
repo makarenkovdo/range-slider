@@ -4,9 +4,9 @@
 // import { beforeEach, describe, expect } from 'jest';
 import '@testing-library/jest-dom';
 import { screen } from '@testing-library/dom';
-import SliderPresenter from '../../src/presenter/SliderPresenter';
-import SliderView from '../../src/view/SliderView';
-import createScale from '../../src/view/viewModules/createScale';
+import SliderPresenter from '../../../src/presenter/SliderPresenter';
+import SliderView from '../../../src/view/SliderView';
+import createScale from '../../../src/view/viewModules/createScale';
 
 beforeEach(() => {
     document.body.innerHTML = `

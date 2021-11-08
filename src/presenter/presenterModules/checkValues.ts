@@ -1,7 +1,9 @@
 import { CheckValuesArgs } from '../presenterInterfaces';
 
 const checkValues = (args: CheckValuesArgs): CheckValuesArgs => {
-  let { minValue, maxValue, step } = args;
+  let {
+    minValue, maxValue, step, fieldThickness,
+  } = args;
   const { runnerSize } = args;
   if (minValue > maxValue) {
     [minValue, maxValue] = [maxValue, minValue];
@@ -17,11 +19,15 @@ const checkValues = (args: CheckValuesArgs): CheckValuesArgs => {
     runnerSize[0] = 40;
     runnerSize[1] = 40;
   }
+  if (fieldThickness <= 0) {
+    fieldThickness = 1;
+  }
   return {
     minValue,
     maxValue,
     step,
     runnerSize,
+    fieldThickness,
   };
 };
 

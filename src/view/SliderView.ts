@@ -27,6 +27,8 @@ import setStep from './viewModules/setStep';
 import { Orientation } from '../presenter/presenterInterfaces';
 
 export default class SliderView {
+  public id: string;
+
   public $body: JQuery<HTMLElement>;
 
   public $runners: JQuery<HTMLElement>[];
@@ -91,7 +93,7 @@ export default class SliderView {
 
   public updateZIndex: (this: SliderView, i: number) => void;
 
-  public initializeValues: (runnerSize: number[], orientation: Orientation) => void;
+  public initializeValues: (runnerSize: number[], fieldThickness:number, orientation: Orientation) => void;
 
   public handleDrag: (this: SliderView, runnerInstance: number) => void;
 
@@ -108,6 +110,7 @@ export default class SliderView {
   public setStep: (step:number, stepSignAfterComma:number) => void;
 
   constructor(id: string, subscriber: SliderPresenter) {
+    this.id = id;
     this.$body = $('body');
     this.$field = $(`#${id}`);
     this.$runners = [];

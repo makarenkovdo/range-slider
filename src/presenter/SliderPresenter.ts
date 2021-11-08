@@ -119,7 +119,7 @@ export default class SliderPresenter {
     i: number,
   ): void {
     console.log();
-    
+
     const dataForRunnerUpdatingArgs: UpdateRunnerValuesArgs = {
       cursorXY,
       isVertical: this.field.isVertical,
@@ -173,7 +173,7 @@ export default class SliderPresenter {
   //  prettier-ignore
   private build(params: PresenterBuildParams): void {
     let {
-      minValue = 0, maxValue = 100, step = 1, runnerSize = [40, 40],
+      minValue = 0, maxValue = 100, step = 1, runnerSize = [40, 40], fieldThickness = 6,
     } = params;
 
     const {
@@ -187,16 +187,16 @@ export default class SliderPresenter {
 
     //  prettier-ignore
     ({
-      minValue, maxValue, step, runnerSize,
+      minValue, maxValue, step, runnerSize, fieldThickness,
     } = checkValues(
       {
-        minValue, maxValue, step, runnerSize,
+        minValue, maxValue, step, runnerSize, fieldThickness,
       },
     ));
 
     if (!isTestMode) {
       this.setMinMax(minValue, maxValue)
-        .initLayers(runnerSize, orientation)
+        .initLayers(runnerSize, fieldThickness, orientation)
         .createRangeSlider({
           isRange,
           shouldAddTip,
@@ -218,9 +218,9 @@ export default class SliderPresenter {
     return this;
   }
 
-  private initLayers(runnerSize: number[], orientation: Orientation): this {
+  private initLayers(runnerSize: number[], fieldThickness:number, orientation: Orientation): this {
     this.field.setIsVertical(orientation);
-    this.view.initializeValues(runnerSize, orientation);
+    this.view.initializeValues(runnerSize, fieldThickness, orientation);
     return this;
   }
 

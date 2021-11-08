@@ -4,22 +4,32 @@ import SliderView from '../SliderView';
 const initializeValues = function initializeDefaultViewValues(
   this: SliderView,
   runnerSize: number[],
+  fieldThickness: number,
+
   orientation: 'vertical' | 'horizontal',
 ): void {
   this.runnerSize = runnerSize;
   this.orientation = orientation;
   this.isVertical = orientation === 'vertical';
-    const { $field }: SliderView = this;
+  let {
+    $field, isVertical, fieldSize,
+  }: SliderView = this;
+  // window.onload = () => {
+  // window.addEventListener('load', (event) => {
+  $().ready(() => {
+  // document.addEventListener("DOMContentLoaded", function(event) {
     const borderWidth = parseInt($field.css('border-width'), 10);
     const fieldWidth = parseInt($field.css('width'), 10);
     const fieldHeight = parseInt($field.css('height'), 10);
-    if (this.isVertical) {
-      this.fieldSize = [fieldWidth - borderWidth - 1, fieldHeight - borderWidth - 11];
+    if (isVertical) {
+      fieldSize = [fieldWidth - borderWidth - 1, fieldHeight - borderWidth - 11];
     } else {
-      this.fieldSize = [fieldWidth - borderWidth - 11, fieldHeight - borderWidth - 1];
+      fieldSize = [fieldWidth - borderWidth - 11, fieldHeight - borderWidth - 1];
     }
-    console.log('this.fieldSize',this.fieldSize);
-    
+    console.log('fieldWidth', fieldWidth);
+
+    console.log(fieldSize);
+  });
   this.$field.addClass(`slider_${this.orientation} js_slider_${this.orientation}`);
 };
 

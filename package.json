@@ -29,6 +29,7 @@
     "global-jsdom": "^8.3.0",
     "html-webpack-plugin": "^5.3.2",
     "jest": "^27.3.1",
+    "jest-jquery-matchers": "^2.1.0",
     "jsdom": "^18.0.0",
     "mini-css-extract-plugin": "^2.3.0",
     "postcss": "^8.3.9",

@@ -48,6 +48,7 @@ const addScaleToDom = (
     divisionNumber,
     divisionQuantity,
     stepSignAfterComma,
+    isVertical,
   };
   const createScaleNumbersBoxArgs = {
     $id,
@@ -66,12 +67,12 @@ const addScaleToDom = (
 
     createScaleNumbersBox(createScaleNumbersBoxArgs);
 
-    $id.append(
-      `<div data-testid="test-scale" class="slider__scale-numbers js-slider__scale-numbers" style="height:${
-        fieldSize[1] + fieldSize[1] / (divisionQuantity - 1)
-      }px; width:${fieldSize[0]}px; top: 0px; left:${fieldSize[0] + 20}px; grid-template-rows: repeat(${divisionQuantity}, 1fr);
-      "></div>`,
-    );
+    // $id.append(
+    //   `<div data-testid="test-scale" class="slider__scale-numbers js-slider__scale-numbers" style="height:${
+    //     fieldSize[1] + fieldSize[1] / (divisionQuantity - 1)
+    //   }px; width:${fieldSize[0]}px; top: 0px; left:${fieldSize[0] + 20}px; grid-template-rows: repeat(${divisionQuantity}, 1fr);
+    //   "></div>`,
+    // );
     const smallLine = 'width: 5px';
     const bigLine = 'width: 10px';
     const $scaleLines = $id.find('.js-slider__scale-lines');

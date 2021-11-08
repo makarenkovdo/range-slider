@@ -29,9 +29,15 @@ type PrepareScaleDataArgs = {
 };
 
 type CreateScaleNumbersArgs = {
-  $scaleNumbers?:JQuery<HTMLElement>; minMax:number[]; divisionNumber:number;
-  divisionQuantity:number; stepSignAfterComma:number; switcher: number;
-  corrector:number; lastOrFirstIterration: number;
+  $scaleNumbers?:JQuery<HTMLElement>;
+  minMax:number[];
+  divisionNumber:number;
+  divisionQuantity:number;
+  stepSignAfterComma:number;
+  switcher: number;
+  corrector:number;
+  lastOrFirstIterration: number;
+  isVertical: boolean;
 };
 
 type CreateScaleLinesBoxArgs = {

@@ -211,3 +211,9 @@ h1 {
     }
   }
 }
+panel {
+  &__container {
+    display: grid;
+    grid-template-rows: repeat(2,1fr);
+  }
+}

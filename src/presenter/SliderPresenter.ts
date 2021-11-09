@@ -151,7 +151,7 @@ export default class SliderPresenter {
     this.field.prepareDataForRunnerUpdating(dataForRunnerUpdatingArgs);
   }
 
-  public setMinMax(minValue: number, maxValue: number): this {
+  private setMinMax(minValue: number, maxValue: number): this {
     this.field.setMinMax(minValue, maxValue);
     this.view.initStartEnd(minValue, maxValue);
     return this;

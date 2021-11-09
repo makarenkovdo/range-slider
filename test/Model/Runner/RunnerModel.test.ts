@@ -2,9 +2,9 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import SliderPresenter from '../src/presenter/SliderPresenter';
-import RunnerModel from '../src/model/RunnerModel';
-import { UpdateRunnerValuesArgs } from '../src/model/runnerModules/runnerInterfaces';
+import SliderPresenter from '../../../src/presenter/SliderPresenter';
+import RunnerModel from '../../../src/model/RunnerModel';
+import { UpdateRunnerValuesArgs } from '../../../src/model/runnerModules/runnerInterfaces';
 
 beforeEach(() => {
   document.body.innerHTML = `

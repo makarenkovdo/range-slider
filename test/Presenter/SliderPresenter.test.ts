@@ -2,8 +2,8 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import SliderPresenter from '../src/presenter/SliderPresenter';
-import { CreateRangeSliderArgsType } from '../src/presenter/presenterInterfaces';
+import SliderPresenter from '../../src/presenter/SliderPresenter';
+import { CreateRangeSliderArgsType } from '../../src/presenter/presenterInterfaces';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -13,7 +13,7 @@ beforeEach(() => {
 
 describe('runnerPresenter test', () => {
   const $field: JQuery<HTMLElement> = $('#first');
-  const testedSlider = new SliderPresenter('first', {
+  let testedSlider = new SliderPresenter('first', {
     isTestMode: true,
   });
   test('constructor testing', () => {
@@ -24,7 +24,11 @@ describe('runnerPresenter test', () => {
     expect(testedSlider).not.toHaveProperty('runners[1]');
   });
 
-  testedSlider.setMinMax(14, 19);
+  testedSlider = new SliderPresenter('first', {
+    minValue: 14,
+    maxValue: 19
+  });
+
   test('if function "setMinMax" assign values to field/view keys', () => {
     expect(testedSlider.field.minMax[0]).toBe(14);
     expect(testedSlider.field.minMax[1]).toBe(19);

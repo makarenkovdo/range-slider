@@ -7,6 +7,6 @@ const config: Config.InitialOptions = {
     '^.+\\.(css|less|scss)$': 'babel-jest',
   },
   setupFiles: ['./src/setup-jest.js'],
-  modulePathIgnorePatterns: ["skip"]
+  modulePathIgnorePatterns: ["skip", 'View','Model', 'Presenter' ]
 };
 export default config;

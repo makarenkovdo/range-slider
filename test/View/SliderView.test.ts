@@ -1,12 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-// import { beforeEach, describe, expect } from 'jest';
 import '@testing-library/jest-dom';
 import { screen } from '@testing-library/dom';
-import SliderView from '../src/view/SliderView';
-import SliderPresenter from '../src/presenter/SliderPresenter';
-import { setThis } from '../src/view/viewModules/createRunner/createRunnerUtility';
+import SliderView from '../../src/view/SliderView';
+import SliderPresenter from '../../src/presenter/SliderPresenter';
+import { setThis } from '../../src/view/viewModules/createRunner/createRunnerUtility';
 
 describe('if function "setThis" set this.$runners', () => {
   document.body.innerHTML = `

@@ -2,7 +2,8 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[5].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/
 body {
-  font-family: "Impact", sans-serif;
+  font-family: "Verdana", sans-serif;
+  font-size: 14px;
   background-color: #fff;
   padding: 100px 15px;
 }
@@ -57,9 +58,12 @@ h1 {
   position: absolute;
   z-index: 0;
   justify-content: space-between;
+  justify-items: center;
 }
 .slider__scale-number {
-  color: black;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 12px;
+  color: #333;
   justify-content: center;
   text-align: center;
   z-index: 1;
@@ -67,11 +71,11 @@ h1 {
 }
 .slider__runner {
   position: absolute;
-  top: -12px;
-  border: 4px solid white;
+  box-sizing: border-box;
+  border: 2px solid white;
   border-radius: 100%;
-  width: 40px;
-  height: 40px;
+  width: 12px;
+  height: 12px;
   cursor: pointer;
   background: linear-gradient(#6fcf97 50%, #66d2ea);
   z-index: 10;
@@ -80,10 +84,10 @@ h1 {
   z-index: 11;
 }
 .slider__runner_horizontal {
-  top: -14.4px;
+  top: -4.32px;
 }
 .slider__runner_vertical {
-  left: -12px;
+  left: -3.6px;
 }
 .slider__bar {
   position: absolute;
@@ -92,12 +96,12 @@ h1 {
 }
 .slider__bar_horizontal {
   width: 0;
-  height: 20px;
+  height: 6px;
   top: 0px;
 }
 .slider__bar_vertical {
   height: 0;
-  width: 20px;
+  width: 6px;
 }
 .slider__tip {
   position: absolute;
@@ -108,20 +112,21 @@ h1 {
 }
 .slider__tip_horizontal {
   left: 0px;
-  top: -44px;
+  top: -50px;
 }
 .slider__tip_vertical {
-  left: 44px;
+  left: -70px;
   top: 0px;
 }
 .slider__tip span {
+  display: grid;
   border-radius: 5px;
   border: 1px solid #333;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 10px;
   line-height: 20px;
   display: block;
-  height: 20px;
+  height: 25px;
   width: 40px;
   color: black;
   font-weight: bold;
@@ -131,17 +136,17 @@ h1 {
   background: linear-gradient(#6fcf97 50%, #66d2ea);
   opacity: 0.2;
 }
-.slider.tap .tip-number {
+.slider.tap .slider__tip {
   z-index: -2;
 }
-.slider.tap .tip-number span {
+.slider.tap .slider__tip span {
   opacity: 1;
   transition: 1s;
   transform: scale(1.1);
 }
 .slider_horizontal {
   position: relative;
-  height: 20px;
+  height: 6px;
   width: 100%;
 }
 .slider_horizontal + .range-slider {
@@ -150,7 +155,7 @@ h1 {
 .slider_horizontal:before, .slider_horizontal:after {
   box-sizing: border-box;
   position: absolute;
-  top: 20px;
+  top: 6px;
   margin: auto 0;
   font-size: 14px;
   line-height: 20px;
@@ -168,7 +173,7 @@ h1 {
 }
 .slider_vertical {
   height: 100%;
-  width: 20px;
+  width: 6px;
   position: relative;
 }
 .slider_vertical + .range-slider {
@@ -177,7 +182,7 @@ h1 {
 .slider_vertical:before, .slider_vertical:after {
   box-sizing: border-box;
   position: absolute;
-  right: 20px;
+  right: 6px;
   margin: auto 0;
   font-size: 14px;
   line-height: 20px;

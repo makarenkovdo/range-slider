@@ -1,6 +1,5 @@
 /* eslint-disable padded-blocks */
 /* eslint-env jquery */
-import '../index.scss';
 // import { addRunnerToDom, prepareRunnerArgs } from './viewModules/createSliderView';
 import createBar from './viewModules/createBar';
 import createRunner from './viewModules/createRunner';
@@ -93,13 +92,17 @@ export default class SliderView {
 
   public updateZIndex: (this: SliderView, i: number) => void;
 
-  public initializeValues: (runnerSize: number[], fieldThickness:number, orientation: Orientation) => void;
+  public initializeValues: (
+    runnerSize: number[], fieldThickness:number, orientation: Orientation
+  ) => void;
 
   public handleDrag: (this: SliderView, runnerInstance: number) => void;
 
   public handleDrop: (this: SliderView) => void;
 
   public handleClick: (this: SliderView, runners: RunnerModel[], field: FieldModel) => void;
+
+  public handleInputs: (this: SliderView) => void;
 
   public notifySliderMoving: (cursorXY: number[], instance: number) => void;
 

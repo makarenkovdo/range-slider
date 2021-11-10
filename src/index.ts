@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import './index.scss';
+import './panel.scss';
 import SliderPresenter from './presenter/SliderPresenter';
 
 const firstRunner = new SliderPresenter('first', {

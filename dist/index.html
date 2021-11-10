@@ -8,13 +8,24 @@
   <script defer src="index.bundle.js"></script><link href="index.css" rel="stylesheet"></head>
   <body>
     <main>
-      <section class="panel__container">
-        <div class="panel__tools"><input type="number"></div>
+      <section id="first-panel" class="panel__container">
+        <div class="panel__tools">
+          <div class="panel__min-value"></div><label">MIN VALUE</label><input type="text"></div>
+          <div class="panel__max-value"></div><label">MAX VALUE</label><input type="text"></div>
+          <div class="panel__runner-0-value"></div><label">RUNNER-1 VALUE</label><input type="text"></div>
+          <div class="panel__runner-1-value"></div><label">RUNNER-2 VALUE</label><input type="text"></div>
+          <div class="panel__runner-size"></div><label">RUNNER SIZE</label><input type="text"></div>
+          <div class="panel__field-thickness"></div><label">FIELD THICKNESS</label><input type="text"></div>
+          <div class="panel__is-range"></div><label">IS RANGE</label><input type="checkbox"></div>
+          <div class="panel__orientation"></div><label">IS VERTICAL</label><input type="checkbox"></div>
+          <div class="panel__scale"></div><label">HAS SCALE</label><input type="checkbox"></div>
+          <div class="panel__bar"></div><label">HAS BAR</label><input type="checkbox"></div>
+          <div class="panel__tip"></div><label">HAS TIP</label><input type="checkbox"></div>
       <div style="width: 500px; margin-bottom: 100px;">
         <div id="first" class="slider"></div>
       </div>
     </section>
-      <div style="height: 500px; margin-bottom: 100px;">
+      <!-- <div style="height: 500px; margin-bottom: 100px;">
         <div class="slider" id="second"></div>
       </div>
       <div style="width: 100px; margin-bottom: 100px;">
@@ -31,7 +42,7 @@
       </div>
       <div style="height: 400px; margin-bottom: 100px;">
         <div class="slider" id="seventh"></div>
-      </div>
+      </div> -->
 
       <!-- <div class="range runner" data-start="0" data-end="300"></div>
             <div class="range runner" data-start="0" data-end="200"></div> -->

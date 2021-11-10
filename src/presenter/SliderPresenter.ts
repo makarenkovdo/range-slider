@@ -104,6 +104,11 @@ export default class SliderPresenter {
     return this;
   }
 
+  public handleInputs():this {
+    this.view.handleInputs();
+    return this;
+  }
+
   public recieveModelLogic(activeRunner: RunnerModel): void {
     if (activeRunner) {
       this.updateRunnerPosition(activeRunner);

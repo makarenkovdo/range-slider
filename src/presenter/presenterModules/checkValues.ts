@@ -1,6 +1,6 @@
 import { CheckValuesArgs } from '../presenterInterfaces';
 
-const checkValues = (args: CheckValuesArgs): CheckValuesArgs => {
+const checkValues = function checkInitialValues(args: CheckValuesArgs): CheckValuesArgs {
   let {
     minValue, maxValue, step, fieldThickness, runnersInstantPosition,
   } = args;
@@ -24,19 +24,18 @@ const checkValues = (args: CheckValuesArgs): CheckValuesArgs => {
   }
 
   if (runnersInstantPosition[0] > runnersInstantPosition[1]
-    || runnersInstantPosition[0] < 0
-    || runnersInstantPosition[1] > 100) {
-      runnersInstantPosition = [0,100]
-    }
-    return {
-      minValue,
-      maxValue,
-      step,
-      runnerSize,
-      fieldThickness,
-      runnersInstantPosition,
-    };
+    || runnersInstantPosition[0] < minValue
+    || runnersInstantPosition[1] > maxValue) {
+    runnersInstantPosition = [minValue, maxValue];
   }
+  return {
+    minValue,
+    maxValue,
+    step,
+    runnerSize,
+    fieldThickness,
+    runnersInstantPosition,
+  };
 };
 
 export default checkValues;

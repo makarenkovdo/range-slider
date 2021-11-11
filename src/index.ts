@@ -12,6 +12,7 @@ const firstRunner = new SliderPresenter('first', {
   isRange: true,
   shouldAddScale: true,
   runnerSize: [16, 16],
+  runnersInstantPosition:[20,80],
 });
 
 const secondRunner = new SliderPresenter('second', {

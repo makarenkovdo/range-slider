@@ -38,7 +38,8 @@ const updateRunnerValues = ({
   } else {
     setStepValueAndPosition(activeRunner, calculateStepValueAndPosition(activeRunner));
   }
-  activeRunner.notify(this);
+  const messageType = 'modelLogic';
+  activeRunner.notify(this, messageType);
 };
 
 export default updateRunnerValues;

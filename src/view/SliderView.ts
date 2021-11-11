@@ -76,9 +76,9 @@ export default class SliderView {
 
   private class: string;
 
-  public createBar: (that: SliderPresenter) => void;
+  public createBar: (presenter: SliderPresenter) => void;
 
-  public createRunner: (i: number, isVertical: boolean) => void;
+  public createRunner: (this:SliderView, i: number, runnersInstantPosition:number[]) => void;
 
   public createTipNumber: (runnerCounter: number, isVertical: boolean) => void;
 

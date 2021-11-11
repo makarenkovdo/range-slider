@@ -6,7 +6,8 @@ import initializeDefaultValues from './runnerModules/initializeDefaultValues';
 import notify from './runnerModules/notify';
 import updateRunnerValues from './runnerModules/updateRunnerValues';
 import setStep from './runnerModules/setStep';
-import { UpdateRunnerValuesArgs } from './runnerModules/runnerInterfaces';
+import { NotifyMessageType, UpdateRunnerValuesArgs } from './runnerModules/runnerInterfaces';
+import { PresenterBuildParams } from '../presenter/presenterInterfaces';
 
 class RunnerModel {
   public instance: number;
@@ -29,9 +30,11 @@ class RunnerModel {
 
   public defineSignAfterComma: (this: RunnerModel) => void;
 
-  public notify: (that: RunnerModel) => void;
+  public notify: (this: RunnerModel, messageType: NotifyMessageType, rebuildData?: PresenterBuildParams) => void;
 
   public setStep: (step: number, minMax: number[]) => void;
+
+  public setValuesFromInputs:(this: RunnerModel, inputValue:number, minMax: number[]) => void;
 
   public updateRunnerValues: (updateRunnerValuesArgs: UpdateRunnerValuesArgs) => void;
 

@@ -25,9 +25,18 @@ type CheckCollisionSubargs = {
   stepValue: number;
 };
 
+type CalculateStepPositionFromInputReturned = {
+  stepPosition: number;
+  stepValue: number;
+};
+
+type NotifyMessageType = 'modelLogic' | 'rebuildData';
+
 export {
   UpdateRunnerValuesArgs,
   AssignIfHasOwnKeys,
   CalculateStepValueAndPositionArgs,
   CheckCollisionSubargs,
+  CalculateStepPositionFromInputReturned,
+  NotifyMessageType,
 };

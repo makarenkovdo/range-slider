@@ -34,9 +34,9 @@ export default class SliderPresenter {
 
   //  prettier-ignore
   public createRangeSlider({
-    isRange, shouldAddTip, runnerSize, minValue, maxValue,runnersInstantPosition
+    isRange, shouldAddTip, runnerSize, minValue, maxValue, runnersInstantPosition,
   }:CreateRangeSliderArgsType): this {
-    this.createRunnerView(this.runnerCounter);
+    this.createRunnerView(this.runnerCounter, runnersInstantPosition);
     this.createRunner(runnerSize, minValue, maxValue);
     this.createTipNumber(shouldAddTip);
     this.onDrag(this.runnerCounter);
@@ -61,8 +61,8 @@ export default class SliderPresenter {
     return this;
   }
 
-  public createRunnerView(i: number): this {
-    this.view.createRunner(i, this.field.isVertical);
+  public createRunnerView(i: number, runnersInstantPosition: number[]): this {
+    this.view.createRunner(i, runnersInstantPosition, this.field.isVertical);
     return this;
   }
 
@@ -115,7 +115,12 @@ export default class SliderPresenter {
       if (this.view.hasTip) this.updateTipNumber(activeRunner.stepValue, activeRunner.instance);
       if (this.view.hasBar) this.updateBarPosition(activeRunner);
     }
+  }  
+  
+  public recieveRebuildData(params: PresenterBuildParams): void {
+    this.build(params)
   }
+
 
   // prettier-ignore
   public recieveDragData(
@@ -123,7 +128,6 @@ export default class SliderPresenter {
     cursorXY: number[],
     i: number,
   ): void {
-    console.log();
 
     const dataForRunnerUpdatingArgs: UpdateRunnerValuesArgs = {
       cursorXY,
@@ -135,6 +139,32 @@ export default class SliderPresenter {
       activeRunner: this.runners[i],
     };
     this.runners[i].updateRunnerValues(dataForRunnerUpdatingArgs);
+  }
+
+  public recieveInputsData(
+    { fieldSize }: SliderView,
+    inputValues: number[],
+    minMax: number[],
+    i: number,
+  ): void {
+    const inputsDataForUpdateLogic: inputsDataForUpdateLogicArgs = {
+      inputValues,
+      minMax,
+      runnerSize,
+      fieldThickness,
+      isRange,
+      hasScale,
+      hasBar,
+      hasTip
+
+      isVertical: this.field.isVertical,
+      minMax: this.field.minMax,
+      isRange: this.field.isRange,
+      fieldSize,
+      runners: this.runners,
+      activeRunner: this.runners[i],
+    };
+    this.runners[i].setValuesFromInputs(inputsDataForUpdateLogic);
   }
 
   // prettier-ignore
@@ -183,7 +213,7 @@ export default class SliderPresenter {
       step = 1,
       runnerSize = [40, 40],
       fieldThickness = 6,
-      runnersInstantPosition = [0,100],
+      runnersInstantPosition = [0, 100],
     } = params;
 
     const {

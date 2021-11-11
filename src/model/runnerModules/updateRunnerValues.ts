@@ -38,7 +38,7 @@ const updateRunnerValues = ({
   } else {
     setStepValueAndPosition(activeRunner, calculateStepValueAndPosition(activeRunner));
   }
-  activeRunner.notifyToUpdate(this, messageType);
+  activeRunner.notifyToUpdate(this);
 };
 
 export default updateRunnerValues;

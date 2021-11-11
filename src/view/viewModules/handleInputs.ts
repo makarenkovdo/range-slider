@@ -1,21 +1,22 @@
 import SliderView from '../SliderView';
+import { PanelSelectors } from '../viewInterfaces';
 import prepareInputData from './handleInputs/handleInputsUtility';
 import setMinValue from './handleInputs/handleInputsUtility';
 
 const handleInputs = function handleChangeInputsAndCheckboxes(this: SliderView): void {
-  const $minValueInput = $(this.$field).find('.panel_min-value');
-  const $maxValueInput = $(this.$field).find('.panel_max-value');
-  const $runnerValueInput0 = $(this.$field).find('.panel__runner-0-value');
-  const $runnerValueInput1 = $(this.$field).find('.panel__runner-1-value');
-  const $runnerSizeInput = $(this.$field).find('.panel__runner-size');
-  const $fieldThicknessInput = $(this.$field).find('.panel__field-thickness');
-  const $rangeCheckbox = $(this.$field).find('.panel__is-range');
-  const $orientationCheckbox = $(this.$field).find('.panel__orientation');
-  const $scaleCheckbox = $(this.$field).find('.panel__scale');
-  const $barCheckbox = $(this.$field).find('.panel__bar');
-  const $tipCheckbox = $(this.$field).find('.panel__tip');
+  const $minValueInput = $(`#${this.id}-panel`).find('.js-slider-input__min-value');
+  const $maxValueInput = $(`#${this.id}-panel`).find('.js-slider-input__max-value');
+  const $runnerValueInput0 = $(`#${this.id}-panel`).find('.js-slider-input__runner-0-value');
+  const $runnerValueInput1 = $(`#${this.id}-panel`).find('.js-slider-input__runner-1-value');
+  const $runnerSizeInput = $(`#${this.id}-panel`).find('.js-slider-input__runner-size');
+  const $fieldThicknessInput = $(`#${this.id}-panel`).find('.js-slider-input__field-thickness');
+  const $rangeCheckbox = $(`#${this.id}-panel`).find('.js-slider-input__is-range');
+  const $orientationCheckbox = $(`#${this.id}-panel`).find('.js-slider-input__orientation');
+  const $scaleCheckbox = $(`#${this.id}-panel`).find('.js-slider-input__has-scale');
+  const $barCheckbox = $(`#${this.id}-panel`).find('.js-slider-input__has-bar');
+  const $tipCheckbox = $(`#${this.id}-panel`).find('.js-slider-input__has-tip');
 
-  const panelSelectors = {
+  const panelSelectors:PanelSelectors = {
     $minValueInput,
     $maxValueInput,
     $runnerValueInput0,
@@ -40,10 +41,14 @@ const handleInputs = function handleChangeInputsAndCheckboxes(this: SliderView):
   // $barCheckbox.on('input', { thisView: this, instance:0 }, setRunnerValue);
   // $tipCheckbox.on('input', { thisView: this, instance:0 }, setRunnerValue);
 
-  $(this.$field).on('change', '.panel_min-value,.panel_max-value', {thisView: this, panelSelectors}, (e) => {
+  $(`#${this.id}-panel`).on('change', `.js-slider-input__min-value,
+  .js-slider-input__max-value,
+  .js-slider-input__has-tip,
+  .js-slider-input__runner-0-value`, { thisView: this, panelSelectors }, (e) => {
     e.preventDefault();
-        prepareInputData( this, panelSelectors);
+    console.log('CHANGE');
 
+    prepareInputData(this, panelSelectors);
   });
 };
 

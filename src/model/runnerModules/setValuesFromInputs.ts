@@ -1,16 +1,22 @@
+import { PanelInputsData } from '../../view/viewInterfaces';
 import RunnerModel from '../RunnerModel';
 import { NotifyMessageType } from './runnerInterfaces';
 import { calculateStepPositionFromInput, setValues } from './setValuesFromInputs/setValuesFromInputsUtility';
 
 const setValuesFromInputs = function setThisValuesFromPanelInputs(
-  this:RunnerModel, inputValue:number, minMax:number[],
+  this:RunnerModel, panelInputsData:PanelInputsData,
 ):void {
   setValues.call(
     this,
-    calculateStepPositionFromInput(inputValue, this.step, this.stepSignAfterComma, minMax),
+    calculateStepPositionFromInput(
+      panelInputsData.runnersValue[this.instance],
+      this.step,
+      this.stepSignAfterComma,
+      panelInputsData.minMax,
+    ),
   );
   const messageType: NotifyMessageType = 'rebuildData';
-  this.notify(this, messageType);
+  this.notifyToRebuild(this, messageType);
 };
 
 export default setValuesFromInputs;

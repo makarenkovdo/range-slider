@@ -62,34 +62,32 @@ type CreateScaleNumbersBoxArgs = {
 };
 
 type PanelSelectors = {
-  $minValueInput: JQuery<HTMLElement>;
-  $maxValueInput: JQuery<HTMLElement>;
-  $runnerValueInput0: JQuery<HTMLElement>;
-  $runnerValueInput1: JQuery<HTMLElement>;
-  $runnerSizeInput: JQuery<HTMLElement>;
-  $fieldThicknessInput: JQuery<HTMLElement>;
-  $rangeCheckbox: JQuery<HTMLElement>;
-  $orientationCheckbox: JQuery<HTMLElement>;
-  $scaleCheckbox: JQuery<HTMLElement>;
-  $barCheckbox: JQuery<HTMLElement>;
-  $tipCheckbox: JQuery<HTMLElement>;
+  $minValueInput: JQuery<HTMLInputElement>;
+  $maxValueInput: JQuery<HTMLInputElement>;
+  $runnerValueInput0: JQuery<HTMLInputElement>;
+  $runnerValueInput1: JQuery<HTMLInputElement>;
+  $runnerSizeInput: JQuery<HTMLInputElement>;
+  $fieldThicknessInput: JQuery<HTMLInputElement>;
+  $rangeCheckbox: JQuery<HTMLInputElement>;
+  $orientationCheckbox: JQuery<HTMLInputElement>;
+  $scaleCheckbox: JQuery<HTMLInputElement>;
+  $barCheckbox: JQuery<HTMLInputElement>;
+  $tipCheckbox: JQuery<HTMLInputElement>;
 };
 
 type HandleInputsEventData = { sliderView: SliderView; panelSelectors: PanelSelectors };
 
 type PanelInputsData = {
-  minValue: number;
-  maxValue: number;
-  runner0Value: number;
-  runner1Value: number;
-  runnerSize: number;
-  fieldThickness: number;
-  isRange: boolean;
-  hasBar: boolean;
-  hasTip: boolean;
-  hasScale: boolean;
-  orientation: boolean;
-}
+  minMax: Array<string | number | string[]>;
+  runnersValue: Array<string | number | string[]>;
+  runnerSize: string | number | string[];
+  fieldThickness: string | number | string[];
+  isRange: string | number | string[];
+  hasBar: string | number | string[];
+  hasTip: string | number | string[];
+  hasScale: string | number | string[];
+  orientation: string | number | string[];
+};
 
 export {
   AddTipNumberToDOMReturned,

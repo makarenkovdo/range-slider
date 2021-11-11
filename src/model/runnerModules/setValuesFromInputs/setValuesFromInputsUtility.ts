@@ -2,7 +2,7 @@ import RunnerModel from '../../RunnerModel';
 import { CalculateStepPositionFromInputReturned } from '../runnerInterfaces';
 
 const calculateStepPositionFromInput = (
-  inputValue:number, step:number, stepSignAfterComma:number, minMax:number[],
+  inputValue: string | number | string[], step:number, stepSignAfterComma:number, minMax:Array<string | number | string[]>,
 ):CalculateStepPositionFromInputReturned => {
   const stepValue = Number((Math.round(inputValue / step) * step).toFixed(stepSignAfterComma));
   const stepPosition = stepValue / minMax[1];

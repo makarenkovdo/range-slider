@@ -3,6 +3,7 @@ import FieldModel from '../model/FieldModel';
 import RunnerModel from '../model/RunnerModel';
 import { UpdateRunnerValuesArgs } from '../model/runnerModules/runnerInterfaces';
 import SliderView from '../view/SliderView';
+import { PanelInputsData } from '../view/viewInterfaces';
 import {
   PresenterBuildParams,
   CreateRangeSliderArgsType,
@@ -37,7 +38,7 @@ export default class SliderPresenter {
     isRange, shouldAddTip, runnerSize, minValue, maxValue, runnersInstantPosition,
   }:CreateRangeSliderArgsType): this {
     this.createRunnerView(this.runnerCounter, runnersInstantPosition);
-    this.createRunner(runnerSize, minValue, maxValue);
+    this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition);
     this.createTipNumber(shouldAddTip);
     this.onDrag(this.runnerCounter);
     this.onDrop();
@@ -46,8 +47,8 @@ export default class SliderPresenter {
       this.runnerCounter += 1;
       this.view.isRange = true;
       this.field.isRange = true;
-      this.createRunnerView(this.runnerCounter);
-      this.createRunner(runnerSize, minValue, maxValue);
+      this.createRunnerView(this.runnerCounter, runnersInstantPosition);
+      this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition);
       this.createTipNumber(shouldAddTip);
       this.onDrag(this.runnerCounter);
       this.onDrop();
@@ -55,14 +56,19 @@ export default class SliderPresenter {
     return this;
   }
 
-  public createRunner(runnerSize: number[], minValue: number, maxValue: number): this {
+  public createRunner(
+    runnerSize: number[], minValue: number, maxValue: number, runnersInstantPosition:number[],
+  ): this {
     this.runners.push(new RunnerModel(this.id, this.runnerCounter, this));
-    this.runners[this.runnerCounter].initializeDefaultValues([minValue, maxValue]);
+    this.runners[this.runnerCounter].initializeDefaultValues(
+      [minValue, maxValue],
+      runnersInstantPosition,
+    );
     return this;
   }
 
   public createRunnerView(i: number, runnersInstantPosition: number[]): this {
-    this.view.createRunner(i, runnersInstantPosition, this.field.isVertical);
+    this.view.createRunner(i, runnersInstantPosition);
     return this;
   }
 
@@ -104,7 +110,7 @@ export default class SliderPresenter {
     return this;
   }
 
-  public handleInputs():this {
+  public onInputChange():this {
     this.view.handleInputs();
     return this;
   }
@@ -115,12 +121,11 @@ export default class SliderPresenter {
       if (this.view.hasTip) this.updateTipNumber(activeRunner.stepValue, activeRunner.instance);
       if (this.view.hasBar) this.updateBarPosition(activeRunner);
     }
-  }  
-  
-  public recieveRebuildData(params: PresenterBuildParams): void {
-    this.build(params)
   }
 
+  public recieveRebuildData(params: PresenterBuildParams): void {
+    this.build(params);
+  }
 
   // prettier-ignore
   public recieveDragData(
@@ -128,7 +133,6 @@ export default class SliderPresenter {
     cursorXY: number[],
     i: number,
   ): void {
-
     const dataForRunnerUpdatingArgs: UpdateRunnerValuesArgs = {
       cursorXY,
       isVertical: this.field.isVertical,
@@ -142,29 +146,18 @@ export default class SliderPresenter {
   }
 
   public recieveInputsData(
-    { fieldSize }: SliderView,
-    inputValues: number[],
-    minMax: number[],
-    i: number,
+    panelInputsData: PanelInputsData,
   ): void {
-    const inputsDataForUpdateLogic: inputsDataForUpdateLogicArgs = {
-      inputValues,
-      minMax,
-      runnerSize,
-      fieldThickness,
-      isRange,
-      hasScale,
-      hasBar,
-      hasTip
+    // const inputsDataForUpdateLogic: inputsDataForUpdateLogicArgs = {
 
-      isVertical: this.field.isVertical,
-      minMax: this.field.minMax,
-      isRange: this.field.isRange,
-      fieldSize,
-      runners: this.runners,
-      activeRunner: this.runners[i],
-    };
-    this.runners[i].setValuesFromInputs(inputsDataForUpdateLogic);
+    //   isVertical: this.field.isVertical,
+    //   minMax: this.field.minMax,
+    //   isRange: this.field.isRange,
+    //   fieldSize,
+    //   runners: this.runners,
+    //   activeRunner: this.runners[i],
+    // };
+    this.runners.forEach((v) => v.setValuesFromInputs(panelInputsData));
   }
 
   // prettier-ignore
@@ -250,7 +243,8 @@ export default class SliderPresenter {
         .createScale(shouldAddScale)
         .updateTipNumber(minValue, 0)
         .updateTipNumber(maxValue, 1)
-        .onClick();
+        .onClick()
+        .onInputChange();
     }
   }
 

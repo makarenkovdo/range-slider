@@ -1,7 +1,7 @@
 import SliderView from '../SliderView';
 import { setThis, addRunnerToDOM, prepareRunnerArgs } from './createRunner/createRunnerUtility';
 
-const createRunner = function addRunnerToDOMAndSetThis$runner(this: SliderView, i: number,runnersInstantPosition:number[]): void {
+const createRunner = function addRunnerToDOMAndSetThis$runner(this: SliderView, i: number, runnersInstantPosition:number[]): void {
   $().ready(() => {
     addRunnerToDOM(
       prepareRunnerArgs(

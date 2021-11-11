@@ -62,7 +62,7 @@ type CreateScaleNumbersBoxArgs = {
 };
 
 type PanelSelectors = {
-  $minValueInput: JQuery<HTMLInputElement>;
+  minMax: number;
   $maxValueInput: JQuery<HTMLInputElement>;
   $runnerValueInput0: JQuery<HTMLInputElement>;
   $runnerValueInput1: JQuery<HTMLInputElement>;

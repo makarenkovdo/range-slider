@@ -146,17 +146,18 @@ export default class SliderPresenter {
   }
 
   public recieveInputsData(
-    panelInputsData: PanelInputsData,
+    thisView: SliderView,
   ): void {
-    // const inputsDataForUpdateLogic: inputsDataForUpdateLogicArgs = {
+    const panelInputsData = {
 
-    //   isVertical: this.field.isVertical,
-    //   minMax: this.field.minMax,
-    //   isRange: this.field.isRange,
-    //   fieldSize,
-    //   runners: this.runners,
-    //   activeRunner: this.runners[i],
-    // };
+      isVertical: thisView.isVertical,
+      minMax: thisView.minMax,
+      isRange: thisView.isRange,
+      fieldThickness: thisView.fieldthickness,
+      hasBar: thisView.hasBar,
+      hasScale: thisView.hasScale,
+      hasTip: thisView.hasTip,
+    };
     this.runners.forEach((v) => v.setValuesFromInputs(panelInputsData));
   }
 

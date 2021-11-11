@@ -15,8 +15,21 @@ const setValuesFromInputs = function setThisValuesFromPanelInputs(
       panelInputsData.minMax,
     ),
   );
-  const messageType: NotifyMessageType = 'rebuildData';
-  this.notifyToRebuild(this, messageType);
+  const rebuildData = {
+    minValue: panelInputsData.minMax[0],
+    maxValue?: panelInputsData.minMax[1],
+    step: this.step,
+    shouldAddTip: panelInputsData.hasTip,
+    shouldAddBar: panelInputsData.hasBar,
+    shouldAddScale: panelInputsData.hasScale,
+    isRange: panelInputsData.isRange,
+    runnerSize: panelInputsData.runnerSize,
+    // fieldThickness?: number,
+    // isTestMode?: boolean,
+    isVertical: panelInputsData.isVertical,
+    runnersInstantPosition: this.stepPosition,
+  }
+  this.notifyToRebuild.call(this, rebuildData);
 };
 
 export default setValuesFromInputs;

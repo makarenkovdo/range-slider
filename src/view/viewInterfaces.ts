@@ -78,15 +78,15 @@ type PanelSelectors = {
 type HandleInputsEventData = { sliderView: SliderView; panelSelectors: PanelSelectors };
 
 type PanelInputsData = {
-  minMax: Array<string | number | string[]>;
-  runnersValue: Array<string | number | string[]>;
-  runnerSize: string | number | string[];
-  fieldThickness: string | number | string[];
-  isRange: string | number | string[];
-  hasBar: string | number | string[];
-  hasTip: string | number | string[];
-  hasScale: string | number | string[];
-  orientation: string | number | string[];
+  minMax: number[];
+  runnersValue: number[];
+  runnerSize:number[];
+  // fieldThickness:number;
+  isRange:boolean;
+  hasBar:boolean;
+  hasTip:boolean;
+  hasScale:boolean;
+  isVertical:boolean;
 };
 
 export {

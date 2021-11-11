@@ -124,7 +124,7 @@ export default class SliderPresenter {
   }
 
   public recieveRebuildData(params: PresenterBuildParams): void {
-    this.build(params);
+    this.rebuild(params)
   }
 
   // prettier-ignore
@@ -153,12 +153,14 @@ export default class SliderPresenter {
       isVertical: thisView.isVertical,
       minMax: thisView.minMax,
       isRange: thisView.isRange,
-      fieldThickness: thisView.fieldthickness,
+      // fieldThickness: thisView.fieldthickness,
       hasBar: thisView.hasBar,
       hasScale: thisView.hasScale,
       hasTip: thisView.hasTip,
+      runnersValue: thisView.runnersPosition,
+      runnerSize: thisView.runnerSize,
     };
-    this.runners.forEach((v) => v.setValuesFromInputs(panelInputsData));
+    this.runners[0].setValuesFromInputs(panelInputsData));
   }
 
   // prettier-ignore
@@ -200,7 +202,14 @@ export default class SliderPresenter {
   }
 
   //  prettier-ignore
+  public rebuild(params):void {
+    this.view.clearHTMLElement();
+    this.build(params);
+  }
+
   private build(params: PresenterBuildParams): void {
+    console.log('BUILDIM');
+    
     let {
       minValue = 0,
       maxValue = 100,

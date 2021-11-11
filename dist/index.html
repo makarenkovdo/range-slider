@@ -8,19 +8,24 @@
   <script defer src="index.bundle.js"></script><link href="index.css" rel="stylesheet"></head>
   <body>
     <main>
-      <section id="first-panel" class="panel__container">
+      <section id="first-panel" class="panel">
         <div class="panel__tools">
-          <div class="panel__min-value"></div><label">MIN VALUE</label><input type="text"></div>
-          <div class="panel__max-value"></div><label">MAX VALUE</label><input type="text"></div>
-          <div class="panel__runner-0-value"></div><label">RUNNER-1 VALUE</label><input type="text"></div>
-          <div class="panel__runner-1-value"></div><label">RUNNER-2 VALUE</label><input type="text"></div>
-          <div class="panel__runner-size"></div><label">RUNNER SIZE</label><input type="text"></div>
-          <div class="panel__field-thickness"></div><label">FIELD THICKNESS</label><input type="text"></div>
-          <div class="panel__is-range"></div><label">IS RANGE</label><input type="checkbox"></div>
-          <div class="panel__orientation"></div><label">IS VERTICAL</label><input type="checkbox"></div>
-          <div class="panel__scale"></div><label">HAS SCALE</label><input type="checkbox"></div>
-          <div class="panel__bar"></div><label">HAS BAR</label><input type="checkbox"></div>
-          <div class="panel__tip"></div><label">HAS TIP</label><input type="checkbox"></div>
+          <div class="panel__inputs">
+            <div class="panel__min-value"><label">MIN VALUE</label><input type="number" class="js-slider-input__min-value"></div>
+            <div class="panel__max-value"><label">MAX VALUE</label><input type="number" class="js-slider-input__max-value"></div>
+            <div class="panel__runner-0-value"><label">RUNNER-1 VALUE</label><input type="number" class="js-slider-input__runner-0-value"></div>
+            <div class="panel__runner-1-value"><label">RUNNER-2 VALUE</label><input type="number" class="js-slider-input__runner-1-value"></div>
+            <div class="panel__runner-size"><label">RUNNER SIZE</label><input type="number" class="js-slider-input__runner-size"></div>
+            <div class="panel__field-thickness"><label">FIELD THICKNESS</label><input type="number" class="js-slider-input__field-thickness"></div>
+          </div>
+          <div class="panel__checkboxes">
+            <div class="panel__is-range"><label>IS RANGE</label><input type="checkbox" class="js-slider-input__is-range"></div>
+            <div class="panel__orientation"><label>IS VERTICAL</label><input type="checkbox" class="js-slider-input__orientation"></div>
+            <div class="panel__scale"><label>HAS SCALE</label><input type="checkbox" class="js-slider-input__has-scale"></div>
+            <div class="panel__bar"><label>HAS BAR</label><input type="checkbox" class="js-slider-input__has-bar"></div>
+            <div class="panel__tip"><label>HAS TIP</label><input type="checkbox" class="js-slider-input__has-tip"></div>
+          </div>
+          </div>  
       <div style="width: 500px; margin-bottom: 100px;">
         <div id="first" class="slider"></div>
       </div>
@@ -46,6 +51,8 @@
 
       <!-- <div class="range runner" data-start="0" data-end="300"></div>
             <div class="range runner" data-start="0" data-end="200"></div> -->
+            <input type="number" min='10' max='100'>
+
     </main>
   </body>
 </html>

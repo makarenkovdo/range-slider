@@ -26,6 +26,7 @@ import handleInputs from './viewModules/handleInputs';
 
 import setStep from './viewModules/setStep';
 import { Orientation } from '../presenter/presenterInterfaces';
+import clearHTMLElement from './viewModules/clearHTMLElement';
 
 export default class SliderView {
   public id: string;
@@ -86,6 +87,8 @@ export default class SliderView {
 
   public createScale: (this: SliderView) => void;
 
+  public clearHTMLElement: (this: SliderView) => void;
+
   public updateBarPosition: (activeRunner: RunnerModel) => void;
 
   public updateTipNumber: (obj: UpdateTipNumberArgs) => void;
@@ -145,6 +148,7 @@ export default class SliderView {
     this.createRunner = createRunner.bind(this) as () => void;
     this.createTipNumber = createTipNumber.bind(this) as () => void;
     this.createScale = createScale.bind(this) as () => void;
+    this.clearHTMLElement = clearHTMLElement.bind(this) as () => void;
     this.updateBarPosition = updateBarPosition.bind(this) as () => void;
     this.updateTipNumber = updateTipNumber.bind(this) as () => void;
     this.updateRunnerPosition = updateRunnerPosition.bind(this) as () => void;

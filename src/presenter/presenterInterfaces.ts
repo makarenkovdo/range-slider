@@ -12,6 +12,7 @@ type PresenterBuildParams = {
   fieldThickness?: number;
   isTestMode?: boolean;
   orientation?: Orientation;
+  runnersInstantPosition?: number[];
 };
 
 type CreateRangeSliderArgsType = {
@@ -20,6 +21,7 @@ type CreateRangeSliderArgsType = {
   runnerSize: number[];
   minValue: number;
   maxValue: number;
+  runnersInstantPosition?: number[];
 };
 
 type DataForRunnerUpdatingArgsType = {
@@ -38,6 +40,7 @@ type CheckValuesArgs = {
   step: number;
   runnerSize: number[];
   fieldThickness: number;
+  runnersInstantPosition: number[];
 };
 
 type Orientation = 'vertical' | 'horizontal';

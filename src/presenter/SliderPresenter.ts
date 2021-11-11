@@ -34,7 +34,7 @@ export default class SliderPresenter {
 
   //  prettier-ignore
   public createRangeSlider({
-    isRange, shouldAddTip, runnerSize, minValue, maxValue,
+    isRange, shouldAddTip, runnerSize, minValue, maxValue,runnersInstantPosition
   }:CreateRangeSliderArgsType): this {
     this.createRunnerView(this.runnerCounter);
     this.createRunner(runnerSize, minValue, maxValue);
@@ -178,7 +178,12 @@ export default class SliderPresenter {
   //  prettier-ignore
   private build(params: PresenterBuildParams): void {
     let {
-      minValue = 0, maxValue = 100, step = 1, runnerSize = [40, 40], fieldThickness = 6,
+      minValue = 0,
+      maxValue = 100,
+      step = 1,
+      runnerSize = [40, 40],
+      fieldThickness = 6,
+      runnersInstantPosition = [0,100],
     } = params;
 
     const {
@@ -192,10 +197,10 @@ export default class SliderPresenter {
 
     //  prettier-ignore
     ({
-      minValue, maxValue, step, runnerSize, fieldThickness,
+      minValue, maxValue, step, runnerSize, fieldThickness, runnersInstantPosition,
     } = checkValues(
       {
-        minValue, maxValue, step, runnerSize, fieldThickness,
+        minValue, maxValue, step, runnerSize, fieldThickness, runnersInstantPosition,
       },
     ));
 
@@ -208,6 +213,7 @@ export default class SliderPresenter {
           runnerSize,
           minValue,
           maxValue,
+          runnersInstantPosition,
         })
         .setStep(step)
         .createBar(shouldAddBar)

@@ -39,7 +39,6 @@ const calculatePositionInPercent = (
     positionInPercent = ((cursorX) * 100) / (fieldSize[0]);
   }
   //  todo for vertical fieldSize[i]
-  console.log('positionInPercent', positionInPercent);
 
   return positionInPercent;
 };

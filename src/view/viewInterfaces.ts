@@ -61,6 +61,36 @@ type CreateScaleNumbersBoxArgs = {
   columnOrRow: string,
 };
 
+type PanelSelectors = {
+  $minValueInput: JQuery<HTMLElement>;
+  $maxValueInput: JQuery<HTMLElement>;
+  $runnerValueInput0: JQuery<HTMLElement>;
+  $runnerValueInput1: JQuery<HTMLElement>;
+  $runnerSizeInput: JQuery<HTMLElement>;
+  $fieldThicknessInput: JQuery<HTMLElement>;
+  $rangeCheckbox: JQuery<HTMLElement>;
+  $orientationCheckbox: JQuery<HTMLElement>;
+  $scaleCheckbox: JQuery<HTMLElement>;
+  $barCheckbox: JQuery<HTMLElement>;
+  $tipCheckbox: JQuery<HTMLElement>;
+};
+
+type HandleInputsEventData = { sliderView: SliderView; panelSelectors: PanelSelectors };
+
+type PanelInputsData = {
+  minValue: number;
+  maxValue: number;
+  runner0Value: number;
+  runner1Value: number;
+  runnerSize: number;
+  fieldThickness: number;
+  isRange: boolean;
+  hasBar: boolean;
+  hasTip: boolean;
+  hasScale: boolean;
+  orientation: boolean;
+}
+
 export {
   AddTipNumberToDOMReturned,
   UpdateTipNumberArgs,
@@ -70,4 +100,7 @@ export {
   CreateScaleNumbersArgs,
   CreateScaleLinesBoxArgs,
   CreateScaleNumbersBoxArgs,
+  PanelSelectors,
+  HandleInputsEventData,
+  PanelInputsData,
 };

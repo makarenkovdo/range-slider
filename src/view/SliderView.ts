@@ -19,9 +19,11 @@ import RunnerModel from '../model/RunnerModel';
 import { UpdateTipNumberArgs } from './viewInterfaces';
 import updateZIndex from './viewModules/updateZIndex';
 import createScale from './viewModules/createScale';
-import handleDrag from './viewModules/handleDrag';
 import handleClick from './viewModules/handleClick';
+import handleDrag from './viewModules/handleDrag';
 import handleDrop from './viewModules/handleDrop';
+import handleInputs from './viewModules/handleInputs';
+
 import setStep from './viewModules/setStep';
 import { Orientation } from '../presenter/presenterInterfaces';
 
@@ -151,6 +153,7 @@ export default class SliderView {
     this.handleDrag = handleDrag.bind(this) as () => void;
     this.handleDrop = handleDrop.bind(this) as () => void;
     this.handleClick = handleClick.bind(this) as () => void;
+    this.handleInputs = handleInputs.bind(this) as () => void;
     this.notifySliderMoving = notifySliderMoving.bind(this) as () => void;
     this.notifyFieldClick = notifyFieldClick.bind(this) as () => void;
     this.initStartEnd = initStartEnd as () => void;

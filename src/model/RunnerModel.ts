@@ -3,11 +3,14 @@
 import SliderPresenter from '../presenter/SliderPresenter';
 import defineSignAfterComma from './runnerModules/defineSignAfterComma';
 import initializeDefaultValues from './runnerModules/initializeDefaultValues';
-import notify from './runnerModules/notify';
+import notifyToUpdate from './runnerModules/notifyToUpdate';
 import updateRunnerValues from './runnerModules/updateRunnerValues';
 import setStep from './runnerModules/setStep';
 import { NotifyMessageType, UpdateRunnerValuesArgs } from './runnerModules/runnerInterfaces';
 import { PresenterBuildParams } from '../presenter/presenterInterfaces';
+import { PanelInputsData } from '../view/viewInterfaces';
+import setValuesFromInputs from './runnerModules/setValuesFromInputs';
+import notifyToRebuild from './runnerModules/notifyToRebuild';
 
 class RunnerModel {
   public instance: number;
@@ -30,11 +33,13 @@ class RunnerModel {
 
   public defineSignAfterComma: (this: RunnerModel) => void;
 
-  public notify: (this: RunnerModel, messageType: NotifyMessageType, rebuildData?: PresenterBuildParams) => void;
+  public notifyToUpdate: (this: RunnerModel, messageType: NotifyMessageType, rebuildData?: PresenterBuildParams) => void;
+ 
+  public notifyToRebuild: (this: RunnerModel, messageType: NotifyMessageType, rebuildData?: PresenterBuildParams) => void;
 
   public setStep: (step: number, minMax: number[]) => void;
 
-  public setValuesFromInputs:(this: RunnerModel, inputValue:number, minMax: number[]) => void;
+  public setValuesFromInputs:(this: RunnerModel, panelInputsData:PanelInputsData) => void;
 
   public updateRunnerValues: (updateRunnerValuesArgs: UpdateRunnerValuesArgs) => void;
 
@@ -52,10 +57,13 @@ class RunnerModel {
     this.subscriber = subscriber;
 
     this.defineSignAfterComma = defineSignAfterComma.bind(this) as () => void;
-    this.notify = notify.bind(this) as () => void;
+    this.notifyToUpdate = notifyToUpdate.bind(this) as () => void;
+    this.notifyToRebuild = notifyToRebuild.bind(this) as () => void;
     this.setStep = setStep.bind(this) as () => void;
     this.updateRunnerValues = updateRunnerValues.bind(this) as () => void;
     this.initializeDefaultValues = initializeDefaultValues.bind(this) as () => void;
+    this.setValuesFromInputs = setValuesFromInputs.bind(this) as () => void;
+
   }
 }
 export default RunnerModel;

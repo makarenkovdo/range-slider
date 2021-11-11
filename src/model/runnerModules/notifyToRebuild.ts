@@ -2,7 +2,7 @@ import { PresenterBuildParams } from '../../presenter/presenterInterfaces';
 import RunnerModel from '../RunnerModel';
 import { NotifyMessageType } from './runnerInterfaces';
 
-const notify = function notifySubscribers(this: RunnerModel, messageType: NotifyMessageType, rebuildData?: PresenterBuildParams): void {
+const notifyToRebuild = function notifySubscribersToRebuild(this: RunnerModel, messageType: NotifyMessageType, rebuildData?: PresenterBuildParams): void {
   switch (messageType) {
     case 'modelLogic': {
       this.subscriber.recieveModelLogic(this);
@@ -16,4 +16,4 @@ const notify = function notifySubscribers(this: RunnerModel, messageType: Notify
   }
 };
 
-export default notify;
+export default notifyToRebuild;

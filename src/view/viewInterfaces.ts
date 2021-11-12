@@ -79,7 +79,7 @@ type HandleInputsEventData = { sliderView: SliderView; panelSelectors: PanelSele
 
 type PanelInputsData = {
   minMax: number[];
-  runnersValue: number[];
+  runnersInstantPosition: number[];
   runnerSize:number[];
   // fieldThickness:number;
   isRange:boolean;

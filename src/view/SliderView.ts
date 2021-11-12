@@ -1,33 +1,33 @@
 /* eslint-disable padded-blocks */
 /* eslint-env jquery */
-// import { addRunnerToDom, prepareRunnerArgs } from './viewModules/createSliderView';
+
+import clearHTMLElement from './viewModules/clearHTMLElement';
 import createBar from './viewModules/createBar';
+import createScale from './viewModules/createScale';
 import createRunner from './viewModules/createRunner';
 import createTipNumber from './viewModules/createTipNumber';
 import initializeValues from './viewModules/initializeValues';
 import initStartEnd from './viewModules/initStartEnd';
+import handleClick from './viewModules/handleClick';
+import handleDrag from './viewModules/handleDrag';
+import handleDrop from './viewModules/handleDrop';
+import handleInputs from './viewModules/handleInputs';
 import notifyFieldClick from './viewModules/notifyFieldClick';
 import notifySliderMoving from './viewModules/notifySliderMoving';
 import notifyInputChange from './viewModules/notifyInputChange';
+import setStep from './viewModules/setStep';
 import updateTipNumber from './viewModules/updateTipNumber';
 import updateBarPosition from './viewModules/updateBarPosition';
 import updateRunnerPosition from './viewModules/updateRunnerPosition';
+import updateZIndex from './viewModules/updateZIndex';
 
 import FieldModel from '../model/FieldModel';
 import SliderPresenter from '../presenter/SliderPresenter.js';
 import RunnerModel from '../model/RunnerModel';
 
 import { RunnersInstantPosition, UpdateTipNumberArgs } from './viewInterfaces';
-import updateZIndex from './viewModules/updateZIndex';
-import createScale from './viewModules/createScale';
-import handleClick from './viewModules/handleClick';
-import handleDrag from './viewModules/handleDrag';
-import handleDrop from './viewModules/handleDrop';
-import handleInputs from './viewModules/handleInputs';
 
-import setStep from './viewModules/setStep';
 import { Orientation } from '../presenter/presenterInterfaces';
-import clearHTMLElement from './viewModules/clearHTMLElement';
 
 export default class SliderView {
   public id: string;
@@ -89,7 +89,8 @@ export default class SliderView {
 
   public createTipNumber: (runnerCounter: number,
     isVertical: boolean,
-    runnersInstantPosition:RunnersInstantPosition
+    stepPosition:number,
+    stepValue:number,
   ) => void;
 
   public createScale: (this: SliderView) => void;
@@ -120,7 +121,7 @@ export default class SliderView {
 
   public notifyFieldClick: (cursorXY: number[]) => void;
 
-  public notifyInputChange: (this: SliderView, runnersValue: number[]) => void;
+  public notifyInputChange: (this: SliderView, runnersInstantPosition: number[]) => void;
 
   public initStartEnd: (minValue: number, maxValue: number) => void;
 

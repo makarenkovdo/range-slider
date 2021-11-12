@@ -2,19 +2,21 @@ import SliderView from '../SliderView';
 
 const notifyInputChange = function prepareDataAndNotifyInputChange(
   this: SliderView,
-  runnersValue: number[],
+  runnersInstantPosition: number[],
 ): void {
   const panelInputsData = {
 
-    isVertical: this.isVertical,
-    minMax: this.minMax,
+    orientation: this.isVertical ? 'vertical' : 'horizontal',
+    minValue: this.minMax[0],
+    maxValue: this.minMax[1],
     isRange: this.isRange,
     // fieldThickness: this.fieldthickness,
-    hasBar: this.hasBar,
-    hasScale: this.hasScale,
-    hasTip: this.hasTip,
-    runnersValue,
+    shouldAddBar: this.hasBar,
+    shouldAddScale: this.hasScale,
+    shouldAddTip: this.hasTip,
+    runnersInstantPosition,
     runnerSize: this.runnerSize,
+    step: this.step,
   };
   this.subscriber.recieveInputsData(panelInputsData);
 };

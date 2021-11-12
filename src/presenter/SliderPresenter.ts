@@ -44,7 +44,7 @@ class SliderPresenter {
     //   [minValue, maxValue],
     // )];
     this.createRunnerView(this.runnerCounter, stepPosition);
-    this.createTipNumber(shouldAddTip, { stepValue, stepPosition });
+    this.createTipNumber(shouldAddTip, stepValue, stepPosition);
     this.onDrag(this.runnerCounter);
     this.onDrop();
 
@@ -55,7 +55,7 @@ class SliderPresenter {
       this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition[this.runnerCounter]);
       ({ stepValue, stepPosition } = this.runners[this.runnerCounter]);
       this.createRunnerView(this.runnerCounter, stepPosition);
-      this.createTipNumber(shouldAddTip, { stepValue, stepPosition });
+      this.createTipNumber(shouldAddTip, stepValue, stepPosition);
       this.onDrag(this.runnerCounter);
       this.onDrop();
     } else this.view.isRange = false;
@@ -81,9 +81,11 @@ class SliderPresenter {
     return this;
   }
 
-  public createTipNumber(isOn: boolean, runnersInstantPosition: RunnersInstantPosition): this {
+  public createTipNumber(isOn: boolean, stepPosition: number, stepValue:number): this {
+    console.log('PRESENTER TIP');
+
     if (isOn) {
-      this.view.createTipNumber(this.runnerCounter, this.field.isVertical, runnersInstantPosition);
+      this.view.createTipNumber(this.runnerCounter, this.field.isVertical, stepPosition, stepValue);
     }
     return this;
   }
@@ -155,15 +157,15 @@ class SliderPresenter {
   }
 
   public recieveInputsData(
-    panelInputsData: PanelInputsData,
+    panelInputsData: PresenterBuildParams,
   ): void {
-    const returnedRunnerPosition = this.runners.map((v, i) => v.setValuesFromInputs(
-      panelInputsData.runnersValue[i],
-      panelInputsData.minMax,
-    ));
-      const rebuildData = panelInputsData;
-    rebuildData.returnedRunnerPosition = returnedRunnerPosition;
-    this.rebuild(rebuildData);
+    // const returnedRunnerPosition = this.runners.map((v, i) => v.setValuesFromInputs(
+    //   panelInputsData.runnersValue[i],
+    //   panelInputsData.minMax,
+    // ));
+    // const rebuildData = panelInputsData;
+    // rebuildData.returnedRunnerPosition = returnedRunnerPosition;
+    this.rebuild(panelInputsData);
   }
 
   // prettier-ignore
@@ -253,8 +255,8 @@ class SliderPresenter {
         .setStep(step)
         .createBar(shouldAddBar)
         .createScale(shouldAddScale)
-        .updateTipNumber(minValue, 0)
-        .updateTipNumber(maxValue, 1)
+        // .updateTipNumber(minValue, 0)
+        // .updateTipNumber(maxValue, 1)
         .onClick()
         .onInputChange();
     }

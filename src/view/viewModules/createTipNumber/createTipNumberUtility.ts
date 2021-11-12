@@ -8,7 +8,11 @@ export type PreparedDataType = {
 };
 
 const prepareTipNumberArgs = (
-  i: number, isVertical: boolean, fieldSize: number[],
+  i: number,
+  isVertical: boolean,
+  fieldSize: number[],
+  stepPosition:number,
+
 ): PreparedDataType => {
   let positioning = ['left'];
   let viewPosition = [100 * i];
@@ -20,8 +24,8 @@ const prepareTipNumberArgs = (
     viewPosition = [100 * i];
   }
   const position = isVertical
-    ? [fieldSize[1] - (viewPosition[0] * (fieldSize[1] / 100)) - 10]
-    : [((viewPosition[0] * (fieldSize[0] / 100)) - 20)];
+    ? [fieldSize[1] - (stepPosition * (fieldSize[1] / 100)) - 10]
+    : [((stepPosition * (fieldSize[0] / 100)) - 20)];
 
   //  set min = 0%, max = 100% for left/top positions
   return { instance, positioning, position } as PreparedDataType;
@@ -32,6 +36,8 @@ const addTipNumberToDOM = (
   $id: JQuery<HTMLElement>,
   orientation: Orientation,
   minMax: number[],
+  stepValue:number,
+
 ): UpdateTipNumberArgs => {
   const {
     instance, positioning, position,
@@ -39,7 +45,7 @@ const addTipNumberToDOM = (
   $id.append(
     `<span data-testid="test-tip-number-${instance}" class='slider__tip slider__tip_${orientation} js-slider__tip_instance-${instance}' style="${positioning[0]}:${position[0]}px"><span>0</span></span>`,
   );
-  $id.find(`.js-slider__tip_instance-${instance} span`).text(`${minMax[instance]}`);
+  $id.find(`.js-slider__tip_instance-${instance} span`).text(`${stepValue}`);
 
   return { stepValue: position[0], instance };
 };

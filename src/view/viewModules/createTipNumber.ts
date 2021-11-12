@@ -8,11 +8,7 @@ const createTipNumber = function addTipNumberToDOMAndUpdateTextNumber(
   stepPosition:number,
   stepValue:number,
 ): void {
-  console.log('CREATE TIP');
-
   $(document).ready(() => {
-    console.log('sdfsdf');
-    
     addTipNumberToDOM(
       prepareTipNumberArgs(
         i,

@@ -1,5 +1,4 @@
 /* eslint-disable padded-blocks */
-/* eslint-env jquery */
 
 import clearHTMLElement from './viewModules/clearHTMLElement';
 import createBar from './viewModules/createBar';
@@ -11,7 +10,7 @@ import initStartEnd from './viewModules/initStartEnd';
 import handleClick from './viewModules/handleClick';
 import handleDrag from './viewModules/handleDrag';
 import handleDrop from './viewModules/handleDrop';
-import handleInputs from './viewModules/handleInputs';
+import handleInputsChange from './viewModules/handleInputsChange';
 import notifyFieldClick from './viewModules/notifyFieldClick';
 import notifySliderMoving from './viewModules/notifySliderMoving';
 import notifyInputChange from './viewModules/notifyInputChange';
@@ -25,7 +24,7 @@ import FieldModel from '../model/FieldModel';
 import SliderPresenter from '../presenter/SliderPresenter.js';
 import RunnerModel from '../model/RunnerModel';
 
-import { RunnersInstantPosition, UpdateTipNumberArgs } from './viewInterfaces';
+import { UpdateTipNumberArgs } from './viewInterfaces';
 
 import { Orientation } from '../presenter/presenterInterfaces';
 
@@ -97,17 +96,11 @@ export default class SliderView {
 
   public clearHTMLElement: (this: SliderView) => void;
 
-  public updateBarPosition: (activeRunner: RunnerModel) => void;
-
-  public updateTipNumber: (obj: UpdateTipNumberArgs) => void;
-
-  public updateRunnerPosition: (this: SliderView, stepPosition: number, instance: number) => void;
-
-  public updateZIndex: (this: SliderView, i: number) => void;
-
   public initializeValues: (
     runnerSize: number[], fieldThickness:number, orientation: Orientation
   ) => void;
+
+  public initStartEnd: (minValue: number, maxValue: number) => void;
 
   public handleDrag: (this: SliderView, runnerInstance: number) => void;
 
@@ -115,7 +108,7 @@ export default class SliderView {
 
   public handleClick: (this: SliderView, runners: RunnerModel[], field: FieldModel) => void;
 
-  public handleInputs: (this: SliderView) => void;
+  public handleInputsChange: (this: SliderView) => void;
 
   public notifySliderMoving: (cursorXY: number[], instance: number) => void;
 
@@ -123,9 +116,15 @@ export default class SliderView {
 
   public notifyInputChange: (this: SliderView, runnersInstantPosition: number[]) => void;
 
-  public initStartEnd: (minValue: number, maxValue: number) => void;
-
   public setStep: (step:number, stepSignAfterComma:number) => void;
+
+  public updateBarPosition: (activeRunner: RunnerModel) => void;
+
+  public updateTipNumber: (obj: UpdateTipNumberArgs) => void;
+
+  public updateRunnerPosition: (this: SliderView, stepPosition: number, instance: number) => void;
+
+  public updateZIndex: (this: SliderView, i: number) => void;
 
   constructor(id: string, subscriber: SliderPresenter) {
     this.id = id;
@@ -167,7 +166,7 @@ export default class SliderView {
     this.handleDrag = handleDrag.bind(this) as () => void;
     this.handleDrop = handleDrop.bind(this) as () => void;
     this.handleClick = handleClick.bind(this) as () => void;
-    this.handleInputs = handleInputs.bind(this) as () => void;
+    this.handleInputsChange = handleInputsChange.bind(this) as () => void;
     this.notifySliderMoving = notifySliderMoving.bind(this) as () => void;
     this.notifyFieldClick = notifyFieldClick.bind(this) as () => void;
     this.notifyInputChange = notifyInputChange.bind(this) as () => void;

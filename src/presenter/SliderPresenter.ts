@@ -29,6 +29,7 @@ class SliderPresenter {
     this.field = new FieldModel(id, this);
     this.view = new SliderView(id, this);
     this.build(params);
+    this.addListeners(params.isRange)
   }
 
   // prettier-ignore
@@ -47,8 +48,8 @@ class SliderPresenter {
     // )];
     this.createRunnerView(this.runnerCounter, stepPosition);
     this.createTipNumber(shouldAddTip, stepPosition, stepValue);
-    this.onDrag(this.runnerCounter);
-    this.onDrop();
+    // this.onDrag(this.runnerCounter);
+    // this.onDrop();
 
     if (isRange) {
       this.runnerCounter += 1;
@@ -60,8 +61,8 @@ class SliderPresenter {
 
       this.createRunnerView(this.runnerCounter, stepPosition);
       this.createTipNumber(shouldAddTip, stepPosition, stepValue);
-      this.onDrag(this.runnerCounter);
-      this.onDrop();
+      // this.onDrag(this.runnerCounter);
+      // this.onDrop();
     } else this.view.isRange = false;
     return this;
   }
@@ -120,13 +121,19 @@ class SliderPresenter {
     return this;
   }
 
+  public addListeners(isRange: boolean): this {
+   this.onClick().onDrag(0).onDrop().onInputChange();
+   if (isRange) this.onDrag(1);
+    return this;
+  }
+
   public onDrop(): this {
     this.view.handleDrop();
     return this;
   }
 
   public onInputChange():this {
-    this.view.handleInputs();
+    this.view.handleInputsChange();
     return this;
   }
 
@@ -256,13 +263,11 @@ class SliderPresenter {
           maxValue,
           runnersInstantPosition,
         })
+        // .onInputChange()
         .setStep(step)
         .createBar(shouldAddBar)
         .createScale(shouldAddScale)
-        // .updateTipNumber(minValue, 0)
-        // .updateTipNumber(maxValue, 1)
-        .onClick()
-        .onInputChange();
+        // .onClick();
     }
   }
 

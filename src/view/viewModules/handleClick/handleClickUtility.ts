@@ -14,6 +14,8 @@ const prepareMovingCoordinates = (event: JQuery.ClickEvent, thisView: SliderView
   return cursorXY;
 };
 const handleClickUtility = (event: JQuery.ClickEvent): void => {
+  event.preventDefault();
+  event.stopPropagation();
   const thisView = event.data as SliderView;
   const cursorXY = prepareMovingCoordinates(event, thisView);
   thisView.notifyFieldClick(cursorXY);

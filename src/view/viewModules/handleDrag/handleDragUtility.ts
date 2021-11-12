@@ -3,7 +3,7 @@ import { DragEventDataType } from '../../viewInterfaces';
 // import notify from './notify';
 
 const prepareMovingCoordinates = (
-  event: JQuery.ClickEvent,
+  event: JQuery.DragEvent,
   eventData: DragEventDataType,
 ): number[] => {
   const cursorXY = [
@@ -21,9 +21,9 @@ const prepareMovingCoordinates = (
   return cursorXY;
 };
 
-const notifySubscriber = (event: JQuery.ClickEvent): void => {
-  // event.preventDefault();
-  // event.stopPropagation();
+const notifySubscriber = (event: JQuery.DragEvent): void => {
+  event.preventDefault();
+  event.stopPropagation();
   const eventData = event.data as DragEventDataType;
   const cursorXY = prepareMovingCoordinates(event, eventData);
   eventData.thisView.notifySliderMoving(cursorXY, eventData.instance);

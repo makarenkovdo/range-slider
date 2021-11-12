@@ -23,9 +23,11 @@ const prepareTipNumberArgs = (
     positioning = ['top'];
     viewPosition = [100 * i];
   }
+  
   const position = isVertical
     ? [fieldSize[1] - (stepPosition * (fieldSize[1] / 100)) - 10]
     : [((stepPosition * (fieldSize[0] / 100)) - 20)];
+    console.log('stepPosition, position',stepPosition, position );
 
   //  set min = 0%, max = 100% for left/top positions
   return { instance, positioning, position } as PreparedDataType;

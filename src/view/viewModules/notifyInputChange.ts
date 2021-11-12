@@ -1,10 +1,11 @@
+import { PresenterBuildParams } from '../../presenter/presenterInterfaces';
 import SliderView from '../SliderView';
 
 const notifyInputChange = function prepareDataAndNotifyInputChange(
   this: SliderView,
   runnersInstantPosition: number[],
 ): void {
-  const panelInputsData = {
+  const panelInputsData:PresenterBuildParams = {
 
     orientation: this.isVertical ? 'vertical' : 'horizontal',
     minValue: this.minMax[0],

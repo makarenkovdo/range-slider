@@ -39,6 +39,8 @@ class SliderPresenter {
   }:CreateRangeSliderArgsType): this {
     this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition[this.runnerCounter]);
     let { stepValue, stepPosition } = this.runners[this.runnerCounter];
+    console.log('presenter stepValue, stepPosition', stepValue, stepPosition);
+
     // const returnedRunnerPosition = [this.runners[0].setValuesFromInputs(
     //   runnersInstantPosition[this.runnerCounter],
     //   [minValue, maxValue],
@@ -54,8 +56,10 @@ class SliderPresenter {
       this.field.isRange = true;
       this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition[this.runnerCounter]);
       ({ stepValue, stepPosition } = this.runners[this.runnerCounter]);
+      console.log('presenter stepValue, stepPosition2', stepValue, stepPosition);
+
       this.createRunnerView(this.runnerCounter, stepPosition);
-      this.createTipNumber(shouldAddTip, stepValue, stepPosition);
+      this.createTipNumber(shouldAddTip, stepPosition, stepValue);
       this.onDrag(this.runnerCounter);
       this.onDrop();
     } else this.view.isRange = false;

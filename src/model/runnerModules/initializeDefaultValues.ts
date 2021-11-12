@@ -15,8 +15,6 @@ const initializeDefaultValues = function initializeDefaultPositionAndValue(
   );
   this.positionInPercent = stepPosition;
   this.value = stepValue;
-  console.log(stepPosition, stepValue);
-
   this.stepPosition = stepPosition;
   this.stepValue = stepValue;
 };

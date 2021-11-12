@@ -16,9 +16,10 @@ const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
     minMax = fieldSize[1];
     switcher = [1, 0];
   }
+  const positionInPx = stepPosition * (fieldSize[switcher[0]] / 100);
 
   const position = [
-    stepPosition + mainPositionCorrector,
+    positionInPx + mainPositionCorrector,
     -thicknessCorrector + fieldSize[switcher[1]] * 0.5];
 
   return {

@@ -46,7 +46,7 @@ class SliderPresenter {
     //   [minValue, maxValue],
     // )];
     this.createRunnerView(this.runnerCounter, stepPosition);
-    this.createTipNumber(shouldAddTip, stepValue, stepPosition);
+    this.createTipNumber(shouldAddTip, stepPosition, stepValue);
     this.onDrag(this.runnerCounter);
     this.onDrop();
 

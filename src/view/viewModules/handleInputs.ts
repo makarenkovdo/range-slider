@@ -9,12 +9,12 @@ const handleInputs = function handleChangeInputsAndCheckboxes(this: SliderView):
   const $runner1ValueInput:
   HTMLInputElement = $panel.querySelector('.js-slider-input__runner-1-value');
   let runnersValue = [0, 0];
-  console.log('runnersValue', runnersValue);
-
-  const handleInputChange = ():void => {
-    console.log('BEGINNING runnersValue', runnersValue);
-
+  const handleMinInputChange = ():void => {
     this.minMax[0] = parseInt(($minValueInput.value), 10);
+    this.notifyInputChange.call(this, runnersValue);
+  };
+  const handleMaxInputChange = ():void => {
+    this.minMax[1] = parseInt(($maxValueInput.value), 10);
     this.notifyInputChange.call(this, runnersValue);
   };
   const handleRunner0InputChange = ():void => {
@@ -22,7 +22,6 @@ const handleInputs = function handleChangeInputsAndCheckboxes(this: SliderView):
       parseInt(($runner0ValueInput.value), 10),
       parseInt(($runner1ValueInput.value), 10),
     ];
-    console.log('CHANGE runnersValue', runnersValue);
 
     // this.notifyInputChange.call(this, runnersValue);
   };
@@ -35,7 +34,8 @@ const handleInputs = function handleChangeInputsAndCheckboxes(this: SliderView):
 
     // this.notifyInputChange.call(this, runnersValue);
   };
-  $minValueInput.addEventListener('change', () => handleInputChange());
+  $minValueInput.addEventListener('change', () => handleMinInputChange());
+  $maxValueInput.addEventListener('change', () => handleMaxInputChange());
   $runner0ValueInput.addEventListener('change', () => handleRunner0InputChange());
   $runner1ValueInput.addEventListener('change', () => handleRunner1InputChange());
 };

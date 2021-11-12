@@ -17,7 +17,7 @@ import FieldModel from '../model/FieldModel';
 import SliderPresenter from '../presenter/SliderPresenter.js';
 import RunnerModel from '../model/RunnerModel';
 
-import { UpdateTipNumberArgs } from './viewInterfaces';
+import { RunnersInstantPosition, UpdateTipNumberArgs } from './viewInterfaces';
 import updateZIndex from './viewModules/updateZIndex';
 import createScale from './viewModules/createScale';
 import handleClick from './viewModules/handleClick';
@@ -82,9 +82,15 @@ export default class SliderView {
 
   public createBar: (presenter: SliderPresenter) => void;
 
-  public createRunner: (this:SliderView, i: number, runnersInstantPosition:number[]) => void;
+  public createRunner: (this:SliderView,
+    i: number,
+    stepPosition:number,
+  ) => void;
 
-  public createTipNumber: (runnerCounter: number, isVertical: boolean) => void;
+  public createTipNumber: (runnerCounter: number,
+    isVertical: boolean,
+    runnersInstantPosition:RunnersInstantPosition
+  ) => void;
 
   public createScale: (this: SliderView) => void;
 

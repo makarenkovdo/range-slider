@@ -87,7 +87,12 @@ type PanelInputsData = {
   hasTip:boolean;
   hasScale:boolean;
   isVertical:boolean;
-  returnedRunnerPosition?: number[]
+  returnedRunnerPosition?: RunnersInstantPosition[];
+};
+
+type RunnersInstantPosition = {
+  stepPosition: number;
+  stepValue: number;
 };
 
 export {
@@ -102,4 +107,5 @@ export {
   PanelSelectors,
   HandleInputsEventData,
   PanelInputsData,
+  RunnersInstantPosition,
 };

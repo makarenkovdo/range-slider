@@ -6,17 +6,17 @@ const initializeDefaultValues = function initializeDefaultPositionAndValue(
   minMax: number[],
   runnersInstantPosition: number[],
 ): void {
-  const minMaxStepPosition = [0, 100];
-  calculateStepPositionFromInput(
+  // const minMaxStepPosition = [0, 100];
+  const { stepPosition, stepValue } = calculateStepPositionFromInput(
     runnersInstantPosition[this.instance],
     this.step,
     this.stepSignAfterComma,
     minMax,
   );
-  this.positionInPercent = minMaxStepPosition[this.instance];
-  this.value = minMax[this.instance];
-  this.stepPosition = minMaxStepPosition[this.instance];
-  this.stepValue = minMax[this.instance];
+  this.positionInPercent = stepPosition;
+  this.value = stepValue;
+  this.stepPosition = stepPosition;
+  this.stepValue = stepValue;
 };
 
 export default initializeDefaultValues;

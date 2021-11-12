@@ -1,9 +1,10 @@
 import { Orientation } from '../../../presenter/presenterInterfaces';
 import SliderView from '../../SliderView';
+import { RunnersInstantPosition } from '../../viewInterfaces';
 import { PreparedDataType } from '../createTipNumber/createTipNumberUtility';
 
 const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
-  fieldSize: number[], runnersInstantPosition: number[],): PreparedDataType => {
+  fieldSize: number[], stepPosition: number): PreparedDataType => {
   let positioning = ['left', 'top'];
   let minMax = 0;
   let switcher = [0, 1];
@@ -15,11 +16,12 @@ const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
     minMax = fieldSize[1];
     switcher = [1, 0];
   }
+
   const position = [
-    runnersInstantPosition[i] + mainPositionCorrector,
+    stepPosition + mainPositionCorrector,
     -thicknessCorrector + fieldSize[switcher[1]] * 0.5];
-    console.log(instance, positioning, position);
-    
+  console.log('instance, positioning, position', instance, positioning, position);
+
   return {
     instance, positioning, position,
   };

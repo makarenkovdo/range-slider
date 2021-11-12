@@ -3,7 +3,7 @@ import FieldModel from '../model/FieldModel';
 import RunnerModel from '../model/RunnerModel';
 import { UpdateRunnerValuesArgs } from '../model/runnerModules/runnerInterfaces';
 import SliderView from '../view/SliderView';
-import { PanelInputsData } from '../view/viewInterfaces';
+import { PanelInputsData, RunnersInstantPosition } from '../view/viewInterfaces';
 import {
   PresenterBuildParams,
   CreateRangeSliderArgsType,
@@ -37,9 +37,15 @@ class SliderPresenter {
   public createRangeSlider({
     isRange, shouldAddTip, runnerSize, minValue, maxValue, runnersInstantPosition,
   }:CreateRangeSliderArgsType): this {
-    this.createRunnerView(this.runnerCounter, runnersInstantPosition);
-    this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition);
-    this.createTipNumber(shouldAddTip);
+    this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition[this.runnerCounter]);
+    let { stepValue, stepPosition } = this.runners[this.runnerCounter];
+    // const returnedRunnerPosition = [this.runners[0].setValuesFromInputs(
+    //   runnersInstantPosition[this.runnerCounter],
+    //   [minValue, maxValue],
+    // )];
+    console.log('ththth');
+    this.createRunnerView(this.runnerCounter, stepPosition);
+    this.createTipNumber(shouldAddTip, { stepValue, stepPosition });
     this.onDrag(this.runnerCounter);
     this.onDrop();
 
@@ -47,9 +53,10 @@ class SliderPresenter {
       this.runnerCounter += 1;
       this.view.isRange = true;
       this.field.isRange = true;
-      this.createRunnerView(this.runnerCounter, runnersInstantPosition);
-      this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition);
-      this.createTipNumber(shouldAddTip);
+      this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition[this.runnerCounter]);
+      ({ stepValue, stepPosition } = this.runners[this.runnerCounter]);
+      this.createRunnerView(this.runnerCounter, stepPosition);
+      this.createTipNumber(shouldAddTip, { stepValue, stepPosition });
       this.onDrag(this.runnerCounter);
       this.onDrop();
     } else this.view.isRange = false;
@@ -57,7 +64,10 @@ class SliderPresenter {
   }
 
   public createRunner(
-    runnerSize: number[], minValue: number, maxValue: number, runnersInstantPosition:number[],
+    runnerSize: number[],
+    minValue: number,
+    maxValue: number,
+    runnersInstantPosition: number,
   ): this {
     this.runners.push(new RunnerModel(this.id, this.runnerCounter, this));
     this.runners[this.runnerCounter].initializeDefaultValues(
@@ -67,14 +77,14 @@ class SliderPresenter {
     return this;
   }
 
-  public createRunnerView(i: number, runnersInstantPosition: number[]): this {
-    this.view.createRunner(i, runnersInstantPosition);
+  public createRunnerView(i: number, stepPosition: number): this {
+    this.view.createRunner(i, stepPosition);
     return this;
   }
 
-  public createTipNumber(isOn: boolean): this {
+  public createTipNumber(isOn: boolean, runnersInstantPosition: RunnersInstantPosition): this {
     if (isOn) {
-      this.view.createTipNumber(this.runnerCounter, this.field.isVertical);
+      this.view.createTipNumber(this.runnerCounter, this.field.isVertical, runnersInstantPosition);
     }
     return this;
   }
@@ -200,11 +210,12 @@ class SliderPresenter {
   //  prettier-ignore
   public rebuild(params:PresenterBuildParams):void {
     this.view.clearHTMLElement();
+    this.runnerCounter = 0;
     this.build(params);
   }
 
   private build(params: PresenterBuildParams): void {
-    console.log('BUILDIM');
+    console.log('BUILDIM', params);
 
     let {
       minValue = 0,

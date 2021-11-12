@@ -3,7 +3,7 @@
 import defineSignAfterComma from './runnerModules/defineSignAfterComma';
 import initializeDefaultValues from './runnerModules/initializeDefaultValues';
 import setStep from './runnerModules/setStep';
-import { UpdateRunnerValuesArgs } from './runnerModules/runnerInterfaces';
+import { CalculateStepPositionFromInputReturned, UpdateRunnerValuesArgs } from './runnerModules/runnerInterfaces';
 import { PresenterBuildParams } from '../presenter/presenterInterfaces';
 // import { PanelInputsData } from '../view/viewInterfaces';
 import notifyToUpdate from './runnerModules/notifyToUpdate';
@@ -43,11 +43,17 @@ class RunnerModel {
 
   public setStep: (step: number, minMax: number[]) => void;
 
-  public setValuesFromInputs:(this: RunnerModel, inputRunnerValue:number, minMax:number[]) => void;
+  public setValuesFromInputs:(
+    this: RunnerModel,
+    inputRunnerValue:number,
+    minMax:number[]
+  ) => CalculateStepPositionFromInputReturned;
 
   public updateRunnerValues: (updateRunnerValuesArgs: UpdateRunnerValuesArgs) => void;
 
-  public initializeDefaultValues: (minMax: number[], runnersInstantPosition:number[]) => void;
+  public initializeDefaultValues: (minMax: number[],
+    runnerInstantPosition:number,
+  ) => void;
 
   constructor(id: string, instance: number, subscriber: SliderPresenter) {
     this.instance = instance;
@@ -66,7 +72,9 @@ class RunnerModel {
     this.setStep = setStep.bind(this) as () => void;
     this.updateRunnerValues = updateRunnerValues.bind(this) as () => void;
     this.initializeDefaultValues = initializeDefaultValues.bind(this) as () => void;
-    this.setValuesFromInputs = setValuesFromInputs.bind(this) as () => void;
+    this.setValuesFromInputs = setValuesFromInputs.bind(
+      this,
+    ) as () => CalculateStepPositionFromInputReturned;
   }
 }
 export default RunnerModel;

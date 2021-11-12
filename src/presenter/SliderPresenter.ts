@@ -148,7 +148,7 @@ export default class SliderPresenter {
   public recieveInputsData(
     thisView: SliderView,
   ): void {
-    const panelInputsData = {
+    const panelInputsData = { //  todo: перенести в view
 
       isVertical: thisView.isVertical,
       minMax: thisView.minMax,

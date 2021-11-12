@@ -87,6 +87,7 @@ type PanelInputsData = {
   hasTip:boolean;
   hasScale:boolean;
   isVertical:boolean;
+  returnedRunnerPosition?: number[]
 };
 
 export {

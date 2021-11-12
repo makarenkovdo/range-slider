@@ -1,35 +1,29 @@
 import { PanelInputsData } from '../../view/viewInterfaces';
 import RunnerModel from '../RunnerModel';
-import { NotifyMessageType } from './runnerInterfaces';
+import { CalculateStepPositionFromInputReturned, NotifyMessageType } from './runnerInterfaces';
 import { calculateStepPositionFromInput, setValues } from './setValuesFromInputs/setValuesFromInputsUtility';
 
 const setValuesFromInputs = function setThisValuesFromPanelInputs(
-  this:RunnerModel, panelInputsData:PanelInputsData,
-):void {
+  this:RunnerModel,
+  inputRunnerValue:number,
+  minMax: number[],
+):CalculateStepPositionFromInputReturned {
+  console.log(inputRunnerValue, 'inputRunnerValue');
+
+  const { stepValue, stepPosition } = calculateStepPositionFromInput(
+    inputRunnerValue,
+    this.step,
+    this.stepSignAfterComma,
+    minMax,
+  );
+
   setValues.call(
     this,
-    calculateStepPositionFromInput(
-      panelInputsData.runnersValue[this.instance],
-      this.step,
-      this.stepSignAfterComma,
-      panelInputsData.minMax,
-    ),
+    stepValue,
+    stepPosition,
   );
-  const rebuildData = {
-    minValue: panelInputsData.minMax[0],
-    maxValue?: panelInputsData.minMax[1],
-    step: this.step,
-    shouldAddTip: panelInputsData.hasTip,
-    shouldAddBar: panelInputsData.hasBar,
-    shouldAddScale: panelInputsData.hasScale,
-    isRange: panelInputsData.isRange,
-    runnerSize: panelInputsData.runnerSize,
-    // fieldThickness?: number,
-    // isTestMode?: boolean,
-    isVertical: panelInputsData.isVertical,
-    runnersInstantPosition: this.stepPosition,
-  }
-  this.notifyToRebuild.call(this, rebuildData);
+  return { stepValue, stepPosition };
+  // this.notifyToRebuild.call(this.stepPosition, this.stepValue);
 };
 
 export default setValuesFromInputs;

@@ -8,12 +8,13 @@ import initializeValues from './viewModules/initializeValues';
 import initStartEnd from './viewModules/initStartEnd';
 import notifyFieldClick from './viewModules/notifyFieldClick';
 import notifySliderMoving from './viewModules/notifySliderMoving';
+import notifyInputChange from './viewModules/notifyInputChange';
 import updateTipNumber from './viewModules/updateTipNumber';
 import updateBarPosition from './viewModules/updateBarPosition';
 import updateRunnerPosition from './viewModules/updateRunnerPosition';
 
 import FieldModel from '../model/FieldModel';
-import SliderPresenter from '../presenter/SliderPresenter';
+import SliderPresenter from '../presenter/SliderPresenter.js';
 import RunnerModel from '../model/RunnerModel';
 
 import { UpdateTipNumberArgs } from './viewInterfaces';
@@ -113,6 +114,8 @@ export default class SliderView {
 
   public notifyFieldClick: (cursorXY: number[]) => void;
 
+  public notifyInputChange: (this: SliderView, runnersValue: number[]) => void;
+
   public initStartEnd: (minValue: number, maxValue: number) => void;
 
   public setStep: (step:number, stepSignAfterComma:number) => void;
@@ -160,6 +163,7 @@ export default class SliderView {
     this.handleInputs = handleInputs.bind(this) as () => void;
     this.notifySliderMoving = notifySliderMoving.bind(this) as () => void;
     this.notifyFieldClick = notifyFieldClick.bind(this) as () => void;
+    this.notifyInputChange = notifyInputChange.bind(this) as () => void;
     this.initStartEnd = initStartEnd as () => void;
     this.setStep = setStep as () => void;
   }

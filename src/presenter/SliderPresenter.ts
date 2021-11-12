@@ -12,7 +12,7 @@ import {
 } from './presenterInterfaces';
 import checkValues from './presenterModules/checkValues';
 
-export default class SliderPresenter {
+class SliderPresenter {
   public field: FieldModel;
 
   public runners: RunnerModel[];
@@ -124,7 +124,7 @@ export default class SliderPresenter {
   }
 
   public recieveRebuildData(params: PresenterBuildParams): void {
-    this.rebuild(params)
+    this.rebuild(params);
   }
 
   // prettier-ignore
@@ -146,21 +146,17 @@ export default class SliderPresenter {
   }
 
   public recieveInputsData(
-    thisView: SliderView,
+    panelInputsData: PanelInputsData,
   ): void {
-    const panelInputsData = { //  todo: перенести в view
+    const returnedRunnerPosition = this.runners.map((v, i) => v.setValuesFromInputs(
+      panelInputsData.runnersValue[i],
+      panelInputsData.minMax,
+    ));
+    console.log('returnedRunnerPosition', returnedRunnerPosition);
 
-      isVertical: thisView.isVertical,
-      minMax: thisView.minMax,
-      isRange: thisView.isRange,
-      // fieldThickness: thisView.fieldthickness,
-      hasBar: thisView.hasBar,
-      hasScale: thisView.hasScale,
-      hasTip: thisView.hasTip,
-      runnersValue: thisView.runnersPosition,
-      runnerSize: thisView.runnerSize,
-    };
-    this.runners[0].setValuesFromInputs(panelInputsData));
+    const rebuildData = panelInputsData;
+    rebuildData.returnedRunnerPosition = returnedRunnerPosition;
+    this.rebuild(rebuildData);
   }
 
   // prettier-ignore
@@ -202,14 +198,14 @@ export default class SliderPresenter {
   }
 
   //  prettier-ignore
-  public rebuild(params):void {
+  public rebuild(params:PresenterBuildParams):void {
     this.view.clearHTMLElement();
     this.build(params);
   }
 
   private build(params: PresenterBuildParams): void {
     console.log('BUILDIM');
-    
+
     let {
       minValue = 0,
       maxValue = 100,
@@ -278,3 +274,5 @@ export default class SliderPresenter {
     this.view.updateRunnerPosition(stepPosition, instance);
   }
 }
+
+export default SliderPresenter;

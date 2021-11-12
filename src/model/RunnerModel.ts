@@ -1,16 +1,16 @@
 /* eslint-env jquery */
 
-import SliderPresenter from '../presenter/SliderPresenter';
 import defineSignAfterComma from './runnerModules/defineSignAfterComma';
 import initializeDefaultValues from './runnerModules/initializeDefaultValues';
 import setStep from './runnerModules/setStep';
-import { NotifyMessageType, UpdateRunnerValuesArgs } from './runnerModules/runnerInterfaces';
+import { UpdateRunnerValuesArgs } from './runnerModules/runnerInterfaces';
 import { PresenterBuildParams } from '../presenter/presenterInterfaces';
-import { PanelInputsData } from '../view/viewInterfaces';
+// import { PanelInputsData } from '../view/viewInterfaces';
 import notifyToUpdate from './runnerModules/notifyToUpdate';
 import notifyToRebuild from './runnerModules/notifyToRebuild';
 import updateRunnerValues from './runnerModules/updateRunnerValues';
 import setValuesFromInputs from './runnerModules/setValuesFromInputs';
+import SliderPresenter from '../presenter/SliderPresenter.js';
 
 class RunnerModel {
   public instance: number;
@@ -43,7 +43,7 @@ class RunnerModel {
 
   public setStep: (step: number, minMax: number[]) => void;
 
-  public setValuesFromInputs:(this: RunnerModel, panelInputsData:PanelInputsData) => void;
+  public setValuesFromInputs:(this: RunnerModel, inputRunnerValue:number, minMax:number[]) => void;
 
   public updateRunnerValues: (updateRunnerValuesArgs: UpdateRunnerValuesArgs) => void;
 

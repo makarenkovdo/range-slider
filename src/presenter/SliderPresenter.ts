@@ -29,7 +29,7 @@ class SliderPresenter {
     this.field = new FieldModel(id, this);
     this.view = new SliderView(id, this);
     this.build(params);
-    this.addListeners(params.isRange)
+    this.addListeners(params.isRange);
   }
 
   // prettier-ignore
@@ -99,7 +99,7 @@ class SliderPresenter {
     if (shouldAddBar) {
       this.view.hasBar = true;
       this.view.createBar(this);
-      this.view.updateBarPosition(this.runners[0]);
+      this.view.updateBarPosition();
     }
 
     return this;
@@ -122,8 +122,8 @@ class SliderPresenter {
   }
 
   public addListeners(isRange: boolean): this {
-   this.onClick().onDrag(0).onDrop().onInputChange();
-   if (isRange) this.onDrag(1);
+    this.onClick().onDrag(0).onDrop().onInputChange();
+    if (isRange) this.onDrag(1);
     return this;
   }
 
@@ -141,7 +141,7 @@ class SliderPresenter {
     if (activeRunner) {
       this.updateRunnerPosition(activeRunner);
       if (this.view.hasTip) this.updateTipNumber(activeRunner.stepValue, activeRunner.instance);
-      if (this.view.hasBar) this.updateBarPosition(activeRunner);
+      if (this.view.hasBar) this.updateBarPosition();
     }
   }
 
@@ -266,13 +266,13 @@ class SliderPresenter {
         // .onInputChange()
         .setStep(step)
         .createBar(shouldAddBar)
-        .createScale(shouldAddScale)
-        // .onClick();
+        .createScale(shouldAddScale);
+      // .onClick();
     }
   }
 
-  private updateBarPosition(activeRunner: RunnerModel): this {
-    this.view.updateBarPosition(activeRunner);
+  private updateBarPosition(): this {
+    this.view.updateBarPosition();
     return this;
   }
 

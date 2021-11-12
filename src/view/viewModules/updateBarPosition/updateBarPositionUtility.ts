@@ -61,6 +61,8 @@ const updateRangeBarPosition = (
   runnersPosition: number[],
   barLength: number,
 ): void => {
+  console.log(runnersPosition, 'runnersPosition BAR');
+  
   const positioningSwitcher = [
     ['left', 'width'],
     ['top', 'height'],
@@ -69,6 +71,7 @@ const updateRangeBarPosition = (
   //  helpVariable for rotation left/top with width/height value
 
   const positionAndLengthSwitcher = [Math.abs(100 * index - runnersPosition[index]), barLength];
+console.log($bar, '$bar ?????????????');
 
   positioningSwitcher[index].forEach((v, i) => {
     $bar.css(`${v}`, `${positionAndLengthSwitcher[i]}%`);

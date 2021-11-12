@@ -8,16 +8,18 @@ import {
 } from './updateBarPosition/updateBarPositionUtility';
 
 const updateBarPosition = function updateBarPositionToDOM(this: SliderView): void {
-  defineBarKind({
+  $(document).ready(() => {
+    defineBarKind({
     // todo destruction
-    isRange: this.isRange,
-    isVertical: this.isVertical,
-    $bar: this.$bar,
-    runnersPosition: this.runnersPosition,
-    calcLengthOfRangeBar,
-    updateSingleVerticalBarPosition,
-    updateSingleHorizontalBarPosition,
-    updateRangeBarPosition,
+      isRange: this.isRange,
+      isVertical: this.isVertical,
+      $bar: this.$bar,
+      runnersPosition: this.runnersPosition,
+      calcLengthOfRangeBar,
+      updateSingleVerticalBarPosition,
+      updateSingleHorizontalBarPosition,
+      updateRangeBarPosition,
+    });
   });
 };
 

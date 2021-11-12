@@ -118,9 +118,9 @@ export default class SliderView {
 
   public setStep: (step:number, stepSignAfterComma:number) => void;
 
-  public updateBarPosition: (activeRunner: RunnerModel) => void;
+  public updateBarPosition: (this: SliderView) => void;
 
-  public updateTipNumber: (obj: UpdateTipNumberArgs) => void;
+  public updateTipNumber: (args: UpdateTipNumberArgs) => void;
 
   public updateRunnerPosition: (this: SliderView, stepPosition: number, instance: number) => void;
 

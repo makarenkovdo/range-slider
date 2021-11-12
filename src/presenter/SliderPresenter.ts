@@ -43,7 +43,6 @@ class SliderPresenter {
     //   runnersInstantPosition[this.runnerCounter],
     //   [minValue, maxValue],
     // )];
-    console.log('ththth');
     this.createRunnerView(this.runnerCounter, stepPosition);
     this.createTipNumber(shouldAddTip, { stepValue, stepPosition });
     this.onDrag(this.runnerCounter);
@@ -162,9 +161,7 @@ class SliderPresenter {
       panelInputsData.runnersValue[i],
       panelInputsData.minMax,
     ));
-    console.log('returnedRunnerPosition', returnedRunnerPosition);
-
-    const rebuildData = panelInputsData;
+      const rebuildData = panelInputsData;
     rebuildData.returnedRunnerPosition = returnedRunnerPosition;
     this.rebuild(rebuildData);
   }
@@ -215,8 +212,6 @@ class SliderPresenter {
   }
 
   private build(params: PresenterBuildParams): void {
-    console.log('BUILDIM', params);
-
     let {
       minValue = 0,
       maxValue = 100,

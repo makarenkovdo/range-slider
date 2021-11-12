@@ -18,8 +18,6 @@ const prepareMovingCoordinates = (
   if (cursorXY[switcher] > eventData.thisView.fieldSize[switcher]) {
     cursorXY[switcher] = eventData.thisView.fieldSize[switcher];
   }
-  console.log(cursorXY, 'cursorXY');
-  
   return cursorXY;
 };
 

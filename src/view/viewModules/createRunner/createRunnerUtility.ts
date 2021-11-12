@@ -20,7 +20,6 @@ const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
   const position = [
     stepPosition + mainPositionCorrector,
     -thicknessCorrector + fieldSize[switcher[1]] * 0.5];
-  console.log('instance, positioning, position', instance, positioning, position);
 
   return {
     instance, positioning, position,

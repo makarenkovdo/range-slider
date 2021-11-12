@@ -8,8 +8,6 @@ const setValuesFromInputs = function setThisValuesFromPanelInputs(
   inputRunnerValue:number,
   minMax: number[],
 ):CalculateStepPositionFromInputReturned {
-  console.log(inputRunnerValue, 'inputRunnerValue');
-
   const { stepValue, stepPosition } = calculateStepPositionFromInput(
     inputRunnerValue,
     this.step,

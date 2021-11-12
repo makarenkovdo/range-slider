@@ -16,8 +16,6 @@ const notifyInputChange = function prepareDataAndNotifyInputChange(
     runnersValue,
     runnerSize: this.runnerSize,
   };
-  console.log('panelInputsData', panelInputsData);
-
   this.subscriber.recieveInputsData(panelInputsData);
 };
 

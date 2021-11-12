@@ -30,8 +30,6 @@ const handleInputs = function handleChangeInputsAndCheckboxes(this: SliderView):
       parseInt(($runner0ValueInput.value), 10),
       parseInt(($runner1ValueInput.value), 10),
     ];
-    console.log('CHANGE runnersValue', runnersValue);
-
     // this.notifyInputChange.call(this, runnersValue);
   };
   $minValueInput.addEventListener('change', () => handleMinInputChange());

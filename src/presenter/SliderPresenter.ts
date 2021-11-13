@@ -127,7 +127,7 @@ class SliderPresenter {
   }
 
   public rebuild(params:PresenterBuildParams):void {
-    this.view.clearHTMLElement();
+    this.view.panel.clearHTMLElement();
     this.runnerCounter = 0;
     this.build(params);
   }
@@ -214,9 +214,7 @@ class SliderPresenter {
 
   private activatePanel(params: PresenterBuildParams): this {
     if (params.hasInputPanel) {
-      console.log('params', params);
-
-      this.view.activatePanel(params);
+      this.view.panel.activatePanel.call(this.view, params);
     }
     return this;
   }

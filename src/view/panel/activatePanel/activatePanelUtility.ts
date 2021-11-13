@@ -1,10 +1,14 @@
 import { PresenterBuildParams } from '../../../presenter/presenterInterfaces';
 import SliderView from '../../SliderView';
 import { PanelSelectors } from '../../viewInterfaces';
+import Panel from '../Panel';
 
 const selectPanelNodes = (id:string):PanelSelectors => {
+  
   const $panel = document.querySelector(`#${id}-panel`);
-
+  console.log($panel);
+  console.log(id);
+  
   const panelSelectors: PanelSelectors = {
     $minValueInput: $panel.querySelector('.js-slider-input__min-value'),
     $maxValueInput: $panel.querySelector('.js-slider-input__max-value'),
@@ -64,7 +68,7 @@ const initializePanel = function initializeDefaultPanelValues(
   });
 };
 const handleChange = function hangleInputsAndCheckboxesChanges(
-  this: SliderView,
+  this: Panel,
   {
     $minValueInput,
     $maxValueInput,
@@ -82,14 +86,15 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
   actionType: string,
 ): void {
   let newRunnersInstantPosition = runnersInstantPosition;
+console.log(this);
 
   switch (actionType) {
     case 'min': {
-      this.minMax[0] = parseInt(($minValueInput.value), 10);
+      this.parent.minMax[0] = parseInt(($minValueInput.value), 10);
       break;
     }
     case 'max': {
-      this.minMax[1] = parseInt(($maxValueInput.value), 10);
+      this.parent.minMax[1] = parseInt(($maxValueInput.value), 10);
       break;
     }
     case 'runnerValue': {
@@ -99,27 +104,27 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
       ]; break;
     }
     case 'step': {
-      this.step = parseInt(($stepInput.value), 10);
+      this.parent.step = parseInt(($stepInput.value), 10);
       break;
     }
     case 'isRange': {
-      this.isRange = $isRangeInput.checked;
+      this.parent.isRange = $isRangeInput.checked;
       break;
     }
     case 'orientation': {
-      this.orientation = $orientationInput.checked ? 'vertical' : 'horizontal';
+      this.parent.orientation = $orientationInput.checked ? 'vertical' : 'horizontal';
       break;
     }
     case 'hasScale': {
-      this.hasScale = $hasScale.checked;
+      this.parent.hasScale = $hasScale.checked;
       break;
     }
     case 'hasTip': {
-      this.hasTip = $hasTip.checked;
+      this.parent.hasTip = $hasTip.checked;
       break;
     }
     case 'hasBar': {
-      this.hasBar = $hasBar.checked;
+      this.parent.hasBar = $hasBar.checked;
       break;
     }
     default: // do nothing;

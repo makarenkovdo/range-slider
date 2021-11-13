@@ -1,6 +1,5 @@
 /* eslint-disable padded-blocks */
 
-import clearHTMLElement from './panel/clearHTMLElement';
 import createBar from './bar/createBar';
 import createScale from './scale/createScale';
 import createRunner from './runner/createRunner';
@@ -12,7 +11,7 @@ import handleDrag from './events/handleDrag';
 import handleDrop from './events/handleDrop';
 import notifyFieldClick from './notifiers/notifyFieldClick';
 import notifySliderMoving from './notifiers/notifySliderMoving';
-import notifyInputChange from './notifiers/notifyInputChange';
+// import notifyInputChange from './notifiers/notifyInputChange';
 import setStep from './initialize/setStep';
 import updateTipNumber from './tip/updateTipNumber';
 import updateBarPosition from './bar/updateBarPosition';
@@ -26,7 +25,8 @@ import RunnerModel from '../model/RunnerModel';
 import { UpdateTipNumberArgs } from './viewInterfaces';
 
 import { Orientation, PresenterBuildParams } from '../presenter/presenterInterfaces';
-import activatePanel from './panel/activatePanel';
+import Panel from './panel/Panel';
+import ElementView from './ElementView';
 
 export default class SliderView {
   public id: string;
@@ -79,8 +79,6 @@ export default class SliderView {
 
   private class: string;
 
-  public activatePanel: (params: PresenterBuildParams) => void;
-
   public createBar: (presenter: SliderPresenter) => void;
 
   public createRunner: (this:SliderView,
@@ -96,13 +94,15 @@ export default class SliderView {
 
   public createScale: (this: SliderView) => void;
 
-  public clearHTMLElement: (this: SliderView) => void;
-
   public initializeValues: (
     runnerSize: number[],
     fieldThickness:number,
     orientation: Orientation,
   ) => void;
+
+  public panel: Panel;
+
+  public element: ElementView;
 
   public initStartEnd: (minValue: number, maxValue: number) => void;
 
@@ -157,12 +157,12 @@ export default class SliderView {
     this.isZIndexUpdated = false;
     this.subscriber = subscriber;
 
-    this.activatePanel = activatePanel.bind(this) as () => void;
+    this.panel = new Panel(this);
+    // this.element = new ElementView(this)
     this.createBar = createBar.bind(this) as () => void;
     this.createRunner = createRunner.bind(this) as () => void;
     this.createTipNumber = createTipNumber.bind(this) as () => void;
     this.createScale = createScale.bind(this) as () => void;
-    this.clearHTMLElement = clearHTMLElement.bind(this) as () => void;
     this.updateBarPosition = updateBarPosition.bind(this) as () => void;
     this.updateTipNumber = updateTipNumber.bind(this) as () => void;
     this.updateRunnerPosition = updateRunnerPosition.bind(this) as () => void;
@@ -174,7 +174,7 @@ export default class SliderView {
     // this.handleInputsChange = handleInputsChange.bind(this) as () => void;
     this.notifySliderMoving = notifySliderMoving.bind(this) as () => void;
     this.notifyFieldClick = notifyFieldClick.bind(this) as () => void;
-    this.notifyInputChange = notifyInputChange.bind(this) as () => void;
+    // this.notifyInputChange = notifyInputChange.bind(this) as () => void;
     this.initStartEnd = initStartEnd as () => void;
     this.setStep = setStep as () => void;
   }

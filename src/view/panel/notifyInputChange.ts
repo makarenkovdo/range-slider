@@ -5,6 +5,8 @@ const notifyInputChange = function prepareDataAndNotifyInputChange(
   this: SliderView,
   runnersInstantPosition: number[],
 ): void {
+  console.log(this);
+  
   const panelInputsData:PresenterBuildParams = {
 
     orientation: this.isVertical ? 'vertical' : 'horizontal',

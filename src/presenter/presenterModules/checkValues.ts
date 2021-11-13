@@ -15,6 +15,9 @@ const checkValues = function checkInitialValues(args: CheckValuesArgs): CheckVal
   if (step <= 0) {
     step = 1;
   }
+  if (step > maxValue - minValue) {
+    step = maxValue - minValue;
+  }
   if (runnerSize[0] <= 0 || runnerSize[1] <= 0) {
     runnerSize[0] = 40;
     runnerSize[1] = 40;

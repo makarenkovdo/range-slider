@@ -16,9 +16,10 @@ const prepareScaleData = (
   if (isVertical) {
     i += 1;
   }
-  const stepLimits = Math.trunc((minMax[1] - minMax[0]) / step);
-  const pixelLimits = Math.trunc(fieldSize[i] / 40);
-  const divisionQuantity = Math.max((Math.trunc(Math.min(stepLimits + 1, pixelLimits + 1))), 2);
+  const stepLimitsWithoutTrunc:number = (minMax[1] - minMax[0]) / step;
+  const stepLimits:number = Math.floor(stepLimitsWithoutTrunc);
+  const pixelLimits:number = Math.floor(fieldSize[i] / 40);
+  const divisionQuantity = Math.max((Math.floor(Math.min(stepLimits + 1, pixelLimits + 1))), 2);
   let divisionNumber = Number(((minMax[1] - minMax[0]) / (divisionQuantity - 1)).toFixed(3));
   if (minMax[0] > 0) {
     divisionNumber = Number(((minMax[1] - minMax[0]) / (divisionQuantity - 1)).toFixed(3));

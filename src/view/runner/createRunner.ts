@@ -1,5 +1,5 @@
 import SliderView from '../SliderView';
-import { RunnersInstantPosition } from '../viewInterfaces';
+// import { RunnersInstantPosition } from '../viewInterfaces';
 import { setThis, addRunnerToDOM, prepareRunnerArgs } from './createRunner/createRunnerUtility';
 
 const createRunner = function addRunnerToDOMAndSetThis$runner(

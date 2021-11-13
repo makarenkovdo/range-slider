@@ -2,7 +2,7 @@ import { PresenterBuildParams } from '../../presenter/presenterInterfaces';
 import SliderView from '../SliderView';
 import { PanelSelectors } from '../viewInterfaces';
 import {
-  addOnChangeListener, handleChange, initializePanel, selectPanelNodes,
+  addOnChangeListener, initializePanel, selectPanelNodes,
 } from './activatePanel/activatePanelUtility';
 
 const activatePanel = function activatePanelAndHandleChanges(

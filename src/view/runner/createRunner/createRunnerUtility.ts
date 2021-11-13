@@ -1,7 +1,6 @@
 import { Orientation } from '../../../presenter/presenterInterfaces';
 import SliderView from '../../SliderView';
-import { RunnersInstantPosition } from '../../viewInterfaces';
-import { PreparedDataType } from '../createTipNumber/createTipNumberUtility';
+import { PreparedDataType } from '../../tip/createTipNumber/createTipNumberUtility';
 
 const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
   fieldSize: number[], stepPosition: number): PreparedDataType => {
@@ -13,7 +12,7 @@ const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
   const thicknessCorrector = runnerSize[0] / 2 + 1;
   if (isVertical) {
     positioning = ['top', 'left'];
-    minMax = fieldSize[1];
+    // minMax = fieldSize[1];
     switcher = [1, 0];
   }
   const positionInPx = stepPosition * (fieldSize[switcher[0]] / 100);

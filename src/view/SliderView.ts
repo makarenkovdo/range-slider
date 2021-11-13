@@ -1,24 +1,23 @@
 /* eslint-disable padded-blocks */
 
-import clearHTMLElement from './viewModules/clearHTMLElement';
-import createBar from './viewModules/createBar';
-import createScale from './viewModules/createScale';
-import createRunner from './viewModules/createRunner';
-import createTipNumber from './viewModules/createTipNumber';
-import initializeValues from './viewModules/initializeValues';
-import initStartEnd from './viewModules/initStartEnd';
-import handleClick from './viewModules/handleClick';
-import handleDrag from './viewModules/handleDrag';
-import handleDrop from './viewModules/handleDrop';
-// import handleInputsChange from './viewModules/activatePanel/handleInputsChange';
-import notifyFieldClick from './viewModules/notifyFieldClick';
-import notifySliderMoving from './viewModules/notifySliderMoving';
-import notifyInputChange from './viewModules/notifyInputChange';
-import setStep from './viewModules/setStep';
-import updateTipNumber from './viewModules/updateTipNumber';
-import updateBarPosition from './viewModules/updateBarPosition';
-import updateRunnerPosition from './viewModules/updateRunnerPosition';
-import updateZIndex from './viewModules/updateZIndex';
+import clearHTMLElement from './panel/clearHTMLElement';
+import createBar from './bar/createBar';
+import createScale from './scale/createScale';
+import createRunner from './runner/createRunner';
+import createTipNumber from './tip/createTipNumber';
+import initializeValues from './initialize/initializeValues';
+import initStartEnd from './initialize/initStartEnd';
+import handleClick from './events/handleClick';
+import handleDrag from './events/handleDrag';
+import handleDrop from './events/handleDrop';
+import notifyFieldClick from './notifiers/notifyFieldClick';
+import notifySliderMoving from './notifiers/notifySliderMoving';
+import notifyInputChange from './notifiers/notifyInputChange';
+import setStep from './initialize/setStep';
+import updateTipNumber from './tip/updateTipNumber';
+import updateBarPosition from './bar/updateBarPosition';
+import updateRunnerPosition from './runner/updateRunnerPosition';
+import updateZIndex from './runner/updateZIndex';
 
 import FieldModel from '../model/FieldModel';
 import SliderPresenter from '../presenter/SliderPresenter.js';
@@ -27,7 +26,7 @@ import RunnerModel from '../model/RunnerModel';
 import { UpdateTipNumberArgs } from './viewInterfaces';
 
 import { Orientation, PresenterBuildParams } from '../presenter/presenterInterfaces';
-import activatePanel from './viewModules/activatePanel';
+import activatePanel from './panel/activatePanel';
 
 export default class SliderView {
   public id: string;

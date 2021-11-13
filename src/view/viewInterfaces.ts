@@ -61,19 +61,19 @@ type CreateScaleNumbersBoxArgs = {
   columnOrRow: string,
 };
 
-type PanelSelectors = {
-  minMax: number;
-  $maxValueInput: JQuery<HTMLInputElement>;
-  $runnerValueInput0: JQuery<HTMLInputElement>;
-  $runnerValueInput1: JQuery<HTMLInputElement>;
-  $runnerSizeInput: JQuery<HTMLInputElement>;
-  $fieldThicknessInput: JQuery<HTMLInputElement>;
-  $rangeCheckbox: JQuery<HTMLInputElement>;
-  $orientationCheckbox: JQuery<HTMLInputElement>;
-  $scaleCheckbox: JQuery<HTMLInputElement>;
-  $barCheckbox: JQuery<HTMLInputElement>;
-  $tipCheckbox: JQuery<HTMLInputElement>;
-};
+// type PanelSelectors = {
+//   minMax: number;
+//   $maxValueInput: JQuery<HTMLInputElement>;
+//   $runnerValueInput0: JQuery<HTMLInputElement>;
+//   $runnerValueInput1: JQuery<HTMLInputElement>;
+//   $runnerSizeInput: JQuery<HTMLInputElement>;
+//   $fieldThicknessInput: JQuery<HTMLInputElement>;
+//   $rangeCheckbox: JQuery<HTMLInputElement>;
+//   $orientationCheckbox: JQuery<HTMLInputElement>;
+//   $scaleCheckbox: JQuery<HTMLInputElement>;
+//   $barCheckbox: JQuery<HTMLInputElement>;
+//   $tipCheckbox: JQuery<HTMLInputElement>;
+// };
 
 type HandleInputsEventData = { sliderView: SliderView; panelSelectors: PanelSelectors };
 
@@ -88,6 +88,20 @@ type PanelInputsData = {
   hasScale:boolean;
   isVertical:boolean;
   returnedRunnerPosition?: RunnersInstantPosition[];
+};
+
+type PanelSelectors = {
+  $minValueInput: HTMLInputElement;
+  $maxValueInput: HTMLInputElement;
+  $runnerSizeInput: HTMLInputElement;
+  $stepInput: HTMLInputElement;
+  $isRangeInput: HTMLInputElement;
+  $orientationInput: HTMLInputElement;
+  $hasScale: HTMLInputElement;
+  $hasBar: HTMLInputElement;
+  $hasTip: HTMLInputElement;
+  $runner0ValueInput: HTMLInputElement;
+  $runner1ValueInput: HTMLInputElement;
 };
 
 type RunnersInstantPosition = {

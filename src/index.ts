@@ -8,11 +8,12 @@ const firstRunner = new SliderPresenter('first', {
   shouldAddBar: true,
   step: 0.1,
   maxValue: 17,
-  minValue: -5,
+  minValue: 10,
   isRange: true,
   shouldAddScale: true,
   runnerSize: [16, 40],
-  runnersInstantPosition: [20, 80],
+  runnersInstantPosition: [0, 10],
+  hasInputPanel: true,
 });
 
 // const secondRunner = new SliderPresenter('second', {

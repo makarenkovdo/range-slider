@@ -2,8 +2,6 @@ import SliderView from '../SliderView';
 
 // how to test? this.$bar is a the result of div-appending and ALL THIS MODULE
 const createBar = function addBarToDomAndSetThisBar(this: SliderView): void {
-  console.log('BAR?');
-
   const addBarToDom = () => {
     $(document).ready(() => {
       this.$field.append(

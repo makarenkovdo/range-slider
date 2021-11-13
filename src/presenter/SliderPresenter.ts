@@ -40,16 +40,9 @@ class SliderPresenter {
   }:CreateRangeSliderArgsType): this {
     this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition[this.runnerCounter]);
     let { stepValue, stepPosition } = this.runners[this.runnerCounter];
-    console.log('presenter stepValue, stepPosition', stepValue, stepPosition);
 
-    // const returnedRunnerPosition = [this.runners[0].setValuesFromInputs(
-    //   runnersInstantPosition[this.runnerCounter],
-    //   [minValue, maxValue],
-    // )];
     this.createRunnerView(this.runnerCounter, stepPosition);
     this.createTipNumber(shouldAddTip, stepPosition, stepValue);
-    // this.onDrag(this.runnerCounter);
-    // this.onDrop();
 
     if (isRange) {
       this.runnerCounter += 1;
@@ -85,8 +78,6 @@ class SliderPresenter {
   }
 
   public createTipNumber(isOn: boolean, stepPosition: number, stepValue:number): this {
-    console.log('PRESENTER TIP');
-
     if (isOn) {
       this.view.createTipNumber(this.runnerCounter, this.field.isVertical, stepPosition, stepValue);
     }
@@ -120,7 +111,7 @@ class SliderPresenter {
   }
 
   public addListeners(isRange: boolean): this {
-    this.onClick().onDrag(0).onDrop().onInputChange();
+    this.onClick().onDrag(0).onDrop();
     if (isRange) this.onDrag(1);
     return this;
   }
@@ -133,6 +124,12 @@ class SliderPresenter {
   public onInputChange():this {
     this.view.handleInputsChange();
     return this;
+  }
+
+  public rebuild(params:PresenterBuildParams):void {
+    this.view.clearHTMLElement();
+    this.runnerCounter = 0;
+    this.build(params);
   }
 
   public recieveModelLogic(activeRunner: RunnerModel): void {
@@ -215,11 +212,11 @@ class SliderPresenter {
     return this;
   }
 
-  //  prettier-ignore
-  public rebuild(params:PresenterBuildParams):void {
-    this.view.clearHTMLElement();
-    this.runnerCounter = 0;
-    this.build(params);
+  private activatePanel(params: PresenterBuildParams): this {
+    if (params.hasInputPanel) {
+      this.view.activatePanel(params);
+    }
+    return this;
   }
 
   private build(params: PresenterBuildParams): void {
@@ -239,6 +236,7 @@ class SliderPresenter {
       isRange = false,
       isTestMode = false,
       orientation = 'horizontal',
+      hasInputPanel = false,
     } = params;
 
     //  prettier-ignore
@@ -252,6 +250,7 @@ class SliderPresenter {
 
     if (!isTestMode) {
       this.setMinMax(minValue, maxValue)
+        .activatePanel(params)
         .initLayers(runnerSize, fieldThickness, orientation)
         .createRangeSlider({
           isRange,
@@ -277,6 +276,7 @@ class SliderPresenter {
   private initLayers(runnerSize: number[], fieldThickness:number, orientation: Orientation): this {
     this.field.setIsVertical(orientation);
     this.view.initializeValues(runnerSize, fieldThickness, orientation);
+
     return this;
   }
 

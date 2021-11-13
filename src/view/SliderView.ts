@@ -10,7 +10,7 @@ import initStartEnd from './viewModules/initStartEnd';
 import handleClick from './viewModules/handleClick';
 import handleDrag from './viewModules/handleDrag';
 import handleDrop from './viewModules/handleDrop';
-import handleInputsChange from './viewModules/handleInputsChange';
+// import handleInputsChange from './viewModules/activatePanel/handleInputsChange';
 import notifyFieldClick from './viewModules/notifyFieldClick';
 import notifySliderMoving from './viewModules/notifySliderMoving';
 import notifyInputChange from './viewModules/notifyInputChange';
@@ -26,7 +26,8 @@ import RunnerModel from '../model/RunnerModel';
 
 import { UpdateTipNumberArgs } from './viewInterfaces';
 
-import { Orientation } from '../presenter/presenterInterfaces';
+import { Orientation, PresenterBuildParams } from '../presenter/presenterInterfaces';
+import activatePanel from './viewModules/activatePanel';
 
 export default class SliderView {
   public id: string;
@@ -78,6 +79,8 @@ export default class SliderView {
   public borderWidth: number;
 
   private class: string;
+
+  public activatePanel: (params: PresenterBuildParams) => void;
 
   public createBar: (presenter: SliderPresenter) => void;
 
@@ -155,6 +158,7 @@ export default class SliderView {
     this.isZIndexUpdated = false;
     this.subscriber = subscriber;
 
+    this.activatePanel = activatePanel.bind(this) as () => void;
     this.createBar = createBar.bind(this) as () => void;
     this.createRunner = createRunner.bind(this) as () => void;
     this.createTipNumber = createTipNumber.bind(this) as () => void;
@@ -168,7 +172,7 @@ export default class SliderView {
     this.handleDrag = handleDrag.bind(this) as () => void;
     this.handleDrop = handleDrop.bind(this) as () => void;
     this.handleClick = handleClick.bind(this) as () => void;
-    this.handleInputsChange = handleInputsChange.bind(this) as () => void;
+    // this.handleInputsChange = handleInputsChange.bind(this) as () => void;
     this.notifySliderMoving = notifySliderMoving.bind(this) as () => void;
     this.notifyFieldClick = notifyFieldClick.bind(this) as () => void;
     this.notifyInputChange = notifyInputChange.bind(this) as () => void;

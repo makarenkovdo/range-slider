@@ -61,8 +61,6 @@ const updateRangeBarPosition = (
   runnersPosition: number[],
   barLength: number,
 ): void => {
-  console.log(runnersPosition, 'runnersPosition BAR');
-
   const positioningSwitcher = [
     ['left', 'width'],
     ['top', 'height'],

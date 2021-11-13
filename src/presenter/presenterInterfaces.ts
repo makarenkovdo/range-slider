@@ -10,9 +10,10 @@ type PresenterBuildParams = {
   isRange?: boolean;
   runnerSize?: number[];
   fieldThickness?: number;
-  isTestMode?: boolean;
   orientation?: Orientation;
   runnersInstantPosition?: number[];
+  hasInputPanel?: boolean;
+  isTestMode?: boolean;
 };
 
 type CreateRangeSliderArgsType = {

@@ -4,11 +4,8 @@ import { PanelSelectors } from '../../viewInterfaces';
 import Panel from '../Panel';
 
 const selectPanelNodes = (id:string):PanelSelectors => {
-  
   const $panel = document.querySelector(`#${id}-panel`);
-  console.log($panel);
-  console.log(id);
-  
+
   const panelSelectors: PanelSelectors = {
     $minValueInput: $panel.querySelector('.js-slider-input__min-value'),
     $maxValueInput: $panel.querySelector('.js-slider-input__max-value'),
@@ -39,7 +36,9 @@ const initializePanel = function initializeDefaultPanelValues(
     isRange,
     step,
   }: PresenterBuildParams,
-  {
+  panelSelectors: PanelSelectors,
+): void {
+  const {
     $minValueInput,
     $maxValueInput,
     $runnerSizeInput,
@@ -51,12 +50,11 @@ const initializePanel = function initializeDefaultPanelValues(
     $hasTip,
     $runner0ValueInput,
     $runner1ValueInput,
-  }: PanelSelectors,
-): void {
+  } = panelSelectors;
   $(document).ready(() => {
     $minValueInput.value = `${minValue}`;
     $maxValueInput.value = `${maxValue}`;
-    $runnerSizeInput.value = `${runnerSize}`;
+    $runnerSizeInput.value = `${runnerSize[0]}`;
     $stepInput.value = `${step}`;
     $isRangeInput.checked = isRange;
     $orientationInput.checked = orientation === 'vertical';
@@ -86,7 +84,7 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
   actionType: string,
 ): void {
   let newRunnersInstantPosition = runnersInstantPosition;
-console.log(this);
+  console.log(this);
 
   switch (actionType) {
     case 'min': {

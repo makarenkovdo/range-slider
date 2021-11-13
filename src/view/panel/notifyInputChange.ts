@@ -1,27 +1,26 @@
 import { PresenterBuildParams } from '../../presenter/presenterInterfaces';
 import SliderView from '../SliderView';
+import Panel from './Panel';
 
 const notifyInputChange = function prepareDataAndNotifyInputChange(
-  this: SliderView,
+  this: Panel,
   runnersInstantPosition: number[],
 ): void {
-  console.log(this);
-  
+  const { parent } = this;
   const panelInputsData:PresenterBuildParams = {
-
-    orientation: this.isVertical ? 'vertical' : 'horizontal',
-    minValue: this.minMax[0],
-    maxValue: this.minMax[1],
-    isRange: this.isRange,
+    orientation: parent.isVertical ? 'vertical' : 'horizontal',
+    minValue: parent.minMax[0],
+    maxValue: parent.minMax[1],
+    isRange: parent.isRange,
     // fieldThickness: this.fieldthickness,
-    shouldAddBar: this.hasBar,
-    shouldAddScale: this.hasScale,
-    shouldAddTip: this.hasTip,
+    shouldAddBar: parent.hasBar,
+    shouldAddScale: parent.hasScale,
+    shouldAddTip: parent.hasTip,
     runnersInstantPosition,
-    runnerSize: this.runnerSize,
-    step: this.step,
+    runnerSize: parent.runnerSize,
+    step: parent.step,
   };
-  this.subscriber.recieveInputsData(panelInputsData);
+  parent.subscriber.recieveInputsData(panelInputsData);
 };
 
 export default notifyInputChange;

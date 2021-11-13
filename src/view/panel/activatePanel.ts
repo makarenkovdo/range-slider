@@ -11,7 +11,7 @@ const activatePanel = function activatePanelAndHandleChanges(
   params: PresenterBuildParams,
 ):void {
   console.log('this', this);
-  
+
   const panelSelectors: PanelSelectors = selectPanelNodes(this.parent.id);
   initializePanel(params, panelSelectors);
   addOnChangeListener.call(this, panelSelectors);

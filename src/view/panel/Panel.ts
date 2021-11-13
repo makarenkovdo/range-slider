@@ -11,7 +11,7 @@ export default class Panel {
 
   public activatePanel: (this: SliderView, params: PresenterBuildParams) => void;
 
-  public clearHTMLElement: () => void;
+  public clearHTMLElement: (id:string) => void;
 
   public notifyInputChange: (this: SliderView, runnersInstantPosition: number[]) => void;
 

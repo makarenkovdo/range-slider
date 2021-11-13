@@ -127,7 +127,7 @@ class SliderPresenter {
   }
 
   public rebuild(params:PresenterBuildParams):void {
-    this.view.panel.clearHTMLElement();
+    this.view.panel.clearHTMLElement(this.view.id);
     this.runnerCounter = 0;
     this.build(params);
   }

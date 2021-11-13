@@ -81,7 +81,6 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
   runnersInstantPosition: number[],
   actionType: string,
 ): void {
-
   let newRunnersInstantPosition = runnersInstantPosition;
 
   switch (actionType) {

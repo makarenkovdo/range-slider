@@ -214,6 +214,8 @@ class SliderPresenter {
 
   private activatePanel(params: PresenterBuildParams): this {
     if (params.hasInputPanel) {
+      console.log('params', params);
+
       this.view.activatePanel(params);
     }
     return this;
@@ -249,8 +251,24 @@ class SliderPresenter {
     ));
 
     if (!isTestMode) {
+      console.log('runnersInstantPosition', runnersInstantPosition);
+
       this.setMinMax(minValue, maxValue)
-        .activatePanel(params)
+        .activatePanel({
+          shouldAddTip,
+          shouldAddBar,
+          shouldAddScale,
+          isRange,
+          isTestMode,
+          orientation,
+          hasInputPanel,
+          minValue,
+          maxValue,
+          step,
+          runnerSize,
+          fieldThickness,
+          runnersInstantPosition,
+        })
         .initLayers(runnerSize, fieldThickness, orientation)
         .createRangeSlider({
           isRange,

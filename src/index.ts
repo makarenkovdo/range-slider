@@ -8,11 +8,11 @@ const firstRunner = new SliderPresenter('first', {
   shouldAddBar: true,
   step: 0.1,
   maxValue: 17,
-  minValue: 10,
+  minValue: 9,
   isRange: true,
   shouldAddScale: true,
   runnerSize: [16, 40],
-  runnersInstantPosition: [0, 10],
+  runnersInstantPosition: [8, 10],
   hasInputPanel: true,
 });
 

@@ -50,17 +50,17 @@ const initializePanel = function initializeDefaultPanelValues(
   }: PanelSelectors,
 ): void {
   $(document).ready(() => {
-    $minValueInput.value = minValue;
-    $maxValueInput.value = maxValue;
-    $runnerSizeInput.value = runnerSize;
-    $stepInput.value = step;
+    $minValueInput.value = `${minValue}`;
+    $maxValueInput.value = `${maxValue}`;
+    $runnerSizeInput.value = `${runnerSize}`;
+    $stepInput.value = `${step}`;
     $isRangeInput.checked = isRange;
     $orientationInput.checked = orientation === 'vertical';
     $hasScale.checked = shouldAddScale;
     $hasBar.checked = shouldAddBar;
     $hasTip.checked = shouldAddTip;
-    $runner0ValueInput.value = runnersInstantPosition[0];
-    $runner1ValueInput.value = runnersInstantPosition[1];
+    $runner0ValueInput.value = `${runnersInstantPosition[0]}`;
+    $runner1ValueInput.value = `${runnersInstantPosition[1]}`;
   });
 };
 const handleChange = function hangleInputsAndCheckboxesChanges(

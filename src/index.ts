@@ -12,7 +12,7 @@ const firstRunner = new SliderPresenter('first', {
   isRange: true,
   shouldAddScale: true,
   runnerSize: [16, 40],
-  runnersInstantPosition: [8, 10],
+  runnersInstantPosition: [9, 14],
   hasInputPanel: true,
 });
 

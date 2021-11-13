@@ -251,8 +251,6 @@ class SliderPresenter {
     ));
 
     if (!isTestMode) {
-      console.log('runnersInstantPosition', runnersInstantPosition);
-
       this.setMinMax(minValue, maxValue)
         .activatePanel({
           shouldAddTip,

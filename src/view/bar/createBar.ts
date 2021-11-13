@@ -13,7 +13,7 @@ const createBar = function addBarToDomAndSetThisBar(this: Bar): void {
   };
 
   const setThis$bar = () => {
-    parent.$bar = parent.$field.children('.js-slider__bar');
+    this.$bar = parent.$field.children('.js-slider__bar');
   };
   addBarToDom();
   $(document).ready(() => {

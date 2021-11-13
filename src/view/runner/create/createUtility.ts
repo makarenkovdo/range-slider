@@ -1,11 +1,11 @@
 import { Orientation } from '../../../presenter/presenterInterfaces';
-import SliderView from '../../SliderView';
-import { PreparedDataType } from '../../tip/createTipNumber/createTipNumberUtility';
+import { PreparedDataType } from '../../tip/create/createUtility';
+import Runner from '../Runner';
 
 const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
   fieldSize: number[], stepPosition: number): PreparedDataType => {
   let positioning = ['left', 'top'];
-  let minMax = 0;
+  // const minMax = 0;
   let switcher = [0, 1];
   const instance = i;
   const mainPositionCorrector = 5 - runnerSize[0] / 2;
@@ -40,9 +40,9 @@ const addRunnerToDOM = (
   );
 };
 
-const setThis = function setThis$runner(this: SliderView, i: number, stepPosition: number): void {
-  this.$runners[i] = this.$field.children(`.js-slider__runner_instance-${i}`);
-  this.runnersPosition[i] = stepPosition;
+const setThis = function setThis$runner(this: Runner, i: number, stepPosition: number): void {
+  this.$elements[i] = this.parent.$field.children(`.js-slider__runner_instance-${i}`);
+  this.positions[i] = stepPosition;
 };
 
 export { setThis, addRunnerToDOM, prepareRunnerArgs };

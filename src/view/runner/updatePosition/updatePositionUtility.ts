@@ -1,4 +1,4 @@
-import SliderView from '../../SliderView';
+import Runner from '../Runner';
 
 type DatasForUpdating = { stepPosition: number; instance: number; positioning: string[] };
 
@@ -18,43 +18,42 @@ const defineRunnerType = (
 };
 
 const setThisRunnerPosition = function setThisRunnerPositionToThis(
-  this: SliderView,
+  this: Runner,
   stepPosition: number,
   instance: number,
 ): void {
-  this.runnersPosition[instance] = stepPosition;
+  this.positions[instance] = stepPosition;
   this.activeInstance = instance;
 };
 
 //  prettier-ignore
 // getting the percent of runnerWidth to fieldWidth
 // const calculatePreperatoryPosition = (
-//   $field: JQuery<HTMLElement>, isVertical: boolean, fieldSize:number[], runnerSize:number[],
+//   $field: JQuery<HTMLElement>, isVertical: boolean, fieldSize:number[], size:number[],
 // ):number => {
 //   const i = isVertical ? 1 : 0;
-//   return (runnerSize[i] / ((fieldSize[i]) + 40)) * 50;
+//   return (size[i] / ((fieldSize[i]) + 40)) * 50;
 // };
 
 type UpdatePositionToDOMArgs = { stepPosition: number; instance: number; positioning: string[] };
 
 // prettier-ignore
-const updatePositionToDOM = function updateRunnerPositionToDom(this:SliderView,
+const updatePositionToDOM = function updateRunnerPositionToDom(this:Runner,
   { stepPosition, instance, positioning }:UpdatePositionToDOMArgs):void {
-  const {
-    isVertical, fieldSize, runnerSize, $runners,
-  } = this;
+  const { isVertical, fieldSize } = this.parent;
+  const { size, $elements } = this;
   // const preperatoryPosition = calculatePreperatoryPosition(
-  //   $field, isVertical, fieldSize, runnerSize,
+  //   $field, isVertical, fieldSize, size,
   // );
   const switcher = isVertical ? 1 : 0;
   // const viewPosition = (stepPosition * (fieldSize[switcher])) / (fieldSize[switcher] + 40)+10;
   const viewPositionInPx = (stepPosition * (fieldSize[switcher] / 100));
-  const getVerticalPosition = () => `${fieldSize[1] - viewPositionInPx + 5 - runnerSize[0] / 2}px`;
-  const getHorizontalPosition = () => `${viewPositionInPx + 5 - runnerSize[0] / 2}px`;
+  const getVerticalPosition = () => `${fieldSize[1] - viewPositionInPx + 5 - size[0] / 2}px`;
+  const getHorizontalPosition = () => `${viewPositionInPx + 5 - size[0] / 2}px`;
   const position = isVertical
     ? getVerticalPosition()
     : getHorizontalPosition();
-  $runners[instance].css(positioning[0], position);
+  $elements[instance].css(positioning[0], position);
 };
 
 export { setThisRunnerPosition, defineRunnerType, updatePositionToDOM };

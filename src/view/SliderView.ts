@@ -1,8 +1,5 @@
 /* eslint-disable padded-blocks */
 
-import createScale from './scale/createScale';
-import createRunner from './runner/createRunner';
-import createTipNumber from './tip/createTipNumber';
 import initializeValues from './initialize/initializeValues';
 import initStartEnd from './initialize/initStartEnd';
 import handleClick from './events/handleClick';
@@ -11,29 +8,22 @@ import handleDrop from './events/handleDrop';
 import notifyFieldClick from './notifiers/notifyFieldClick';
 import notifySliderMoving from './notifiers/notifySliderMoving';
 import setStep from './initialize/setStep';
-import updateTipNumber from './tip/updateTipNumber';
-import updateRunnerPosition from './runner/updateRunnerPosition';
-import updateZIndex from './runner/updateZIndex';
 
 import FieldModel from '../model/FieldModel';
 import SliderPresenter from '../presenter/SliderPresenter.js';
 import RunnerModel from '../model/RunnerModel';
 
-import { UpdateTipNumberArgs } from './viewInterfaces';
-
-import { Orientation, PresenterBuildParams } from '../presenter/presenterInterfaces';
+import { Orientation } from '../presenter/presenterInterfaces';
 import Panel from './panel/Panel';
-import ElementView from './ElementView';
 import Bar from './bar/Bar';
+import Runner from './runner/Runner';
+import Scale from './scale/Scale';
+import Tip from './tip/Tip';
 
 export default class SliderView {
   public id: string;
 
   public $body: JQuery<HTMLElement>;
-
-  public $runners: JQuery<HTMLElement>[];
-
-  public $bar: JQuery<HTMLElement>;
 
   public isVertical: boolean;
 
@@ -43,10 +33,6 @@ export default class SliderView {
 
   public hasBar: boolean;
 
-  public runnersPosition: number[];
-
-  public runnerSize: number[];
-
   public fieldSize: number[];
 
   public minMax: number[];
@@ -55,40 +41,17 @@ export default class SliderView {
 
   readonly subscriber: SliderPresenter;
 
-  public cursorXY: number[];
-
   public corrector: number;
-
-  public activeInstance: number;
-
-  public isZIndexUpdated: boolean;
 
   public hasScale: boolean;
 
   public hasTip: boolean;
-
-  public step: number;
-
-  public stepSignAfterComma: number;
 
   public lengthInStep: number;
 
   public borderWidth: number;
 
   private class: string;
-
-  public createRunner: (this:SliderView,
-    i: number,
-    stepPosition:number,
-  ) => void;
-
-  public createTipNumber: (runnerCounter: number,
-    isVertical: boolean,
-    stepPosition:number,
-    stepValue:number,
-  ) => void;
-
-  public createScale: (this: SliderView) => void;
 
   public initializeValues: (
     runnerSize: number[],
@@ -98,9 +61,13 @@ export default class SliderView {
 
   public panel: Panel;
 
-  public element: ElementView;
-
   public bar: Bar;
+
+  public runner: Runner;
+
+  public scale: Scale;
+
+  public tip: Tip;
 
   public initStartEnd: (minValue: number, maxValue: number) => void;
 
@@ -120,18 +87,10 @@ export default class SliderView {
 
   public setStep: (step:number, stepSignAfterComma:number) => void;
 
-  public updateTipNumber: (args: UpdateTipNumberArgs) => void;
-
-  public updateRunnerPosition: (this: SliderView, stepPosition: number, instance: number) => void;
-
-  public updateZIndex: (this: SliderView, i: number) => void;
-
   constructor(id: string, subscriber: SliderPresenter) {
     this.id = id;
     this.$body = $('body');
     this.$field = $(`#${id}`);
-    this.$runners = [];
-    // this.$bar = '';
     this.class = $(`#${id}`).attr('class');
     this.isVertical = false;
     this.isRange = false;
@@ -139,29 +98,19 @@ export default class SliderView {
     this.hasScale = false;
     this.hasTip = false;
     this.orientation = 'horizontal';
-    this.runnersPosition = [0, 100];
     this.fieldSize = [];
-    this.runnerSize = [];
     this.borderWidth = 1;
     this.minMax = [];
-    this.step = 1;
-    this.stepSignAfterComma = 0;
     this.lengthInStep = 1;
     this.corrector = 0;
-    this.cursorXY = [0, 0];
-    this.activeInstance = 0;
-    this.isZIndexUpdated = false;
     this.subscriber = subscriber;
 
     this.panel = new Panel(this);
     this.bar = new Bar(this);
+    this.runner = new Runner(this);
+    this.scale = new Scale(this);
+    this.tip = new Tip(this);
 
-    this.createRunner = createRunner.bind(this) as () => void;
-    this.createTipNumber = createTipNumber.bind(this) as () => void;
-    this.createScale = createScale.bind(this) as () => void;
-    this.updateTipNumber = updateTipNumber.bind(this) as () => void;
-    this.updateRunnerPosition = updateRunnerPosition.bind(this) as () => void;
-    this.updateZIndex = updateZIndex.bind(this) as () => void;
     this.initializeValues = initializeValues.bind(this) as () => void;
     this.handleDrag = handleDrag.bind(this) as () => void;
     this.handleDrop = handleDrop.bind(this) as () => void;

@@ -3,7 +3,6 @@ import FieldModel from '../model/FieldModel';
 import RunnerModel from '../model/RunnerModel';
 import { UpdateRunnerValuesArgs } from '../model/runnerModules/runnerInterfaces';
 import SliderView from '../view/SliderView';
-import { PanelInputsData, RunnersInstantPosition } from '../view/viewInterfaces';
 import {
   PresenterBuildParams,
   CreateRangeSliderArgsType,
@@ -73,13 +72,18 @@ class SliderPresenter {
   }
 
   public createRunnerView(i: number, stepPosition: number): this {
-    this.view.createRunner(i, stepPosition);
+    this.view.runner.createRunner(i, stepPosition);
     return this;
   }
 
   public createTipNumber(isOn: boolean, stepPosition: number, stepValue:number): this {
     if (isOn) {
-      this.view.createTipNumber(this.runnerCounter, this.field.isVertical, stepPosition, stepValue);
+      this.view.tip.create(
+        this.runnerCounter,
+        this.field.isVertical,
+        stepPosition,
+        stepValue,
+      );
     }
     return this;
   }
@@ -97,7 +101,7 @@ class SliderPresenter {
   public createScale(shouldAddScale: boolean): this {
     if (shouldAddScale) {
       this.view.hasScale = true;
-      this.view.createScale();
+      this.view.scale.create();
     }
 
     return this;
@@ -176,11 +180,11 @@ class SliderPresenter {
 
   // prettier-ignore
   public recieveClickData(
-    {
-      runnersPosition, fieldSize,
-    }: SliderView,
+    view: SliderView,
     cursorXY: number[],
   ): void {
+    const runnersPosition = view.runner.positions;
+    const { fieldSize } = view;
     const dataForRunnerUpdatingArgs: DataForRunnerUpdatingArgsType = {
       runnersPosition,
       isVertical: this.field.isVertical,
@@ -208,7 +212,7 @@ class SliderPresenter {
   }
 
   public updateTipNumber(stepValue: number, instance: number): this {
-    this.view.updateTipNumber({ stepValue, instance });
+    this.view.tip.update({ stepValue, instance });
     return this;
   }
 
@@ -300,7 +304,7 @@ class SliderPresenter {
   }
 
   private updateRunnerPosition({ stepPosition, instance }: RunnerModel): void {
-    this.view.updateRunnerPosition(stepPosition, instance);
+    this.view.runner.updatePosition(stepPosition, instance);
   }
 }
 

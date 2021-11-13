@@ -1,9 +1,7 @@
 import clearHTMLElement from './clearHTMLElement';
-import activatePanel from './activatePanel';
+import activatePanel from './activate';
 import { PresenterBuildParams } from '../../presenter/presenterInterfaces';
 import SliderView from '../SliderView';
-import SliderPresenter from '../../presenter/SliderPresenter';
-import ElementView from '../ElementView';
 import notifyInputChange from './notifyInputChange';
 
 export default class Panel {

@@ -1,7 +1,7 @@
 import SliderView from '../SliderView';
-import { addTipNumberToDOM, prepareTipNumberArgs } from './createTipNumber/createTipNumberUtility';
+import { addTipNumberToDOM, prepareTipNumberArgs } from './create/createUtility';
 
-const createTipNumber = function addTipNumberToDOMAndUpdateTextNumber(
+const create = function addTipNumberToDOMAndUpdateTextNumber(
   this: SliderView,
   i: number,
   isVertical: boolean,
@@ -25,4 +25,4 @@ const createTipNumber = function addTipNumberToDOMAndUpdateTextNumber(
   this.hasTip = true;
 };
 
-export default createTipNumber;
+export default create;

@@ -1,5 +1,4 @@
 import { PresenterBuildParams } from '../../presenter/presenterInterfaces';
-import SliderView from '../SliderView';
 import Panel from './Panel';
 
 const notifyInputChange = function prepareDataAndNotifyInputChange(
@@ -17,8 +16,8 @@ const notifyInputChange = function prepareDataAndNotifyInputChange(
     shouldAddScale: parent.hasScale,
     shouldAddTip: parent.hasTip,
     runnersInstantPosition,
-    runnerSize: parent.runnerSize,
-    step: parent.step,
+    runnerSize: parent.runner.size,
+    step: parent.runner.step,
   };
   parent.subscriber.recieveInputsData(panelInputsData);
 };

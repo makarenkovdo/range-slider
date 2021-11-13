@@ -1,12 +1,11 @@
 import { PresenterBuildParams } from '../../presenter/presenterInterfaces';
-import SliderView from '../SliderView';
 import { PanelSelectors } from '../viewInterfaces';
 import {
   addOnChangeListener, initializePanel, selectPanelNodes,
-} from './activatePanel/activatePanelUtility';
+} from './activate/activateUtility';
 import Panel from './Panel';
 
-const activatePanel = function activatePanelAndHandleChanges(
+const activate = function activatePanelAndHandleChanges(
   this:Panel,
   params: PresenterBuildParams,
 ):void {
@@ -17,4 +16,4 @@ const activatePanel = function activatePanelAndHandleChanges(
   addOnChangeListener.call(this, panelSelectors);
 };
 
-export default activatePanel;
+export default activate;

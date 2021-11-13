@@ -1,8 +1,8 @@
-import SliderView from '../SliderView';
+import Runner from './Runner';
 
-const updateZIndex = function updateZIndexOfRunners(this: SliderView, instance: number): void {
-  $(document).ready(() => { //  todo: window.onload ????
-    this.$runners[instance].addClass('slider__runner_current');
+const updateZIndex = function updateZIndexOfRunners(this: Runner, instance: number): void {
+  $(document).ready(() => {
+    this.$elements[instance].addClass('slider__runner_current');
   });
 };
 

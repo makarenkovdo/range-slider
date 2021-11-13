@@ -84,7 +84,6 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
   actionType: string,
 ): void {
   let newRunnersInstantPosition = runnersInstantPosition;
-  console.log(this);
 
   switch (actionType) {
     case 'min': {
@@ -102,7 +101,7 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
       ]; break;
     }
     case 'step': {
-      this.parent.step = parseInt(($stepInput.value), 10);
+      this.parent.runner.step = parseInt(($stepInput.value), 10);
       break;
     }
     case 'isRange': {

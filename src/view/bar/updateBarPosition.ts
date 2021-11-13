@@ -15,8 +15,8 @@ const updateBarPosition = function updateBarPositionToDOM(this: Bar): void {
     // todo destruction
       isRange: parent.isRange,
       isVertical: parent.isVertical,
-      $bar: parent.$bar,
-      runnersPosition: parent.runnersPosition,
+      $bar: this.$bar,
+      runnersPosition: parent.runner.positions,
       calcLengthOfRangeBar,
       updateSingleVerticalBarPosition,
       updateSingleHorizontalBarPosition,

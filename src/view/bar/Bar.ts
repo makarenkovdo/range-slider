@@ -6,6 +6,8 @@ import updateBarPosition from './updateBarPosition';
 export default class Bar {
   parent: SliderView;
 
+  public $bar: JQuery<HTMLElement>;
+
   public createBar: (presenter: SliderPresenter) => void;
 
   public updateBarPosition: (this: Bar) => void;

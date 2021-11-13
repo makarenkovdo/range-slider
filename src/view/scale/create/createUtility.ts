@@ -77,6 +77,7 @@ const addScaleToDom = (
     createScaleLinesBox(createScaleLinesBoxArgs);
 
     createScaleNumbersBoxArgs.width = fieldSize[0] + fieldSize[0] / (divisionQuantity - 1);
+    // eslint-disable-next-line prefer-destructuring
     createScaleNumbersBoxArgs.height = fieldSize[1];
     createScaleNumbersBoxArgs.top = fieldSize[1] + 20;
     createScaleNumbersBoxArgs.left = Math.min((-fieldSize[0] / (2 * divisionQuantity)), -17);

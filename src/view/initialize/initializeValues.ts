@@ -8,7 +8,7 @@ const initializeValues = function initializeDefaultViewValues(
   orientation: 'vertical' | 'horizontal',
 ): void {
   // this.runnersPosition = runnersInstantPosition;
-  this.runnerSize = runnerSize;
+  this.runner.size = runnerSize;
   this.orientation = orientation;
   this.isVertical = orientation === 'vertical';
   $(document).ready(() => {

@@ -56,9 +56,7 @@ class SliderPresenter {
       this.view.isRange = true;
       this.field.isRange = true;
       this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition[this.runnerCounter]);
-      ({ stepValue, stepPosition } = this.runners[this.runnerCounter]);
-      console.log('presenter stepValue, stepPosition2', stepValue, stepPosition);
-
+      ({ stepPosition, stepValue } = this.runners[this.runnerCounter]);
       this.createRunnerView(this.runnerCounter, stepPosition);
       this.createTipNumber(shouldAddTip, stepPosition, stepValue);
       // this.onDrag(this.runnerCounter);

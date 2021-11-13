@@ -7,6 +7,7 @@ const initializeValues = function initializeDefaultViewValues(
   fieldThickness: number,
   orientation: 'vertical' | 'horizontal',
 ): void {
+  // this.runnersPosition = runnersInstantPosition;
   this.runnerSize = runnerSize;
   this.orientation = orientation;
   this.isVertical = orientation === 'vertical';

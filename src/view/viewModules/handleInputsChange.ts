@@ -30,14 +30,14 @@ const handleInputsChange = function handleInputsAndCheckboxesChange(this: Slider
       parseInt(($runner1ValueInput.value), 10),
     ];
 
-    // this.notifyInputChange.call(this, runnersValue);
+    this.notifyInputChange.call(this, runnersInstantPosition);
   };
   const handleRunner1InputChange = ():void => {
     runnersInstantPosition = [
       parseInt(($runner0ValueInput.value), 10),
       parseInt(($runner1ValueInput.value), 10),
     ];
-    // this.notifyInputChange.call(this, runnersValue);
+    this.notifyInputChange.call(this, runnersInstantPosition);
   };
   const handleStepInputChange = ():void => {
     this.step = parseInt(($stepInput.value), 10);

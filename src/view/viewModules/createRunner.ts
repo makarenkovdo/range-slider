@@ -14,7 +14,7 @@ const createRunner = function addRunnerToDOMAndSetThis$runner(
       ), this.$field, this.runnerSize, this.orientation,
     );
 
-    setThis.call(this, i);
+    setThis.call(this, i, stepPosition);
   });
 };
 

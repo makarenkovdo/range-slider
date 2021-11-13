@@ -97,7 +97,9 @@ export default class SliderView {
   public clearHTMLElement: (this: SliderView) => void;
 
   public initializeValues: (
-    runnerSize: number[], fieldThickness:number, orientation: Orientation
+    runnerSize: number[],
+    fieldThickness:number,
+    orientation: Orientation,
   ) => void;
 
   public initStartEnd: (minValue: number, maxValue: number) => void;

@@ -41,8 +41,9 @@ const addRunnerToDOM = (
   );
 };
 
-const setThis = function setThis$runner(this: SliderView, i: number): void {
+const setThis = function setThis$runner(this: SliderView, i: number, stepPosition: number): void {
   this.$runners[i] = this.$field.children(`.js-slider__runner_instance-${i}`);
+  this.runnersPosition[i] = stepPosition;
 };
 
 export { setThis, addRunnerToDOM, prepareRunnerArgs };

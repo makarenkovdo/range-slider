@@ -62,17 +62,18 @@ const updateRangeBarPosition = (
   barLength: number,
 ): void => {
   console.log(runnersPosition, 'runnersPosition BAR');
-  
+
   const positioningSwitcher = [
     ['left', 'width'],
     ['top', 'height'],
   ];
 
   //  helpVariable for rotation left/top with width/height value
+  // const viewPosition = this.isVertical
+  // ? this.fieldSize[1] - (this.runnersPosition[instance] * (this.fieldSize[1] / 100)) - 10
+  // : ((this.runnersPosition[instance] * (this.fieldSize[0] / 100)) - 20);
 
   const positionAndLengthSwitcher = [Math.abs(100 * index - runnersPosition[index]), barLength];
-console.log($bar, '$bar ?????????????');
-
   positioningSwitcher[index].forEach((v, i) => {
     $bar.css(`${v}`, `${positionAndLengthSwitcher[i]}%`);
   });

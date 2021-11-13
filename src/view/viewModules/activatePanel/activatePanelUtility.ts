@@ -23,7 +23,18 @@ const selectPanelNodes = (id:string):PanelSelectors => {
 };
 
 const initializePanel = function initializeDefaultPanelValues(
-  params: PresenterBuildParams,
+  {
+    minValue,
+    maxValue,
+    runnerSize,
+    runnersInstantPosition,
+    orientation,
+    shouldAddBar,
+    shouldAddScale,
+    shouldAddTip,
+    isRange,
+    step,
+  }: PresenterBuildParams,
   {
     $minValueInput,
     $maxValueInput,
@@ -39,7 +50,17 @@ const initializePanel = function initializeDefaultPanelValues(
   }: PanelSelectors,
 ): void {
   $(document).ready(() => {
-    console.log('INITIAL');
+    $minValueInput.value = minValue;
+    $maxValueInput.value = maxValue;
+    $runnerSizeInput.value = runnerSize;
+    $stepInput.value = step;
+    $isRangeInput.checked = isRange;
+    $orientationInput.checked = orientation === 'vertical';
+    $hasScale.checked = shouldAddScale;
+    $hasBar.checked = shouldAddBar;
+    $hasTip.checked = shouldAddTip;
+    $runner0ValueInput.value = runnersInstantPosition[0];
+    $runner1ValueInput.value = runnersInstantPosition[1];
   });
 };
 const handleChange = function hangleInputsAndCheckboxesChanges(
@@ -60,8 +81,7 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
   runnersInstantPosition: number[],
   actionType: string,
 ): void {
-  console.log('handle');
-  
+
   let newRunnersInstantPosition = runnersInstantPosition;
 
   switch (actionType) {

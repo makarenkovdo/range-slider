@@ -1,17 +1,19 @@
 import SliderView from '../SliderView';
+import Bar from './Bar';
 
 // how to test? this.$bar is a the result of div-appending and ALL THIS MODULE
-const createBar = function addBarToDomAndSetThisBar(this: SliderView): void {
+const createBar = function addBarToDomAndSetThisBar(this: Bar): void {
+  const { parent } = this;
   const addBarToDom = () => {
     $(document).ready(() => {
-      this.$field.append(
-        `<div data-testid='test-slider-bar' class='slider__bar slider__bar_${this.orientation} js-slider__bar'></div>`,
+      parent.$field.append(
+        `<div data-testid='test-slider-bar' class='slider__bar slider__bar_${parent.orientation} js-slider__bar'></div>`,
       );
     });
   };
 
   const setThis$bar = () => {
-    this.$bar = this.$field.children('.js-slider__bar');
+    parent.$bar = parent.$field.children('.js-slider__bar');
   };
   addBarToDom();
   $(document).ready(() => {

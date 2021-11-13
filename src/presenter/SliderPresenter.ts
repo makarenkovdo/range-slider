@@ -87,8 +87,8 @@ class SliderPresenter {
   public createBar(shouldAddBar: boolean): this {
     if (shouldAddBar) {
       this.view.hasBar = true;
-      this.view.createBar(this);
-      this.view.updateBarPosition();
+      this.view.bar.createBar(this);
+      this.view.bar.updateBarPosition();
     }
 
     return this;
@@ -283,7 +283,7 @@ class SliderPresenter {
   }
 
   private updateBarPosition(): this {
-    this.view.updateBarPosition();
+    this.view.bar.updateBarPosition();
     return this;
   }
 

@@ -1,6 +1,5 @@
 /* eslint-disable padded-blocks */
 
-import createBar from './bar/createBar';
 import createScale from './scale/createScale';
 import createRunner from './runner/createRunner';
 import createTipNumber from './tip/createTipNumber';
@@ -11,10 +10,8 @@ import handleDrag from './events/handleDrag';
 import handleDrop from './events/handleDrop';
 import notifyFieldClick from './notifiers/notifyFieldClick';
 import notifySliderMoving from './notifiers/notifySliderMoving';
-// import notifyInputChange from './notifiers/notifyInputChange';
 import setStep from './initialize/setStep';
 import updateTipNumber from './tip/updateTipNumber';
-import updateBarPosition from './bar/updateBarPosition';
 import updateRunnerPosition from './runner/updateRunnerPosition';
 import updateZIndex from './runner/updateZIndex';
 
@@ -27,6 +24,7 @@ import { UpdateTipNumberArgs } from './viewInterfaces';
 import { Orientation, PresenterBuildParams } from '../presenter/presenterInterfaces';
 import Panel from './panel/Panel';
 import ElementView from './ElementView';
+import Bar from './bar/Bar';
 
 export default class SliderView {
   public id: string;
@@ -79,8 +77,6 @@ export default class SliderView {
 
   private class: string;
 
-  public createBar: (presenter: SliderPresenter) => void;
-
   public createRunner: (this:SliderView,
     i: number,
     stepPosition:number,
@@ -104,6 +100,8 @@ export default class SliderView {
 
   public element: ElementView;
 
+  public bar: Bar;
+
   public initStartEnd: (minValue: number, maxValue: number) => void;
 
   public handleDrag: (this: SliderView, runnerInstance: number) => void;
@@ -121,8 +119,6 @@ export default class SliderView {
   public notifyInputChange: (this: SliderView, runnersInstantPosition: number[]) => void;
 
   public setStep: (step:number, stepSignAfterComma:number) => void;
-
-  public updateBarPosition: (this: SliderView) => void;
 
   public updateTipNumber: (args: UpdateTipNumberArgs) => void;
 
@@ -158,12 +154,11 @@ export default class SliderView {
     this.subscriber = subscriber;
 
     this.panel = new Panel(this);
-    // this.element = new ElementView(this)
-    this.createBar = createBar.bind(this) as () => void;
+    this.bar = new Bar(this);
+
     this.createRunner = createRunner.bind(this) as () => void;
     this.createTipNumber = createTipNumber.bind(this) as () => void;
     this.createScale = createScale.bind(this) as () => void;
-    this.updateBarPosition = updateBarPosition.bind(this) as () => void;
     this.updateTipNumber = updateTipNumber.bind(this) as () => void;
     this.updateRunnerPosition = updateRunnerPosition.bind(this) as () => void;
     this.updateZIndex = updateZIndex.bind(this) as () => void;

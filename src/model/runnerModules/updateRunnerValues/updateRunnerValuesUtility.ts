@@ -103,30 +103,23 @@ const calculateStepValueAndPosition = ({
 minMax: number[],
 fieldSize: number[],
 isVertical: boolean):CheckCollisionSubargs => {
-  const positioningSwitcher = isVertical ? 1 : 0;
   let divisionQuantity = 0;
-  function checkOnException () {
-    return Math.floor((minMax[1] - minMax[0]) / step) * step === (minMax[1] - minMax[0])
+  function checkOnException() {
+    return Math.floor((minMax[1] - minMax[0]) / step) * step === (minMax[1] - minMax[0]);
   }
   if (checkOnException()) divisionQuantity = (minMax[1] - minMax[0]) / step;
   else divisionQuantity = Math.floor((minMax[1] - minMax[0]) / step) + 1;
-  console.log('value', value);
   const divisionSizeInPercent = 100 / divisionQuantity;
 
   let stepPosition = Number((Math.round(positionInPercent / stepInPercent) * (stepInPercent))
     .toFixed(stepSignAfterComma));
   const stepValueMultiplier = Math.floor(stepPosition / divisionSizeInPercent);
   let stepValue = Number((minMax[0] + step * stepValueMultiplier));
-  console.log(checkOnException());
-  
-  if (!checkOnException() && stepValueMultiplier === divisionQuantity) {
-    console.log('???');
-    
+
+  if (!checkOnException() && (value === minMax[1] || stepValueMultiplier === divisionQuantity)) {
     stepPosition = 100;
     stepValue = minMax[1];
   }
-  console.log('stepValue', positionInPercent);
-
   // const stepValue = Number((Math.round(value / step) * step).toFixed(stepSignAfterComma));
   return { stepPosition, stepValue };
 };

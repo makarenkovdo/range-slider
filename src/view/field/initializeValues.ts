@@ -19,9 +19,11 @@ const initializeValues = function initializeDefaultViewValues(
     if (this.isVertical) {
       this.fieldSize = [fieldThickness, fieldHeight - borderWidth - 11];
       $field.css('width', fieldThickness);
+      $field.css('height', '100%');
     } else {
       this.fieldSize = [fieldWidth - borderWidth - 11, fieldThickness];
       $field.css('height', fieldThickness);
+      $field.css('width', '100%');
     }
   });
   this.$field.addClass(`slider_${this.orientation} js_slider_${this.orientation}`);

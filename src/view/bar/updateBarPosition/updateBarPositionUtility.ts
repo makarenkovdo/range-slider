@@ -98,9 +98,6 @@ const updateRangeBarPosition = (
     // });
     // const thicknessPositioningIndex = 1 - index;
     // $bar.css(`${positioningSwitcher[thicknessPositioningIndex][0]}`, `${fieldThickness}px`);
-    console.log(barBeginningPosition);
-    console.log('barLength', barLength);
-
     $bar.css(`${positioningSwitcher[index][0]}`, `${barBeginningPosition}%`);
     $bar.css(`${positioningSwitcher[index][1]}`, `${barLength}%`);
     const thicknessPositioningIndex = 1 - index;

@@ -100,9 +100,7 @@ const calculateStepValueAndPosition = ({
   value,
   stepSignAfterComma,
 }:CalculateStepValueAndPositionArgs,
-minMax: number[],
-fieldSize: number[],
-isVertical: boolean):CheckCollisionSubargs => {
+minMax: number[]):CheckCollisionSubargs => {
   let divisionQuantity = 0;
   function checkOnException() {
     return Math.floor((minMax[1] - minMax[0]) / step) * step === (minMax[1] - minMax[0]);

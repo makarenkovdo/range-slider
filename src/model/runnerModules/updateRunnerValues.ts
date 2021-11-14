@@ -29,7 +29,7 @@ const updateRunnerValues = ({
     setStepValueAndPosition(
       activeRunner,
       checkCollision(
-        calculateStepValueAndPosition(activeRunner, minMax, fieldSize, isVertical),
+        calculateStepValueAndPosition(activeRunner, minMax),
         runners,
         activeRunner,
         isVertical,
@@ -38,7 +38,7 @@ const updateRunnerValues = ({
   } else {
     setStepValueAndPosition(
       activeRunner,
-      calculateStepValueAndPosition(activeRunner, minMax, fieldSize, isVertical),
+      calculateStepValueAndPosition(activeRunner, minMax),
     );
   }
   activeRunner.notifyToUpdate.call(this);

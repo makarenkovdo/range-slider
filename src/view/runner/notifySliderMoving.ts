@@ -1,11 +1,11 @@
-import SliderView from '../SliderView';
+import Runner from './Runner';
 
 const notifySliderMoving = function notifySubscribers(
-  this: SliderView,
+  this: Runner,
   cursorXY: number[],
   instance: number,
 ): void {
-  this.subscriber.recieveDragData(this, cursorXY, instance);
+  this.parent.subscriber.recieveDragData(this.parent, cursorXY, instance);
 };
 
 export default notifySliderMoving;

@@ -1,4 +1,5 @@
 import { Orientation } from '../presenter/presenterInterfaces';
+import Runner from './runner/Runner';
 import SliderView from './SliderView';
 
 type AddTipNumberToDOMReturned = { minMax: number; i: number };
@@ -20,7 +21,7 @@ type DefineBarKindArgsType = {
   ) => void;
 };
 type DragEventDataType = {
-  thisView: SliderView;
+  thisRunner: Runner;
   instance: number;
 };
 

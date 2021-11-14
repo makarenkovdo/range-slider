@@ -6,17 +6,18 @@ const prepareMovingCoordinates = (
   event: JQuery.DragEvent,
   eventData: DragEventDataType,
 ): number[] => {
+  const { $field, fieldSize, isVertical } = eventData.thisRunner.parent;
   const cursorXY = [
-    event.pageX - eventData.thisView.$field.position().left - 5,
-    event.pageY - eventData.thisView.$field.position().top - 5,
+    event.pageX - $field.position().left - 5,
+    event.pageY - $field.position().top - 5,
   ];
   let switcher = 0;
-  if (eventData.thisView.isVertical) switcher = 1;
+  if (isVertical) switcher = 1;
   if (cursorXY[switcher] < 0) {
     cursorXY[switcher] = 0;
   }
-  if (cursorXY[switcher] > eventData.thisView.fieldSize[switcher]) {
-    cursorXY[switcher] = eventData.thisView.fieldSize[switcher];
+  if (cursorXY[switcher] > fieldSize[switcher]) {
+    cursorXY[switcher] = fieldSize[switcher];
   }
   return cursorXY;
 };
@@ -26,7 +27,7 @@ const notifySubscriber = (event: JQuery.DragEvent): void => {
   event.stopPropagation();
   const eventData = event.data as DragEventDataType;
   const cursorXY = prepareMovingCoordinates(event, eventData);
-  eventData.thisView.notifySliderMoving(cursorXY, eventData.instance);
+  eventData.thisRunner.notifySliderMoving(cursorXY, eventData.instance);
 };
 
 export default notifySubscriber;

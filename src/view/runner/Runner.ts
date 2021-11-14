@@ -1,5 +1,8 @@
 import SliderView from '../SliderView';
 import createRunner from './create';
+import handleDrag from './handleDrag';
+import handleDrop from './handleDrop';
+import notifySliderMoving from './notifySliderMoving';
 import updatePosition from './updatePosition';
 import updateZIndex from './updateZIndex';
 
@@ -27,6 +30,12 @@ export default class Runner {
     stepPosition:number,
   ) => void;
 
+  public handleDrag: (this: Runner, runnerInstance: number) => void;
+
+  public handleDrop: (this: Runner) => void;
+
+  public notifySliderMoving: (this: Runner, cursorXY: number[], instance: number) => void;
+
   public updatePosition: (this: Runner, stepPosition: number, instance: number) => void;
 
   public updateZIndex: (this: Runner, i: number) => void;
@@ -45,6 +54,9 @@ export default class Runner {
     this.cursorXY = [0, 0];
 
     this.createRunner = createRunner.bind(this) as () => void;
+    this.handleDrag = handleDrag.bind(this) as () => void;
+    this.handleDrop = handleDrop.bind(this) as () => void;
+    this.notifySliderMoving = notifySliderMoving.bind(this) as () => void;
     this.updatePosition = updatePosition.bind(this) as () => void;
     this.updateZIndex = updateZIndex.bind(this) as () => void;
   }

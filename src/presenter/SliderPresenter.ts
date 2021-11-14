@@ -109,7 +109,7 @@ class SliderPresenter {
 
   public onDrag(runnerCounter: number): this {
     $(document).ready(() => {
-      this.view.handleDrag(runnerCounter);
+      this.view.runner.handleDrag(runnerCounter);
     });
     return this;
   }
@@ -121,14 +121,14 @@ class SliderPresenter {
   }
 
   public onDrop(): this {
-    this.view.handleDrop();
+    this.view.runner.handleDrop();
     return this;
   }
 
-  public onInputChange():this {
-    this.view.handleInputsChange();
-    return this;
-  }
+  // public onInputChange():this {
+  //   this.view.panel.handleInputsChange();
+  //   return this;
+  // }
 
   public rebuild(params:PresenterBuildParams):void {
     this.view.panel.clearHTMLElement(this.view.id);

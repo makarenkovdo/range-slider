@@ -1,10 +1,10 @@
 /* eslint-disable padded-blocks */
 
-import initializeValues from './initialize/initializeValues';
-import initStartEnd from './initialize/initStartEnd';
-import handleClick from './events/handleClick';
-import notifyFieldClick from './notifiers/notifyFieldClick';
-import setStep from './initialize/setStep';
+import initializeValues from './field/initializeValues';
+import initStartEnd from './field/initStartEnd';
+import handleClick from './field/handleClick';
+import notifyFieldClick from './field/notifyFieldClick';
+import setStep from './field/setStep';
 
 import FieldModel from '../model/FieldModel';
 import SliderPresenter from '../presenter/SliderPresenter.js';

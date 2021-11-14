@@ -5,7 +5,7 @@ import { UpdateRunnerValuesArgs } from '../model/runnerModules/runnerInterfaces'
 import SliderView from '../view/SliderView';
 import {
   PresenterBuildParams,
-  CreateRangeSliderArgsType,
+  // CreateRangeSliderArgsType,
   DataForRunnerUpdatingArgsType,
   Orientation,
 } from './presenterInterfaces';
@@ -28,15 +28,44 @@ class SliderPresenter {
     this.field = new FieldModel(id, this);
     this.view = new SliderView(id, this);
     this.build(params);
-    this.addListeners(params.isRange);
+    this.addListeners(params);
   }
 
+  private build(params: PresenterBuildParams): void {
+    const checkedParams = checkValues(params);
+
+    if (!checkedParams.isTestMode) {
+      this.setMinMax(checkedParams)
+        .initLayers(checkedParams)
+        .createRangeSlider(checkedParams)
+        .setStep(checkedParams)
+        .createBar(checkedParams)
+        .createScale(checkedParams)
+        .activatePanel(checkedParams);
+    }
+  }
   // prettier-ignore
+
+  private activatePanel(params: PresenterBuildParams): this {
+    console.log(params);
+
+    // if (params.hasInputPanel && !this.view.hasPanel) {
+    this.view.panel.activatePanel.call(this.view, params);
+    this.view.hasPanel = true;
+    // }
+    return this;
+  }
+
+  private addListeners({ isRange }:PresenterBuildParams): this {
+    this.onClick().onDrag(0).onDrop();
+    if (isRange) this.onDrag(1);
+    return this;
+  }
 
   //  prettier-ignore
   public createRangeSlider({
     isRange, shouldAddTip, runnerSize, minValue, maxValue, runnersInstantPosition,
-  }:CreateRangeSliderArgsType): this {
+  }:PresenterBuildParams): this {
     this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition[this.runnerCounter]);
     let { stepValue, stepPosition } = this.runners[this.runnerCounter];
 
@@ -88,7 +117,7 @@ class SliderPresenter {
     return this;
   }
 
-  public createBar(shouldAddBar: boolean): this {
+  public createBar({ shouldAddBar }:PresenterBuildParams): this {
     if (shouldAddBar) {
       this.view.hasBar = true;
       this.view.bar.createBar(this);
@@ -98,7 +127,7 @@ class SliderPresenter {
     return this;
   }
 
-  public createScale(shouldAddScale: boolean): this {
+  public createScale({ shouldAddScale }:PresenterBuildParams): this {
     if (shouldAddScale) {
       this.view.hasScale = true;
       this.view.scale.create();
@@ -111,12 +140,6 @@ class SliderPresenter {
     $(document).ready(() => {
       this.view.runner.handleDrag(runnerCounter);
     });
-    return this;
-  }
-
-  public addListeners(isRange: boolean): this {
-    this.onClick().onDrag(0).onDrop();
-    if (isRange) this.onDrag(1);
     return this;
   }
 
@@ -200,13 +223,13 @@ class SliderPresenter {
     this.field.prepareDataForRunnerUpdating(dataForRunnerUpdatingArgs);
   }
 
-  private setMinMax(minValue: number, maxValue: number): this {
+  private setMinMax({ minValue, maxValue }:PresenterBuildParams): this {
     this.field.setMinMax(minValue, maxValue);
     this.view.initStartEnd(minValue, maxValue);
     return this;
   }
 
-  public setStep(step: number): this {
+  public setStep({ step }:PresenterBuildParams): this {
     this.runners.forEach((v) => v.setStep(step, this.field.minMax));
     if (step < 1) this.runners.forEach((v) => v.defineSignAfterComma());
     this.view.setStep(step, this.runners[0].stepSignAfterComma);
@@ -219,84 +242,12 @@ class SliderPresenter {
     return this;
   }
 
-  private activatePanel(params: PresenterBuildParams): this {
-    console.log(params);
-    
-    // if (params.hasInputPanel && !this.view.hasPanel) {
-    this.view.panel.activatePanel.call(this.view, params);
-    this.view.hasPanel = true;
-    // }
-    return this;
-  }
-
-  private build(params: PresenterBuildParams): void {
-    let {
-      minValue = 0,
-      maxValue = 100,
-      step = 1,
-      runnerSize = [40, 40],
-      fieldThickness = 6,
-      runnersInstantPosition = [0, 100],
-    } = params;
-
-    const {
-      shouldAddTip = false,
-      shouldAddBar = false,
-      shouldAddScale = false,
-      isRange = false,
-      isTestMode = false,
-      orientation = 'horizontal',
-      hasInputPanel = false,
-    } = params;
-
-    //  prettier-ignore
-    ({
-      minValue, maxValue, step, runnerSize, fieldThickness, runnersInstantPosition,
-    } = checkValues(
-      {
-        minValue, maxValue, step, runnerSize, fieldThickness, runnersInstantPosition,
-      },
-    ));
-
-    if (!isTestMode) {
-      this.setMinMax(minValue, maxValue)
-        .initLayers(runnerSize, fieldThickness, orientation)
-        .createRangeSlider({
-          isRange,
-          shouldAddTip,
-          runnerSize,
-          minValue,
-          maxValue,
-          runnersInstantPosition,
-        })
-        // .onInputChange()
-        .setStep(step)
-        .createBar(shouldAddBar)
-        .createScale(shouldAddScale)
-        .activatePanel({
-          shouldAddTip,
-          shouldAddBar,
-          shouldAddScale,
-          isRange,
-          isTestMode,
-          orientation,
-          hasInputPanel,
-          minValue,
-          maxValue,
-          step,
-          runnerSize,
-          fieldThickness,
-          runnersInstantPosition,
-        });
-    }
-  }
-
   private updateBarPosition(): this {
     this.view.bar.updateBarPosition();
     return this;
   }
 
-  private initLayers(runnerSize: number[], fieldThickness:number, orientation: Orientation): this {
+  private initLayers({ runnerSize, fieldThickness, orientation }:PresenterBuildParams): this {
     this.field.setIsVertical(orientation);
     this.view.initializeValues(runnerSize, fieldThickness, orientation);
 

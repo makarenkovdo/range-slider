@@ -1,10 +1,26 @@
-import { CheckValuesArgs } from '../presenterInterfaces';
+import { CheckValuesArgs, PresenterBuildParams } from '../presenterInterfaces';
 
-const checkValues = function checkInitialValues(args: CheckValuesArgs): CheckValuesArgs {
+const checkValues = function checkInitialValues(
+  params: PresenterBuildParams,
+): PresenterBuildParams {
   let {
-    minValue, maxValue, step, fieldThickness, runnersInstantPosition,
-  } = args;
-  const { runnerSize } = args;
+    minValue = 0,
+    maxValue = 100,
+    step = 1,
+    fieldThickness = 6,
+    runnersInstantPosition = [0, 100],
+  } = params;
+
+  const {
+    runnerSize = [40, 40],
+    shouldAddTip = false,
+    shouldAddBar = false,
+    shouldAddScale = false,
+    isRange = false,
+    isTestMode = false,
+    orientation = 'horizontal',
+    hasInputPanel = false,
+  } = params;
   if (minValue > maxValue) {
     [minValue, maxValue] = [maxValue, minValue];
   } else if (minValue === maxValue) {
@@ -38,14 +54,22 @@ const checkValues = function checkInitialValues(args: CheckValuesArgs): CheckVal
     || runnersInstantPosition[1] > maxValue) {
     runnersInstantPosition = [minValue, maxValue];
   }
-  return {
+  const checkedParams = {
     minValue,
     maxValue,
     step,
     runnerSize,
     fieldThickness,
     runnersInstantPosition,
+    shouldAddTip,
+    shouldAddBar,
+    shouldAddScale,
+    isRange,
+    isTestMode,
+    orientation,
+    hasInputPanel,
   };
+  return checkedParams;
 };
 
 export default checkValues;

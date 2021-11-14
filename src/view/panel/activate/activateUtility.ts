@@ -6,7 +6,8 @@ const selectPanelNodes = function selectPanelInputNodes(this: Panel):void {
 
   this.$minValueInput = $panel.querySelector('.js-slider-input__min-value');
   this.$maxValueInput = $panel.querySelector('.js-slider-input__max-value');
-  this.$runnerSizeInput = $panel.querySelector('.js-slider-input__runner-size');
+  this.$runnerWidthInput = $panel.querySelector('.js-slider-input__runner-width');
+  this.$runnerHeightInput = $panel.querySelector('.js-slider-input__runner-height');
   this.$stepInput = $panel.querySelector('.js-slider-input__step');
   this.$isRangeInput = $panel.querySelector('.js-slider-input__is-range');
   this.$orientationInput = $panel.querySelector('.js-slider-input__orientation');
@@ -35,7 +36,6 @@ const initializePanel = function initializeDefaultPanelValues(
   const {
     $minValueInput,
     $maxValueInput,
-    $runnerSizeInput,
     $stepInput,
     $isRangeInput,
     $orientationInput,
@@ -44,11 +44,14 @@ const initializePanel = function initializeDefaultPanelValues(
     $hasTipInput,
     $runner0ValueInput,
     $runner1ValueInput,
+    $runnerHeightInput,
+    $runnerWidthInput,
   } = this;
   $(document).ready(() => {
     $minValueInput.value = `${minValue}`;
     $maxValueInput.value = `${maxValue}`;
-    $runnerSizeInput.value = `${runnerSize[0]}`;
+    $runnerHeightInput.value = `${runnerSize[1]}`;
+    $runnerWidthInput.value = `${runnerSize[0]}`;
     $stepInput.value = `${step}`;
     $isRangeInput.checked = isRange;
     $orientationInput.checked = orientation === 'vertical';
@@ -68,7 +71,8 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
   const {
     $minValueInput,
     $maxValueInput,
-    $runnerSizeInput,
+    $runnerWidthInput,
+    $runnerHeightInput,
     $stepInput,
     $isRangeInput,
     $orientationInput,
@@ -94,6 +98,13 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
         parseFloat($runner0ValueInput.value),
         parseFloat($runner1ValueInput.value),
       ]; break;
+    }
+    case 'runnerSize': {
+      this.parent.runner.size = [
+        parseInt(($runnerWidthInput.value), 10),
+        parseInt(($runnerHeightInput.value), 10),
+      ];
+      break;
     }
     case 'step': {
       this.parent.runner.step = parseFloat($stepInput.value);
@@ -131,7 +142,8 @@ const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(
   const {
     $minValueInput,
     $maxValueInput,
-    $runnerSizeInput,
+    $runnerWidthInput,
+    $runnerHeightInput,
     $stepInput,
     $isRangeInput,
     $orientationInput,
@@ -173,7 +185,12 @@ const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(
     runnersInstantPosition,
     actionType.runnerValue,
   ));
-  $runnerSizeInput.addEventListener('change', ():void => handleChange.call(
+  $runnerWidthInput.addEventListener('change', ():void => handleChange.call(
+    this,
+    runnersInstantPosition,
+    actionType.runnerSize,
+  ));
+  $runnerHeightInput.addEventListener('change', ():void => handleChange.call(
     this,
     runnersInstantPosition,
     actionType.runnerSize,

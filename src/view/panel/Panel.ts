@@ -12,7 +12,9 @@ export default class Panel {
 
   public $maxValueInput: HTMLInputElement;
 
-  public $runnerSizeInput: HTMLInputElement;
+  public $runnerWidthInput: HTMLInputElement;
+
+  public $runnerHeightInput: HTMLInputElement;
 
   public $stepInput: HTMLInputElement;
 

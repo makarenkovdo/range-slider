@@ -3,15 +3,10 @@ import activatePanel from './activate';
 import { PresenterBuildParams } from '../../presenter/presenterInterfaces';
 import SliderView from '../SliderView';
 import notifyInputChange from './notifyInputChange';
+import updateRunnerInput from './updateRunnerInput';
 
 export default class Panel {
   parent: SliderView;
-
-  public activatePanel: (this: Panel, params: PresenterBuildParams) => void;
-
-  public clearHTMLElement: (id:string) => void;
-
-  public notifyInputChange: (this: Panel, runnersInstantPosition: number[]) => void;
 
   public $minValueInput: HTMLInputElement;
 
@@ -35,10 +30,19 @@ export default class Panel {
 
   public $runner1ValueInput: HTMLInputElement;
 
+  public activatePanel: (this: Panel, params: PresenterBuildParams) => void;
+
+  public clearHTMLElement: (id:string) => void;
+
+  public notifyInputChange: (this: Panel, runnersInstantPosition: number[]) => void;
+
+  public updateRunnerInput: (this: Panel, stepValue:number, instance:number) => void;
+
   constructor(view: SliderView) {
     this.parent = view;
     this.activatePanel = activatePanel.bind(this) as () => void;
     this.clearHTMLElement = clearHTMLElement as () => void;
     this.notifyInputChange = notifyInputChange.bind(this) as () => void;
+    this.updateRunnerInput = updateRunnerInput.bind(this) as () => void;
   }
 }

@@ -141,6 +141,12 @@ class SliderPresenter {
       this.updateRunnerPosition(activeRunner);
       if (this.view.hasTip) this.updateTipNumber(activeRunner.stepValue, activeRunner.instance);
       if (this.view.hasBar) this.updateBarPosition();
+      if (this.view.hasPanel) {
+        this.view.panel.updateRunnerInput(
+          activeRunner.stepValue,
+          activeRunner.instance,
+        );
+      }
     }
   }
 
@@ -219,6 +225,7 @@ class SliderPresenter {
   private activatePanel(params: PresenterBuildParams): this {
     if (params.hasInputPanel) {
       this.view.panel.activatePanel.call(this.view, params);
+      this.view.hasPanel = true;
     }
     return this;
   }

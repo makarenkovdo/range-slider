@@ -45,6 +45,8 @@ export default class SliderView {
 
   public hasTip: boolean;
 
+  public hasPanel: boolean;
+
   public lengthInStep: number;
 
   public borderWidth: number;

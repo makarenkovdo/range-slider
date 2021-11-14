@@ -19,11 +19,18 @@ const checkValues = function checkInitialValues(args: CheckValuesArgs): CheckVal
     step = maxValue - minValue;
   }
   if (runnerSize[0] <= 0 || runnerSize[1] <= 0) {
-    runnerSize[0] = 40;
-    runnerSize[1] = 40;
+    runnerSize[0] = 6;
+    runnerSize[1] = 6;
+  }
+  if (runnerSize[0] > 50 || runnerSize[1] > 50) {
+    runnerSize[0] = 50;
+    runnerSize[1] = 50;
   }
   if (fieldThickness <= 0) {
     fieldThickness = 1;
+  }
+  if (fieldThickness >= 20) {
+    fieldThickness = 20;
   }
 
   if (runnersInstantPosition[0] > runnersInstantPosition[1]

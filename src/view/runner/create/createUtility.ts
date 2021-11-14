@@ -9,17 +9,19 @@ const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
   let switcher = [0, 1];
   const instance = i;
   const mainPositionCorrector = 5 - runnerSize[0] / 2;
-  const thicknessCorrector = runnerSize[0] / 2 + 1;
   if (isVertical) {
     positioning = ['top', 'left'];
     // minMax = fieldSize[1];
     switcher = [1, 0];
   }
-  const positionInPx = stepPosition * (fieldSize[switcher[0]] / 100);
+  const thicknessCorrector = runnerSize[switcher[1]] / 2 + 1;
+
+  const positionInPx = Math.abs(fieldSize[switcher[0]] * switcher[0] - stepPosition * (fieldSize[switcher[0]] / 100));
 
   const position = [
     positionInPx + mainPositionCorrector,
     -thicknessCorrector + fieldSize[switcher[1]] * 0.5];
+  console.log('instance, positioning, position', instance, positioning, position);
 
   return {
     instance, positioning, position,

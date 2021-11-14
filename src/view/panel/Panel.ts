@@ -7,11 +7,33 @@ import notifyInputChange from './notifyInputChange';
 export default class Panel {
   parent: SliderView;
 
-  public activatePanel: (this: SliderView, params: PresenterBuildParams) => void;
+  public activatePanel: (this: Panel, params: PresenterBuildParams) => void;
 
   public clearHTMLElement: (id:string) => void;
 
-  public notifyInputChange: (this: SliderView, runnersInstantPosition: number[]) => void;
+  public notifyInputChange: (this: Panel, runnersInstantPosition: number[]) => void;
+
+  public $minValueInput: HTMLInputElement;
+
+  public $maxValueInput: HTMLInputElement;
+
+  public $runnerSizeInput: HTMLInputElement;
+
+  public $stepInput: HTMLInputElement;
+
+  public $isRangeInput: HTMLInputElement;
+
+  public $orientationInput: HTMLInputElement;
+
+  public $hasScaleInput: HTMLInputElement;
+
+  public $hasBarInput: HTMLInputElement;
+
+  public $hasTipInput: HTMLInputElement;
+
+  public $runner0ValueInput: HTMLInputElement;
+
+  public $runner1ValueInput: HTMLInputElement;
 
   constructor(view: SliderView) {
     this.parent = view;

@@ -1,5 +1,4 @@
 import { PresenterBuildParams } from '../../presenter/presenterInterfaces';
-import { PanelSelectors } from '../viewInterfaces';
 import {
   addOnChangeListener, initializePanel, selectPanelNodes,
 } from './activate/activateUtility';
@@ -9,9 +8,9 @@ const activate = function activatePanelAndHandleChanges(
   this:Panel,
   params: PresenterBuildParams,
 ):void {
-  const panelSelectors: PanelSelectors = selectPanelNodes(this.parent.id);
-  initializePanel(params, panelSelectors);
-  addOnChangeListener.call(this, panelSelectors);
+  selectPanelNodes.call(this);
+  initializePanel.call(this, params);
+  addOnChangeListener.call(this);
 };
 
 export default activate;

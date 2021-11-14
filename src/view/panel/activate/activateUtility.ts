@@ -1,29 +1,24 @@
 import { PresenterBuildParams } from '../../../presenter/presenterInterfaces';
-import SliderView from '../../SliderView';
-import { PanelSelectors } from '../../viewInterfaces';
 import Panel from '../Panel';
 
-const selectPanelNodes = (id:string):PanelSelectors => {
-  const $panel = document.querySelector(`#${id}-panel`);
+const selectPanelNodes = function selectPanelInputNodes(this: Panel):void {
+  const $panel = document.querySelector(`#${this.parent.id}-panel`);
 
-  const panelSelectors: PanelSelectors = {
-    $minValueInput: $panel.querySelector('.js-slider-input__min-value'),
-    $maxValueInput: $panel.querySelector('.js-slider-input__max-value'),
-    $runnerSizeInput: $panel.querySelector('.js-slider-input__runner-size'),
-    $stepInput: $panel.querySelector('.js-slider-input__step'),
-    $isRangeInput: $panel.querySelector('.js-slider-input__is-range'),
-    $orientationInput: $panel.querySelector('.js-slider-input__orientation'),
-    $hasScale: $panel.querySelector('.js-slider-input__has-scale'),
-    $hasBar: $panel.querySelector('.js-slider-input__has-bar'),
-    $hasTip: $panel.querySelector('.js-slider-input__has-tip'),
-    $runner0ValueInput: $panel.querySelector('.js-slider-input__runner-0-value'),
-    $runner1ValueInput: $panel.querySelector('.js-slider-input__runner-1-value'),
-  };
-
-  return panelSelectors;
+  this.$minValueInput = $panel.querySelector('.js-slider-input__min-value');
+  this.$maxValueInput = $panel.querySelector('.js-slider-input__max-value');
+  this.$runnerSizeInput = $panel.querySelector('.js-slider-input__runner-size');
+  this.$stepInput = $panel.querySelector('.js-slider-input__step');
+  this.$isRangeInput = $panel.querySelector('.js-slider-input__is-range');
+  this.$orientationInput = $panel.querySelector('.js-slider-input__orientation');
+  this.$hasScaleInput = $panel.querySelector('.js-slider-input__has-scale');
+  this.$hasBarInput = $panel.querySelector('.js-slider-input__has-bar');
+  this.$hasTipInput = $panel.querySelector('.js-slider-input__has-tip');
+  this.$runner0ValueInput = $panel.querySelector('.js-slider-input__runner-0-value');
+  this.$runner1ValueInput = $panel.querySelector('.js-slider-input__runner-1-value');
 };
 
 const initializePanel = function initializeDefaultPanelValues(
+  this: Panel,
   {
     minValue,
     maxValue,
@@ -36,7 +31,6 @@ const initializePanel = function initializeDefaultPanelValues(
     isRange,
     step,
   }: PresenterBuildParams,
-  panelSelectors: PanelSelectors,
 ): void {
   const {
     $minValueInput,
@@ -45,12 +39,12 @@ const initializePanel = function initializeDefaultPanelValues(
     $stepInput,
     $isRangeInput,
     $orientationInput,
-    $hasScale,
-    $hasBar,
-    $hasTip,
+    $hasScaleInput,
+    $hasBarInput,
+    $hasTipInput,
     $runner0ValueInput,
     $runner1ValueInput,
-  } = panelSelectors;
+  } = this;
   $(document).ready(() => {
     $minValueInput.value = `${minValue}`;
     $maxValueInput.value = `${maxValue}`;
@@ -58,32 +52,33 @@ const initializePanel = function initializeDefaultPanelValues(
     $stepInput.value = `${step}`;
     $isRangeInput.checked = isRange;
     $orientationInput.checked = orientation === 'vertical';
-    $hasScale.checked = shouldAddScale;
-    $hasBar.checked = shouldAddBar;
-    $hasTip.checked = shouldAddTip;
+    $hasScaleInput.checked = shouldAddScale;
+    $hasBarInput.checked = shouldAddBar;
+    $hasTipInput.checked = shouldAddTip;
     $runner0ValueInput.value = `${runnersInstantPosition[0]}`;
     $runner1ValueInput.value = `${runnersInstantPosition[1]}`;
   });
 };
 const handleChange = function hangleInputsAndCheckboxesChanges(
   this: Panel,
-  {
+
+  runnersInstantPosition: number[],
+  actionType: string,
+): void {
+  const {
     $minValueInput,
     $maxValueInput,
     $runnerSizeInput,
     $stepInput,
     $isRangeInput,
     $orientationInput,
-    $hasScale,
-    $hasBar,
-    $hasTip,
+    $hasScaleInput,
+    $hasBarInput,
+    $hasTipInput,
     $runner0ValueInput,
     $runner1ValueInput,
-  }: PanelSelectors,
-  runnersInstantPosition: number[],
-  actionType: string,
-): void {
-  let newRunnersInstantPosition = runnersInstantPosition;
+  } = this;
+  let newRunnersInstantPosition:number[] = runnersInstantPosition;
 
   switch (actionType) {
     case 'min': {
@@ -113,24 +108,24 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
       break;
     }
     case 'hasScale': {
-      this.parent.hasScale = $hasScale.checked;
+      this.parent.hasScale = $hasScaleInput.checked;
       break;
     }
     case 'hasTip': {
-      this.parent.hasTip = $hasTip.checked;
+      this.parent.hasTip = $hasTipInput.checked;
       break;
     }
     case 'hasBar': {
-      this.parent.hasBar = $hasBar.checked;
+      this.parent.hasBar = $hasBarInput.checked;
       break;
     }
     default: // do nothing;
   }
   this.notifyInputChange.call(this, newRunnersInstantPosition);
 };
+
 const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(
-  this: SliderView,
-  panelSelectors: PanelSelectors,
+  this: Panel,
 ): void {
   const runnersInstantPosition = [0, 100];
   const {
@@ -140,12 +135,12 @@ const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(
     $stepInput,
     $isRangeInput,
     $orientationInput,
-    $hasScale,
-    $hasBar,
-    $hasTip,
+    $hasScaleInput,
+    $hasBarInput,
+    $hasTipInput,
     $runner0ValueInput,
     $runner1ValueInput,
-  } = panelSelectors;
+  } = this;
   const actionType = {
     min: 'min',
     max: 'max',
@@ -160,67 +155,56 @@ const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(
   };
   $minValueInput.addEventListener('change', ():void => handleChange.call(
     this,
-    panelSelectors,
     runnersInstantPosition,
     actionType.min,
   ));
   $maxValueInput.addEventListener('change', ():void => handleChange.call(
     this,
-    panelSelectors,
     runnersInstantPosition,
     actionType.max,
   ));
   $runner0ValueInput.addEventListener('change', ():void => handleChange.call(
     this,
-    panelSelectors,
     runnersInstantPosition,
     actionType.runnerValue,
   ));
   $runner1ValueInput.addEventListener('change', ():void => handleChange.call(
     this,
-    panelSelectors,
     runnersInstantPosition,
     actionType.runnerValue,
   ));
   $runnerSizeInput.addEventListener('change', ():void => handleChange.call(
     this,
-    panelSelectors,
     runnersInstantPosition,
     actionType.runnerSize,
   ));
   $stepInput.addEventListener('change', ():void => handleChange.call(
     this,
-    panelSelectors,
     runnersInstantPosition,
     actionType.step,
   ));
   $orientationInput.addEventListener('change', ():void => handleChange.call(
     this,
-    panelSelectors,
     runnersInstantPosition,
     actionType.orientation,
   ));
   $isRangeInput.addEventListener('change', ():void => handleChange.call(
     this,
-    panelSelectors,
     runnersInstantPosition,
     actionType.isRange,
   ));
-  $hasBar.addEventListener('change', ():void => handleChange.call(
+  $hasBarInput.addEventListener('change', ():void => handleChange.call(
     this,
-    panelSelectors,
     runnersInstantPosition,
     actionType.hasBar,
   ));
-  $hasScale.addEventListener('change', ():void => handleChange.call(
+  $hasScaleInput.addEventListener('change', ():void => handleChange.call(
     this,
-    panelSelectors,
     runnersInstantPosition,
     actionType.hasScale,
   ));
-  $hasTip.addEventListener('change', ():void => handleChange.call(
+  $hasTipInput.addEventListener('change', ():void => handleChange.call(
     this,
-    panelSelectors,
     runnersInstantPosition,
     actionType.hasTip,
   ));

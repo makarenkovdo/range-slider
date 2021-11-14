@@ -11,8 +11,9 @@ import SliderPresenter from '../presenter/SliderPresenter.js';
 import RunnerModel from '../model/RunnerModel';
 
 import { Orientation } from '../presenter/presenterInterfaces';
-import Panel from './panel/Panel';
+
 import Bar from './bar/Bar';
+import Panel from './panel/Panel';
 import Runner from './runner/Runner';
 import Scale from './scale/Scale';
 import Tip from './tip/Tip';
@@ -100,9 +101,7 @@ export default class SliderView {
 
     this.initializeValues = initializeValues.bind(this) as () => void;
     this.handleClick = handleClick.bind(this) as () => void;
-    // this.handleInputsChange = handleInputsChange.bind(this) as () => void;
     this.notifyFieldClick = notifyFieldClick.bind(this) as () => void;
-    // this.notifyInputChange = notifyInputChange.bind(this) as () => void;
     this.initStartEnd = initStartEnd as () => void;
     this.setStep = setStep as () => void;
   }

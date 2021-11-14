@@ -82,21 +82,21 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
 
   switch (actionType) {
     case 'min': {
-      this.parent.minMax[0] = parseInt(($minValueInput.value), 10);
+      this.parent.minMax[0] = parseFloat($minValueInput.value);
       break;
     }
     case 'max': {
-      this.parent.minMax[1] = parseInt(($maxValueInput.value), 10);
+      this.parent.minMax[1] = parseFloat($maxValueInput.value);
       break;
     }
     case 'runnerValue': {
       newRunnersInstantPosition = [
-        parseInt(($runner0ValueInput.value), 10),
-        parseInt(($runner1ValueInput.value), 10),
+        parseFloat($runner0ValueInput.value),
+        parseFloat($runner1ValueInput.value),
       ]; break;
     }
     case 'step': {
-      this.parent.runner.step = parseInt(($stepInput.value), 10);
+      this.parent.runner.step = parseFloat($stepInput.value);
       break;
     }
     case 'isRange': {

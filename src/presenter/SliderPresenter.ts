@@ -131,8 +131,6 @@ class SliderPresenter {
   // }
 
   public rebuild(params:PresenterBuildParams):void {
-    console.log('params', params);
-    
     this.view.panel.clearHTMLElement(this.view.id);
     this.runnerCounter = 0;
     this.build(params);
@@ -153,8 +151,6 @@ class SliderPresenter {
   }
 
   public recieveRebuildData(params: PresenterBuildParams): void {
-    console.log('params', params);
-    
     this.rebuild(params);
   }
 
@@ -179,12 +175,6 @@ class SliderPresenter {
   public recieveInputsData(
     panelInputsData: PresenterBuildParams,
   ): void {
-    // const returnedRunnerPosition = this.runners.map((v, i) => v.setValuesFromInputs(
-    //   panelInputsData.runnersValue[i],
-    //   panelInputsData.minMax,
-    // ));
-    // const rebuildData = panelInputsData;
-    // rebuildData.returnedRunnerPosition = returnedRunnerPosition;
     this.rebuild(panelInputsData);
   }
 

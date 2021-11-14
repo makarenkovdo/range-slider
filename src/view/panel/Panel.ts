@@ -16,6 +16,8 @@ export default class Panel {
 
   public $runnerHeightInput: HTMLInputElement;
 
+  public $fieldThicknessInput: HTMLInputElement;
+
   public $stepInput: HTMLInputElement;
 
   public $isRangeInput: HTMLInputElement;

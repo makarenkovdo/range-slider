@@ -51,6 +51,8 @@ export default class SliderView {
 
   public borderWidth: number;
 
+  public fieldThickness: number;
+
   private class: string;
 
   public panel: Panel;

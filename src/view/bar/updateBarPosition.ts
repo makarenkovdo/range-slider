@@ -10,6 +10,7 @@ import {
 
 const updateBarPosition = function updateBarPositionToDOM(this: Bar): void {
   const { parent } = this;
+  
   $(document).ready(() => {
     defineBarKind({
     // todo destruction
@@ -17,6 +18,7 @@ const updateBarPosition = function updateBarPositionToDOM(this: Bar): void {
       isVertical: parent.isVertical,
       $bar: this.$bar,
       runnersPosition: parent.runner.positions,
+      fieldThickness: parent.fieldThickness,
       calcLengthOfRangeBar,
       updateSingleVerticalBarPosition,
       updateSingleHorizontalBarPosition,

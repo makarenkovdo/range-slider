@@ -10,6 +10,7 @@ const defineBarKind = ({
   isVertical,
   $bar,
   runnersPosition,
+  fieldThickness,
   calcLengthOfRangeBar,
   updateSingleVerticalBarPosition,
   updateSingleHorizontalBarPosition,
@@ -17,9 +18,10 @@ const defineBarKind = ({
 }: DefineBarKindArgsType): void => {
   if (isRange && isVertical) {
     updateRangeBarPosition(
-      NumbersEnum.one, // todo enum
+      NumbersEnum.one,
       $bar,
       runnersPosition,
+      fieldThickness,
       calcLengthOfRangeBar(runnersPosition),
     );
   }
@@ -28,11 +30,24 @@ const defineBarKind = ({
       NumbersEnum.zero,
       $bar,
       runnersPosition,
+      fieldThickness,
       calcLengthOfRangeBar(runnersPosition),
     );
   }
-  if (!isRange && isVertical) updateSingleVerticalBarPosition(runnersPosition, $bar);
-  if (!isRange && !isVertical) updateSingleHorizontalBarPosition(runnersPosition, $bar);
+  if (!isRange && isVertical) {
+    updateSingleVerticalBarPosition(
+      runnersPosition,
+      fieldThickness,
+      $bar,
+    );
+  }
+  if (!isRange && !isVertical) {
+    updateSingleHorizontalBarPosition(
+      runnersPosition,
+      fieldThickness,
+      $bar,
+    );
+  }
 
   return this;
 };
@@ -43,37 +58,53 @@ const calcLengthOfRangeBar = (runnersPosition: number[]): number => Math.abs(run
 
 const updateSingleVerticalBarPosition = (
   runnersPosition: number[],
+  fieldThickness: number,
   $bar: JQuery<HTMLElement>,
 ): void => {
   $bar.css('height', `${runnersPosition[0]}%`).css('top', `${100 - runnersPosition[0]}%`);
+  $bar.css('width', `${fieldThickness}px`);
 };
 
 const updateSingleHorizontalBarPosition = (
   runnersPosition: number[],
+  fieldThickness: number,
   $bar: JQuery<HTMLElement>,
 ): void => {
-  $(document).ready(() => $bar.css('width', `${runnersPosition[0]}%`));
+  $(document).ready(() => {
+    $bar.css('width', `${runnersPosition[0]}%`);
+    $bar.css('height', `${fieldThickness}px`);
+  });
 };
 
 const updateRangeBarPosition = (
   index: NumbersEnum,
   $bar: JQuery<HTMLElement>,
   runnersPosition: number[],
+  fieldThickness: number,
   barLength: number,
 ): void => {
-  const positioningSwitcher = [
-    ['left', 'width'],
-    ['top', 'height'],
-  ];
+  $(document).ready(() => {
+    const positioningSwitcher = [
+      ['left', 'width'],
+      ['top', 'height'],
+    ];
+    const barBeginningPosition = Math.abs(100 * index - runnersPosition[index]);
 
-  //  helpVariable for rotation left/top with width/height value
-  // const viewPosition = this.isVertical
-  // ? this.fieldSize[1] - (this.runnersPosition[instance] * (this.fieldSize[1] / 100)) - 10
-  // : ((this.runnersPosition[instance] * (this.fieldSize[0] / 100)) - 20);
+    //  helpVariable for rotation left/top with width/height value
 
-  const positionAndLengthSwitcher = [Math.abs(100 * index - runnersPosition[index]), barLength];
-  positioningSwitcher[index].forEach((v, i) => {
-    $bar.css(`${v}`, `${positionAndLengthSwitcher[i]}%`);
+    // const positionAndLengthSwitcher = [Math.abs(100 * index - runnersPosition[index]), barLength];
+    // positioningSwitcher[index].forEach((v, i) => {
+    //   $bar.css(`${v}`, `${positionAndLengthSwitcher[i]}%`);
+    // });
+    // const thicknessPositioningIndex = 1 - index;
+    // $bar.css(`${positioningSwitcher[thicknessPositioningIndex][0]}`, `${fieldThickness}px`);
+    console.log(barBeginningPosition);
+    console.log('barLength', barLength);
+
+    $bar.css(`${positioningSwitcher[index][0]}`, `${barBeginningPosition}%`);
+    $bar.css(`${positioningSwitcher[index][1]}`, `${barLength}%`);
+    const thicknessPositioningIndex = 1 - index;
+    $bar.css(`${positioningSwitcher[thicknessPositioningIndex][1]}`, `${fieldThickness}px`);
   });
 };
 

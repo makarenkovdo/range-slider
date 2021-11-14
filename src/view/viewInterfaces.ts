@@ -10,13 +10,23 @@ type DefineBarKindArgsType = {
   isVertical: boolean;
   $bar: JQuery<HTMLElement>;
   runnersPosition: number[];
+  fieldThickness: number;
   calcLengthOfRangeBar: (runnersPosition: number[]) => number;
-  updateSingleVerticalBarPosition: (runnersPosition: number[], $bar: JQuery<HTMLElement>) => void;
-  updateSingleHorizontalBarPosition: (runnersPosition: number[], $bar: JQuery<HTMLElement>) => void;
+  updateSingleVerticalBarPosition: (
+    runnersPosition: number[],
+    fieldThickness: number,
+    $bar: JQuery<HTMLElement>
+  ) => void;
+  updateSingleHorizontalBarPosition: (
+    runnersPosition: number[],
+    fieldThickness: number,
+    $bar: JQuery<HTMLElement>
+  ) => void;
   updateRangeBarPosition: (
-    a: number, // todo enum
+    enumNumber: number,
     $bar: JQuery<HTMLElement>,
     runnersPosition: number[],
+    fieldThickness: number,
     barLength: number,
   ) => void;
 };

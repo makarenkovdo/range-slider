@@ -16,6 +16,7 @@ const selectPanelNodes = function selectPanelInputNodes(this: Panel):void {
   this.$hasTipInput = $panel.querySelector('.js-slider-input__has-tip');
   this.$runner0ValueInput = $panel.querySelector('.js-slider-input__runner-0-value');
   this.$runner1ValueInput = $panel.querySelector('.js-slider-input__runner-1-value');
+  this.$fieldThicknessInput = $panel.querySelector('.js-slider-input__field-thickness');
 };
 
 const initializePanel = function initializeDefaultPanelValues(
@@ -31,6 +32,7 @@ const initializePanel = function initializeDefaultPanelValues(
     shouldAddTip,
     isRange,
     step,
+    fieldThickness,
   }: PresenterBuildParams,
 ): void {
   const {
@@ -46,6 +48,7 @@ const initializePanel = function initializeDefaultPanelValues(
     $runner1ValueInput,
     $runnerHeightInput,
     $runnerWidthInput,
+    $fieldThicknessInput,
   } = this;
   $(document).ready(() => {
     $minValueInput.value = `${minValue}`;
@@ -60,6 +63,7 @@ const initializePanel = function initializeDefaultPanelValues(
     $hasTipInput.checked = shouldAddTip;
     $runner0ValueInput.value = `${runnersInstantPosition[0]}`;
     $runner1ValueInput.value = `${runnersInstantPosition[1]}`;
+    $fieldThicknessInput.value = `${fieldThickness}`;
   });
 };
 const handleChange = function hangleInputsAndCheckboxesChanges(
@@ -81,6 +85,7 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
     $hasTipInput,
     $runner0ValueInput,
     $runner1ValueInput,
+    $fieldThicknessInput,
   } = this;
   let newRunnersInstantPosition:number[] = runnersInstantPosition;
 
@@ -130,6 +135,10 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
       this.parent.hasBar = $hasBarInput.checked;
       break;
     }
+    case 'fieldThickness': {
+      this.parent.fieldThickness = parseInt(($fieldThicknessInput.value), 10);
+      break;
+    }
     default: // do nothing;
   }
   this.notifyInputChange.call(this, newRunnersInstantPosition);
@@ -152,6 +161,7 @@ const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(
     $hasTipInput,
     $runner0ValueInput,
     $runner1ValueInput,
+    $fieldThicknessInput,
   } = this;
   const actionType = {
     min: 'min',
@@ -164,6 +174,7 @@ const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(
     hasTip: 'hasTip',
     orientation: 'orientation',
     isRange: 'isRange',
+    fieldThickness: 'fieldThickness',
   };
   $minValueInput.addEventListener('change', ():void => handleChange.call(
     this,
@@ -194,6 +205,11 @@ const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(
     this,
     runnersInstantPosition,
     actionType.runnerSize,
+  ));
+  $fieldThicknessInput.addEventListener('change', ():void => handleChange.call(
+    this,
+    runnersInstantPosition,
+    actionType.fieldThickness,
   ));
   $stepInput.addEventListener('change', ():void => handleChange.call(
     this,

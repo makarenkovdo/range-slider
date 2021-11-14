@@ -11,7 +11,7 @@ const notifyInputChange = function prepareDataAndNotifyInputChange(
     minValue: parent.minMax[0],
     maxValue: parent.minMax[1],
     isRange: parent.isRange,
-    // fieldThickness: this.fieldthickness,
+    fieldThickness: parent.fieldThickness,
     shouldAddBar: parent.hasBar,
     shouldAddScale: parent.hasScale,
     shouldAddTip: parent.hasTip,

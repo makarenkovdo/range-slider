@@ -3,12 +3,12 @@ import './index.scss';
 import './panel.scss';
 import SliderPresenter from './presenter/SliderPresenter';
 
-const firstRunner = new SliderPresenter('first', {
+const firstSlider = new SliderPresenter('first', {
   shouldAddTip: true,
   shouldAddBar: true,
-  step: 0.1,
+  step: 2,
   maxValue: 17,
-  minValue: 9,
+  minValue: 9.1,
   isRange: true,
   shouldAddScale: true,
   runnerSize: [16, 40],

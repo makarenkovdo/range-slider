@@ -14,6 +14,7 @@ const firstRunner = new SliderPresenter('first', {
   runnerSize: [16, 40],
   runnersInstantPosition: [9, 14],
   hasInputPanel: true,
+  orientation: 'vertical',
 });
 
 // const secondRunner = new SliderPresenter('second', {

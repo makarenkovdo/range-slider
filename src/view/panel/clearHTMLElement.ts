@@ -1,7 +1,12 @@
-const clearHTMLElement = function clearHTMLElementForRebuild(id:string): void {
+import Panel from './Panel';
+
+const clearHTMLElement = function clearHTMLElementForRebuild(this: Panel, id:string): void {
   const $slider = document.querySelector(`#${id}`);
   $(document).ready(() => {
     $slider.innerHTML = '';
+    const prevOrientation = this.parent.orientation === 'vertical' ? 'horizontal' : 'vertical';
+    $slider.classList.remove(`slider_${prevOrientation}`);
+    $slider.classList.remove(`js_slider_${prevOrientation}`);
   });
 };
 export default clearHTMLElement;

@@ -54,7 +54,7 @@ const initializePanel = function initializeDefaultPanelValues(
     $runnerWidthInput.value = `${runnerSize[0]}`;
     $stepInput.value = `${step}`;
     $isRangeInput.checked = isRange;
-    $orientationInput.checked = orientation === 'vertical';
+    $orientationInput.checked = (orientation === 'vertical');
     $hasScaleInput.checked = shouldAddScale;
     $hasBarInput.checked = shouldAddBar;
     $hasTipInput.checked = shouldAddTip;

@@ -7,7 +7,7 @@ const notifyInputChange = function prepareDataAndNotifyInputChange(
 ): void {
   const { parent } = this;
   const panelInputsData:PresenterBuildParams = {
-    orientation: parent.isVertical ? 'vertical' : 'horizontal',
+    orientation: parent.orientation,
     minValue: parent.minMax[0],
     maxValue: parent.minMax[1],
     isRange: parent.isRange,

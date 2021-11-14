@@ -34,7 +34,7 @@ export default class Panel {
 
   public activatePanel: (this: Panel, params: PresenterBuildParams) => void;
 
-  public clearHTMLElement: (id:string) => void;
+  public clearHTMLElement: (this: Panel, id:string) => void;
 
   public notifyInputChange: (this: Panel, runnersInstantPosition: number[]) => void;
 
@@ -43,7 +43,7 @@ export default class Panel {
   constructor(view: SliderView) {
     this.parent = view;
     this.activatePanel = activatePanel.bind(this) as () => void;
-    this.clearHTMLElement = clearHTMLElement as () => void;
+    this.clearHTMLElement = clearHTMLElement.bind(this) as () => void;
     this.notifyInputChange = notifyInputChange.bind(this) as () => void;
     this.updateRunnerInput = updateRunnerInput.bind(this) as () => void;
   }

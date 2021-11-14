@@ -14,8 +14,8 @@ const initializeValues = function initializeDefaultViewValues(
   $(document).ready(() => {
     const { $field }: SliderView = this;
     const borderWidth = parseInt($field.css('border-width'), 10);
-    const fieldWidth = parseInt($field.css('width'), 10);
-    const fieldHeight = parseInt($field.css('height'), 10);
+    const fieldWidth = parseInt($field.parent().css('width'), 10);
+    const fieldHeight = parseInt($field.parent().css('height'), 10);
     if (this.isVertical) {
       this.fieldSize = [fieldWidth - borderWidth - 1, fieldHeight - borderWidth - 11];
     } else {

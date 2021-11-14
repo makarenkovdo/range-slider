@@ -90,6 +90,8 @@ class SliderPresenter {
 
   public createBar(shouldAddBar: boolean): this {
     if (shouldAddBar) {
+      console.log('this.view.fieldThickness', this.view.fieldThickness);
+
       this.view.hasBar = true;
       this.view.bar.createBar(this);
       this.view.bar.updateBarPosition();
@@ -134,6 +136,9 @@ class SliderPresenter {
     this.view.panel.clearHTMLElement(this.view.id);
     this.runnerCounter = 0;
     this.build(params);
+    console.log('params', params);
+
+    // this.view.panel.initializePanel(params);
   }
 
   public recieveModelLogic(activeRunner: RunnerModel): void {
@@ -217,7 +222,7 @@ class SliderPresenter {
   }
 
   private activatePanel(params: PresenterBuildParams): this {
-    if (params.hasInputPanel) {
+    if (params.hasInputPanel && !this.view.hasPanel) {
       this.view.panel.activatePanel.call(this.view, params);
       this.view.hasPanel = true;
     }
@@ -254,7 +259,22 @@ class SliderPresenter {
     ));
 
     if (!isTestMode) {
+      console.log(fieldThickness);
+
       this.setMinMax(minValue, maxValue)
+        .initLayers(runnerSize, fieldThickness, orientation)
+        .createRangeSlider({
+          isRange,
+          shouldAddTip,
+          runnerSize,
+          minValue,
+          maxValue,
+          runnersInstantPosition,
+        })
+        // .onInputChange()
+        .setStep(step)
+        .createBar(shouldAddBar)
+        .createScale(shouldAddScale)
         .activatePanel({
           shouldAddTip,
           shouldAddBar,
@@ -269,21 +289,7 @@ class SliderPresenter {
           runnerSize,
           fieldThickness,
           runnersInstantPosition,
-        })
-        .initLayers(runnerSize, fieldThickness, orientation)
-        .createRangeSlider({
-          isRange,
-          shouldAddTip,
-          runnerSize,
-          minValue,
-          maxValue,
-          runnersInstantPosition,
-        })
-        // .onInputChange()
-        .setStep(step)
-        .createBar(shouldAddBar)
-        .createScale(shouldAddScale);
-      // .onClick();
+        });
     }
   }
 

@@ -1,5 +1,5 @@
 import { PresenterBuildParams } from '../../../presenter/presenterInterfaces';
-import Panel from '../Panel';
+import Panel from '../Panel.js';
 
 const selectPanelNodes = function selectPanelInputNodes(this: Panel):void {
   const $panel = document.querySelector(`#${this.parent.id}-panel`);
@@ -35,6 +35,16 @@ const initializePanel = function initializeDefaultPanelValues(
     fieldThickness,
   }: PresenterBuildParams,
 ): void {
+  this.orientation = orientation;
+  this.minMax = [minValue, maxValue];
+  this.isRange = isRange;
+  this.fieldThickness = fieldThickness;
+  this.hasBar = shouldAddBar;
+  this.hasScale = shouldAddScale;
+  this.hasTip = shouldAddTip;
+  this.runnersPosition = runnersInstantPosition;
+  this.runnerSize = runnerSize;
+  this.step = step;
   const {
     $minValueInput,
     $maxValueInput,
@@ -87,61 +97,61 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
     $runner1ValueInput,
     $fieldThicknessInput,
   } = this;
-  let newRunnersInstantPosition:number[] = runnersInstantPosition;
+  this.runnersPosition = runnersInstantPosition;
 
   switch (actionType) {
     case 'min': {
-      this.parent.minMax[0] = parseFloat($minValueInput.value);
+      this.minMax[0] = parseFloat($minValueInput.value);
       break;
     }
     case 'max': {
-      this.parent.minMax[1] = parseFloat($maxValueInput.value);
+      this.minMax[1] = parseFloat($maxValueInput.value);
       break;
     }
     case 'runnerValue': {
-      newRunnersInstantPosition = [
+      this.runnersPosition = [
         parseFloat($runner0ValueInput.value),
         parseFloat($runner1ValueInput.value),
       ]; break;
     }
     case 'runnerSize': {
-      this.parent.runner.size = [
+      this.runnerSize = [
         parseInt(($runnerWidthInput.value), 10),
         parseInt(($runnerHeightInput.value), 10),
       ];
       break;
     }
     case 'step': {
-      this.parent.runner.step = parseFloat($stepInput.value);
+      this.step = parseFloat($stepInput.value);
       break;
     }
     case 'isRange': {
-      this.parent.isRange = $isRangeInput.checked;
+      this.isRange = $isRangeInput.checked;
       break;
     }
     case 'orientation': {
-      this.parent.orientation = $orientationInput.checked ? 'vertical' : 'horizontal';
+      this.orientation = $orientationInput.checked ? 'vertical' : 'horizontal';
       break;
     }
     case 'hasScale': {
-      this.parent.hasScale = $hasScaleInput.checked;
+      this.hasScale = $hasScaleInput.checked;
       break;
     }
     case 'hasTip': {
-      this.parent.hasTip = $hasTipInput.checked;
+      this.hasTip = $hasTipInput.checked;
       break;
     }
     case 'hasBar': {
-      this.parent.hasBar = $hasBarInput.checked;
+      this.hasBar = $hasBarInput.checked;
       break;
     }
     case 'fieldThickness': {
-      this.parent.fieldThickness = parseInt(($fieldThicknessInput.value), 10);
+      this.fieldThickness = parseInt(($fieldThicknessInput.value), 10);
       break;
     }
     default: // do nothing;
   }
-  this.notifyInputChange.call(this, newRunnersInstantPosition);
+  this.notifyInputChange.call(this, this.runnersPosition);
 };
 
 const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(

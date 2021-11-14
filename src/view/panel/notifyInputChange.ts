@@ -5,21 +5,20 @@ const notifyInputChange = function prepareDataAndNotifyInputChange(
   this: Panel,
   runnersInstantPosition: number[],
 ): void {
-  const { parent } = this;
   const panelInputsData:PresenterBuildParams = {
-    orientation: parent.orientation,
-    minValue: parent.minMax[0],
-    maxValue: parent.minMax[1],
-    isRange: parent.isRange,
-    fieldThickness: parent.fieldThickness,
-    shouldAddBar: parent.hasBar,
-    shouldAddScale: parent.hasScale,
-    shouldAddTip: parent.hasTip,
+    orientation: this.orientation,
+    minValue: this.minMax[0],
+    maxValue: this.minMax[1],
+    isRange: this.isRange,
+    fieldThickness: this.fieldThickness,
+    shouldAddBar: this.hasBar,
+    shouldAddScale: this.hasScale,
+    shouldAddTip: this.hasTip,
     runnersInstantPosition,
-    runnerSize: parent.runner.size,
-    step: parent.runner.step,
+    runnerSize: this.runnerSize,
+    step: this.step,
   };
-  parent.subscriber.recieveInputsData(panelInputsData);
+  this.parent.subscriber.recieveInputsData(panelInputsData);
 };
 
 export default notifyInputChange;

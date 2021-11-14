@@ -66,7 +66,7 @@ export default class Panel {
   public updateRunnerInput: (this: Panel, stepValue:number, instance:number) => void;
 
   constructor(view: SliderView) {
-    // this.parent = view;
+    this.parent = view;
     // this.orientation = view.orientation;
     // this.minMax = view.minMax;
     // this.isRange = view.isRange;

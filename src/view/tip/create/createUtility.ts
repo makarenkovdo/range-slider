@@ -14,8 +14,6 @@ const prepareTipNumberArgs = (
   stepPosition:number,
 
 ): PreparedDataType => {
-  console.log(fieldSize);
-  
   let positioning = ['left'];
   // let viewPosition = [100 * i];
   let instance = i;

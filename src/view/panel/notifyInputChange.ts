@@ -5,6 +5,8 @@ const notifyInputChange = function prepareDataAndNotifyInputChange(
   this: Panel,
   runnersInstantPosition: number[],
 ): void {
+  console.log('notify ore',this.orientation);
+  
   const panelInputsData:PresenterBuildParams = {
     orientation: this.orientation,
     minValue: this.minMax[0],
@@ -14,7 +16,7 @@ const notifyInputChange = function prepareDataAndNotifyInputChange(
     shouldAddBar: this.hasBar,
     shouldAddScale: this.hasScale,
     shouldAddTip: this.hasTip,
-    runnersInstantPosition,
+    runnersInstantPosition: this.runnersPosition,
     runnerSize: this.runnerSize,
     step: this.step,
   };

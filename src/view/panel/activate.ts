@@ -10,7 +10,9 @@ const activate = function activatePanelAndHandleChanges(
 ):void {
   selectPanelNodes.call(this);
   initializePanel.call(this, params);
-  addOnChangeListener.call(this);
+  if (!this.parent.hasPanel) {
+    addOnChangeListener.call(this);
+  }
 };
 
 export default activate;

@@ -8,7 +8,6 @@ const initStartEnd = function createFieldStartEndAndInitMinMax(
   // this.$field.attr('data-start', minValue);
   // this.$field.attr('data-end', maxValue);
   this.minMax = [minValue, maxValue];
-  console.log(this);
 };
 
 export default initStartEnd;

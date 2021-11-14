@@ -35,6 +35,9 @@ const initializePanel = function initializeDefaultPanelValues(
     fieldThickness,
   }: PresenterBuildParams,
 ): void {
+  console.log('runnersInstantPosition INIT', runnersInstantPosition);
+  console.log(orientation);
+  
   this.orientation = orientation;
   this.minMax = [minValue, maxValue];
   this.isRange = isRange;
@@ -78,8 +81,6 @@ const initializePanel = function initializeDefaultPanelValues(
 };
 const handleChange = function hangleInputsAndCheckboxesChanges(
   this: Panel,
-
-  runnersInstantPosition: number[],
   actionType: string,
 ): void {
   const {
@@ -97,7 +98,7 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
     $runner1ValueInput,
     $fieldThicknessInput,
   } = this;
-  this.runnersPosition = runnersInstantPosition;
+  console.log('actionType',actionType);
 
   switch (actionType) {
     case 'min': {
@@ -130,7 +131,11 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
       break;
     }
     case 'orientation': {
+      console.log('this.orientation', this.orientation);
+
       this.orientation = $orientationInput.checked ? 'vertical' : 'horizontal';
+      console.log('this.orientation', this.orientation);
+      
       break;
     }
     case 'hasScale': {
@@ -157,6 +162,8 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
 const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(
   this: Panel,
 ): void {
+  console.log('addOnchange');
+  
   const runnersInstantPosition = [0, 100];
   const {
     $minValueInput,
@@ -188,67 +195,57 @@ const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(
   };
   $minValueInput.addEventListener('change', ():void => handleChange.call(
     this,
-    runnersInstantPosition,
     actionType.min,
   ));
   $maxValueInput.addEventListener('change', ():void => handleChange.call(
     this,
-    runnersInstantPosition,
     actionType.max,
   ));
   $runner0ValueInput.addEventListener('change', ():void => handleChange.call(
     this,
-    runnersInstantPosition,
     actionType.runnerValue,
   ));
   $runner1ValueInput.addEventListener('change', ():void => handleChange.call(
     this,
-    runnersInstantPosition,
     actionType.runnerValue,
   ));
   $runnerWidthInput.addEventListener('change', ():void => handleChange.call(
     this,
-    runnersInstantPosition,
     actionType.runnerSize,
   ));
   $runnerHeightInput.addEventListener('change', ():void => handleChange.call(
     this,
-    runnersInstantPosition,
     actionType.runnerSize,
   ));
   $fieldThicknessInput.addEventListener('change', ():void => handleChange.call(
     this,
-    runnersInstantPosition,
     actionType.fieldThickness,
   ));
   $stepInput.addEventListener('change', ():void => handleChange.call(
     this,
-    runnersInstantPosition,
     actionType.step,
   ));
-  $orientationInput.addEventListener('change', ():void => handleChange.call(
+  $orientationInput.addEventListener('change', ():void => {
+    console.log('ORIEN LISTENER');
+    
+    handleChange.call(
     this,
-    runnersInstantPosition,
     actionType.orientation,
-  ));
+  )});
   $isRangeInput.addEventListener('change', ():void => handleChange.call(
     this,
-    runnersInstantPosition,
     actionType.isRange,
   ));
   $hasBarInput.addEventListener('change', ():void => handleChange.call(
     this,
-    runnersInstantPosition,
     actionType.hasBar,
   ));
   $hasScaleInput.addEventListener('change', ():void => handleChange.call(
     this,
-    runnersInstantPosition,
     actionType.hasScale,
   ));
   $hasTipInput.addEventListener('change', ():void => handleChange.call(
     this,
-    runnersInstantPosition,
     actionType.hasTip,
   ));
 };

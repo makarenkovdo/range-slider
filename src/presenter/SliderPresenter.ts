@@ -90,8 +90,6 @@ class SliderPresenter {
 
   public createBar(shouldAddBar: boolean): this {
     if (shouldAddBar) {
-      console.log('this.view.fieldThickness', this.view.fieldThickness);
-
       this.view.hasBar = true;
       this.view.bar.createBar(this);
       this.view.bar.updateBarPosition();
@@ -222,10 +220,12 @@ class SliderPresenter {
   }
 
   private activatePanel(params: PresenterBuildParams): this {
-    if (params.hasInputPanel && !this.view.hasPanel) {
-      this.view.panel.activatePanel.call(this.view, params);
-      this.view.hasPanel = true;
-    }
+    console.log(params);
+    
+    // if (params.hasInputPanel && !this.view.hasPanel) {
+    this.view.panel.activatePanel.call(this.view, params);
+    this.view.hasPanel = true;
+    // }
     return this;
   }
 
@@ -259,8 +259,6 @@ class SliderPresenter {
     ));
 
     if (!isTestMode) {
-      console.log(fieldThickness);
-
       this.setMinMax(minValue, maxValue)
         .initLayers(runnerSize, fieldThickness, orientation)
         .createRangeSlider({

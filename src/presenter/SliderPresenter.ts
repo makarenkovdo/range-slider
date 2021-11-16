@@ -109,7 +109,7 @@ class SliderPresenter {
     minValue: number,
     maxValue: number,
     runnersInstantPosition: number,
-    step,
+    step: number,
   ): this {
     this.runners.push(new RunnerModel(this.id, this.runnerCounter, this));
     this.runners[this.runnerCounter].setStep(step, [minValue, maxValue])

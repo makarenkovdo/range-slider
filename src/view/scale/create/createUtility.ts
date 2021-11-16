@@ -21,6 +21,8 @@ const prepareScaleData = (
   const pixelLimits:number = Math.floor(fieldSize[i] / 40);
   const divisionQuantity = Math.max((Math.floor(Math.min(stepLimits + 1, pixelLimits + 1))), 2);
   let divisionNumber = Number(((minMax[1] - minMax[0]) / (divisionQuantity - 1)).toFixed(3));
+  console.log(divisionNumber,divisionQuantity,'divisionNumber,divisionQuantity');
+  
   if (minMax[0] > 0) {
     divisionNumber = Number(((minMax[1] - minMax[0]) / (divisionQuantity - 1)).toFixed(3));
   }

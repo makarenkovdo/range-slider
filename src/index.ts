@@ -17,6 +17,20 @@ const firstSlider = new SliderPresenter('first', {
   orientation: 'horizontal',
 });
 
+const secondSlider = new SliderPresenter('second', {
+  shouldAddTip: true,
+  shouldAddBar: true,
+  step: 2,
+  maxValue: 0,
+  minValue: 3,
+  isRange: true,
+  shouldAddScale: true,
+  runnerSize: [12, 12],
+  runnersInstantPosition: [0, 5 ],
+  hasInputPanel: true,
+  orientation: 'horizontal',
+});
+
 // const secondRunner = new SliderPresenter('second', {
 //   shouldAddTip: true,
 //   shouldAddBar: true,

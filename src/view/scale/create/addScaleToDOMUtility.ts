@@ -55,11 +55,10 @@ const createScaleLines = (
   $scaleLines:JQuery<HTMLElement>, divisionQuantity:number, orientation:Orientation,
   minMax:number[], smallLine: string, bigLine: string,
 ):void => {
-  if (minMax[0] === 0) {
-    for (let i = 0; i < 2 * divisionQuantity - 1; i += 1) {
-      if (i % 2) {
-        $scaleLines.append(
-          `<div 
+  for (let i = 0; i < 2 * divisionQuantity - 1; i += 1) {
+    if (i % 2) {
+      $scaleLines.append(
+        `<div 
             class="
               slider__scale-line
               slider__scale-line_${orientation}
@@ -68,10 +67,10 @@ const createScaleLines = (
             style="${smallLine}"
           >
           </div>`,
-        );
-      } else {
-        $scaleLines.append(
-          `<div
+      );
+    } else {
+      $scaleLines.append(
+        `<div
             class="
               slider__scale-line
               slider__scale-line_${orientation}
@@ -79,36 +78,7 @@ const createScaleLines = (
             "
             style="${bigLine}"
           ></div>`,
-        );
-      }
-    }
-  } else {
-    for (let i = 0; i < 2 * divisionQuantity - 1; i += 1) {
-      if (i % 2) {
-        $scaleLines.append(
-          `<div 
-            class="
-              slider__scale-line
-              slider__scale-line_${orientation}
-              js-slider__scale-line
-              "
-            style="${smallLine}"
-            >
-            </div>`,
-        );
-      } else {
-        $scaleLines.append(
-          `<div
-            class="
-              slider__scale-line
-              slider__scale-line_${orientation}
-              js-slider__scale-line
-              "
-            style="${bigLine}"
-          >
-          </div>`,
-        );
-      }
+      );
     }
   }
 };
@@ -142,6 +112,8 @@ const createScaleNumbers = (
         </div>`,
       );
     } else {
+      console.log('minMax[0], 1 - switcher, i, divisionNumber', minMax[0], 1 - switcher, i, divisionNumber);
+
       $scaleNumbers.append(
         `<div
           class="

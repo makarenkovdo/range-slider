@@ -6,18 +6,15 @@ const initializeDefaultValues = function initializeDefaultPositionAndValue(
   minMax: number[],
   runnersInstantPosition: number,
 ): void {
-  console.log('minMax', minMax);
-  
-  console.log('runnersInstantPosition', runnersInstantPosition);
-  
+  console.log('this.step / (minMax[1] - minMax[0]', this.step, minMax[1], minMax[0]);
+
+  this.stepInPercent = (this.step / (minMax[1] - minMax[0])) * 100;
+
   this.setValuesFromInputs.call(
     this.instance,
     runnersInstantPosition,
     minMax,
   );
-  console.log('CHECK2!!!', this.stepPosition, this.stepValue);
-  const { stepValue, stepPosition } = this;
-  console.log('CHECK3123', stepPosition, stepValue);
 };
 
 export default initializeDefaultValues;

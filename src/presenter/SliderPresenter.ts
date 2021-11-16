@@ -67,8 +67,6 @@ class SliderPresenter {
   // prettier-ignore
 
   private activatePanel(params: PresenterBuildParams): this {
-    console.log(params);
-
     // if (params.hasInputPanel && !this.view.hasPanel) {
     this.view.panel.activatePanel.call(this.view, params);
     this.view.hasPanel = true;
@@ -84,11 +82,10 @@ class SliderPresenter {
 
   //  prettier-ignore
   public createRangeSlider({
-    isRange, shouldAddTip, runnerSize, minValue, maxValue, runnersInstantPosition,
+    isRange, shouldAddTip, runnerSize, minValue, maxValue, runnersInstantPosition, step,
   }:PresenterBuildParams): this {
-    this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition[this.runnerCounter]);
+    this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition[this.runnerCounter], step);
     let { stepPosition, stepValue } = this.runners[this.runnerCounter];
-    console.log('CHECK3', stepPosition, stepValue);
 
     this.createRunnerView(this.runnerCounter, stepPosition);
     this.createTipNumber(shouldAddTip, stepPosition, stepValue);
@@ -97,7 +94,7 @@ class SliderPresenter {
       this.runnerCounter += 1;
       this.view.isRange = true;
       this.field.isRange = true;
-      this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition[this.runnerCounter]);
+      this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition[this.runnerCounter], step);
       ({ stepPosition, stepValue } = this.runners[this.runnerCounter]);
       this.createRunnerView(this.runnerCounter, stepPosition);
       this.createTipNumber(shouldAddTip, stepPosition, stepValue);
@@ -112,8 +109,10 @@ class SliderPresenter {
     minValue: number,
     maxValue: number,
     runnersInstantPosition: number,
+    step,
   ): this {
     this.runners.push(new RunnerModel(this.id, this.runnerCounter, this));
+    this.runners[this.runnerCounter].setStep(step, [minValue, maxValue])
     this.runners[this.runnerCounter].initializeDefaultValues(
       [minValue, maxValue],
       runnersInstantPosition,
@@ -128,8 +127,6 @@ class SliderPresenter {
 
   public createTipNumber(isOn: boolean, stepPosition: number, stepValue:number): this {
     if (isOn) {
-      console.log('stepPosition, stepValue TIP', stepPosition, stepValue)
-      
       this.view.tip.create(
         this.runnerCounter,
         this.field.isVertical,
@@ -180,8 +177,6 @@ class SliderPresenter {
     this.view.panel.clearHTMLElement(this.view.id);
     this.runnerCounter = 0;
     this.build(params);
-    console.log('params', params);
-
     // this.view.panel.initializePanel(params);
   }
 

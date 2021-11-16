@@ -35,8 +35,6 @@ const initializePanel = function initializeDefaultPanelValues(
     fieldThickness,
   }: PresenterBuildParams,
 ): void {
-  console.log('runnersInstantPosition INIT', runnersInstantPosition);
-  console.log(orientation);
   
   this.orientation = orientation;
   this.minMax = [minValue, maxValue];
@@ -98,7 +96,6 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
     $runner1ValueInput,
     $fieldThicknessInput,
   } = this;
-  console.log('actionType',actionType);
 
   switch (actionType) {
     case 'min': {
@@ -131,10 +128,7 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
       break;
     }
     case 'orientation': {
-      console.log('this.orientation', this.orientation);
-
       this.orientation = $orientationInput.checked ? 'vertical' : 'horizontal';
-      console.log('this.orientation', this.orientation);
       
       break;
     }
@@ -162,8 +156,6 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
 const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(
   this: Panel,
 ): void {
-  console.log('addOnchange');
-  
   const runnersInstantPosition = [0, 100];
   const {
     $minValueInput,
@@ -226,8 +218,6 @@ const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(
     actionType.step,
   ));
   $orientationInput.addEventListener('change', ():void => {
-    console.log('ORIEN LISTENER');
-    
     handleChange.call(
     this,
     actionType.orientation,

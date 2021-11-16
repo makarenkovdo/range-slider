@@ -5,7 +5,6 @@ const notifyInputChange = function prepareDataAndNotifyInputChange(
   this: Panel,
   runnersInstantPosition: number[],
 ): void {
-  console.log('notify ore',this.orientation);
   
   const panelInputsData:PresenterBuildParams = {
     orientation: this.orientation,

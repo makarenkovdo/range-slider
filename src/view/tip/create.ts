@@ -8,8 +8,6 @@ const create = function addTipNumberToDOMAndUpdateTextNumber(
   stepPosition:number,
   stepValue:number,
 ): void {
-  console.log(  'stepPositionstepValue,',stepPosition, stepValue);
-  
   $(document).ready(() => {
     const {
       fieldSize,

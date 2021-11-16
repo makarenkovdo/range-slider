@@ -53,14 +53,15 @@ const prepareScaleData = (
   if (step * (lineQuantity - 1) * stepMultiplier !== minMax[1] - minMax[0]) {
     scaleSignAfterComma += 1;
     shouldAddExtraLine = true;
-    const scaleStepBetweenTwoLastLines = fieldSize[i] - ((step * stepMultiplier * (lineQuantity-1)) / (minMax[1] - minMax[0]) * fieldSize[i]);
+    const scaleStepBetweenTwoLastLines = fieldSize[i]
+    - (((step * stepMultiplier * (lineQuantity - 1))
+    / (minMax[1] - minMax[0])) * fieldSize[i]);
     console.log(scaleStepBetweenTwoLastLines, 'scaleStepBetweenTwoLastLines');
-    console.log(step * stepMultiplier * (lineQuantity-1), 'step * stepMultiplier * (lineQuantity-1)');
+    console.log(step * stepMultiplier * (lineQuantity - 1), 'step * stepMultiplier * (lineQuantity-1)');
     console.log((minMax[1] - minMax[0]) * fieldSize[i], '(minMax[1] - minMax[0]) * fieldSize[i])');
 
-    if (scaleStepBetweenTwoLastLines<50) lineQuantity -= 1
+    if (scaleStepBetweenTwoLastLines < 50) lineQuantity -= 1;
   }
-
 
   if (minMax[0] > 0) {
     divisionNumber = Number(((minMax[1] - minMax[0]) / (lineQuantity - 1)).toFixed(3));

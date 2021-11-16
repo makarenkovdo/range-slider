@@ -128,7 +128,7 @@ const createScaleNumbers = (
     stepMultiplier,
     step,
     scaleSignAfterComma,
-    shouldAddExtraLine
+    shouldAddExtraLine,
   }:CreateScaleNumbersArgs,
 ):void => {
   for (let i = 0; i < lineQuantity; i += 1) {

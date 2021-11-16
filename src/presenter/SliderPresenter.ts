@@ -1,9 +1,7 @@
 /* eslint-env jquery */
 import FieldModel from '../model/FieldModel';
 import RunnerModel from '../model/RunnerModel';
-import { CalculateStepPositionFromInputReturned, UpdateRunnerValuesArgs } from '../model/runnerModules/runnerInterfaces';
-import setValuesFromInputs from '../model/runnerModules/setValuesFromInputs';
-import { calculatePositionInPercent, calculateStepValueAndPosition, setStepValueAndPosition } from '../model/runnerModules/updateRunnerValues/updateRunnerValuesUtility';
+import { UpdateRunnerValuesArgs } from '../model/runnerModules/runnerInterfaces';
 import SliderView from '../view/SliderView';
 import {
   PresenterBuildParams,
@@ -42,32 +40,9 @@ class SliderPresenter {
         .createScale(checkedParams)
         .activatePanel(checkedParams);
     }
-
-    // let cursorXY = [50,50]
-    // this.runners[0].updateRunnerValues({
-    //   cursorXY,
-    //   isVertical: this.field.isVertical,
-    //   minMax: this.field.minMax,
-    //   isRange: this.field.isRange,
-    //   fieldSize: this.view.fieldSize,
-    //   runners: this.runners,
-    //   activeRunner: this.runners[0],
-    // });
-    // cursorXY = [checkedParams.runnersInstantPosition[1], checkedParams.runnersInstantPosition[0]];
-    // this.runners[1].updateRunnerValues({
-    //   cursorXY,
-    //   isVertical: this.field.isVertical,
-    //   minMax: this.field.minMax,
-    //   isRange: this.field.isRange,
-    //   fieldSize: this.view.fieldSize,
-    //   runners: this.runners,
-    //   activeRunner: this.runners[1],
-    // });
   }
-  // prettier-ignore
 
   private activatePanel(params: PresenterBuildParams): this {
-    // if (params.hasInputPanel && !this.view.hasPanel) {
     this.view.panel.activatePanel.call(this.view, params);
     this.view.hasPanel = true;
     // }
@@ -84,7 +59,13 @@ class SliderPresenter {
   public createRangeSlider({
     isRange, shouldAddTip, runnerSize, minValue, maxValue, runnersInstantPosition, step,
   }:PresenterBuildParams): this {
-    this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition[this.runnerCounter], step);
+    this.createRunner(
+      runnerSize,
+      minValue,
+      maxValue,
+      runnersInstantPosition[this.runnerCounter],
+      step,
+    );
     let { stepPosition, stepValue } = this.runners[this.runnerCounter];
 
     this.createRunnerView(this.runnerCounter, stepPosition);
@@ -94,7 +75,11 @@ class SliderPresenter {
       this.runnerCounter += 1;
       this.view.isRange = true;
       this.field.isRange = true;
-      this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition[this.runnerCounter], step);
+      this.createRunner(runnerSize,
+        minValue,
+        maxValue,
+        runnersInstantPosition[this.runnerCounter],
+        step);
       ({ stepPosition, stepValue } = this.runners[this.runnerCounter]);
       this.createRunnerView(this.runnerCounter, stepPosition);
       this.createTipNumber(shouldAddTip, stepPosition, stepValue);
@@ -112,7 +97,7 @@ class SliderPresenter {
     step: number,
   ): this {
     this.runners.push(new RunnerModel(this.id, this.runnerCounter, this));
-    this.runners[this.runnerCounter].setStep(step, [minValue, maxValue])
+    this.runners[this.runnerCounter].setStep(step, [minValue, maxValue]);
     this.runners[this.runnerCounter].initializeDefaultValues(
       [minValue, maxValue],
       runnersInstantPosition,
@@ -247,9 +232,9 @@ class SliderPresenter {
     return this;
   }
 
-  public setStep({ step }:PresenterBuildParams): this {
+  public setStep({ step, minValue, maxValue }:PresenterBuildParams): this {
     this.runners.forEach((v) => v.setStep(step, this.field.minMax));
-    if (step < 1) this.runners.forEach((v) => v.defineSignAfterComma());
+    if (step < 1) this.runners.forEach((v) => v.defineSignAfterComma([minValue, maxValue]));
     this.view.setStep(step, this.runners[0].stepSignAfterComma);
 
     return this;

@@ -31,7 +31,7 @@ class RunnerModel {
 
   public subscriber: SliderPresenter;
 
-  public defineSignAfterComma: (this: RunnerModel) => void;
+  public defineSignAfterComma: (this: RunnerModel, minMax: number[]) => void;
 
   public notifyToUpdate: (
     this: RunnerModel

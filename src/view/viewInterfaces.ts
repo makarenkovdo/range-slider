@@ -38,6 +38,7 @@ type DragEventDataType = {
 type PrepareScaleDataArgs = {
   divisionQuantity:number;
   divisionNumber:number;
+  stepMultiplier:number;
 };
 
 type CreateScaleNumbersArgs = {
@@ -70,6 +71,18 @@ type CreateScaleNumbersBoxArgs = {
   top:number,
   left:number,
   columnOrRow: string,
+};
+
+type CreateScaleLinesArgs = {
+  $scaleLines?:JQuery<HTMLElement>;
+  minMax:number[];
+  divisionNumber:number;
+  divisionQuantity:number;
+  orientation: Orientation;
+  smallLine:string;
+  bigLine: string;
+  step: number;
+  stepMultiplier: number;
 };
 
 // type PanelSelectors = {
@@ -133,4 +146,6 @@ export {
   HandleInputsEventData,
   PanelInputsData,
   RunnersInstantPosition,
+  CreateScaleLinesArgs,
+
 };

@@ -18,15 +18,42 @@ const firstSlider = new SliderPresenter('first', {
 });
 
 const secondSlider = new SliderPresenter('second', {
+  step: 2,
+  maxValue: -1,
+  minValue: 4,
   shouldAddTip: true,
   shouldAddBar: true,
-  step: 2,
-  maxValue: 0,
-  minValue: 3,
+  shouldAddScale: true,
+  runnerSize: [12, 12],
+  runnersInstantPosition: [0, 5],
+  hasInputPanel: true,
+  orientation: 'horizontal',
+});
+
+const thirdSlider = new SliderPresenter('third', {
+  shouldAddTip: true,
+  shouldAddBar: true,
+  step: 4,
+  maxValue: 16,
+  minValue: -16,
   isRange: true,
   shouldAddScale: true,
   runnerSize: [12, 12],
-  runnersInstantPosition: [0, 5 ],
+  runnersInstantPosition: [0, 8 ],
+  hasInputPanel: true,
+  orientation: 'horizontal',
+});
+
+const fourthSlider = new SliderPresenter('fourth', {
+  shouldAddTip: true,
+  shouldAddBar: true,
+  step: 0.07,
+  maxValue: 0,
+  minValue: 16,
+  isRange: true,
+  shouldAddScale: true,
+  runnerSize: [12, 12],
+  runnersInstantPosition: [0, 8 ],
   hasInputPanel: true,
   orientation: 'horizontal',
 });

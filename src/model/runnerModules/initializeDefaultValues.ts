@@ -6,8 +6,6 @@ const initializeDefaultValues = function initializeDefaultPositionAndValue(
   minMax: number[],
   runnersInstantPosition: number,
 ): void {
-  console.log('this.step / (minMax[1] - minMax[0]', this.step, minMax[1], minMax[0]);
-
   this.stepInPercent = (this.step / (minMax[1] - minMax[0])) * 100;
 
   this.setValuesFromInputs.call(

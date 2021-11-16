@@ -113,13 +113,6 @@ minMax: number[]):CheckCollisionSubargs => {
     .toFixed(stepSignAfterComma));
   const stepValueMultiplier = Math.floor(stepPosition / divisionSizeInPercent);
   let stepValue = Number((minMax[0] + step * stepValueMultiplier));
-  console.log('stepValue', stepValue);
-  console.log('stepPosition', stepPosition);
-  console.log('stepInPercent', stepInPercent);
-  console.log('positionInPercent / stepInPercent', Math.round(positionInPercent / stepInPercent));
-  
-  
-
   if (!checkOnException() && (value === minMax[1] || stepValueMultiplier === divisionQuantity)) {
     stepPosition = 100;
     stepValue = minMax[1];

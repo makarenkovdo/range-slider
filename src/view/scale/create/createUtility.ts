@@ -1,6 +1,6 @@
 import { Orientation } from '../../../presenter/presenterInterfaces';
 import {
-  CreateScaleLinesBoxArgs, CreateScaleNumbersArgs, PrepareScaleDataArgs, CreateScaleNumbersBoxArgs,
+  CreateScaleLinesBoxArgs, CreateScaleNumbersArgs, PrepareScaleDataArgs, CreateScaleNumbersBoxArgs, CreateScaleLinesArgs,
 } from '../../viewInterfaces';
 import {
   createScaleLines, createScaleLinesBox, createScaleNumbers, createScaleNumbersBox,
@@ -21,12 +21,14 @@ const prepareScaleData = (
   const pixelLimits:number = Math.floor(fieldSize[i] / 40);
   const divisionQuantity = Math.max((Math.floor(Math.min(stepLimits + 1, pixelLimits + 1))), 2);
   let divisionNumber = Number(((minMax[1] - minMax[0]) / (divisionQuantity - 1)).toFixed(3));
-  console.log(divisionNumber,divisionQuantity,'divisionNumber,divisionQuantity');
-  
+  const stepMultiplier = Math.floor(divisionNumber / step);
+
+  console.log(divisionNumber, divisionQuantity, 'divisionNumber,divisionQuantity');
+
   if (minMax[0] > 0) {
     divisionNumber = Number(((minMax[1] - minMax[0]) / (divisionQuantity - 1)).toFixed(3));
   }
-  return { divisionQuantity, divisionNumber };
+  return { divisionQuantity, divisionNumber, stepMultiplier };
 };
 
 const addScaleToDom = (
@@ -37,7 +39,7 @@ const addScaleToDom = (
   stepSignAfterComma: number,
   minMax: number[],
   orientation: Orientation,
-  { divisionQuantity, divisionNumber }: PrepareScaleDataArgs,
+  { divisionQuantity, divisionNumber, stepMultiplier }: PrepareScaleDataArgs,
 ): void => {
   const createScaleLinesBoxArgs:CreateScaleLinesBoxArgs = {
     $id, orientation, fieldSize, divisionQuantity, top: 5, left: fieldSize[0] + 2, columnOrRow: 'row',
@@ -60,18 +62,24 @@ const addScaleToDom = (
     left: fieldSize[0] + 20,
     columnOrRow: 'row',
   };
+  const createScaleLinesArgs: CreateScaleLinesArgs = {
+    $scaleLines: $id.find('.js-slider__scale-lines'),
+    divisionQuantity,
+    divisionNumber,
+    orientation,
+    minMax,
+    smallLine: 'width: 5px',
+    bigLine: 'width: 10px',
+    step,
+    stepMultiplier,
+  }
 
   if (isVertical) {
     createScaleLinesBox(createScaleLinesBoxArgs);
     createScaleNumbersBox(createScaleNumbersBoxArgs);
-    const smallLine = 'width: 5px';
-    const bigLine = 'width: 10px';
-    const $scaleLines = $id.find('.js-slider__scale-lines');
     createScaleNumbersArgs.$scaleNumbers = $id.find('.js-slider__scale-numbers');
-    createScaleNumbers(
-      createScaleNumbersArgs,
-    );
-    createScaleLines($scaleLines, divisionQuantity, orientation, minMax, smallLine, bigLine);
+    createScaleNumbers(createScaleNumbersArgs);
+    createScaleLines(createScaleLinesArgs);
   } else {
     createScaleLinesBoxArgs.top = fieldSize[1] + 2;
     createScaleLinesBoxArgs.left = 4;
@@ -85,15 +93,16 @@ const addScaleToDom = (
     createScaleNumbersBoxArgs.left = Math.min((-fieldSize[0] / (2 * divisionQuantity)), -17);
     createScaleNumbersBoxArgs.columnOrRow = 'columns';
 
+
     createScaleNumbersBox(createScaleNumbersBoxArgs);
-    const $scaleLines = $id.find('.js-slider__scale-lines');
-    const smallLine = 'height: 5px';
-    const bigLine = 'height: 10px';
     createScaleNumbersArgs.$scaleNumbers = $id.find('.js-slider__scale-numbers');
     createScaleNumbersArgs.switcher = 0;
     createScaleNumbersArgs.lastOrFirstIterration = divisionQuantity - 1;
     createScaleNumbers(createScaleNumbersArgs);
-    createScaleLines($scaleLines, divisionQuantity, orientation, minMax, smallLine, bigLine);
+    createScaleLinesArgs.$scaleLines = $id.find('.js-slider__scale-lines');
+    createScaleLinesArgs.smallLine = 'height: 5px';
+    createScaleLinesArgs.bigLine = 'height: 10px';
+    createScaleLines(createScaleLinesArgs);
   }
 };
 

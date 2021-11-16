@@ -1,5 +1,7 @@
 import { Orientation } from '../../../presenter/presenterInterfaces';
-import { CreateScaleLinesBoxArgs, CreateScaleNumbersArgs, CreateScaleNumbersBoxArgs } from '../../viewInterfaces';
+import {
+  CreateScaleLinesArgs, CreateScaleLinesBoxArgs, CreateScaleNumbersArgs, CreateScaleNumbersBoxArgs,
+} from '../../viewInterfaces';
 
 function createScaleLinesBox(
   {
@@ -14,7 +16,6 @@ function createScaleLinesBox(
         style="height:${fieldSize[1]}px;
           width:${fieldSize[0]}px;
           left:${left}px; top:${top}px;
-          grid-template-${columnOrRow}:repeat(${2 * divisionQuantity - 1}, 1px)
         "
       >
       </div>`,
@@ -52,8 +53,10 @@ function createScaleNumbersBox(
 }
 
 const createScaleLines = (
-  $scaleLines:JQuery<HTMLElement>, divisionQuantity:number, orientation:Orientation,
-  minMax:number[], smallLine: string, bigLine: string,
+  {
+    $scaleLines, divisionQuantity, orientation,
+    minMax, smallLine, bigLine, step, stepMultiplier
+  }:CreateScaleLinesArgs,
 ):void => {
   for (let i = 0; i < 2 * divisionQuantity - 1; i += 1) {
     if (i % 2) {
@@ -64,11 +67,16 @@ const createScaleLines = (
               slider__scale-line_${orientation}
               js-slider__scale-line
               " 
-            style="${smallLine}"
+            style="
+            position: absolute;
+            ${smallLine};
+            left: ${(step / (minMax[1] - minMax[0]) *stepMultiplier * 100) * (i / 2)}%;"
           >
           </div>`,
       );
     } else {
+      console.log('step, (minMax[1] - minMax[0]), 100, i, stepMultiplier', step, (minMax[1] - minMax[0]), 100, i, stepMultiplier);
+
       $scaleLines.append(
         `<div
             class="
@@ -76,7 +84,9 @@ const createScaleLines = (
               slider__scale-line_${orientation}
               js-slider__scale-line
             "
-            style="${bigLine}"
+            style="${bigLine};
+            position: absolute;
+            left: ${(step / (minMax[1] - minMax[0]) *stepMultiplier * 100) * (i / 2)}%;"
           ></div>`,
       );
     }
@@ -120,7 +130,7 @@ const createScaleNumbers = (
             slider__scale-number
             js-slider__scale-number
           "
-        >${(minMax[0] * (1 - switcher) + i * divisionNumber).toFixed(Math.min(2, stepSignAfterComma))}
+        >${(minMax[0] + i * divisionNumber).toFixed(Math.min(2, stepSignAfterComma))}
         </div>`,
       );
     }

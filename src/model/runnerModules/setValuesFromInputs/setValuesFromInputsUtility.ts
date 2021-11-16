@@ -9,8 +9,6 @@ const calculatePositionFromInput = (
 ):number => {
   // const stepValue = Number((Math.round(inputValue / step) * step).toFixed(stepSignAfterComma));
   const positionInPercent = Math.abs((inputValue - minMax[0]) / (minMax[1] - minMax[0])) * 100;
-  console.log('positionInPercent', positionInPercent);
-  
   return positionInPercent;
 };
 const setPrepareValues = function setValueAndPositionInPercent(

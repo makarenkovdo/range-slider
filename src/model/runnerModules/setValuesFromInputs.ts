@@ -21,8 +21,8 @@ const setValuesFromInputs = function setThisValuesFromPanelInputs(
 
   setStepValues.call(
     this,
-    stepValue,
     stepPosition,
+    stepValue,
   );
   return { stepValue, stepPosition };
   // this.notifyToRebuild.call(this.stepPosition, this.stepValue);

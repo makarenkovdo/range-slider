@@ -33,7 +33,6 @@ class SliderPresenter {
 
   private build(params: PresenterBuildParams): void {
     const checkedParams = checkValues(params);
-
     if (!checkedParams.isTestMode) {
       this.setMinMax(checkedParams)
         .initLayers(checkedParams)
@@ -88,17 +87,8 @@ class SliderPresenter {
     isRange, shouldAddTip, runnerSize, minValue, maxValue, runnersInstantPosition,
   }:PresenterBuildParams): this {
     this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition[this.runnerCounter]);
-    console.log('CHECK!!!', this.runners[this.runnerCounter].stepPosition, this.runners[this.runnerCounter].stepValue);
-
-    //  todo all below - to 'initialize'
-    // this.runners[this.runnerCounter].setValuesFromInputs.call(
-    //   this.runners[this.runnerCounter],
-    //   runnersInstantPosition[this.runnerCounter],
-    //   [minValue, maxValue],
-    // );
-    // console.log('CHECK2!!!', this.runners[this.runnerCounter].stepPosition, this.runners[this.runnerCounter].stepValue);
-    // let { stepValue, stepPosition } = this.runners[this.runnerCounter];
-    // console.log('CHECK3', stepPosition, stepValue);
+    let { stepPosition, stepValue } = this.runners[this.runnerCounter];
+    console.log('CHECK3', stepPosition, stepValue);
 
     this.createRunnerView(this.runnerCounter, stepPosition);
     this.createTipNumber(shouldAddTip, stepPosition, stepValue);
@@ -138,6 +128,8 @@ class SliderPresenter {
 
   public createTipNumber(isOn: boolean, stepPosition: number, stepValue:number): this {
     if (isOn) {
+      console.log('stepPosition, stepValue TIP', stepPosition, stepValue)
+      
       this.view.tip.create(
         this.runnerCounter,
         this.field.isVertical,

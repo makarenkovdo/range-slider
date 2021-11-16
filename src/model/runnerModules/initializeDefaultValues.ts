@@ -6,6 +6,10 @@ const initializeDefaultValues = function initializeDefaultPositionAndValue(
   minMax: number[],
   runnersInstantPosition: number,
 ): void {
+  console.log('minMax', minMax);
+  
+  console.log('runnersInstantPosition', runnersInstantPosition);
+  
   this.setValuesFromInputs.call(
     this.instance,
     runnersInstantPosition,
@@ -13,7 +17,7 @@ const initializeDefaultValues = function initializeDefaultPositionAndValue(
   );
   console.log('CHECK2!!!', this.stepPosition, this.stepValue);
   const { stepValue, stepPosition } = this;
-  console.log('CHECK3', stepPosition, stepValue);
+  console.log('CHECK3123', stepPosition, stepValue);
 };
 
 export default initializeDefaultValues;

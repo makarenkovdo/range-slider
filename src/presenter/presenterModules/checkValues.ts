@@ -8,7 +8,6 @@ const checkValues = function checkInitialValues(
     maxValue = 100,
     step = 1,
     fieldThickness = 6,
-    runnersInstantPosition = [0, 100],
   } = params;
 
   const {
@@ -20,6 +19,7 @@ const checkValues = function checkInitialValues(
     isTestMode = false,
     orientation = 'horizontal',
     hasInputPanel = false,
+    runnersInstantPosition = [0, 100],
   } = params;
   if (minValue > maxValue) {
     [minValue, maxValue] = [maxValue, minValue];
@@ -49,11 +49,14 @@ const checkValues = function checkInitialValues(
     fieldThickness = 20;
   }
 
-  if (runnersInstantPosition[0] > runnersInstantPosition[1]
-    || runnersInstantPosition[0] < minValue
-    || runnersInstantPosition[1] > maxValue) {
-    runnersInstantPosition = [minValue, maxValue];
+  if (runnersInstantPosition[0] < minValue
+    || runnersInstantPosition[0] > runnersInstantPosition[1]) {
+    runnersInstantPosition[0] = minValue;
   }
+  if (runnersInstantPosition[1] > maxValue) {
+    runnersInstantPosition[1] = maxValue;
+  }
+
   const checkedParams = {
     minValue,
     maxValue,

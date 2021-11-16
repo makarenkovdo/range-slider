@@ -5,7 +5,7 @@ import {
 
 function createScaleLinesBox(
   {
-    $id, orientation, fieldSize, divisionQuantity, top, left, columnOrRow,
+    $id, orientation, fieldSize, lineQuantity, top, left, columnOrRow,
   }:CreateScaleLinesBoxArgs,
 ):void {
   $id.append(
@@ -25,7 +25,7 @@ function createScaleLinesBox(
 function createScaleNumbersBox(
   {
     $id,
-    divisionQuantity,
+    lineQuantity,
     width,
     height,
     top,
@@ -45,7 +45,7 @@ function createScaleNumbersBox(
         width:${width}px;
         top:${top}px;
         left: ${left}px;
-        grid-template-${columnOrRow}:repeat(${divisionQuantity}, 1fr)
+        grid-template-${columnOrRow}:repeat(${lineQuantity}, 1fr)
       "
     >
     </div>`,
@@ -54,11 +54,11 @@ function createScaleNumbersBox(
 
 const createScaleLines = (
   {
-    $scaleLines, divisionQuantity, orientation,
-    minMax, smallLine, bigLine, step, stepMultiplier
+    $scaleLines, lineQuantity, orientation,
+    minMax, smallLine, bigLine, step, stepMultiplier,
   }:CreateScaleLinesArgs,
 ):void => {
-  for (let i = 0; i < 2 * divisionQuantity - 1; i += 1) {
+  for (let i = 0; i < 2 * lineQuantity - 1; i += 1) {
     if (i % 2) {
       $scaleLines.append(
         `<div 
@@ -70,12 +70,11 @@ const createScaleLines = (
             style="
             position: absolute;
             ${smallLine};
-            left: ${(step / (minMax[1] - minMax[0]) *stepMultiplier * 100) * (i / 2)}%;"
+            left: ${((step / (minMax[1] - minMax[0])) * stepMultiplier * 100) * (i / 2)}%;"
           >
           </div>`,
       );
     } else {
-      console.log('step, (minMax[1] - minMax[0]), 100, i, stepMultiplier', step, (minMax[1] - minMax[0]), 100, i, stepMultiplier);
 
       $scaleLines.append(
         `<div
@@ -86,7 +85,7 @@ const createScaleLines = (
             "
             style="${bigLine};
             position: absolute;
-            left: ${(step / (minMax[1] - minMax[0]) *stepMultiplier * 100) * (i / 2)}%;"
+            left: ${((step / (minMax[1] - minMax[0])) * stepMultiplier * 100) * (i / 2)}%;"
           ></div>`,
       );
     }
@@ -95,12 +94,20 @@ const createScaleLines = (
 
 const createScaleNumbers = (
   {
-    $scaleNumbers, minMax, divisionNumber,
-    divisionQuantity, stepSignAfterComma, switcher,
-    lastOrFirstIterration, isVertical,
+    $scaleNumbers,
+    minMax,
+    divisionNumber,
+    lineQuantity,
+    stepSignAfterComma,
+    switcher,
+    lastOrFirstIterration,
+    isVertical,
+    stepMultiplier,
+    step,
+    scaleSignAfterComma,
   }:CreateScaleNumbersArgs,
 ):void => {
-  for (let i = 0; i < divisionQuantity; i += 1) {
+  for (let i = 0; i < lineQuantity; i += 1) {
     if (i === lastOrFirstIterration) {
       $scaleNumbers.append(
         `<div
@@ -118,19 +125,18 @@ const createScaleNumbers = (
             slider__scale-number
             js-slider__scale-number
           "
-        >${(minMax[1] * switcher - (minMax[0] * (1 - switcher) + i * divisionNumber)).toFixed(Math.min(2, stepSignAfterComma))}
+        >${(minMax[1] * switcher - (minMax[0] * (1 - switcher) + i * divisionNumber)).toFixed(Math.min(1, scaleSignAfterComma))}
         </div>`,
       );
     } else {
-      console.log('minMax[0], 1 - switcher, i, divisionNumber', minMax[0], 1 - switcher, i, divisionNumber);
-
+      
       $scaleNumbers.append(
         `<div
           class="
             slider__scale-number
             js-slider__scale-number
           "
-        >${(minMax[0] + i * divisionNumber).toFixed(Math.min(2, stepSignAfterComma))}
+        >${(minMax[0] + i * step * stepMultiplier).toFixed(Math.min(1, scaleSignAfterComma))}
         </div>`,
       );
     }

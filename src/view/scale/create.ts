@@ -15,7 +15,11 @@ const create = function createScaleAndAddToDom(this: Scale): void {
       minMax,
       orientation,
       prepareScaleData(
-        fieldSize, isVertical, minMax, runner.step,
+        fieldSize,
+        isVertical,
+        minMax,
+        runner.step,
+        runner.stepSignAfterComma,
       ),
     );
     // setThis.call(this, i);

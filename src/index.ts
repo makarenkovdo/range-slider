@@ -39,7 +39,7 @@ const thirdSlider = new SliderPresenter('third', {
   isRange: true,
   shouldAddScale: true,
   runnerSize: [12, 12],
-  runnersInstantPosition: [0, 8 ],
+  runnersInstantPosition: [0, 8],
   hasInputPanel: true,
   orientation: 'horizontal',
 });
@@ -53,7 +53,7 @@ const fourthSlider = new SliderPresenter('fourth', {
   isRange: true,
   shouldAddScale: true,
   runnerSize: [12, 12],
-  runnersInstantPosition: [0, 8 ],
+  runnersInstantPosition: [0, 8],
   hasInputPanel: true,
   orientation: 'horizontal',
 });

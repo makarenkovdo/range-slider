@@ -25,7 +25,6 @@ const calcScaleSignAfterComma = (stepSignAfterComma:number, minMax:number[]): nu
       .pop().length);
   } else minMaxSignAfterComma.push(0);
 
-
   return Math.max(stepSignAfterComma, minMaxSignAfterComma[0], minMaxSignAfterComma[1]);
 };
 
@@ -41,26 +40,33 @@ const prepareScaleData = (
     i += 1;
   }
   let scaleSignAfterComma = calcScaleSignAfterComma(stepSignAfterComma, minMax);
+  let shouldAddExtraLine = false;
 
   const stepLimitsWithoutTrunc:number = (minMax[1] - minMax[0]) / step;
   const stepLimits:number = Math.floor(stepLimitsWithoutTrunc);
   const pixelLimits:number = Math.floor(fieldSize[i] / 40);
 
-  const lineQuantity = Math.max((Math.floor(Math.min(stepLimits + 1, pixelLimits + 1))), 2);
+  let lineQuantity = Math.max((Math.floor(Math.min(stepLimits + 1, pixelLimits + 1))), 2);
   let divisionNumber = Number(((minMax[1] - minMax[0]) / (lineQuantity - 1)).toFixed(3));
   const stepMultiplier = Math.floor(divisionNumber / step);
-console.log('step * lineQuantity * stepMultiplier', step, lineQuantity, stepMultiplier);
-console.log('minMax[1] - minMax[0]',minMax[1], minMax[0]);
 
+  if (step * (lineQuantity - 1) * stepMultiplier !== minMax[1] - minMax[0]) {
+    scaleSignAfterComma += 1;
+    shouldAddExtraLine = true;
+    const scaleStepBetweenTwoLastLines = fieldSize[i] - ((step * stepMultiplier * (lineQuantity-1)) / (minMax[1] - minMax[0]) * fieldSize[i]);
+    console.log(scaleStepBetweenTwoLastLines, 'scaleStepBetweenTwoLastLines');
+    console.log(step * stepMultiplier * (lineQuantity-1), 'step * stepMultiplier * (lineQuantity-1)');
+    console.log((minMax[1] - minMax[0]) * fieldSize[i], '(minMax[1] - minMax[0]) * fieldSize[i])');
 
-  if (step * (lineQuantity-1) * stepMultiplier !== minMax[1] - minMax[0]) scaleSignAfterComma += 1;
+    if (scaleStepBetweenTwoLastLines<50) lineQuantity -= 1
+  }
 
 
   if (minMax[0] > 0) {
     divisionNumber = Number(((minMax[1] - minMax[0]) / (lineQuantity - 1)).toFixed(3));
   }
   return {
-    lineQuantity, divisionNumber, stepMultiplier, scaleSignAfterComma,
+    lineQuantity, divisionNumber, stepMultiplier, scaleSignAfterComma, shouldAddExtraLine,
   };
 };
 
@@ -73,7 +79,7 @@ const addScaleToDom = (
   minMax: number[],
   orientation: Orientation,
   {
-    lineQuantity, divisionNumber, stepMultiplier, scaleSignAfterComma,
+    lineQuantity, divisionNumber, stepMultiplier, scaleSignAfterComma, shouldAddExtraLine,
   }: PrepareScaleDataArgs,
 ): void => {
   const createScaleLinesBoxArgs:CreateScaleLinesBoxArgs = {
@@ -84,6 +90,29 @@ const addScaleToDom = (
     top: 5,
     left: fieldSize[0] + 2,
     columnOrRow: 'row',
+  };
+
+  const createScaleNumbersBoxArgs: CreateScaleNumbersBoxArgs = {
+    $id,
+    lineQuantity,
+    width: fieldSize[0],
+    height: fieldSize[1] + fieldSize[1] / (lineQuantity - 1),
+    top: 0,
+    left: fieldSize[0] + 20,
+    columnOrRow: 'row',
+    fieldSize,
+  };
+  const createScaleLinesArgs: CreateScaleLinesArgs = {
+    $scaleLines: $id.find('.js-slider__scale-lines'),
+    lineQuantity,
+    divisionNumber,
+    orientation,
+    minMax,
+    smallLine: 'width: 5px',
+    bigLine: 'width: 10px',
+    step,
+    stepMultiplier,
+    shouldAddExtraLine,
   };
   const createScaleNumbersArgs: CreateScaleNumbersArgs = {
     switcher: 1,
@@ -96,26 +125,7 @@ const addScaleToDom = (
     stepMultiplier,
     step,
     scaleSignAfterComma,
-  };
-  const createScaleNumbersBoxArgs: CreateScaleNumbersBoxArgs = {
-    $id,
-    lineQuantity,
-    width: fieldSize[0],
-    height: fieldSize[1] + fieldSize[1] / (lineQuantity - 1),
-    top: 0,
-    left: fieldSize[0] + 20,
-    columnOrRow: 'row',
-  };
-  const createScaleLinesArgs: CreateScaleLinesArgs = {
-    $scaleLines: $id.find('.js-slider__scale-lines'),
-    lineQuantity,
-    divisionNumber,
-    orientation,
-    minMax,
-    smallLine: 'width: 5px',
-    bigLine: 'width: 10px',
-    step,
-    stepMultiplier,
+    shouldAddExtraLine,
   };
 
   if (isVertical) {

@@ -40,22 +40,10 @@ type PrepareScaleDataArgs = {
   divisionNumber:number;
   stepMultiplier:number;
   scaleSignAfterComma: number;
+  shouldAddExtraLine: boolean;
 };
 
-type CreateScaleNumbersArgs = {
-  $scaleNumbers?:JQuery<HTMLElement>;
-  minMax:number[];
-  divisionNumber:number;
-  lineQuantity:number;
-  stepSignAfterComma:number;
-  switcher: number;
-  lastOrFirstIterration: number;
-  isVertical: boolean;
-  stepMultiplier:number;
-  step: number;
-  scaleSignAfterComma: number;
 
-};
 
 type CreateScaleLinesBoxArgs = {
   $id:JQuery<HTMLElement>;
@@ -76,6 +64,8 @@ type CreateScaleNumbersBoxArgs = {
   top:number,
   left:number,
   columnOrRow: string,
+  fieldSize:number[];
+
 };
 
 type CreateScaleLinesArgs = {
@@ -88,6 +78,21 @@ type CreateScaleLinesArgs = {
   bigLine: string;
   step: number;
   stepMultiplier: number;
+  shouldAddExtraLine: boolean;
+};
+type CreateScaleNumbersArgs = {
+  $scaleNumbers?:JQuery<HTMLElement>;
+  minMax:number[];
+  divisionNumber:number;
+  lineQuantity:number;
+  stepSignAfterComma:number;
+  switcher: number;
+  lastOrFirstIterration: number;
+  isVertical: boolean;
+  stepMultiplier:number;
+  step: number;
+  scaleSignAfterComma: number;
+  shouldAddExtraLine: boolean;
 };
 
 // type PanelSelectors = {

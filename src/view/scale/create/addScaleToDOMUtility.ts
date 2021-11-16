@@ -5,7 +5,13 @@ import {
 
 function createScaleLinesBox(
   {
-    $id, orientation, fieldSize, lineQuantity, top, left, columnOrRow,
+    $id,
+    orientation,
+    fieldSize,
+    lineQuantity,
+    top,
+    left,
+    columnOrRow,
   }:CreateScaleLinesBoxArgs,
 ):void {
   $id.append(
@@ -31,31 +37,35 @@ function createScaleNumbersBox(
     top,
     left,
     columnOrRow,
+    fieldSize,
   }:CreateScaleNumbersBoxArgs,
 ):void {
   $id.append(
     `<div 
-      data-testid="test-scale"
-      class="
-        slider__scale-numbers
-        js-slider__scale-numbers
-      "
-      style="
-        height:${height}px;
-        width:${width}px;
-        top:${top}px;
-        left: ${left}px;
-        grid-template-${columnOrRow}:repeat(${lineQuantity}, 1fr)
-      "
-    >
-    </div>`,
+        data-testid="test-slider__scale-numbers"
+        class="slider__scale-lines slider__scale-numbers
+          js-slider__scale-numbers"
+        style="height:${fieldSize[1]}px;
+          width:${fieldSize[0]}px;
+          top:${top}px;
+        "
+      >
+      </div>`,
   );
 }
 
 const createScaleLines = (
   {
-    $scaleLines, lineQuantity, orientation,
-    minMax, smallLine, bigLine, step, stepMultiplier,
+    $scaleLines,
+    lineQuantity,
+    orientation,
+    minMax,
+    smallLine,
+    bigLine,
+    step,
+    stepMultiplier,
+    shouldAddExtraLine,
+
   }:CreateScaleLinesArgs,
 ):void => {
   for (let i = 0; i < 2 * lineQuantity - 1; i += 1) {
@@ -75,7 +85,6 @@ const createScaleLines = (
           </div>`,
       );
     } else {
-
       $scaleLines.append(
         `<div
             class="
@@ -89,6 +98,20 @@ const createScaleLines = (
           ></div>`,
       );
     }
+  }
+  if (shouldAddExtraLine) {
+    $scaleLines.append(
+      `<div
+          class="
+            slider__scale-line
+            slider__scale-line_${orientation}
+            js-slider__scale-line
+          "
+          style="${bigLine};
+          position: absolute;
+          left: 100%;"
+        ></div>`,
+    );
   }
 };
 
@@ -105,20 +128,11 @@ const createScaleNumbers = (
     stepMultiplier,
     step,
     scaleSignAfterComma,
+    shouldAddExtraLine
   }:CreateScaleNumbersArgs,
 ):void => {
   for (let i = 0; i < lineQuantity; i += 1) {
-    if (i === lastOrFirstIterration) {
-      $scaleNumbers.append(
-        `<div
-          class="
-            slider__scale-number
-            js-slider__scale-number
-          "
-        >${minMax[1].toFixed(Math.min(2, stepSignAfterComma))}
-        </div>`,
-      );
-    } else if (isVertical) {
+    if (isVertical) {
       $scaleNumbers.append(
         `<div
           class="
@@ -129,16 +143,38 @@ const createScaleNumbers = (
         </div>`,
       );
     } else {
-      
       $scaleNumbers.append(
         `<div
           class="
             slider__scale-number
             js-slider__scale-number
           "
+          style="
+          left: ${((step / (minMax[1] - minMax[0])) * stepMultiplier * 100) * (i)}%;
+          position: absolute;
+
+          "
+          
         >${(minMax[0] + i * step * stepMultiplier).toFixed(Math.min(1, scaleSignAfterComma))}
         </div>`,
       );
+      if (shouldAddExtraLine) {
+        $scaleNumbers.append(
+          `<div
+            class="
+              slider__scale-number
+              js-slider__scale-number
+            "
+            style="
+            left: 100%;
+            position: absolute;
+  
+            "
+            
+          >${(minMax[1])}
+          </div>`,
+        );
+      }
     }
   }
 };

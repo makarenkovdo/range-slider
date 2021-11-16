@@ -2,8 +2,13 @@ import { Orientation } from '../../../presenter/presenterInterfaces';
 import { PreparedDataType } from '../../tip/create/createUtility';
 import Runner from '../Runner';
 
-const prepareRunnerArgs = (i: number, isVertical: boolean, runnerSize: number[],
-  fieldSize: number[], stepPosition: number): PreparedDataType => {
+const prepareRunnerArgs = (
+  i: number,
+  isVertical:boolean,
+  runnerSize: number[],
+  fieldSize: number[],
+  stepPosition: number,
+): PreparedDataType => {
   let positioning = ['left', 'top'];
   // const minMax = 0;
   let switcher = [0, 1];

@@ -1,21 +1,25 @@
-import { PanelInputsData } from '../../view/viewInterfaces';
 import RunnerModel from '../RunnerModel';
-import { CalculateStepPositionFromInputReturned, NotifyMessageType } from './runnerInterfaces';
-import { calculateStepPositionFromInput, setValues } from './setValuesFromInputs/setValuesFromInputsUtility';
+import { CalculateStepPositionFromInputReturned } from './runnerInterfaces';
+import {
+  calculatePositionFromInput, setPrepareValues, setStepValues,
+} from './setValuesFromInputs/setValuesFromInputsUtility';
+import { calculateStepValueAndPosition } from './updateRunnerValues/updateRunnerValuesUtility';
 
 const setValuesFromInputs = function setThisValuesFromPanelInputs(
   this:RunnerModel,
   inputRunnerValue:number,
   minMax: number[],
 ):CalculateStepPositionFromInputReturned {
-  const { stepValue, stepPosition } = calculateStepPositionFromInput(
+  const positionInPercent = calculatePositionFromInput(
     inputRunnerValue,
     this.step,
     this.stepSignAfterComma,
     minMax,
   );
+  setPrepareValues.call(this, positionInPercent, inputRunnerValue);
+  const { stepValue, stepPosition } = calculateStepValueAndPosition(this, minMax);
 
-  setValues.call(
+  setStepValues.call(
     this,
     stepValue,
     stepPosition,

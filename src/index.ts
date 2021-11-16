@@ -7,7 +7,7 @@ const firstSlider = new SliderPresenter('first', {
   shouldAddTip: true,
   shouldAddBar: true,
   step: 2,
-  maxValue: 16.9,
+  maxValue: 17.2,
   minValue: 9.1,
   isRange: true,
   shouldAddScale: true,

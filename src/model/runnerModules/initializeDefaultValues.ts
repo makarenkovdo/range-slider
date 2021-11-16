@@ -1,22 +1,19 @@
 import RunnerModel from '../RunnerModel';
-import { calculateStepPositionFromInput } from './setValuesFromInputs/setValuesFromInputsUtility';
+import { calculatePositionFromInput } from './setValuesFromInputs/setValuesFromInputsUtility';
 
 const initializeDefaultValues = function initializeDefaultPositionAndValue(
   this: RunnerModel,
   minMax: number[],
   runnersInstantPosition: number,
 ): void {
-  // const minMaxStepPosition = [0, 100];
-  const { stepPosition, stepValue } = calculateStepPositionFromInput(
+  this.setValuesFromInputs.call(
+    this.instance,
     runnersInstantPosition,
-    this.step,
-    this.stepSignAfterComma,
     minMax,
   );
-  this.positionInPercent = stepPosition;
-  this.value = stepValue;
-  this.stepPosition = stepPosition;
-  this.stepValue = stepValue;
+  console.log('CHECK2!!!', this.stepPosition, this.stepValue);
+  const { stepValue, stepPosition } = this;
+  console.log('CHECK3', stepPosition, stepValue);
 };
 
 export default initializeDefaultValues;

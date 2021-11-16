@@ -1,13 +1,13 @@
 /* eslint-env jquery */
 import FieldModel from '../model/FieldModel';
 import RunnerModel from '../model/RunnerModel';
-import { UpdateRunnerValuesArgs } from '../model/runnerModules/runnerInterfaces';
+import { CalculateStepPositionFromInputReturned, UpdateRunnerValuesArgs } from '../model/runnerModules/runnerInterfaces';
+import setValuesFromInputs from '../model/runnerModules/setValuesFromInputs';
+import { calculatePositionInPercent, calculateStepValueAndPosition, setStepValueAndPosition } from '../model/runnerModules/updateRunnerValues/updateRunnerValuesUtility';
 import SliderView from '../view/SliderView';
 import {
   PresenterBuildParams,
-  // CreateRangeSliderArgsType,
   DataForRunnerUpdatingArgsType,
-  Orientation,
 } from './presenterInterfaces';
 import checkValues from './presenterModules/checkValues';
 
@@ -43,6 +43,27 @@ class SliderPresenter {
         .createScale(checkedParams)
         .activatePanel(checkedParams);
     }
+
+    // let cursorXY = [50,50]
+    // this.runners[0].updateRunnerValues({
+    //   cursorXY,
+    //   isVertical: this.field.isVertical,
+    //   minMax: this.field.minMax,
+    //   isRange: this.field.isRange,
+    //   fieldSize: this.view.fieldSize,
+    //   runners: this.runners,
+    //   activeRunner: this.runners[0],
+    // });
+    // cursorXY = [checkedParams.runnersInstantPosition[1], checkedParams.runnersInstantPosition[0]];
+    // this.runners[1].updateRunnerValues({
+    //   cursorXY,
+    //   isVertical: this.field.isVertical,
+    //   minMax: this.field.minMax,
+    //   isRange: this.field.isRange,
+    //   fieldSize: this.view.fieldSize,
+    //   runners: this.runners,
+    //   activeRunner: this.runners[1],
+    // });
   }
   // prettier-ignore
 
@@ -67,7 +88,17 @@ class SliderPresenter {
     isRange, shouldAddTip, runnerSize, minValue, maxValue, runnersInstantPosition,
   }:PresenterBuildParams): this {
     this.createRunner(runnerSize, minValue, maxValue, runnersInstantPosition[this.runnerCounter]);
-    let { stepValue, stepPosition } = this.runners[this.runnerCounter];
+    console.log('CHECK!!!', this.runners[this.runnerCounter].stepPosition, this.runners[this.runnerCounter].stepValue);
+
+    //  todo all below - to 'initialize'
+    // this.runners[this.runnerCounter].setValuesFromInputs.call(
+    //   this.runners[this.runnerCounter],
+    //   runnersInstantPosition[this.runnerCounter],
+    //   [minValue, maxValue],
+    // );
+    // console.log('CHECK2!!!', this.runners[this.runnerCounter].stepPosition, this.runners[this.runnerCounter].stepValue);
+    // let { stepValue, stepPosition } = this.runners[this.runnerCounter];
+    // console.log('CHECK3', stepPosition, stepValue);
 
     this.createRunnerView(this.runnerCounter, stepPosition);
     this.createTipNumber(shouldAddTip, stepPosition, stepValue);
@@ -237,6 +268,10 @@ class SliderPresenter {
     return this;
   }
 
+  private updateRunnerPosition({ stepPosition, instance }: RunnerModel): void {
+    this.view.runner.updatePosition(stepPosition, instance);
+  }
+
   public updateTipNumber(stepValue: number, instance: number): this {
     this.view.tip.update({ stepValue, instance });
     return this;
@@ -257,10 +292,6 @@ class SliderPresenter {
   private onClick(): this {
     this.view.handleClick(this.runners, this.field);
     return this;
-  }
-
-  private updateRunnerPosition({ stepPosition, instance }: RunnerModel): void {
-    this.view.runner.updatePosition(stepPosition, instance);
   }
 }
 

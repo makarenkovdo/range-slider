@@ -18,7 +18,6 @@ const createScaleLines = (
 
   for (let i = 0; i < 2 * lineQuantity + 1; i += 1) {
     const topOrLeftPosition = ((step / (minMax[1] - minMax[0])) * stepMultiplier * 100) * (i / 2);
-    console.log(topOrLeftPosition);
 
     if (topOrLeftPosition < 98) {
       if (i % 2 && i !== 2 * Math.floor(lineQuantity) + 1) {        
@@ -37,7 +36,6 @@ const createScaleLines = (
             </div>`,
         );
       } else if (!(i % 2)) {
-        console.log($scaleLines);
         
         $scaleLines.append(
           `<div

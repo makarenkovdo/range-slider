@@ -1,5 +1,4 @@
 import SliderView from '../SliderView';
-import SliderPresenter from '../../presenter/SliderPresenter';
 import createBar from './createBar';
 import updateBarPosition from './updateBarPosition';
 
@@ -8,7 +7,9 @@ export default class Bar {
 
   public $bar: JQuery<HTMLElement>;
 
-  public createBar: (presenter: SliderPresenter) => void;
+  public fieldThickness: number;
+
+  public createBar: (this: Bar, fieldThickness: number) => void;
 
   public updateBarPosition: (this: Bar) => void;
 

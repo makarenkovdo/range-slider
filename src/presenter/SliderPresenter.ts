@@ -147,10 +147,10 @@ class SliderPresenter {
     return this;
   }
 
-  public createBar({ shouldAddBar }:PresenterBuildParams): this {
+  public createBar({ shouldAddBar, fieldThickness }:PresenterBuildParams): this {
     if (shouldAddBar) {
       this.view.hasBar = true;
-      this.view.bar.createBar(this);
+      this.view.bar.createBar(fieldThickness);
       this.view.bar.updateBarPosition();
     }
 

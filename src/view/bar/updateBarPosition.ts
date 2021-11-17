@@ -18,7 +18,7 @@ const updateBarPosition = function updateBarPositionToDOM(this: Bar): void {
       isVertical: parent.isVertical,
       $bar: this.$bar,
       runnersPosition: parent.runner.positions,
-      fieldThickness: parent.fieldThickness,
+      fieldThickness: this.fieldThickness,
       calcLengthOfRangeBar,
       updateSingleVerticalBarPosition,
       updateSingleHorizontalBarPosition,

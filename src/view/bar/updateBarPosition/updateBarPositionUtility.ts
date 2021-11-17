@@ -16,6 +16,8 @@ const defineBarKind = ({
   updateSingleHorizontalBarPosition,
   updateRangeBarPosition,
 }: DefineBarKindArgsType): void => {
+  console.log(fieldThickness, 'fieldThickness');
+  
   if (isRange && isVertical) {
     updateRangeBarPosition(
       NumbersEnum.one,

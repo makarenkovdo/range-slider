@@ -6,8 +6,6 @@ const removeDrag = function removeDragBeforeRebuild(
   instance: number,
 ): void {
   const { $field } = this.parent;
-console.log('OFFF?');
-
-  $field.off();
+  $field.off('mousedown touchstart', `.js-slider__runner_instance-${instance}`);
 };
 export default removeDrag;

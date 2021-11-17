@@ -41,8 +41,9 @@ const prepareScaleData = (
   }
 
   const onePxInPercent = 100 / fieldSize[i];
+console.log(stepSignAfterComma, 'stepSignAfterComma');
 
-  let scaleSignAfterComma = calcScaleSignAfterComma(stepSignAfterComma, minMax);
+  let scaleSignAfterComma = stepSignAfterComma;
   let shouldAddExtraLine = false;
 
   const stepLimitsWithoutTrunc:number = (minMax[1] - minMax[0]) / step;
@@ -51,7 +52,6 @@ const prepareScaleData = (
   for (let index = 0; stepLimits > pixelLimits; index++) {
     stepLimits /= 2;
   }
-  console.log(stepLimits, pixelLimits);
 
   let lineQuantity = Math.floor(stepLimits);
   let segmentInPercent = Number(((minMax[1] - minMax[0]) / (lineQuantity)).toFixed(3));
@@ -70,8 +70,6 @@ const prepareScaleData = (
   if (minMax[0] > 0) {
     segmentInPercent = Number(((minMax[1] - minMax[0]) / (lineQuantity - 1)).toFixed(3));
   }
-  console.log('lineQuantity, segmentInPercent, stepMultiplier');
-  console.log(lineQuantity, segmentInPercent, stepMultiplier);
 
   return {
     lineQuantity,

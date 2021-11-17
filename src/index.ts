@@ -6,7 +6,7 @@ import SliderPresenter from './presenter/SliderPresenter';
 const firstSlider = new SliderPresenter('first', {
   shouldAddTip: true,
   shouldAddBar: true,
-  step: 0.01,
+  step: 2,
   maxValue: -0.1,
   minValue: 0.1,
   isRange: true,
@@ -18,9 +18,9 @@ const firstSlider = new SliderPresenter('first', {
 });
 
 const secondSlider = new SliderPresenter('second', {
-  step: 2,
-  maxValue: 45,
-  minValue: -1,
+  step: 1,
+  maxValue: -10,
+  minValue: 10,
   shouldAddTip: true,
   shouldAddBar: true,
   shouldAddScale: true,

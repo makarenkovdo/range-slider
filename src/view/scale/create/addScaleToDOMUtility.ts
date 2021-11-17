@@ -135,13 +135,13 @@ const createScaleNumbers = (
     onePxInPercent,
   }:CreateScaleNumbersArgs,
 ):void => {
+  console.log('FINAL stepSignAfterComma',stepSignAfterComma );
+  
   for (let i = 0; i < lineQuantity + 1; i += 1) {
     const leftPosition = ((step / (minMax[1] - minMax[0])) * stepMultiplier * 100) * (i);
-    const viewNumber = (minMax[0] + i * step * stepMultiplier).toFixed(Math.min(2, scaleSignAfterComma));
+    const viewNumber = (minMax[0] + i * step * stepMultiplier).toFixed(Math.min(2, stepSignAfterComma));
     const viewNumberLength = viewNumber.length;
     const viewNumberAligning = viewNumber.length * 2 * onePxInPercent;
-    console.log('viewNumber, viewNumberLength, viewNumberAligning, onePxInPercent', viewNumber, viewNumberLength, viewNumberAligning, onePxInPercent);
-console.log('100 - leftPosition / onePxInPercent', 100 - leftPosition / onePxInPercent);
 
     if ((100 - leftPosition) / onePxInPercent > 30) {
       if (isVertical) {
@@ -151,11 +151,10 @@ console.log('100 - leftPosition / onePxInPercent', 100 - leftPosition / onePxInP
             slider__scale-number
             js-slider__scale-number
           "
-        >${(minMax[1] * switcher - (minMax[0] * (1 - switcher) + i * segmentInPercent)).toFixed(Math.min(2, scaleSignAfterComma))}
+        >${(minMax[1] * switcher - (minMax[0] * (1 - switcher) + i * segmentInPercent)).toFixed(Math.min(2, stepSignAfterComma))}
         </div>`,
         );
       } else {
-        console.log(viewNumberLength, 'viewNumberLength');
 
         $scaleNumbers.append(
           `<div
@@ -169,7 +168,7 @@ console.log('100 - leftPosition / onePxInPercent', 100 - leftPosition / onePxInP
 
           "
           
-        >${(minMax[0] + i * step * stepMultiplier).toFixed(Math.min(2, scaleSignAfterComma))}
+        >${(minMax[0] + i * step * stepMultiplier).toFixed(Math.min(2, stepSignAfterComma ))}
         </div>`,
         );
         if (shouldAddExtraLine) {

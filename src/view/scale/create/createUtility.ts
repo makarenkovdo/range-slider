@@ -73,6 +73,7 @@ const addScaleToDom = (
     scaleSignAfterComma,
     shouldAddExtraLine,
     onePxInPercent,
+    orientation,
   };
 
   if (isVertical) {

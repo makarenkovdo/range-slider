@@ -1,4 +1,4 @@
-import { CreateScaleNumbersArgs } from "../../../viewInterfaces";
+import { CreateScaleNumbersArgs } from '../../../viewInterfaces';
 
 const createScaleNumbers = (
   {
@@ -15,17 +15,21 @@ const createScaleNumbers = (
     scaleSignAfterComma,
     shouldAddExtraLine,
     onePxInPercent,
+    orientation,
   }:CreateScaleNumbersArgs,
 ):void => {
+  const positioning = orientation === 'vertical' ? 'top' : 'left';
+
   console.log('FINAL stepSignAfterComma', stepSignAfterComma);
 
-  for (let i = 0; i < lineQuantity + 1; i += 1) {
-    const leftPosition = ((step / (minMax[1] - minMax[0])) * stepMultiplier * 100) * (i);
-    const viewNumber = (minMax[0] + i * step * stepMultiplier).toFixed(Math.min(2, stepSignAfterComma));
-    const viewNumberLength = viewNumber.length;
+  for (let i = 1; i < lineQuantity + 1; i += 1) {
+    const leftOrTopPosition = ((step / (minMax[1] - minMax[0])) * stepMultiplier * 100) * (i);
+    const viewNumber = (
+      minMax[0] + i * step * stepMultiplier
+    ).toFixed(Math.min(2, stepSignAfterComma));
     const viewNumberAligning = viewNumber.length * 2 * onePxInPercent;
 
-    if ((100 - leftPosition) / onePxInPercent > 30) {
+    if ((100 - leftOrTopPosition) / onePxInPercent > 30) {
       if (isVertical) {
         $scaleNumbers.append(
           `<div
@@ -33,7 +37,14 @@ const createScaleNumbers = (
               slider__scale-number
               js-slider__scale-number
             "
-          >${(minMax[1] * switcher - (minMax[0] * (1 - switcher) + i * segmentInPercent)).toFixed(Math.min(2, stepSignAfterComma))}
+            style="
+            left: 5px;
+            top: ${leftOrTopPosition - 0.5}%;
+            position: absolute;
+  
+            "
+
+          >${(minMax[1] - ( i * step * stepMultiplier)).toFixed(Math.min(2, stepSignAfterComma))}
           </div>`,
         );
       } else {
@@ -44,7 +55,7 @@ const createScaleNumbers = (
               js-slider__scale-number
             "
             style="
-            left: ${leftPosition - viewNumberAligning}%;
+            left: ${leftOrTopPosition - viewNumberAligning}%;
             position: absolute;
   
             "
@@ -52,25 +63,73 @@ const createScaleNumbers = (
           >${(minMax[0] + i * step * stepMultiplier).toFixed(Math.min(2, stepSignAfterComma))}
           </div>`,
         );
-        if (shouldAddExtraLine) {
-          $scaleNumbers.append(
-            `<div
-              class="
-                slider__scale-number
-                js-slider__scale-number
-              "
-              style="
-              left: 100%;
-              position: absolute;
-    
-              "
-              
-            >${(minMax[1])}
-            </div>`,
-          );
-        }
       }
     }
+  }
+  if (isVertical) {
+    $scaleNumbers.append(
+      `<div
+          class="
+            slider__scale-number
+            js-slider__scale-number
+          "
+          style="
+          left: 5px;
+          ${positioning}: 99.5%;
+          position: absolute;
+
+          "
+          
+        >${(minMax[0])}
+        </div>`,
+    );
+    $scaleNumbers.append(
+      `<div
+          class="
+            slider__scale-number
+            js-slider__scale-number
+          "
+          style="
+          left: 5px;
+          ${positioning}: -0.5%;
+          position: absolute;
+
+          "
+          
+        >${(minMax[1])}
+        </div>`,
+    );
+  } else {
+    $scaleNumbers.append(
+      `<div
+          class="
+            slider__scale-number
+            js-slider__scale-number
+          "
+          style="
+          ${positioning}: 100%;
+          position: absolute;
+
+          "
+          
+        >${(minMax[1])}
+        </div>`,
+    );
+    $scaleNumbers.append(
+      `<div
+          class="
+            slider__scale-number
+            js-slider__scale-number
+          "
+          style="
+          ${positioning}: 0%;
+          position: absolute;
+
+          "
+          
+        >${(minMax[0])}
+        </div>`,
+    );
   }
 };
 

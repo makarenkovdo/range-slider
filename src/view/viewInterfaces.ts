@@ -95,6 +95,7 @@ type CreateScaleNumbersArgs = {
   scaleSignAfterComma: number;
   shouldAddExtraLine: boolean;
   onePxInPercent: number;
+  orientation: string;
 };
 
 // type PanelSelectors = {

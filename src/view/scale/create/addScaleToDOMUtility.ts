@@ -68,10 +68,12 @@ const createScaleLines = (
 
   }:CreateScaleLinesArgs,
 ):void => {
-  for (let i = 0; i < 2 * lineQuantity - 1; i += 1) {
-    if (i % 2) {
-      $scaleLines.append(
-        `<div 
+  for (let i = 0; i < 2 * lineQuantity + 1; i += 1) {
+    const leftPosition = ((step / (minMax[1] - minMax[0])) * stepMultiplier * 100) * (i / 2);
+    if (leftPosition < 98) {
+      if (i % 2 && i !== 2 * Math.floor(lineQuantity) + 1) {
+        $scaleLines.append(
+          `<div 
             class="
               slider__scale-line
               slider__scale-line_${orientation}
@@ -80,13 +82,13 @@ const createScaleLines = (
             style="
             position: absolute;
             ${smallLine};
-            left: ${((step / (minMax[1] - minMax[0])) * stepMultiplier * 100) * (i / 2)}%;"
+            left: ${leftPosition}%;"
           >
           </div>`,
-      );
-    } else {
-      $scaleLines.append(
-        `<div
+        );
+      } else if (!(i % 2)) {
+        $scaleLines.append(
+          `<div
             class="
               slider__scale-line
               slider__scale-line_${orientation}
@@ -94,9 +96,10 @@ const createScaleLines = (
             "
             style="${bigLine};
             position: absolute;
-            left: ${((step / (minMax[1] - minMax[0])) * stepMultiplier * 100) * (i / 2)}%;"
+            left: ${leftPosition}%;"
           ></div>`,
-      );
+        );
+      }
     }
   }
   if (shouldAddExtraLine) {

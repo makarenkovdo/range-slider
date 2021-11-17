@@ -44,10 +44,14 @@ const prepareScaleData = (
   let shouldAddExtraLine = false;
 
   const stepLimitsWithoutTrunc:number = (minMax[1] - minMax[0]) / step;
-  const stepLimits:number = Math.floor(stepLimitsWithoutTrunc);
+  let stepLimits:number = Math.floor(stepLimitsWithoutTrunc);
   const pixelLimits:number = Math.floor(fieldSize[i] / 40);
+  for (let index = 0; stepLimits > pixelLimits; index++) {
+    stepLimits /= 2;
+  }
+  console.log(stepLimits, pixelLimits);
 
-  let lineQuantity = Math.max((Math.floor(Math.min(stepLimits + 1, pixelLimits + 1))), 2);
+  let lineQuantity = stepLimits;
   let divisionNumber = Number(((minMax[1] - minMax[0]) / (lineQuantity - 1)).toFixed(3));
   const stepMultiplier = Math.floor(divisionNumber / step);
 
@@ -66,8 +70,7 @@ const prepareScaleData = (
   }
   console.log('lineQuantity, divisionNumber, stepMultiplier');
   console.log(lineQuantity, divisionNumber, stepMultiplier);
-  
-  
+
   return {
     lineQuantity, divisionNumber, stepMultiplier, scaleSignAfterComma, shouldAddExtraLine,
   };

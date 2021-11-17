@@ -40,6 +40,8 @@ const prepareScaleData = (
     i += 1;
   }
 
+  const onePxInPercent = 100 / fieldSize[i];
+
   let scaleSignAfterComma = calcScaleSignAfterComma(stepSignAfterComma, minMax);
   let shouldAddExtraLine = false;
 
@@ -51,9 +53,9 @@ const prepareScaleData = (
   }
   console.log(stepLimits, pixelLimits);
 
-  let lineQuantity = stepLimits;
-  let divisionNumber = Number(((minMax[1] - minMax[0]) / (lineQuantity - 1)).toFixed(3));
-  const stepMultiplier = Math.floor(divisionNumber / step);
+  let lineQuantity = Math.floor(stepLimits);
+  let segmentInPercent = Number(((minMax[1] - minMax[0]) / (lineQuantity)).toFixed(3));
+  const stepMultiplier = Math.floor(segmentInPercent / step);
 
   if (step * (lineQuantity - 1) * stepMultiplier !== minMax[1] - minMax[0]) {
     scaleSignAfterComma += 1;
@@ -66,13 +68,18 @@ const prepareScaleData = (
   }
 
   if (minMax[0] > 0) {
-    divisionNumber = Number(((minMax[1] - minMax[0]) / (lineQuantity - 1)).toFixed(3));
+    segmentInPercent = Number(((minMax[1] - minMax[0]) / (lineQuantity - 1)).toFixed(3));
   }
-  console.log('lineQuantity, divisionNumber, stepMultiplier');
-  console.log(lineQuantity, divisionNumber, stepMultiplier);
+  console.log('lineQuantity, segmentInPercent, stepMultiplier');
+  console.log(lineQuantity, segmentInPercent, stepMultiplier);
 
   return {
-    lineQuantity, divisionNumber, stepMultiplier, scaleSignAfterComma, shouldAddExtraLine,
+    lineQuantity,
+    segmentInPercent,
+    stepMultiplier,
+    scaleSignAfterComma,
+    shouldAddExtraLine,
+    onePxInPercent,
   };
 };
 
@@ -85,7 +92,12 @@ const addScaleToDom = (
   minMax: number[],
   orientation: Orientation,
   {
-    lineQuantity, divisionNumber, stepMultiplier, scaleSignAfterComma, shouldAddExtraLine,
+    lineQuantity,
+    segmentInPercent,
+    stepMultiplier,
+    scaleSignAfterComma,
+    shouldAddExtraLine,
+    onePxInPercent,
   }: PrepareScaleDataArgs,
 ): void => {
   const createScaleLinesBoxArgs:CreateScaleLinesBoxArgs = {
@@ -111,7 +123,7 @@ const addScaleToDom = (
   const createScaleLinesArgs: CreateScaleLinesArgs = {
     $scaleLines: $id.find('.js-slider__scale-lines'),
     lineQuantity,
-    divisionNumber,
+    segmentInPercent,
     orientation,
     minMax,
     smallLine: 'width: 5px',
@@ -124,7 +136,7 @@ const addScaleToDom = (
     switcher: 1,
     lastOrFirstIterration: 0,
     minMax,
-    divisionNumber,
+    segmentInPercent,
     lineQuantity,
     stepSignAfterComma,
     isVertical,
@@ -132,6 +144,7 @@ const addScaleToDom = (
     step,
     scaleSignAfterComma,
     shouldAddExtraLine,
+    onePxInPercent,
   };
 
   if (isVertical) {

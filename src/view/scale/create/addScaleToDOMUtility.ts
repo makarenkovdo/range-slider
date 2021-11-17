@@ -122,7 +122,7 @@ const createScaleNumbers = (
   {
     $scaleNumbers,
     minMax,
-    divisionNumber,
+    segmentInPercent,
     lineQuantity,
     stepSignAfterComma,
     switcher,
@@ -132,20 +132,30 @@ const createScaleNumbers = (
     step,
     scaleSignAfterComma,
     shouldAddExtraLine,
+    onePxInPercent,
   }:CreateScaleNumbersArgs,
 ):void => {
-  for (let i = 0; i < lineQuantity; i += 1) {
-    if (isVertical) {
+  for (let i = 0; i < lineQuantity+1; i += 1) {
+    const leftPosition = ((step / (minMax[1] - minMax[0])) * stepMultiplier * 100) * (i);
+    const viewNumber = (minMax[0] + i * step * stepMultiplier).toFixed(Math.min(2, scaleSignAfterComma));
+    const viewNumberLength = viewNumber.length;
+    const viewNumberAligning = viewNumber.length * 2 *onePxInPercent;
+    console.log('viewNumber, viewNumberLength, viewNumberAligning, onePxInPercent', viewNumber, viewNumberLength, viewNumberAligning, onePxInPercent);
+    
+
+  if (isVertical) {
       $scaleNumbers.append(
         `<div
           class="
             slider__scale-number
             js-slider__scale-number
           "
-        >${(minMax[1] * switcher - (minMax[0] * (1 - switcher) + i * divisionNumber)).toFixed(Math.min(1, scaleSignAfterComma))}
+        >${(minMax[1] * switcher - (minMax[0] * (1 - switcher) + i * segmentInPercent)).toFixed(Math.min(2, scaleSignAfterComma))}
         </div>`,
       );
     } else {
+      console.log(viewNumberLength, 'viewNumberLength');
+      
       $scaleNumbers.append(
         `<div
           class="
@@ -153,12 +163,12 @@ const createScaleNumbers = (
             js-slider__scale-number
           "
           style="
-          left: ${((step / (minMax[1] - minMax[0])) * stepMultiplier * 100) * (i)}%;
+          left: ${leftPosition-viewNumberAligning}%;
           position: absolute;
 
           "
           
-        >${(minMax[0] + i * step * stepMultiplier).toFixed(Math.min(1, scaleSignAfterComma))}
+        >${(minMax[0] + i * step * stepMultiplier).toFixed(Math.min(2, scaleSignAfterComma))}
         </div>`,
       );
       if (shouldAddExtraLine) {

@@ -37,10 +37,11 @@ type DragEventDataType = {
 
 type PrepareScaleDataArgs = {
   lineQuantity:number;
-  divisionNumber:number;
+  segmentInPercent:number;
   stepMultiplier:number;
   scaleSignAfterComma: number;
   shouldAddExtraLine: boolean;
+  onePxInPercent: number;
 };
 
 
@@ -71,7 +72,7 @@ type CreateScaleNumbersBoxArgs = {
 type CreateScaleLinesArgs = {
   $scaleLines?:JQuery<HTMLElement>;
   minMax:number[];
-  divisionNumber:number;
+  segmentInPercent:number;
   lineQuantity:number;
   orientation: Orientation;
   smallLine:string;
@@ -83,7 +84,7 @@ type CreateScaleLinesArgs = {
 type CreateScaleNumbersArgs = {
   $scaleNumbers?:JQuery<HTMLElement>;
   minMax:number[];
-  divisionNumber:number;
+  segmentInPercent:number;
   lineQuantity:number;
   stepSignAfterComma:number;
   switcher: number;
@@ -93,6 +94,7 @@ type CreateScaleNumbersArgs = {
   step: number;
   scaleSignAfterComma: number;
   shouldAddExtraLine: boolean;
+  onePxInPercent: number;
 };
 
 // type PanelSelectors = {

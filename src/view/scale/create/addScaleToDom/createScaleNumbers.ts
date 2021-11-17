@@ -32,12 +32,12 @@ const createScaleNumbers = (
             "
             style="
             left: 5px;
-            top: ${leftOrTopPosition - 0.5}%;
+            top: ${100-(leftOrTopPosition + 0.5)}%;
             position: absolute;
   
             "
 
-          >${(minMax[1] - (i * step * stepMultiplier)).toFixed(Math.min(2, stepSignAfterComma))}
+          >${((minMax[0] + i * step * stepMultiplier)).toFixed(Math.min(2, stepSignAfterComma))}
           </div>`,
         );
       } else {

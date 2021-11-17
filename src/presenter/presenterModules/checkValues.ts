@@ -50,10 +50,10 @@ const checkValues = function checkInitialValues(
   }
 
   if (runnersInstantPosition[0] < minValue
-    || runnersInstantPosition[0] > runnersInstantPosition[1]) {
+    || runnersInstantPosition[0] > runnersInstantPosition[1] || runnersInstantPosition[0] > maxValue ) {
     runnersInstantPosition[0] = minValue;
   }
-  if (runnersInstantPosition[1] > maxValue) {
+  if (runnersInstantPosition[1] > maxValue || runnersInstantPosition[1] < minValue) {
     runnersInstantPosition[1] = maxValue;
   }
 

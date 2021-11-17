@@ -6,9 +6,9 @@ import SliderPresenter from './presenter/SliderPresenter';
 const firstSlider = new SliderPresenter('first', {
   shouldAddTip: true,
   shouldAddBar: true,
-  step: 2,
-  maxValue: 48,
-  minValue: 9.1,
+  step: 0.01,
+  maxValue: -0.1,
+  minValue: 0.1,
   isRange: true,
   shouldAddScale: true,
   runnerSize: [12, 12],

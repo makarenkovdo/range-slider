@@ -12,8 +12,6 @@ const setValuesFromInputs = function setThisValuesFromPanelInputs(
 ):CalculateStepPositionFromInputReturned {
   const positionInPercent = calculatePositionFromInput(
     inputRunnerValue,
-    this.step,
-    this.stepSignAfterComma,
     minMax,
   );
   setPrepareValues.call(this, positionInPercent, inputRunnerValue);
@@ -25,7 +23,6 @@ const setValuesFromInputs = function setThisValuesFromPanelInputs(
     stepValue,
   );
   return { stepValue, stepPosition };
-  // this.notifyToRebuild.call(this.stepPosition, this.stepValue);
 };
 
 export default setValuesFromInputs;

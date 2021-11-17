@@ -11,8 +11,6 @@ function createScaleLinesBox(
     columnOrRow,
   }:CreateScaleLinesBoxArgs,
 ):void {
-  console.log(left, top);
-  
   $id.append(
     `<div 
           data-testid="test-slider__scale-lines"

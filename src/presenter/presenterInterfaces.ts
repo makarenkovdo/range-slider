@@ -16,15 +16,6 @@ type PresenterBuildParams = {
   isTestMode?: boolean;
 };
 
-// type CreateRangeSliderArgsType = {
-//   isRange: boolean;
-//   shouldAddTip: boolean;
-//   runnerSize: number[];
-//   minValue: number;
-//   maxValue: number;
-//   runnersInstantPosition?: number[];
-// };
-
 type DataForRunnerUpdatingArgsType = {
   runnersPosition: number[];
   isVertical: boolean;
@@ -48,7 +39,6 @@ type Orientation = 'vertical' | 'horizontal';
 
 export {
   PresenterBuildParams,
-  // CreateRangeSliderArgsType,
   DataForRunnerUpdatingArgsType,
   CheckValuesArgs,
   Orientation,

@@ -16,8 +16,7 @@ const defineBarKind = ({
   updateSingleHorizontalBarPosition,
   updateRangeBarPosition,
 }: DefineBarKindArgsType): void => {
-  console.log(fieldThickness, 'fieldThickness');
-  
+
   if (isRange && isVertical) {
     updateRangeBarPosition(
       NumbersEnum.one,
@@ -54,7 +53,6 @@ const defineBarKind = ({
   return this;
 };
 
-// prettier-ignore
 const calcLengthOfRangeBar = (runnersPosition: number[]): number => Math.abs(runnersPosition[1]
   - runnersPosition[0]);
 
@@ -92,14 +90,6 @@ const updateRangeBarPosition = (
     ];
     const barBeginningPosition = Math.abs(100 * index - runnersPosition[index]);
 
-    //  helpVariable for rotation left/top with width/height value
-
-    // const positionAndLengthSwitcher = [Math.abs(100 * index - runnersPosition[index]), barLength];
-    // positioningSwitcher[index].forEach((v, i) => {
-    //   $bar.css(`${v}`, `${positionAndLengthSwitcher[i]}%`);
-    // });
-    // const thicknessPositioningIndex = 1 - index;
-    // $bar.css(`${positioningSwitcher[thicknessPositioningIndex][0]}`, `${fieldThickness}px`);
     $bar.css(`${positioningSwitcher[index][0]}`, `${barBeginningPosition}%`);
     $bar.css(`${positioningSwitcher[index][1]}`, `${barLength}%`);
     const thicknessPositioningIndex = 1 - index;

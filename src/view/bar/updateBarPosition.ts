@@ -9,16 +9,16 @@ import {
 } from './updateBarPosition/updateBarPositionUtility';
 
 const updateBarPosition = function updateBarPositionToDOM(this: Bar): void {
-  const { parent } = this;
+  const { isRange, isVertical, runner } = this.parent;
+  const {$bar, fieldThickness} = this
   
   $(document).ready(() => {
     defineBarKind({
-    // todo destruction
-      isRange: parent.isRange,
-      isVertical: parent.isVertical,
-      $bar: this.$bar,
-      runnersPosition: parent.runner.positions,
-      fieldThickness: this.fieldThickness,
+      isRange: isRange,
+      isVertical: isVertical,
+      $bar: $bar,
+      runnersPosition: runner.positions,
+      fieldThickness: fieldThickness,
       calcLengthOfRangeBar,
       updateSingleVerticalBarPosition,
       updateSingleHorizontalBarPosition,

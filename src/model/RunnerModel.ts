@@ -5,7 +5,6 @@ import initializeDefaultValues from './runnerModules/initializeDefaultValues';
 import setStep from './runnerModules/setStep';
 import { CalculateStepPositionFromInputReturned, UpdateRunnerValuesArgs } from './runnerModules/runnerInterfaces';
 import { PresenterBuildParams } from '../presenter/presenterInterfaces';
-// import { PanelInputsData } from '../view/viewInterfaces';
 import notifyToUpdate from './runnerModules/notifyToUpdate';
 import notifyToRebuild from './runnerModules/notifyToRebuild';
 import updateRunnerValues from './runnerModules/updateRunnerValues';

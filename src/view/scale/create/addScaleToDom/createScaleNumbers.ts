@@ -20,8 +20,6 @@ const createScaleNumbers = (
 ):void => {
   const positioning = orientation === 'vertical' ? 'top' : 'left';
 
-  console.log('FINAL stepSignAfterComma', stepSignAfterComma);
-
   for (let i = 1; i < lineQuantity + 1; i += 1) {
     const leftOrTopPosition = ((step / (minMax[1] - minMax[0])) * stepMultiplier * 100) * (i);
     const viewNumber = (

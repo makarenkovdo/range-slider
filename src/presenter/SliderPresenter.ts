@@ -81,7 +81,6 @@ class SliderPresenter {
     return this;
   }
 
-  //  prettier-ignore
   private createRangeSlider({
     isRange, shouldAddTip, runnerSize, minValue, maxValue, runnersInstantPosition, step,
   }:PresenterBuildParams): this {
@@ -178,21 +177,15 @@ class SliderPresenter {
     return this;
   }
 
-  // public onInputChange():this {
-  //   this.view.panel.handleInputsChange();
-  //   return this;
-  // }
-
   private rebuild(params:PresenterBuildParams):void {
     this.field.isRange = false;
     this.view.isRange = false;
-    this.removeListeners(params);// todo: first 3 lines to FACADE = 'REMOVE OLD'
-    this.runners = [];// todo: first 3 lines to FACADE = 'REMOVE OLD'
-    this.view.panel.clearHTMLElement(this.view.id); // todo: first 3 lines to FACADE = 'REMOVE OLD'
+    this.removeListeners(params);
+    this.runners = [];
+    this.view.panel.clearHTMLElement(this.view.id);
     this.runnerCounter = 0;
     this.build(params);
     this.addListeners(params, 'rebuild');
-    // this.view.panel.initializePanel(params);
   }
 
   public recieveModelLogic(activeRunner: RunnerModel): void {
@@ -213,8 +206,7 @@ class SliderPresenter {
     this.rebuild(params);
   }
 
-  // prettier-ignore
-  public recieveDragData(
+ public recieveDragData(
     { fieldSize }: SliderView,
     cursorXY: number[],
     i: number,
@@ -237,7 +229,6 @@ class SliderPresenter {
     this.rebuild(panelInputsData);
   }
 
-  // prettier-ignore
   public recieveClickData(
     view: SliderView,
     cursorXY: number[],
@@ -264,7 +255,6 @@ class SliderPresenter {
 
   private setStep({ step, minValue, maxValue }:PresenterBuildParams): this {
     this.runners.forEach((v) => v.setStep(step, this.field.minMax));
-    // if (step < 1) this.runners.forEach((v) => v.defineSignAfterComma([minValue, maxValue]));
     this.view.setStep(step, this.runners[0].stepSignAfterComma);
 
     return this;

@@ -67,16 +67,6 @@ export default class Panel {
 
   constructor(view: SliderView) {
     this.parent = view;
-    // this.orientation = view.orientation;
-    // this.minMax = view.minMax;
-    // this.isRange = view.isRange;
-    // this.fieldThickness = view.fieldThickness;
-    // this.hasBar = view.hasBar;
-    // this.hasScale = view.hasScale;
-    // this.hasTip = view.hasTip;
-    // this.runnersPosition = view.runner.positions;
-    // this.runnerSize = view.runner.size;
-    // this.step = view.runner.step;
     this.activatePanel = activatePanel.bind(this) as () => void;
     this.clearHTMLElement = clearHTMLElement.bind(this) as () => void;
     this.initializePanel = initializePanel.bind(this) as () => void;

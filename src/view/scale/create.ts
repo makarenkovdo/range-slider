@@ -23,7 +23,6 @@ const create = function createScaleAndAddToDom(this: Scale): void {
         runner.stepSignAfterComma,
       ),
     );
-    // setThis.call(this, i);
   });
 };
 

@@ -98,27 +98,12 @@ type CreateScaleNumbersArgs = {
   orientation: string;
 };
 
-// type PanelSelectors = {
-//   minMax: number;
-//   $maxValueInput: JQuery<HTMLInputElement>;
-//   $runnerValueInput0: JQuery<HTMLInputElement>;
-//   $runnerValueInput1: JQuery<HTMLInputElement>;
-//   $runnerSizeInput: JQuery<HTMLInputElement>;
-//   $fieldThicknessInput: JQuery<HTMLInputElement>;
-//   $rangeCheckbox: JQuery<HTMLInputElement>;
-//   $orientationCheckbox: JQuery<HTMLInputElement>;
-//   $scaleCheckbox: JQuery<HTMLInputElement>;
-//   $barCheckbox: JQuery<HTMLInputElement>;
-//   $tipCheckbox: JQuery<HTMLInputElement>;
-// };
-
 type HandleInputsEventData = { sliderView: SliderView; panelSelectors: PanelSelectors };
 
 type PanelInputsData = {
   minMax: number[];
   runnersInstantPosition: number[];
   runnerSize:number[];
-  // fieldThickness:number;
   isRange:boolean;
   hasBar:boolean;
   hasTip:boolean;

@@ -1,7 +1,6 @@
 import SliderView from '../SliderView';
 import Bar from './Bar';
 
-// how to test? this.$bar is a the result of div-appending and ALL THIS MODULE
 const createBar = function addBarToDomAndSetThisBar(this: Bar, fieldThickness: number): void {
   const { parent } = this;
   const addBarToDom = () => {

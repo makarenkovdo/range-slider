@@ -148,7 +148,7 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
       this.fieldThickness = parseInt(($fieldThicknessInput.value), 10);
       break;
     }
-    default: // do nothing;
+    default: break;
   }
   this.notifyInputChange.call(this, this.runnersPosition);
 };

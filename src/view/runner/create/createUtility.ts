@@ -10,13 +10,11 @@ const prepareRunnerArgs = (
   stepPosition: number,
 ): PreparedDataType => {
   let positioning = ['left', 'top'];
-  // const minMax = 0;
   let switcher = [0, 1];
   const instance = i;
   const mainPositionCorrector = 5 - runnerSize[0] / 2;
   if (isVertical) {
     positioning = ['top', 'left'];
-    // minMax = fieldSize[1];
     switcher = [1, 0];
   }
   const thicknessCorrector = runnerSize[switcher[1]] / 2 + 1;

@@ -1,6 +1,4 @@
-// import assignIfHasOwn from '../../utility/assignIfOwnHas';
 import { DragEventDataType } from '../../viewInterfaces';
-// import notify from './notify';
 
 const prepareMovingCoordinates = (
   event: JQuery.DragEvent,

@@ -5,8 +5,6 @@ const initStartEnd = function createFieldStartEndAndInitMinMax(
   minValue: number,
   maxValue: number,
 ): void {
-  // this.$field.attr('data-start', minValue);
-  // this.$field.attr('data-end', maxValue);
   this.minMax = [minValue, maxValue];
 };
 

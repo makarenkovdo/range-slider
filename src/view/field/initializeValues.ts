@@ -1,13 +1,11 @@
 import SliderView from '../SliderView';
 
-//  prettier-ignore
 const initializeValues = function initializeDefaultViewValues(
   this: SliderView,
   runnerSize: number[],
   fieldThickness: number,
   orientation: 'vertical' | 'horizontal',
 ): void {
-  // this.runnersPosition = runnersInstantPosition;
   this.runner.size = runnerSize;
   this.orientation = orientation;
   this.isVertical = orientation === 'vertical';

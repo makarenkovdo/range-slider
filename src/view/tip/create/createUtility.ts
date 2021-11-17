@@ -15,21 +15,18 @@ const prepareTipNumberArgs = (
 
 ): PreparedDataType => {
   let positioning = ['left'];
-  // let viewPosition = [100 * i];
   let instance = i;
 
   if (isVertical) {
     instance = i;
     positioning = ['top'];
-    // viewPosition = [100 * i];
   }
 
   const position = isVertical
     ? [fieldSize[1] - (stepPosition * (fieldSize[1] / 100)) - 10]
     : [((stepPosition * (fieldSize[0] / 100)) - 20)];
-  //  set min = 0%, max = 100% for left/top positions
   return { instance, positioning, position } as PreparedDataType;
-};
+}
 
 const addTipNumberToDOM = (
   preparedData: PreparedDataType,

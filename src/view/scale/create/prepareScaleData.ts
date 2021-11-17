@@ -13,7 +13,6 @@ const prepareScaleData = (
   }
 
   const onePxInPercent = 100 / fieldSize[i];
-  console.log(stepSignAfterComma, 'stepSignAfterComma');
 
   let scaleSignAfterComma = stepSignAfterComma;
   let shouldAddExtraLine = false;

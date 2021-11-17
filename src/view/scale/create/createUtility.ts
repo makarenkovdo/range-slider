@@ -79,6 +79,7 @@ const addScaleToDom = (
     createScaleLinesBox(createScaleLinesBoxArgs);
     createScaleNumbersBox(createScaleNumbersBoxArgs);
     createScaleNumbersArgs.$scaleNumbers = $id.find('.js-slider__scale-numbers');
+    createScaleLinesArgs.$scaleLines = $id.find('.js-slider__scale-lines');
     createScaleNumbers(createScaleNumbersArgs);
     createScaleLines(createScaleLinesArgs);
   } else {
@@ -91,7 +92,7 @@ const addScaleToDom = (
     // eslint-disable-next-line prefer-destructuring
     createScaleNumbersBoxArgs.height = fieldSize[1];
     createScaleNumbersBoxArgs.top = fieldSize[1] + 20;
-    createScaleNumbersBoxArgs.left = Math.min((-fieldSize[0] / (2 * lineQuantity)), -17);
+    createScaleNumbersBoxArgs.left = 0;
     createScaleNumbersBoxArgs.columnOrRow = 'columns';
 
     createScaleNumbersBox(createScaleNumbersBoxArgs);

@@ -36,6 +36,8 @@ const createScaleLines = (
             </div>`,
         );
       } else if (!(i % 2)) {
+        console.log($scaleLines);
+        
         $scaleLines.append(
           `<div
               class="

@@ -6,9 +6,10 @@ import {
   CreateScaleNumbersBoxArgs,
   CreateScaleLinesArgs,
 } from '../../viewInterfaces';
-import {
-  createScaleLines, createScaleLinesBox, createScaleNumbers, createScaleNumbersBox,
-} from './addScaleToDOMUtility';
+import createScaleLines from './addScaleToDom/createScaleLines';
+import createScaleLinesBox from './addScaleToDom/createScaleLinesBox';
+import createScaleNumbers from './addScaleToDom/createScaleNumbers';
+import createScaleNumbersBox from './addScaleToDom/createScaleNumbersBox';
 
 const calcScaleSignAfterComma = (stepSignAfterComma:number, minMax:number[]): number => {
   const minMaxSignAfterComma:number[] = [];
@@ -41,7 +42,7 @@ const prepareScaleData = (
   }
 
   const onePxInPercent = 100 / fieldSize[i];
-console.log(stepSignAfterComma, 'stepSignAfterComma');
+  console.log(stepSignAfterComma, 'stepSignAfterComma');
 
   let scaleSignAfterComma = stepSignAfterComma;
   let shouldAddExtraLine = false;

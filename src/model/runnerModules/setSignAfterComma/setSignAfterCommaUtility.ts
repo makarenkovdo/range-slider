@@ -20,9 +20,6 @@ const calcSignAfterComma = ({ step }: RunnerModel, minMax: number[]): number => 
       .split('.')
       .pop().length);
   } else minMaxSignAfterComma.push(0);
-  console.log('minMaxSignAfterComma[0], minMaxSignAfterComma[1], minMaxSignAfterComma[2]', minMaxSignAfterComma[0], minMaxSignAfterComma[1], minMaxSignAfterComma[2]);
-  
-
   return Math.max(minMaxSignAfterComma[0], minMaxSignAfterComma[1], minMaxSignAfterComma[2]);
 };
 

@@ -14,7 +14,7 @@ const firstSlider = new SliderPresenter('first', {
   runnerSize: [12, 12],
   runnersInstantPosition: [9, 14],
   hasInputPanel: true,
-  orientation: 'horizontal',
+  orientation: 'vertical',
 });
 
 const secondSlider = new SliderPresenter('second', {
@@ -27,7 +27,7 @@ const secondSlider = new SliderPresenter('second', {
   runnerSize: [12, 12],
   runnersInstantPosition: [0, 5],
   hasInputPanel: true,
-  orientation: 'horizontal',
+  orientation: 'vertical',
 });
 
 const thirdSlider = new SliderPresenter('third', {
@@ -41,7 +41,7 @@ const thirdSlider = new SliderPresenter('third', {
   runnerSize: [12, 12],
   runnersInstantPosition: [0, 8],
   hasInputPanel: true,
-  orientation: 'horizontal',
+  orientation: 'vertical',
 });
 
 const fourthSlider = new SliderPresenter('fourth', {
@@ -55,7 +55,7 @@ const fourthSlider = new SliderPresenter('fourth', {
   runnerSize: [12, 12],
   runnersInstantPosition: [0, 8],
   hasInputPanel: true,
-  orientation: 'horizontal',
+  orientation: 'vertical',
 });
 
 // const secondRunner = new SliderPresenter('second', {

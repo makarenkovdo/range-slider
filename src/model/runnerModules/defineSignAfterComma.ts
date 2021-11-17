@@ -7,8 +7,6 @@ const defineSignAfterComma = function defineSignQuantityAfterComma(
   minMax: number[],
 ): number {
   setThisSign.call(this, calcSignAfterComma(this, minMax));
-  console.log('this.stepSignAfterComma',this.stepSignAfterComma);
-  
   return this.stepSignAfterComma;
 };
 

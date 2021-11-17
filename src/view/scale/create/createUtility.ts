@@ -64,6 +64,10 @@ const prepareScaleData = (
   if (minMax[0] > 0) {
     divisionNumber = Number(((minMax[1] - minMax[0]) / (lineQuantity - 1)).toFixed(3));
   }
+  console.log('lineQuantity, divisionNumber, stepMultiplier');
+  console.log(lineQuantity, divisionNumber, stepMultiplier);
+  
+  
   return {
     lineQuantity, divisionNumber, stepMultiplier, scaleSignAfterComma, shouldAddExtraLine,
   };

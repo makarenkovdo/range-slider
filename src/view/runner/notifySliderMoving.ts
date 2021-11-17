@@ -1,6 +1,6 @@
 import Runner from './Runner';
 
-const notifySliderMoving = function notifySubscribers(
+const notifySliderMoving = function notifySubscribersAboutDrag(
   this: Runner,
   cursorXY: number[],
   instance: number,

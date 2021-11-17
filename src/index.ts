@@ -7,7 +7,7 @@ const firstSlider = new SliderPresenter('first', {
   shouldAddTip: true,
   shouldAddBar: true,
   step: 2,
-  maxValue: 17.2,
+  maxValue: 48,
   minValue: 9.1,
   isRange: true,
   shouldAddScale: true,
@@ -19,8 +19,8 @@ const firstSlider = new SliderPresenter('first', {
 
 const secondSlider = new SliderPresenter('second', {
   step: 2,
-  maxValue: -1,
-  minValue: 4,
+  maxValue: 45,
+  minValue: -1,
   shouldAddTip: true,
   shouldAddBar: true,
   shouldAddScale: true,
@@ -35,7 +35,7 @@ const thirdSlider = new SliderPresenter('third', {
   shouldAddBar: true,
   step: 4,
   maxValue: 16,
-  minValue: -16,
+  minValue: -70,
   isRange: false,
   shouldAddScale: true,
   runnerSize: [12, 12],

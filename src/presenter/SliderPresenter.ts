@@ -227,8 +227,6 @@ class SliderPresenter {
       runners: this.runners,
       activeRunner: this.runners[i],
     };
-    console.log(this, 'THIS PRESENTER, i', i);
-
     this.runners[i].updateRunnerValues(dataForRunnerUpdatingArgs);
   }
 

@@ -18,8 +18,6 @@ const updateRunnerValues = ({
   runners,
   activeRunner,
 }: UpdateRunnerValuesArgs): void => {
-  console.log('activeRunner', activeRunner);
-  
   setPositionInPercent(
     activeRunner,
     calculatePositionInPercent(isVertical, activeRunner, cursorXY, fieldSize),
@@ -28,8 +26,6 @@ const updateRunnerValues = ({
   setValue(activeRunner, calculateValue(minMax, activeRunner));
 
   if (isRange) {
-    console.log(isRange, 'ISRANGE TRUE');
-    
     setStepValueAndPosition(
       activeRunner,
       checkCollision(

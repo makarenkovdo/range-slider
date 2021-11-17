@@ -54,8 +54,6 @@ const setThis = function setThis$runner(
 ): void {
   this.$elements[i] = this.parent.$field.children(`.js-slider__runner_instance-${i}`);
   this.positions[i] = stepPosition;
-  console.log('CREATED RUNNER');
-  
 };
 
 export { setThis, addRunnerToDOM, prepareRunnerArgs };

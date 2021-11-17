@@ -10,13 +10,13 @@ import {
 import checkValues from './presenterModules/checkValues';
 
 class SliderPresenter {
-  public field: FieldModel;
+  private field: FieldModel;
 
-  public runners: RunnerModel[];
+  private runners: RunnerModel[];
 
-  public view: SliderView;
+  private view: SliderView;
 
-  public isBothOnDragAdded: boolean;
+  private isBothOnDragAdded: boolean;
 
   private id: string;
 
@@ -82,7 +82,7 @@ class SliderPresenter {
   }
 
   //  prettier-ignore
-  public createRangeSlider({
+  private createRangeSlider({
     isRange, shouldAddTip, runnerSize, minValue, maxValue, runnersInstantPosition, step,
   }:PresenterBuildParams): this {
     this.createRunner(
@@ -114,7 +114,7 @@ class SliderPresenter {
     return this;
   }
 
-  public createRunner(
+  private createRunner(
     runnerSize: number[],
     minValue: number,
     maxValue: number,
@@ -130,12 +130,12 @@ class SliderPresenter {
     return this;
   }
 
-  public createRunnerView(i: number, stepPosition: number, stepSignAfterComma: number): this {
+  private createRunnerView(i: number, stepPosition: number, stepSignAfterComma: number): this {
     this.view.runner.createRunner(i, stepPosition, stepSignAfterComma);
     return this;
   }
 
-  public createTipNumber(isOn: boolean, stepPosition: number, stepValue:number): this {
+  private createTipNumber(isOn: boolean, stepPosition: number, stepValue:number): this {
     if (isOn) {
       this.view.tip.create(
         this.runnerCounter,
@@ -147,7 +147,7 @@ class SliderPresenter {
     return this;
   }
 
-  public createBar({ shouldAddBar, fieldThickness }:PresenterBuildParams): this {
+  private createBar({ shouldAddBar, fieldThickness }:PresenterBuildParams): this {
     if (shouldAddBar) {
       this.view.hasBar = true;
       this.view.bar.createBar(fieldThickness);
@@ -157,7 +157,7 @@ class SliderPresenter {
     return this;
   }
 
-  public createScale({ shouldAddScale }:PresenterBuildParams): this {
+  private createScale({ shouldAddScale }:PresenterBuildParams): this {
     if (shouldAddScale) {
       this.view.hasScale = true;
       this.view.scale.create();
@@ -166,14 +166,14 @@ class SliderPresenter {
     return this;
   }
 
-  public onDrag(runnerCounter: number): this {
+  private onDrag(runnerCounter: number): this {
     $(document).ready(() => {
       this.view.runner.handleDrag(runnerCounter);
     });
     return this;
   }
 
-  public onDrop(): this {
+  private onDrop(): this {
     this.view.runner.handleDrop();
     return this;
   }
@@ -183,7 +183,7 @@ class SliderPresenter {
   //   return this;
   // }
 
-  public rebuild(params:PresenterBuildParams):void {
+  private rebuild(params:PresenterBuildParams):void {
     this.field.isRange = false;
     this.view.isRange = false;
     this.removeListeners(params);// todo: first 3 lines to FACADE = 'REMOVE OLD'
@@ -262,7 +262,7 @@ class SliderPresenter {
     return this;
   }
 
-  public setStep({ step, minValue, maxValue }:PresenterBuildParams): this {
+  private setStep({ step, minValue, maxValue }:PresenterBuildParams): this {
     this.runners.forEach((v) => v.setStep(step, this.field.minMax));
     // if (step < 1) this.runners.forEach((v) => v.defineSignAfterComma([minValue, maxValue]));
     this.view.setStep(step, this.runners[0].stepSignAfterComma);
@@ -274,7 +274,7 @@ class SliderPresenter {
     this.view.runner.updatePosition(stepPosition, instance);
   }
 
-  public updateTipNumber(stepValue: number, instance: number): this {
+  private updateTipNumber(stepValue: number, instance: number): this {
     this.view.tip.update({ stepValue, instance });
     return this;
   }

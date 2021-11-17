@@ -206,7 +206,7 @@ class SliderPresenter {
     this.rebuild(params);
   }
 
- public recieveDragData(
+  public recieveDragData(
     { fieldSize }: SliderView,
     cursorXY: number[],
     i: number,
@@ -253,7 +253,7 @@ class SliderPresenter {
     return this;
   }
 
-  private setStep({ step, minValue, maxValue }:PresenterBuildParams): this {
+  private setStep({ step }:PresenterBuildParams): this {
     this.runners.forEach((v) => v.setStep(step, this.field.minMax));
     this.view.setStep(step, this.runners[0].stepSignAfterComma);
 

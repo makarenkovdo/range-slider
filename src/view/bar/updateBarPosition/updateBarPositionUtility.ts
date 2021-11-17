@@ -16,7 +16,6 @@ const defineBarKind = ({
   updateSingleHorizontalBarPosition,
   updateRangeBarPosition,
 }: DefineBarKindArgsType): void => {
-
   if (isRange && isVertical) {
     updateRangeBarPosition(
       NumbersEnum.one,
@@ -61,8 +60,10 @@ const updateSingleVerticalBarPosition = (
   fieldThickness: number,
   $bar: JQuery<HTMLElement>,
 ): void => {
-  $bar.css('height', `${runnersPosition[0]}%`).css('top', `${100 - runnersPosition[0]}%`);
-  $bar.css('width', `${fieldThickness}px`);
+  $(document).ready(() => {
+    $bar.css('height', `${runnersPosition[0]}%`).css('top', `${100 - runnersPosition[0]}%`);
+    $bar.css('width', `${fieldThickness}px`);
+  });
 };
 
 const updateSingleHorizontalBarPosition = (
@@ -89,7 +90,6 @@ const updateRangeBarPosition = (
       ['top', 'height'],
     ];
     const barBeginningPosition = Math.abs(100 * index - runnersPosition[index]);
-
     $bar.css(`${positioningSwitcher[index][0]}`, `${barBeginningPosition}%`);
     $bar.css(`${positioningSwitcher[index][1]}`, `${barLength}%`);
     const thicknessPositioningIndex = 1 - index;

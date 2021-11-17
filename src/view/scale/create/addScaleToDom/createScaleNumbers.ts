@@ -4,16 +4,11 @@ const createScaleNumbers = (
   {
     $scaleNumbers,
     minMax,
-    segmentInPercent,
     lineQuantity,
     stepSignAfterComma,
-    switcher,
-    lastOrFirstIterration,
     isVertical,
     stepMultiplier,
     step,
-    scaleSignAfterComma,
-    shouldAddExtraLine,
     onePxInPercent,
     orientation,
   }:CreateScaleNumbersArgs,
@@ -42,7 +37,7 @@ const createScaleNumbers = (
   
             "
 
-          >${(minMax[1] - ( i * step * stepMultiplier)).toFixed(Math.min(2, stepSignAfterComma))}
+          >${(minMax[1] - (i * step * stepMultiplier)).toFixed(Math.min(2, stepSignAfterComma))}
           </div>`,
         );
       } else {

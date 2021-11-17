@@ -57,4 +57,3 @@ const fourthSlider = new SliderPresenter('fourth', {
   hasInputPanel: true,
   orientation: 'vertical',
 });
-

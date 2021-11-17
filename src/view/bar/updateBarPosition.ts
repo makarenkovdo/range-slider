@@ -1,4 +1,3 @@
-import SliderView from '../SliderView';
 import Bar from './Bar';
 import {
   defineBarKind,
@@ -10,15 +9,14 @@ import {
 
 const updateBarPosition = function updateBarPositionToDOM(this: Bar): void {
   const { isRange, isVertical, runner } = this.parent;
-  const {$bar, fieldThickness} = this
-  
   $(document).ready(() => {
+    const { $bar, fieldThickness } = this;
     defineBarKind({
-      isRange: isRange,
-      isVertical: isVertical,
-      $bar: $bar,
+      isRange,
+      isVertical,
+      $bar,
       runnersPosition: runner.positions,
-      fieldThickness: fieldThickness,
+      fieldThickness,
       calcLengthOfRangeBar,
       updateSingleVerticalBarPosition,
       updateSingleHorizontalBarPosition,

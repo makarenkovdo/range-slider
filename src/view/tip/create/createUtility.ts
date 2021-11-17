@@ -26,7 +26,7 @@ const prepareTipNumberArgs = (
     ? [fieldSize[1] - (stepPosition * (fieldSize[1] / 100)) - 10]
     : [((stepPosition * (fieldSize[0] / 100)) - 20)];
   return { instance, positioning, position } as PreparedDataType;
-}
+};
 
 const addTipNumberToDOM = (
   preparedData: PreparedDataType,

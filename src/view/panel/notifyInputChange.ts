@@ -3,9 +3,7 @@ import Panel from './Panel';
 
 const notifyInputChange = function prepareDataAndNotifyInputChange(
   this: Panel,
-  runnersInstantPosition: number[],
 ): void {
-  
   const panelInputsData:PresenterBuildParams = {
     orientation: this.orientation,
     minValue: this.minMax[0],

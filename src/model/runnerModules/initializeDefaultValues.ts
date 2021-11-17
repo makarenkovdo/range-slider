@@ -1,5 +1,4 @@
 import RunnerModel from '../RunnerModel';
-import { calculatePositionFromInput } from './setValuesFromInputs/setValuesFromInputsUtility';
 
 const initializeDefaultValues = function initializeDefaultPositionAndValue(
   this: RunnerModel,

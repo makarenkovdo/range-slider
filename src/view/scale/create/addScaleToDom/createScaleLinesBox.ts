@@ -5,10 +5,8 @@ function createScaleLinesBox(
     $id,
     orientation,
     fieldSize,
-    lineQuantity,
     top,
     left,
-    columnOrRow,
   }:CreateScaleLinesBoxArgs,
 ):void {
   $id.append(

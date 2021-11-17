@@ -9,7 +9,7 @@ import {
 const assignIfHasOwn = (obj: RunnerModel, key: AssignIfHasOwnKeys, value: number) => {
   const newObj: RunnerModel = obj;
   if (Object.prototype.hasOwnProperty.call(obj, key)) {
-    newObj[key] = value; 
+    newObj[key] = value;
   }
 };
 
@@ -45,7 +45,7 @@ const checkCollision = (
 ):CheckCollisionSubargs => {
   const isCollisionZero = () => (!isVertical && thisRunner.instance === 0
       && stepPosition - runner[1].stepPosition >= 0)
-        || (isVertical && thisRunner.instance === 0 
+        || (isVertical && thisRunner.instance === 0
             && runner[1].stepPosition - stepPosition <= 0);
 
   const isCollisionOne = () => (
@@ -58,12 +58,11 @@ const checkCollision = (
   if (isCollisionZero()) {
     const a = { stepPosition: runner[1].stepPosition, stepValue: runner[1].stepValue };
     return a;
-  } else if (isCollisionOne()) {
+  } if (isCollisionOne()) {
     const a = { stepPosition: runner[0].stepPosition, stepValue: runner[0].stepValue };
     return a;
-  } else {
-    return { stepPosition, stepValue };
   }
+  return { stepPosition, stepValue };
 };
 
 const setStepValueAndPosition = (
@@ -102,6 +101,7 @@ minMax: number[]):CheckCollisionSubargs => {
 
   if (!checkOnException() && (value === minMax[1] || stepValueMultiplier === divisionQuantity)) {
     stepPosition = 100;
+    // eslint-disable-next-line prefer-destructuring
     stepValue = minMax[1];
   }
   return { stepPosition, stepValue };

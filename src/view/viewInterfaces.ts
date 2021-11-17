@@ -44,8 +44,6 @@ type PrepareScaleDataArgs = {
   onePxInPercent: number;
 };
 
-
-
 type CreateScaleLinesBoxArgs = {
   $id:JQuery<HTMLElement>;
   orientation:Orientation;

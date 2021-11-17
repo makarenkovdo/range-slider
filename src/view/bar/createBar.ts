@@ -1,4 +1,3 @@
-import SliderView from '../SliderView';
 import Bar from './Bar';
 
 const createBar = function addBarToDomAndSetThisBar(this: Bar, fieldThickness: number): void {
@@ -13,13 +12,14 @@ const createBar = function addBarToDomAndSetThisBar(this: Bar, fieldThickness: n
   };
 
   const setThis$bar = () => {
-    this.$bar = parent.$field.children('.js-slider__bar');
+    $(document).ready(() => {
+      this.$bar = parent.$field.children('.js-slider__bar');
+    });
+
     this.fieldThickness = fieldThickness;
   };
   addBarToDom();
-  $(document).ready(() => {
-    setThis$bar();
-  });
+  setThis$bar();
 };
 
 export default createBar;

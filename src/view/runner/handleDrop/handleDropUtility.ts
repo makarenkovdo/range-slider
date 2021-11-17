@@ -6,7 +6,7 @@ type EventData = {
   thisView: SliderView;
 };
 function cancelDragging(event: JQuery.DragOverEvent): void {
-  if (event.target.tagName !== 'INPUT') {
+  if ((event.target as HTMLElement).tagName !== 'INPUT') {
     event.preventDefault();
     event.stopPropagation();
     const eventData = event.data as EventData;

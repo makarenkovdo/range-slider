@@ -30,13 +30,10 @@ type CalculateStepPositionFromInputReturned = {
   stepValue: number;
 };
 
-type NotifyMessageType = 'modelLogic' | 'rebuildData';
-
 export {
   UpdateRunnerValuesArgs,
   AssignIfHasOwnKeys,
   CalculateStepValueAndPositionArgs,
   CheckCollisionSubargs,
   CalculateStepPositionFromInputReturned,
-  NotifyMessageType,
 };

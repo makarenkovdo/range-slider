@@ -1,4 +1,3 @@
-import notifySubscriber from './handleDrag/handleDragUtility';
 import Runner from './Runner';
 
 const removeDrag = function removeDragBeforeRebuild(

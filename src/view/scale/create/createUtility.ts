@@ -108,4 +108,4 @@ const addScaleToDom = (
   }
 };
 
-export default addScaleToDom ;
+export default addScaleToDom;

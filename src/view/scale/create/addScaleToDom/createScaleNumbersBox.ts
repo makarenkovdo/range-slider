@@ -1,14 +1,10 @@
-import { CreateScaleNumbersBoxArgs } from "../../../viewInterfaces";
+import { CreateScaleNumbersBoxArgs } from '../../../viewInterfaces';
 
 function createScaleNumbersBox(
   {
     $id,
-    lineQuantity,
-    width,
-    height,
     top,
     left,
-    columnOrRow,
     fieldSize,
   }:CreateScaleNumbersBoxArgs,
 ):void {

@@ -9,6 +9,7 @@ const prepareMovingCoordinates = (event: JQuery.ClickEvent, thisView: SliderView
     cursorXY[0] = 0;
   }
   if (cursorXY[0] > thisView.fieldSize[0]) {
+    // eslint-disable-next-line prefer-destructuring
     cursorXY[0] = thisView.fieldSize[0];
   }
   return cursorXY;

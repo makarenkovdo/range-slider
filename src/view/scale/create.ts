@@ -1,4 +1,5 @@
-import { prepareScaleData, addScaleToDom } from './create/createUtility';
+import addScaleToDom from './create/createUtility';
+import prepareScaleData from './create/prepareScaleData';
 import Scale from './Scale';
 
 const create = function createScaleAndAddToDom(this: Scale): void {

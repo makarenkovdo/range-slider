@@ -1,4 +1,4 @@
-import { CreateScaleLinesArgs } from "../../../viewInterfaces";
+import { CreateScaleLinesArgs } from '../../../viewInterfaces';
 
 const createScaleLines = (
   {
@@ -16,8 +16,11 @@ const createScaleLines = (
 ):void => {
   for (let i = 0; i < 2 * lineQuantity + 1; i += 1) {
     const leftPosition = ((step / (minMax[1] - minMax[0])) * stepMultiplier * 100) * (i / 2);
+    console.log(leftPosition);
+    const positioning = orientation === 'vertical' ? 'top' : 'left';
+
     if (leftPosition < 98) {
-      if (i % 2 && i !== 2 * Math.floor(lineQuantity) + 1) {
+      if (i % 2 && i !== 2 * Math.floor(lineQuantity) + 1) {        
         $scaleLines.append(
           `<div 
               class="
@@ -28,7 +31,7 @@ const createScaleLines = (
               style="
               position: absolute;
               ${smallLine};
-              left: ${leftPosition}%;"
+              ${positioning}: ${leftPosition}%;"
             >
             </div>`,
         );

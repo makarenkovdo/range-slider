@@ -20,6 +20,7 @@ function createScaleNumbersBox(
           style="height:${fieldSize[1]}px;
             width:${fieldSize[0]}px;
             top:${top}px;
+            left:${left}px;
           "
         >
         </div>`,

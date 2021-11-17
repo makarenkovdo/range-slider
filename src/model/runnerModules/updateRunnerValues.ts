@@ -28,6 +28,8 @@ const updateRunnerValues = ({
   setValue(activeRunner, calculateValue(minMax, activeRunner));
 
   if (isRange) {
+    console.log(isRange, 'ISRANGE TRUE');
+    
     setStepValueAndPosition(
       activeRunner,
       checkCollision(

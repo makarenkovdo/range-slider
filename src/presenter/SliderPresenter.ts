@@ -29,7 +29,7 @@ class SliderPresenter {
     this.field = new FieldModel(id, this);
     this.view = new SliderView(id, this);
     this.build(params);
-    // this.addListeners(params, 'build');
+    this.addListeners(params, 'build');
   }
 
   private build(params: PresenterBuildParams): void {
@@ -61,7 +61,7 @@ class SliderPresenter {
         break;
       }
       case 'rebuild': {
-        this.onClick().onDrag(0).onDrop();
+        this.onDrag(0);
         if (isRange) {
           this.onDrag(1);
         }
@@ -76,7 +76,7 @@ class SliderPresenter {
 
   private removeListeners({ isRange }:PresenterBuildParams): this {
     this.view.runner.removeDrag(0);
-    this.view.runner.removeDrag(1);
+    if (isRange) this.view.runner.removeDrag(1);
 
     return this;
   }
@@ -96,8 +96,6 @@ class SliderPresenter {
     const stepSignAfterComma = this.runners[0].defineSignAfterComma([minValue, maxValue]);
     this.createRunnerView(this.runnerCounter, stepPosition, stepSignAfterComma);
     this.createTipNumber(shouldAddTip, stepPosition, stepValue);
-    this.onDrag(0);
-    this.onDrop();
 
     if (isRange) {
       this.runnerCounter += 1;
@@ -111,7 +109,6 @@ class SliderPresenter {
       ({ stepPosition, stepValue } = this.runners[this.runnerCounter]);
       this.createRunnerView(this.runnerCounter, stepPosition, this.runners[0].stepSignAfterComma);
       this.createTipNumber(shouldAddTip, stepPosition, stepValue);
-      this.onDrag(this.runnerCounter);
     } else this.view.isRange = false;
     return this;
   }
@@ -186,12 +183,14 @@ class SliderPresenter {
   // }
 
   public rebuild(params:PresenterBuildParams):void {
-    this.removeListeners(params);
-    this.runners = [];
-    this.view.panel.clearHTMLElement(this.view.id);
+    this.field.isRange = false;
+    this.view.isRange = false;
+    this.removeListeners(params);// todo: first 3 lines to FACADE = 'REMOVE OLD'
+    this.runners = [];// todo: first 3 lines to FACADE = 'REMOVE OLD'
+    this.view.panel.clearHTMLElement(this.view.id); // todo: first 3 lines to FACADE = 'REMOVE OLD'
     this.runnerCounter = 0;
     this.build(params);
-    // this.addListeners(params, 'rebuild');
+    this.addListeners(params, 'rebuild');
     // this.view.panel.initializePanel(params);
   }
 

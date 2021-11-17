@@ -3,6 +3,7 @@ import createRunner from './create';
 import handleDrag from './handleDrag';
 import handleDrop from './handleDrop';
 import notifySliderMoving from './notifySliderMoving';
+import removeDrag from './removeDrag';
 import updatePosition from './updatePosition';
 import updateZIndex from './updateZIndex';
 
@@ -28,6 +29,7 @@ export default class Runner {
   public createRunner: (this:Runner,
     i: number,
     stepPosition:number,
+    stepSignAfterComma: number
   ) => void;
 
   public handleDrag: (this: Runner, runnerInstance: number) => void;
@@ -35,6 +37,8 @@ export default class Runner {
   public handleDrop: (this: Runner) => void;
 
   public notifySliderMoving: (this: Runner, cursorXY: number[], instance: number) => void;
+
+  public removeDrag: (this: Runner, runnerInstance: number) => void;
 
   public updatePosition: (this: Runner, stepPosition: number, instance: number) => void;
 
@@ -57,6 +61,7 @@ export default class Runner {
     this.handleDrag = handleDrag.bind(this) as () => void;
     this.handleDrop = handleDrop.bind(this) as () => void;
     this.notifySliderMoving = notifySliderMoving.bind(this) as () => void;
+    this.removeDrag = removeDrag.bind(this) as () => void;
     this.updatePosition = updatePosition.bind(this) as () => void;
     this.updateZIndex = updateZIndex.bind(this) as () => void;
   }

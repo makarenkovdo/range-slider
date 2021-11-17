@@ -39,6 +39,7 @@ const prepareScaleData = (
   if (isVertical) {
     i += 1;
   }
+
   let scaleSignAfterComma = calcScaleSignAfterComma(stepSignAfterComma, minMax);
   let shouldAddExtraLine = false;
 
@@ -56,9 +57,6 @@ const prepareScaleData = (
     const scaleStepBetweenTwoLastLines = fieldSize[i]
     - (((step * stepMultiplier * (lineQuantity - 1))
     / (minMax[1] - minMax[0])) * fieldSize[i]);
-    console.log(scaleStepBetweenTwoLastLines, 'scaleStepBetweenTwoLastLines');
-    console.log(step * stepMultiplier * (lineQuantity - 1), 'step * stepMultiplier * (lineQuantity-1)');
-    console.log((minMax[1] - minMax[0]) * fieldSize[i], '(minMax[1] - minMax[0]) * fieldSize[i])');
 
     if (scaleStepBetweenTwoLastLines < 50) lineQuantity -= 1;
   }

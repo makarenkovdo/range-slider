@@ -5,7 +5,10 @@ const create = function addRunnerToDOMAndSetThis$runner(
   this: Runner,
   i: number,
   stepPosition:number,
+  stepSignAfterComma:number,
 ): void {
+  this.stepSignAfterComma = stepSignAfterComma;
+
   $().ready(() => {
     addRunnerToDOM(
       prepareRunnerArgs(

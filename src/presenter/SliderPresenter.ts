@@ -16,6 +16,8 @@ class SliderPresenter {
 
   public view: SliderView;
 
+  public isBothOnDragAdded: boolean;
+
   private id: string;
 
   private runnerCounter: number;
@@ -23,10 +25,11 @@ class SliderPresenter {
   constructor(id: string, params?: PresenterBuildParams) {
     this.runnerCounter = 0;
     this.runners = [];
+    this.isBothOnDragAdded = false;
     this.field = new FieldModel(id, this);
     this.view = new SliderView(id, this);
     this.build(params);
-    this.addListeners(params);
+    // this.addListeners(params, 'build');
   }
 
   private build(params: PresenterBuildParams): void {
@@ -45,13 +48,36 @@ class SliderPresenter {
   private activatePanel(params: PresenterBuildParams): this {
     this.view.panel.activatePanel.call(this.view, params);
     this.view.hasPanel = true;
-    // }
     return this;
   }
 
-  private addListeners({ isRange }:PresenterBuildParams): this {
-    this.onClick().onDrag(0).onDrop();
-    if (isRange) this.onDrag(1);
+  private addListeners({ isRange }:PresenterBuildParams, actionType:string): this {
+    switch (actionType) {
+      case 'build': {
+        this.onClick().onDrag(0).onDrop();
+        if (isRange) {
+          this.onDrag(1);
+        }
+        break;
+      }
+      case 'rebuild': {
+        this.onClick().onDrag(0).onDrop();
+        if (isRange) {
+          this.onDrag(1);
+        }
+        break;
+      }
+
+      default: break;
+    }
+
+    return this;
+  }
+
+  private removeListeners({ isRange }:PresenterBuildParams): this {
+    this.view.runner.removeDrag(0);
+    this.view.runner.removeDrag(1);
+
     return this;
   }
 
@@ -67,9 +93,11 @@ class SliderPresenter {
       step,
     );
     let { stepPosition, stepValue } = this.runners[this.runnerCounter];
-
-    this.createRunnerView(this.runnerCounter, stepPosition);
+    const stepSignAfterComma = this.runners[0].defineSignAfterComma([minValue, maxValue]);
+    this.createRunnerView(this.runnerCounter, stepPosition, stepSignAfterComma);
     this.createTipNumber(shouldAddTip, stepPosition, stepValue);
+    this.onDrag(0);
+    this.onDrop();
 
     if (isRange) {
       this.runnerCounter += 1;
@@ -81,10 +109,9 @@ class SliderPresenter {
         runnersInstantPosition[this.runnerCounter],
         step);
       ({ stepPosition, stepValue } = this.runners[this.runnerCounter]);
-      this.createRunnerView(this.runnerCounter, stepPosition);
+      this.createRunnerView(this.runnerCounter, stepPosition, this.runners[0].stepSignAfterComma);
       this.createTipNumber(shouldAddTip, stepPosition, stepValue);
-      // this.onDrag(this.runnerCounter);
-      // this.onDrop();
+      this.onDrag(this.runnerCounter);
     } else this.view.isRange = false;
     return this;
   }
@@ -105,8 +132,8 @@ class SliderPresenter {
     return this;
   }
 
-  public createRunnerView(i: number, stepPosition: number): this {
-    this.view.runner.createRunner(i, stepPosition);
+  public createRunnerView(i: number, stepPosition: number, stepSignAfterComma: number): this {
+    this.view.runner.createRunner(i, stepPosition, stepSignAfterComma);
     return this;
   }
 
@@ -159,9 +186,12 @@ class SliderPresenter {
   // }
 
   public rebuild(params:PresenterBuildParams):void {
+    this.removeListeners(params);
+    this.runners = [];
     this.view.panel.clearHTMLElement(this.view.id);
     this.runnerCounter = 0;
     this.build(params);
+    // this.addListeners(params, 'rebuild');
     // this.view.panel.initializePanel(params);
   }
 
@@ -198,6 +228,8 @@ class SliderPresenter {
       runners: this.runners,
       activeRunner: this.runners[i],
     };
+    console.log(this, 'THIS PRESENTER, i', i);
+
     this.runners[i].updateRunnerValues(dataForRunnerUpdatingArgs);
   }
 
@@ -234,7 +266,7 @@ class SliderPresenter {
 
   public setStep({ step, minValue, maxValue }:PresenterBuildParams): this {
     this.runners.forEach((v) => v.setStep(step, this.field.minMax));
-    if (step < 1) this.runners.forEach((v) => v.defineSignAfterComma([minValue, maxValue]));
+    // if (step < 1) this.runners.forEach((v) => v.defineSignAfterComma([minValue, maxValue]));
     this.view.setStep(step, this.runners[0].stepSignAfterComma);
 
     return this;

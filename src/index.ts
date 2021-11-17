@@ -36,7 +36,7 @@ const thirdSlider = new SliderPresenter('third', {
   step: 4,
   maxValue: 16,
   minValue: -16,
-  isRange: true,
+  isRange: false,
   shouldAddScale: true,
   runnerSize: [12, 12],
   runnersInstantPosition: [0, 8],

@@ -47,9 +47,15 @@ const addRunnerToDOM = (
   );
 };
 
-const setThis = function setThis$runner(this: Runner, i: number, stepPosition: number): void {
+const setThis = function setThis$runner(
+  this: Runner,
+  i: number,
+  stepPosition: number,
+): void {
   this.$elements[i] = this.parent.$field.children(`.js-slider__runner_instance-${i}`);
   this.positions[i] = stepPosition;
+  console.log('CREATED RUNNER');
+  
 };
 
 export { setThis, addRunnerToDOM, prepareRunnerArgs };

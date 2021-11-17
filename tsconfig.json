@@ -10,6 +10,6 @@
     "allowJs": true,
     "moduleResolution": "node"
   },
-  "include": ".eslintrc.js",
+  // "include": [".eslintrc.js"],
   "exclude": ["test"]
 }

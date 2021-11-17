@@ -18,6 +18,8 @@ const updateRunnerValues = ({
   runners,
   activeRunner,
 }: UpdateRunnerValuesArgs): void => {
+  console.log('activeRunner', activeRunner);
+  
   setPositionInPercent(
     activeRunner,
     calculatePositionInPercent(isVertical, activeRunner, cursorXY, fieldSize),

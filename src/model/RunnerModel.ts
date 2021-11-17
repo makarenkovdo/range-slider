@@ -31,7 +31,7 @@ class RunnerModel {
 
   public subscriber: SliderPresenter;
 
-  public defineSignAfterComma: (this: RunnerModel, minMax: number[]) => void;
+  public defineSignAfterComma: (this: RunnerModel, minMax: number[]) => number;
 
   public notifyToUpdate: (
     this: RunnerModel
@@ -66,7 +66,7 @@ class RunnerModel {
     this.stepValue = 0;
     this.subscriber = subscriber;
 
-    this.defineSignAfterComma = defineSignAfterComma.bind(this) as () => void;
+    this.defineSignAfterComma = defineSignAfterComma.bind(this) as () => number;
     this.notifyToUpdate = notifyToUpdate.bind(this) as () => void;
     this.notifyToRebuild = notifyToRebuild.bind(this) as () => void;
     this.setStep = setStep.bind(this) as () => void;

@@ -135,45 +135,46 @@ const createScaleNumbers = (
     onePxInPercent,
   }:CreateScaleNumbersArgs,
 ):void => {
-  for (let i = 0; i < lineQuantity+1; i += 1) {
+  for (let i = 0; i < lineQuantity + 1; i += 1) {
     const leftPosition = ((step / (minMax[1] - minMax[0])) * stepMultiplier * 100) * (i);
     const viewNumber = (minMax[0] + i * step * stepMultiplier).toFixed(Math.min(2, scaleSignAfterComma));
     const viewNumberLength = viewNumber.length;
-    const viewNumberAligning = viewNumber.length * 2 *onePxInPercent;
+    const viewNumberAligning = viewNumber.length * 2 * onePxInPercent;
     console.log('viewNumber, viewNumberLength, viewNumberAligning, onePxInPercent', viewNumber, viewNumberLength, viewNumberAligning, onePxInPercent);
-    
+console.log('100 - leftPosition / onePxInPercent', 100 - leftPosition / onePxInPercent);
 
-  if (isVertical) {
-      $scaleNumbers.append(
-        `<div
+    if ((100 - leftPosition) / onePxInPercent > 30) {
+      if (isVertical) {
+        $scaleNumbers.append(
+          `<div
           class="
             slider__scale-number
             js-slider__scale-number
           "
         >${(minMax[1] * switcher - (minMax[0] * (1 - switcher) + i * segmentInPercent)).toFixed(Math.min(2, scaleSignAfterComma))}
         </div>`,
-      );
-    } else {
-      console.log(viewNumberLength, 'viewNumberLength');
-      
-      $scaleNumbers.append(
-        `<div
+        );
+      } else {
+        console.log(viewNumberLength, 'viewNumberLength');
+
+        $scaleNumbers.append(
+          `<div
           class="
             slider__scale-number
             js-slider__scale-number
           "
           style="
-          left: ${leftPosition-viewNumberAligning}%;
+          left: ${leftPosition - viewNumberAligning}%;
           position: absolute;
 
           "
           
         >${(minMax[0] + i * step * stepMultiplier).toFixed(Math.min(2, scaleSignAfterComma))}
         </div>`,
-      );
-      if (shouldAddExtraLine) {
-        $scaleNumbers.append(
-          `<div
+        );
+        if (shouldAddExtraLine) {
+          $scaleNumbers.append(
+            `<div
             class="
               slider__scale-number
               js-slider__scale-number
@@ -186,7 +187,8 @@ const createScaleNumbers = (
             
           >${(minMax[1])}
           </div>`,
-        );
+          );
+        }
       }
     }
   }

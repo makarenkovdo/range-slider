@@ -1,4 +1,4 @@
-import { PrepareScaleDataArgs } from "../../viewInterfaces";
+import { PrepareScaleDataArgs } from '../../viewInterfaces';
 
 const prepareScaleData = (
   fieldSize: number[],
@@ -21,7 +21,7 @@ const prepareScaleData = (
   const stepLimitsWithoutTrunc:number = (minMax[1] - minMax[0]) / step;
   let stepLimits:number = Math.floor(stepLimitsWithoutTrunc);
   const pixelLimits:number = Math.floor(fieldSize[i] / 40);
-  for (let index = 0; stepLimits > pixelLimits; index++) {
+  for (let index = 0; stepLimits > pixelLimits; index += 1) {
     stepLimits /= 2;
   }
 

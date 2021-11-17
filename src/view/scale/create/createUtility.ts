@@ -11,26 +11,6 @@ import createScaleLinesBox from './addScaleToDom/createScaleLinesBox';
 import createScaleNumbers from './addScaleToDom/createScaleNumbers';
 import createScaleNumbersBox from './addScaleToDom/createScaleNumbersBox';
 
-const calcScaleSignAfterComma = (stepSignAfterComma:number, minMax:number[]): number => {
-  const minMaxSignAfterComma:number[] = [];
-  if (minMax[0].toString().includes('.')) {
-    minMaxSignAfterComma.push(minMax[0]
-      .toString()
-      .split('.')
-      .pop().length);
-  } else minMaxSignAfterComma.push(0);
-  if (minMax[1].toString().includes('.')) {
-    minMaxSignAfterComma.push(minMax[1]
-      .toString()
-      .split('.')
-      .pop().length);
-  } else minMaxSignAfterComma.push(0);
-
-  return Math.max(stepSignAfterComma, minMaxSignAfterComma[0], minMaxSignAfterComma[1]);
-};
-
-
-
 const addScaleToDom = (
   isVertical: boolean,
   $id: JQuery<HTMLElement>,

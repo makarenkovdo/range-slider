@@ -107,7 +107,8 @@ class SliderPresenter {
         runnersInstantPosition[this.runnerCounter],
         step);
       ({ stepPosition, stepValue } = this.runners[this.runnerCounter]);
-      this.createRunnerView(this.runnerCounter, stepPosition, this.runners[0].stepSignAfterComma);
+      this.runners[this.runnerCounter].stepSignAfterComma = stepSignAfterComma;
+      this.createRunnerView(this.runnerCounter, stepPosition, stepSignAfterComma);
       this.createTipNumber(shouldAddTip, stepPosition, stepValue);
     } else this.view.isRange = false;
     return this;

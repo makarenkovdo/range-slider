@@ -56,11 +56,11 @@ describe('if build-function calls methods', () => {
     await waitFor(() => {
       expect(testedSlider['view'].id).toBeDefined();
     });
-
+    const clearHTMLElement = jest.fn();
     testedSlider['activatePanel'](createRangeSliderTestArgs);
-
-    expect(testedSlider['view'].panel.$maxValueInput).toBeDefined();
-    expect(testedSlider['view'].panel.minMax[0]).toBe(1);
+    testedSlider['view'].panel.clearHTMLElement = clearHTMLElement;
+    testedSlider['rebuild'](createRangeSliderTestArgs);
+    expect(clearHTMLElement).toHaveBeenCalled();
   });
   //   test('if function selectPanelNodes works', async() => {
   //     await waitFor(() => {

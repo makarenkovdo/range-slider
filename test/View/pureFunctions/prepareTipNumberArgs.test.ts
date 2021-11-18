@@ -1,6 +1,7 @@
 /**
  * @jest-environment jsdom
  */
+import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { prepareTipNumberArgs } from '../../../src/view/tip/create/createUtility';
 beforeEach(() => {
@@ -11,12 +12,12 @@ beforeEach(() => {
 
 describe('if function "prepareTipArgs" return values', () => {
   test('must return 0', () => {
-    expect(prepareTipNumberArgs(0, false, [200,300])).toHaveProperty('i', 0);
+    expect(prepareTipNumberArgs(0, false, [200,300],20)).toHaveProperty('instance', 0);
   });
   test('must return left', () => {
-    expect(prepareTipNumberArgs(0, false, [200,300])).toHaveProperty('positioning', 'left');
+    expect(prepareTipNumberArgs(0, false, [200,300],20)).toHaveProperty('positioning', ['left']);
   });
   test('must return 100', () => {
-    expect(prepareTipNumberArgs(1, false, [200,300])).toHaveProperty('minMax', 100);
+    expect(prepareTipNumberArgs(1, false, [200,300],20)).toHaveProperty('position', [20]);
   });
 });

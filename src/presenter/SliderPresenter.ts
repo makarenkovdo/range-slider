@@ -76,13 +76,6 @@ class SliderPresenter {
     return this;
   }
 
-  private removeListeners({ isRange }:PresenterBuildParams): this {
-    this.view.runner.removeDrag(0);
-    if (isRange) this.view.runner.removeDrag(1);
-
-    return this;
-  }
-
   private createRangeSlider({
     isRange, shouldAddTip, runnerSize, minValue, maxValue, runnersInstantPosition, step,
   }:PresenterBuildParams): this {
@@ -188,6 +181,13 @@ class SliderPresenter {
     this.runnerCounter = 0;
     this.build(params);
     this.addListeners(params, 'rebuild');
+  }
+
+  private removeListeners({ isRange }:PresenterBuildParams): this {
+    this.view.runner.removeDrag(0);
+    if (isRange) this.view.runner.removeDrag(1);
+
+    return this;
   }
 
   public recieveModelLogic(activeRunner: RunnerModel): void {

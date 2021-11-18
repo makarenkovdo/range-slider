@@ -20,14 +20,6 @@ describe('runnerPresenter test', () => {
     isTestMode: true,
   });
 
-  // const runnerSize: number[] = [50, 50];
-  // testedSlider.view.initializeValues(runnerSize);
-  // $(document).ready(() => {
-  //   test('if function initLayers runs ', () => {
-  //     expect(testedSlider.view.runnerSize[0]).toBe(50);
-  //   });
-  // });
-
   const createRangeSliderTestArgs: PresenterBuildParams = {
     isRange: false,
     shouldAddTip: true,
@@ -43,24 +35,22 @@ describe('runnerPresenter test', () => {
     expect(testedSlider['view'].isRange).toBe(false);
   });
 
-  describe('creating slider', () => {
-    test('if createRangeSlider runs if/else block', () => {
-      createRangeSliderTestArgs.isRange = true;
-      testedSlider['createRangeSlider'](createRangeSliderTestArgs);
-      expect(testedSlider['view'].isRange).toBe(true);
-    });
+  test('if createRangeSlider runs if/else block', () => {
+    createRangeSliderTestArgs.isRange = true;
+    testedSlider['createRangeSlider'](createRangeSliderTestArgs);
+    expect(testedSlider['view'].isRange).toBe(true);
+  });
 
-    test('if createRangeSlider calls functions', () => {
-      const createRunnerView = jest.fn();
-      const createRunner = jest.fn();
-      const createTipNumber = jest.fn();
-      testedSlider['createRunnerView'] = createRunnerView;
-      testedSlider['createRunner'] = createRunner;
-      testedSlider['createTipNumber'] = createTipNumber;
-      testedSlider['createRangeSlider'](createRangeSliderTestArgs);
-      expect(createRunnerView).toHaveBeenCalled();
-      expect(createRunner).toHaveBeenCalled();
-      expect(createTipNumber).toHaveBeenCalled();
-    });
+  test('if createRangeSlider calls functions', () => {
+    const createRunnerView = jest.fn();
+    const createRunner = jest.fn();
+    const createTipNumber = jest.fn();
+    testedSlider['createRunnerView'] = createRunnerView;
+    testedSlider['createRunner'] = createRunner;
+    testedSlider['createTipNumber'] = createTipNumber;
+    testedSlider['createRangeSlider'](createRangeSliderTestArgs);
+    expect(createRunnerView).toHaveBeenCalled();
+    expect(createRunner).toHaveBeenCalled();
+    expect(createTipNumber).toHaveBeenCalled();
   });
 });

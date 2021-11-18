@@ -59,11 +59,8 @@ describe('panel test', () => {
     const notifyInputChange = jest.fn();
     testedSlider['view'].panel.notifyInputChange = notifyInputChange;
     testedSlider['activatePanel'](createRangeSliderTestArgs);
-    const event = new Event('change');
-    const elem = document.querySelector('.js-slider-input__runner-0-value');
-    elem.dispatchEvent(event);
-
-    expect(notifyInputChange).toHaveBeenCalled();
+    testedSlider['view'].panel.updateRunnerInput(10, 0);
+    const inputValue = document.querySelector('.js-slider-input__runner-0-value').value;
+    expect(inputValue).toBe('10');
   });
-
 });

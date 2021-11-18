@@ -20,6 +20,12 @@ describe('if function "setThis" set this.$runners', () => {
     expect(testView.runner.$elements[0]).toBeFalsy();
   });
   test('must NOT be empty array', async () => {
+    await waitFor(() => {
+      expect(testView.$field).not.toBeFalsy();
+    });
+  });
+
+  test('must NOT be empty array', async () => {
     setThis.call(testView, 0);
     await waitFor(() => {
       expect(testView.runner.$elements[0]).not.toBeFalsy();

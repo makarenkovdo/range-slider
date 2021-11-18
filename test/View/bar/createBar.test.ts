@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import { screen } from '@testing-library/dom';
+import { screen, waitFor } from '@testing-library/dom';
 import SliderView from '../../../src/view/SliderView';
 import SliderPresenter from '../../../src/presenter/SliderPresenter';
 
@@ -16,9 +16,13 @@ describe('ViewModel test', () => {
   });
   const testView = new SliderView('testId', testPresenter);
 
-  test('if function "createBar" creating html-element', () => {
+  test('if function "createBar" creating html-element', async () => {
     testView.bar.createBar.call(this);
-    expect(testView.bar.$bar).not.toBeFalsy();
-    expect(screen.getByTestId('test-slider-bar')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByTestId('test-slider-bar')).toBeInTheDocument();
+    });
+    await waitFor(() => {
+      expect(testView.bar.$bar).not.toBeFalsy();
+    });
   });
 });

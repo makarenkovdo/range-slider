@@ -3,7 +3,7 @@
 import defineSignAfterComma from './runnerModules/defineSignAfterComma';
 import initializeDefaultValues from './runnerModules/initializeDefaultValues';
 import setStep from './runnerModules/setStep';
-import { CalculateStepPositionFromInputReturned, UpdateRunnerValuesArgs } from './runnerModules/runnerInterfaces';
+import { UpdateRunnerValuesArgs } from './runnerModules/runnerInterfaces';
 import { PresenterBuildParams } from '../presenter/presenterInterfaces';
 import notifyToUpdate from './runnerModules/notifyToUpdate';
 import notifyToRebuild from './runnerModules/notifyToRebuild';

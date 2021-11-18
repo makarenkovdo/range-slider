@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/dot-notation */
 /**
  * @jest-environment jsdom
  */
+/* eslint-disable @typescript-eslint/dot-notation */
 import '@testing-library/jest-dom';
 import { PresenterBuildParams } from '../../src/presenter/presenterInterfaces';
 import SliderPresenter from '../../src/presenter/SliderPresenter';
@@ -34,6 +34,8 @@ describe('runnerPresenter test', () => {
     runnerSize: [70, 70],
     minValue: 10,
     maxValue: 100,
+    runnersInstantPosition: [10, 20],
+    step: 1,
   };
 
   test('if createRangeSlider runs', () => {
@@ -52,19 +54,13 @@ describe('runnerPresenter test', () => {
       const createRunnerView = jest.fn();
       const createRunner = jest.fn();
       const createTipNumber = jest.fn();
-      const onDrag = jest.fn();
-      const onDrop = jest.fn();
       testedSlider['createRunnerView'] = createRunnerView;
       testedSlider['createRunner'] = createRunner;
       testedSlider['createTipNumber'] = createTipNumber;
-      testedSlider['onDrag'] = onDrag;
-      testedSlider['onDrop'] = onDrop;
       testedSlider['createRangeSlider'](createRangeSliderTestArgs);
       expect(createRunnerView).toHaveBeenCalled();
       expect(createRunner).toHaveBeenCalled();
       expect(createTipNumber).toHaveBeenCalled();
-      expect(onDrag).toHaveBeenCalled();
-      expect(onDrop).toHaveBeenCalled();
     });
   });
 });

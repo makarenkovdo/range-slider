@@ -2,8 +2,7 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import { prepareTipNumberArgs } from '../../../src/view/viewModules/createTipNumber/createTipNumberUtility';
-
+import { prepareTipNumberArgs } from '../../../src/view/tip/create/createUtility';
 beforeEach(() => {
   document.body.innerHTML = `
      <div data-testid="testId" id="testId" class="range-runner horizontal" data-start="0"></div>

@@ -22,7 +22,7 @@ describe('RunnerModel test', () => {
     expect(testField).toHaveProperty('isVertical', false);
   });
 
-  describe('test onClickHandler', () => {
+  describe('test actions after the onClickHandler', () => {
     const testArgs: DataForRunnerUpdatingArgsType = {
       runnersPosition: [0, 100],
       isVertical: false,
@@ -37,7 +37,7 @@ describe('RunnerModel test', () => {
     test("must call subscriber's-method through the notifier", () => {
       testPresenter['field'].prepareDataForRunnerUpdating(testArgs);
       expect(recieveModelLogic).toHaveBeenCalled();
-    }); 
+    });
     test('if prepareDataForRunnerUpdating define nearest runner and assign this.stepPosition ', () => {
       testPresenter['field'].prepareDataForRunnerUpdating(testArgs);
       expect(testPresenter['runners'][1].stepPosition).toBe(80);

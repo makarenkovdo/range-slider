@@ -21,12 +21,18 @@ describe('calculateValue test', () => {
       stepSignAfterComma: 0,
     };
 
-    expect(calculateStepValueAndPosition(CalculateStepValueAndPositionArgsTest, [0, 10])).toHaveProperty(
+    expect(calculateStepValueAndPosition(
+      CalculateStepValueAndPositionArgsTest,
+      [0, 10],
+    )).toHaveProperty(
       'stepPosition',
       20,
     );
 
-    expect(calculateStepValueAndPosition(CalculateStepValueAndPositionArgsTest, [0, 10])).toHaveProperty(
+    expect(calculateStepValueAndPosition(
+      CalculateStepValueAndPositionArgsTest,
+      [0, 10],
+    )).toHaveProperty(
       'stepValue',
       2,
     );

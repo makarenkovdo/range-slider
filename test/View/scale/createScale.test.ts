@@ -1,12 +1,14 @@
 /**
  * @jest-environment jsdom
  */
+/* eslint-disable @typescript-eslint/dot-notation */
+
 import '@testing-library/jest-dom';
 import {
   screen, waitFor,
 } from '@testing-library/dom';
 import SliderPresenter from '../../../src/presenter/SliderPresenter';
-import createScale from '../../../src/view/viewModules/createScale';
+import create from '../../../src/view/scale/create';
 
 describe('createScale test', () => {
   document.body.innerHTML = `
@@ -19,7 +21,7 @@ describe('createScale test', () => {
 
   test("div with 'testId' toBeInTheDocument", async () => {
     const testPresenter = new SliderPresenter('testId', { isRange: true });
-    createScale.call(testPresenter.view);
+    create.call(testPresenter['view']);
     await waitFor(() => {
       expect(screen.getByTestId('test-scale')).toBeInTheDocument();
     });

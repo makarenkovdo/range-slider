@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import { prepareRunnerArgs } from '../../../../src/view/viewModules/createRunner/createRunnerUtility';
+import { prepareRunnerArgs } from '../../../src/view/runner/create/createUtility';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -12,12 +12,12 @@ beforeEach(() => {
 
 describe('if function "prepareRunnerArgs" return values', () => {
   test('must return 0', () => {
-    expect(prepareRunnerArgs(0, false)).toHaveProperty('i', 0);
+    expect(prepareRunnerArgs(0, false, [12, 12], [500, 500], 50)).toHaveProperty('i', 0);
   });
   test('must return left', () => {
-    expect(prepareRunnerArgs(0, false)).toHaveProperty('positioning', 'left');
+    expect(prepareRunnerArgs(0, false, [12, 12], [500, 500], 50)).toHaveProperty('positioning', 'left');
   });
   test('must return 100', () => {
-    expect(prepareRunnerArgs(1, false)).toHaveProperty('minMax', 100);
+    expect(prepareRunnerArgs(1, false, [12, 12], [500, 500], 50)).toHaveProperty('minMax', 100);
   });
 });

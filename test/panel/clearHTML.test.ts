@@ -36,7 +36,7 @@ beforeEach(() => {
     `;
 });
 
-describe('if build-function calls methods', () => {
+describe('panel test', () => {
   const testedSlider = new SliderPresenter('first', {});
   const createRangeSliderTestArgs: PresenterBuildParams = {
     hasInputPanel: true,
@@ -52,7 +52,7 @@ describe('if build-function calls methods', () => {
     orientation: 'vertical',
   };
 
-  test('if functions selectPanelNodes/initializePanel works', async () => {
+  test('if functions rebuild call clearHTMLElement', async () => {
     await waitFor(() => {
       expect(testedSlider['view'].id).toBeDefined();
     });
@@ -61,6 +61,17 @@ describe('if build-function calls methods', () => {
     testedSlider['view'].panel.clearHTMLElement = clearHTMLElement;
     testedSlider['rebuild'](createRangeSliderTestArgs);
     expect(clearHTMLElement).toHaveBeenCalled();
+  });
+  test('if clearHTMLElement clear $field', async () => {
+    await waitFor(() => {
+      expect(testedSlider['view'].id).toBeDefined();
+    });
+    const clearHTMLElement = jest.fn();
+    testedSlider['activatePanel'](createRangeSliderTestArgs);
+    testedSlider['view'].panel.clearHTMLElement = clearHTMLElement;
+    testedSlider['rebuild'](createRangeSliderTestArgs);
+    const $field = $('#first')
+    expect($field.html()).toBe('');
   });
   //   test('if function selectPanelNodes works', async() => {
   //     await waitFor(() => {

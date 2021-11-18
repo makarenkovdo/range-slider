@@ -36,7 +36,7 @@ beforeEach(() => {
     `;
 });
 
-describe('if build-function calls methods', () => {
+describe('panel test', () => {
   const testedSlider = new SliderPresenter('first', {});
   const createRangeSliderTestArgs: PresenterBuildParams = {
     hasInputPanel: true,

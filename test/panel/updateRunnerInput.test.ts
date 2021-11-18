@@ -52,7 +52,7 @@ describe('panel test', () => {
     orientation: 'vertical',
   };
 
-  test('if changing the input would call notifyInputChange-function', async () => {
+  test('if functions selectPanelNodes/initializePanel works', async () => {
     await waitFor(() => {
       expect(testedSlider['view'].id).toBeDefined();
     });
@@ -60,7 +60,7 @@ describe('panel test', () => {
     testedSlider['view'].panel.notifyInputChange = notifyInputChange;
     testedSlider['activatePanel'](createRangeSliderTestArgs);
     const event = new Event('change');
-    const elem = document.querySelector('.js-slider-input__min-value');
+    const elem = document.querySelector('.js-slider-input__runner-0-value');
     elem.dispatchEvent(event);
 
     expect(notifyInputChange).toHaveBeenCalled();

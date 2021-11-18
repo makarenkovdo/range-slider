@@ -6,7 +6,6 @@
 
 import '@testing-library/jest-dom';
 import { screen, waitFor } from '@testing-library/dom';
-import SliderView from '../../../src/view/SliderView';
 import SliderPresenter from '../../../src/presenter/SliderPresenter';
 
 describe('ViewModel test', () => {

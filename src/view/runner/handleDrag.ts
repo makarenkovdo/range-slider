@@ -5,6 +5,8 @@ const handleDrag = function activateOnDragListenerAndNotify(
   this: Runner,
   instance: number,
 ): void {
+  console.log('HOWwwwwwwww???');
+
   const { $field, $body } = this.parent;
   $field.on('mousedown touchstart', `.js-slider__runner_instance-${instance}`, (event: JQuery.DragEvent) => {
     event.preventDefault();

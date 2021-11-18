@@ -21,7 +21,6 @@ describe('if build-function calls methods', () => {
     isTestMode: false,
   };
   const activatePanel = jest.fn();
-
   test('if build-function calls last method of builder-chain-of-calling', () => {
     testedSlider['activatePanel'] = activatePanel;
     testedSlider['build'](createRangeSliderTestArgs);

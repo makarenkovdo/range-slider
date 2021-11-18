@@ -50,6 +50,8 @@ const setThis = function setThis$runner(
   i: number,
   stepPosition: number,
 ): void {
+  console.log(this);
+  
   this.$elements[i] = this.parent.$field.children(`.js-slider__runner_instance-${i}`);
   this.positions[i] = stepPosition;
 };

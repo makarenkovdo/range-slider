@@ -35,9 +35,9 @@ export default class SliderView {
 
   public minMax: number[];
 
-  readonly $field: JQuery<HTMLElement>;
+  public $field: JQuery<HTMLElement>;
 
-  readonly subscriber: SliderPresenter;
+  public subscriber: SliderPresenter;
 
   public corrector: number;
 

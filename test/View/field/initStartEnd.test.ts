@@ -17,8 +17,8 @@ describe('ViewModel test', () => {
   const testView = new SliderView('testId', testPresenter);
 
   testView.initStartEnd(20, 60);
-  test('if function initStartEnd append start-end to html', () => {
-    expect($field.attr('data-start')).toBe('20');
-    expect($field.attr('data-end')).toBe('60');
+  test('if function initStartEnd set this minMax', () => {
+    expect(testView.minMax[0]).toBe(20);
+    expect(testView.minMax[1]).toBe(60);
   });
 });

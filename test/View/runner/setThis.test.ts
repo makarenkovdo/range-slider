@@ -16,9 +16,6 @@ describe('if function "setThis" set this.$runners', () => {
   });
 
   const testView = new SliderView('testId', testPresenter);
-  test('before setThis.call must be empty array', () => {
-    expect(testView.runner.$elements[0]).toBeFalsy();
-  });
   test('must found $runners and set to this.$elements ', async () => {
     await waitFor(() => {
       expect(testView.$field).not.toBeFalsy();

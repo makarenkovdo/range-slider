@@ -17,13 +17,11 @@ describe('createScale test', () => {
  </div>
  `;
 
-  jest.setTimeout(10000);
-
   test("div with 'testId' toBeInTheDocument", async () => {
-    const testPresenter = new SliderPresenter('testId', { isRange: true });
-    create.call(testPresenter['view']);
+    const testPresenter = new SliderPresenter('testId', { isRange: true, shouldAddScale: true });
     await waitFor(() => {
-      expect(screen.getByTestId('test-scale')).toBeInTheDocument();
+      const $scale = document.querySelector('.slider__scale-line');
+      expect(!!$scale).toBe(true);
     });
   });
 });

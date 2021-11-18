@@ -46,8 +46,10 @@ class SliderPresenter {
   }
 
   private activatePanel(params: PresenterBuildParams): this {
-    this.view.panel.activatePanel.call(this.view, params);
-    this.view.hasPanel = true;
+    if (params.hasInputPanel) {
+      this.view.panel.activatePanel.call(this.view, params);
+      this.view.hasPanel = true;
+    }
     return this;
   }
 

@@ -16,18 +16,19 @@ describe('calculateValue test', () => {
     const CalculateStepValueAndPositionArgsTest: CalculateStepValueAndPositionArgs = {
       positionInPercent: 23,
       step: 2,
+      stepInPercent: 20,
       value: 23,
       stepSignAfterComma: 0,
     };
 
-    expect(calculateStepValueAndPosition(CalculateStepValueAndPositionArgsTest)).toHaveProperty(
+    expect(calculateStepValueAndPosition(CalculateStepValueAndPositionArgsTest, [0, 10])).toHaveProperty(
       'stepPosition',
-      24,
+      20,
     );
 
-    expect(calculateStepValueAndPosition(CalculateStepValueAndPositionArgsTest)).toHaveProperty(
+    expect(calculateStepValueAndPosition(CalculateStepValueAndPositionArgsTest, [0, 10])).toHaveProperty(
       'stepValue',
-      24,
+      2,
     );
   });
 });

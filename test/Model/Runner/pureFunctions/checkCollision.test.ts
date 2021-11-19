@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-// import { beforeEach, describe, expect } from 'jest';
+/* eslint-disable @typescript-eslint/dot-notation */
 import '@testing-library/jest-dom';
 import SliderPresenter from '../../../../src/presenter/SliderPresenter';
 import { checkCollision } from '../../../../src/model/runnerModules/updateRunnerValues/updateRunnerValuesUtility';
@@ -17,12 +17,12 @@ describe('checkCollision test', () => {
     isRange: true,
   });
   const stepElement = { stepPosition: 50, stepValue: 50 };
-  const runner = testPresenter.runners;
-  const thisRunner = testPresenter.runners[1];
+  const runner = testPresenter['runners'];
+  const thisRunner = testPresenter['runners'][1];
   const isVertical = false;
 
   test('new stepPosition mustnot be < than runner[0].stepPosition ', () => {
-    testPresenter.runners[0].stepPosition = 30;
+    testPresenter['runners'][0].stepPosition = 30;
 
     expect(checkCollision(stepElement, runner, thisRunner, isVertical)).toHaveProperty(
       'stepPosition',
@@ -30,7 +30,7 @@ describe('checkCollision test', () => {
     );
   });
   test('new stepPosition mustnot be < than runner[0].stepPosition', () => {
-    testPresenter.runners[0].stepPosition = 60;
+    testPresenter['runners'][0].stepPosition = 60;
 
     expect(checkCollision(stepElement, runner, thisRunner, isVertical)).toHaveProperty(
       'stepPosition',

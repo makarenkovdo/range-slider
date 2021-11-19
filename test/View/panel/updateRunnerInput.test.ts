@@ -60,7 +60,7 @@ describe('panel test', () => {
     testedSlider['view'].panel.notifyInputChange = notifyInputChange;
     testedSlider['activatePanel'](createRangeSliderTestArgs);
     testedSlider['view'].panel.updateRunnerInput(10, 0);
-    const inputValue = document.querySelector('.js-slider-input__runner-0-value').value;
-    expect(inputValue).toBe('10');
+    const $input:HTMLInputElement = document.querySelector('.js-slider-input__runner-0-value');
+    expect($input.value).toBe('10');
   });
 });

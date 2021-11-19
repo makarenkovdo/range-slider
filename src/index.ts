@@ -14,18 +14,18 @@ const firstSlider = new SliderPresenter('first', {
   runnerSize: [12, 12],
   runnersInstantPosition: [9, 14],
   hasInputPanel: true,
-  orientation: 'vertical',
 });
 
 const secondSlider = new SliderPresenter('second', {
-  step: 1,
-  maxValue: -10,
-  minValue: 10,
+  step: 100,
+  maxValue: -1000,
+  minValue: 1000,
   shouldAddTip: true,
   shouldAddBar: true,
   shouldAddScale: true,
-  runnerSize: [12, 12],
+  runnerSize: [20, 20],
   runnersInstantPosition: [0, 5],
+  fieldThickness: 10,
   hasInputPanel: true,
   orientation: 'vertical',
 });
@@ -34,26 +34,27 @@ const thirdSlider = new SliderPresenter('third', {
   shouldAddTip: true,
   shouldAddBar: true,
   step: 4,
-  maxValue: 16,
+  maxValue: 16.25,
   minValue: -70,
-  isRange: false,
-  shouldAddScale: true,
-  runnerSize: [12, 12],
-  runnersInstantPosition: [0, 8],
-  hasInputPanel: true,
-  orientation: 'vertical',
-});
-
-const fourthSlider = new SliderPresenter('fourth', {
-  shouldAddTip: true,
-  shouldAddBar: true,
-  step: 0.07,
-  maxValue: 0,
-  minValue: 16,
   isRange: true,
   shouldAddScale: true,
   runnerSize: [12, 12],
   runnersInstantPosition: [0, 8],
   hasInputPanel: true,
+  fieldThickness: 2,
   orientation: 'vertical',
+});
+
+const fourthSlider = new SliderPresenter('fourth', {
+  shouldAddTip: false,
+  shouldAddBar: false,
+  step: 0.07,
+  maxValue: -0.01,
+  minValue: 16.35,
+  isRange: true,
+  shouldAddScale: true,
+  runnerSize: [50, 50],
+  runnersInstantPosition: [0, 8],
+  fieldThickness: 20,
+  hasInputPanel: true,
 });

@@ -17,14 +17,14 @@ const firstSlider = new SliderPresenter('first', {
 });
 
 const secondSlider = new SliderPresenter('second', {
-  step: 100,
-  maxValue: -1000,
-  minValue: 1000,
+  step: 100000,
+  maxValue: -1000000,
+  minValue: 1000000,
   shouldAddTip: true,
   shouldAddBar: true,
   shouldAddScale: true,
   runnerSize: [20, 20],
-  runnersInstantPosition: [0, 5],
+  runnersInstantPosition: [0, 100000],
   fieldThickness: 10,
   hasInputPanel: true,
   orientation: 'vertical',

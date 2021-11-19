@@ -40,8 +40,6 @@ const addRunnerToDOM = (
   const {
     instance, positioning, position,
   } = preparedData;
-  console.log('HEEEEEEEEEERE');
-  console.log($field);
   $field.append(
     `<span data-testid="test-runner-${instance}" class="slider__runner slider__runner_${orientation} js-slider__runner_instance-${instance}" style="${positioning[0]}:${position[0]}px; ${positioning[1]}:${position[1]}px; width:${runnerSize[0]}px; height:${runnerSize[1]}px"></span>`,
   );

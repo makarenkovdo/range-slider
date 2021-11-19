@@ -40,8 +40,6 @@ const updatePositionToDOM = function updateRunnerPositionToDom(this:Runner,
   const position = isVertical
     ? getVerticalPosition()
     : getHorizontalPosition();
-    console.log('position, fieldSize',position, fieldSize);
-
   $elements[instance].css(positioning[0], position);
 };
 

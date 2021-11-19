@@ -7,8 +7,13 @@ const updateRunnerInput = function updateRunnersValueInputs(
 ):void {
   const { $runner1ValueInput, $runner0ValueInput } = this;
 
-  if (instance) $runner1ValueInput.value = `${stepValue}`;
-  else $runner0ValueInput.value = `${stepValue}`;
+  if (instance) {
+    $runner1ValueInput.value = `${stepValue}`;
+    this.runnersPosition[1] = stepValue;
+  } else {
+    $runner0ValueInput.value = `${stepValue}`;
+    this.runnersPosition[0] = stepValue;
+  }
 };
 
 export default updateRunnerInput;

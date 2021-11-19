@@ -92,15 +92,20 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
       this.minMax[1] = parseFloat((event.target as HTMLInputElement).value);
       break;
     }
-    case 'runnerValue': {
-      this.runnersPosition = [
-        parseFloat((event.target as HTMLInputElement).value),
-        parseFloat((event.target as HTMLInputElement).value),
-      ]; break;
+    case 'runnerValue0': {
+      this.runnersPosition[0] = parseFloat((event.target as HTMLInputElement).value);
+      break;
     }
-    case 'runnerSize': {
-      this.runnerSize = [parseInt(((event.target as HTMLInputElement).value), 10),
-        parseInt(((event.target as HTMLInputElement).value), 10)];
+    case 'runnerValue1': {
+      this.runnersPosition[1] = parseFloat((event.target as HTMLInputElement).value);
+      break;
+    }
+    case 'runnerHeight': {
+      this.runnerSize[1] = parseInt(((event.target as HTMLInputElement).value), 10);
+      break;
+    }
+    case 'runnerWidth': {
+      this.runnerSize[0] = parseInt(((event.target as HTMLInputElement).value), 10);
       break;
     }
     case 'step': {
@@ -135,9 +140,7 @@ const handleChange = function hangleInputsAndCheckboxesChanges(
     default: break;
   }
 
-  console.log(this.runnersPosition);
-
-  this.notifyInputChange.call(this, this.runnersPosition);
+  this.notifyInputChange.call(this);
 };
 
 const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(
@@ -162,8 +165,10 @@ const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(
     min: 'min',
     max: 'max',
     step: 'step',
-    runnerValue: 'runnerValue',
-    runnerSize: 'runnerSize',
+    runnerValue0: 'runnerValue0',
+    runnerValue1: 'runnerValue1',
+    runnerWidth: 'runnerWidth',
+    runnerHeight: 'runnerHeight',
     hasScale: 'hasScale',
     hasBar: 'hasBar',
     hasTip: 'hasTip',
@@ -173,10 +178,10 @@ const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(
   };
   $minValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.min));
   $maxValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.max));
-  $runner0ValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerValue));
-  $runner1ValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerValue));
-  $runnerWidthInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerSize));
-  $runnerHeightInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerSize));
+  $runner0ValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerValue0));
+  $runner1ValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerValue1));
+  $runnerWidthInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerWidth));
+  $runnerHeightInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerHeight));
   $fieldThicknessInput.addEventListener('change', (event):void => this.handleChange(event, actionType.fieldThickness));
   $stepInput.addEventListener('change', (event):void => this.handleChange(event, actionType.step));
   $orientationInput.addEventListener('change', (event):void => this.handleChange(event, actionType.orientation));

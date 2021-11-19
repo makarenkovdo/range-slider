@@ -3,8 +3,11 @@ import Panel from './Panel';
 
 const notifyInputChange = function prepareDataAndNotifyInputChange(
   this: Panel,
+  runnersPosition: number[],
 ): void {
-  const panelInputsData:PresenterBuildParams = {
+  console.log(runnersPosition);
+  
+  const newVar:PresenterBuildParams = {
     orientation: this.orientation,
     minValue: this.minMax[0],
     maxValue: this.minMax[1],
@@ -17,7 +20,9 @@ const notifyInputChange = function prepareDataAndNotifyInputChange(
     runnerSize: this.runnerSize,
     step: this.step,
   };
-  this.parent.subscriber.recieveInputsData(panelInputsData);
+  console.log(newVar, 'panelInputsData');
+
+  this.parent.subscriber.recieveInputsData(newVar);
 };
 
 export default notifyInputChange;

@@ -6,12 +6,12 @@ import SliderPresenter from './presenter/SliderPresenter';
 const firstSlider = new SliderPresenter('first', {
   shouldAddTip: true,
   shouldAddBar: true,
-  step: 2,
+  step: 0.3,
   maxValue: -0.1,
-  minValue: 0.1,
+  minValue: 0.7,
   isRange: true,
   shouldAddScale: true,
-  runnerSize: [12, 12],
+  runnerSize: [12, 24],
   runnersInstantPosition: [9, 14],
   hasInputPanel: true,
 });

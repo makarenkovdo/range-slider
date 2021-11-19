@@ -4,7 +4,7 @@ import { PresenterBuildParams } from '../../presenter/presenterInterfaces';
 import SliderView from '../SliderView';
 import notifyInputChange from './notifyInputChange';
 import updateRunnerInput from './updateRunnerInput';
-import { initializePanel } from './activate/activateUtility';
+import { handleChange, initializePanel } from './activate/activateUtility';
 
 export default class Panel {
   parent: SliderView;
@@ -61,6 +61,8 @@ export default class Panel {
 
   public initializePanel: (this: Panel, params: PresenterBuildParams) => void;
 
+  public handleChange: (this: Panel, event:Event, actionType: string) => void;
+
   public notifyInputChange: (this: Panel, runnersInstantPosition: number[]) => void;
 
   public updateRunnerInput: (this: Panel, stepValue:number, instance:number) => void;
@@ -72,5 +74,6 @@ export default class Panel {
     this.initializePanel = initializePanel.bind(this) as () => void;
     this.notifyInputChange = notifyInputChange.bind(this) as () => void;
     this.updateRunnerInput = updateRunnerInput.bind(this) as () => void;
+    this.handleChange = handleChange.bind(this) as () => void;
   }
 }

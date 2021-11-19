@@ -77,79 +77,66 @@ const initializePanel = function initializeDefaultPanelValues(
     $fieldThicknessInput.value = `${fieldThickness}`;
   });
 };
+
 const handleChange = function hangleInputsAndCheckboxesChanges(
   this: Panel,
+  event:_Event,
   actionType: string,
 ): void {
-  const {
-    $minValueInput,
-    $maxValueInput,
-    $runnerWidthInput,
-    $runnerHeightInput,
-    $stepInput,
-    $isRangeInput,
-    $orientationInput,
-    $hasScaleInput,
-    $hasBarInput,
-    $hasTipInput,
-    $runner0ValueInput,
-    $runner1ValueInput,
-    $fieldThicknessInput,
-  } = this;
-
   switch (actionType) {
     case 'min': {
-      this.minMax[0] = parseFloat($minValueInput.value);
+      this.minMax[0] = parseFloat((event.target as HTMLInputElement).value);
       break;
     }
     case 'max': {
-      this.minMax[1] = parseFloat($maxValueInput.value);
+      this.minMax[1] = parseFloat((event.target as HTMLInputElement).value);
       break;
     }
     case 'runnerValue': {
       this.runnersPosition = [
-        parseFloat($runner0ValueInput.value),
-        parseFloat($runner1ValueInput.value),
+        parseFloat((event.target as HTMLInputElement).value),
+        parseFloat((event.target as HTMLInputElement).value),
       ]; break;
     }
     case 'runnerSize': {
-      this.runnerSize = [
-        parseInt(($runnerWidthInput.value), 10),
-        parseInt(($runnerHeightInput.value), 10),
-      ];
+      this.runnerSize = [parseInt(((event.target as HTMLInputElement).value), 10),
+        parseInt(((event.target as HTMLInputElement).value), 10)];
       break;
     }
     case 'step': {
-      this.step = parseFloat($stepInput.value);
+      this.step = parseFloat((event.target as HTMLInputElement).value);
       break;
     }
     case 'isRange': {
-      this.isRange = $isRangeInput.checked;
+      this.isRange = (event.target as HTMLInputElement).checked;
       break;
     }
     case 'orientation': {
-      this.orientation = $orientationInput.checked ? 'vertical' : 'horizontal';
+      this.orientation = (event.target as HTMLInputElement).checked ? 'vertical' : 'horizontal';
 
       break;
     }
     case 'hasScale': {
-      this.hasScale = $hasScaleInput.checked;
+      this.hasScale = (event.target as HTMLInputElement).checked;
       break;
     }
     case 'hasTip': {
-      this.hasTip = $hasTipInput.checked;
+      this.hasTip = (event.target as HTMLInputElement).checked;
       break;
     }
     case 'hasBar': {
-      this.hasBar = $hasBarInput.checked;
+      this.hasBar = (event.target as HTMLInputElement).checked;
       break;
     }
     case 'fieldThickness': {
-      this.fieldThickness = parseInt(($fieldThicknessInput.value), 10);
+      this.fieldThickness = parseInt(((event.target as HTMLInputElement).value), 10);
       break;
     }
     default: break;
   }
+
+  console.log(this.runnersPosition);
+
   this.notifyInputChange.call(this, this.runnersPosition);
 };
 
@@ -184,60 +171,19 @@ const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(
     isRange: 'isRange',
     fieldThickness: 'fieldThickness',
   };
-  $minValueInput.addEventListener('change', ():void => handleChange.call(
-    this,
-    actionType.min,
-  ));
-  $maxValueInput.addEventListener('change', ():void => handleChange.call(
-    this,
-    actionType.max,
-  ));
-  $runner0ValueInput.addEventListener('change', ():void => handleChange.call(
-    this,
-    actionType.runnerValue,
-  ));
-  $runner1ValueInput.addEventListener('change', ():void => handleChange.call(
-    this,
-    actionType.runnerValue,
-  ));
-  $runnerWidthInput.addEventListener('change', ():void => handleChange.call(
-    this,
-    actionType.runnerSize,
-  ));
-  $runnerHeightInput.addEventListener('change', ():void => handleChange.call(
-    this,
-    actionType.runnerSize,
-  ));
-  $fieldThicknessInput.addEventListener('change', ():void => handleChange.call(
-    this,
-    actionType.fieldThickness,
-  ));
-  $stepInput.addEventListener('change', ():void => handleChange.call(
-    this,
-    actionType.step,
-  ));
-  $orientationInput.addEventListener('change', ():void => {
-    handleChange.call(
-      this,
-      actionType.orientation,
-    );
-  });
-  $isRangeInput.addEventListener('change', ():void => handleChange.call(
-    this,
-    actionType.isRange,
-  ));
-  $hasBarInput.addEventListener('change', ():void => handleChange.call(
-    this,
-    actionType.hasBar,
-  ));
-  $hasScaleInput.addEventListener('change', ():void => handleChange.call(
-    this,
-    actionType.hasScale,
-  ));
-  $hasTipInput.addEventListener('change', ():void => handleChange.call(
-    this,
-    actionType.hasTip,
-  ));
+  $minValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.min));
+  $maxValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.max));
+  $runner0ValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerValue));
+  $runner1ValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerValue));
+  $runnerWidthInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerSize));
+  $runnerHeightInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerSize));
+  $fieldThicknessInput.addEventListener('change', (event):void => this.handleChange(event, actionType.fieldThickness));
+  $stepInput.addEventListener('change', (event):void => this.handleChange(event, actionType.step));
+  $orientationInput.addEventListener('change', (event):void => this.handleChange(event, actionType.orientation));
+  $isRangeInput.addEventListener('change', (event):void => this.handleChange(event, actionType.isRange));
+  $hasBarInput.addEventListener('change', (event):void => this.handleChange(event, actionType.hasBar));
+  $hasScaleInput.addEventListener('change', (event):void => this.handleChange(event, actionType.hasScale));
+  $hasTipInput.addEventListener('change', (event):void => this.handleChange(event, actionType.hasTip));
 };
 
 export {

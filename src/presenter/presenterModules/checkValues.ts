@@ -50,16 +50,20 @@ const checkValues = function checkInitialValues(
   }
 
   // eslint-disable-next-line arrow-body-style
-  const ifPositionIncorrect = ():boolean => {
+  const ifPosition0Incorrect = ():boolean => {
     return runnersInstantPosition[0] < minValue
     || runnersInstantPosition[0] > runnersInstantPosition[1]
     || runnersInstantPosition[0] > maxValue;
   };
+  // eslint-disable-next-line arrow-body-style
+  const ifPosition1Incorrect = ():boolean => {
+    return runnersInstantPosition[1] > maxValue || runnersInstantPosition[1] < minValue;
+  };
 
-  if (ifPositionIncorrect) {
+  if (ifPosition0Incorrect()) {
     runnersInstantPosition[0] = minValue;
   }
-  if (runnersInstantPosition[1] > maxValue || runnersInstantPosition[1] < minValue) {
+  if (ifPosition1Incorrect()) {
     runnersInstantPosition[1] = maxValue;
   }
 

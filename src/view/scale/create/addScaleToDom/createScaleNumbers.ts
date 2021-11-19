@@ -32,7 +32,7 @@ const createScaleNumbers = (
             "
             style="
             left: 5px;
-            top: ${100-(leftOrTopPosition + 0.5)}%;
+            top: ${100 - (leftOrTopPosition + 0.5)}%;
             position: absolute;
   
             "

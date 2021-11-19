@@ -14,8 +14,7 @@ beforeEach(() => {
     `;
 });
 
-describe('runnerPresenter test', () => {
-//   const $field: JQuery<HTMLElement> = $('#first');
+describe('Presenter test', () => {
   const testedSlider = new SliderPresenter('first', {
     isTestMode: true,
   });

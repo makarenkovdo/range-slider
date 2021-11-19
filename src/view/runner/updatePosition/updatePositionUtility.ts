@@ -36,7 +36,7 @@ const updatePositionToDOM = function updateRunnerPositionToDom(this:Runner,
   const viewPositionInPx = (stepPosition * (fieldSize[switcher] / 100));
   const getVerticalPosition = () => `${fieldSize[1] - viewPositionInPx + 5 - size[0] / 2}px`;
   const getHorizontalPosition = () => `${viewPositionInPx + 5 - size[0] / 2}px`;
-  
+
   const position = isVertical
     ? getVerticalPosition()
     : getHorizontalPosition();

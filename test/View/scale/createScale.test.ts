@@ -2,13 +2,11 @@
  * @jest-environment jsdom
  */
 /* eslint-disable @typescript-eslint/dot-notation */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import '@testing-library/jest-dom';
-import {
-  screen, waitFor,
-} from '@testing-library/dom';
+import { waitFor } from '@testing-library/dom';
 import SliderPresenter from '../../../src/presenter/SliderPresenter';
-import create from '../../../src/view/scale/create';
 
 describe('createScale test', () => {
   document.body.innerHTML = `

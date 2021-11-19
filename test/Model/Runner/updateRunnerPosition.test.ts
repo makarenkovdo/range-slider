@@ -16,7 +16,6 @@ beforeEach(() => {
 describe('test updateRunnerValues', () => {
   const testPresenter = new SliderPresenter('testId', {
   });
-  // const testRunner = new RunnerModel('testId', 0, testPresenter);
   const updateRunnerValuesArgsTest: UpdateRunnerValuesArgs = {
     cursorXY: [20, 50],
     isVertical: false,

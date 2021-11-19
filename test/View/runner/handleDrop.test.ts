@@ -6,7 +6,6 @@
 import { screen, waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import SliderPresenter from '../../../src/presenter/SliderPresenter';
-import cancelDragging from '../../../src/view/runner/handleDrop/handleDropUtility';
 
 describe('testing events ', () => {
   document.body.innerHTML = `

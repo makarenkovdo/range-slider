@@ -1,3 +1,4 @@
+/* eslint-disable fsd/no-function-declaration-in-event-listener */
 import { PresenterBuildParams } from '../../../presenter/presenterInterfaces';
 import Panel from '../Panel.js';
 

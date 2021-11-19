@@ -70,16 +70,7 @@ describe('panel test', () => {
     testedSlider['activatePanel'](createRangeSliderTestArgs);
     testedSlider['view'].panel.clearHTMLElement = clearHTMLElement;
     testedSlider['rebuild'](createRangeSliderTestArgs);
-    const $field = $('#first')
+    const $field = $('#first');
     expect($field.html()).toBe('');
   });
-  //   test('if function selectPanelNodes works', async() => {
-  //     await waitFor(() => {
-  //       expect(testedSlider['view'].id).toBeDefined();
-  //     });
-
-  //     testedSlider['activatePanel'](createRangeSliderTestArgs);
-
-  //     expect(testedSlider['view'].panel.$maxValueInput).toBeDefined();
-  //   });
 });

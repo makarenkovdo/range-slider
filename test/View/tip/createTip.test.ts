@@ -11,7 +11,6 @@ describe('ViewModel test', () => {
      <div data-testid="testId" id="testId" class="range-runner horizontal" data-start="0"></div>
      `;
   const testPresenter = new SliderPresenter('testId', {
-    // shouldAddTip: true,
     isTestMode: true,
   });
   const testView = new SliderView('testId', testPresenter);

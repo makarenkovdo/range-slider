@@ -13,7 +13,6 @@ beforeEach(() => {
 
 describe('if function "notify" call subscribers', () => {
   const testPresenter = new SliderPresenter('testId', {
-    // shouldAddTip: true,
     isTestMode: true,
   });
 
@@ -23,7 +22,7 @@ describe('if function "notify" call subscribers', () => {
   const recieveRebuildData = jest.fn();
   testPresenter.recieveModelLogic = recieveModelLogic;
   testPresenter.recieveRebuildData = recieveRebuildData;
-  test('must call fakeSubscriber', () => {
+  test('must call fakeSubscriber to update', () => {
     testRunner.notifyToUpdate.call(this);
     expect(recieveModelLogic).toHaveBeenCalled();
   });

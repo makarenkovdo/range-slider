@@ -16,7 +16,7 @@ describe('RunnerModel test', () => {
     isRange: true,
   });
   const testField = new FieldModel('testId', testPresenter);
-  test('constructor create own properties', () => {
+  test('if constructor create own properties', () => {
     expect(testField).toHaveProperty('isVertical', false);
     expect(testField).toHaveProperty('subscriber', testPresenter);
   });

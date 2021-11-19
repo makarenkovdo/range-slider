@@ -84,7 +84,8 @@ h1 {
       top: -($size * 1.2) * 0.6;
     }
     &_vertical {
-      left: -$size * 1.2 * 0.5; //half a width+borders
+      //  half a width+borders
+      left: -$size * 1.2 * 0.5; 
     }
   }
   &__bar {

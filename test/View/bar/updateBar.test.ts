@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { getByTestId, screen, waitFor } from '@testing-library/dom';
+import { screen, waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import SliderView from '../../../src/view/SliderView';
 import SliderPresenter from '../../../src/presenter/SliderPresenter';
@@ -10,7 +10,6 @@ describe('ViewModel test', () => {
   document.body.innerHTML = `
      <div data-testid="testId" id="testId" class="range-runner horizontal" data-start="0"></div>
      `;
-  const $field: JQuery<HTMLElement> = $('#testId');
   const testPresenter = new SliderPresenter('testId', {
     isTestMode: true,
   });
@@ -22,7 +21,7 @@ describe('ViewModel test', () => {
     testView.isRange = true;
     testView.bar.updateBarPosition.call(this);
     await waitFor(() => {
-      const bar = screen.getByTestId('test-slider-bar')
+      const bar = screen.getByTestId('test-slider-bar');
       expect(bar).toHaveStyle('width: 60%');
     });
   });
@@ -32,7 +31,7 @@ describe('ViewModel test', () => {
     testView.isVertical = true;
     testView.bar.updateBarPosition.call(this);
     await waitFor(() => {
-      const bar = screen.getByTestId('test-slider-bar')
+      const bar = screen.getByTestId('test-slider-bar');
       expect(bar).toHaveStyle('height: 60%');
     });
   });

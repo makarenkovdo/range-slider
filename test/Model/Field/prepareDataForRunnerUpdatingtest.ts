@@ -13,7 +13,7 @@ beforeEach(() => {
     `;
 });
 
-describe('RunnerModel test', () => {
+describe('FieldModel test', () => {
   const testPresenter: SliderPresenter = new SliderPresenter('testId', {
     isRange: true,
   });

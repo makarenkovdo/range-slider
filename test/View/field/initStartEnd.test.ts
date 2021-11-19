@@ -9,9 +9,7 @@ describe('ViewModel test', () => {
   document.body.innerHTML = `
      <div data-testid="testId" id="testId" class="range-runner horizontal" data-start="0"></div>
      `;
-  const $field: JQuery<HTMLElement> = $('#testId');
   const testPresenter = new SliderPresenter('testId', {
-    // shouldAddTip: true,
     isTestMode: true,
   });
   const testView = new SliderView('testId', testPresenter);

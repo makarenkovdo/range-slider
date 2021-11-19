@@ -1,5 +1,3 @@
-/* eslint-disable padded-blocks */
-
 import initializeValues from './field/initializeValues';
 import initStartEnd from './field/initStartEnd';
 import handleClick from './field/handleClick';

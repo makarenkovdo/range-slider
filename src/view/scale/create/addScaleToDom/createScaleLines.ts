@@ -18,7 +18,9 @@ const createScaleLines = (
   const switcher = orientation === 'vertical' ? 1 : 0;
 
   for (let i = 0; i < 2 * lineQuantity + 1; i += 1) {
-    const topOrLeftPosition = Math.abs(100 * switcher - (((step / (minMax[1] - minMax[0])) * stepMultiplier * 100) * (i / 2)));
+    const topOrLeftPosition = Math.abs(
+      100 * switcher - (((step / (minMax[1] - minMax[0])) * stepMultiplier * 100) * (i / 2)),
+    );
 
     if (topOrLeftPosition < 98) {
       if (i % 2 && i !== 2 * Math.floor(lineQuantity) + 1) {

@@ -4,7 +4,6 @@
 import '@testing-library/jest-dom';
 import SliderPresenter from '../../../src/presenter/SliderPresenter';
 import RunnerModel from '../../../src/model/RunnerModel';
-import { UpdateRunnerValuesArgs } from '../../../src/model/runnerModules/runnerInterfaces';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -19,7 +18,7 @@ describe('RunnerModel test', () => {
   const testRunner = new RunnerModel('testId', 0, testPresenter);
 
   testRunner.setStep(0.15, [0, 15]);
-  test('set step', () => {
+  test('if set step', () => {
     expect(testRunner).toHaveProperty('step', 0.15);
   });
 });

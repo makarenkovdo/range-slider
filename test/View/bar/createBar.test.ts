@@ -13,7 +13,6 @@ describe('ViewModel test', () => {
   const $field: JQuery<HTMLElement> = $('#testId');
 
   const testPresenter = new SliderPresenter('testId', {
-    // shouldAddTip: true,
     isTestMode: true,
   });
   const testView = new SliderView('testId', testPresenter);

@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-// import { beforeEach, describe, expect } from 'jest';
 import '@testing-library/jest-dom';
 import SliderPresenter from '../../../../src/presenter/SliderPresenter';
 import RunnerModel from '../../../../src/model/RunnerModel';

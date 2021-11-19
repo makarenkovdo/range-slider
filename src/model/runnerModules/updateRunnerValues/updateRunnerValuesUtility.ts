@@ -98,8 +98,8 @@ minMax: number[]):CheckCollisionSubargs => {
     .toFixed(stepSignAfterComma));
   const stepValueMultiplier = Math.floor(stepPosition / divisionSizeInPercent);
   let stepValue = Number((minMax[0] + step * stepValueMultiplier).toFixed(stepSignAfterComma));
-
-  if (!checkOnException() && (value === minMax[1] || stepValueMultiplier === divisionQuantity)) {
+  const isItLast = ():boolean => value === minMax[1] || stepValueMultiplier === divisionQuantity;
+  if (!checkOnException() && isItLast()) {
     stepPosition = 100;
     // eslint-disable-next-line prefer-destructuring
     stepValue = minMax[1];

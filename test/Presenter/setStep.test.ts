@@ -14,7 +14,7 @@ beforeEach(() => {
     `;
 });
 
-describe('runnerPresenter test', () => {
+describe('Presenter test', () => {
   const testedSlider = new SliderPresenter('first', {});
 
   const createRangeSliderTestArgs: PresenterBuildParams = {

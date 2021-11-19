@@ -12,7 +12,7 @@ beforeEach(() => {
 });
 
 describe('calculateValue test', () => {
-  test('calculateValue', () => {
+  test('must return stepValue and stepPosition', () => {
     const CalculateStepValueAndPositionArgsTest: CalculateStepValueAndPositionArgs = {
       positionInPercent: 23,
       step: 2,

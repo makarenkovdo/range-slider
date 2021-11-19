@@ -5,18 +5,18 @@ import { UpdateRunnerValuesArgs } from '../model/runnerModules/runnerInterfaces'
 import SliderView from '../view/SliderView';
 import {
   PresenterBuildParams,
-  CreateRangeSliderArgsType,
   DataForRunnerUpdatingArgsType,
-  Orientation,
 } from './presenterInterfaces';
 import checkValues from './presenterModules/checkValues';
 
-export default class SliderPresenter {
-  public field: FieldModel;
+class SliderPresenter {
+  private field: FieldModel;
 
-  public runners: RunnerModel[];
+  private runners: RunnerModel[];
 
-  public view: SliderView;
+  private view: SliderView;
+
+  private isBothOnDragAdded: boolean;
 
   private id: string;
 
@@ -25,82 +25,168 @@ export default class SliderPresenter {
   constructor(id: string, params?: PresenterBuildParams) {
     this.runnerCounter = 0;
     this.runners = [];
+    this.isBothOnDragAdded = false;
     this.field = new FieldModel(id, this);
     this.view = new SliderView(id, this);
     this.build(params);
+    this.addListeners(params, 'build');
   }
 
-  // prettier-ignore
+  private build(params: PresenterBuildParams): void {
+    const checkedParams = checkValues(params);
+    if (!checkedParams.isTestMode) {
+      this.setMinMax(checkedParams)
+        .initLayers(checkedParams)
+        .createRangeSlider(checkedParams)
+        .setStep(checkedParams)
+        .createBar(checkedParams)
+        .createScale(checkedParams)
+        .activatePanel(checkedParams);
+    }
+  }
 
-  //  prettier-ignore
-  public createRangeSlider({
-    isRange, shouldAddTip, runnerSize, minValue, maxValue,
-  }:CreateRangeSliderArgsType): this {
-    this.createRunnerView(this.runnerCounter);
-    this.createRunner(runnerSize, minValue, maxValue);
-    this.createTipNumber(shouldAddTip);
-    this.onDrag(this.runnerCounter);
-    this.onDrop();
+  private activatePanel(params: PresenterBuildParams): this {
+    if (params.hasInputPanel) {
+      this.view.panel.activatePanel.call(this.view, params);
+      this.view.hasPanel = true;
+    }
+    return this;
+  }
+
+  private addListeners({ isRange }:PresenterBuildParams, actionType:string): this {
+    switch (actionType) {
+      case 'build': {
+        this.onClick().onDrag(0).onDrop();
+        if (isRange) {
+          this.onDrag(1);
+        }
+        break;
+      }
+      case 'rebuild': {
+        this.onDrag(0);
+        if (isRange) {
+          this.onDrag(1);
+        }
+        break;
+      }
+
+      default: break;
+    }
+
+    return this;
+  }
+
+  private createRangeSlider({
+    isRange, shouldAddTip, runnerSize, minValue, maxValue, runnersInstantPosition, step,
+  }:PresenterBuildParams): this {
+    this.createRunner(
+      runnerSize,
+      minValue,
+      maxValue,
+      runnersInstantPosition[this.runnerCounter],
+      step,
+    );
+    let { stepPosition, stepValue } = this.runners[this.runnerCounter];
+    const stepSignAfterComma = this.runners[0].defineSignAfterComma([minValue, maxValue]);
+    this.createRunnerView(this.runnerCounter, stepPosition, stepSignAfterComma);
+    this.createTipNumber(shouldAddTip, stepPosition, stepValue);
 
     if (isRange) {
       this.runnerCounter += 1;
       this.view.isRange = true;
       this.field.isRange = true;
-      this.createRunnerView(this.runnerCounter);
-      this.createRunner(runnerSize, minValue, maxValue);
-      this.createTipNumber(shouldAddTip);
-      this.onDrag(this.runnerCounter);
-      this.onDrop();
+      this.createRunner(runnerSize,
+        minValue,
+        maxValue,
+        runnersInstantPosition[this.runnerCounter],
+        step);
+      ({ stepPosition, stepValue } = this.runners[this.runnerCounter]);
+      this.runners[this.runnerCounter].stepSignAfterComma = stepSignAfterComma;
+      this.createRunnerView(this.runnerCounter, stepPosition, stepSignAfterComma);
+      this.createTipNumber(shouldAddTip, stepPosition, stepValue);
     } else this.view.isRange = false;
     return this;
   }
 
-  public createRunner(runnerSize: number[], minValue: number, maxValue: number): this {
+  private createRunner(
+    runnerSize: number[],
+    minValue: number,
+    maxValue: number,
+    runnersInstantPosition: number,
+    step: number,
+  ): this {
     this.runners.push(new RunnerModel(this.id, this.runnerCounter, this));
-    this.runners[this.runnerCounter].initializeDefaultValues([minValue, maxValue]);
+    this.runners[this.runnerCounter].setStep(step, [minValue, maxValue]);
+    this.runners[this.runnerCounter].initializeDefaultValues(
+      [minValue, maxValue],
+      runnersInstantPosition,
+    );
     return this;
   }
 
-  public createRunnerView(i: number): this {
-    this.view.createRunner(i, this.field.isVertical);
+  private createRunnerView(i: number, stepPosition: number, stepSignAfterComma: number): this {
+    this.view.runner.createRunner(i, stepPosition, stepSignAfterComma);
     return this;
   }
 
-  public createTipNumber(isOn: boolean): this {
+  private createTipNumber(isOn: boolean, stepPosition: number, stepValue:number): this {
     if (isOn) {
-      this.view.createTipNumber(this.runnerCounter, this.field.isVertical);
+      this.view.tip.create(
+        this.runnerCounter,
+        this.field.isVertical,
+        stepPosition,
+        stepValue,
+      );
     }
     return this;
   }
 
-  public createBar(shouldAddBar: boolean): this {
+  private createBar({ shouldAddBar, fieldThickness }:PresenterBuildParams): this {
     if (shouldAddBar) {
       this.view.hasBar = true;
-      this.view.createBar(this);
-      this.view.updateBarPosition(this.runners[0]);
+      this.view.bar.createBar(fieldThickness);
+      this.view.bar.updateBarPosition();
     }
 
     return this;
   }
 
-  public createScale(shouldAddScale: boolean): this {
+  private createScale({ shouldAddScale }:PresenterBuildParams): this {
     if (shouldAddScale) {
       this.view.hasScale = true;
-      this.view.createScale();
+      this.view.scale.create();
     }
 
     return this;
   }
 
-  public onDrag(runnerCounter: number): this {
+  private onDrag(runnerCounter: number): this {
     $(document).ready(() => {
-      this.view.handleDrag(runnerCounter);
+      this.view.runner.handleDrag(runnerCounter);
     });
     return this;
   }
 
-  public onDrop(): this {
-    this.view.handleDrop();
+  private onDrop(): this {
+    this.view.runner.handleDrop();
+    return this;
+  }
+
+  private rebuild(params:PresenterBuildParams):void {
+    this.field.isRange = false;
+    this.view.isRange = false;
+    this.removeListeners(params);
+    this.runners = [];
+    this.view.panel.clearHTMLElement(this.view.id);
+    this.runnerCounter = 0;
+    this.build(params);
+    this.addListeners(params, 'rebuild');
+  }
+
+  private removeListeners({ isRange }:PresenterBuildParams): this {
+    this.view.runner.removeDrag(0);
+    if (isRange) this.view.runner.removeDrag(1);
+
     return this;
   }
 
@@ -108,18 +194,25 @@ export default class SliderPresenter {
     if (activeRunner) {
       this.updateRunnerPosition(activeRunner);
       if (this.view.hasTip) this.updateTipNumber(activeRunner.stepValue, activeRunner.instance);
-      if (this.view.hasBar) this.updateBarPosition(activeRunner);
+      if (this.view.hasBar) this.updateBarPosition();
+      if (this.view.hasPanel) {
+        this.view.panel.updateRunnerInput(
+          activeRunner.stepValue,
+          activeRunner.instance,
+        );
+      }
     }
   }
 
-  // prettier-ignore
+  public recieveRebuildData(params: PresenterBuildParams): void {
+    this.rebuild(params);
+  }
+
   public recieveDragData(
     { fieldSize }: SliderView,
     cursorXY: number[],
     i: number,
   ): void {
-    console.log();
-
     const dataForRunnerUpdatingArgs: UpdateRunnerValuesArgs = {
       cursorXY,
       isVertical: this.field.isVertical,
@@ -132,13 +225,18 @@ export default class SliderPresenter {
     this.runners[i].updateRunnerValues(dataForRunnerUpdatingArgs);
   }
 
-  // prettier-ignore
+  public recieveInputsData(
+    panelInputsData: PresenterBuildParams,
+  ): void {
+    this.rebuild(panelInputsData);
+  }
+
   public recieveClickData(
-    {
-      runnersPosition, fieldSize,
-    }: SliderView,
+    view: SliderView,
     cursorXY: number[],
   ): void {
+    const runnersPosition = view.runner.positions;
+    const { fieldSize } = view;
     const dataForRunnerUpdatingArgs: DataForRunnerUpdatingArgsType = {
       runnersPosition,
       isVertical: this.field.isVertical,
@@ -151,76 +249,37 @@ export default class SliderPresenter {
     this.field.prepareDataForRunnerUpdating(dataForRunnerUpdatingArgs);
   }
 
-  private setMinMax(minValue: number, maxValue: number): this {
+  private setMinMax({ minValue, maxValue }:PresenterBuildParams): this {
     this.field.setMinMax(minValue, maxValue);
     this.view.initStartEnd(minValue, maxValue);
     return this;
   }
 
-  public setStep(step: number): this {
+  private setStep({ step }:PresenterBuildParams): this {
     this.runners.forEach((v) => v.setStep(step, this.field.minMax));
-    if (step < 1) this.runners.forEach((v) => v.defineSignAfterComma());
     this.view.setStep(step, this.runners[0].stepSignAfterComma);
 
     return this;
   }
 
-  public updateTipNumber(stepValue: number, instance: number): this {
-    this.view.updateTipNumber({ stepValue, instance });
+  private updateRunnerPosition({ stepPosition, instance }: RunnerModel): void {
+    this.view.runner.updatePosition(stepPosition, instance);
+  }
+
+  private updateTipNumber(stepValue: number, instance: number): this {
+    this.view.tip.update({ stepValue, instance });
     return this;
   }
 
-  //  prettier-ignore
-  private build(params: PresenterBuildParams): void {
-    let {
-      minValue = 0, maxValue = 100, step = 1, runnerSize = [40, 40], fieldThickness = 6,
-    } = params;
-
-    const {
-      shouldAddTip = false,
-      shouldAddBar = false,
-      shouldAddScale = false,
-      isRange = false,
-      isTestMode = false,
-      orientation = 'horizontal',
-    } = params;
-
-    //  prettier-ignore
-    ({
-      minValue, maxValue, step, runnerSize, fieldThickness,
-    } = checkValues(
-      {
-        minValue, maxValue, step, runnerSize, fieldThickness,
-      },
-    ));
-
-    if (!isTestMode) {
-      this.setMinMax(minValue, maxValue)
-        .initLayers(runnerSize, fieldThickness, orientation)
-        .createRangeSlider({
-          isRange,
-          shouldAddTip,
-          runnerSize,
-          minValue,
-          maxValue,
-        })
-        .setStep(step)
-        .createBar(shouldAddBar)
-        .createScale(shouldAddScale)
-        .updateTipNumber(minValue, 0)
-        .updateTipNumber(maxValue, 1)
-        .onClick();
-    }
-  }
-
-  private updateBarPosition(activeRunner: RunnerModel): this {
-    this.view.updateBarPosition(activeRunner);
+  private updateBarPosition(): this {
+    this.view.bar.updateBarPosition();
     return this;
   }
 
-  private initLayers(runnerSize: number[], fieldThickness:number, orientation: Orientation): this {
+  private initLayers({ runnerSize, fieldThickness, orientation }:PresenterBuildParams): this {
     this.field.setIsVertical(orientation);
     this.view.initializeValues(runnerSize, fieldThickness, orientation);
+
     return this;
   }
 
@@ -228,8 +287,6 @@ export default class SliderPresenter {
     this.view.handleClick(this.runners, this.field);
     return this;
   }
-
-  private updateRunnerPosition({ stepPosition, instance }: RunnerModel): void {
-    this.view.updateRunnerPosition(stepPosition, instance);
-  }
 }
+
+export default SliderPresenter;

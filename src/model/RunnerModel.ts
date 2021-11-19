@@ -1,12 +1,15 @@
 /* eslint-env jquery */
 
-import SliderPresenter from '../presenter/SliderPresenter';
 import defineSignAfterComma from './runnerModules/defineSignAfterComma';
 import initializeDefaultValues from './runnerModules/initializeDefaultValues';
-import notify from './runnerModules/notify';
-import updateRunnerValues from './runnerModules/updateRunnerValues';
 import setStep from './runnerModules/setStep';
-import { UpdateRunnerValuesArgs } from './runnerModules/runnerInterfaces';
+import { CalculateStepPositionFromInputReturned, UpdateRunnerValuesArgs } from './runnerModules/runnerInterfaces';
+import { PresenterBuildParams } from '../presenter/presenterInterfaces';
+import notifyToUpdate from './runnerModules/notifyToUpdate';
+import notifyToRebuild from './runnerModules/notifyToRebuild';
+import updateRunnerValues from './runnerModules/updateRunnerValues';
+import setValuesFromInputs from './runnerModules/setValuesFromInputs';
+import SliderPresenter from '../presenter/SliderPresenter.js';
 
 class RunnerModel {
   public instance: number;
@@ -27,15 +30,29 @@ class RunnerModel {
 
   public subscriber: SliderPresenter;
 
-  public defineSignAfterComma: (this: RunnerModel) => void;
+  public defineSignAfterComma: (this: RunnerModel, minMax: number[]) => number;
 
-  public notify: (that: RunnerModel) => void;
+  public notifyToUpdate: (
+    this: RunnerModel
+  ) => void;
+
+  public notifyToRebuild: (
+    this: RunnerModel, rebuildData: PresenterBuildParams
+  ) => void;
 
   public setStep: (step: number, minMax: number[]) => void;
 
+  public setValuesFromInputs:(
+    this: RunnerModel,
+    inputRunnerValue:number,
+    minMax:number[]
+  ) => CalculateStepPositionFromInputReturned;
+
   public updateRunnerValues: (updateRunnerValuesArgs: UpdateRunnerValuesArgs) => void;
 
-  public initializeDefaultValues: (a: number[]) => void;
+  public initializeDefaultValues: (minMax: number[],
+    runnerInstantPosition:number,
+  ) => void;
 
   constructor(id: string, instance: number, subscriber: SliderPresenter) {
     this.instance = instance;
@@ -48,11 +65,15 @@ class RunnerModel {
     this.stepValue = 0;
     this.subscriber = subscriber;
 
-    this.defineSignAfterComma = defineSignAfterComma.bind(this) as () => void;
-    this.notify = notify.bind(this) as () => void;
+    this.defineSignAfterComma = defineSignAfterComma.bind(this) as () => number;
+    this.notifyToUpdate = notifyToUpdate.bind(this) as () => void;
+    this.notifyToRebuild = notifyToRebuild.bind(this) as () => void;
     this.setStep = setStep.bind(this) as () => void;
     this.updateRunnerValues = updateRunnerValues.bind(this) as () => void;
     this.initializeDefaultValues = initializeDefaultValues.bind(this) as () => void;
+    this.setValuesFromInputs = setValuesFromInputs.bind(
+      this,
+    ) as () => CalculateStepPositionFromInputReturned;
   }
 }
 export default RunnerModel;

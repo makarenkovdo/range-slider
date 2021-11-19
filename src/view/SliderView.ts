@@ -1,39 +1,25 @@
-/* eslint-disable padded-blocks */
-/* eslint-env jquery */
-import '../index.scss';
-// import { addRunnerToDom, prepareRunnerArgs } from './viewModules/createSliderView';
-import createBar from './viewModules/createBar';
-import createRunner from './viewModules/createRunner';
-import createTipNumber from './viewModules/createTipNumber';
-import initializeValues from './viewModules/initializeValues';
-import initStartEnd from './viewModules/initStartEnd';
-import notifyFieldClick from './viewModules/notifyFieldClick';
-import notifySliderMoving from './viewModules/notifySliderMoving';
-import updateTipNumber from './viewModules/updateTipNumber';
-import updateBarPosition from './viewModules/updateBarPosition';
-import updateRunnerPosition from './viewModules/updateRunnerPosition';
+import initializeValues from './field/initializeValues';
+import initStartEnd from './field/initStartEnd';
+import handleClick from './field/handleClick';
+import notifyFieldClick from './field/notifyFieldClick';
+import setStep from './field/setStep';
 
 import FieldModel from '../model/FieldModel';
-import SliderPresenter from '../presenter/SliderPresenter';
+import SliderPresenter from '../presenter/SliderPresenter.js';
 import RunnerModel from '../model/RunnerModel';
 
-import { UpdateTipNumberArgs } from './viewInterfaces';
-import updateZIndex from './viewModules/updateZIndex';
-import createScale from './viewModules/createScale';
-import handleDrag from './viewModules/handleDrag';
-import handleClick from './viewModules/handleClick';
-import handleDrop from './viewModules/handleDrop';
-import setStep from './viewModules/setStep';
 import { Orientation } from '../presenter/presenterInterfaces';
+
+import Bar from './bar/Bar';
+import Panel from './panel/Panel';
+import Runner from './runner/Runner';
+import Scale from './scale/Scale';
+import Tip from './tip/Tip';
 
 export default class SliderView {
   public id: string;
 
   public $body: JQuery<HTMLElement>;
-
-  public $runners: JQuery<HTMLElement>[];
-
-  public $bar: JQuery<HTMLElement>;
 
   public isVertical: boolean;
 
@@ -43,69 +29,51 @@ export default class SliderView {
 
   public hasBar: boolean;
 
-  public runnersPosition: number[];
-
-  public runnerSize: number[];
-
   public fieldSize: number[];
 
   public minMax: number[];
 
-  readonly $field: JQuery<HTMLElement>;
+  public $field: JQuery<HTMLElement>;
 
-  readonly subscriber: SliderPresenter;
-
-  public cursorXY: number[];
+  public subscriber: SliderPresenter;
 
   public corrector: number;
-
-  public activeInstance: number;
-
-  public isZIndexUpdated: boolean;
 
   public hasScale: boolean;
 
   public hasTip: boolean;
 
-  public step: number;
-
-  public stepSignAfterComma: number;
+  public hasPanel: boolean;
 
   public lengthInStep: number;
 
   public borderWidth: number;
 
+  public fieldThickness: number;
+
   private class: string;
 
-  public createBar: (that: SliderPresenter) => void;
+  public panel: Panel;
 
-  public createRunner: (i: number, isVertical: boolean) => void;
+  public bar: Bar;
 
-  public createTipNumber: (runnerCounter: number, isVertical: boolean) => void;
+  public runner: Runner;
 
-  public createScale: (this: SliderView) => void;
+  public scale: Scale;
 
-  public updateBarPosition: (activeRunner: RunnerModel) => void;
+  public tip: Tip;
 
-  public updateTipNumber: (obj: UpdateTipNumberArgs) => void;
+  public initializeValues: (
+    runnerSize: number[],
+    fieldThickness:number,
+    orientation: Orientation,
+  ) => void;
 
-  public updateRunnerPosition: (this: SliderView, stepPosition: number, instance: number) => void;
-
-  public updateZIndex: (this: SliderView, i: number) => void;
-
-  public initializeValues: (runnerSize: number[], fieldThickness:number, orientation: Orientation) => void;
-
-  public handleDrag: (this: SliderView, runnerInstance: number) => void;
-
-  public handleDrop: (this: SliderView) => void;
+  public initStartEnd: (minValue: number, maxValue: number) => void;
 
   public handleClick: (this: SliderView, runners: RunnerModel[], field: FieldModel) => void;
 
-  public notifySliderMoving: (cursorXY: number[], instance: number) => void;
-
   public notifyFieldClick: (cursorXY: number[]) => void;
-
-  public initStartEnd: (minValue: number, maxValue: number) => void;
 
   public setStep: (step:number, stepSignAfterComma:number) => void;
 
@@ -113,8 +81,6 @@ export default class SliderView {
     this.id = id;
     this.$body = $('body');
     this.$field = $(`#${id}`);
-    this.$runners = [];
-    // this.$bar = '';
     this.class = $(`#${id}`).attr('class');
     this.isVertical = false;
     this.isRange = false;
@@ -122,33 +88,21 @@ export default class SliderView {
     this.hasScale = false;
     this.hasTip = false;
     this.orientation = 'horizontal';
-    this.runnersPosition = [0, 100];
     this.fieldSize = [];
-    this.runnerSize = [];
     this.borderWidth = 1;
     this.minMax = [];
-    this.step = 1;
-    this.stepSignAfterComma = 0;
     this.lengthInStep = 1;
     this.corrector = 0;
-    this.cursorXY = [0, 0];
-    this.activeInstance = 0;
-    this.isZIndexUpdated = false;
     this.subscriber = subscriber;
 
-    this.createBar = createBar.bind(this) as () => void;
-    this.createRunner = createRunner.bind(this) as () => void;
-    this.createTipNumber = createTipNumber.bind(this) as () => void;
-    this.createScale = createScale.bind(this) as () => void;
-    this.updateBarPosition = updateBarPosition.bind(this) as () => void;
-    this.updateTipNumber = updateTipNumber.bind(this) as () => void;
-    this.updateRunnerPosition = updateRunnerPosition.bind(this) as () => void;
-    this.updateZIndex = updateZIndex.bind(this) as () => void;
+    this.panel = new Panel(this);
+    this.bar = new Bar(this);
+    this.runner = new Runner(this);
+    this.scale = new Scale(this);
+    this.tip = new Tip(this);
+
     this.initializeValues = initializeValues.bind(this) as () => void;
-    this.handleDrag = handleDrag.bind(this) as () => void;
-    this.handleDrop = handleDrop.bind(this) as () => void;
     this.handleClick = handleClick.bind(this) as () => void;
-    this.notifySliderMoving = notifySliderMoving.bind(this) as () => void;
     this.notifyFieldClick = notifyFieldClick.bind(this) as () => void;
     this.initStartEnd = initStartEnd as () => void;
     this.setStep = setStep as () => void;

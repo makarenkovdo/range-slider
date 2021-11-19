@@ -6,15 +6,10 @@ import {
 } from '../runnerInterfaces';
 
 //  implementation of airbnb rule #7.12
-// const assignIfHasOwn = (obj, key, value) => {
-//   const newObj = Object.prototype.hasOwnProperty.call(obj, key) ? obj : false;
-//   newObj[key] = value;
-// };
-
 const assignIfHasOwn = (obj: RunnerModel, key: AssignIfHasOwnKeys, value: number) => {
   const newObj: RunnerModel = obj;
   if (Object.prototype.hasOwnProperty.call(obj, key)) {
-    newObj[key] = value; // enum???
+    newObj[key] = value;
   }
 };
 
@@ -38,32 +33,24 @@ const calculatePositionInPercent = (
     }
     positionInPercent = ((cursorX) * 100) / (fieldSize[0]);
   }
-  //  todo for vertical fieldSize[i]
-  console.log('positionInPercent', positionInPercent);
 
   return positionInPercent;
 };
 
-// prettier-ignore
 const checkCollision = (
   { stepPosition, stepValue }:CheckCollisionSubargs,
   runner:RunnerModel[],
   thisRunner:RunnerModel,
   isVertical:boolean,
 ):CheckCollisionSubargs => {
-  // const isCollisionZero = () => (thisRunner.instance === 0
   const isCollisionZero = () => (!isVertical && thisRunner.instance === 0
       && stepPosition - runner[1].stepPosition >= 0)
-        // || (thisRunner && thisRunner.instance === 0 // thisRunner hasn't isVertical!!!
-        || (isVertical && thisRunner.instance === 0 // thisRunner hasn't isVertical!
+        || (isVertical && thisRunner.instance === 0
             && runner[1].stepPosition - stepPosition <= 0);
 
-  // prettier-ignore
   const isCollisionOne = () => (
     (!isVertical && thisRunner.instance === 1
-    // (thisRunner.instance === 1
         && stepPosition - runner[0].stepPosition <= 0)
-        // || (thisRunner.instance === 0
         || (isVertical && thisRunner.instance === 1
             && runner[0].stepPosition - stepPosition >= 0)
   );
@@ -71,13 +58,11 @@ const checkCollision = (
   if (isCollisionZero()) {
     const a = { stepPosition: runner[1].stepPosition, stepValue: runner[1].stepValue };
     return a;
-  // eslint-disable-next-line no-else-return
-  } else if (isCollisionOne()) {
+  } if (isCollisionOne()) {
     const a = { stepPosition: runner[0].stepPosition, stepValue: runner[0].stepValue };
     return a;
-  } else {
-    return { stepPosition, stepValue };
   }
+  return { stepPosition, stepValue };
 };
 
 const setStepValueAndPosition = (
@@ -93,17 +78,32 @@ const calculateValue = (minMax: number[], thisRunner: RunnerModel): number => {
   return thisRunner.positionInPercent * (fieldLength / 100) + +minMax[0];
 };
 
-// prettier-ignore
 const calculateStepValueAndPosition = ({
   positionInPercent,
   step,
   stepInPercent,
   value,
   stepSignAfterComma,
-}:CalculateStepValueAndPositionArgs):CheckCollisionSubargs => {
-  const stepPosition = Number((Math.round(positionInPercent / stepInPercent) * (stepInPercent))
+}:CalculateStepValueAndPositionArgs,
+minMax: number[]):CheckCollisionSubargs => {
+  let divisionQuantity = 0;
+  function checkOnException() {
+    return Math.floor((minMax[1] - minMax[0]) / step) * step === (minMax[1] - minMax[0]);
+  }
+  if (checkOnException()) divisionQuantity = (minMax[1] - minMax[0]) / step;
+  else divisionQuantity = Math.floor((minMax[1] - minMax[0]) / step) + 1;
+  const divisionSizeInPercent = 100 / divisionQuantity;
+
+  let stepPosition = Number((Math.round(positionInPercent / stepInPercent) * (stepInPercent))
     .toFixed(stepSignAfterComma));
-  const stepValue = Number((Math.round(value / step) * step).toFixed(stepSignAfterComma));
+  const stepValueMultiplier = Math.floor(stepPosition / divisionSizeInPercent);
+  let stepValue = Number((minMax[0] + step * stepValueMultiplier).toFixed(stepSignAfterComma));
+  const isItLast = ():boolean => value === minMax[1] || stepValueMultiplier === divisionQuantity;
+  if (!checkOnException() && isItLast()) {
+    stepPosition = 100;
+    // eslint-disable-next-line prefer-destructuring
+    stepValue = minMax[1];
+  }
   return { stepPosition, stepValue };
 };
 

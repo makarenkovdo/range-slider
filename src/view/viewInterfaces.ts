@@ -1,4 +1,5 @@
 import { Orientation } from '../presenter/presenterInterfaces';
+import Runner from './runner/Runner';
 import SliderView from './SliderView';
 
 type AddTipNumberToDOMReturned = { minMax: number; i: number };
@@ -9,42 +10,45 @@ type DefineBarKindArgsType = {
   isVertical: boolean;
   $bar: JQuery<HTMLElement>;
   runnersPosition: number[];
+  fieldThickness: number;
   calcLengthOfRangeBar: (runnersPosition: number[]) => number;
-  updateSingleVerticalBarPosition: (runnersPosition: number[], $bar: JQuery<HTMLElement>) => void;
-  updateSingleHorizontalBarPosition: (runnersPosition: number[], $bar: JQuery<HTMLElement>) => void;
+  updateSingleVerticalBarPosition: (
+    runnersPosition: number[],
+    fieldThickness: number,
+    $bar: JQuery<HTMLElement>
+  ) => void;
+  updateSingleHorizontalBarPosition: (
+    runnersPosition: number[],
+    fieldThickness: number,
+    $bar: JQuery<HTMLElement>
+  ) => void;
   updateRangeBarPosition: (
-    a: number, // todo enum
+    enumNumber: number,
     $bar: JQuery<HTMLElement>,
     runnersPosition: number[],
+    fieldThickness: number,
     barLength: number,
   ) => void;
 };
 type DragEventDataType = {
-  thisView: SliderView;
+  thisRunner: Runner;
   instance: number;
 };
 
 type PrepareScaleDataArgs = {
-  divisionQuantity:number;
-  divisionNumber:number;
-};
-
-type CreateScaleNumbersArgs = {
-  $scaleNumbers?:JQuery<HTMLElement>;
-  minMax:number[];
-  divisionNumber:number;
-  divisionQuantity:number;
-  stepSignAfterComma:number;
-  switcher: number;
-  lastOrFirstIterration: number;
-  isVertical: boolean;
+  lineQuantity:number;
+  segmentInPercent:number;
+  stepMultiplier:number;
+  scaleSignAfterComma: number;
+  shouldAddExtraLine: boolean;
+  onePxInPercent: number;
 };
 
 type CreateScaleLinesBoxArgs = {
   $id:JQuery<HTMLElement>;
   orientation:Orientation;
   fieldSize:number[];
-  divisionQuantity:number;
+  lineQuantity:number;
   top: number;
   left: number;
   columnOrRow:string;
@@ -53,12 +57,76 @@ type CreateScaleLinesBoxArgs = {
 
 type CreateScaleNumbersBoxArgs = {
   $id:JQuery<HTMLElement>,
-  divisionQuantity:number,
+  lineQuantity:number,
   width: number,
   height: number,
   top:number,
   left:number,
   columnOrRow: string,
+  fieldSize:number[];
+
+};
+
+type CreateScaleLinesArgs = {
+  $scaleLines?:JQuery<HTMLElement>;
+  minMax:number[];
+  segmentInPercent:number;
+  lineQuantity:number;
+  orientation: Orientation;
+  smallLine:string;
+  bigLine: string;
+  step: number;
+  stepMultiplier: number;
+  shouldAddExtraLine: boolean;
+};
+type CreateScaleNumbersArgs = {
+  $scaleNumbers?:JQuery<HTMLElement>;
+  minMax:number[];
+  segmentInPercent:number;
+  lineQuantity:number;
+  stepSignAfterComma:number;
+  switcher: number;
+  lastOrFirstIterration: number;
+  isVertical: boolean;
+  stepMultiplier:number;
+  step: number;
+  scaleSignAfterComma: number;
+  shouldAddExtraLine: boolean;
+  onePxInPercent: number;
+  orientation: string;
+};
+
+type HandleInputsEventData = { sliderView: SliderView; panelSelectors: PanelSelectors };
+
+type PanelInputsData = {
+  minMax: number[];
+  runnersInstantPosition: number[];
+  runnerSize:number[];
+  isRange:boolean;
+  hasBar:boolean;
+  hasTip:boolean;
+  hasScale:boolean;
+  isVertical:boolean;
+  returnedRunnerPosition?: RunnersInstantPosition[];
+};
+
+type PanelSelectors = {
+  $minValueInput: HTMLInputElement;
+  $maxValueInput: HTMLInputElement;
+  $runnerSizeInput: HTMLInputElement;
+  $stepInput: HTMLInputElement;
+  $isRangeInput: HTMLInputElement;
+  $orientationInput: HTMLInputElement;
+  $hasScale: HTMLInputElement;
+  $hasBar: HTMLInputElement;
+  $hasTip: HTMLInputElement;
+  $runner0ValueInput: HTMLInputElement;
+  $runner1ValueInput: HTMLInputElement;
+};
+
+type RunnersInstantPosition = {
+  stepPosition: number;
+  stepValue: number;
 };
 
 export {
@@ -70,4 +138,10 @@ export {
   CreateScaleNumbersArgs,
   CreateScaleLinesBoxArgs,
   CreateScaleNumbersBoxArgs,
+  PanelSelectors,
+  HandleInputsEventData,
+  PanelInputsData,
+  RunnersInstantPosition,
+  CreateScaleLinesArgs,
+
 };

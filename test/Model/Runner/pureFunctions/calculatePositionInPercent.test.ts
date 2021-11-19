@@ -17,7 +17,7 @@ describe('calculatePositionInPercent test', () => {
     isTestMode: true,
   });
   const testRunner = new RunnerModel('testId', 0, testPresenter);
-  test('calculatePositionInPercent ', () => {
+  test('must return positionInPercent ', () => {
     const isVertical = false;
     const thisRunner: RunnerModel = testRunner;
     const cursorXY: number[] = [0.2, 0.5];

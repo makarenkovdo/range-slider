@@ -1,68 +1,60 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import './index.scss';
+import './panel.scss';
 import SliderPresenter from './presenter/SliderPresenter';
 
-const firstRunner = new SliderPresenter('first', {
+const firstSlider = new SliderPresenter('first', {
   shouldAddTip: true,
   shouldAddBar: true,
-  step: 0.1,
-  maxValue: 17,
-  minValue: -5,
+  step: 2,
+  maxValue: -0.1,
+  minValue: 0.1,
   isRange: true,
   shouldAddScale: true,
-  runnerSize: [16, 16],
+  runnerSize: [12, 12],
+  runnersInstantPosition: [9, 14],
+  hasInputPanel: true,
 });
 
-const secondRunner = new SliderPresenter('second', {
+const secondSlider = new SliderPresenter('second', {
+  step: 100000,
+  maxValue: -1000000,
+  minValue: 1000000,
   shouldAddTip: true,
   shouldAddBar: true,
-  step: 10,
+  shouldAddScale: true,
+  runnerSize: [20, 20],
+  runnersInstantPosition: [0, 100000],
+  fieldThickness: 10,
+  hasInputPanel: true,
+  orientation: 'vertical',
+});
+
+const thirdSlider = new SliderPresenter('third', {
+  shouldAddTip: true,
+  shouldAddBar: true,
+  step: 4,
+  maxValue: 16.25,
+  minValue: -70,
   isRange: true,
   shouldAddScale: true,
+  runnerSize: [12, 12],
+  runnersInstantPosition: [0, 8],
+  hasInputPanel: true,
+  fieldThickness: 2,
   orientation: 'vertical',
-  minValue: -10,
-
 });
 
-const thirdRunner = new SliderPresenter('third', {
-  shouldAddTip: true,
-  shouldAddBar: true,
-  maxValue: 10,
-  minValue: -11,
+const fourthSlider = new SliderPresenter('fourth', {
+  shouldAddTip: false,
+  shouldAddBar: false,
+  step: 0.07,
+  maxValue: -0.01,
+  minValue: 16.35,
+  isRange: true,
   shouldAddScale: true,
-
-});
-
-const fourthRunner = new SliderPresenter('fourth', {
-  shouldAddTip: true,
-  shouldAddBar: true,
-  maxValue: 10,
-  shouldAddScale: true,
-  orientation: 'vertical',
-
-});
-
-const fifthRunner = new SliderPresenter('fifth', {
-  minValue: 20,
-  maxValue: 35,
-  shouldAddTip: true,
-  shouldAddBar: true,
-  shouldAddScale: true,
-
-});
-const sixthRunner = new SliderPresenter('sixth', {
-  minValue: 0,
-  maxValue: 1,
-  step: 0.001,
-  shouldAddTip: true,
-  shouldAddScale: true,
-
-});
-
-const seventhRunner = new SliderPresenter('seventh', {
-  minValue: 7,
-  maxValue: 14,
-  step: 0.01,
-  shouldAddTip: true,
-  shouldAddScale: true,
-  orientation: 'vertical',
+  runnerSize: [50, 50],
+  runnersInstantPosition: [0, 8],
+  fieldThickness: 20,
+  hasInputPanel: true,
 });

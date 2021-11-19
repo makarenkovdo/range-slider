@@ -25,9 +25,15 @@ type CheckCollisionSubargs = {
   stepValue: number;
 };
 
+type CalculateStepPositionFromInputReturned = {
+  stepPosition: number;
+  stepValue: number;
+};
+
 export {
   UpdateRunnerValuesArgs,
   AssignIfHasOwnKeys,
   CalculateStepValueAndPositionArgs,
   CheckCollisionSubargs,
+  CalculateStepPositionFromInputReturned,
 };

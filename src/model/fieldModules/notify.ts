@@ -1,6 +1,6 @@
 import RunnerModel from '../RunnerModel';
 
-const notify = function notifySubscribers(this: RunnerModel): void {
+const notify = function notifySubscribersToRecieveModelLogic(this: RunnerModel): void {
   this.subscriber.recieveModelLogic(this);
 };
 

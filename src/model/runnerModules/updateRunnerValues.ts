@@ -29,16 +29,19 @@ const updateRunnerValues = ({
     setStepValueAndPosition(
       activeRunner,
       checkCollision(
-        calculateStepValueAndPosition(activeRunner),
+        calculateStepValueAndPosition(activeRunner, minMax),
         runners,
         activeRunner,
         isVertical,
       ),
     );
   } else {
-    setStepValueAndPosition(activeRunner, calculateStepValueAndPosition(activeRunner));
+    setStepValueAndPosition(
+      activeRunner,
+      calculateStepValueAndPosition(activeRunner, minMax),
+    );
   }
-  activeRunner.notify(this);
+  activeRunner.notifyToUpdate.call(this);
 };
 
 export default updateRunnerValues;

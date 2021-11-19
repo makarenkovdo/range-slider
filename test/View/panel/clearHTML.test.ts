@@ -4,8 +4,8 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
-import { PresenterBuildParams } from '../../src/presenter/presenterInterfaces';
-import SliderPresenter from '../../src/presenter/SliderPresenter';
+import { PresenterBuildParams } from '../../../src/presenter/presenterInterfaces';
+import SliderPresenter from '../../../src/presenter/SliderPresenter';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -52,15 +52,26 @@ describe('panel test', () => {
     orientation: 'vertical',
   };
 
-  test('if functions selectPanelNodes/initializePanel works', async () => {
+  test('if functions rebuild call clearHTMLElement', async () => {
     await waitFor(() => {
       expect(testedSlider['view'].id).toBeDefined();
     });
-
+    const clearHTMLElement = jest.fn();
     testedSlider['activatePanel'](createRangeSliderTestArgs);
-
-    expect(testedSlider['view'].panel.$maxValueInput).toBeDefined();
-    expect(testedSlider['view'].panel.minMax[0]).toBe(1);
+    testedSlider['view'].panel.clearHTMLElement = clearHTMLElement;
+    testedSlider['rebuild'](createRangeSliderTestArgs);
+    expect(clearHTMLElement).toHaveBeenCalled();
+  });
+  test('if clearHTMLElement clear $field', async () => {
+    await waitFor(() => {
+      expect(testedSlider['view'].id).toBeDefined();
+    });
+    const clearHTMLElement = jest.fn();
+    testedSlider['activatePanel'](createRangeSliderTestArgs);
+    testedSlider['view'].panel.clearHTMLElement = clearHTMLElement;
+    testedSlider['rebuild'](createRangeSliderTestArgs);
+    const $field = $('#first')
+    expect($field.html()).toBe('');
   });
   //   test('if function selectPanelNodes works', async() => {
   //     await waitFor(() => {

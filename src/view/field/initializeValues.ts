@@ -24,7 +24,7 @@ const initializeValues = function initializeDefaultViewValues(
       $field.css('width', '100%');
     }
   });
-  this.$field.addClass(`slider_${this.orientation} js_slider_${this.orientation}`);
+  this.$field.addClass(`slider_${this.orientation} js-slider_${this.orientation}`);
 };
 
 export default initializeValues;

@@ -4,8 +4,8 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
-import { PresenterBuildParams } from '../../src/presenter/presenterInterfaces';
-import SliderPresenter from '../../src/presenter/SliderPresenter';
+import { PresenterBuildParams } from '../../../src/presenter/presenterInterfaces';
+import SliderPresenter from '../../../src/presenter/SliderPresenter';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -52,18 +52,30 @@ describe('panel test', () => {
     orientation: 'vertical',
   };
 
-  test('if changing the input would call notifyInputChange-function', async () => {
+  test('if functions selectPanelNodes/initializePanel set minmax', async () => {
     await waitFor(() => {
       expect(testedSlider['view'].id).toBeDefined();
     });
-    const notifyInputChange = jest.fn();
-    testedSlider['view'].panel.notifyInputChange = notifyInputChange;
+
     testedSlider['activatePanel'](createRangeSliderTestArgs);
-    const event = new Event('change');
-    const elem = document.querySelector('.js-slider-input__min-value');
-    elem.dispatchEvent(event);
 
-    expect(notifyInputChange).toHaveBeenCalled();
+    expect(testedSlider['view'].panel.$maxValueInput).toBeDefined();
+    expect(testedSlider['view'].panel.minMax[0]).toBe(1);
+    await waitFor(() => {
+      expect(testedSlider['view'].panel.$maxValueInput.value).toBe('5');
+    });
   });
+  test('if functions selectPanelNodes/initializePanel set orientation', async () => {
+    await waitFor(() => {
+      expect(testedSlider['view'].id).toBeDefined();
+    });
 
+    testedSlider['activatePanel'](createRangeSliderTestArgs);
+
+    expect(testedSlider['view'].panel.$orientationInput).toBeDefined();
+    expect(testedSlider['view'].panel.orientation).toBe('vertical');
+    await waitFor(() => {
+      expect(testedSlider['view'].panel.$orientationInput.value).toBe('on');
+    });
+  });
 });

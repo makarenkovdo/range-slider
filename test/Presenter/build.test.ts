@@ -2,20 +2,16 @@
  * @jest-environment jsdom
  */
 /* eslint-disable @typescript-eslint/dot-notation */
+import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import { PresenterBuildParams } from '../../src/presenter/presenterInterfaces';
 import SliderPresenter from '../../src/presenter/SliderPresenter';
 
-beforeEach(() => {
-  document.body.innerHTML = `
-<div style="width: 500px; height: 500px; margin-bottom: 100px;">
-  <div id="first" class="slider"></div>
-</div>
-    `;
-});
-
 describe('if build-function calls methods', () => {
-  const testedSlider = new SliderPresenter('first', {});
+  document.body.innerHTML = `
+  <div data-testid="testId" id="testId" class="slider"></div>
+  `;
+  const testedSlider = new SliderPresenter('testId', {});
 
   const createRangeSliderTestArgs: PresenterBuildParams = {
     isTestMode: false,
@@ -25,5 +21,19 @@ describe('if build-function calls methods', () => {
     testedSlider['activatePanel'] = activatePanel;
     testedSlider['build'](createRangeSliderTestArgs);
     expect(activatePanel).toHaveBeenCalled();
+  });
+});
+
+describe('if build params works', () => {
+  document.body.innerHTML = `
+  <div data-testid="testId" id="testId" class="slider"></div>
+  `;
+  const testedSlider = new SliderPresenter('testId', {
+    orientation: 'vertical',
+  });
+  test('if build vertical slider', async () => {
+    await waitFor(() => {
+      expect(testedSlider['view'].$field.hasClass('js-slider_vertical')).toBe(true);
+    });
   });
 });

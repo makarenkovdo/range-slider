@@ -1,10 +1,10 @@
-#Range-Slider-плагин
+# Range-Slider-плагин
 реализован в рамках стажировки в MetaLamp
 
 [Демо-страница]: (https://makarenkovdo.github.io/range-slider/dist/)
 
 
-#Библиотеки:
+# Библиотеки:
 
 * Webpack: 5.54.0
 * SASS: 1.41.0

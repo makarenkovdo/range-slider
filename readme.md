@@ -23,7 +23,7 @@
 Покрытие тестами: npx jest --coverage
 
 #Инициализация плагина
-1) Создать пустой родительный div-элемент с необходимой шириной/длиной + пустой div-элемент с классом slider.
+1) Создать пустой родительный div-элемент с необходимой шириной/длиной + пустой вложенный div-элемент с классом slider.
 ```
 <div style="width: 500px">
         <div id="first" class="slider"></div>
@@ -36,17 +36,10 @@
 const mySlider = new SliderPresenter('first',{})
 ```
 
-$('#selector').mySlider();
 Инициализация с пользовательсиким параметрами:
 
 ```
-const config = {
-  min: 200,
-  max: 500,
-  from: 250,
-  to: 350,
-  isDouble: true,
-};
+
 ```
 
-$('#selector').mySlider(config);
+

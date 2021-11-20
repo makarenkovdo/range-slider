@@ -120,14 +120,15 @@ h1 {
 }
 .slider__tip span {
   display: grid;
+  grid-template-columns: minmax(20px, auto);
   border-radius: 5px;
   border: 1px solid #333;
   box-sizing: border-box;
   font-size: 10px;
   line-height: 20px;
-  display: block;
   height: 25px;
-  width: 40px;
+  padding-left: 2px;
+  padding-right: 2px;
   color: black;
   font-weight: bold;
   text-align: center;

@@ -14,8 +14,8 @@ const plugins = [
 
 plugins.push(
   new HtmlWebpackPlugin({
-    template: `./src/index.html`,
-    filename: `index.html`,
+    template: `./src/demo.html`,
+    filename: `demo.html`,
   }),
   new webpack.ProvidePlugin({
     $: 'jquery',
@@ -28,7 +28,8 @@ plugins.push(
 module.exports = {
   mode: 'development',
   entry: {
-    index: './src/index.ts',
+    demo: './src/demo.ts',
+    Slider: './src/Slider.ts',
   },
   output: {
     filename: '[name].bundle.js',

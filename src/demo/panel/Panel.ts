@@ -1,7 +1,7 @@
 import clearHTMLElement from './clearHTMLElement';
 import activatePanel from './activate';
 import { PresenterBuildParams } from '../../presenter/presenterInterfaces';
-import SliderView from '../SliderView';
+import SliderView from '../../view/SliderView';
 import notifyInputChange from './notifyInputChange';
 import updateRunnerInput from './updateRunnerInput';
 import { handleChange, initializePanel } from './activate/activateUtility';
@@ -67,7 +67,7 @@ export default class Panel {
 
   public updateRunnerInput: (this: Panel, stepValue:number, instance:number) => void;
 
-  constructor(view: SliderView) {
+  constructor(params: PresenterBuildParams) {
     this.$minValueInput = null;
     this.$fieldThicknessInput = null;
     this.$hasBarInput = null;
@@ -81,7 +81,15 @@ export default class Panel {
     this.$runnerHeightInput = null;
     this.$runnerWidthInput = null;
     this.$stepInput = null;
-    this.parent = view;
+    this.hasBar = params.shouldAddBar;
+    this.hasScale = params.shouldAddScale;
+    this.hasTip = params.shouldAddTip;
+    this.isRange = params.isRange;
+    this.minMax = [params.minValue, params.maxValue];
+    this.orientation = params.orientation;
+    this.runnerSize = params.runnerSize;
+    this.runnersPosition = params.runnersInstantPosition;
+    this.step = params.step;
     this.activatePanel = activatePanel.bind(this) as () => void;
     this.clearHTMLElement = clearHTMLElement.bind(this) as () => void;
     this.initializePanel = initializePanel.bind(this) as () => void;

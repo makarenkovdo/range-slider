@@ -14,8 +14,8 @@ const plugins = [
 
 plugins.push(
   new HtmlWebpackPlugin({
-    template: `./src/demo.html`,
-    filename: `demo.html`,
+    template: `./src/demo/demo.html`,
+    filename: `index.html`,
   }),
   new webpack.ProvidePlugin({
     $: 'jquery',
@@ -28,7 +28,7 @@ plugins.push(
 module.exports = {
   mode: 'development',
   entry: {
-    demo: './src/demo.ts',
+    index: './src/demo/DemoSlider.ts',
     Slider: './src/Slider.ts',
   },
   output: {

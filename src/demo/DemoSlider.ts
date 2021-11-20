@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/dot-notation */
-import './index.scss';
-import './panel.scss';
+import '../index.scss';
+import './panel/panel.scss';
 import Slider from '../Slider';
 import Panel from './panel/Panel';
 import { PresenterBuildParams, PresenterBuildParamsBeforeChecking } from '../presenter/presenterInterfaces';

@@ -1,13 +1,16 @@
-import clearHTMLElement from './clearHTMLElement';
+import clearHTMLElement from '../../view/clearHTMLElement';
 import activatePanel from './activate';
 import { PresenterBuildParams } from '../../presenter/presenterInterfaces';
-import SliderView from '../../view/SliderView';
 import notifyInputChange from './notifyInputChange';
-import updateRunnerInput from './updateRunnerInput';
+// import updateRunnerInput from '../../view/input/updateRunnerInput';
 import { handleChange, initializePanel } from './activate/activateUtility';
+import removeListeners from './removeListeners';
+import DemoSlider from '../DemoSlider';
 
 export default class Panel {
-  parent: SliderView;
+  public parent: DemoSlider;
+
+  public id: string;
 
   public $minValueInput: HTMLInputElement | null;
 
@@ -65,9 +68,13 @@ export default class Panel {
 
   public notifyInputChange: (this: Panel) => void;
 
-  public updateRunnerInput: (this: Panel, stepValue:number, instance:number) => void;
+  public removeListeners: (id:string) => void;
 
-  constructor(params: PresenterBuildParams) {
+  // public updateRunnerInput: (this: Panel, stepValue:number, instance:number) => void;
+
+  constructor(id:string, params: PresenterBuildParams, demoSlider: DemoSlider) {
+    this.parent = demoSlider;
+    this.id = id;
     this.$minValueInput = null;
     this.$fieldThicknessInput = null;
     this.$hasBarInput = null;
@@ -85,6 +92,7 @@ export default class Panel {
     this.hasScale = params.shouldAddScale;
     this.hasTip = params.shouldAddTip;
     this.isRange = params.isRange;
+    this.fieldThickness = params.fieldThickness;
     this.minMax = [params.minValue, params.maxValue];
     this.orientation = params.orientation;
     this.runnerSize = params.runnerSize;
@@ -94,7 +102,8 @@ export default class Panel {
     this.clearHTMLElement = clearHTMLElement.bind(this) as () => void;
     this.initializePanel = initializePanel.bind(this) as () => void;
     this.notifyInputChange = notifyInputChange.bind(this) as () => void;
-    this.updateRunnerInput = updateRunnerInput.bind(this) as () => void;
+    // this.updateRunnerInput = updateRunnerInput.bind(this) as () => void;
+    this.removeListeners = removeListeners;
     this.handleChange = handleChange.bind(this) as () => void;
   }
 }

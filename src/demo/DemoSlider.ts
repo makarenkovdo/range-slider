@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/dot-notation */
 import './index.scss';
 import './panel.scss';
 import Slider from '../Slider';
@@ -5,7 +6,9 @@ import Panel from './panel/Panel';
 import { PresenterBuildParams, PresenterBuildParamsBeforeChecking } from '../presenter/presenterInterfaces';
 import checkValues from '../presenter/presenterModules/checkValues';
 
-class Demo {
+class DemoSlider {
+  public id: string;
+
   public checkedParams: PresenterBuildParams;
 
   public panel: Panel;
@@ -13,14 +16,36 @@ class Demo {
   public slider: Slider;
 
   constructor(id:string, params:PresenterBuildParamsBeforeChecking) {
+    this.id = id;
     this.checkedParams = checkValues(params);
-    this.panel = new Panel(this.checkedParams);
+    this.panel = new Panel(id, this.checkedParams, this);
     this.slider = new Slider(id, this.checkedParams);
+  }
+
+  public activatePanel(params: PresenterBuildParams): this {
+    this.panel.activatePanel.call(this.panel, params);
+    return this;
+  }
+
+  public rebuild(params:PresenterBuildParams):void {
+    // this.field.isRange = false;
+    // this.view.isRange = false;
+    this.removeListeners(this.id);
+    this.slider['presenter']['runners'] = [];
+    this.panel.clearHTMLElement(this.id);
+    this.slider['presenter']['runnerCounter'] = 0;
+    this.slider = new Slider(this.id, params);
+  }
+
+  private removeListeners(id:string): this {
+    this.panel.removeListeners(id);
+
+    return this;
   }
 }
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-const firstSlider = new Demo('first', {
+const firstSlider = new DemoSlider('first', {
   shouldAddTip: true,
   shouldAddBar: true,
   step: 0.3,
@@ -33,7 +58,7 @@ const firstSlider = new Demo('first', {
   hasInputPanel: true,
 });
 
-const secondSlider = new Demo('second', {
+const secondSlider = new DemoSlider('second', {
   step: 100000,
   maxValue: -1000000,
   minValue: 1000000,
@@ -47,7 +72,7 @@ const secondSlider = new Demo('second', {
   orientation: 'vertical',
 });
 
-const thirdSlider = new Demo('third', {
+const thirdSlider = new DemoSlider('third', {
   shouldAddTip: true,
   shouldAddBar: true,
   step: 4,
@@ -62,7 +87,7 @@ const thirdSlider = new Demo('third', {
   orientation: 'vertical',
 });
 
-const fourthSlider = new Demo('fourth', {
+const fourthSlider = new DemoSlider('fourth', {
   shouldAddTip: false,
   shouldAddBar: false,
   step: 0.07,
@@ -75,3 +100,5 @@ const fourthSlider = new Demo('fourth', {
   fieldThickness: 20,
   hasInputPanel: true,
 });
+
+export default DemoSlider;

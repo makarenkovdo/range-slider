@@ -11,10 +11,11 @@ import RunnerModel from '../model/RunnerModel';
 import { Orientation } from '../presenter/presenterInterfaces';
 
 import Bar from './bar/Bar';
-import Panel from './panel/Panel';
 import Runner from './runner/Runner';
 import Scale from './scale/Scale';
 import Tip from './tip/Tip';
+import clearHTMLElement from './clearHTMLElement';
+import Input from './input/Input';
 
 export default class SliderView {
   public id: string;
@@ -41,9 +42,9 @@ export default class SliderView {
 
   public hasScale: boolean;
 
-  public hasTip: boolean;
+  public hasInput: boolean;
 
-  public hasPanel: boolean;
+  public hasTip: boolean;
 
   public lengthInStep: number;
 
@@ -53,8 +54,6 @@ export default class SliderView {
 
   private class: string | undefined;
 
-  public panel: Panel;
-
   public bar: Bar;
 
   public runner: Runner;
@@ -63,11 +62,15 @@ export default class SliderView {
 
   public tip: Tip;
 
+  public input: Input[] | [];
+
   public initializeValues: (
     runnerSize: number[],
     fieldThickness:number,
     orientation: Orientation,
   ) => void;
+
+  public clearHTMLElement:(id:string, orientation: Orientation) => void;
 
   public initStartEnd: (minValue: number, maxValue: number) => void;
 
@@ -85,9 +88,9 @@ export default class SliderView {
     this.isVertical = false;
     this.isRange = false;
     this.hasBar = false;
+    this.hasInput = false;
     this.hasScale = false;
     this.hasTip = false;
-    this.hasPanel = false;
     this.orientation = 'horizontal';
     this.fieldSize = [];
     this.fieldThickness = 6;
@@ -97,12 +100,13 @@ export default class SliderView {
     this.corrector = 0;
     this.subscriber = subscriber;
 
-    this.panel = new Panel(this);
     this.bar = new Bar(this);
     this.runner = new Runner(this);
     this.scale = new Scale(this);
     this.tip = new Tip(this);
+    this.input = [];
 
+    this.clearHTMLElement = clearHTMLElement;
     this.initializeValues = initializeValues.bind(this) as () => void;
     this.handleClick = handleClick.bind(this) as () => void;
     this.notifyFieldClick = notifyFieldClick.bind(this) as () => void;

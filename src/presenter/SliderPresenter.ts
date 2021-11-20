@@ -7,6 +7,7 @@ import {
   PresenterBuildParams,
   DataForRunnerUpdatingArgsType,
   PresenterBuildParamsBeforeChecking,
+  GetValuesReturned,
 } from './presenterInterfaces';
 import checkValues from './presenterModules/checkValues';
 
@@ -34,6 +35,27 @@ class SliderPresenter {
     this.addListeners(this.checkedParams, 'build');
   }
 
+  public getValues():GetValuesReturned {
+    if (this.view.isRange) {
+      return {
+        firstRunnerValue: this.runners[0].stepValue,
+        secondRunnerValue: this.runners[1].stepValue,
+      };
+    }
+    return { firstRunnerValue: this.runners[0].stepValue };
+  }
+
+  public rebuild(params:PresenterBuildParams):void {
+    this.field.isRange = false;
+    this.view.isRange = false;
+    this.removeListeners(params);
+    this.runners = [];
+    this.view.clearHTMLElement(this.view.id, params.orientation);
+    this.runnerCounter = 0;
+    this.build(params);
+    this.addListeners(params, 'rebuild');
+  }
+
   private build(params: PresenterBuildParamsBeforeChecking): void {
     const checkedParams = checkValues(params);
     if (!checkedParams.isTestMode) {
@@ -42,17 +64,8 @@ class SliderPresenter {
         .createRangeSlider(checkedParams)
         .setStep(checkedParams)
         .createBar(checkedParams)
-        .createScale(checkedParams)
-        .activatePanel(checkedParams);
+        .createScale(checkedParams);
     }
-  }
-
-  private activatePanel(params: PresenterBuildParams): this {
-    if (params.hasInputPanel) {
-      this.view.panel.activatePanel.call(this.view.panel, params);
-      this.view.hasPanel = true;
-    }
-    return this;
   }
 
   private addListeners({ isRange }:PresenterBuildParams, actionType:string): this {
@@ -174,17 +187,6 @@ class SliderPresenter {
     return this;
   }
 
-  private rebuild(params:PresenterBuildParams):void {
-    this.field.isRange = false;
-    this.view.isRange = false;
-    this.removeListeners(params);
-    this.runners = [];
-    this.view.panel.clearHTMLElement(this.view.id);
-    this.runnerCounter = 0;
-    this.build(params);
-    this.addListeners(params, 'rebuild');
-  }
-
   private removeListeners({ isRange }:PresenterBuildParams): this {
     this.view.runner.removeDrag(0);
     if (isRange) this.view.runner.removeDrag(1);
@@ -197,8 +199,8 @@ class SliderPresenter {
       this.updateRunnerPosition(activeRunner);
       if (this.view.hasTip) this.updateTipNumber(activeRunner.stepValue, activeRunner.instance);
       if (this.view.hasBar) this.updateBarPosition();
-      if (this.view.hasPanel) {
-        this.view.panel.updateRunnerInput(
+      if (this.view.hasInput) {
+        this.view.input[activeRunner.instance].updateRunnerInput(
           activeRunner.stepValue,
           activeRunner.instance,
         );
@@ -227,11 +229,11 @@ class SliderPresenter {
     this.runners[i].updateRunnerValues(dataForRunnerUpdatingArgs);
   }
 
-  public recieveInputsData(
-    panelInputsData: PresenterBuildParams,
-  ): void {
-    this.rebuild(panelInputsData);
-  }
+  // public recieveInputsData(
+  //   panelInputsData: PresenterBuildParams,
+  // ): void {
+  //   this.rebuild(panelInputsData);
+  // }
 
   public recieveClickData(
     view: SliderView,

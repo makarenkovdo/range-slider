@@ -17,7 +17,7 @@ const notifyInputChange = function prepareDataAndNotifyInputChange(
     runnerSize: this.runnerSize,
     step: this.step,
   };
-  this.parent.subscriber.recieveInputsData(panelInputsData);
+  this.parent.rebuild(panelInputsData);
 };
 
 export default notifyInputChange;

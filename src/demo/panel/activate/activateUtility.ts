@@ -3,7 +3,7 @@ import { PresenterBuildParams } from '../../../presenter/presenterInterfaces';
 import Panel from '../Panel.js';
 
 const selectPanelNodes = function selectPanelInputNodes(this: Panel):void {
-  const $panel = document.querySelector(`#${this.parent.id}-panel`);
+  const $panel = document.querySelector(`#${this.id}-panel`);
   if ($panel) {
     this.$minValueInput = $panel.querySelector('.js-slider-input__min-value');
     this.$maxValueInput = $panel.querySelector('.js-slider-input__max-value');

@@ -27,8 +27,7 @@ type PresenterBuildParams = {
   fieldThickness: number;
   orientation: Orientation;
   runnersInstantPosition: number[];
-  hasInputPanel: boolean;
-  isTestMode: boolean;
+  isTestMode?: boolean;
 };
 
 type DataForRunnerUpdatingArgsType = {
@@ -52,10 +51,16 @@ type CheckValuesArgs = {
 
 type Orientation = 'vertical' | 'horizontal';
 
+type GetValuesReturned = {
+  firstRunnerValue: number;
+  secondRunnerValue?: number | undefined;
+};
+
 export {
   PresenterBuildParams,
   DataForRunnerUpdatingArgsType,
   CheckValuesArgs,
   Orientation,
   PresenterBuildParamsBeforeChecking,
+  GetValuesReturned,
 };

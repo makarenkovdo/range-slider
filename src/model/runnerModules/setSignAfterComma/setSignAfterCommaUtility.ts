@@ -6,13 +6,13 @@ const calcSignAfterComma = ({ step }: RunnerModel, minMax: number[]): number => 
   const separatedMin = minMax[0].toString().split('.');
   const separatedMax = minMax[1].toString().split('.');
   if (separatedStep[1]) {
-    minMaxSignAfterComma.push(separatedStep.pop().length);
+    minMaxSignAfterComma.push(separatedStep[1].length);
   } else minMaxSignAfterComma.push(0);
   if (separatedMin[1]) {
-    minMaxSignAfterComma.push(separatedMin.pop().length);
+    minMaxSignAfterComma.push(separatedMin[1].length);
   } else minMaxSignAfterComma.push(0);
   if (separatedMax[1]) {
-    minMaxSignAfterComma.push(separatedMax.pop().length);
+    minMaxSignAfterComma.push(separatedMax[1].length);
   } else minMaxSignAfterComma.push(0);
 
   return Math.max(minMaxSignAfterComma[0], minMaxSignAfterComma[1], minMaxSignAfterComma[2]);

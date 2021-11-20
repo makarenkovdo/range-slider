@@ -6,6 +6,7 @@ import SliderView from '../view/SliderView';
 import {
   PresenterBuildParams,
   DataForRunnerUpdatingArgsType,
+  PresenterBuildParamsBeforeChecking,
 } from './presenterInterfaces';
 import checkValues from './presenterModules/checkValues';
 
@@ -16,23 +17,24 @@ class SliderPresenter {
 
   private view: SliderView;
 
-  private isBothOnDragAdded: boolean;
-
   private id: string;
 
   private runnerCounter: number;
 
-  constructor(id: string, params?: PresenterBuildParams) {
+  private checkedParams: PresenterBuildParams;
+
+  constructor(id: string, params: PresenterBuildParamsBeforeChecking) {
+    this.id = id;
     this.runnerCounter = 0;
     this.runners = [];
-    this.isBothOnDragAdded = false;
     this.field = new FieldModel(id, this);
     this.view = new SliderView(id, this);
-    this.build(params);
-    this.addListeners(params, 'build');
+    this.checkedParams = checkValues(params);
+    this.build(this.checkedParams);
+    this.addListeners(this.checkedParams, 'build');
   }
 
-  private build(params: PresenterBuildParams): void {
+  private build(params: PresenterBuildParamsBeforeChecking): void {
     const checkedParams = checkValues(params);
     if (!checkedParams.isTestMode) {
       this.setMinMax(checkedParams)
@@ -47,7 +49,7 @@ class SliderPresenter {
 
   private activatePanel(params: PresenterBuildParams): this {
     if (params.hasInputPanel) {
-      this.view.panel.activatePanel.call(this.view, params);
+      this.view.panel.activatePanel.call(this.view.panel, params);
       this.view.hasPanel = true;
     }
     return this;

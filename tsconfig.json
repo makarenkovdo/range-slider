@@ -8,7 +8,8 @@
       "jest",
     ],
     "allowJs": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "strict": true
   },
   // "include": [".eslintrc.js"],
   // "exclude": ["test"]

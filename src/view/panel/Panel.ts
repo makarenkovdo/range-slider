@@ -9,31 +9,31 @@ import { handleChange, initializePanel } from './activate/activateUtility';
 export default class Panel {
   parent: SliderView;
 
-  public $minValueInput: HTMLInputElement;
+  public $minValueInput: HTMLInputElement | null;
 
-  public $maxValueInput: HTMLInputElement;
+  public $maxValueInput: HTMLInputElement | null;
 
-  public $runnerWidthInput: HTMLInputElement;
+  public $runnerWidthInput: HTMLInputElement | null;
 
-  public $runnerHeightInput: HTMLInputElement;
+  public $runnerHeightInput: HTMLInputElement | null;
 
-  public $fieldThicknessInput: HTMLInputElement;
+  public $fieldThicknessInput: HTMLInputElement | null;
 
-  public $stepInput: HTMLInputElement;
+  public $stepInput: HTMLInputElement | null;
 
-  public $isRangeInput: HTMLInputElement;
+  public $isRangeInput: HTMLInputElement | null;
 
-  public $orientationInput: HTMLInputElement;
+  public $orientationInput: HTMLInputElement | null;
 
-  public $hasScaleInput: HTMLInputElement;
+  public $hasScaleInput: HTMLInputElement | null;
 
-  public $hasBarInput: HTMLInputElement;
+  public $hasBarInput: HTMLInputElement | null;
 
-  public $hasTipInput: HTMLInputElement;
+  public $hasTipInput: HTMLInputElement | null;
 
-  public $runner0ValueInput: HTMLInputElement;
+  public $runner0ValueInput: HTMLInputElement | null;
 
-  public $runner1ValueInput: HTMLInputElement;
+  public $runner1ValueInput: HTMLInputElement | null;
 
   public minMax: number[];
 
@@ -63,11 +63,24 @@ export default class Panel {
 
   public handleChange: (this: Panel, event:Event, actionType: string) => void;
 
-  public notifyInputChange: (this: Panel, runnersInstantPosition: number[]) => void;
+  public notifyInputChange: (this: Panel) => void;
 
   public updateRunnerInput: (this: Panel, stepValue:number, instance:number) => void;
 
   constructor(view: SliderView) {
+    this.$minValueInput = null;
+    this.$fieldThicknessInput = null;
+    this.$hasBarInput = null;
+    this.$hasScaleInput = null;
+    this.$hasTipInput = null;
+    this.$isRangeInput = null;
+    this.$maxValueInput = null;
+    this.$orientationInput = null;
+    this.$runner0ValueInput = null;
+    this.$runner1ValueInput = null;
+    this.$runnerHeightInput = null;
+    this.$runnerWidthInput = null;
+    this.$stepInput = null;
     this.parent = view;
     this.activatePanel = activatePanel.bind(this) as () => void;
     this.clearHTMLElement = clearHTMLElement.bind(this) as () => void;

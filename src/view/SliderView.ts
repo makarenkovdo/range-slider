@@ -51,7 +51,7 @@ export default class SliderView {
 
   public fieldThickness: number;
 
-  private class: string;
+  private class: string | undefined;
 
   public panel: Panel;
 
@@ -87,8 +87,10 @@ export default class SliderView {
     this.hasBar = false;
     this.hasScale = false;
     this.hasTip = false;
+    this.hasPanel = false;
     this.orientation = 'horizontal';
     this.fieldSize = [];
+    this.fieldThickness = 6;
     this.borderWidth = 1;
     this.minMax = [];
     this.lengthInStep = 1;

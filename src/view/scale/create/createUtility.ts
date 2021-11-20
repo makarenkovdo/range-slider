@@ -61,6 +61,7 @@ const addScaleToDom = (
     shouldAddExtraLine,
   };
   const createScaleNumbersArgs: CreateScaleNumbersArgs = {
+    $scaleNumbers: $id.find('.js-slider__scale-numbers'),
     switcher: 1,
     lastOrFirstIterration: 0,
     minMax,

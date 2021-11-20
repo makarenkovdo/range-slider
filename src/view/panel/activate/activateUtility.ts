@@ -4,20 +4,21 @@ import Panel from '../Panel.js';
 
 const selectPanelNodes = function selectPanelInputNodes(this: Panel):void {
   const $panel = document.querySelector(`#${this.parent.id}-panel`);
-
-  this.$minValueInput = $panel.querySelector('.js-slider-input__min-value');
-  this.$maxValueInput = $panel.querySelector('.js-slider-input__max-value');
-  this.$runnerWidthInput = $panel.querySelector('.js-slider-input__runner-width');
-  this.$runnerHeightInput = $panel.querySelector('.js-slider-input__runner-height');
-  this.$stepInput = $panel.querySelector('.js-slider-input__step');
-  this.$isRangeInput = $panel.querySelector('.js-slider-input__is-range');
-  this.$orientationInput = $panel.querySelector('.js-slider-input__orientation');
-  this.$hasScaleInput = $panel.querySelector('.js-slider-input__has-scale');
-  this.$hasBarInput = $panel.querySelector('.js-slider-input__has-bar');
-  this.$hasTipInput = $panel.querySelector('.js-slider-input__has-tip');
-  this.$runner0ValueInput = $panel.querySelector('.js-slider-input__runner-0-value');
-  this.$runner1ValueInput = $panel.querySelector('.js-slider-input__runner-1-value');
-  this.$fieldThicknessInput = $panel.querySelector('.js-slider-input__field-thickness');
+  if ($panel) {
+    this.$minValueInput = $panel.querySelector('.js-slider-input__min-value');
+    this.$maxValueInput = $panel.querySelector('.js-slider-input__max-value');
+    this.$runnerWidthInput = $panel.querySelector('.js-slider-input__runner-width');
+    this.$runnerHeightInput = $panel.querySelector('.js-slider-input__runner-height');
+    this.$stepInput = $panel.querySelector('.js-slider-input__step');
+    this.$isRangeInput = $panel.querySelector('.js-slider-input__is-range');
+    this.$orientationInput = $panel.querySelector('.js-slider-input__orientation');
+    this.$hasScaleInput = $panel.querySelector('.js-slider-input__has-scale');
+    this.$hasBarInput = $panel.querySelector('.js-slider-input__has-bar');
+    this.$hasTipInput = $panel.querySelector('.js-slider-input__has-tip');
+    this.$runner0ValueInput = $panel.querySelector('.js-slider-input__runner-0-value');
+    this.$runner1ValueInput = $panel.querySelector('.js-slider-input__runner-1-value');
+    this.$fieldThicknessInput = $panel.querySelector('.js-slider-input__field-thickness');
+  }
 };
 
 const initializePanel = function initializeDefaultPanelValues(
@@ -61,21 +62,36 @@ const initializePanel = function initializeDefaultPanelValues(
     $runnerWidthInput,
     $fieldThicknessInput,
   } = this;
-  $(document).ready(() => {
-    $minValueInput.value = `${minValue}`;
-    $maxValueInput.value = `${maxValue}`;
-    $runnerHeightInput.value = `${runnerSize[1]}`;
-    $runnerWidthInput.value = `${runnerSize[0]}`;
-    $stepInput.value = `${step}`;
-    $isRangeInput.checked = isRange;
-    $orientationInput.checked = (orientation === 'vertical');
-    $hasScaleInput.checked = shouldAddScale;
-    $hasBarInput.checked = shouldAddBar;
-    $hasTipInput.checked = shouldAddTip;
-    $runner0ValueInput.value = `${runnersInstantPosition[0]}`;
-    $runner1ValueInput.value = `${runnersInstantPosition[1]}`;
-    $fieldThicknessInput.value = `${fieldThickness}`;
-  });
+  const checkSelectors = () => $minValueInput
+    && $maxValueInput
+    && $stepInput
+    && $isRangeInput
+    && $orientationInput
+    && $hasScaleInput
+    && $hasBarInput
+    && $hasTipInput
+    && $runner0ValueInput
+    && $runner1ValueInput
+    && $runnerHeightInput
+    && $runnerWidthInput
+    && $fieldThicknessInput;
+  if (checkSelectors()) {
+    $(document).ready(() => {
+      if ($minValueInput) $minValueInput.value = `${minValue}`;
+      if ($maxValueInput) $maxValueInput.value = `${maxValue}`;
+      if ($runnerHeightInput) $runnerHeightInput.value = `${runnerSize[1]}`;
+      if ($runnerWidthInput) $runnerWidthInput.value = `${runnerSize[0]}`;
+      if ($stepInput) $stepInput.value = `${step}`;
+      if ($isRangeInput) $isRangeInput.checked = isRange;
+      if ($orientationInput) $orientationInput.checked = (orientation === 'vertical');
+      if ($hasScaleInput) $hasScaleInput.checked = shouldAddScale;
+      if ($hasBarInput) $hasBarInput.checked = shouldAddBar;
+      if ($hasTipInput) $hasTipInput.checked = shouldAddTip;
+      if ($runner0ValueInput) $runner0ValueInput.value = `${runnersInstantPosition[0]}`;
+      if ($runner1ValueInput) $runner1ValueInput.value = `${runnersInstantPosition[1]}`;
+      if ($fieldThicknessInput) $fieldThicknessInput.value = `${fieldThickness}`;
+    });
+  }
 };
 
 const handleChange = function hangleInputsAndCheckboxesChanges(
@@ -176,19 +192,19 @@ const addOnChangeListener = function addInputAndCheckboxesOnChangeListener(
     isRange: 'isRange',
     fieldThickness: 'fieldThickness',
   };
-  $minValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.min));
-  $maxValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.max));
-  $runner0ValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerValue0));
-  $runner1ValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerValue1));
-  $runnerWidthInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerWidth));
-  $runnerHeightInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerHeight));
-  $fieldThicknessInput.addEventListener('change', (event):void => this.handleChange(event, actionType.fieldThickness));
-  $stepInput.addEventListener('change', (event):void => this.handleChange(event, actionType.step));
-  $orientationInput.addEventListener('change', (event):void => this.handleChange(event, actionType.orientation));
-  $isRangeInput.addEventListener('change', (event):void => this.handleChange(event, actionType.isRange));
-  $hasBarInput.addEventListener('change', (event):void => this.handleChange(event, actionType.hasBar));
-  $hasScaleInput.addEventListener('change', (event):void => this.handleChange(event, actionType.hasScale));
-  $hasTipInput.addEventListener('change', (event):void => this.handleChange(event, actionType.hasTip));
+  if ($minValueInput) $minValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.min));
+  if ($maxValueInput) $maxValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.max));
+  if ($runner0ValueInput) $runner0ValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerValue0));
+  if ($runner1ValueInput) $runner1ValueInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerValue1));
+  if ($runnerWidthInput) $runnerWidthInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerWidth));
+  if ($runnerHeightInput) $runnerHeightInput.addEventListener('change', (event):void => this.handleChange(event, actionType.runnerHeight));
+  if ($fieldThicknessInput) $fieldThicknessInput.addEventListener('change', (event):void => this.handleChange(event, actionType.fieldThickness));
+  if ($stepInput) $stepInput.addEventListener('change', (event):void => this.handleChange(event, actionType.step));
+  if ($orientationInput) $orientationInput.addEventListener('change', (event):void => this.handleChange(event, actionType.orientation));
+  if ($isRangeInput) $isRangeInput.addEventListener('change', (event):void => this.handleChange(event, actionType.isRange));
+  if ($hasBarInput) $hasBarInput.addEventListener('change', (event):void => this.handleChange(event, actionType.hasBar));
+  if ($hasScaleInput) $hasScaleInput.addEventListener('change', (event):void => this.handleChange(event, actionType.hasScale));
+  if ($hasTipInput) $hasTipInput.addEventListener('change', (event):void => this.handleChange(event, actionType.hasTip));
 };
 
 export {

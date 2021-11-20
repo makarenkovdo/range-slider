@@ -8,23 +8,23 @@ type UpdateTipNumberArgs = { stepValue: number; instance: number };
 type DefineBarKindArgsType = {
   isRange: boolean;
   isVertical: boolean;
-  $bar: JQuery<HTMLElement>;
+  $bar: undefined | JQuery<HTMLElement>;
   runnersPosition: number[];
   fieldThickness: number;
   calcLengthOfRangeBar: (runnersPosition: number[]) => number;
   updateSingleVerticalBarPosition: (
     runnersPosition: number[],
     fieldThickness: number,
-    $bar: JQuery<HTMLElement>
+    $bar: JQuery<HTMLElement> | undefined,
   ) => void;
   updateSingleHorizontalBarPosition: (
     runnersPosition: number[],
     fieldThickness: number,
-    $bar: JQuery<HTMLElement>
+    $bar: JQuery<HTMLElement> | undefined,
   ) => void;
   updateRangeBarPosition: (
     enumNumber: number,
-    $bar: JQuery<HTMLElement>,
+    $bar: JQuery<HTMLElement> | undefined,
     runnersPosition: number[],
     fieldThickness: number,
     barLength: number,
@@ -68,7 +68,7 @@ type CreateScaleNumbersBoxArgs = {
 };
 
 type CreateScaleLinesArgs = {
-  $scaleLines?:JQuery<HTMLElement>;
+  $scaleLines:JQuery<HTMLElement>;
   minMax:number[];
   segmentInPercent:number;
   lineQuantity:number;
@@ -80,7 +80,7 @@ type CreateScaleLinesArgs = {
   shouldAddExtraLine: boolean;
 };
 type CreateScaleNumbersArgs = {
-  $scaleNumbers?:JQuery<HTMLElement>;
+  $scaleNumbers:JQuery<HTMLElement>;
   minMax:number[];
   segmentInPercent:number;
   lineQuantity:number;

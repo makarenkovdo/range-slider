@@ -5,7 +5,7 @@ import updateBarPosition from './updateBarPosition';
 export default class Bar {
   parent: SliderView;
 
-  public $bar: JQuery<HTMLElement>;
+  public $bar: JQuery<HTMLElement> | undefined;
 
   public fieldThickness: number;
 
@@ -15,6 +15,7 @@ export default class Bar {
 
   constructor(view: SliderView) {
     this.parent = view;
+    this.fieldThickness = 6;
     this.createBar = createBar.bind(this) as () => void;
     this.updateBarPosition = updateBarPosition.bind(this) as () => void;
   }

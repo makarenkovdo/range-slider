@@ -58,43 +58,49 @@ const calcLengthOfRangeBar = (runnersPosition: number[]): number => Math.abs(run
 const updateSingleVerticalBarPosition = (
   runnersPosition: number[],
   fieldThickness: number,
-  $bar: JQuery<HTMLElement>,
+  $bar: JQuery<HTMLElement> | undefined,
 ): void => {
-  $(document).ready(() => {
-    $bar.css('height', `${runnersPosition[0]}%`).css('top', `${100 - runnersPosition[0]}%`);
-    $bar.css('width', `${fieldThickness}px`);
-  });
+  if ($bar) {
+    $(document).ready(() => {
+      $bar.css('height', `${runnersPosition[0]}%`).css('top', `${100 - runnersPosition[0]}%`);
+      $bar.css('width', `${fieldThickness}px`);
+    });
+  }
 };
 
 const updateSingleHorizontalBarPosition = (
   runnersPosition: number[],
   fieldThickness: number,
-  $bar: JQuery<HTMLElement>,
+  $bar: JQuery<HTMLElement> | undefined,
 ): void => {
-  $(document).ready(() => {
-    $bar.css('width', `${runnersPosition[0]}%`);
-    $bar.css('height', `${fieldThickness}px`);
-  });
+  if ($bar) {
+    $(document).ready(() => {
+      $bar.css('width', `${runnersPosition[0]}%`);
+      $bar.css('height', `${fieldThickness}px`);
+    });
+  }
 };
 
 const updateRangeBarPosition = (
   index: NumbersEnum,
-  $bar: JQuery<HTMLElement>,
+  $bar: JQuery<HTMLElement> | undefined,
   runnersPosition: number[],
   fieldThickness: number,
   barLength: number,
 ): void => {
-  $(document).ready(() => {
-    const positioningSwitcher = [
-      ['left', 'width'],
-      ['top', 'height'],
-    ];
-    const barBeginningPosition = Math.abs(100 * index - runnersPosition[index]);
-    $bar.css(`${positioningSwitcher[index][0]}`, `${barBeginningPosition}%`);
-    $bar.css(`${positioningSwitcher[index][1]}`, `${barLength}%`);
-    const thicknessPositioningIndex = 1 - index;
-    $bar.css(`${positioningSwitcher[thicknessPositioningIndex][1]}`, `${fieldThickness}px`);
-  });
+  if ($bar) {
+    $(document).ready(() => {
+      const positioningSwitcher = [
+        ['left', 'width'],
+        ['top', 'height'],
+      ];
+      const barBeginningPosition = Math.abs(100 * index - runnersPosition[index]);
+      $bar.css(`${positioningSwitcher[index][0]}`, `${barBeginningPosition}%`);
+      $bar.css(`${positioningSwitcher[index][1]}`, `${barLength}%`);
+      const thicknessPositioningIndex = 1 - index;
+      $bar.css(`${positioningSwitcher[thicknessPositioningIndex][1]}`, `${fieldThickness}px`);
+    });
+  }
 };
 
 export {

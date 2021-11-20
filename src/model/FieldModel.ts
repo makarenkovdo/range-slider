@@ -12,7 +12,7 @@ export default class FieldModel {
 
   public isRange: boolean;
 
-  private class: string;
+  private class: string | undefined;
 
   private subscriber: SliderPresenter;
 

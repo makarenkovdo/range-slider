@@ -41,7 +41,7 @@ const updateRunnerValues = ({
       calculateStepValueAndPosition(activeRunner, minMax),
     );
   }
-  activeRunner.notifyToUpdate.call(this);
+  activeRunner.notifyToUpdate();
 };
 
 export default updateRunnerValues;

@@ -17,12 +17,12 @@ plugins.push(
     template: `./src/demo/demo.html`,
     filename: `index.html`,
   }),
-  new webpack.ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery',
-    'window.jQuery': 'jquery',
-    'window.$': 'jquery',
-  }),
+  // new webpack.ProvidePlugin({
+  //   $: 'jquery',
+  //   jQuery: 'jquery',
+  //   'window.jQuery': 'jquery',
+  //   'window.$': 'jquery',
+  // }),
 );
 
 module.exports = {

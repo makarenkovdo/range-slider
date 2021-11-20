@@ -6,6 +6,10 @@ import Panel from './panel/Panel';
 import { PresenterBuildParams, PresenterBuildParamsBeforeChecking } from '../presenter/presenterInterfaces';
 import checkValues from '../presenter/presenterModules/checkValues';
 
+const jQueryScript = document.createElement('script');
+jQueryScript.setAttribute('src', 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js');
+document.head.appendChild(jQueryScript);
+
 class DemoSlider {
   public id: string;
 

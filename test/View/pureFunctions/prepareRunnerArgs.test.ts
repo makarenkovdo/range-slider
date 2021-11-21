@@ -3,7 +3,7 @@
  */
 import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
-import SliderPresenter from '../../../src/presenter/SliderPresenter';
+import Slider from '../../../src/Slider';
 import { prepareRunnerArgs } from '../../../src/view/runner/create/createUtility';
 import SliderView from '../../../src/view/SliderView';
 
@@ -12,11 +12,11 @@ beforeEach(() => {
     <div data-testid="testId" id="testId" class="range-runner horizontal" data-start="0"></div>
     `;
 });
-const testPresenter = new SliderPresenter('testId', {
+const testSlider = new Slider('testId', {
   isTestMode: true,
 });
 
-const testView = new SliderView('testId', testPresenter);
+const testView = new SliderView('testId', testSlider.presenter);
 describe('if function "prepareRunnerArgs" return values', () => {
   test('must NOT be empty for next test', async () => {
     await waitFor(() => {

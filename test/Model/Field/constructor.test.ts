@@ -3,7 +3,7 @@
  */
 import '@testing-library/jest-dom';
 import FieldModel from '../../../src/model/FieldModel';
-import SliderPresenter from '../../../src/presenter/SliderPresenter';
+import Slider from '../../../src/Slider';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -12,12 +12,12 @@ beforeEach(() => {
 });
 
 describe('RunnerModel test', () => {
-  const testPresenter: SliderPresenter = new SliderPresenter('testId', {
+  const testSlider: Slider = new Slider('testId', {
     isRange: true,
   });
-  const testField = new FieldModel('testId', testPresenter);
+  const testField = new FieldModel('testId', testSlider.presenter);
   test('if constructor create own properties', () => {
     expect(testField).toHaveProperty('isVertical', false);
-    expect(testField).toHaveProperty('subscriber', testPresenter);
+    expect(testField).toHaveProperty('subscriber', testSlider.presenter);
   });
 });

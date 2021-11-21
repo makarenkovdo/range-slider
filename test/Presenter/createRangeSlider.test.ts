@@ -3,8 +3,8 @@
  */
 /* eslint-disable @typescript-eslint/dot-notation */
 import '@testing-library/jest-dom';
-import { BuildParams } from '../../src/presenter/presenterInterfaces';
-import SliderPresenter from '../../src/presenter/SliderPresenter';
+import { BuildParams } from '../../src/initializeTypes';
+import Slider from '../../src/Slider';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -15,7 +15,7 @@ beforeEach(() => {
 });
 
 describe('Presenter test', () => {
-  const testedSlider = new SliderPresenter('first', {
+  const testedSlider = new Slider('first', {
     isTestMode: true,
   });
 
@@ -34,24 +34,24 @@ describe('Presenter test', () => {
   };
 
   test('if createRangeSlider runs', () => {
-    testedSlider['createRangeSlider'](createRangeSliderTestArgs);
-    expect(testedSlider['view'].isRange).toBe(false);
+    testedSlider.presenter['createRangeSlider'](createRangeSliderTestArgs);
+    expect(testedSlider.presenter['view'].isRange).toBe(false);
   });
 
   test('if createRangeSlider runs if/else block', () => {
     createRangeSliderTestArgs.isRange = true;
-    testedSlider['createRangeSlider'](createRangeSliderTestArgs);
-    expect(testedSlider['view'].isRange).toBe(true);
+    testedSlider.presenter['createRangeSlider'](createRangeSliderTestArgs);
+    expect(testedSlider.presenter['view'].isRange).toBe(true);
   });
 
   test('if createRangeSlider calls functions', () => {
     const createRunnerView = jest.fn();
     const createRunner = jest.fn();
     const createTipNumber = jest.fn();
-    testedSlider['createRunnerView'] = createRunnerView;
-    testedSlider['createRunner'] = createRunner;
-    testedSlider['createTipNumber'] = createTipNumber;
-    testedSlider['createRangeSlider'](createRangeSliderTestArgs);
+    testedSlider.presenter['createRunnerView'] = createRunnerView;
+    testedSlider.presenter['createRunner'] = createRunner;
+    testedSlider.presenter['createTipNumber'] = createTipNumber;
+    testedSlider.presenter['createRangeSlider'](createRangeSliderTestArgs);
     expect(createRunnerView).toHaveBeenCalled();
     expect(createRunner).toHaveBeenCalled();
     expect(createTipNumber).toHaveBeenCalled();

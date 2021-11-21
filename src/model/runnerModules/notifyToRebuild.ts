@@ -1,4 +1,4 @@
-import { BuildParams } from '../../presenter/presenterInterfaces';
+import { BuildParams } from '../../initializeTypes';
 import RunnerModel from '../RunnerModel';
 
 const notifyToRebuild = function notifySubscribersToRebuild(

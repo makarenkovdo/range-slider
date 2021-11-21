@@ -1,4 +1,4 @@
-import { BuildParams } from '../../presenter/presenterInterfaces';
+import { BuildParams } from '../../initializeTypes';
 import {
   addOnChangeListener, initializePanel, selectPanelNodes,
 } from './activate/activateUtility';

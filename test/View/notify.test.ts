@@ -3,19 +3,19 @@
  */
 import '@testing-library/jest-dom';
 import SliderView from '../../src/view/SliderView';
-import SliderPresenter from '../../src/presenter/SliderPresenter';
+import Slider from '../../src/Slider';
 
 describe('if function "notify" call subscribers', () => {
-  const testPresenter = new SliderPresenter('testId', {
+  const testSlider = new Slider('testId', {
     isTestMode: true,
   });
 
   const recieveClickData = jest.fn();
   const recieveDragData = jest.fn();
-  testPresenter.recieveClickData = recieveClickData;
-  testPresenter.recieveDragData = recieveDragData;
+  testSlider.presenter.recieveClickData = recieveClickData;
+  testSlider.presenter.recieveDragData = recieveDragData;
 
-  const testView = new SliderView('testId', testPresenter);
+  const testView = new SliderView('testId', testSlider.presenter);
   test('must call fakeSubscriber', () => {
     testView.notifyFieldClick.call(this, [0, 100]);
     expect(recieveClickData).toHaveBeenCalled();

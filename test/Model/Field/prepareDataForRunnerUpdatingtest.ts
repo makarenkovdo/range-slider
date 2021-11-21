@@ -4,8 +4,8 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import '@testing-library/jest-dom';
 import FieldModel from '../../../src/model/FieldModel';
-import SliderPresenter from '../../../src/presenter/SliderPresenter';
 import { DataForRunnerUpdatingArgsType } from '../../../src/presenter/presenterInterfaces';
+import Slider from '../../../src/Slider';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -14,10 +14,10 @@ beforeEach(() => {
 });
 
 describe('FieldModel test', () => {
-  const testPresenter: SliderPresenter = new SliderPresenter('testId', {
+  const testSlider: Slider = new Slider('testId', {
     isRange: true,
   });
-  const testField = new FieldModel('testId', testPresenter);
+  const testField = new FieldModel('testId', testSlider.presenter);
   test('constructor create own property isVertical', () => {
     expect(testField).toHaveProperty('isVertical', false);
   });
@@ -30,17 +30,17 @@ describe('FieldModel test', () => {
       isRange: true,
       fieldSize: [100, 50],
       cursorXY: [80, 25],
-      runners: testPresenter['runners'],
+      runners: testSlider.presenter['runners'],
     };
     const recieveModelLogic = jest.fn();
-    testPresenter.recieveModelLogic = recieveModelLogic;
+    testSlider.presenter.recieveModelLogic = recieveModelLogic;
     test("must call subscriber's-method through the notifier", () => {
-      testPresenter['field'].prepareDataForRunnerUpdating(testArgs);
+      testSlider.presenter['field'].prepareDataForRunnerUpdating(testArgs);
       expect(recieveModelLogic).toHaveBeenCalled();
     });
     test('if prepareDataForRunnerUpdating define nearest runner and assign this.stepPosition ', () => {
-      testPresenter['field'].prepareDataForRunnerUpdating(testArgs);
-      expect(testPresenter['runners'][1].stepPosition).toBe(80);
+      testSlider.presenter['field'].prepareDataForRunnerUpdating(testArgs);
+      expect(testSlider.presenter['runners'][1].stepPosition).toBe(80);
     });
   });
 });

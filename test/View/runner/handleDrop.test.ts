@@ -5,7 +5,7 @@
 
 import { screen, waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
-import SliderPresenter from '../../../src/presenter/SliderPresenter';
+import Slider from '../../../src/Slider';
 
 describe('testing events ', () => {
   document.body.innerHTML = `
@@ -13,14 +13,14 @@ describe('testing events ', () => {
   <div data-testid="testId" id="testId" class="slider"></div>
 </div>
     `;
-  const testPresenter = new SliderPresenter('testId', {});
+  const testSlider = new Slider('testId', {});
   const $field = $('#testId');
   const fakeOnDrop = jest.fn();
-  testPresenter['view'].runner.updateZIndex = fakeOnDrop;
+  testSlider.presenter['view'].runner.updateZIndex = fakeOnDrop;
 
   test('must toHaveBeenCalles when click', async () => {
     const notifySliderMoving = jest.fn();
-    testPresenter['view'].runner.notifySliderMoving = notifySliderMoving;
+    testSlider.presenter['view'].runner.notifySliderMoving = notifySliderMoving;
     await waitFor(() => {
       expect(screen.getByTestId('test-runner-0')).toBeInTheDocument();
     });

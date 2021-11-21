@@ -4,12 +4,12 @@ import defineSignAfterComma from './runnerModules/defineSignAfterComma';
 import initializeDefaultValues from './runnerModules/initializeDefaultValues';
 import setStep from './runnerModules/setStep';
 import { CalculateStepPositionFromInputReturned, UpdateRunnerValuesArgs } from './runnerModules/runnerInterfaces';
-import { BuildParams } from '../presenter/presenterInterfaces';
 import notifyToUpdate from './runnerModules/notifyToUpdate';
 import notifyToRebuild from './runnerModules/notifyToRebuild';
 import updateRunnerValues from './runnerModules/updateRunnerValues';
 import setValuesFromInputs from './runnerModules/setValuesFromInputs';
 import SliderPresenter from '../presenter/SliderPresenter.js';
+import { BuildParams } from '../initializeTypes';
 
 class RunnerModel {
   public instance: number;

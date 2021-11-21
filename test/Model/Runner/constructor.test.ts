@@ -2,8 +2,8 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import SliderPresenter from '../../../src/presenter/SliderPresenter';
 import RunnerModel from '../../../src/model/RunnerModel';
+import Slider from '../../../src/Slider';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -12,10 +12,10 @@ beforeEach(() => {
 });
 
 describe('RunnerModel test', () => {
-  const testPresenter = new SliderPresenter('testId', {
+  const testSlider = new Slider('testId', {
     isTestMode: true,
   });
-  const testRunner = new RunnerModel('testId', 0, testPresenter);
+  const testRunner = new RunnerModel('testId', 0, testSlider.presenter);
   test('constructor testing', () => {
     expect(testRunner).toHaveProperty('instance', 0);
     expect(testRunner).not.toHaveProperty('id');

@@ -3,7 +3,7 @@
  */
 /* eslint-disable @typescript-eslint/dot-notation */
 import '@testing-library/jest-dom';
-import SliderPresenter from '../../src/presenter/SliderPresenter';
+import Slider from '../../src/Slider';
 
 beforeEach(() => {
   document.body.innerHTML = ` 
@@ -14,18 +14,18 @@ beforeEach(() => {
 });
 
 describe('Presenter test', () => {
-  let testedSlider = new SliderPresenter('first', {
+  let testedSlider = new Slider('first', {
     isTestMode: true,
   });
-  testedSlider = new SliderPresenter('first', {
+  testedSlider = new Slider('first', {
     minValue: 14,
     maxValue: 19,
   });
 
   test('if function "setMinMax" assign values to field/view keys', () => {
-    expect(testedSlider['field'].minMax[0]).toBe(14);
-    expect(testedSlider['field'].minMax[1]).toBe(19);
-    expect(testedSlider['view'].minMax[0]).toBe(14);
-    expect(testedSlider['view'].minMax[1]).toBe(19);
+    expect(testedSlider.presenter['field'].minMax[0]).toBe(14);
+    expect(testedSlider.presenter['field'].minMax[1]).toBe(19);
+    expect(testedSlider.presenter['view'].minMax[0]).toBe(14);
+    expect(testedSlider.presenter['view'].minMax[1]).toBe(19);
   });
 });

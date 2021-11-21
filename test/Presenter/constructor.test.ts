@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import SliderPresenter from '../../src/presenter/SliderPresenter';
+import Slider from '../../src/Slider';
 
 beforeEach(() => {
   document.body.innerHTML = ` 
@@ -13,7 +13,7 @@ beforeEach(() => {
 });
 
 describe('Presenter test', () => {
-  const testedSlider = new SliderPresenter('first', {
+  const testedSlider = new Slider('first', {
     isTestMode: true,
   });
   test('constructor testing', () => {

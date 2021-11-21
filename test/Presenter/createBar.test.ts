@@ -3,8 +3,8 @@
  */
 /* eslint-disable @typescript-eslint/dot-notation */
 import '@testing-library/jest-dom';
-import { BuildParams } from '../../src/presenter/presenterInterfaces';
-import SliderPresenter from '../../src/presenter/SliderPresenter';
+import { BuildParams } from '../../src/initializeTypes';
+import Slider from '../../src/Slider';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -15,7 +15,7 @@ beforeEach(() => {
 });
 
 describe('Presenter test', () => {
-  const testedSlider = new SliderPresenter('first', {
+  const testedSlider = new Slider('first', {
     isTestMode: true,
   });
 
@@ -34,18 +34,18 @@ describe('Presenter test', () => {
   };
 
   test('if createBar runs', () => {
-    expect(testedSlider['view'].hasBar).toBe(false);
+    expect(testedSlider.presenter['view'].hasBar).toBe(false);
     createRangeSliderTestArgs.shouldAddBar = true;
-    testedSlider['createBar'](createRangeSliderTestArgs);
-    expect(testedSlider['view'].hasBar).toBe(true);
+    testedSlider.presenter['createBar'](createRangeSliderTestArgs);
+    expect(testedSlider.presenter['view'].hasBar).toBe(true);
   });
   test('if createBar call view.methods', () => {
     const createBarMock = jest.fn();
     const updateBarMock = jest.fn();
-    testedSlider['view'].bar.createBar = createBarMock;
-    testedSlider['view'].bar.updateBarPosition = updateBarMock;
+    testedSlider.presenter['view'].bar.createBar = createBarMock;
+    testedSlider.presenter['view'].bar.updateBarPosition = updateBarMock;
     createRangeSliderTestArgs.shouldAddBar = true;
-    testedSlider['createBar'](createRangeSliderTestArgs);
+    testedSlider.presenter['createBar'](createRangeSliderTestArgs);
     expect(createBarMock).toHaveBeenCalled();
     expect(updateBarMock).toHaveBeenCalled();
   });

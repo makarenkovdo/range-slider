@@ -6,7 +6,7 @@
 
 import '@testing-library/jest-dom';
 import { waitFor } from '@testing-library/dom';
-import SliderPresenter from '../../../src/presenter/SliderPresenter';
+import Slider from '../../../src/Slider';
 
 describe('createScale test', () => {
   document.body.innerHTML = `
@@ -16,7 +16,7 @@ describe('createScale test', () => {
  `;
 
   test("div with 'testId' toBeInTheDocument", async () => {
-    const testPresenter = new SliderPresenter('testId', { isRange: true, shouldAddScale: true });
+    const testSlider = new Slider('testId', { isRange: true, shouldAddScale: true });
     await waitFor(() => {
       const $scale = document.querySelector('.slider__scale-line');
       expect(!!$scale).toBe(true);

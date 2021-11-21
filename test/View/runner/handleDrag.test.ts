@@ -6,7 +6,7 @@
 import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import checkValues from '../../../src/presenter/presenterModules/checkValues';
-import SliderPresenter from '../../../src/presenter/SliderPresenter';
+import Slider from '../../../src/Slider';
 
 describe('testing events ', () => {
   document.body.innerHTML = `
@@ -15,16 +15,16 @@ describe('testing events ', () => {
     </div>
 </div>
     `;
-  const testPresenter = new SliderPresenter('testId', {});
+  const testSlider = new Slider('testId', {});
   const notifySliderMoving = jest.fn();
 
-  testPresenter['view'].runner.notifySliderMoving = notifySliderMoving;
+  testSlider.presenter['view'].runner.notifySliderMoving = notifySliderMoving;
 
   const onDrag = jest.fn();
   const createRangeSliderTestArgs = checkValues({});
   test('if build-function calls last method of builder-chain-of-calling', async () => {
-    testPresenter['view'].runner.handleDrag = onDrag;
-    testPresenter['addListeners'](createRangeSliderTestArgs, 'build');
+    testSlider.presenter['view'].runner.handleDrag = onDrag;
+    testSlider.presenter['addListeners'](createRangeSliderTestArgs, 'build');
     await waitFor(() => {
       expect(onDrag).toHaveBeenCalled();
     });

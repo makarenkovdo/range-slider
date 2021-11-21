@@ -10,10 +10,10 @@ class Slider {
 
   constructor(
     id: string,
-    params: BuildParams,
+    params: BuildParamsBeforeChecking,
   ) {
-    this.presenter = new SliderPresenter(this, id, params);
     this.checkValues = checkValues;
+    this.presenter = new SliderPresenter(this, id, checkValues(params));
   }
 
   public getValues():BuildParams {

@@ -1,4 +1,4 @@
-import { BuildParams } from '../../presenter/presenterInterfaces';
+import { BuildParams } from '../../initializeTypes';
 import Panel from './Panel';
 
 const notifyInputChange = function prepareDataAndNotifyInputChange(

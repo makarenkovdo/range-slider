@@ -2,9 +2,9 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import SliderPresenter from '../../../../src/presenter/SliderPresenter';
 import RunnerModel from '../../../../src/model/RunnerModel';
 import { calculatePositionInPercent } from '../../../../src/model/runnerModules/updateRunnerValues/updateRunnerValuesUtility';
+import Slider from '../../../../src/Slider';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -13,10 +13,10 @@ beforeEach(() => {
 });
 
 describe('calculatePositionInPercent test', () => {
-  const testPresenter = new SliderPresenter('first', {
+  const testSlider = new Slider('first', {
     isTestMode: true,
   });
-  const testRunner = new RunnerModel('testId', 0, testPresenter);
+  const testRunner = new RunnerModel('testId', 0, testSlider.presenter);
   test('must return positionInPercent ', () => {
     const isVertical = false;
     const thisRunner: RunnerModel = testRunner;

@@ -4,16 +4,16 @@
 import '@testing-library/jest-dom';
 import { screen, waitFor } from '@testing-library/dom';
 import SliderView from '../../../src/view/SliderView';
-import SliderPresenter from '../../../src/presenter/SliderPresenter';
+import Slider from '../../../src/Slider';
 
 describe('ViewModel test', () => {
   document.body.innerHTML = `
      <div data-testid="testId" id="testId" class="range-runner horizontal" data-start="0"></div>
      `;
-  const testPresenter = new SliderPresenter('testId', {
+  const testSlider = new Slider('testId', {
     isTestMode: true,
   });
-  const testView = new SliderView('testId', testPresenter);
+  const testView = new SliderView('testId', testSlider.presenter);
 
   test('if function "createTipNumber" creating html-element', async () => {
     testView.tip.create.call(testView.tip, 0, false, 50, 50);

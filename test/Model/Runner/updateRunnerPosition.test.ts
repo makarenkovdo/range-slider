@@ -4,8 +4,8 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 
 import '@testing-library/jest-dom';
-import SliderPresenter from '../../../src/presenter/SliderPresenter';
 import { UpdateRunnerValuesArgs } from '../../../src/model/runnerModules/runnerInterfaces';
+import Slider from '../../../src/Slider';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -14,7 +14,7 @@ beforeEach(() => {
 });
 
 describe('test updateRunnerValues', () => {
-  const testPresenter = new SliderPresenter('testId', {
+  const testSlider = new Slider('testId', {
   });
   const updateRunnerValuesArgsTest: UpdateRunnerValuesArgs = {
     cursorXY: [20, 50],
@@ -22,19 +22,19 @@ describe('test updateRunnerValues', () => {
     minMax: [0, 100],
     isRange: false,
     fieldSize: [100, 200],
-    runners: testPresenter['runners'],
-    activeRunner: testPresenter['runners'][0],
+    runners: testSlider.presenter['runners'],
+    activeRunner: testSlider.presenter['runners'][0],
   };
   const recieveModelLogic = jest.fn();
-  testPresenter.recieveModelLogic = recieveModelLogic;
+  testSlider.presenter.recieveModelLogic = recieveModelLogic;
 
   test("must call subscriber's-method through the notifier", () => {
-    testPresenter['runners'][0].updateRunnerValues(updateRunnerValuesArgsTest);
+    testSlider.presenter['runners'][0].updateRunnerValues(updateRunnerValuesArgsTest);
     expect(recieveModelLogic).toHaveBeenCalled();
   });
   test('must update position and stepValue', () => {
-    testPresenter['runners'][0].updateRunnerValues(updateRunnerValuesArgsTest);
-    expect(testPresenter['runners'][0]).toHaveProperty('positionInPercent', 20);
-    expect(testPresenter['runners'][0]).toHaveProperty('stepValue', 20);
+    testSlider.presenter['runners'][0].updateRunnerValues(updateRunnerValuesArgsTest);
+    expect(testSlider.presenter['runners'][0]).toHaveProperty('positionInPercent', 20);
+    expect(testSlider.presenter['runners'][0]).toHaveProperty('stepValue', 20);
   });
 });

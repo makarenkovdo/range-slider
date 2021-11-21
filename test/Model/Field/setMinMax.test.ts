@@ -3,7 +3,7 @@
  */
 import '@testing-library/jest-dom';
 import FieldModel from '../../../src/model/FieldModel';
-import SliderPresenter from '../../../src/presenter/SliderPresenter';
+import Slider from '../../../src/Slider';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -12,10 +12,10 @@ beforeEach(() => {
 });
 
 describe('setMinMax test', () => {
-  const testPresenter: SliderPresenter = new SliderPresenter('testId', {
+  const testSlider: Slider = new Slider('testId', {
     isRange: true,
   });
-  const testField = new FieldModel('testId', testPresenter);
+  const testField = new FieldModel('testId', testSlider.presenter);
 
   testField.setMinMax(14, 19);
 

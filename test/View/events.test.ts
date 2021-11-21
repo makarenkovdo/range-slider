@@ -4,16 +4,16 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 
 import '@testing-library/jest-dom';
-import SliderPresenter from '../../src/presenter/SliderPresenter';
+import Slider from '../../src/Slider';
 
 describe('testing events ', () => {
   document.body.innerHTML = `
     <div data-testid="testId" id="testId" class="range-runner horizontal" data-start="0"><div class="runner js-runner js-instance-0" id="js-runner"></div></div>
     `;
-  const testPresenter = new SliderPresenter('testId', {});
+  const testSlider = new Slider('testId', {});
   test('must toHaveBeenCalles when click', () => {
     const notifyFieldClick = jest.fn();
-    testPresenter['view'].notifyFieldClick = notifyFieldClick;
+    testSlider.presenter['view'].notifyFieldClick = notifyFieldClick;
     const $testId:HTMLElement | null = document.querySelector('testId');
     if ($testId) {
       $testId.click();

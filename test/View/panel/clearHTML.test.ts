@@ -4,8 +4,8 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
-import { BuildParams } from '../../../src/presenter/presenterInterfaces';
-import SliderPresenter from '../../../src/presenter/SliderPresenter';
+import { BuildParams } from '../../../src/initializeTypes';
+import Slider from '../../../src/Slider';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -37,7 +37,7 @@ beforeEach(() => {
 });
 
 describe('panel test', () => {
-  const testedSlider = new SliderPresenter('first', {});
+  const testSlider = new Slider('first', {});
   const createRangeSliderTestArgs: BuildParams = {
     shouldAddTip: true,
     shouldAddBar: true,
@@ -54,20 +54,20 @@ describe('panel test', () => {
 
   test('if functions rebuild call clearHTMLElement', async () => {
     await waitFor(() => {
-      expect(testedSlider['view'].id).toBeDefined();
+      expect(testSlider.presenter['view'].id).toBeDefined();
     });
     const clearHTMLElement = jest.fn();
-    testedSlider['view'].clearHTMLElement = clearHTMLElement;
-    testedSlider['rebuild'](createRangeSliderTestArgs);
+    testSlider.presenter['view'].clearHTMLElement = clearHTMLElement;
+    testSlider.presenter['rebuild'](createRangeSliderTestArgs);
     expect(clearHTMLElement).toHaveBeenCalled();
   });
   test('if clearHTMLElement clear $field', async () => {
     await waitFor(() => {
-      expect(testedSlider['view'].id).toBeDefined();
+      expect(testSlider.presenter['view'].id).toBeDefined();
     });
     const clearHTMLElement = jest.fn();
-    testedSlider['view'].clearHTMLElement = clearHTMLElement;
-    testedSlider['rebuild'](createRangeSliderTestArgs);
+    testSlider.presenter['view'].clearHTMLElement = clearHTMLElement;
+    testSlider.presenter['rebuild'](createRangeSliderTestArgs);
     const $field = $('#first');
     expect($field.html()).toBe('');
   });

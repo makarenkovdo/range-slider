@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import { BuildParamsBeforeChecking } from '../../../src/presenter/presenterInterfaces';
+import { BuildParamsBeforeChecking } from '../../../src/initializeTypes';
 import checkValues from '../../../src/presenter/presenterModules/checkValues';
 
 describe('check build params test', () => {

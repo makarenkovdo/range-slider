@@ -1,14 +1,17 @@
 import { DragEventDataType } from '../../viewInterfaces';
 
 const prepareMovingCoordinates = (
-  event: JQuery.DragEvent,
+  event: JQuery.MouseMoveEvent | JQuery.TouchMoveEvent,
   eventData: DragEventDataType,
 ): number[] => {
   const { $field, fieldSize, isVertical } = eventData.thisRunner.parent;
-  const cursorXY = [
-    event.pageX - $field.position().left - 5,
-    event.pageY - $field.position().top - 5,
-  ];
+  let cursorXY = [0, 0];
+  if (event.pageX && event.pageY) {
+    cursorXY = [
+      event.pageX - $field.position().left - 5,
+      event.pageY - $field.position().top - 5,
+    ];
+  }
   let switcher = 0;
   if (isVertical) switcher = 1;
   if (cursorXY[switcher] < 0) {
@@ -20,7 +23,7 @@ const prepareMovingCoordinates = (
   return cursorXY;
 };
 
-const notifySubscriber = (event: JQuery.DragEvent): void => {
+const notifySubscriber = (event: JQuery.MouseMoveEvent | JQuery.TouchMoveEvent): void => {
   event.preventDefault();
   event.stopPropagation();
   const eventData = event.data as DragEventDataType;

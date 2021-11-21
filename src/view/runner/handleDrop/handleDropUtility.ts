@@ -5,7 +5,7 @@ import SliderView from '../../SliderView';
 type EventData = {
   thisView: SliderView;
 };
-function cancelDragging(event: JQuery.DragOverEvent): void {
+function cancelDragging(event: JQuery.MouseUpEvent | JQuery.TouchEndEvent): void {
   if ((event.target as HTMLElement).tagName !== 'INPUT') {
     event.preventDefault();
     event.stopPropagation();

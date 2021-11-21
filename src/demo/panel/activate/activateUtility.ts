@@ -62,36 +62,23 @@ const initializePanel = function initializeDefaultPanelValues(
     $runnerWidthInput,
     $fieldThicknessInput,
   } = this;
-  const checkSelectors = () => $minValueInput
-    && $maxValueInput
-    && $stepInput
-    && $isRangeInput
-    && $orientationInput
-    && $hasScaleInput
-    && $hasBarInput
-    && $hasTipInput
-    && $runner0ValueInput
-    && $runner1ValueInput
-    && $runnerHeightInput
-    && $runnerWidthInput
-    && $fieldThicknessInput;
-  if (checkSelectors()) {
-    $(document).ready(() => {
-      if ($minValueInput) $minValueInput.value = `${minValue}`;
-      if ($maxValueInput) $maxValueInput.value = `${maxValue}`;
-      if ($runnerHeightInput) $runnerHeightInput.value = `${runnerSize[1]}`;
-      if ($runnerWidthInput) $runnerWidthInput.value = `${runnerSize[0]}`;
-      if ($stepInput) $stepInput.value = `${step}`;
-      if ($isRangeInput) $isRangeInput.checked = isRange;
-      if ($orientationInput) $orientationInput.checked = (orientation === 'vertical');
-      if ($hasScaleInput) $hasScaleInput.checked = shouldAddScale;
-      if ($hasBarInput) $hasBarInput.checked = shouldAddBar;
-      if ($hasTipInput) $hasTipInput.checked = shouldAddTip;
-      if ($runner0ValueInput) $runner0ValueInput.value = `${runnersInstantPosition[0]}`;
-      if ($runner1ValueInput) $runner1ValueInput.value = `${runnersInstantPosition[1]}`;
-      if ($fieldThicknessInput) $fieldThicknessInput.value = `${fieldThickness}`;
-    });
-  }
+  $(document).ready(() => {
+    if ($minValueInput) $minValueInput.value = `${minValue}`;
+    if ($maxValueInput) $maxValueInput.value = `${maxValue}`;
+    if ($runnerHeightInput) $runnerHeightInput.value = `${runnerSize[1]}`;
+    if ($runnerWidthInput) $runnerWidthInput.value = `${runnerSize[0]}`;
+    if ($stepInput) $stepInput.value = `${step}`;
+    if ($isRangeInput) $isRangeInput.checked = isRange;
+    if ($orientationInput) $orientationInput.checked = (orientation === 'vertical');
+    if ($hasScaleInput) $hasScaleInput.checked = shouldAddScale;
+    if ($hasBarInput) $hasBarInput.checked = shouldAddBar;
+    if ($hasTipInput) $hasTipInput.checked = shouldAddTip;
+    if ($runner0ValueInput) $runner0ValueInput.value = `${runnersInstantPosition[0]}`;
+    if ($runner1ValueInput) $runner1ValueInput.value = `${runnersInstantPosition[1]}`;
+    if ($fieldThicknessInput) $fieldThicknessInput.value = `${fieldThickness}`;
+    console.log(this);
+    
+  });
 };
 
 const handleChange = function hangleInputsAndCheckboxesChanges(

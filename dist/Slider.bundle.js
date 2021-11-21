@@ -10,13 +10,23 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/index.scss":
+/*!************************!*\
+  !*** ./src/index.scss ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n\n//# sourceURL=webpack://metalamp__task-4/./src/index.scss?");
+
+/***/ }),
+
 /***/ "./src/Slider.ts":
 /*!***********************!*\
   !*** ./src/Slider.ts ***!
   \***********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _presenter_SliderPresenter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./presenter/SliderPresenter */ \"./src/presenter/SliderPresenter.ts\");\n\r\nvar Slider = /** @class */ (function () {\r\n    function Slider(id, params) {\r\n        this.presenter = new _presenter_SliderPresenter__WEBPACK_IMPORTED_MODULE_0__[\"default\"](id, params);\r\n    }\r\n    return Slider;\r\n}());\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Slider);\r\n\n\n//# sourceURL=webpack://metalamp__task-4/./src/Slider.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _presenter_SliderPresenter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./presenter/SliderPresenter */ \"./src/presenter/SliderPresenter.ts\");\n/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.scss */ \"./src/index.scss\");\n\r\n\r\nvar Slider = /** @class */ (function () {\r\n    function Slider(id, params) {\r\n        this.presenter = new _presenter_SliderPresenter__WEBPACK_IMPORTED_MODULE_0__[\"default\"](id, params);\r\n    }\r\n    return Slider;\r\n}());\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Slider);\r\n\n\n//# sourceURL=webpack://metalamp__task-4/./src/Slider.ts?");
 
 /***/ }),
 

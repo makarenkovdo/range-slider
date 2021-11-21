@@ -7,7 +7,7 @@ const path = require('path');
 const plugins = [
   new MiniCssExtractPlugin({
     filename: '[name].css',
-    chunkFilename: '[name].css',
+    chunkFilename: '[id].css',
     ignoreOrder: true,
   }),
 ];
@@ -41,6 +41,27 @@ module.exports = {
     // alias: {
     //   images: path.resolve(__dirname, 'src/assets/img/'),
     // },
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        index: {
+          type: "css/mini-extract",
+          name: "index",
+          chunks: (chunk) => {
+            return chunk.name === "index";
+          },          enforce: true,
+        },
+        Slider: {
+          type: "css/mini-extract",
+          name: "Slider",
+          chunks: (chunk) => {
+            return chunk.name === "Slider";
+          },
+          enforce: true,
+        },
+      },
+    },
   },
 
   plugins: plugins,

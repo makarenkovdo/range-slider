@@ -17,11 +17,19 @@ h1 {
 
 .panel {
   width: 500px;
-
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: max-content;
+  &__container {
+    display: grid;
+    grid-template-rows: repeat(2,1fr);
+  }
   &__tools {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     margin-bottom: 50px;
+    height: 200px;
+
 
     input {
       width: 80px;

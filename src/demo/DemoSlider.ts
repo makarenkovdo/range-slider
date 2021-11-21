@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/dot-notation */
-import '../index.scss';
+// import '../index.scss';
 import './panel/panel.scss';
 import Slider from '../Slider';
 import Panel from './panel/Panel';
@@ -24,6 +24,7 @@ class DemoSlider {
     this.checkedParams = checkValues(params);
     this.panel = new Panel(id, this.checkedParams, this);
     this.slider = new Slider(id, this.checkedParams);
+    this.activatePanel(this.checkedParams);
   }
 
   public activatePanel(params: PresenterBuildParams): this {
@@ -32,13 +33,14 @@ class DemoSlider {
   }
 
   public rebuild(params:PresenterBuildParams):void {
-    // this.field.isRange = false;
-    // this.view.isRange = false;
-    this.removeListeners(this.id);
-    this.slider['presenter']['runners'] = [];
-    this.panel.clearHTMLElement(this.id);
-    this.slider['presenter']['runnerCounter'] = 0;
-    this.slider = new Slider(this.id, params);
+    // // this.field.isRange = false;
+    // // this.view.isRange = false;
+    // this.removeListeners(this.id);
+    // this.slider['presenter']['runners'] = [];
+    // this.panel.clearHTMLElement(this.id);
+    // this.slider['presenter']['runnerCounter'] = 0;
+    // this.slider = new Slider(this.id, params);
+    this.slider.presenter.rebuild(params);
   }
 
   private removeListeners(id:string): this {

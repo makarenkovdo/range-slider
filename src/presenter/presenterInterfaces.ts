@@ -14,6 +14,7 @@ type PresenterBuildParamsBeforeChecking = {
   runnersInstantPosition?: number[];
   hasInputPanel?: boolean;
   isTestMode?: boolean;
+  onChange?: (params:PresenterBuildParamsBeforeChecking)=>void
 };
 type PresenterBuildParams = {
   minValue: number;
@@ -28,6 +29,7 @@ type PresenterBuildParams = {
   orientation: Orientation;
   runnersInstantPosition: number[];
   isTestMode?: boolean;
+  onChange?: (params:PresenterBuildParamsBeforeChecking)=>void;
 };
 
 type DataForRunnerUpdatingArgsType = {

@@ -76,8 +76,6 @@ const initializePanel = function initializeDefaultPanelValues(
     if ($runner0ValueInput) $runner0ValueInput.value = `${runnersInstantPosition[0]}`;
     if ($runner1ValueInput) $runner1ValueInput.value = `${runnersInstantPosition[1]}`;
     if ($fieldThicknessInput) $fieldThicknessInput.value = `${fieldThickness}`;
-    console.log(this);
-    
   });
 };
 

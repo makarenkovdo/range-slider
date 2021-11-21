@@ -23,8 +23,13 @@ class DemoSlider {
     this.id = id;
     this.checkedParams = checkValues(params);
     this.panel = new Panel(id, this.checkedParams, this);
-    this.slider = new Slider(id, this.checkedParams);
+    this.slider = new Slider(id, this.setCallback());
     this.activatePanel(this.checkedParams);
+  }
+
+  public setCallback() {
+    this.checkedParams.onChange = this.handleChange.bind(this);
+    return this.checkedParams;
   }
 
   public activatePanel(params: PresenterBuildParams): this {
@@ -32,11 +37,20 @@ class DemoSlider {
     return this;
   }
 
-  public rebuild(params:PresenterBuildParams):void {
-    this.checkedParams = checkValues(params);
-    this.slider.presenter.rebuild(this.checkedParams);
-    this.panel.initializePanel(this.checkedParams); //listeners?
+  public handleChange(params:PresenterBuildParamsBeforeChecking) {
+    this.rebuildPanel(params);
+  }
 
+  public rebuildPanel(params:PresenterBuildParamsBeforeChecking):void {
+    this.checkedParams = checkValues(params);
+    this.panel.initializePanel(this.checkedParams); // listeners?
+  }
+
+  public rebuild(params:PresenterBuildParamsBeforeChecking):void {
+    this.checkedParams = checkValues(params);
+    this.checkedParams = this.setCallback();
+    this.panel.initializePanel(this.checkedParams); // listeners?
+    this.slider.presenter.rebuild(this.checkedParams);
   }
 
   private removeListeners(id:string): this {

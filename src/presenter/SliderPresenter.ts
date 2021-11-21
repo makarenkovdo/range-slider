@@ -2,16 +2,18 @@
 import FieldModel from '../model/FieldModel';
 import RunnerModel from '../model/RunnerModel';
 import { UpdateRunnerValuesArgs } from '../model/runnerModules/runnerInterfaces';
+import Slider from '../Slider';
 import SliderView from '../view/SliderView';
 import {
   PresenterBuildParams,
   DataForRunnerUpdatingArgsType,
   PresenterBuildParamsBeforeChecking,
-  GetValuesReturned,
 } from './presenterInterfaces';
 import checkValues from './presenterModules/checkValues';
 
 class SliderPresenter {
+  public parent: Slider;
+
   private field: FieldModel;
 
   private runners: RunnerModel[];
@@ -22,30 +24,38 @@ class SliderPresenter {
 
   private runnerCounter: number;
 
-  private checkedParams: PresenterBuildParams;
+  private params: PresenterBuildParams;
 
-  constructor(id: string, params: PresenterBuildParamsBeforeChecking) {
+  constructor(
+    slider: Slider,
+    id: string,
+    params: PresenterBuildParams,
+  ) {
+    this.parent = slider;
     this.id = id;
     this.runnerCounter = 0;
     this.runners = [];
     this.field = new FieldModel(id, this);
     this.view = new SliderView(id, this);
-    this.checkedParams = checkValues(params);
-    this.build(this.checkedParams);
-    this.addListeners(this.checkedParams, 'build');
+    this.params = params;
+    this.build(params);
+    this.addListeners(params, 'build');
   }
 
-  public getValues():GetValuesReturned {
-    if (this.view.isRange) {
-      return {
-        firstRunnerValue: this.runners[0].stepValue,
-        secondRunnerValue: this.runners[1].stepValue,
-      };
-    }
-    return { firstRunnerValue: this.runners[0].stepValue };
+  public getValues():PresenterBuildParamsBeforeChecking {
+    // console.log(this.view.isRange);
+    // console.log('this.runners[0].stepValue, this.runners[0].stepValue', this.runners[0].stepValue, this.runners[0].stepValue);
+
+    // if (this.view.isRange) {
+    //   return {
+    //     runnersInstantPosition: [this.runners[0].stepValue, this.runners[1].stepValue],
+    //   };
+    // }
+    return { runnersInstantPosition: [1, 0] };
   }
 
   public rebuild(params:PresenterBuildParams):void {
+    this.params = params;
     this.field.isRange = false;
     this.view.isRange = false;
     this.removeListeners(params);
@@ -56,15 +66,14 @@ class SliderPresenter {
     this.addListeners(params, 'rebuild');
   }
 
-  private build(params: PresenterBuildParamsBeforeChecking): void {
-    const checkedParams = checkValues(params);
-    if (!checkedParams.isTestMode) {
-      this.setMinMax(checkedParams)
-        .initLayers(checkedParams)
-        .createRangeSlider(checkedParams)
-        .setStep(checkedParams)
-        .createBar(checkedParams)
-        .createScale(checkedParams);
+  private build(params: PresenterBuildParams): void {
+    if (!params.isTestMode) {
+      this.setMinMax(params)
+        .initLayers(params)
+        .createRangeSlider(params)
+        .setStep(params)
+        .createBar(params)
+        .createScale(params);
     }
   }
 
@@ -204,6 +213,11 @@ class SliderPresenter {
           activeRunner.stepValue,
           activeRunner.instance,
         );
+      }
+
+      if (this.params.onChange) {
+        this.params.runnersInstantPosition[activeRunner.instance] = activeRunner.stepValue;
+        this.params.onChange(this.params);
       }
     }
   }

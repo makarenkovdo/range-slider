@@ -6,6 +6,6 @@ const config: Config.InitialOptions = {
   moduleNameMapper: {
     '^.+\\.(css|less|scss)$': 'babel-jest',
   },
-  setupFiles: ['./src/setup-jest.js'],
+  setupFiles: ['./test/setup-jest.js'],
 };
 export default config;

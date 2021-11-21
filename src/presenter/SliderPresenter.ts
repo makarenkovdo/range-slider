@@ -51,8 +51,6 @@ class SliderPresenter {
   }
 
   private build(params: BuildParams): void {
-    console.log('build params', params);
-    
     if (!params.isTestMode) {
       this.setMinMax(params)
         .initLayers(params)

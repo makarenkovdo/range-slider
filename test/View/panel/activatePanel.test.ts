@@ -83,7 +83,7 @@ describe('panel test', () => {
       const $orient: HTMLInputElement | null = testedSlider.panel.$orientationInput;
       let orientation:string | null = null;
       if ($orient) orientation = $orient.value;
-      if (orientation) expect(orientation).toBe('5');
+      if (orientation) expect(orientation).toBe('on');
     });
   });
 });

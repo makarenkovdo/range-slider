@@ -63,6 +63,8 @@ describe('panel test', () => {
     expect(testedSlider.panel.minMax[0]).toBe(1);
     await waitFor(() => {
       const $maxValueInputNew: HTMLInputElement | null = testedSlider.panel.$maxValueInput;
+      console.log('$maxValueInputNew', $maxValueInputNew);
+      
       let maxValue:string | null = null;
       if ($maxValueInputNew) maxValue = $maxValueInputNew.value;
       if (maxValue) expect(maxValue).toBe('5');

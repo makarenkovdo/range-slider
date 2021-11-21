@@ -17,10 +17,10 @@ describe('Presenter test', () => {
     isTestMode: true,
   });
   test('constructor testing', () => {
-    expect(testedSlider).toHaveProperty('runnerCounter', 0);
-    expect(testedSlider).toHaveProperty('field.isVertical', false);
-    expect(testedSlider).toHaveProperty('runners');
-    expect(testedSlider).toHaveProperty('view');
-    expect(testedSlider).not.toHaveProperty('runners[1]');
+    expect(testedSlider.presenter).toHaveProperty('runnerCounter', 0);
+    expect(testedSlider.presenter).toHaveProperty('field.isVertical', false);
+    expect(testedSlider.presenter).toHaveProperty('runners');
+    expect(testedSlider.presenter).toHaveProperty('view');
+    expect(testedSlider.presenter).not.toHaveProperty('runners[1]');
   });
 });

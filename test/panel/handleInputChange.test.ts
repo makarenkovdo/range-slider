@@ -4,8 +4,8 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
-import DemoSlider from '../../../src/demo/DemoSlider';
-import { BuildParams } from '../../../src/initializeTypes';
+import DemoSlider from '../../src/demo/DemoSlider';
+import { BuildParams } from '../../src/initializeTypes';
 
 beforeEach(() => {
   document.body.innerHTML = `

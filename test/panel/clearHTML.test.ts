@@ -4,8 +4,8 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
-import DemoSlider from '../../../src/demo/DemoSlider';
-import { BuildParams } from '../../../src/initializeTypes';
+import { BuildParams } from '../../src/initializeTypes';
+import Slider from '../../src/Slider';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -37,7 +37,7 @@ beforeEach(() => {
 });
 
 describe('panel test', () => {
-  const testedSlider = new DemoSlider('first', {});
+  const testSlider = new Slider('first', {});
   const createRangeSliderTestArgs: BuildParams = {
     shouldAddTip: true,
     shouldAddBar: true,
@@ -52,38 +52,23 @@ describe('panel test', () => {
     fieldThickness: 6,
   };
 
-  test('if functions selectPanelNodes/initializePanel set minmax', async () => {
+  test('if functions rebuild call clearHTMLElement', async () => {
     await waitFor(() => {
-      expect(testedSlider.slider.presenter['view'].id).toBeDefined();
+      expect(testSlider.presenter['view'].id).toBeDefined();
     });
-
-    testedSlider['activatePanel'](createRangeSliderTestArgs);
-
-    expect(testedSlider.panel.$maxValueInput).toBeDefined();
-    expect(testedSlider.panel.minMax[0]).toBe(1);
-    await waitFor(() => {
-      const $maxValueInputNew: HTMLInputElement | null = testedSlider.panel.$maxValueInput;
-      console.log('$maxValueInputNew', $maxValueInputNew);
-
-      let maxValue:string | null = null;
-      if ($maxValueInputNew) maxValue = $maxValueInputNew.value;
-      if (maxValue) expect(maxValue).toBe('5');
-    });
+    const clearHTMLElement = jest.fn();
+    testSlider.presenter['view'].clearHTMLElement = clearHTMLElement;
+    testSlider.presenter['rebuild'](createRangeSliderTestArgs);
+    expect(clearHTMLElement).toHaveBeenCalled();
   });
-  test('if functions selectPanelNodes/initializePanel set orientation', async () => {
+  test('if clearHTMLElement clear $field', async () => {
     await waitFor(() => {
-      expect(testedSlider.slider.presenter['view'].id).toBeDefined();
+      expect(testSlider.presenter['view'].id).toBeDefined();
     });
-
-    testedSlider['activatePanel'](createRangeSliderTestArgs);
-
-    expect(testedSlider.panel.$orientationInput).toBeDefined();
-    expect(testedSlider.panel.orientation).toBe('vertical');
-    await waitFor(() => {
-      const $orient: HTMLInputElement | null = testedSlider.panel.$orientationInput;
-      let orientation:string | null = null;
-      if ($orient) orientation = $orient.value;
-      if (orientation) expect(orientation).toBe('on');
-    });
+    const clearHTMLElement = jest.fn();
+    testSlider.presenter['view'].clearHTMLElement = clearHTMLElement;
+    testSlider.presenter['rebuild'](createRangeSliderTestArgs);
+    const $field = $('#first');
+    expect($field.html()).toBe('');
   });
 });

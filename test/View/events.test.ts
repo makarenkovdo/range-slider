@@ -14,10 +14,8 @@ describe('testing events ', () => {
   test('must toHaveBeenCalles when click', () => {
     const notifyFieldClick = jest.fn();
     testSlider.presenter['view'].notifyFieldClick = notifyFieldClick;
-    const $testId:HTMLElement | null = document.querySelector('testId');
+    const $testId:HTMLElement | null = document.querySelector('#testId');
     if ($testId) {
-      console.log('HERE! CLICK!');
-      console.log($testId);
       $testId.click();
     }
     expect(notifyFieldClick).toHaveBeenCalled();

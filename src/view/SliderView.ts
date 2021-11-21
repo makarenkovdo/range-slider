@@ -15,7 +15,6 @@ import Runner from './runner/Runner';
 import Scale from './scale/Scale';
 import Tip from './tip/Tip';
 import clearHTMLElement from './clearHTMLElement';
-import Input from './input/Input';
 
 export default class SliderView {
   public id: string;
@@ -42,8 +41,6 @@ export default class SliderView {
 
   public hasScale: boolean;
 
-  public hasInput: boolean;
-
   public hasTip: boolean;
 
   public lengthInStep: number;
@@ -61,8 +58,6 @@ export default class SliderView {
   public scale: Scale;
 
   public tip: Tip;
-
-  public input: Input[] | [];
 
   public initializeValues: (
     runnerSize: number[],
@@ -88,7 +83,6 @@ export default class SliderView {
     this.isVertical = false;
     this.isRange = false;
     this.hasBar = false;
-    this.hasInput = false;
     this.hasScale = false;
     this.hasTip = false;
     this.orientation = 'horizontal';
@@ -104,7 +98,6 @@ export default class SliderView {
     this.runner = new Runner(this);
     this.scale = new Scale(this);
     this.tip = new Tip(this);
-    this.input = [];
 
     this.clearHTMLElement = clearHTMLElement;
     this.initializeValues = initializeValues.bind(this) as () => void;

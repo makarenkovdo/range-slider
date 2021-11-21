@@ -51,6 +51,8 @@ class SliderPresenter {
   }
 
   private build(params: BuildParams): void {
+    console.log('build params', params);
+    
     if (!params.isTestMode) {
       this.setMinMax(params)
         .initLayers(params)
@@ -192,13 +194,6 @@ class SliderPresenter {
       this.updateRunnerPosition(activeRunner);
       if (this.view.hasTip) this.updateTipNumber(activeRunner.stepValue, activeRunner.instance);
       if (this.view.hasBar) this.updateBarPosition();
-      if (this.view.hasInput) {
-        this.view.input[activeRunner.instance].updateRunnerInput(
-          activeRunner.stepValue,
-          activeRunner.instance,
-        );
-      }
-
       if (this.params.onChange) {
         this.params.runnersInstantPosition[activeRunner.instance] = activeRunner.stepValue;
         this.params.onChange(this.params);

@@ -18,7 +18,6 @@ const checkValues = function checkInitialValues(
     isRange = false,
     isTestMode = false,
     orientation = 'horizontal',
-    hasInputPanel = false,
     runnersInstantPosition = [0, 100],
   } = params;
   if (minValue > maxValue) {
@@ -67,7 +66,7 @@ const checkValues = function checkInitialValues(
     runnersInstantPosition[1] = maxValue;
   }
 
-  const checkedParams = {
+  const checkedParams:BuildParams = {
     minValue,
     maxValue,
     step,
@@ -80,8 +79,8 @@ const checkValues = function checkInitialValues(
     isRange,
     isTestMode,
     orientation,
-    hasInputPanel,
   };
+  if (params.onChange) checkedParams.onChange = params.onChange;
   return checkedParams;
 };
 

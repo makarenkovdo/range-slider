@@ -33,14 +33,10 @@ class DemoSlider {
   }
 
   public rebuild(params:PresenterBuildParams):void {
-    // // this.field.isRange = false;
-    // // this.view.isRange = false;
-    // this.removeListeners(this.id);
-    // this.slider['presenter']['runners'] = [];
-    // this.panel.clearHTMLElement(this.id);
-    // this.slider['presenter']['runnerCounter'] = 0;
-    // this.slider = new Slider(this.id, params);
-    this.slider.presenter.rebuild(params);
+    this.checkedParams = checkValues(params);
+    this.slider.presenter.rebuild(this.checkedParams);
+    this.panel.initializePanel(this.checkedParams); //listeners?
+
   }
 
   private removeListeners(id:string): this {

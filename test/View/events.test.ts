@@ -14,7 +14,10 @@ describe('testing events ', () => {
   test('must toHaveBeenCalles when click', () => {
     const notifyFieldClick = jest.fn();
     testPresenter['view'].notifyFieldClick = notifyFieldClick;
-    document.getElementById('testId').click();
+    const $testId:HTMLElement | null = document.querySelector('testId');
+    if ($testId) {
+      $testId.click();
+    }
     expect(notifyFieldClick).toHaveBeenCalled();
   });
 });

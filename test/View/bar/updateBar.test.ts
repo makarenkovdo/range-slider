@@ -19,7 +19,7 @@ describe('ViewModel test', () => {
   test('if function updateBarPosition update width of horizontal range slider', async () => {
     testView.runner.positions = [20, 80];
     testView.isRange = true;
-    testView.bar.updateBarPosition.call(this);
+    testView.bar.updateBarPosition.call(testView.bar);
     await waitFor(() => {
       const bar = screen.getByTestId('test-slider-bar');
       expect(bar).toHaveStyle('width: 60%');
@@ -29,7 +29,7 @@ describe('ViewModel test', () => {
     testView.runner.positions = [60, 100];
     testView.isRange = false;
     testView.isVertical = true;
-    testView.bar.updateBarPosition.call(this);
+    testView.bar.updateBarPosition.call(testView.bar);
     await waitFor(() => {
       const bar = screen.getByTestId('test-slider-bar');
       expect(bar).toHaveStyle('height: 60%');

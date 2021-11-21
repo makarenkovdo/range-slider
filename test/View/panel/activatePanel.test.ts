@@ -4,8 +4,8 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
+import DemoSlider from '../../../src/demo/DemoSlider';
 import { PresenterBuildParams } from '../../../src/presenter/presenterInterfaces';
-import SliderPresenter from '../../../src/presenter/SliderPresenter';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -37,9 +37,8 @@ beforeEach(() => {
 });
 
 describe('panel test', () => {
-  const testedSlider = new SliderPresenter('first', {});
+  const testedSlider = new DemoSlider('first', {});
   const createRangeSliderTestArgs: PresenterBuildParams = {
-    hasInputPanel: true,
     shouldAddTip: true,
     shouldAddBar: true,
     step: 2,
@@ -50,32 +49,39 @@ describe('panel test', () => {
     runnerSize: [12, 12],
     runnersInstantPosition: [9, 14],
     orientation: 'vertical',
+    fieldThickness: 6,
   };
 
   test('if functions selectPanelNodes/initializePanel set minmax', async () => {
     await waitFor(() => {
-      expect(testedSlider['view'].id).toBeDefined();
+      expect(testedSlider.slider.presenter['view'].id).toBeDefined();
     });
 
     testedSlider['activatePanel'](createRangeSliderTestArgs);
 
-    expect(testedSlider['view'].panel.$maxValueInput).toBeDefined();
-    expect(testedSlider['view'].panel.minMax[0]).toBe(1);
+    expect(testedSlider.panel.$maxValueInput).toBeDefined();
+    expect(testedSlider.panel.minMax[0]).toBe(1);
     await waitFor(() => {
-      expect(testedSlider['view'].panel.$maxValueInput.value).toBe('5');
+      const $maxValueInputNew: HTMLInputElement | null = testedSlider.panel.$maxValueInput;
+      let maxValue:string | null = null;
+      if ($maxValueInputNew) maxValue = $maxValueInputNew.value;
+      if (maxValue) expect(maxValue).toBe('5');
     });
   });
   test('if functions selectPanelNodes/initializePanel set orientation', async () => {
     await waitFor(() => {
-      expect(testedSlider['view'].id).toBeDefined();
+      expect(testedSlider.slider.presenter['view'].id).toBeDefined();
     });
 
     testedSlider['activatePanel'](createRangeSliderTestArgs);
 
-    expect(testedSlider['view'].panel.$orientationInput).toBeDefined();
-    expect(testedSlider['view'].panel.orientation).toBe('vertical');
+    expect(testedSlider.panel.$orientationInput).toBeDefined();
+    expect(testedSlider.panel.orientation).toBe('vertical');
     await waitFor(() => {
-      expect(testedSlider['view'].panel.$orientationInput.value).toBe('on');
+      const $orient: HTMLInputElement | null = testedSlider.panel.$orientationInput;
+      let orientation:string | null = null;
+      if ($orient) orientation = $orient.value;
+      if (orientation) expect(orientation).toBe('5');
     });
   });
 });

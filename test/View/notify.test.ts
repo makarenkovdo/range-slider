@@ -21,7 +21,7 @@ describe('if function "notify" call subscribers', () => {
     expect(recieveClickData).toHaveBeenCalled();
   });
   test('must call fakeSubscriber', () => {
-    testView.runner.notifySliderMoving.call(this, [0, 100]);
+    testView.runner.notifySliderMoving([0, 100], 0);
     expect(recieveDragData).toHaveBeenCalled();
   });
 });

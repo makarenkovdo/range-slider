@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
-import { PresenterBuildParams } from '../../src/presenter/presenterInterfaces';
+import { PresenterBuildParamsBeforeChecking } from '../../src/presenter/presenterInterfaces';
 import SliderPresenter from '../../src/presenter/SliderPresenter';
 
 describe('if build-function calls methods', () => {
@@ -13,14 +13,14 @@ describe('if build-function calls methods', () => {
   `;
   const testedSlider = new SliderPresenter('testId', {});
 
-  const createRangeSliderTestArgs: PresenterBuildParams = {
+  const createRangeSliderTestArgs: PresenterBuildParamsBeforeChecking = {
     isTestMode: false,
   };
-  const activatePanel = jest.fn();
+  const createScale = jest.fn();
   test('if build-function calls last method of builder-chain-of-calling', () => {
-    testedSlider['activatePanel'] = activatePanel;
+    testedSlider['createScale'] = createScale;
     testedSlider['build'](createRangeSliderTestArgs);
-    expect(activatePanel).toHaveBeenCalled();
+    expect(createScale).toHaveBeenCalled();
   });
 });
 

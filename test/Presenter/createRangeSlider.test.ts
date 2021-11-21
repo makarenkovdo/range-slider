@@ -25,8 +25,12 @@ describe('Presenter test', () => {
     runnerSize: [70, 70],
     minValue: 10,
     maxValue: 100,
-    runnersInstantPosition: [10, 20],
+    shouldAddScale: false,
+    shouldAddBar: false,
     step: 1,
+    fieldThickness: 6,
+    runnersInstantPosition: [20, 50],
+    orientation: 'horizontal',
   };
 
   test('if createRangeSlider runs', () => {

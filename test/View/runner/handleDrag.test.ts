@@ -5,6 +5,7 @@
 
 import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
+import checkValues from '../../../src/presenter/presenterModules/checkValues';
 import SliderPresenter from '../../../src/presenter/SliderPresenter';
 
 describe('testing events ', () => {
@@ -20,7 +21,7 @@ describe('testing events ', () => {
   testPresenter['view'].runner.notifySliderMoving = notifySliderMoving;
 
   const onDrag = jest.fn();
-  const createRangeSliderTestArgs = {};
+  const createRangeSliderTestArgs = checkValues({});
   test('if build-function calls last method of builder-chain-of-calling', async () => {
     testPresenter['view'].runner.handleDrag = onDrag;
     testPresenter['addListeners'](createRangeSliderTestArgs, 'build');

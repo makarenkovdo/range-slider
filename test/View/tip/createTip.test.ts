@@ -16,7 +16,7 @@ describe('ViewModel test', () => {
   const testView = new SliderView('testId', testPresenter);
 
   test('if function "createTipNumber" creating html-element', async () => {
-    testView.tip.create.call(this, 0, false);
+    testView.tip.create.call(testView.tip, 0, false, 50, 50);
     await waitFor(() => {
       expect(screen.getByTestId('test-tip-number-0')).toBeInTheDocument();
     });

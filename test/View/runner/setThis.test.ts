@@ -20,7 +20,7 @@ describe('if function "setThis" set this.$runners', () => {
     await waitFor(() => {
       expect(testView.$field).not.toBeFalsy();
     });
-    setThis.call(testView.runner, 0);
+    setThis.call(testView.runner, 0, 50);
     await waitFor(() => {
       expect(testView.runner.$elements[0]).not.toBeFalsy();
     });

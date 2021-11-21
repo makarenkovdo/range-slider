@@ -19,7 +19,7 @@ describe('ViewModel test', () => {
   testView.$field = $field;
 
   test('if function "createBar" creating html-element', async () => {
-    testView.bar.createBar.call(this);
+    testView.bar.createBar.call(testView.bar, 6);
     await waitFor(() => {
       expect(screen.getByTestId('test-slider-bar')).toBeInTheDocument();
     });

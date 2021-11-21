@@ -4,8 +4,8 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
+import DemoSlider from '../../../src/demo/DemoSlider';
 import { PresenterBuildParams } from '../../../src/presenter/presenterInterfaces';
-import SliderPresenter from '../../../src/presenter/SliderPresenter';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -37,9 +37,8 @@ beforeEach(() => {
 });
 
 describe('panel test', () => {
-  const testedSlider = new SliderPresenter('first', {});
+  const testedSlider = new DemoSlider('first', {});
   const createRangeSliderTestArgs: PresenterBuildParams = {
-    hasInputPanel: true,
     shouldAddTip: true,
     shouldAddBar: true,
     step: 2,
@@ -50,17 +49,18 @@ describe('panel test', () => {
     runnerSize: [12, 12],
     runnersInstantPosition: [9, 14],
     orientation: 'vertical',
+    fieldThickness: 6,
   };
 
   test('if functions selectPanelNodes/initializePanel works', async () => {
     await waitFor(() => {
-      expect(testedSlider['view'].id).toBeDefined();
+      expect(testedSlider.slider.presenter['view'].id).toBeDefined();
     });
     const notifyInputChange = jest.fn();
-    testedSlider['view'].panel.notifyInputChange = notifyInputChange;
+    testedSlider.panel.notifyInputChange = notifyInputChange;
     testedSlider['activatePanel'](createRangeSliderTestArgs);
-    testedSlider['view'].panel.updateRunnerInput(10, 0);
-    const $input:HTMLInputElement = document.querySelector('.js-slider-input__runner-0-value');
-    expect($input.value).toBe('10');
+    testedSlider.slider.presenter['view'].input[0].updateRunnerInput(10, 0);
+    const $input:HTMLInputElement | null = document.querySelector('.js-slider-input__runner-0-value');
+    if ($input) expect($input.value).toBe('10');
   });
 });

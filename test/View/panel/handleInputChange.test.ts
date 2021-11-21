@@ -4,8 +4,8 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
+import DemoSlider from '../../../src/demo/DemoSlider';
 import { PresenterBuildParams } from '../../../src/presenter/presenterInterfaces';
-import SliderPresenter from '../../../src/presenter/SliderPresenter';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -37,9 +37,8 @@ beforeEach(() => {
 });
 
 describe('panel test', () => {
-  const testedSlider = new SliderPresenter('first', {});
+  const testedSlider = new DemoSlider('first', {});
   const createRangeSliderTestArgs: PresenterBuildParams = {
-    hasInputPanel: true,
     shouldAddTip: true,
     shouldAddBar: true,
     step: 2,
@@ -50,41 +49,151 @@ describe('panel test', () => {
     runnerSize: [12, 12],
     runnersInstantPosition: [9, 14],
     orientation: 'vertical',
+    fieldThickness: 6,
   };
 
   test('if changing the input would call notifyInputChange-function', async () => {
     await waitFor(() => {
-      expect(testedSlider['view'].id).toBeDefined();
+      expect(testedSlider.slider.presenter['view'].id).toBeDefined();
     });
     const notifyInputChange = jest.fn();
-    testedSlider['view'].panel.notifyInputChange = notifyInputChange;
+    testedSlider.panel.notifyInputChange = notifyInputChange;
     testedSlider['activatePanel'](createRangeSliderTestArgs);
     const event = new Event('change');
-    const elem1 = document.querySelector('.js-slider-input__min-value');
-    const elem2 = document.querySelector('.js-slider-input__max-value');
-    const elem3 = document.querySelector('.js-slider-input__runner-0-value');
-    const elem4 = document.querySelector('.js-slider-input__runner-1-value');
-    const elem5 = document.querySelector('.js-slider-input__runner-width');
-    const elem6 = document.querySelector('.js-slider-input__runner-height');
-    const elem7 = document.querySelector('.js-slider-input__field-thickness');
-    const elem8 = document.querySelector('.js-slider-input__step');
-    const elem9 = document.querySelector('.js-slider-input__orientation');
-    const elem10 = document.querySelector('.js-slider-input__has-scale');
-    const elem11 = document.querySelector('.js-slider-input__has-bar');
-    const elem12 = document.querySelector('.js-slider-input__has-tip');
-    elem1.dispatchEvent(event);
-    elem2.dispatchEvent(event);
-    elem3.dispatchEvent(event);
-    elem4.dispatchEvent(event);
-    elem5.dispatchEvent(event);
-    elem6.dispatchEvent(event);
-    elem7.dispatchEvent(event);
-    elem8.dispatchEvent(event);
-    elem9.dispatchEvent(event);
-    elem10.dispatchEvent(event);
-    elem11.dispatchEvent(event);
-    elem12.dispatchEvent(event);
-
+    const elem = document.querySelector('.js-slider-input__min-value');
+    if (elem) elem.dispatchEvent(event);
+    expect(notifyInputChange).toHaveBeenCalled();
+  });
+  test('if changing the input would call notifyInputChange-function', async () => {
+    await waitFor(() => {
+      expect(testedSlider.slider.presenter['view'].id).toBeDefined();
+    });
+    const notifyInputChange = jest.fn();
+    testedSlider.panel.notifyInputChange = notifyInputChange;
+    testedSlider['activatePanel'](createRangeSliderTestArgs);
+    const event = new Event('change');
+    const elem = document.querySelector('.js-slider-input__max-value');
+    if (elem) elem.dispatchEvent(event);
+    expect(notifyInputChange).toHaveBeenCalled();
+  });
+  test('if changing the input would call notifyInputChange-function', async () => {
+    await waitFor(() => {
+      expect(testedSlider.slider.presenter['view'].id).toBeDefined();
+    });
+    const notifyInputChange = jest.fn();
+    testedSlider.panel.notifyInputChange = notifyInputChange;
+    testedSlider['activatePanel'](createRangeSliderTestArgs);
+    const event = new Event('change');
+    const elem = document.querySelector('.js-slider-input__runner-0-value');
+    if (elem) elem.dispatchEvent(event);
+    expect(notifyInputChange).toHaveBeenCalled();
+  });
+  test('if changing the input would call notifyInputChange-function', async () => {
+    await waitFor(() => {
+      expect(testedSlider.slider.presenter['view'].id).toBeDefined();
+    });
+    const notifyInputChange = jest.fn();
+    testedSlider.panel.notifyInputChange = notifyInputChange;
+    testedSlider['activatePanel'](createRangeSliderTestArgs);
+    const event = new Event('change');
+    const elem = document.querySelector('.js-slider-input__runner-1-value');
+    if (elem) elem.dispatchEvent(event);
+    expect(notifyInputChange).toHaveBeenCalled();
+  });
+  test('if changing the input would call notifyInputChange-function', async () => {
+    await waitFor(() => {
+      expect(testedSlider.slider.presenter['view'].id).toBeDefined();
+    });
+    const notifyInputChange = jest.fn();
+    testedSlider.panel.notifyInputChange = notifyInputChange;
+    testedSlider['activatePanel'](createRangeSliderTestArgs);
+    const event = new Event('change');
+    const elem = document.querySelector('.js-slider-input__runner-width');
+    if (elem) elem.dispatchEvent(event);
+    expect(notifyInputChange).toHaveBeenCalled();
+  });
+  test('if changing the input would call notifyInputChange-function', async () => {
+    await waitFor(() => {
+      expect(testedSlider.slider.presenter['view'].id).toBeDefined();
+    });
+    const notifyInputChange = jest.fn();
+    testedSlider.panel.notifyInputChange = notifyInputChange;
+    testedSlider['activatePanel'](createRangeSliderTestArgs);
+    const event = new Event('change');
+    const elem = document.querySelector('.js-slider-input__runner-height');
+    if (elem) elem.dispatchEvent(event);
+    expect(notifyInputChange).toHaveBeenCalled();
+  });
+  test('if changing the input would call notifyInputChange-function', async () => {
+    await waitFor(() => {
+      expect(testedSlider.slider.presenter['view'].id).toBeDefined();
+    });
+    const notifyInputChange = jest.fn();
+    testedSlider.panel.notifyInputChange = notifyInputChange;
+    testedSlider['activatePanel'](createRangeSliderTestArgs);
+    const event = new Event('change');
+    const elem = document.querySelector('.js-slider-input__field-thickness');
+    if (elem) elem.dispatchEvent(event);
+    expect(notifyInputChange).toHaveBeenCalled();
+  });
+  test('if changing the input would call notifyInputChange-function', async () => {
+    await waitFor(() => {
+      expect(testedSlider.slider.presenter['view'].id).toBeDefined();
+    });
+    const notifyInputChange = jest.fn();
+    testedSlider.panel.notifyInputChange = notifyInputChange;
+    testedSlider['activatePanel'](createRangeSliderTestArgs);
+    const event = new Event('change');
+    const elem = document.querySelector('.js-slider-input__step');
+    if (elem) elem.dispatchEvent(event);
+    expect(notifyInputChange).toHaveBeenCalled();
+  });
+  test('if changing the input would call notifyInputChange-function', async () => {
+    await waitFor(() => {
+      expect(testedSlider.slider.presenter['view'].id).toBeDefined();
+    });
+    const notifyInputChange = jest.fn();
+    testedSlider.panel.notifyInputChange = notifyInputChange;
+    testedSlider['activatePanel'](createRangeSliderTestArgs);
+    const event = new Event('change');
+    const elem = document.querySelector('.js-slider-input__orientation');
+    if (elem) elem.dispatchEvent(event);
+    expect(notifyInputChange).toHaveBeenCalled();
+  });
+  test('if changing the input would call notifyInputChange-function', async () => {
+    await waitFor(() => {
+      expect(testedSlider.slider.presenter['view'].id).toBeDefined();
+    });
+    const notifyInputChange = jest.fn();
+    testedSlider.panel.notifyInputChange = notifyInputChange;
+    testedSlider['activatePanel'](createRangeSliderTestArgs);
+    const event = new Event('change');
+    const elem = document.querySelector('.js-slider-input__has-scale');
+    if (elem) elem.dispatchEvent(event);
+    expect(notifyInputChange).toHaveBeenCalled();
+  });
+  test('if changing the input would call notifyInputChange-function', async () => {
+    await waitFor(() => {
+      expect(testedSlider.slider.presenter['view'].id).toBeDefined();
+    });
+    const notifyInputChange = jest.fn();
+    testedSlider.panel.notifyInputChange = notifyInputChange;
+    testedSlider['activatePanel'](createRangeSliderTestArgs);
+    const event = new Event('change');
+    const elem = document.querySelector('.js-slider-input__has-bar');
+    if (elem) elem.dispatchEvent(event);
+    expect(notifyInputChange).toHaveBeenCalled();
+  });
+  test('if changing the input would call notifyInputChange-function', async () => {
+    await waitFor(() => {
+      expect(testedSlider.slider.presenter['view'].id).toBeDefined();
+    });
+    const notifyInputChange = jest.fn();
+    testedSlider.panel.notifyInputChange = notifyInputChange;
+    testedSlider['activatePanel'](createRangeSliderTestArgs);
+    const event = new Event('change');
+    const elem = document.querySelector('.js-slider-input__has-tip');
+    if (elem) elem.dispatchEvent(event);
     expect(notifyInputChange).toHaveBeenCalled();
   });
 });

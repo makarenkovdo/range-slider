@@ -18,7 +18,17 @@ describe('Presenter test', () => {
   const testedSlider = new SliderPresenter('first', {});
 
   const createRangeSliderTestArgs: PresenterBuildParams = {
+    isRange: false,
+    shouldAddTip: true,
+    runnerSize: [70, 70],
+    minValue: 10,
+    maxValue: 100,
+    shouldAddScale: false,
+    shouldAddBar: false,
     step: 12,
+    fieldThickness: 6,
+    runnersInstantPosition: [20, 50],
+    orientation: 'horizontal',
   };
 
   test('if setStep set runner.step', () => {

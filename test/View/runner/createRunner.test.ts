@@ -16,8 +16,8 @@ describe('ViewModel test', () => {
   const testView = new SliderView('testId', testPresenter);
 
   test('if function "createRunner" creating html-element', async () => {
-    testView.runner.createRunner.call(this, 0);
-    testView.runner.createRunner.call(this, 1);
+    testView.runner.createRunner(0, 0, 0);
+    testView.runner.createRunner(1, 100, 0);
     await waitFor(() => {
       expect(testView.runner.$elements[0]).not.toBeFalsy();
       expect(screen.getByTestId('test-runner-0')).toBeInTheDocument();

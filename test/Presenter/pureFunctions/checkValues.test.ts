@@ -2,11 +2,11 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import { PresenterBuildParams } from '../../../src/presenter/presenterInterfaces';
+import { PresenterBuildParamsBeforeChecking } from '../../../src/presenter/presenterInterfaces';
 import checkValues from '../../../src/presenter/presenterModules/checkValues';
 
 describe('check build params test', () => {
-  const params:PresenterBuildParams = {
+  const params:PresenterBuildParamsBeforeChecking = {
     shouldAddTip: true,
     shouldAddBar: true,
     step: 2,
@@ -16,7 +16,6 @@ describe('check build params test', () => {
     shouldAddScale: true,
     runnerSize: [12, 12],
     runnersInstantPosition: [9, 14],
-    hasInputPanel: true,
     orientation: 'vertical',
   };
 
@@ -36,7 +35,6 @@ describe('check build params test', () => {
   });
   test('checkValues must return falsy boolean from empty object', () => {
     const newParams = checkValues({});
-    expect(newParams.hasInputPanel).toBe(false);
     expect(newParams.shouldAddBar).toBe(false);
     expect(newParams.shouldAddScale).toBe(false);
     expect(newParams.shouldAddTip).toBe(false);

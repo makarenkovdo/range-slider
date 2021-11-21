@@ -39,7 +39,6 @@ beforeEach(() => {
 describe('panel test', () => {
   const testedSlider = new SliderPresenter('first', {});
   const createRangeSliderTestArgs: PresenterBuildParams = {
-    hasInputPanel: true,
     shouldAddTip: true,
     shouldAddBar: true,
     step: 2,
@@ -50,6 +49,7 @@ describe('panel test', () => {
     runnerSize: [12, 12],
     runnersInstantPosition: [9, 14],
     orientation: 'vertical',
+    fieldThickness: 6,
   };
 
   test('if functions rebuild call clearHTMLElement', async () => {
@@ -57,8 +57,7 @@ describe('panel test', () => {
       expect(testedSlider['view'].id).toBeDefined();
     });
     const clearHTMLElement = jest.fn();
-    testedSlider['activatePanel'](createRangeSliderTestArgs);
-    testedSlider['view'].panel.clearHTMLElement = clearHTMLElement;
+    testedSlider['view'].clearHTMLElement = clearHTMLElement;
     testedSlider['rebuild'](createRangeSliderTestArgs);
     expect(clearHTMLElement).toHaveBeenCalled();
   });
@@ -67,8 +66,7 @@ describe('panel test', () => {
       expect(testedSlider['view'].id).toBeDefined();
     });
     const clearHTMLElement = jest.fn();
-    testedSlider['activatePanel'](createRangeSliderTestArgs);
-    testedSlider['view'].panel.clearHTMLElement = clearHTMLElement;
+    testedSlider['view'].clearHTMLElement = clearHTMLElement;
     testedSlider['rebuild'](createRangeSliderTestArgs);
     const $field = $('#first');
     expect($field.html()).toBe('');

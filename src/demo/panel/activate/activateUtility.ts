@@ -1,5 +1,5 @@
 /* eslint-disable fsd/no-function-declaration-in-event-listener */
-import { PresenterBuildParams } from '../../../presenter/presenterInterfaces';
+import { BuildParams } from '../../../initializeTypes.js';
 import Panel from '../Panel.js';
 
 const selectPanelNodes = function selectPanelInputNodes(this: Panel):void {
@@ -35,7 +35,7 @@ const initializePanel = function initializeDefaultPanelValues(
     isRange,
     step,
     fieldThickness,
-  }: PresenterBuildParams,
+  }: BuildParams,
 ): void {
   this.orientation = orientation;
   this.minMax = [minValue, maxValue];

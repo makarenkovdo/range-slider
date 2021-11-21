@@ -2,11 +2,11 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-import { PresenterBuildParamsBeforeChecking } from '../../../src/presenter/presenterInterfaces';
+import { BuildParamsBeforeChecking } from '../../../src/presenter/presenterInterfaces';
 import checkValues from '../../../src/presenter/presenterModules/checkValues';
 
 describe('check build params test', () => {
-  const params:PresenterBuildParamsBeforeChecking = {
+  const params:BuildParamsBeforeChecking = {
     shouldAddTip: true,
     shouldAddBar: true,
     step: 2,

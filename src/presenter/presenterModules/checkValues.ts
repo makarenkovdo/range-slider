@@ -1,8 +1,8 @@
-import { PresenterBuildParams, PresenterBuildParamsBeforeChecking } from '../presenterInterfaces';
+import { BuildParams, BuildParamsBeforeChecking } from '../../initializeTypes';
 
 const checkValues = function checkInitialValues(
-  params: PresenterBuildParamsBeforeChecking,
-): PresenterBuildParams {
+  params: BuildParamsBeforeChecking,
+): BuildParams {
   let {
     minValue = 0,
     maxValue = 100,

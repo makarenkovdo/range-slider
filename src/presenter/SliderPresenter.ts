@@ -1,18 +1,16 @@
 /* eslint-env jquery */
+import { BuildParams } from '../initializeTypes';
 import FieldModel from '../model/FieldModel';
 import RunnerModel from '../model/RunnerModel';
 import { UpdateRunnerValuesArgs } from '../model/runnerModules/runnerInterfaces';
 import Slider from '../Slider';
 import SliderView from '../view/SliderView';
-import {
-  PresenterBuildParams,
-  DataForRunnerUpdatingArgsType,
-  PresenterBuildParamsBeforeChecking,
-} from './presenterInterfaces';
-import checkValues from './presenterModules/checkValues';
+import { DataForRunnerUpdatingArgsType } from './presenterInterfaces';
 
 class SliderPresenter {
   public parent: Slider;
+
+  public params: BuildParams;
 
   private field: FieldModel;
 
@@ -24,12 +22,10 @@ class SliderPresenter {
 
   private runnerCounter: number;
 
-  private params: PresenterBuildParams;
-
   constructor(
     slider: Slider,
     id: string,
-    params: PresenterBuildParams,
+    params: BuildParams,
   ) {
     this.parent = slider;
     this.id = id;
@@ -42,19 +38,7 @@ class SliderPresenter {
     this.addListeners(params, 'build');
   }
 
-  public getValues():PresenterBuildParamsBeforeChecking {
-    // console.log(this.view.isRange);
-    // console.log('this.runners[0].stepValue, this.runners[0].stepValue', this.runners[0].stepValue, this.runners[0].stepValue);
-
-    // if (this.view.isRange) {
-    //   return {
-    //     runnersInstantPosition: [this.runners[0].stepValue, this.runners[1].stepValue],
-    //   };
-    // }
-    return { runnersInstantPosition: [1, 0] };
-  }
-
-  public rebuild(params:PresenterBuildParams):void {
+  public rebuild(params:BuildParams):void {
     this.params = params;
     this.field.isRange = false;
     this.view.isRange = false;
@@ -66,7 +50,7 @@ class SliderPresenter {
     this.addListeners(params, 'rebuild');
   }
 
-  private build(params: PresenterBuildParams): void {
+  private build(params: BuildParams): void {
     if (!params.isTestMode) {
       this.setMinMax(params)
         .initLayers(params)
@@ -77,7 +61,7 @@ class SliderPresenter {
     }
   }
 
-  private addListeners({ isRange }:PresenterBuildParams, actionType:string): this {
+  private addListeners({ isRange }:BuildParams, actionType:string): this {
     switch (actionType) {
       case 'build': {
         this.onClick().onDrag(0).onDrop();
@@ -102,7 +86,7 @@ class SliderPresenter {
 
   private createRangeSlider({
     isRange, shouldAddTip, runnerSize, minValue, maxValue, runnersInstantPosition, step,
-  }:PresenterBuildParams): this {
+  }:BuildParams): this {
     this.createRunner(
       runnerSize,
       minValue,
@@ -165,7 +149,7 @@ class SliderPresenter {
     return this;
   }
 
-  private createBar({ shouldAddBar, fieldThickness }:PresenterBuildParams): this {
+  private createBar({ shouldAddBar, fieldThickness }:BuildParams): this {
     if (shouldAddBar) {
       this.view.hasBar = true;
       this.view.bar.createBar(fieldThickness);
@@ -175,7 +159,7 @@ class SliderPresenter {
     return this;
   }
 
-  private createScale({ shouldAddScale }:PresenterBuildParams): this {
+  private createScale({ shouldAddScale }:BuildParams): this {
     if (shouldAddScale) {
       this.view.hasScale = true;
       this.view.scale.create();
@@ -196,7 +180,7 @@ class SliderPresenter {
     return this;
   }
 
-  private removeListeners({ isRange }:PresenterBuildParams): this {
+  private removeListeners({ isRange }:BuildParams): this {
     this.view.runner.removeDrag(0);
     if (isRange) this.view.runner.removeDrag(1);
 
@@ -222,7 +206,7 @@ class SliderPresenter {
     }
   }
 
-  public recieveRebuildData(params: PresenterBuildParams): void {
+  public recieveRebuildData(params: BuildParams): void {
     this.rebuild(params);
   }
 
@@ -244,7 +228,7 @@ class SliderPresenter {
   }
 
   // public recieveInputsData(
-  //   panelInputsData: PresenterBuildParams,
+  //   panelInputsData: BuildParams,
   // ): void {
   //   this.rebuild(panelInputsData);
   // }
@@ -267,13 +251,13 @@ class SliderPresenter {
     this.field.prepareDataForRunnerUpdating(dataForRunnerUpdatingArgs);
   }
 
-  private setMinMax({ minValue, maxValue }:PresenterBuildParams): this {
+  private setMinMax({ minValue, maxValue }:BuildParams): this {
     this.field.setMinMax(minValue, maxValue);
     this.view.initStartEnd(minValue, maxValue);
     return this;
   }
 
-  private setStep({ step }:PresenterBuildParams): this {
+  private setStep({ step }:BuildParams): this {
     this.runners.forEach((v) => v.setStep(step, this.field.minMax));
     this.view.setStep(step, this.runners[0].stepSignAfterComma);
 
@@ -294,7 +278,7 @@ class SliderPresenter {
     return this;
   }
 
-  private initLayers({ runnerSize, fieldThickness, orientation }:PresenterBuildParams): this {
+  private initLayers({ runnerSize, fieldThickness, orientation }:BuildParams): this {
     this.field.setIsVertical(orientation);
     this.view.initializeValues(runnerSize, fieldThickness, orientation);
 

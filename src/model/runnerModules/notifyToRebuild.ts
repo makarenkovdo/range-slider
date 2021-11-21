@@ -1,8 +1,8 @@
-import { PresenterBuildParams } from '../../presenter/presenterInterfaces';
+import { BuildParams } from '../../presenter/presenterInterfaces';
 import RunnerModel from '../RunnerModel';
 
 const notifyToRebuild = function notifySubscribersToRebuild(
-  this: RunnerModel, rebuildData: PresenterBuildParams,
+  this: RunnerModel, rebuildData: BuildParams,
 ): void {
   this.subscriber.recieveRebuildData(rebuildData);
 };

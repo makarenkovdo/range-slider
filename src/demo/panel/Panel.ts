@@ -1,6 +1,6 @@
 import clearHTMLElement from '../../view/clearHTMLElement';
 import activatePanel from './activate';
-import { PresenterBuildParams } from '../../presenter/presenterInterfaces';
+import { BuildParams } from '../../presenter/presenterInterfaces';
 import notifyInputChange from './notifyInputChange';
 // import updateRunnerInput from '../../view/input/updateRunnerInput';
 import { handleChange, initializePanel } from './activate/activateUtility';
@@ -58,11 +58,11 @@ export default class Panel {
 
   public runnersPosition: number[];
 
-  public activatePanel: (this: Panel, params: PresenterBuildParams) => void;
+  public activatePanel: (this: Panel, params: BuildParams) => void;
 
   public clearHTMLElement: (this: Panel, id:string) => void;
 
-  public initializePanel: (this: Panel, params: PresenterBuildParams) => void;
+  public initializePanel: (this: Panel, params: BuildParams) => void;
 
   public handleChange: (this: Panel, event:Event, actionType: string) => void;
 
@@ -72,7 +72,7 @@ export default class Panel {
 
   // public updateRunnerInput: (this: Panel, stepValue:number, instance:number) => void;
 
-  constructor(id:string, params: PresenterBuildParams, demoSlider: DemoSlider) {
+  constructor(id:string, params: BuildParams, demoSlider: DemoSlider) {
     this.parent = demoSlider;
     this.id = id;
     this.$minValueInput = null;

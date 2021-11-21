@@ -1,24 +1,23 @@
-import { PresenterBuildParams, PresenterBuildParamsBeforeChecking } from './presenter/presenterInterfaces';
 import SliderPresenter from './presenter/SliderPresenter';
 import './index.scss';
+import checkValues from './presenter/presenterModules/checkValues';
+import { BuildParams, BuildParamsBeforeChecking } from './initializeTypes';
 
 class Slider {
   public presenter: SliderPresenter;
 
+  public checkValues: (params: BuildParamsBeforeChecking) => BuildParams;
+
   constructor(
     id: string,
-    params: PresenterBuildParams,
+    params: BuildParams,
   ) {
     this.presenter = new SliderPresenter(this, id, params);
+    this.checkValues = checkValues;
   }
 
-  public getValues():PresenterBuildParams {
-    if (this.view.isRange) {
-      return {
-        runnersInstantPosition: [this.runners[0].stepValue, this.runners[1].stepValue],
-      };
-    }
-    return { runnersInstantPosition: [1, 0] };
+  public getValues():BuildParams {
+    return this.presenter.params;
   }
 }
 

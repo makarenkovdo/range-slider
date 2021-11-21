@@ -3,8 +3,8 @@
 import './panel/panel.scss';
 import Slider from '../Slider';
 import Panel from './panel/Panel';
-import { PresenterBuildParams, PresenterBuildParamsBeforeChecking } from '../presenter/presenterInterfaces';
 import checkValues from '../presenter/presenterModules/checkValues';
+import { BuildParams, BuildParamsBeforeChecking } from '../initializeTypes';
 
 const jQueryScript = document.createElement('script');
 jQueryScript.setAttribute('src', 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js');
@@ -13,13 +13,13 @@ document.head.appendChild(jQueryScript);
 class DemoSlider {
   public id: string;
 
-  public checkedParams: PresenterBuildParams;
+  public checkedParams: BuildParams;
 
   public panel: Panel;
 
   public slider: Slider;
 
-  constructor(id:string, params:PresenterBuildParamsBeforeChecking) {
+  constructor(id:string, params:BuildParamsBeforeChecking) {
     this.id = id;
     this.checkedParams = checkValues(params);
     this.panel = new Panel(id, this.checkedParams, this);
@@ -32,24 +32,24 @@ class DemoSlider {
     return this.checkedParams;
   }
 
-  public activatePanel(params: PresenterBuildParams): this {
+  public activatePanel(params: BuildParams): this {
     this.panel.activatePanel.call(this.panel, params);
     return this;
   }
 
-  public handleChange(params:PresenterBuildParamsBeforeChecking) {
+  public handleChange(params:BuildParamsBeforeChecking) {
     this.rebuildPanel(params);
   }
 
-  public rebuildPanel(params:PresenterBuildParamsBeforeChecking):void {
+  public rebuildPanel(params:BuildParamsBeforeChecking):void {
     this.checkedParams = checkValues(params);
-    this.panel.initializePanel(this.checkedParams); // listeners?
+    this.panel.initializePanel(this.checkedParams);
   }
 
-  public rebuild(params:PresenterBuildParamsBeforeChecking):void {
+  public rebuild(params:BuildParamsBeforeChecking):void {
     this.checkedParams = checkValues(params);
     this.checkedParams = this.setCallback();
-    this.panel.initializePanel(this.checkedParams); // listeners?
+    this.panel.initializePanel(this.checkedParams);
     this.slider.presenter.rebuild(this.checkedParams);
   }
 

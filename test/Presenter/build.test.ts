@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
-import { PresenterBuildParamsBeforeChecking } from '../../src/presenter/presenterInterfaces';
+import { BuildParamsBeforeChecking } from '../../src/presenter/presenterInterfaces';
 import SliderPresenter from '../../src/presenter/SliderPresenter';
 
 describe('if build-function calls methods', () => {
@@ -13,7 +13,7 @@ describe('if build-function calls methods', () => {
   `;
   const testedSlider = new SliderPresenter('testId', {});
 
-  const createRangeSliderTestArgs: PresenterBuildParamsBeforeChecking = {
+  const createRangeSliderTestArgs: BuildParamsBeforeChecking = {
     isTestMode: false,
   };
   const createScale = jest.fn();

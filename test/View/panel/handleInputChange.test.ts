@@ -5,7 +5,7 @@
 import { waitFor } from '@testing-library/dom';
 import '@testing-library/jest-dom';
 import DemoSlider from '../../../src/demo/DemoSlider';
-import { PresenterBuildParams } from '../../../src/presenter/presenterInterfaces';
+import { BuildParams } from '../../../src/presenter/presenterInterfaces';
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -38,7 +38,7 @@ beforeEach(() => {
 
 describe('panel test', () => {
   const testedSlider = new DemoSlider('first', {});
-  const createRangeSliderTestArgs: PresenterBuildParams = {
+  const createRangeSliderTestArgs: BuildParams = {
     shouldAddTip: true,
     shouldAddBar: true,
     step: 2,

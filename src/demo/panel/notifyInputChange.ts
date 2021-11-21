@@ -1,10 +1,10 @@
-import { PresenterBuildParams } from '../../presenter/presenterInterfaces';
+import { BuildParams } from '../../presenter/presenterInterfaces';
 import Panel from './Panel';
 
 const notifyInputChange = function prepareDataAndNotifyInputChange(
   this: Panel,
 ): void {
-  const panelInputsData:PresenterBuildParams = {
+  const panelInputsData:BuildParams = {
     orientation: this.orientation,
     minValue: this.minMax[0],
     maxValue: this.minMax[1],

@@ -1,37 +1,5 @@
 import RunnerModel from '../model/RunnerModel';
 
-type PresenterBuildParamsBeforeChecking = {
-  minValue?: number;
-  maxValue?: number;
-  step?: number;
-  shouldAddTip?: boolean;
-  shouldAddBar?: boolean;
-  shouldAddScale?: boolean;
-  isRange?: boolean;
-  runnerSize?: number[];
-  fieldThickness?: number;
-  orientation?: Orientation;
-  runnersInstantPosition?: number[];
-  hasInputPanel?: boolean;
-  isTestMode?: boolean;
-  onChange?: (params:PresenterBuildParamsBeforeChecking)=>void
-};
-type PresenterBuildParams = {
-  minValue: number;
-  maxValue: number;
-  step: number;
-  shouldAddTip: boolean;
-  shouldAddBar: boolean;
-  shouldAddScale: boolean;
-  isRange: boolean;
-  runnerSize: number[];
-  fieldThickness: number;
-  orientation: Orientation;
-  runnersInstantPosition: number[];
-  isTestMode?: boolean;
-  onChange?: (params:PresenterBuildParamsBeforeChecking)=>void;
-};
-
 type DataForRunnerUpdatingArgsType = {
   runnersPosition: number[];
   isVertical: boolean;
@@ -59,10 +27,8 @@ type GetValuesReturned = {
 };
 
 export {
-  PresenterBuildParams,
   DataForRunnerUpdatingArgsType,
   CheckValuesArgs,
   Orientation,
-  PresenterBuildParamsBeforeChecking,
   GetValuesReturned,
 };

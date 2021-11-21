@@ -3,7 +3,7 @@
  */
 /* eslint-disable @typescript-eslint/dot-notation */
 import '@testing-library/jest-dom';
-import { PresenterBuildParams } from '../../src/presenter/presenterInterfaces';
+import { BuildParams } from '../../src/presenter/presenterInterfaces';
 import SliderPresenter from '../../src/presenter/SliderPresenter';
 
 beforeEach(() => {
@@ -17,7 +17,7 @@ beforeEach(() => {
 describe('Presenter test', () => {
   const testedSlider = new SliderPresenter('first', {});
 
-  const createRangeSliderTestArgs: PresenterBuildParams = {
+  const createRangeSliderTestArgs: BuildParams = {
     isRange: false,
     shouldAddTip: true,
     runnerSize: [70, 70],

@@ -35,6 +35,8 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    library: "my-library",
+    libraryTarget: "umd",
     clean: true,
   },
   resolve: {
@@ -71,7 +73,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules)/,
+        exclude: [/(node_modules)/],
         use: {
           loader: 'babel-loader',
           options: {
@@ -88,7 +90,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: [/(node_modules)/],
       },
       {
         test: /\.css$/i,

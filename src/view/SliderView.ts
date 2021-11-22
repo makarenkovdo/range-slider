@@ -49,7 +49,7 @@ export default class SliderView {
 
   public fieldThickness: number;
 
-  private class: string | undefined;
+  public class: string | undefined;
 
   public bar: Bar;
 

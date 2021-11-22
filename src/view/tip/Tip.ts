@@ -6,7 +6,9 @@ import update from './update';
 export default class Tip {
   public parent: SliderView;
 
-  public create: (this:Tip, runnerCounter: number,
+  public create: (
+    this:Tip,
+    runnerCounter: number,
     isVertical: boolean,
     stepPosition:number,
     stepValue:number,

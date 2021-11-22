@@ -1,7 +1,6 @@
 import clearHTMLElement from '../../view/clearHTMLElement';
 import activatePanel from './activate';
 import notifyInputChange from './notifyInputChange';
-// import updateRunnerInput from '../../view/input/updateRunnerInput';
 import { handleChange, initializePanel } from './activate/activateUtility';
 import removeListeners from './removeListeners';
 import DemoSlider from '../DemoSlider';
@@ -70,8 +69,6 @@ export default class Panel {
 
   public removeListeners: (id:string) => void;
 
-  // public updateRunnerInput: (this: Panel, stepValue:number, instance:number) => void;
-
   constructor(id:string, params: BuildParams, demoSlider: DemoSlider) {
     this.parent = demoSlider;
     this.id = id;
@@ -102,7 +99,6 @@ export default class Panel {
     this.clearHTMLElement = clearHTMLElement.bind(this) as () => void;
     this.initializePanel = initializePanel.bind(this) as () => void;
     this.notifyInputChange = notifyInputChange.bind(this) as () => void;
-    // this.updateRunnerInput = updateRunnerInput.bind(this) as () => void;
     this.removeListeners = removeListeners;
     this.handleChange = handleChange.bind(this) as () => void;
   }

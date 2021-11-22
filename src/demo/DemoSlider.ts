@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/dot-notation */
-// import '../index.scss';
 import './panel/panel.scss';
 import Slider from '../Slider';
 import Panel from './panel/Panel';
@@ -62,30 +61,28 @@ class DemoSlider {
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 const firstSlider = new DemoSlider('first', {
-  step: 100000,
-  maxValue: -1000000,
-  minValue: 1000000,
+  step: 1,
+  maxValue: -10,
+  minValue: 10,
   shouldAddTip: true,
   shouldAddBar: true,
   shouldAddScale: true,
-  runnerSize: [20, 20],
-  runnersInstantPosition: [0, 100000],
-  fieldThickness: 10,
-  hasInputPanel: true,
-  orientation: 'vertical',
+  isRange: true,
+  runnerSize: [12, 12],
+  runnersInstantPosition: [-6, 6],
+  fieldThickness: 6,
 });
 
 const secondSlider = new DemoSlider('second', {
   shouldAddTip: true,
   shouldAddBar: true,
   step: 0.003,
-  maxValue: 0.152,
+  maxValue: 0.15,
   minValue: -0.751,
   isRange: true,
   shouldAddScale: true,
   runnerSize: [12, 24],
-  runnersInstantPosition: [9, 14],
-  hasInputPanel: true,
+  runnersInstantPosition: [-0.5, 0.1],
 });
 
 const thirdSlider = new DemoSlider('third', {
@@ -98,7 +95,6 @@ const thirdSlider = new DemoSlider('third', {
   shouldAddScale: true,
   runnerSize: [12, 12],
   runnersInstantPosition: [0, 8],
-  hasInputPanel: true,
   fieldThickness: 2,
   orientation: 'vertical',
 });
@@ -114,7 +110,19 @@ const fourthSlider = new DemoSlider('fourth', {
   runnerSize: [50, 50],
   runnersInstantPosition: [0, 8],
   fieldThickness: 20,
-  hasInputPanel: true,
+});
+
+const fifthSlider = new DemoSlider('fifth', {
+  step: 100000,
+  maxValue: -1000000,
+  minValue: 1000000,
+  shouldAddTip: true,
+  shouldAddBar: true,
+  shouldAddScale: true,
+  runnerSize: [20, 20],
+  runnersInstantPosition: [0, 100000],
+  fieldThickness: 10,
+  orientation: 'vertical',
 });
 
 export default DemoSlider;

@@ -95,8 +95,11 @@ class SliderPresenter {
       step,
     );
     let { stepPosition, stepValue } = this.runners[this.runnerCounter];
-    const stepSignAfterComma = this.runners[0].defineSignAfterComma([minValue, maxValue]);
-    this.createRunnerView(this.runnerCounter, stepPosition, stepSignAfterComma);
+    this.createRunnerView(
+      this.runnerCounter,
+      stepPosition,
+      this.runners[this.runnerCounter].stepSignAfterComma,
+    );
     this.createTipNumber(shouldAddTip, stepPosition, stepValue);
 
     if (isRange) {
@@ -109,8 +112,11 @@ class SliderPresenter {
         runnersInstantPosition[this.runnerCounter],
         step);
       ({ stepPosition, stepValue } = this.runners[this.runnerCounter]);
-      this.runners[this.runnerCounter].stepSignAfterComma = stepSignAfterComma;
-      this.createRunnerView(this.runnerCounter, stepPosition, stepSignAfterComma);
+      this.createRunnerView(
+        this.runnerCounter,
+        stepPosition,
+        this.runners[this.runnerCounter].stepSignAfterComma,
+      );
       this.createTipNumber(shouldAddTip, stepPosition, stepValue);
     } else this.view.isRange = false;
     return this;
@@ -219,12 +225,6 @@ class SliderPresenter {
     };
     this.runners[i].updateRunnerValues(dataForRunnerUpdatingArgs);
   }
-
-  // public recieveInputsData(
-  //   panelInputsData: BuildParams,
-  // ): void {
-  //   this.rebuild(panelInputsData);
-  // }
 
   public recieveClickData(
     view: SliderView,

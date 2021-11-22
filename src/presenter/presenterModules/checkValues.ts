@@ -8,6 +8,7 @@ const checkValues = function checkInitialValues(
     maxValue = 100,
     step = 1,
     fieldThickness = 6,
+    runnersInstantPosition = [0, 100],
   } = params;
 
   const {
@@ -18,7 +19,6 @@ const checkValues = function checkInitialValues(
     isRange = false,
     isTestMode = false,
     orientation = 'horizontal',
-    runnersInstantPosition = [0, 100],
   } = params;
   if (minValue > maxValue) {
     [minValue, maxValue] = [maxValue, minValue];
@@ -51,7 +51,6 @@ const checkValues = function checkInitialValues(
   // eslint-disable-next-line arrow-body-style
   const ifPosition0Incorrect = ():boolean => {
     return runnersInstantPosition[0] < minValue
-    || runnersInstantPosition[0] > runnersInstantPosition[1]
     || runnersInstantPosition[0] > maxValue;
   };
   // eslint-disable-next-line arrow-body-style
@@ -64,6 +63,9 @@ const checkValues = function checkInitialValues(
   }
   if (ifPosition1Incorrect()) {
     runnersInstantPosition[1] = maxValue;
+  }
+  if (isRange && runnersInstantPosition[0] > runnersInstantPosition[1]) {
+    runnersInstantPosition = [runnersInstantPosition[1], runnersInstantPosition[0]];
   }
 
   const checkedParams:BuildParams = {

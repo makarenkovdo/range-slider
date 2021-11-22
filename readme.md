@@ -27,6 +27,8 @@
     - jsdom: 18.0.0,
     - dom-testing-library 8.10.1
 
+Стиль кода обусловлен использованием ESLint в соответствии с air-bnb style-guide + fsd style-guide с включенным режимом ```strict: true``` в tsconfig.
+
 ### Команды <a name="commands"></a>
 * Инициализация проекта: ```npm i```
 * Сборка проекта: ```npx webpack```

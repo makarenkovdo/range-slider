@@ -1,6 +1,7 @@
 # Range-Slider-плагин
 реализован в рамках стажировки в MetaLamp
-Макаренков А.В. (makarenkov.do@gmail.com) 2021
+Макаренков А.В. 
+(makarenkov.do@gmail.com) 2021
 
 
 ### Содержание

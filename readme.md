@@ -72,19 +72,22 @@ const mySlider = new Slider('first',{})
 
 ```getValues()``` Возвращает объект со значением слайдера (или значениями в случае диапазонного слайдера) 
 
-```rebuild({})``` Перестраивает слайдер на основе переданных параметров (перечислены выше). Ничего не возвращает.
+```rebuild(params)``` Перестраивает слайдер на основе переданных параметров (перечислены выше). Ничего не возвращает.
 
 ###### Пример подписки на события слайдера с помощью параметра onChange
 
 ```
+const params = {};
+const newSlider = Slider('id', params)
 function setCallback() {
-    this.params.onChange = this.handleChange.bind(this);
-    return this.params;
+    params.onChange = handleChange.bind(this);
+    return params;
   }
 function handleChange(params) {
-  //  произвольная функция для выполнения
-    this.rebuild(params); 
-  }
+    newSlider.rebuild(params); 
+}
+
+
 ```
 
 ### Архитектура <a name="arc"></a>

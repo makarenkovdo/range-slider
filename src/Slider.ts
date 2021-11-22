@@ -19,6 +19,10 @@ class Slider {
   public getValues():BuildParams {
     return this.presenter.params;
   }
+
+  public rebuild(params:BuildParams) {
+    this.presenter.rebuild(checkValues(params));
+  }
 }
 
 export default Slider;

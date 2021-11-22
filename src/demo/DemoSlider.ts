@@ -62,19 +62,6 @@ class DemoSlider {
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 const firstSlider = new DemoSlider('first', {
-  shouldAddTip: true,
-  shouldAddBar: true,
-  step: 0.3,
-  maxValue: -0.1,
-  minValue: 0.7,
-  isRange: true,
-  shouldAddScale: true,
-  runnerSize: [12, 24],
-  runnersInstantPosition: [9, 14],
-  hasInputPanel: true,
-});
-
-const secondSlider = new DemoSlider('second', {
   step: 100000,
   maxValue: -1000000,
   minValue: 1000000,
@@ -86,6 +73,19 @@ const secondSlider = new DemoSlider('second', {
   fieldThickness: 10,
   hasInputPanel: true,
   orientation: 'vertical',
+});
+
+const secondSlider = new DemoSlider('second', {
+  shouldAddTip: true,
+  shouldAddBar: true,
+  step: 0.003,
+  maxValue: 0.152,
+  minValue: -0.751,
+  isRange: true,
+  shouldAddScale: true,
+  runnerSize: [12, 24],
+  runnersInstantPosition: [9, 14],
+  hasInputPanel: true,
 });
 
 const thirdSlider = new DemoSlider('third', {

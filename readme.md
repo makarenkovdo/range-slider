@@ -31,8 +31,8 @@
 
 ### Команды <a name="commands"></a>
 * Инициализация проекта: ```npm i```
-* Сборка проекта: ```npx webpack```
-* Запуск сервера: ```npx webpack serve```
+* Сборка проекта: ```npm run build```
+* Запуск сервера: ```npm run start```
 * Запуск тестов: ```npx jest```
 * Покрытие тестами: ```npx jest --coverage```
 

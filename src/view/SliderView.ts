@@ -3,17 +3,16 @@ import initStartEnd from './field/initStartEnd';
 import handleClick from './field/handleClick';
 import notifyFieldClick from './field/notifyFieldClick';
 import setStep from './field/setStep';
-
 import FieldModel from '../model/FieldModel';
 import SliderPresenter from '../presenter/SliderPresenter.js';
 import RunnerModel from '../model/RunnerModel';
-
-import { Orientation } from '../presenter/presenterInterfaces';
-
 import Bar from './bar/Bar';
 import Runner from './runner/Runner';
 import Scale from './scale/Scale';
 import Tip from './tip/Tip';
+
+import { Orientation } from '../presenter/presenterInterfaces';
+
 import clearHTMLElement from './clearHTMLElement';
 
 export default class SliderView {

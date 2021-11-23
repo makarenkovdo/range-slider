@@ -1,9 +1,9 @@
-import Runner from './Runner';
 import {
   defineRunnerType,
   setThisRunnerPosition,
   updatePositionToDOM,
 } from './updatePosition/updatePositionUtility';
+import Runner from './Runner';
 
 const updatePosition = function updatePositionToThisAndDOM(
   this: Runner,

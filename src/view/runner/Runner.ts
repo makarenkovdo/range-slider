@@ -1,9 +1,9 @@
+import removeDrag from '../../demo/panel/removeListeners';
 import SliderView from '../SliderView';
 import createRunner from './create';
 import handleDrag from './handleDrag';
 import handleDrop from './handleDrop';
 import notifySliderMoving from './notifySliderMoving';
-import removeDrag from '../../demo/panel/removeListeners';
 import updatePosition from './updatePosition';
 import updateZIndex from './updateZIndex';
 

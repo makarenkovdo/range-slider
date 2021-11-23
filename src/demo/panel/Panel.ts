@@ -1,10 +1,10 @@
 import clearHTMLElement from '../../view/clearHTMLElement';
+import { BuildParams } from '../../initializeTypes';
+import { handleChange, initializePanel } from './activate/activateUtility';
+import DemoSlider from '../DemoSlider';
 import activatePanel from './activate';
 import notifyInputChange from './notifyInputChange';
-import { handleChange, initializePanel } from './activate/activateUtility';
 import removeListeners from './removeListeners';
-import DemoSlider from '../DemoSlider';
-import { BuildParams } from '../../initializeTypes';
 
 export default class Panel {
   public parent: DemoSlider;

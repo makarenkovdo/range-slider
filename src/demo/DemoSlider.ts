@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/dot-notation */
 import './panel/panel.scss';
-import Slider from '../Slider';
-import Panel from './panel/Panel';
+
 import checkValues from '../presenter/presenterModules/checkValues';
+import Panel from './panel/Panel';
 import { BuildParams, BuildParamsBeforeChecking } from '../initializeTypes';
+import Slider from '../Slider';
 
 const jQueryScript = document.createElement('script');
 jQueryScript.setAttribute('src', 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js');

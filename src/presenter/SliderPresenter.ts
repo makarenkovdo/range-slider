@@ -1,10 +1,10 @@
 /* eslint-env jquery */
-import { BuildParams } from '../initializeTypes';
+import { UpdateRunnerValuesArgs } from '../model/runnerModules/runnerInterfaces';
 import FieldModel from '../model/FieldModel';
 import RunnerModel from '../model/RunnerModel';
-import { UpdateRunnerValuesArgs } from '../model/runnerModules/runnerInterfaces';
-import Slider from '../Slider';
 import SliderView from '../view/SliderView';
+import { BuildParams } from '../initializeTypes';
+import Slider from '../Slider';
 import { DataForRunnerUpdatingArgsType } from './presenterInterfaces';
 
 class SliderPresenter {

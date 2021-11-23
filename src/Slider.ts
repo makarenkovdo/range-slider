@@ -1,6 +1,7 @@
-import SliderPresenter from './presenter/SliderPresenter';
 import './index.scss';
+
 import checkValues from './presenter/presenterModules/checkValues';
+import SliderPresenter from './presenter/SliderPresenter';
 import { BuildParams, BuildParamsBeforeChecking } from './initializeTypes';
 
 class Slider {

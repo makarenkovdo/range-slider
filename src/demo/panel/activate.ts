@@ -1,6 +1,8 @@
 import { BuildParams } from '../../initializeTypes';
 import {
-  addOnChangeListener, initializePanel, selectPanelNodes,
+  addOnChangeListener,
+  initializePanel,
+  selectPanelNodes,
 } from './activate/activateUtility';
 import Panel from './Panel';
 

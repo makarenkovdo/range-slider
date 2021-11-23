@@ -22,7 +22,6 @@ const updateRunnerValues = ({
     activeRunner,
     calculatePositionInPercent(isVertical, activeRunner, cursorXY, fieldSize),
   );
-
   setValue(activeRunner, calculateValue(minMax, activeRunner));
 
   if (isRange) {
